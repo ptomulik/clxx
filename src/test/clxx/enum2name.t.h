@@ -303,6 +303,17 @@ public:
 #endif
     TS_ASSERT_EQUALS(enum2name(static_cast<context_info_t>(-1l)), nullptr);
   }
+  /** // doc: test_context_properties_t() {{{
+   * \brief Ensure that enum2name() works with context_properties_t.
+   */ // }}}
+  void test_context_properties_t( )
+  {
+    TS_ASSERT_EQUALS(enum2name(context_properties_t::platform), "platform");
+#if CL_VERSION_1_2
+    TS_ASSERT_EQUALS(enum2name(context_properties_t::interop_user_sync), "interop_user_sync");
+#endif
+    TS_ASSERT_EQUALS(enum2name(static_cast<context_properties_t>(-1l)), nullptr);
+  }
 #if CL_VERSION_1_2
   /** // doc: test_device_partition_property_t() {{{
    * \brief Ensure that enum2name() works with device_partition_property_t.

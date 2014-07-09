@@ -287,6 +287,16 @@ enum2name(context_info_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 /* ------------------------------------------------------------------------ */
+constexpr char const*
+enum2name(context_properties_t x, char const* dflt = nullptr) noexcept
+{
+  return  (x == context_properties_t::platform) ? "platform" :
+#if CL_VERSION_1_2
+          (x == context_properties_t::interop_user_sync) ? "interop_user_sync" :
+#endif
+          dflt;
+}
+/* ------------------------------------------------------------------------ */
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(device_partition_property_t x, char const* dflt = nullptr) noexcept
