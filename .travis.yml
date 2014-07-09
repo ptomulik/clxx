@@ -1,0 +1,45 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+before_install:
+  - lsb_release -c
+  - lsb_release -r
+  - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse restricted'
+  - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu raring main universe multiverse restricted'
+  - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu saucy main universe multiverse restricted'
+  - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu trusty main universe multiverse restricted'
+  - sudo apt-get -y update
+install:
+  - sudo apt-get --no-install-recommends -y install g++
+  - sudo apt-get --no-install-recommends -y install clang
+  - if (clang --version | grep 'clang version 3\.3'); then
+      sudo apt-get --no-install-recommends -y install libclang-common-3.3-dev;
+    fi
+  - sudo apt-get --no-install-recommends -y install cxxtest
+  - sudo apt-get --no-install-recommends -y install scons
+#  - sudo apt-get --no-install-recommends -y install swig
+  - sudo apt-get --no-install-recommends -y install nvidia-opencl-dev
+#  - sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev libboost-regex-dev
+#  - sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler
+  - sudo pip install cpp-coveralls;
+
+before_script:
+  - $CXX --version
+  - $CXX -dumpversion
+script:
+  - scons CLXX_ENABLE_GCOV=YES && scons CLXX_ENABLE_GCOV=YES check;
+after_success:
+    GCOV=gcov-`$CXX -dumpversion | sed -e 's/^\([0-9]\+\.[0-9]\+\).*$/\1/'`;
+    which $GCOV || GCOV="";
+    echo $GCOV;
+    if [ ! -z "$GCOV" ]; then
+      coveralls --gcov $GCOV --gcov-options '\-p \-l' -b . -r . 
+                  -e .git -e HOWTO -e lib -e bin -e src/app -e build/app 
+                  -e build/.sconf_temp -e build/lib/clxx/.sconf_temp
+                  -e build/lib/clxx/python -e src/doc -e src/test -e site_scons
+                  -e template -e /usr;
+    fi
+after_failure:
+  - test -f src/config.log && cat src/config.log
+#  - test -f src/lib/clxx/config.log && cat src/lib/clxx/config.log

@@ -1,0 +1,18 @@
+[submodule "site_scons/site_tools/doxygen"]
+	path = site_scons/site_tools/doxygen
+	url = git://github.com/ptomulik/scons_doxygen.git
+[submodule "site_scons/site_tools/doxyfile"]
+	path = site_scons/site_tools/doxyfile
+	url = git://github.com/ptomulik/scons-tool-doxyfile.git
+[submodule "site_scons/site_tools/cxxtest"]
+	path = site_scons/site_tools/cxxtest
+	url = git://github.com/ptomulik/scons-tool-cxxtest.git
+[submodule "site_scons/site_tools/gcccov"]
+	path = site_scons/site_tools/gcccov
+	url = git://github.com/ptomulik/scons-tool-gcccov.git
+[submodule "lib/scons-gnu-build"]
+	path = lib/scons-gnu-build
+	url = git://github.com/ptomulik/scons-gnu-build.git
+[submodule "lib/tml"]
+	path = lib/tml
+	url = git://github.com/ptomulik/tml
