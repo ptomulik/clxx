@@ -22,7 +22,7 @@ Import('env')
 
 from SCons.Util import CLVar
 
-libs = CLVar('clxx_app clxx_io clxx clxx_info')
+libs = CLVar('clxx_app clxx_io clxx clxx_s11n clxx_info')
 
 lib = env.SharedLibrary('../../../clxx_app_clinfo',
     [ 'options_description.cpp'

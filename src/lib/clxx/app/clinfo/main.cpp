@@ -31,7 +31,7 @@
 
 #include <clxx/platform_layer.hpp>
 #include <clxx/info/platform_layer_info.hpp>
-//#include <clxx/s11n/clinfo/platform_layer_info.hpp>
+#include <clxx/s11n/platform_layer_info.hpp>
 #include <clxx/io/platform_layer_info.hpp>
 #include <clxx/app/options/rethrow.hpp>
 
@@ -120,24 +120,16 @@ template<class Archive>
 static void
 load_from_archive(std::istream& ifs, platform_layer_info& obj)
 {
-  (void)ifs;
-  (void)obj;
-#if 0 // TODO: implement again
   Archive ar(ifs);
   ar >> boost::serialization::make_nvp("platform_layer_info", obj);
-#endif
 }
 
 template<class Archive>
 static void
 save_to_archive(std::ostream& ofs, platform_layer_info const& obj)
 {
-  (void)ofs;
-  (void)obj;
-#if 0 // TODO: implement again
   Archive ar(ofs);
   ar << boost::serialization::make_nvp("platform_layer_info", obj);
-#endif
 }
 
 static platform_layer_info
