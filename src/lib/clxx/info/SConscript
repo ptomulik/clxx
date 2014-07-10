@@ -26,7 +26,8 @@ objects = env.SharedObject([
     'platform_query.cpp',
     'platform_info.cpp',
     'device_query.cpp',
-    'device_info.cpp'
+    'device_info.cpp',
+    'platform_layer_info.cpp'
 ])
 
 libs = CLVar()

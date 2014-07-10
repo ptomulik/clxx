@@ -20,12 +20,16 @@
 
 Import(['env'])
 
+from SCons.Util import CLVar
+
 env.Program('exception1.cpp')
 env.Program('exception2.cpp')
 env.Program('exception3.cpp')
 env.Program('exception4.cpp')
-env.Program('platform1.cpp', LIBS = 'clxx')
-env.Program('device1.cpp', LIBS = 'clxx')
+env.Program('platform1.cpp', LIBS = CLVar('clxx'))
+env.Program('platform2.cpp', LIBS = CLVar('clxx clxx_info clxx_io'))
+env.Program('platform3.cpp', LIBS = CLVar('clxx clxx_info clxx_io'))
+env.Program('device1.cpp', LIBS = CLVar('clxx'))
 
 # Local Variables:
 # # tab-width:4

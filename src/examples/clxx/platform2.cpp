@@ -36,8 +36,8 @@
 #include <clxx/devices.hpp>
 #include <clxx/info/platform_info.hpp>
 #include <clxx/info/device_info.hpp>
-//#include <dimbo/format/clinfo/platform_info.hpp>
-//#include <dimbo/format/clinfo/device_info.hpp>
+#include <clxx/io/platform_info.hpp>
+#include <clxx/io/device_info.hpp>
 #include <iostream>
 // [Includes]
 
@@ -48,7 +48,7 @@ int main(int, char const*[])
   try {
     // [Createplatforms]
     // Create proxies for all local OpenCL platforms
-    platforms platforms(get_platforms());
+    platforms plats(get_platforms());
     // [Createplatforms]
 
     // [PreparePlatformQuery]
@@ -71,19 +71,17 @@ int main(int, char const*[])
     // [PrepareDeviceQuery]
 
     // Query all platforms
-    for (platforms::const_iterator pi = platforms.begin();
-         pi != platforms.end(); ++ pi)
+    for (platforms::const_iterator pi = plats.begin(); pi != plats.end(); ++ pi)
       {
         // [CreatePlatformInfo]
         // Crete platform_info object and gather information about *pi
         // by performing query described by pq
-        platform_info pinfo;
-        query_platform_info(*pi, pq);
+        platform_info pinfo(query_platform_info(*pi, pq));
         // [CreatePlatformInfo]
 
         // Print-out pi info
-        cout << "Platform " << pi - platforms.begin() << ":" << endl;
-        write(cout, pinfo, 2) << endl;
+        cout << "Platform " << pi - plats.begin() << ":" << endl;
+        io::write(cout, pinfo, 2) << endl;
 
         // Query all devices that belong to platform *pi
         // [Createdevices]
@@ -96,12 +94,11 @@ int main(int, char const*[])
             // [CreateDeviceInfo]
             // Crete device_info object gather information about *di by
             // performing query described by dq
-            device_info dinfo;
-            query_device_info(*di, dq);
+            device_info dinfo(query_device_info(*di, dq));
             // [CreateDeviceInfo]
             // Print-out device info
             cout << "    Device " << di - devices.begin() << ":" << endl;
-            write(cout, dinfo, 4) << endl;
+            io::write(cout, dinfo, 4) << endl;
           }
     }
   } catch (std::exception const& e) {
