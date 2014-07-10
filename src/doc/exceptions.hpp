@@ -48,7 +48,7 @@
  *   }
  * \endcode
  * or (s)he may wish to handle only exceptions that fall to a predefined
- * \e categry in %clxx &mdash; for example exceptions raised due to OpenCL
+ * \e category in %clxx &mdash; for example exceptions raised due to OpenCL
  * errors (error codes returned from OpenCL functions converted to exceptions)
  * \code
  *   try {
