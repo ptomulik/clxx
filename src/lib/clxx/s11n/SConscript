@@ -22,27 +22,20 @@ Import('env')
 
 from SCons.Util import CLVar
 
-objects = env.SharedObject([
-    'platform.cpp',
-    'platforms.cpp',
-    'device.cpp',
-    'devices.cpp',
-    'platform_layer.cpp'
-])
+libs =  CLVar('clxx_info boost_serialization')
 
-libs = CLVar('boost_regex OpenCL clxx_info')
-# rlib - "real" libarary
-rlib = env.SharedLibrary('../clxx', objects + ['real.cpp'], LIBS = libs)
-env.Install('${libdir}', rlib)
+# rlib - "real" library
+lib = env.SharedLibrary('../../clxx_s11n', 
+    [ 'platform_info.cpp'
+    , 'platform_query.cpp'
+    , 'device_info.cpp'
+    , 'device_query.cpp'
+    , 'platform_layer_info.cpp'
+    ],
+    LIBS = libs
+)
+env.Install('${libdir}', lib)
 
-# tlib - library for testing (OpenCL functions replaced with mocks)
-tlib = env.SharedLibrary('../clxx_test', objects + ['mock.cpp'], LIBS = libs)
-env.Ignore('../..', tlib)
-
-SConscript('info/SConscript', exports = ['env'])
-SConscript('io/SConscript', exports = ['env'])
-SConscript('app/SConscript', exports = ['env'])
-SConscript('s11n/SConscript', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4

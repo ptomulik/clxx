@@ -43,10 +43,18 @@ env.CxxTest('../check-libclxx_app', env.Glob('app/*.t.h') + env.Glob('app/*/*.t.
            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
            CXXTEST_TARGET = 'check-libclxx_app')
 
-env.Alias('check', ['check-libclxx', 'check-libclxx_info', 'check-libclxx_app'])
+env.CxxTest('../check-libclxx_s11n', env.Glob('s11n/*.t.h'),
+           LIBS = CLVar('clxx_s11n clxx_info boost_serialization'),
+           CXXTEST_CPPPATH = ['..'],
+           CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
+           CXXTEST_TARGET = 'check-libclxx_s11n')
+
+env.Alias('check', ['check-libclxx', 'check-libclxx_info', 'check-libclxx_app', 
+                    'check-libclxx_s11n' ])
 env.AlwaysBuild('check-libclxx')
 env.AlwaysBuild('check-libclxx_info')
 env.AlwaysBuild('check-libclxx_app')
+env.AlwaysBuild('check-libclxx_s11n')
 
 # Local Variables:
 # # tab-width:4
