@@ -36,9 +36,16 @@ lib = env.SharedLibrary( '../../clxx_io',
   LIBS = libs
 )
 
-env.Install('${libdir}', lib)
+ilib = env.Install('${libdir}', lib)
+env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
-# TODO: Install
+ihdr = env.Install("${includedir}/clxx/io", env.Glob("*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/io", ihdr)
+
+env.Alias('install-libclxx_io-headers', ihdr)
+env.Alias('install-libclxx_io-lib', ilib)
+env.Alias('install-libclxx_io-dev', ['install-libclxx_io-headers', 'install-libclxx_io-lib' ])
+env.Alias('install','install-libclxx_io-dev')
 
 # Local Variables:
 # # tab-width:4

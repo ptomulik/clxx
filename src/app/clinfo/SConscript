@@ -25,7 +25,11 @@ from SCons.Util import CLVar
 libs = CLVar('clxx_app_clinfo')
 clinfo = env.Program('clxx-clinfo', 'main.cpp', LIBS = libs)
 
-env.Install('${bindir}', clinfo)
+ibin = env.Install('${bindir}', clinfo)
+env.Ignore("${INSTALL_SANDBOX}${bindir}", ibin)
+
+env.Alias('install-app-clinfo', ibin)
+env.Alias('install','install-app-clinfo')
 
 # Local Variables:
 # # tab-width:4

@@ -34,8 +34,17 @@ lib = env.SharedLibrary('../../clxx_s11n',
     ],
     LIBS = libs
 )
-env.Install('${libdir}', lib)
 
+ilib = env.Install('${libdir}', lib)
+env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+
+ihdr = env.Install("${includedir}/clxx/s11n", env.Glob("*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/s11n", ihdr)
+
+env.Alias('install-libclxx_s11n-headers', ihdr)
+env.Alias('install-libclxx_s11n-lib', ilib)
+env.Alias('install-libclxx_s11n-dev', ['install-libclxx_s11n-headers', 'install-libclxx_s11n-lib' ])
+env.Alias('install','install-libclxx_s11n-dev')
 
 # Local Variables:
 # # tab-width:4

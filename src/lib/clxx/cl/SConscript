@@ -33,11 +33,21 @@ objects = env.SharedObject([
 libs = CLVar('OpenCL clxx_info')
 # rlib - "real" libarary
 rlib = env.SharedLibrary('../../clxx_cl', objects + ['real.cpp'], LIBS = libs)
-env.Install('${libdir}', rlib)
 
 # tlib - library for testing (OpenCL functions replaced with mocks)
 tlib = env.SharedLibrary('../../clxx_cl_test', objects + ['mock.cpp'], LIBS = libs)
 env.Ignore('../../..', tlib)
+
+ilib = env.Install('${libdir}', rlib)
+env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+
+ihdr = env.Install("${includedir}/clxx/cl", env.Glob("*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/cl", ihdr)
+
+env.Alias('install-libclxx_cl-headers', ihdr)
+env.Alias('install-libclxx_cl-lib', ilib)
+env.Alias('install-libclxx_cl-dev', ['install-libclxx_cl-headers', 'install-libclxx_cl-lib' ])
+env.Alias('install','install-libclxx_cl-dev')
 
 # Local Variables:
 # # tab-width:4

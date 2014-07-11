@@ -20,6 +20,18 @@
 
 Import('env')
 
+from SCons.Script import GetOption
+
+ihdr = env.Install("${includedir}/clxx", env.Glob("*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx", ihdr)
+
+util_ihdr = env.Install("${includedir}/clxx/util", env.Glob("util/*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/util", util_ihdr)
+
+env.Alias('install-libclxx_common-headers', ihdr + util_ihdr)
+env.Alias('install-libclxx_common-dev','install-libclxx_common-headers')
+env.Alias('install','install-libclxx_common-dev')
+
 SConscript('app/SConscript', exports = ['env'])
 SConscript('cl/SConscript', exports = ['env'])
 SConscript('info/SConscript', exports = ['env'])

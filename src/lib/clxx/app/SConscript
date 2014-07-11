@@ -32,7 +32,16 @@ lib = env.SharedLibrary('../../clxx_app',
     LIBS = libs
 )
 
-env.Install('${libdir}', lib)
+ilib = env.Install('${libdir}', lib)
+env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+
+ihdr = env.Install("${includedir}/clxx/app", env.Glob("*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/app", ihdr)
+
+env.Alias('install-libclxx_app-headers', ihdr)
+env.Alias('install-libclxx_app-lib', ilib)
+env.Alias('install-libclxx_app-dev', ['install-libclxx_app-headers', 'install-libclxx_app-lib' ])
+env.Alias('install','install-libclxx_app-dev')
 
 subdirs = [ 'clinfo' ]
 scripts = [ '%s/SConscript' % s for s in subdirs ]

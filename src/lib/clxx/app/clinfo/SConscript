@@ -37,11 +37,16 @@ lib = env.SharedLibrary('../../../clxx_app_clinfo',
     LIBS = libs
 )
 
-env.Install('${libdir}', lib)
+ilib = env.Install('${libdir}', lib)
+env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
-#subdirs = [ 'po' ]
-#scripts = [ '%s/SConscript' % s for s in subdirs ]
-#SConscript( scripts, exports = ['env'] )
+ihdr = env.Install("${includedir}/clxx/app_clinfo", env.Glob("*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/app_clinfo", ihdr)
+
+env.Alias('install-libclxx_app_clinfo-headers', ihdr)
+env.Alias('install-libclxx_app_clinfo-lib', ilib)
+env.Alias('install-libclxx_app_clinfo-dev', ['install-libclxx_app_clinfo-headers', 'install-libclxx_app_clinfo-lib' ])
+env.Alias('install','install-libclxx_app_clinfo-dev')
 
 # Local Variables:
 # # tab-width:4

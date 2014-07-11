@@ -25,6 +25,10 @@ env.Tool('doxyfile')
 env.Tool('doxygen')
 env.Tool('gcccov')
 
+# Pre-load 'install' tool to create 'install_sandbox' option
+env.Tool('install')
+env['INSTALL_SANDBOX'] = GetOption('install_sandbox')
+
 # Local Variables:
 # # tab-width:4
 # # indent-tabs-mode:nil
