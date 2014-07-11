@@ -161,10 +161,10 @@ create_device_query( clxx::app::options::options_map const& om )
   else
     {
       // A lot of commands {{{
-      if(om.count("id"))
-        query.select_id(om["id"].as<bool>());
-      if(om.count("type"))
-        query.select_type(om["type"].as<bool>());
+      if(om.count("device-id"))
+        query.select_id(om["device-id"].as<bool>());
+      if(om.count("device-type"))
+        query.select_type(om["device-type"].as<bool>());
       if(om.count("vendor-id"))
         query.select_vendor_id(om["vendor-id"].as<bool>());
       if(om.count("max-compute-units"))

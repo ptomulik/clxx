@@ -68,7 +68,7 @@ _init_options_description()
     ("device-id"
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
     ,"query for device id")
-    // device-info {{{
+    // device-info
     ("device-type"
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
     ,"query for device type")
@@ -321,7 +321,6 @@ _init_options_description()
     ("reference-count"
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
     ,"query for reference-count")
-    // }}}
     // }}}
   ;
 }
