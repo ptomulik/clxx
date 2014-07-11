@@ -20,7 +20,7 @@ install:
   - sudo apt-get --no-install-recommends -y install scons
 #  - sudo apt-get --no-install-recommends -y install swig
   - sudo apt-get --no-install-recommends -y install nvidia-opencl-dev
-#  - sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev libboost-regex-dev
+  - sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev libboost-regex-dev
 #  - sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler
   - sudo pip install cpp-coveralls;
 
