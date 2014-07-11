@@ -30,7 +30,7 @@ objects = env.SharedObject([
     'platform_layer.cpp'
 ])
 
-libs = CLVar('boost_regex OpenCL clxx_info')
+libs = CLVar('OpenCL clxx_info')
 # rlib - "real" libarary
 rlib = env.SharedLibrary('../clxx_cl', objects + ['real.cpp'], LIBS = libs)
 env.Install('${libdir}', rlib)

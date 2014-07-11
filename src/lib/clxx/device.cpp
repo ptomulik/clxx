@@ -30,8 +30,8 @@
 #include <clxx/exceptions.hpp>
 #include <clxx/mock.hpp>
 #include <boost/shared_array.hpp>
-#include <boost/regex.hpp>
 #include <string>
+#include <cstdio>
 
 namespace clxx {
 
@@ -582,16 +582,9 @@ device_info
 query_device_info(device const& dev, device_query const& query)
 {
   std::string vs(dev.get_version());
-  boost::regex re("OpenCL ([0-9]+)\\.([0-9]+).*");
-  boost::smatch sm;
-  int major, minor;
+  unsigned int major, minor;
 
-  if(boost::regex_match(vs, sm, re))
-    {
-      major = std::stoi(sm[1]);
-      minor = std::stoi(sm[2]);
-    }
-  else
+  if(std::sscanf(vs.c_str(), "OpenCL %u.%u", &major, &minor) != 2)
     {
       major = 1;
       minor = 0;
