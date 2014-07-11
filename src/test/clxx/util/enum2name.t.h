@@ -26,11 +26,11 @@
  * \file clxx/enum2name.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_ENUM2NAME_T_H_INCLUDED
-#define CLXX_ENUM2NAME_T_H_INCLUDED
+#ifndef CLXX_UTIL_ENUM2NAME_T_H_INCLUDED
+#define CLXX_UTIL_ENUM2NAME_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/enum2name.hpp>
+#include <clxx/util/enum2name.hpp>
 
 namespace clxx { class enum2name_test_suite; }
 
@@ -773,6 +773,6 @@ public:
   }
 };
 
-#endif /* CLXX_ENUM2NAME_T_H_INCLUDED */
+#endif /* CLXX_UTIL_ENUM2NAME_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

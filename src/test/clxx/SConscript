@@ -25,8 +25,8 @@ from SCons.Util import CLVar
 #defs = env.get('CPPDEFINES', {}).copy()
 #defs.update({'CLXX_COMPILING_TEST' : 1})
 
-env.CxxTest('../check-libclxx', env.Glob('*.t.h'),
-           LIBS = CLVar('clxx_test OpenCL clxx_info'),
+env.CxxTest('../check-libclxx', env.Glob('*.t.h') + env.Glob('util/*.t.h'),
+           LIBS = CLVar('clxx_cl_test OpenCL clxx_info'),
            CXXTEST_CPPPATH = ['..'],
            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
            CXXTEST_TARGET = 'check-libclxx')

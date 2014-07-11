@@ -26,11 +26,11 @@
  * \file clxx/enum2hex.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_ENUM2HEX_T_H_INCLUDED
-#define CLXX_ENUM2HEX_T_H_INCLUDED
+#ifndef CLXX_UTIL_ENUM2HEX_T_H_INCLUDED
+#define CLXX_UTIL_ENUM2HEX_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/enum2hex.hpp>
+#include <clxx/util/enum2hex.hpp>
 
 namespace clxx { class enum2hex_test_suite; }
 
@@ -96,6 +96,6 @@ public:
   }
 };
 
-#endif /* CLXX_ENUM2HEX_T_H_INCLUDED */
+#endif /* CLXX_UTIL_ENUM2HEX_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

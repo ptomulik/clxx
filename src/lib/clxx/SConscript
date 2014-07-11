@@ -32,11 +32,11 @@ objects = env.SharedObject([
 
 libs = CLVar('boost_regex OpenCL clxx_info')
 # rlib - "real" libarary
-rlib = env.SharedLibrary('../clxx', objects + ['real.cpp'], LIBS = libs)
+rlib = env.SharedLibrary('../clxx_cl', objects + ['real.cpp'], LIBS = libs)
 env.Install('${libdir}', rlib)
 
 # tlib - library for testing (OpenCL functions replaced with mocks)
-tlib = env.SharedLibrary('../clxx_test', objects + ['mock.cpp'], LIBS = libs)
+tlib = env.SharedLibrary('../clxx_cl_test', objects + ['mock.cpp'], LIBS = libs)
 env.Ignore('../..', tlib)
 
 SConscript('info/SConscript', exports = ['env'])

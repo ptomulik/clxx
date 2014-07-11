@@ -20,16 +20,16 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/std_except_ctor_arg.hpp
+// clxx/util/std_except_ctor_arg.hpp
 
 #include <stdexcept>
 
-/** // doc: clxx/std_except_ctor_arg.hpp {{{
- * \file clxx/std_except_ctor_arg.hpp
+/** // doc: clxx/util/std_except_ctor_arg.hpp {{{
+ * \file clxx/util/std_except_ctor_arg.hpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
-#define CLXX_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
+#ifndef CLXX_UTIL_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
+#define CLXX_UTIL_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
 
 namespace clxx {
 /** // doc: std_except_no_ctor_arg_tag {{{
@@ -43,10 +43,10 @@ struct std_except_no_ctor_arg_tag {};
  * There are two kinds of standard exceptions:
  *
  * - those taking a message string as an argument to constructor, and
- * - those having message only the default (and copy) constructor.
+ * - those having only the default (and copy) constructor.
  *
- * An example of exception belonging to the first group (with mutable message)
- * is the \c std::runtime_error. An example of the later (with fixed message)
+ * An example of exception from the first group (with mutable message) is the
+ * \c std::runtime_error. An example of the later (with fixed message)
  * is the \c std::bad_alloc. One feature which distinguishes one standard
  * exceptions from others is thus the additional constructor which takes the
  * message string as an argument.
@@ -58,7 +58,7 @@ struct std_except_no_ctor_arg_tag {};
  *
  * **Example**:
  * \code
- * #include <clxx/std_except_ctor_arg.hpp>
+ * #include <clxx/util/std_except_ctor_arg.hpp>
  *
  * template<class StdExcept, class CtorArg = typename std_except_ctor_arg<StdExcept>::type>
  *   struct my_except 
@@ -120,6 +120,6 @@ struct std_except_ctor_arg< std::bad_alloc>
 /** \endcond */
 } // end namespace clxx
 
-#endif /* CLXX_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED */
+#endif /* CLXX_UTIL_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

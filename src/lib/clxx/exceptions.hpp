@@ -31,7 +31,7 @@
 
 #include <clxx/exception_base.hpp>
 #include <clxx/clerror_no.hpp>
-#include <clxx/to_string.hpp>
+#include <clxx/util/to_string.hpp>
 #include <string>
 
 namespace clxx {

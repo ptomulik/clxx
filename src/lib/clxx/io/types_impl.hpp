@@ -30,7 +30,7 @@
  * @todo Write documentation
  */ // }}}
 #include <clxx/io/types.hpp>
-#include <clxx/to_string.hpp>
+#include <clxx/util/to_string.hpp>
 
 template <typename _CharT, typename _Traits>
 std::basic_ostream<_CharT, _Traits>&

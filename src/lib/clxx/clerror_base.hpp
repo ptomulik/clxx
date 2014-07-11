@@ -31,9 +31,9 @@
 
 #include <clxx/clerror.hpp>
 #include <clxx/exception_base.hpp>
-#include <clxx/std_except_ctor_arg.hpp>
-#include <clxx/clerror_stdexcept.hpp>
-#include <clxx/enum2cstr.hpp>
+#include <clxx/util/std_except_ctor_arg.hpp>
+#include <clxx/util/clerror_stdexcept.hpp>
+#include <clxx/util/enum2cstr.hpp>
 
 namespace clxx {
 

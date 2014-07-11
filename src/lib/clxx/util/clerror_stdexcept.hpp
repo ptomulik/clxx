@@ -20,14 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/clerror_stdexcept.hpp
+// clxx/util/clerror_stdexcept.hpp
 
-/** // doc: clxx/clerror_stdexcept.hpp {{{
- * \file clxx/clerror_stdexcept.hpp
+/** // doc: clxx/util/clerror_stdexcept.hpp {{{
+ * \file clxx/util/clerror_stdexcept.hpp
  * \brief Provides the clxx::clerror_stdexcept metafunction.
  */ // }}}
-#ifndef CLXX_CLERROR_STDEXCEPT_HPP_INCLUDED
-#define CLXX_CLERROR_STDEXCEPT_HPP_INCLUDED
+#ifndef CLXX_UTIL_CLERROR_STDEXCEPT_HPP_INCLUDED
+#define CLXX_UTIL_CLERROR_STDEXCEPT_HPP_INCLUDED
 
 #include <clxx/types.hpp>
 #include <stdexcept>
@@ -238,6 +238,6 @@ template<>
 
 } // end namespace clxx
 
-#endif /* CLXX_CLERROR_STDEXCEPT_HPP_INCLUDED */
+#endif /* CLXX_UTIL_CLERROR_STDEXCEPT_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

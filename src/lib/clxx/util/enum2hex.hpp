@@ -20,17 +20,17 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/to_string.hpp
+// clxx/util/to_string.hpp
 
-/** // doc: clxx/to_string.hpp {{{
- * \file clxx/to_string.hpp
+/** // doc: clxx/util/to_string.hpp {{{
+ * \file clxx/util/to_string.hpp
  * \brief Conversions of several types of data to string
  *
  * This header implements overloaded std::to_string for several types defined
  * in clxx.
  */ // }}}
-#ifndef CLXX_ENUM2HEX_HPP_INCLUDED
-#define CLXX_ENUM2HEX_HPP_INCLUDED
+#ifndef CLXX_UTIL_ENUM2HEX_HPP_INCLUDED
+#define CLXX_UTIL_ENUM2HEX_HPP_INCLUDED
 
 #include <string>
 #include <type_traits>
@@ -143,6 +143,6 @@ std::string enum2hex(E x)
 }
 
 } // end namespace clxx
-#endif /* CLXX_ENUM2HEX_HPP_INCLUDED */
+#endif /* CLXX_UTIL_ENUM2HEX_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

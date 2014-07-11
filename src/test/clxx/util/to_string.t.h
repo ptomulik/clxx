@@ -26,13 +26,13 @@
  * \file clxx/to_string.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_TO_STRING_T_H_INCLUDED
-#define CLXX_TO_STRING_T_H_INCLUDED
+#ifndef CLXX_UTIL_TO_STRING_T_H_INCLUDED
+#define CLXX_UTIL_TO_STRING_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/to_string.hpp>
+#include <clxx/util/to_string.hpp>
 #include <clxx/types.hpp>
-#include <clxx/enum2hex.hpp>
+#include <clxx/util/enum2hex.hpp>
 
 namespace clxx { class to_string_test_suite; }
 
@@ -405,6 +405,6 @@ public:
   }
 };
 
-#endif /* CLXX_TO_STRING_T_H_INCLUDED */
+#endif /* CLXX_UTIL_TO_STRING_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -30,7 +30,7 @@
 #define CLXX_EXCEPTION_BASE_HPP_INCLUDED
 
 #include <clxx/exception.hpp>
-#include <clxx/std_except_ctor_arg.hpp>
+#include <clxx/util/std_except_ctor_arg.hpp>
 
 namespace clxx {
 

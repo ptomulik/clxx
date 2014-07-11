@@ -20,21 +20,21 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/to_string.hpp
+// clxx/util/to_string.hpp
 
-/** // doc: clxx/to_string.hpp {{{
- * \file clxx/to_string.hpp
+/** // doc: clxx/util/to_string.hpp {{{
+ * \file clxx/util/to_string.hpp
  * \brief Conversions of several types of data to string
  *
  * This header implements overloaded std::to_string for several types defined
  * in clxx.
  */ // }}}
-#ifndef CLXX_TO_STRING_HPP_INCLUDED
-#define CLXX_TO_STRING_HPP_INCLUDED
+#ifndef CLXX_UTIL_TO_STRING_HPP_INCLUDED
+#define CLXX_UTIL_TO_STRING_HPP_INCLUDED
 
 #include <clxx/types.hpp>
-#include <clxx/enum2name.hpp>
-#include <clxx/enum2hex.hpp>
+#include <clxx/util/enum2name.hpp>
+#include <clxx/util/enum2hex.hpp>
 #include <string>
 #include <type_traits>
 
@@ -297,6 +297,6 @@ inline string to_string(clxx::profiling_info_t x)
 
 } // end namespace std
 
-#endif /* CLXX_TO_STRING_HPP_INCLUDED */
+#endif /* CLXX_UTIL_TO_STRING_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

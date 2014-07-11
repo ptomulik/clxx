@@ -20,14 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/enum2name.hpp
+// clxx/util/enum2name.hpp
 
-/** // doc: clxx/enum2name.hpp {{{
- * \file clxx/enum2name.hpp
+/** // doc: clxx/util/enum2name.hpp {{{
+ * \file clxx/util/enum2name.hpp
  * \brief Provides enum2namen() function.
  */ // }}}
-#ifndef CLXX_ENUM2NAME_HPP_INCLUDED
-#define CLXX_ENUM2NAME_HPP_INCLUDED
+#ifndef CLXX_UTIL_ENUM2NAME_HPP_INCLUDED
+#define CLXX_UTIL_ENUM2NAME_HPP_INCLUDED
 
 #include <clxx/types.hpp>
 #include <stdexcept>
@@ -717,6 +717,6 @@ enum2name(profiling_info_t x, char const* dflt = nullptr) noexcept
 
 } // end namespace clxx
 
-#endif /* CLXX_ENUM2NAME_HPP_INCLUDED */
+#endif /* CLXX_UTIL_ENUM2NAME_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
