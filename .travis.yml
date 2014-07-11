@@ -37,8 +37,8 @@ after_success:
       coveralls --gcov $GCOV --gcov-options '\-p \-l' -b . -r . 
                   -e .git -e HOWTO -e lib -e bin -e src/app -e build/app 
                   -e build/.sconf_temp -e build/lib/clxx/.sconf_temp
-                  -e build/lib/clxx/python -e src/doc -e src/test -e site_scons
-                  -e template -e valgrid -e /usr;
+                  -e src/doc -e src/test -e build/doc -e build/test
+                  -e site_scons -e template -e valgrid -e /usr;
     fi
 after_failure:
   - test -f src/config.log && cat src/config.log
