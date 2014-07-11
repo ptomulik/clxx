@@ -32,11 +32,8 @@
 #include <clxx/info/device_info.hpp>
 #include <boost/serialization/version.hpp>
 
-// FIXME: replace with more verbose constant, e.g. CLXX_USE_BOOST_SERIALIZATION
-#ifndef SWIG
 BOOST_CLASS_VERSION( clxx::device_info
                    , clxx::device_info::class_version )
-#endif
 
 namespace boost {
 namespace serialization {

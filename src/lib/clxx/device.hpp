@@ -183,8 +183,6 @@ public:
   ~device()
   {
   }
-/* FIXME: develop more verbose macro name */
-#ifndef SWIG
   /** // {{{
    * \brief Assignment operator.
    * \return Reference to this object.
@@ -202,7 +200,6 @@ public:
   {
     return this->_device_id;
   }
-#endif
   /** // {{{
    * \brief Assignment.
    *
