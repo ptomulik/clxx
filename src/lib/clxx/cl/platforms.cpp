@@ -20,15 +20,15 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/platforms.cpp
+// clxx/cl/platforms.cpp
 
-/** // doc: clxx/platforms.cpp {{{
- * \file clxx/platforms.cpp
+/** // doc: clxx/cl/platforms.cpp {{{
+ * \file clxx/cl/platforms.cpp
  * \todo Write documentation
  */ // }}}
-#include <clxx/platforms.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/platforms.hpp>
+#include <clxx/cl/exceptions.hpp>
+#include <clxx/cl/mock.hpp>
 
 namespace clxx {
 

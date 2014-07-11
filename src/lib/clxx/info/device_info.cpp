@@ -27,7 +27,7 @@
  * @todo Write documentation
  */ // }}}
 #include <clxx/info/device_info.hpp>
-#include <clxx/exceptions.hpp>
+#include <clxx/cl/exceptions.hpp>
 #include <string>
 
 namespace clxx {

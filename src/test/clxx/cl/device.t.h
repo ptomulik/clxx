@@ -26,13 +26,13 @@
  * \file clxx/device.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_DEVICE_T_H_INCLUDED
-#define CLXX_DEVICE_T_H_INCLUDED
+#ifndef CLXX_CL_DEVICE_T_H_INCLUDED
+#define CLXX_CL_DEVICE_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/device.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/device.hpp>
+#include <clxx/cl/exceptions.hpp>
+#include <clxx/cl/mock.hpp>
 
 namespace clxx { class device_test_suite; }
 
@@ -4478,6 +4478,6 @@ public:
   }
 };
 
-#endif /* CLXX_DEVICE_T_H_INCLUDED */
+#endif /* CLXX_CL_DEVICE_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

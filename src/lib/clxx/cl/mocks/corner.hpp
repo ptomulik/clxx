@@ -20,10 +20,10 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/mocks/corner.hpp
+// clxx/cl/mocks/corner.hpp
 
-/** // doc: clxx/mocks/corner.hpp {{{
- * \file clxx/mocks/corner.hpp
+/** // doc: clxx/cl/mocks/corner.hpp {{{
+ * \file clxx/cl/mocks/corner.hpp
  *
  * This file implements OpenCL mocks emulating several corner cases, such as
  * memory allocation errors.
@@ -32,8 +32,8 @@
  * constant is defined,
  *
  */ // }}}
-#ifndef CLXX_MOCKS_CORNER_HPP_INCLUDED
-#define CLXX_MOCKS_CORNER_HPP_INCLUDED
+#ifndef CLXX_CL_MOCKS_CORNER_HPP_INCLUDED
+#define CLXX_CL_MOCKS_CORNER_HPP_INCLUDED
 
 /* Mock class declarations */
 #if defined(CXXTEST_MOCK_TEST_SOURCE_FILE) || defined(CXXTEST_FLAGS) \
@@ -180,6 +180,6 @@ ErrRet_clGetDeviceInfo(cl_int err)
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
 
-#endif /* CLXX_MOCKS_CORNER_HPP_INCLUDED */
+#endif /* CLXX_CL_MOCKS_CORNER_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

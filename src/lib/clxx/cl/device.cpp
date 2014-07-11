@@ -20,15 +20,15 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/device.cpp
+// clxx/cl/device.cpp
 
-/** // doc: clxx/device.cpp {{{
- * \file clxx/device.cpp
+/** // doc: clxx/cl/device.cpp {{{
+ * \file clxx/cl/device.cpp
  * \todo Write documentation
  */ // }}}
-#include <clxx/device.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/device.hpp>
+#include <clxx/cl/exceptions.hpp>
+#include <clxx/cl/mock.hpp>
 #include <boost/shared_array.hpp>
 #include <string>
 #include <cstdio>

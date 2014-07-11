@@ -20,17 +20,17 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/device.hpp
+// clxx/cl/device.hpp
 
-/** // doc: clxx/device.hpp {{{
- * \file clxx/device.hpp
+/** // doc: clxx/cl/device.hpp {{{
+ * \file clxx/cl/device.hpp
  * \brief Provides the clxx::device class.
  *
  * This file contains definition of clxx::device class which provides
  * proxy object to access locally available OpenCL device.
  */ // }}}
-#ifndef CLXX_DEVICE_HPP_INCLUDED
-#define CLXX_DEVICE_HPP_INCLUDED
+#ifndef CLXX_CL_DEVICE_HPP_INCLUDED
+#define CLXX_CL_DEVICE_HPP_INCLUDED
 
 #include <clxx/types.hpp>
 #include <vector>
@@ -878,6 +878,6 @@ query_device_info( device const& device,
                    device_query const& query = device_query() );
 } // end namespace clxx
 
-#endif /* CLXX_DEVICE_HPP_INCLUDED */
+#endif /* CLXX_CL_DEVICE_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

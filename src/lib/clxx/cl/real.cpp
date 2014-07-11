@@ -20,12 +20,12 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/real.cpp {{{
- * \file clxx/real.cpp
+/** // doc: clxx/cl/real.cpp {{{
+ * \file clxx/cl/real.cpp
  * \todo Write documentation
  */ // }}}
 #define CXXTEST_MOCK_REAL_SOURCE_FILE
-#include <clxx/mock.hpp>
+#include <clxx/cl/mock.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

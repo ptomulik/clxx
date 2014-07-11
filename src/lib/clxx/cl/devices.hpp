@@ -20,17 +20,17 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/devices.hpp
+// clxx/cl/devices.hpp
 
-/** // doc: clxx/devices.hpp {{{
- * \file clxx/devices.hpp
+/** // doc: clxx/cl/devices.hpp {{{
+ * \file clxx/cl/devices.hpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_DEVICES_HPP_INCLUDED
-#define CLXX_DEVICES_HPP_INCLUDED
+#ifndef CLXX_CL_DEVICES_HPP_INCLUDED
+#define CLXX_CL_DEVICES_HPP_INCLUDED
 
-#include <clxx/device.hpp>
-#include <clxx/platform.hpp>
+#include <clxx/cl/device.hpp>
+#include <clxx/cl/platform.hpp>
 #include <clxx/types.hpp>
 
 namespace clxx {

@@ -30,9 +30,9 @@
 #define DIMBO_CL_DEVICES_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/devices.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/devices.hpp>
+#include <clxx/cl/exceptions.hpp>
+#include <clxx/cl/mock.hpp>
 
 namespace clxx { class devices_test_suite; }
 

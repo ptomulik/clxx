@@ -20,16 +20,16 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/clerror_base.hpp
+// clxx/cl/clerror_base.hpp
 
-/** // doc: clxx/clerror_base.hpp {{{
- * \file clxx/clerror_base.hpp
+/** // doc: clxx/cl/clerror_base.hpp {{{
+ * \file clxx/cl/clerror_base.hpp
  * \brief Provides the clxx::clerror_base template class.
  */ // }}}
 #ifndef CLXX_CLERROR_NO_BASE_HPP_INCLUDED
 #define CLXX_CLERROR_NO_BASE_HPP_INCLUDED
 
-#include <clxx/clerror.hpp>
+#include <clxx/cl/clerror.hpp>
 #include <clxx/exception_base.hpp>
 #include <clxx/util/std_except_ctor_arg.hpp>
 #include <clxx/util/clerror_stdexcept.hpp>

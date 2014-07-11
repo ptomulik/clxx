@@ -20,18 +20,18 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/platforms.hpp
+// clxx/cl/platforms.hpp
 
-/** // doc: clxx/platforms.hpp {{{
- * \file clxx/platforms.hpp
+/** // doc: clxx/cl/platforms.hpp {{{
+ * \file clxx/cl/platforms.hpp
  *
  * This file provides functions to retrieve platform identifiers (and platform
  * proxy objects) of (all) locally available OpenCL platforms.
  */ // }}}
-#ifndef CLXX_PLATFORMS_HPP_INCLUDED
-#define CLXX_PLATFORMS_HPP_INCLUDED
+#ifndef CLXX_CL_PLATFORMS_HPP_INCLUDED
+#define CLXX_CL_PLATFORMS_HPP_INCLUDED
 
-#include <clxx/platform.hpp>
+#include <clxx/cl/platform.hpp>
 #include <CL/cl.h>
 #include <vector>
 

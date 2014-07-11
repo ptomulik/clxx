@@ -20,14 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/clerror.hpp
+// clxx/cl/clerror.hpp
 
-/** // doc: clxx/clerror.hpp {{{
- * \file clxx/clerror.hpp
+/** // doc: clxx/cl/clerror.hpp {{{
+ * \file clxx/cl/clerror.hpp
  * \brief Provides clxx::clerror class.
  */ // }}}
-#ifndef CLXX_CLERROR_HPP_INCLUDED
-#define CLXX_CLERROR_HPP_INCLUDED
+#ifndef CLXX_CL_CLERROR_HPP_INCLUDED
+#define CLXX_CL_CLERROR_HPP_INCLUDED
 
 #include <clxx/exception.hpp>
 #include <clxx/types.hpp>
@@ -62,6 +62,6 @@ struct clerror
 
 } // end namespace clxx
 
-#endif /* CLXX_CLERROR_HPP_INCLUDED */
+#endif /* CLXX_CL_CLERROR_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

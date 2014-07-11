@@ -20,18 +20,18 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/platform.hpp
+// clxx/cl/platform.hpp
 
-/** // doc: clxx/platform.hpp {{{
- * \file clxx/platform.hpp
+/** // doc: clxx/cl/platform.hpp {{{
+ * \file clxx/cl/platform.hpp
  * \brief Provides the clxx::platform and clxx::get_platform_info().
  *
  * This file contains clxx::platform class (OpenCL platform proxy object),
  * which provides access to OpenCL platform information.
  *
  */ // }}}
-#ifndef CLXX_PLATFORM_HPP_INCLUDED
-#define CLXX_PLATFORM_HPP_INCLUDED
+#ifndef CLXX_CL_PLATFORM_HPP_INCLUDED
+#define CLXX_CL_PLATFORM_HPP_INCLUDED
 
 #include <clxx/types.hpp>
 #include <string>
@@ -327,6 +327,6 @@ query_platform_info( platform const& platform,
                      platform_query const& query = platform_query() );
 } // end namespace clxx
 
-#endif /* CLXX_PLATFORM_HPP_INCLUDED */
+#endif /* CLXX_CL_PLATFORM_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -20,17 +20,17 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/platform_layer.hpp
+// clxx/cl/platform_layer.hpp
 
-/** // doc: clxx/platform_layer.hpp {{{
- * \file clxx/platform_layer.hpp
+/** // doc: clxx/cl/platform_layer.hpp {{{
+ * \file clxx/cl/platform_layer.hpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_PLATFORM_LAYER_HPP_INCLUDED
-#define CLXX_PLATFORM_LAYER_HPP_INCLUDED
+#ifndef CLXX_CL_PLATFORM_LAYER_HPP_INCLUDED
+#define CLXX_CL_PLATFORM_LAYER_HPP_INCLUDED
 
-#include <clxx/platforms.hpp>
-#include <clxx/devices.hpp>
+#include <clxx/cl/platforms.hpp>
+#include <clxx/cl/devices.hpp>
 
 #include <clxx/info/platform_layer_info.hpp>
 #include <clxx/info/platform_query.hpp>
@@ -101,6 +101,6 @@ query_platform_layer_info(
 
 } // end namespace clxx
 
-#endif /* CLXX_PLATFORM_LAYER_HPP_INCLUDED */
+#endif /* CLXX_CL_PLATFORM_LAYER_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

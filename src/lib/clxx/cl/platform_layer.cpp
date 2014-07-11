@@ -20,16 +20,16 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/platform_layer.cpp
+// clxx/cl/platform_layer.cpp
 
-/** // doc: clxx/platform_layer.cpp {{{
- * @file clxx/platform_layer.cpp
+/** // doc: clxx/cl/platform_layer.cpp {{{
+ * @file clxx/cl/platform_layer.cpp
  * @todo Write documentation
  */ // }}}
-#include <clxx/platform_layer.hpp>
-#include <clxx/platform.hpp>
-#include <clxx/device.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/platform_layer.hpp>
+#include <clxx/cl/platform.hpp>
+#include <clxx/cl/device.hpp>
+#include <clxx/cl/mock.hpp>
 #include <algorithm>
 
 namespace clxx {

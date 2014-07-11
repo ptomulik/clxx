@@ -22,14 +22,23 @@ Import(['env'])
 
 from SCons.Util import CLVar
 
-#defs = env.get('CPPDEFINES', {}).copy()
-#defs.update({'CLXX_COMPILING_TEST' : 1})
+env.CxxTest('../check-libclxx_app', env.Glob('app/*.t.h') + env.Glob('app/*/*.t.h'),
+           LIBS = CLVar('clxx_app boost_program_options'),
+           CXXTEST_CPPPATH = ['..'],
+           CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
+           CXXTEST_TARGET = 'check-libclxx_app')
 
-env.CxxTest('../check-libclxx', env.Glob('*.t.h') + env.Glob('util/*.t.h'),
+env.CxxTest('../check-libclxx_cl', env.Glob('cl/*.t.h'),
            LIBS = CLVar('clxx_cl_test OpenCL clxx_info'),
            CXXTEST_CPPPATH = ['..'],
            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
-           CXXTEST_TARGET = 'check-libclxx')
+           CXXTEST_TARGET = 'check-libclxx_cl')
+
+env.CxxTest('../check-libclxx_common', env.Glob('*.t.h') + env.Glob('util/*.t.h'),
+           LIBS = CLVar(),
+           CXXTEST_CPPPATH = ['..'],
+           CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
+           CXXTEST_TARGET = 'check-libclxx_common')
 
 env.CxxTest('../check-libclxx_info', env.Glob('info/*.t.h'),
            LIBS = CLVar('clxx_info'),
@@ -37,23 +46,20 @@ env.CxxTest('../check-libclxx_info', env.Glob('info/*.t.h'),
            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
            CXXTEST_TARGET = 'check-libclxx_info')
 
-env.CxxTest('../check-libclxx_app', env.Glob('app/*.t.h') + env.Glob('app/*/*.t.h'),
-           LIBS = CLVar('clxx_app boost_program_options'),
-           CXXTEST_CPPPATH = ['..'],
-           CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
-           CXXTEST_TARGET = 'check-libclxx_app')
-
 env.CxxTest('../check-libclxx_s11n', env.Glob('s11n/*.t.h'),
            LIBS = CLVar('clxx_s11n clxx_info boost_serialization'),
            CXXTEST_CPPPATH = ['..'],
            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
            CXXTEST_TARGET = 'check-libclxx_s11n')
 
-env.Alias('check', ['check-libclxx', 'check-libclxx_info', 'check-libclxx_app', 
-                    'check-libclxx_s11n' ])
-env.AlwaysBuild('check-libclxx')
-env.AlwaysBuild('check-libclxx_info')
+env.Alias('check', [ 'check-libclxx_app', 'check-libclxx_cl',
+                     'check-libclxx_common', 'check-libclxx_info',
+                     'check-libclxx_s11n' ])
+
 env.AlwaysBuild('check-libclxx_app')
+env.AlwaysBuild('check-libclxx_cl')
+env.AlwaysBuild('check-libclxx_common')
+env.AlwaysBuild('check-libclxx_info')
 env.AlwaysBuild('check-libclxx_s11n')
 
 # Local Variables:

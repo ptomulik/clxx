@@ -26,12 +26,12 @@
  * \file clxx/platform_layer.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_PLATFORM_LAYER_T_H_INCLUDED
-#define CLXX_PLATFORM_LAYER_T_H_INCLUDED
+#ifndef CLXX_CL_PLATFORM_LAYER_T_H_INCLUDED
+#define CLXX_CL_PLATFORM_LAYER_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/platform_layer.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/platform_layer.hpp>
+#include <clxx/cl/mock.hpp>
 
 namespace clxx { class platform_layer_test_suite; }
 
@@ -364,6 +364,6 @@ public:
   }
 };
 
-#endif /* CLXX_PLATFORM_LAYER_T_H_INCLUDED */
+#endif /* CLXX_CL_PLATFORM_LAYER_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

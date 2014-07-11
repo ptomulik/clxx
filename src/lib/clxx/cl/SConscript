@@ -20,11 +20,24 @@
 
 Import('env')
 
-SConscript('app/SConscript', exports = ['env'])
-SConscript('cl/SConscript', exports = ['env'])
-SConscript('info/SConscript', exports = ['env'])
-SConscript('io/SConscript', exports = ['env'])
-SConscript('s11n/SConscript', exports = ['env'])
+from SCons.Util import CLVar
+
+objects = env.SharedObject([
+    'platform.cpp',
+    'platforms.cpp',
+    'device.cpp',
+    'devices.cpp',
+    'platform_layer.cpp'
+])
+
+libs = CLVar('OpenCL clxx_info')
+# rlib - "real" libarary
+rlib = env.SharedLibrary('../../clxx_cl', objects + ['real.cpp'], LIBS = libs)
+env.Install('${libdir}', rlib)
+
+# tlib - library for testing (OpenCL functions replaced with mocks)
+tlib = env.SharedLibrary('../../clxx_cl_test', objects + ['mock.cpp'], LIBS = libs)
+env.Ignore('../../..', tlib)
 
 # Local Variables:
 # # tab-width:4

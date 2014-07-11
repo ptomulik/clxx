@@ -24,15 +24,15 @@
 
 /** // doc: clxx/platforms.t.h {{{
  * \file clxx/platforms.t.h
- * \brief Unit tests for clxx/platforms.hpp
+ * \brief Unit tests for clxx/cl/platforms.hpp
  */ // }}}
-#ifndef CLXX_PLATFORMS_T_H_INCLUDED
-#define CLXX_PLATFORMS_T_H_INCLUDED
+#ifndef CLXX_CL_PLATFORMS_T_H_INCLUDED
+#define CLXX_CL_PLATFORMS_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/platforms.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/platforms.hpp>
+#include <clxx/cl/exceptions.hpp>
+#include <clxx/cl/mock.hpp>
 
 namespace clxx { class Platforms_TestSuite; }
 
@@ -148,6 +148,6 @@ public:
   }
 };
 
-#endif /* CLXX_PLATFORMS_T_H_INCLUDED */
+#endif /* CLXX_CL_PLATFORMS_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

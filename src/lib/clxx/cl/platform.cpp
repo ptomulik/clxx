@@ -20,15 +20,15 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/platform.hpp
+// clxx/cl/platform.hpp
 
-/** // doc: clxx/platform.hpp {{{
- * \file clxx/platform.hpp
+/** // doc: clxx/cl/platform.hpp {{{
+ * \file clxx/cl/platform.hpp
  * \todo Write documentation
  */ // }}}
-#include <clxx/platform.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/platform.hpp>
+#include <clxx/cl/exceptions.hpp>
+#include <clxx/cl/mock.hpp>
 #include <boost/shared_array.hpp>
 
 namespace clxx {

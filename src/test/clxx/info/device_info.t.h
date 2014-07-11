@@ -32,7 +32,7 @@
 #include <cxxtest/TestSuite.h>
 #include <clxx/info/device_info.hpp>
 #include <clxx/info/device_info_fixtures.hpp>
-#include <clxx/exceptions.hpp>
+#include <clxx/cl/exceptions.hpp>
 
 // For serialization
 #include <boost/archive/text_oarchive.hpp>

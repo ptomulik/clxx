@@ -20,15 +20,15 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/devices.cpp
+// clxx/cl/devices.cpp
 
-/** // doc: clxx/devices.cpp {{{
- * \file clxx/devices.cpp
+/** // doc: clxx/cl/devices.cpp {{{
+ * \file clxx/cl/devices.cpp
  * \todo Write documentation
  */ // }}}
-#include <clxx/devices.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/mock.hpp>
+#include <clxx/cl/devices.hpp>
+#include <clxx/cl/exceptions.hpp>
+#include <clxx/cl/mock.hpp>
 
 namespace clxx {
 

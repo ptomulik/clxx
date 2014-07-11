@@ -26,11 +26,11 @@
  * \file clxx/clerror_no.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CLERROR_NO_T_H_INCLUDED
-#define CLXX_CLERROR_NO_T_H_INCLUDED
+#ifndef CLXX_CL_CLERROR_NO_T_H_INCLUDED
+#define CLXX_CL_CLERROR_NO_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/clerror_no.hpp>
+#include <clxx/cl/clerror_no.hpp>
 
 namespace clxx { class clerror_no_test; }
 
@@ -920,6 +920,6 @@ public:
 #endif
 };
 
-#endif /* CLXX_CLERROR_NO_T_H_INCLUDED */
+#endif /* CLXX_CL_CLERROR_NO_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

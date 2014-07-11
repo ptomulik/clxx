@@ -20,10 +20,10 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/mocks/newton.hpp
+// clxx/cl/mocks/newton.hpp
 
-/** // doc: clxx/mocks/newton.hpp {{{
- * \file clxx/mocks/newton.hpp
+/** // doc: clxx/cl/mocks/newton.hpp {{{
+ * \file clxx/cl/mocks/newton.hpp
  *
  * This file implements OpenCL mocks emulating one node of our OpenCL-based
  * cluster named newton. This note has two OpenCL platforms on it. Platform 0
@@ -57,8 +57,8 @@
  *  \endcode
  *
  */ // }}}
-#ifndef CLXX_MOCKS_NEWTON_HPP_INCLUDED
-#define CLXX_MOCKS_NEWTON_HPP_INCLUDED
+#ifndef CLXX_CL_MOCKS_NEWTON_HPP_INCLUDED
+#define CLXX_CL_MOCKS_NEWTON_HPP_INCLUDED
 
 /* Mock class declarations */
 #if defined(CXXTEST_MOCK_TEST_SOURCE_FILE) || defined(CXXTEST_FLAGS) \
@@ -1108,6 +1108,6 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
 
-#endif /* CLXX_MOCKS_NEWTON_HPP_INCLUDED */
+#endif /* CLXX_CL_MOCKS_NEWTON_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -20,17 +20,17 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/exceptions.hpp
+// clxx/cl/exceptions.hpp
 
-/** // doc: clxx/exceptions.hpp {{{
- * \file clxx/exceptions.hpp
+/** // doc: clxx/cl/exceptions.hpp {{{
+ * \file clxx/cl/exceptions.hpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_EXCEPTIONS_HPP_INCLUDED
-#define CLXX_EXCEPTIONS_HPP_INCLUDED
+#ifndef CLXX_CL_EXCEPTIONS_HPP_INCLUDED
+#define CLXX_CL_EXCEPTIONS_HPP_INCLUDED
 
 #include <clxx/exception_base.hpp>
-#include <clxx/clerror_no.hpp>
+#include <clxx/cl/clerror_no.hpp>
 #include <clxx/util/to_string.hpp>
 #include <string>
 
@@ -118,6 +118,6 @@ struct unexpected_clerror
   };
 } // end namespace clxx
 
-#endif /* CLXX_EXCEPTIONS_HPP_INCLUDED */
+#endif /* CLXX_CL_EXCEPTIONS_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

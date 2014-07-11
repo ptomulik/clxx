@@ -20,18 +20,18 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/mock.hpp
+// clxx/cl/mock.hpp
 
-/** // doc: clxx/mock.hpp {{{
- * \file clxx/mock.hpp
+/** // doc: clxx/cl/mock.hpp {{{
+ * \file clxx/cl/mock.hpp
  *
  * \brief CxxTest mocks for OpenCL functions.
  *
  * This file declares OpenCL mocks for CxxTest-based unit tests. Particular
- * implementations are provided by headers found in clxx/mocks/ directory.
+ * implementations are provided by headers found in clxx/cl/mocks/ directory.
  */ // }}}
-#ifndef CLXX_MOCK_HPP_INCLUDED
-#define CLXX_MOCK_HPP_INCLUDED
+#ifndef CLXX_CL_MOCK_HPP_INCLUDED
+#define CLXX_CL_MOCK_HPP_INCLUDED
 
 #include <CL/cl.h>
 #include <cxxtest/Mock.h>
@@ -104,9 +104,9 @@ CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramInfo,
 CXXTEST_MOCK_GLOBAL(cl_int, clRetainProgram, (cl_program program), (program));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseProgram, (cl_program program), (program));
 
-#include <clxx/mocks/newton.hpp>
-#include <clxx/mocks/corner.hpp>
+#include <clxx/cl/mocks/newton.hpp>
+#include <clxx/cl/mocks/corner.hpp>
 
-#endif /* CLXX_MOCK_HPP_INCLUDED */
+#endif /* CLXX_CL_MOCK_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
