@@ -1,14 +1,11 @@
 HOWTO: Create new source file
 `````````````````````````````
 
-If you wish to create fully-equipped C++ class module, see 
-``HOWTO/addclass.md``
-
 If you wish to create a new source file, do your best to use one of the
 templates stored under ``template/`` directory. For example, to create new
 C++ header do::
 
-    cp template/unit.hpp src/lib/dimbo/myheader.hpp
+    cp template/unit.hpp src/lib/clxx/myheader.hpp
 
 If there is no template available for the source file type you wish to create,
 consider creating new one in ``template/`` directory and put documentation to

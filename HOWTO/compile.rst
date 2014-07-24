@@ -12,7 +12,7 @@ documentation.
 HOWTO: Change compilation flags
 ```````````````````````````````
 
-You may set several command-line variables to change compilator, compilation
+You may set several command-line variables to change compiler, compilation
 flags and other options. For example, you may change flags for C and C++
 compiler::
 
