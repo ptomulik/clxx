@@ -9,6 +9,7 @@ before_install:
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu raring main universe multiverse restricted'
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu saucy main universe multiverse restricted'
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu trusty main universe multiverse restricted'
+  - sudo apt-key update
   - sudo apt-get -y update
 install:
   - sudo apt-get --no-install-recommends -y install g++
