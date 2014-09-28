@@ -62,7 +62,7 @@
  * \code
  *   try {
  *     // ...
- *   } catch (clxx::clerror_no<status_t::device_not_found> const& e) {
+ *   } catch (clxx::clerror_no<clxx::status_t::device_not_found> const& e) {
  *     // ...
  *   }
  * \endcode
@@ -116,7 +116,7 @@
  *   };
  * \endcode
  *
- * Whenever a new \e category have to be implemented, a new base class for the
+ * Whenever a new \e category has to be implemented, a new base class for the
  * \e category should be defined (the "branch base"). For example, the a base
  * for errors returned by OpenCL functions is the clxx::clerror class. The
  * category class should be derived from clxx::exception.
