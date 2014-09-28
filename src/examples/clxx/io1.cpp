@@ -20,39 +20,32 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/s11n/device_query.hpp
-
-/** // doc: clxx/s11n/device_query.hpp {{{
- * \file clxx/s11n/device_query.hpp
+/** // doc: clxx/unit.cpp {{{
+ * \file clxx/unit.cpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED
-#define CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED
-
-#include <clxx/info/device_query.hpp>
-#include <boost/serialization/version.hpp>
-
-BOOST_CLASS_VERSION( clxx::device_query
-                   , clxx::device_query::class_version )
-#ifdef DOXYGEN
-;
-#endif
-
-namespace boost {
-namespace serialization {
-/**
- * \ingroup clxx_s11n
- * @{
- */
-/** // doc: serialize(ar,obj,ver) {{{
- * \todo Write documentation
+/** // doc: io1.cpp {{{
+ * \example io1.cpp
+ * This example demonstrates usage of I/O functions with CLXX types.
  */ // }}}
-template<class Archive>
-void serialize(Archive& ar, clxx::device_query& obj, const unsigned int ver);
-/** @} */
-} /* namespace serialization */
-} /* namespace boost */
+// [Program]
+#include <clxx/io/types.hpp>
+#include <clxx/types.hpp>
+#include <iostream>
+// [Main]
+/// \brief Main function
+int main(int, char const*[])
+{
+  // [OutputStatusT]
+  clxx::status_t err = clxx::status_t::device_not_found;
+  std::cout << "1. Error code: " << err << std::endl;
+  // [OutputStatusT]
+  return EXIT_SUCCESS;
+}
+// [Main]
+// [Program]
 
-#endif /* CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED */
+
+
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

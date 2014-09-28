@@ -97,7 +97,7 @@ int main(int, char const*[])
     clxx::platforms ps(clxx::get_platforms());
     std::for_each(ps.begin(), ps.end(), dump_platform());
   } catch (std::exception const& e) {
-    std::cerr << "Exception cautht: " << e.what() << std::endl;
+    std::cerr << "Exception caught: " << e.what() << std::endl;
     return EXIT_FAILURE;
   }
   return EXIT_SUCCESS;

@@ -34,21 +34,43 @@
 
 namespace clxx { namespace io {
 
+/**
+ * \ingroup clxx_io
+ * @{
+ */
 /** // doc: write(os, info, pre) {{{
- * \todo Write documentation
+ * \brief Write out clxx::platform_layer_info object to a stream
+ *
+ * \param os    Output stream.
+ * \param info  Info object to be written out to the stream.
+ * \param ind   Indentation level.
+ *
+ * \returns     Modified output stream \b os.
  */ // }}}
 template <class Ostream> Ostream&
 write(Ostream& os, clxx::platform_layer_info const& info, int ind);
 /** // doc: write(os, info) {{{
- * \todo Write documentation
+ * \brief Write out clxx::platform_layer_info object to a stream
+ *
+ * \param os    Output stream.
+ * \param info  Info object to be written out to the stream.
+ *
+ * \returns     Modified output stream \b os.
  */ // }}}
 template <class Ostream> Ostream&
 write(Ostream& os, clxx::platform_layer_info const& info);
+/** @} */
 
 } } // end namespace clxx::io
 
 /** // doc: os << info {{{
- * \todo Write documentation
+ * \ingroup clxx_io
+ * \brief Write out clxx::platform_layer_info object to a stream
+ *
+ * \param os    Output stream.
+ * \param info  Info object to be written out to the stream.
+ *
+ * \returns     Modified output stream \b os.
  */ // }}}
 template<typename _CharT, typename _Traits>
 std::basic_ostream<_CharT, _Traits>&

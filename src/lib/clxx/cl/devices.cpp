@@ -64,8 +64,8 @@ get_device_ids(cl_platform_id platform, device_type_t device_type,
             throw clerror_no<status_t::invalid_device_type>();
           case status_t::invalid_value:
             throw clerror_no<status_t::invalid_value>();
-          // case status_t::device_not_found: throw clerror_no<CL_DEVICE_NOT_FOUND>();
           case status_t::device_not_found:
+            // throw clerror_no<CL_DEVICE_NOT_FOUND>();
             break;
           case status_t::out_of_resources:
             throw clerror_no<status_t::out_of_resources>();
