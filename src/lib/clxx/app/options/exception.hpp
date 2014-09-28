@@ -29,7 +29,7 @@
 #define CLXX_APP_OPTIONS_EXCEPTION_HPP_INCLUDED
 
 
-/* Dimbo includes */
+/* Clxx includes */
 #include <clxx/app/exception.hpp>
 
 namespace clxx { namespace app { namespace options {

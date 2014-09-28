@@ -19,12 +19,12 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE
  */
-/** // \defgroup Dimbo_Format {{{
- * \defgroup Dimbo_Format Formatting and streaming out dimbo objects.
- *
- * This module provides several template classes and functions that may be used
- * to output objects to streams in the form of human-readable strings.
- *
+
+/** // doc: namespace clxx {{{
+ * \namespace clxx
+ * This is the main namespace, where all %clxx classes, functions, etc.
+ * are placed.
  */ // }}}
+namespace clxx { }
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -20,10 +20,10 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// dimbo/shared_ptr.hpp
+// clxx/shared_ptr.hpp
 
-/** // doc: dimbo/shared_ptr.hpp {{{
- * \file dimbo/shared_ptr.hpp
+/** // doc: clxx/shared_ptr.hpp {{{
+ * \file clxx/shared_ptr.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_SHARED_PTR_HPP_INCLUDED

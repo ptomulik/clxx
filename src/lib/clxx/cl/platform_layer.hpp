@@ -43,7 +43,7 @@
 namespace clxx {
 
 /** // doc: class platform_layer {{{
- * \ingroup Dimbo_Cl_platform
+ * \ingroup Clxx_Cl_platform
  * \todo Write documentation
  */ // }}}
 class platform_layer
