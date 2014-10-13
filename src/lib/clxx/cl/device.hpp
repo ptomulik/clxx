@@ -152,8 +152,8 @@ public:
   /** // {{{
    * \brief Default constructor
    *
-   * Sets internal device ID to NULL, so this proxy object is regardes as
-   * uninitialized (get_initilized() returns \c false).
+   * Sets internal device ID to NULL, so this proxy object is regarded as
+   * uninitialized (is_initialized() returns \c false).
    */ // }}}
   device() noexcept
     :_device_id(NULL)
@@ -239,6 +239,16 @@ public:
   cl_device_id get_valid_id() const;
   /** // {{{
    * \brief Get certain information from device.
+   *
+   * This method is a wrapper around \c clGetDeviceInfo(). A call such as:
+   *   - <tt>dev->get_info(name, value_size, value, value_size_ret)</tt>
+   *
+   * yields same information as:
+   *   - <tt>clGetDeviceInfo(dev->id(),name,value_size,value,value_size_ret)</tt>.
+   *
+   * The main difference between get_info() and \c clGetDeviceInfo() is that it
+   * throws %clxx exceptions instead of returning OpenCL error codes.
+   *
    * \param name
    *    An enumeration constant that identifies the device information being
    *    queried. It can be one of the values as specified in the OpenCL
@@ -256,19 +266,23 @@ public:
    *    Returns the actual size in bytes of data being queried by \c
    *    param_value. If \c param_value_size_ret is \c NULL, it is ignored
    *
-   * The call to this function yields same information as call to
-   * \c clGetDeviceInfo(this->id(),name,value_size,value,value_size_ret).
+   * \throws  clxx::clerror_no<clxx::status_t::invalid_device>
+   *    when \c clGetDeviceInfo() returns \c CL_INVALID_DEVICE,
+   * \throws  clxx::clerror_no<clxx::status_t::invalid_value>
+   *    when \c clGetDeviceInfo() returns \c CL_INVALID_VALUE,
+   * \throws  clxx::clerror_no<clxx::status_t::out_of_resources>
+   *    when \c clGetDeviceInfo() returns \c CL_OUT_OF_RESOURCES,
+   * \throws  clxx::clerror_no<clxx::status_t::out_of_host_memory>
+   *   when \c clGetDeviceInfo() returns \c CL_OUT_OF_HOST_MEMORY.
+   * \throws  clxx::unexpected_clerror
+   *   when \c clGetDeviceInfo() returns any other error code. 
    *
-   * In case of error, this method throws one of the exceptions defined by
-   * CLXX_DEVICE_GET_INFO_EXCEPTIONS.
    */ // }}}
   void get_info( device_info_t name, size_t value_size, void* value,
                  size_t* value_size_ret) const;
   /** // {{{
    *  \brief Get \c CL_DEVICE_TYPE information.
-   *  \return The OpenCL device type. It may be for example
-   *      \c CL_DEVICE_TYPE_CPU, \c CL_DEVICE_TYPE_GPU, or other value defined
-   *      by OpenCL specification (depending on OpenCL version).
+   *  \return The OpenCL device type, see clxx::device_type_t.
    */ // }}}
   device_type_t get_type() const;
   /** // {{{
@@ -440,31 +454,17 @@ public:
   cl_uint get_min_data_type_align_size() const;
   /** // {{{
    * \brief Get CL_DEVICE_SINGLE_FP_CONFIG information
-   * \return Value of type device_fp_config_t.
+   * \return Value of type clxx::device_fp_config_t.
    *
    * The returned value describes single precision floating-point capability of
    * the device. This is a bit-field that describes one or more of the
-   * following values:
-   *
-   * - \c CL_FP_DENORM - denorms are supported,
-   * - \c CL_FP_INF_NAN - INF and quiet NaNs are supported,
-   * - \c CL_FP_ROUND_TO_NEAREST - round to nearest even rounding mode
-   *   supported,
-   * - \c CL_FP_ROUND_TO_ZERO - round to zero rounding mode supported
-   * - \c CL_FP_ROUND_TO_INF - round to +ve and -ve infinity rounding modes
-   *   supported
-   * - \c CL_FP_FMA - IEEE754-2008 fused multiply-add is supported
-   * - \c CL_FP_SOFT_FLOAT - Basic floating-point operations (such as addition,
-   *   subtraction, multiplication) are implemented in software.
-   *
-   * The mandated minimum floating-point capability is
-   * \c CL_FP_ROUND_TO_NEAREST \c | \c CL_FP_INF_NAN.
+   * values defined by clxx::device_fp_config_t.
    */ // }}}
   device_fp_config_t get_single_fp_config() const;
   /** // {{{
    * \brief Get \c CL_DEVICE_GLOBAL_MEM_CACHE_TYPE information.
-   * \return Type of global memory cache supported. Possible values are:
-   *    \c CL_NONE, \c CL_READ_ONLY_CACHE, and \c CL_READ_WRITE_CACHE.
+   * \return Type of global memory cache supported. Possible values are
+   *    defined by clxx::device_mem_cache_type_t.
    */ // }}}
   device_mem_cache_type_t get_global_mem_cache_type() const;
   /** // {{{
@@ -497,9 +497,7 @@ public:
   cl_uint get_max_constant_args() const;
   /** // {{{
    * \brief Get \c CL_DEVICE_LOCAL_MEM_TYPE information.
-   * \return Type of local memory supported. This can be set to \c CL_LOCAL
-   *    implying dedicated local memory storage such as \c SRAM, or
-   *    \c CL_GLOBAL.
+   * \return Type of local memory supported, see clxx::device_local_mem_type_t.
    */ // }}}
   device_local_mem_type_t get_local_mem_type() const;
   /** // {{{
@@ -541,32 +539,21 @@ public:
    */ // }}}
   cl_bool get_compiler_available() const;
   /** // {{{
-   * \todo Get \c CL_DEVICE_EXECUTION_CAPABILITIES information.
+   * \brief Get \c CL_DEVICE_EXECUTION_CAPABILITIES information.
    * \return Value of type: \c device_exec_capabilities_t
    *
    * The returned value describes the execution capabilities of the device.
-   * This is a bit-field that describes one or more of the following values:
-   *
-   * - \c CL_EXEC_KERNEL - The OpenCL device can execute OpenCL kernels.
-   * - \c CL_EXEC_NATIVE_KERNEL - The OpenCL device can execute native kernels.
-   *
-   * The mandated minimum capability is \c CL_EXEC_KERNEL.
+   * This is a bit-field that describes one or more of the values defined by
+   * clxx::device_exec_capabilities_t.
    */ // }}}
   device_exec_capabilities_t get_execution_capabilities() const;
   /** // {{{
    * \brief Get \c CL_DEVICE_QUEUE_PROPERTIES information.
-   * \return Value of type: \c command_queue_properties_t.
+   * \return Value of type clxx::command_queue_properties_t.
    *
    * The returned value describes the command-queue properties supported by the
-   * device. This is a bit-field that describes one or more of the following
-   * values:
-   *
-   * - CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE
-   * - CL_QUEUE_PROFILING_ENABLE
-   *
-   * These properties are described in the table for clCreateCommandQueue in
-   * OpenCL specification. The mandated minimum capability is
-   * \c CL_QUEUE_PROFILING_ENABLE.
+   * device. This is a bit-field that describes one or more of the values
+   * defined by clxx::command_queue_properties_t.
    */ // }}}
   command_queue_properties_t get_queue_properties() const;
   /** // {{{
@@ -835,6 +822,13 @@ public:
 /** // {{{
  * \ingroup clxx_platform_layer
  * \brief Get certain information from device.
+ *
+ * This is a wrapper around \c clGetDeviceInfo(). The call to this function
+ * yields same information as call to 
+ *   - \c clGetDeviceInfo(device,name,value_size,value,value_size_ret).
+ * The main difference between clxx::get_device_info() and \c clGetDeviceInfo()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
  * \param device
  *    %device identifier of type cl_device_id.
  * \param name
@@ -854,11 +848,17 @@ public:
  *    Returns the actual size in bytes of data being queried by \c
  *    param_value. If \c param_value_size_ret is \c NULL, it is ignored
  *
- * The call to this function yields same information as call to
- * \c clGetDeviceInfo(device,name,value_size,value,value_size_ret).
+ * \throws  clxx::clerror_no<clxx::status_t::invalid_device>
+ *    when \c clGetDeviceInfo() returns \c CL_INVALID_DEVICE,
+ * \throws  clxx::clerror_no<clxx::status_t::invalid_value>
+ *    when \c clGetDeviceInfo() returns \c CL_INVALID_VALUE,
+ * \throws  clxx::clerror_no<clxx::status_t::out_of_resources>
+ *    when \c clGetDeviceInfo() returns \c CL_OUT_OF_RESOURCES,
+ * \throws  clxx::clerror_no<clxx::status_t::out_of_host_memory>
+ *    when \c clGetDeviceInfo() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throws  clxx::unexpected_clerror
+ *    when \c clGetDeviceInfo() returns any other error code.
  *
- * In case of error, this method throws one of the exceptions defined by
- * CLXX_GET_DEVICE_INFO_EXCEPTIONS.
  */ // }}}
 void
 get_device_info( cl_device_id device, device_info_t name, size_t value_size,

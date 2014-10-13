@@ -19,25 +19,32 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE
  */
-/** // \defgroup clxx_io {{{
- * \defgroup clxx_io Formatting and streaming out clxx objects
- *
- * This module implements several I/O routines which stream out %clxx objects
- * to output streams in a user-readable form. They may be used for simple
- * diagnostics, debugging or user-interface implementation.
- *
- * The implemented functions cover all the %clxx enum classes defined in
- * clxx/types.hpp and some of the object classes, such as clxx::platform_info.
- * For convenience, we have specialized the "shift" operator (\c <<) for these
- * types and these specializations work with most standard streams. In
- * addition, there are also specialized functions named clxx::io::write which
- * accept additional parameters to tune the output layout (indentation etc.).
- *
- * \par Linking
- *
- * Programs using functions described in this module shall be linked against
- * \c libclxx_io library (\c -lclxx_io).
- *
+
+/** // doc: clxx/platform4.cpp {{{
+ * \file clxx/platform4.cpp
+ * \todo Write file documentation
  */ // }}}
+/** // doc: platform4.cpp {{{
+ * \example platform4.cpp
+ * This example demonstrates, how OpenCL Platfrom Layer may be accessed from
+ * local machine. We get and display some info about platforms and devices
+ * available locally.
+ */ // }}}
+// [Program]
+#include <clxx/cl/platform_layer.hpp>
+#include <clxx/io/platform_layer_info.hpp>
+#include <iostream>
+
+int main(int, char const*[])
+{
+  try {
+    std::cout << clxx::query_platform_layer_info() << std::endl;
+  } catch (std::exception const& e) {
+    std::cerr << "Exception caught: " << e.what() << std::endl;
+    return EXIT_FAILURE;
+  }
+  return EXIT_SUCCESS;
+}
+// [Program]
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

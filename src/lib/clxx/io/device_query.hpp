@@ -34,21 +34,43 @@
 
 namespace clxx { namespace io {
 
+/**
+ * \ingroup clxx_io
+ * @{
+ */
 /** // doc: write(os, info, pre) {{{
- * \todo Write documentation
+ * \brief Write out clxx::device_query object to a stream
+ *
+ * \param os    Output stream.
+ * \param query An object to be written out to the stream.
+ * \param ind   Indentation level.
+ *
+ * \returns     Modified output stream \b os.
  */ // }}}
 template <class Ostream> Ostream&
 write(Ostream& os, clxx::device_query const& query, int ind);
 /** // doc: write(os, info) {{{
- * \todo Write documentation
+ * \brief Write out clxx::device_query object to a stream
+ *
+ * \param os    Output stream.
+ * \param query An object to be written out to the stream.
+ *
+ * \returns     Modified output stream \b os.
  */ // }}}
 template <class Ostream> Ostream&
 write(Ostream& os, clxx::device_query const& query);
+/** @} */
 
 } } // end namespace clxx::io
 
 /** // doc: os << info {{{
- * \todo Write documentation
+ * \ingroup clxx_io
+ * \brief Write clxx::device_query object to a stream
+ *
+ * \param os    Output stream.
+ * \param query An object to be written out to the stream.
+ *
+ * \returns     Modified output stream \b os.
  */ // }}}
 template<typename _CharT, typename _Traits>
 std::basic_ostream<_CharT, _Traits>&

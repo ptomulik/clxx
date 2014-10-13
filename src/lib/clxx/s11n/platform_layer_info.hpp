@@ -34,16 +34,22 @@
 
 BOOST_CLASS_VERSION( clxx::platform_layer_info
                    , clxx::platform_layer_info::class_version )
+#ifdef DOXYGEN
+;
+#endif
 
 namespace boost {
 namespace serialization {
-
+/**
+ * \ingroup clxx_s11n
+ * @{
+ */
 /** // doc: serialize(ar,obj,ver) {{{
  * \todo Write documentation
  */ // }}}
 template<class Archive>
 void serialize(Archive& ar, clxx::platform_layer_info& obj, const unsigned int ver);
-
+/** @} */
 } /* namespace serialization */
 } /* namespace boost */
 

@@ -77,7 +77,7 @@
  *     // clxx exceptions also caught here ...
  *   }
  * \endcode
- * will, thus, catch all standard exceptions and %clxx exceptions.
+ * will, thus, catch all the standard exceptions and %clxx exceptions.
  *
  * When handling %clxx exception, the standard interface is available via
  * the method \ref clxx::exception::clxx2std() "clxx2std()".

@@ -197,7 +197,7 @@ enum class status_t : cl_int {
 constexpr bool is_success(status_t code) noexcept
 { return code == status_t::success; }
 /** // doc: is_error() {{{
- * \brief Check if the given result code represents an error.
+ * \brief Check if the given status code represents an error.
  *
  * \param code Result code obtained from a clxx function.
  * \return \c true, if the code represents an error or \c false otherwise.

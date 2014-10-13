@@ -20,39 +20,30 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/s11n/device_query.hpp
-
-/** // doc: clxx/s11n/device_query.hpp {{{
- * \file clxx/s11n/device_query.hpp
+/** // doc: clxx/autosep1.cpp {{{
+ * \file clxx/autosep1.cpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED
-#define CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED
-
-#include <clxx/info/device_query.hpp>
-#include <boost/serialization/version.hpp>
-
-BOOST_CLASS_VERSION( clxx::device_query
-                   , clxx::device_query::class_version )
-#ifdef DOXYGEN
-;
-#endif
-
-namespace boost {
-namespace serialization {
-/**
- * \ingroup clxx_s11n
- * @{
- */
-/** // doc: serialize(ar,obj,ver) {{{
- * \todo Write documentation
+/** // example {{{
+ * \example autosep1.cpp
+ * This example demonstrates how one may use the clxx::io::autosep_ object
+ * to format sequences when printing them to a stream.
  */ // }}}
-template<class Archive>
-void serialize(Archive& ar, clxx::device_query& obj, const unsigned int ver);
-/** @} */
-} /* namespace serialization */
-} /* namespace boost */
+// [Program]
+#include <clxx/io/autosep.hpp>
+#include <iostream>
+/// Main function
+int main(int, char**)
+{
+  clxx::io::autosep_<const char*> as(", ");
+  std::cout << "tab[] = {";
+  for(int i = 1; i <= 3; ++i) {
+    std::cout << as << i;
+  }
+  std::cout << "}" << std::endl;
+  return EXIT_SUCCESS;
+}
+// [Program]
 
-#endif /* CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

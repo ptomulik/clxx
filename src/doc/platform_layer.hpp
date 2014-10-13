@@ -22,24 +22,47 @@
 /** // \defgroup clxx_platform_layer {{{
  * \defgroup clxx_platform_layer OpenCL platform layer
  *
- * This module describes c++ wrappers for *OpenCL platform layer* described by
+ * This module defines c++ wrappers around *OpenCL platform layer* described by
  * the OpenCL specification under chapter 4 "The OpenCL Platform Layer". Most
- * of the functionalities is provided in object oriented way, some calls are
+ * of the functionalities is exposed in object oriented way, some calls are
  * simplified. OpenCL errors are turned-out into %clxx exceptions
- * (see \ref clxx_exceptions). All the stuff is made type-safe.
+ * (see \ref clxx_exceptions). The API defined by this module is type-safe.
  *
- * The %clxx OpenCL platform layer implements the following core classes:
+ * The %clxx API for OpenCL platform layer defines the following core classes:
  *   - clxx::platform,
  *   - clxx::device,
  *
  * The whole OpenCL platform layer (all locally available OpenCL platforms and
- * devices) is represented by clxx::platform_layer object.
+ * devices) is represented by
+ *   - clxx::platform_layer
+ *
+ * object. There is also a number of free-standing functions such as
+ *   - clxx::get_num_platforms,
+ *   - clxx::get_platforms,
+ *   - clxx::get_num_devices,
+ *   - clxx::get_devices.
  *
  * The clxx::platform object is used to query information from a single OpenCL
  * platform. The clxx::device is used to do the same with an OpenCL device. The
- * clxx::platform and clxx::device objects are lightweight. The clxx::platform
- * encapsulates the \c cl_platform_id identifier, the clxx::device encapsulates
- * the \c cl_device_id (both are just pointers).
+ * clxx::platform and clxx::device objects are lightweight. The only data
+ * encapsulated by clxx::platform is a \c cl_platform_id identifier, and the
+ * clxx::device encapsulates its \c cl_device_id identifier (both are just
+ * pointers).
+ *
+ * A collection of clxx::platform objects representing locally available OpenCL
+ * platforms may be retrieved with clxx::get_platforms(), for example:
+ *
+ * \code
+ *  clxx::platforms ps(clxx::get_platforms());
+ * \endcode
+ *
+ * Similarly, a collection of clxx::device objects representing devices
+ * comprising given OpenCL platform may be retrieved with clxx::get_devices(),
+ * for example:
+ *
+ * \code
+ *  clxx::devices ds(clxx::get_devices(ps[0]));
+ * \endcode
  *
  */ // }}}
 // vim: set expandtab tabstop=2 shiftwidth=2:

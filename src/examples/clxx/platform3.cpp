@@ -52,7 +52,7 @@ int main(int, char const*[])
     io::write(cout, info, 2);
     // [DumpPlatformLayerInfo]
   } catch (std::exception const& e) {
-    std::cerr << "Exception cautht: " << e.what() << std::endl;
+    std::cerr << "Exception caught: " << e.what() << std::endl;
     return EXIT_FAILURE;
   }
   return EXIT_SUCCESS;

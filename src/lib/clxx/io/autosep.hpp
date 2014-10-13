@@ -51,6 +51,11 @@ namespace clxx { namespace io {
  * \b Example:
  * \snippet autosep1.cpp Program
  *
+ * The output of the above program is
+ * \verbatim
+   tab[] = {1, 2, 3}
+\endverbatim
+ *
  */ // }}}
 template<typename SepT>
 class autosep_

@@ -46,10 +46,10 @@ int main(int, char const*[])
   using namespace std;
   using namespace clxx;
   try {
-    // [Createplatforms]
+    // [CreatePlatforms]
     // Create proxies for all local OpenCL platforms
     platforms plats(get_platforms());
-    // [Createplatforms]
+    // [CreatePlatforms]
 
     // [PreparePlatformQuery]
     // Prepare platform query
@@ -84,10 +84,10 @@ int main(int, char const*[])
         io::write(cout, pinfo, 2) << endl;
 
         // Query all devices that belong to platform *pi
-        // [Createdevices]
+        // [CreateDevices]
         // Create proxies to all devices that belong to platform *pi.
         devices devices(get_devices(*pi));
-        // [Createdevices]
+        // [CreateDevices]
         for(devices::const_iterator di = devices.begin();
             di != devices.end(); ++di)
           {
@@ -102,7 +102,7 @@ int main(int, char const*[])
           }
     }
   } catch (std::exception const& e) {
-    std::cerr << "Exception cautht: " << e.what() << std::endl;
+    std::cerr << "Exception caught: " << e.what() << std::endl;
     return EXIT_FAILURE;
   }
   return EXIT_SUCCESS;

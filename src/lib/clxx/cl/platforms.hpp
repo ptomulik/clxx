@@ -119,7 +119,8 @@ void get_platform_ids( cl_uint num_entries,
 std::vector<cl_platform_id> get_platform_ids();
 /** // {{{ doc: get_platforms()
  * \brief Get proxy platform objects for locally available OpenCL platforms.
- * \return platforms.
+ *
+ * \return clxx::platforms.
  *
  * \throws clerror_no<status_t::invalid_value>
  *         when \c clGetPlatformIDs() returns \c CL_INVALID_VALUE,
@@ -141,7 +142,9 @@ std::vector<cl_platform_id> get_platform_ids();
 platforms get_platforms();
 /** // {{{ doc: make_platforms(ids)
  * \brief Wrap platform identifiers with clxx::platform objects.
+ *
  * \param ids OpenCL platform identifiers
+ *
  * \return clxx::platforms a collection of platform objects for the given
  *         identifiers
  *
