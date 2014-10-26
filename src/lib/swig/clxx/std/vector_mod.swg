@@ -20,15 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/cl/context.swg {{{
- * \file clxx/swig/clxx/cl/context.swg
+/** // doc: swig/clxx/std/vector_mod.swg {{{
+ * \file swig/clxx/std/vector_mod.swg
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/cl/context.hpp>
-%}
-%include <clxx/cl/context.hpp>
+%import <clxx/swig_config.swg>
+
+%include <std_vector.i>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

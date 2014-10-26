@@ -20,14 +20,15 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/std/map_mod.swg {{{
- * \file clxx/swig/clxx/std/map_mod.swg
+/** // doc: swig/clxx/cl/program.swg {{{
+ * \file swig/clxx/cl/program.swg
  * \todo Write documentation
  */ // }}}
 
-%import <clxx/swig_config.swg>
-
-%include <std_map.i>
+%{
+#include <clxx/cl/program.hpp>
+%}
+%include <clxx/cl/program.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

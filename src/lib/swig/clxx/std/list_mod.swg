@@ -20,14 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/std/vector_mod.swg {{{
- * \file clxx/swig/clxx/std/vector_mod.swg
+/** // doc: swig/clxx/std/list_mod.swg {{{
+ * \file swig/clxx/std/list_mod.swg
  * \todo Write documentation
  */ // }}}
 
 %import <clxx/swig_config.swg>
 
-%include <std_vector.i>
+%include <std_list.i>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

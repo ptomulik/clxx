@@ -20,15 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/cl/context_properties.swg {{{
- * \file clxx/swig/clxx/cl/context_properties.swg
+/** // doc: swig/clxx/std/map_mod.swg {{{
+ * \file swig/clxx/std/map_mod.swg
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/cl/context_properties.hpp>
-%}
-%include <clxx/cl/context_properties.hpp>
+%import <clxx/swig_config.swg>
+
+%include <std_map.i>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

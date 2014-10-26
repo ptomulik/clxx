@@ -20,15 +20,23 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/cl/other_cl_error.swg {{{
- * \file clxx/swig/clxx/cl/other_cl_error.swg
+/** // doc: swig/clxx/cl/devices_commin.swg {{{
+ * \file swig/clxx/cl/devices.swg
  * \todo Write documentation
  */ // }}}
 
 %{
-#include <clxx/cl/other_cl_error.hpp>
+#include <clxx/cl/devices.hpp>
 %}
-%include <clxx/cl/other_cl_error.hpp>
+
+%include <clxx/cl/device.swg>
+%include <clxx/cl/platform.swg>
+%include <std_vector.i>
+%template() std::vector<clxx::device>;
+// TODO: investigate what's wrong with the following
+//%template() std::vector<cl_device_id>; // used by get_device_ids();
+%include <clxx/cl/devices.hpp>
+
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

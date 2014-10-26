@@ -20,23 +20,20 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/cl/devices_commin.swg {{{
- * \file clxx/swig/clxx/cl/devices.swg
+/** // doc: swig/clxx/cl/platforms.swg {{{
+ * \file swig/clxx/cl/platforms.swg
  * \todo Write documentation
  */ // }}}
 
 %{
-#include <clxx/cl/devices.hpp>
+#include <clxx/cl/platforms.hpp>
 %}
-
-%include <clxx/cl/device.swg>
 %include <clxx/cl/platform.swg>
 %include <std_vector.i>
-%template() std::vector<clxx::device>;
+%template() std::vector<clxx::platform>;
 // TODO: investigate what's wrong with the following
-//%template() std::vector<cl_device_id>; // used by get_device_ids();
-%include <clxx/cl/devices.hpp>
-
+//%template() std::vector<cl_platform_id>; // used by get_platform_ids();
+%include <clxx/cl/platforms.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

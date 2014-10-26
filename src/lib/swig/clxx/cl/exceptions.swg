@@ -20,15 +20,15 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/cl/program_source.swg {{{
- * \file clxx/swig/clxx/cl/program_source.swg
+/** // doc: swig/clxx/cl/exceptions.swg {{{
+ * \file swig/clxx/cl/exceptions.swg
  * \todo Write documentation
  */ // }}}
 
+%include <clxx/cl/exceptions.hpp>
 %{
-#include <clxx/cl/program_source.hpp>
+#include <clxx/cl/exceptions.hpp>
 %}
-%include <clxx/cl/program_source.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

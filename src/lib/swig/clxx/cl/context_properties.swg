@@ -20,28 +20,15 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/swig/clxx/cl/platform_mod.swg {{{
- * \file clxx/swig/clxx/cl/platform_mod.swg
+/** // doc: swig/clxx/cl/context_properties.swg {{{
+ * \file swig/clxx/cl/context_properties.swg
  * \todo Write documentation
  */ // }}}
 
-%import <clxx/swig_config.swg>
-
-%import  <clxx/cl/exception_mod.i>
-%import  <clxx/cl/opencl1_0.i>
-%import  <clxx/info/platform_info_mod.i>
-
 %{
-#include <clxx/cl/exception_mod.hpp>
-#include <clxx/cl/opencl_mod.hpp>
-#include <clxx/info/platform_info_mod.hpp>
+#include <clxx/cl/context_properties.hpp>
 %}
-
-%include <clxx/cl/device.swg>
-%include <clxx/cl/platform.swg>
-//%include <clxx/cl/devices.swg>
-%include <clxx/cl/platforms.swg>
-//%include <clxx/cl/platform_layer.swg>
+%include <clxx/cl/context_properties.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

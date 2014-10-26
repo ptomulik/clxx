@@ -20,6 +20,7 @@
 
 Import(['env'])
 SConscript('clxx/SConscript', exports = ['env'])
+SConscript('python/SConscript', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4
