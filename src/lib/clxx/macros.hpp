@@ -38,68 +38,6 @@
 
 #include <clxx/config.h>
 
-#if defined(DOXYGEN)
-# define CLXX_ENABLE_CLASS_ENUM_WORKAROUND 0
-#else
-# if CLXX_NEEDS_CLASS_ENUM_WORKAROUND
-#   define CLXX_ENABLE_CLASS_ENUM_WORKAROUND 1
-# else
-#   define CLXX_ENABLE_CLASS_ENUM_WORKAROUND 0
-# endif
-#endif
-
-#if ! CLXX_ENABLE_CLASS_ENUM_WORKAROUND
-/** // doc: CLXX_ENUM_CLASS {{{
- * \brief Define enum class based on a given underlying type
- *
- * \param [in] __t enum type,
- * \param [in] __ut underlying type.
- *
- * \note Do not put a semicolon after the macro.
- * \note Put the macro in an appropriate namespace.
- *
- * **Example**:
- *
- * \code
- * CLXX_ENUM_CLASS(cmyk,int)
- *   cyan, magenta, yellow, black
- * CLXX_ENUM_CLASS_END
- * \endcode
- */ // }}}
-# define CLXX_ENUM_CLASS(__t,__ut) enum class __t : __ut {
-/** // doc: CLXX_ENUM_CLASS {{{
- * \brief Define enum class without an explicitelly specified underlying type
- *
- * \param [in] __t enum type,
- *
- * \note Do not put a semicolon after the macro.
- * \note Put the macro in an appropriate namespace.
- *
- * **Example**:
- *
- * \code
- * CLXX_ENUM_CLASS(cmyk)
- *   cyan, magenta, yellow, black
- * CLXX_ENUM_CLASS_END
- * \endcode
- */ // }}}
-# define CLXX_ENUM_CLASS_NOBASE(__t) enum class __t
-# define CLXX_ENUM_CLASS_END(__t) };
-#else
-#   define CLXX_ENUM_CLASS(__t,__ut) \
-      struct __t##_ { enum class enum_type : __ut {
-#   define CLXX_ENUM_CLASS_NOBASE(__t) \
-      struct __t##_ { enum class enum_type : unsigned int {
-#   define CLXX_ENUM_CLASS_END(__t) \
-        }; \
-        __t##_(enum_type x) : _value(x) {} \
-        operator enum_type() const { return _value; } \
-      private: \
-        enum_type _value; \
-      }; \
-      typedef __t##_::enum_type __t;
-#endif
-
 #if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_BITOPS
 # define CLXX_DEFINE_ENUM_BITOPS(__t, __ut)
 #else
@@ -189,8 +127,8 @@
  * \hideinitializer
  */ // }}}
 # define CLXX_DEFINE_ENUM_BOOLVAL(__t, __ut) \
-constexpr bool boolval(__t x) noexcept \
-{ return static_cast<bool>(x); }
+  constexpr bool boolval(__t x) noexcept \
+  { return static_cast<bool>(x); }
 #endif
 
 #if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_INTVAL
@@ -226,8 +164,8 @@ constexpr bool boolval(__t x) noexcept \
  * \hideinitializer
  */ // }}}
 # define CLXX_DEFINE_ENUM_INTVAL(__t, __ut) \
-constexpr __ut intval(__t x) noexcept \
-{ return static_cast<__ut>(x); }
+  constexpr __ut intval(__t x) noexcept \
+  { return static_cast<__ut>(x); }
 #endif
 
 /** // doc: CLXX_MAKE_BITMASK_ENUM {{{

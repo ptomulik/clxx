@@ -71,7 +71,7 @@ env.Append(SWIGPY_SWIGPATH = swigpath)
 #env.Append(SWIGPY_SWIGPATH = ['/usr/include'])
 
 # SWIGPY_SWIGFLAGS
-env.Append(SWIGPY_SWIGFLAGS = swigflags)
+env.Append(SWIGPY_SWIGFLAGS = swigflags + ['-enumclass'])
 
 # SWIGPY_CPPPATH
 env.Append(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib').path ])

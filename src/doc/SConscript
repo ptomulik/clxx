@@ -44,9 +44,6 @@ doxyfile = env.Doxyfile(
     EXPAND_ONLY_PREDEF      = True,
     PREDEFINED              = [ 'DOXYGEN', 'CL_VERSION_1_0', 'CL_VERSION_1_1',
                                 'CL_VERSION_1_2',
-                                'CLXX_ENUM_CLASS(__t,__ut)=enum class __t : __ut {',
-                                'CLXX_ENUM_CLASS_NOBASE(__t)=enum class __t {',
-                                'CLXX_ENUM_CLASS_END=};',
                                 'BOOST_CLASS_VERSION(__klass,__ver)=' ]
 )
 
