@@ -20,6 +20,10 @@ install:
   - sudo apt-get --no-install-recommends -y install cxxtest
   - sudo apt-get --no-install-recommends -y install scons
 #  - sudo apt-get --no-install-recommends -y install swig
+  - sudo apt-get -y build-dep swig
+  - sudo apt-get -y install yodl
+  - (cd /tmp && git clone -b ptomulik-latest https://github.com/ptomulik/swig.git)
+  - (cd /tmp/swig/ && ./autogen.sh && ./configure && make && sudo make install)
   - sudo apt-get --no-install-recommends -y install nvidia-opencl-dev
   - sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev
 #  - sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler
@@ -35,8 +39,8 @@ after_success:
     which $GCOV || GCOV="";
     echo $GCOV;
     if [ ! -z "$GCOV" ]; then
-      coveralls --gcov $GCOV --gcov-options '\-p \-l' -b . -r . 
-                  -e .git -e HOWTO -e lib -e bin -e src/app -e build/app 
+      coveralls --gcov $GCOV --gcov-options '\-p \-l' -b . -r .
+                  -e .git -e HOWTO -e lib -e bin -e src/app -e build/app
                   -e build/.sconf_temp -e build/lib/clxx/.sconf_temp
                   -e src/doc -e src/test -e build/doc -e build/test
                   -e site_scons -e template -e valgrid -e /usr;
