@@ -39,8 +39,15 @@ doxyfile = env.Doxyfile(
                                 '*.hpp' : env.File('../../bin/doxycppfilter'),
                                 '*.h'   : env.File('../../bin/doxycppfilter') },
     ENUM_VALUES_PER_LINE    = 0,
+    ENABLE_PREPROCESSING    = True,
+    MACRO_EXPANSION         = True,
+    EXPAND_ONLY_PREDEF      = True,
     PREDEFINED              = [ 'DOXYGEN', 'CL_VERSION_1_0', 'CL_VERSION_1_1',
-                                'CL_VERSION_1_2']
+                                'CL_VERSION_1_2',
+                                'CLXX_ENUM_CLASS(__t,__ut)=enum class __t : __ut {',
+                                'CLXX_ENUM_CLASS_NOBASE(__t)=enum class __t {',
+                                'CLXX_ENUM_CLASS_END=};',
+                                'BOOST_CLASS_VERSION(__klass,__ver)=' ]
 )
 
 doc = env.Doxygen(doxyfile)

@@ -34,8 +34,8 @@
 
 namespace clxx {
 
-typedef std::vector<platform_info_ptr> platform_info_ptrs;
-typedef std::vector<const_platform_info_ptr> const_platform_info_ptrs;
+typedef std::vector<clxx::platform_info_ptr> platform_info_ptrs;
+typedef std::vector<clxx::const_platform_info_ptr> const_platform_info_ptrs;
 
 } // end namespace clxx
 

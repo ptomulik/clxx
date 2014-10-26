@@ -34,9 +34,6 @@
 
 BOOST_CLASS_VERSION( clxx::platform_query
                    , clxx::platform_query::class_version )
-#ifdef DOXYGEN
-;
-#endif
 
 namespace boost {
 namespace serialization {

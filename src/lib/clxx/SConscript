@@ -37,6 +37,7 @@ SConscript('cl/SConscript', exports = ['env'])
 SConscript('info/SConscript', exports = ['env'])
 SConscript('io/SConscript', exports = ['env'])
 SConscript('s11n/SConscript', exports = ['env'])
+SConscript('python/SConscript', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4

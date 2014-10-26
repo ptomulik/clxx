@@ -34,9 +34,7 @@
 
 BOOST_CLASS_VERSION( clxx::device_info
                    , clxx::device_info::class_version )
-#ifdef DOXYGEN
-;
-#endif
+
 namespace boost {
 namespace serialization {
 /**

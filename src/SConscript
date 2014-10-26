@@ -26,7 +26,8 @@ SConscript('SConscript.cli', exports = ['env'])
 SConscript('SConscript.adjust', exports = ['env'])
 if not env.GetOption('clean') and not env.GetOption('help') \
    and not env.GetOption('help_variables'):
-   conf = env.Configure(conf_dir = '.sconf_temp', log_file = 'config.log')
+   conf = env.Configure(conf_dir = '.sconf_temp', log_file = 'config.log',
+                        config_h = 'lib/clxx/config.h')
    SConscript('SConscript.conf', exports = ['conf'])
    env = conf.Finish()
 SConscript('SConscript.adjust2', exports = ['env'])

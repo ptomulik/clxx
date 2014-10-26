@@ -57,7 +57,7 @@ namespace clxx {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class status_t : cl_int {
+CLXX_ENUM_CLASS(status_t,cl_int)
   /// Corresponds to \c CL_SUCCESS
   success                         = CL_SUCCESS,
   /// Corresponds to \c CL_DEVICE_NOT_FOUND
@@ -186,7 +186,7 @@ enum class status_t : cl_int {
   /// Corresponds to \c CL_INVALID_DEVICE_PARTITION_COUNT
   invalid_device_partition_count  = CL_INVALID_DEVICE_PARTITION_COUNT
 #endif
-};
+CLXX_ENUM_CLASS_END(status_t)
 
 /** // doc: is_success() {{{
  * \brief Check if the given result code represents a success.
@@ -219,7 +219,7 @@ constexpr bool is_error(status_t code) noexcept
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class platform_info_t : cl_platform_info {
+CLXX_ENUM_CLASS(platform_info_t,cl_platform_info)
   /// Corresponds to \c CL_PLATFORM_PROFILE
   profile    = CL_PLATFORM_PROFILE,
   /// Corresponds to \c CL_PLATFORM_VERSION
@@ -230,7 +230,7 @@ enum class platform_info_t : cl_platform_info {
   vendor     = CL_PLATFORM_VENDOR,
   /// Corresponds to \c CL_PLATFORM_EXTENSIONS
   extensions = CL_PLATFORM_EXTENSIONS
-};
+CLXX_ENUM_CLASS_END(platform_info_t)
 
 /** // doc: device_type_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_device_type.
@@ -246,7 +246,7 @@ enum class platform_info_t : cl_platform_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class device_type_t : cl_device_type {
+CLXX_ENUM_CLASS(device_type_t,cl_device_type)
   /// Zero
   none        = 0ul,
   /// Corresponds to \c CL_DEVICE_TYPE_DEFAULT
@@ -263,7 +263,7 @@ enum class device_type_t : cl_device_type {
 #endif
   /// Corresponds to \c CL_DEVICE_TYPE_ALL
   all         = CL_DEVICE_TYPE_ALL
-};
+CLXX_ENUM_CLASS_END(device_type_t)
 
 CLXX_MAKE_BITMASK_ENUM(device_type_t, cl_device_type)
 
@@ -281,7 +281,7 @@ CLXX_MAKE_BITMASK_ENUM(device_type_t, cl_device_type)
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class device_info_t : cl_device_info {
+CLXX_ENUM_CLASS(device_info_t,cl_device_info)
   /// Corresponds to \c CL_DEVICE_TYPE
   type                           = CL_DEVICE_TYPE,
   /// Corresponds to \c CL_DEVICE_VENDOR_ID
@@ -441,7 +441,7 @@ enum class device_info_t : cl_device_info {
   /// Corresponds to \c CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT
   image_base_address_alignment   = CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT
 #endif
-};
+CLXX_ENUM_CLASS_END(device_info_t)
 
 /** // doc: device_fp_config_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_device_fp_config
@@ -458,7 +458,7 @@ enum class device_info_t : cl_device_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class device_fp_config_t : cl_device_fp_config {
+CLXX_ENUM_CLASS(device_fp_config_t,cl_device_fp_config)
   /// Zero
   none                           = 0ul,
   /// Corresponds to \c CL_FP_DENORM
@@ -483,7 +483,7 @@ enum class device_fp_config_t : cl_device_fp_config {
   /// Corresponds to \c CL_FP_CORRECTLY_ROUNDED_DIVIDE_SQRT
   correctly_rounded_divide_sqrt  = CL_FP_CORRECTLY_ROUNDED_DIVIDE_SQRT
 #endif
-};
+CLXX_ENUM_CLASS_END(device_fp_config_t)
 
 CLXX_MAKE_BITMASK_ENUM(device_fp_config_t, cl_device_fp_config)
 
@@ -502,14 +502,14 @@ CLXX_MAKE_BITMASK_ENUM(device_fp_config_t, cl_device_fp_config)
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class device_mem_cache_type_t : cl_device_mem_cache_type {
+CLXX_ENUM_CLASS(device_mem_cache_type_t,cl_device_mem_cache_type)
   /// Corresponds to \c CL_NONE
   none              = CL_NONE,
   /// Corresponds to \c CL_READ_ONLY_CACHE
   read_only_cache   = CL_READ_ONLY_CACHE,
   /// Corresponds to \c CL_READ_WRITE_CACHE
   read_write_cache  = CL_READ_WRITE_CACHE
-};
+CLXX_ENUM_CLASS_END(device_mem_cache_type_t)
 
 /** // doc: device_local_mem_type_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_device_local_mem_type
@@ -526,12 +526,12 @@ enum class device_mem_cache_type_t : cl_device_mem_cache_type {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class device_local_mem_type_t : cl_device_local_mem_type {
+CLXX_ENUM_CLASS(device_local_mem_type_t,cl_device_local_mem_type)
   /// Corresponds to \c CL_LOCAL
   local   = CL_LOCAL,
   /// Corresponds to \c CL_GLOBAL
   global  = CL_GLOBAL
-};
+CLXX_ENUM_CLASS_END(device_local_mem_type_t)
 
 /** // doc: device_exec_capabilities_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_device_exec_capabilities
@@ -548,14 +548,14 @@ enum class device_local_mem_type_t : cl_device_local_mem_type {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class device_exec_capabilities_t : cl_device_exec_capabilities {
+CLXX_ENUM_CLASS(device_exec_capabilities_t,cl_device_exec_capabilities)
   /// Zero
   none           = 0ul,
   /// Corresponds to \c CL_EXEC_KERNEL
   kernel         = CL_EXEC_KERNEL,
   /// Corresponds to \c CL_EXEC_NATIVE_KERNEL
   native_kernel  = CL_EXEC_NATIVE_KERNEL
-};
+CLXX_ENUM_CLASS_END(device_exec_capabilities_t)
 
 CLXX_MAKE_BITMASK_ENUM(device_exec_capabilities_t, cl_device_exec_capabilities)
 
@@ -576,14 +576,14 @@ CLXX_MAKE_BITMASK_ENUM(device_exec_capabilities_t, cl_device_exec_capabilities)
  * \todo Elaborate how to map \c clCreateCommandQueue() case to CLXX.
  *
  */ // }}}
-enum class command_queue_properties_t : cl_command_queue_properties {
+CLXX_ENUM_CLASS(command_queue_properties_t,cl_command_queue_properties)
   /// Zero
   none                          = 0ul,
   /// Corresponds to \c CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE
   out_of_order_exec_mode_enable = CL_QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE,
   /// Corresponds to \c CL_QUEUE_PROFILING_ENABLE
   profiling_enable              = CL_QUEUE_PROFILING_ENABLE
-};
+CLXX_ENUM_CLASS_END(command_queue_properties_t)
 
 CLXX_MAKE_BITMASK_ENUM(command_queue_properties_t, cl_command_queue_properties)
 
@@ -601,7 +601,7 @@ CLXX_MAKE_BITMASK_ENUM(command_queue_properties_t, cl_command_queue_properties)
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class context_info_t : cl_context_info {
+CLXX_ENUM_CLASS(context_info_t,cl_context_info)
   /// Corresponds to \c CL_CONTEXT_REFERENCE_COUNT
   reference_count = CL_CONTEXT_REFERENCE_COUNT,
   /// Corresponds to \c CL_CONTEXT_DEVICES
@@ -613,7 +613,7 @@ enum class context_info_t : cl_context_info {
   /// Corresponds to \c CL_CONTEXT_NUM_DEVICES
   num_devices     = CL_CONTEXT_NUM_DEVICES
 #endif
-};
+CLXX_ENUM_CLASS_END(context_info_t)
 
 /** // doc: context_properties_t {{{ 
  * \brief Correspons to OpenCL's \c cl_context_properties
@@ -629,7 +629,7 @@ enum class context_info_t : cl_context_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class context_properties_t : cl_context_properties {
+CLXX_ENUM_CLASS(context_properties_t,cl_context_properties)
   /// Corresponds to \c CL_CONTEXT_PLATFORM
   platform          = CL_CONTEXT_PLATFORM
 #if CL_VERSION_1_2
@@ -637,7 +637,7 @@ enum class context_properties_t : cl_context_properties {
   /// Corresponds to \c CL_CONTEXT_INTEROP_USER_SYNC
   interop_user_sync = CL_CONTEXT_INTEROP_USER_SYNC
 #endif
-};
+CLXX_ENUM_CLASS_END(context_properties_t)
 
 #if CL_VERSION_1_2
 /** // doc: device_partition_property_t {{{ 
@@ -659,7 +659,7 @@ enum class context_properties_t : cl_context_properties {
  * \todo Elaborate how to cover the \c clCreateSubDevices() case.
  *
  */ // }}}
-enum class device_partition_property_t : cl_device_partition_property {
+CLXX_ENUM_CLASS(device_partition_property_t,cl_device_partition_property)
   /// Corresponds to \c CL_DEVICE_PARTITION_EQUALLY
   equally            = CL_DEVICE_PARTITION_EQUALLY,
   /// Corresponds to \c CL_DEVICE_PARTITION_BY_COUNTS
@@ -668,7 +668,7 @@ enum class device_partition_property_t : cl_device_partition_property {
   by_counts_list_end = CL_DEVICE_PARTITION_BY_COUNTS_LIST_END,
   /// Corresponds to \c CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN
   by_affinity_domain = CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN
-};
+CLXX_ENUM_CLASS_END(device_partition_property_t)
 #endif
 
 #if CL_VERSION_1_2
@@ -691,7 +691,7 @@ enum class device_partition_property_t : cl_device_partition_property {
  * \todo Elaborate how to cover the \c clCreateSubDevices() case.
  *
  */ // }}}
-enum class device_affinity_domain_t : cl_device_affinity_domain {
+CLXX_ENUM_CLASS(device_affinity_domain_t,cl_device_affinity_domain)
   /// Zero
   none               = 0ul,
   /// Corresponds to \c CL_DEVICE_AFFINITY_DOMAIN_NUMA
@@ -706,7 +706,7 @@ enum class device_affinity_domain_t : cl_device_affinity_domain {
   l1_cache           = CL_DEVICE_AFFINITY_DOMAIN_L1_CACHE,
   /// Corresponds to \c CL_DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE
   next_partitionable = CL_DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE
-};
+CLXX_ENUM_CLASS_END(device_affinity_domain_t)
 
 CLXX_MAKE_BITMASK_ENUM(device_affinity_domain_t, cl_device_affinity_domain)
 #endif
@@ -725,7 +725,7 @@ CLXX_MAKE_BITMASK_ENUM(device_affinity_domain_t, cl_device_affinity_domain)
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class command_queue_info_t : cl_command_queue_info {
+CLXX_ENUM_CLASS(command_queue_info_t,cl_command_queue_info)
   /// Corresponds to \c CL_QUEUE_CONTEXT
   context         = CL_QUEUE_CONTEXT,
   /// Corresponds to \c CL_QUEUE_DEVICE
@@ -734,7 +734,7 @@ enum class command_queue_info_t : cl_command_queue_info {
   reference_count = CL_QUEUE_REFERENCE_COUNT,
   /// Corresponds to \c CL_QUEUE_PROPERTIES
   properties      = CL_QUEUE_PROPERTIES
-};
+CLXX_ENUM_CLASS_END(command_queue_info_t)
 
 /** // doc: mem_flags_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_mem_flags
@@ -752,7 +752,7 @@ enum class command_queue_info_t : cl_command_queue_info {
  * \todo Elaborate where and how the \ref clxx::mem_flags_t are used.
  *
  */ // }}}
-enum class mem_flags_t : cl_mem_flags {
+CLXX_ENUM_CLASS(mem_flags_t,cl_mem_flags)
   /// Zero
   none            = 0ul,
   /// Corresponds to \c CL_MEM_READ_WRITE
@@ -776,7 +776,7 @@ enum class mem_flags_t : cl_mem_flags {
   /// Corresponds to \c CL_MEM_HOST_NO_ACCESS
   host_no_access  = CL_MEM_HOST_NO_ACCESS
 #endif
-};
+CLXX_ENUM_CLASS_END(mem_flags_t)
 
 CLXX_MAKE_BITMASK_ENUM(mem_flags_t, cl_mem_flags)
 
@@ -796,14 +796,14 @@ CLXX_MAKE_BITMASK_ENUM(mem_flags_t, cl_mem_flags)
  * \todo Elaborate where and how is the \ref clxx::mem_migration_flags_t used.
  *
  */ // }}}
-enum class mem_migration_flags_t : cl_mem_migration_flags {
+CLXX_ENUM_CLASS(mem_migration_flags_t,cl_mem_migration_flags)
   /// Zero
   none                         = 0ul,
   /// Corresponds to \c CL_MIGRATE_MEM_OBJECT_HOST
   mem_object_host              = CL_MIGRATE_MEM_OBJECT_HOST,
   /// Corresponds to \c CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED
   mem_object_content_undefined = CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED
-};
+CLXX_ENUM_CLASS_END(mem_migration_flags_t)
 
 CLXX_MAKE_BITMASK_ENUM(mem_migration_flags_t, cl_mem_migration_flags)
 #endif
@@ -823,7 +823,7 @@ CLXX_MAKE_BITMASK_ENUM(mem_migration_flags_t, cl_mem_migration_flags)
  * \todo Elaborate where and how is the \ref clxx::channel_order_t used.
  *
  */ // }}}
-enum class channel_order_t : cl_channel_order {
+CLXX_ENUM_CLASS(channel_order_t,cl_channel_order)
   /// Corresponds to \c CL_R
   r             = CL_R,
   /// Corresponds to \c CL_A
@@ -860,7 +860,7 @@ enum class channel_order_t : cl_channel_order {
   /// Corresponds to \c CL_DEPTH_STENCIL
   depth_stencil = CL_DEPTH_STENCIL,
 #endif
-};
+CLXX_ENUM_CLASS_END(channel_order_t)
 
 /** // doc: channel_type_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_channel_type
@@ -877,7 +877,7 @@ enum class channel_order_t : cl_channel_order {
  * \todo Elaborate where and how is the \ref clxx::channel_type_t used.
  *
  */ // }}}
-enum class channel_type_t : cl_channel_type {
+CLXX_ENUM_CLASS(channel_type_t,cl_channel_type)
   /// Corresponds to \c CL_SNORM_INT8
   snorm_int8        = CL_SNORM_INT8,
   /// Corresponds to \c CL_SNORM_INT16
@@ -913,7 +913,7 @@ enum class channel_type_t : cl_channel_type {
   /// Corresponds to \c CL_UNORM_INT24
   unorm_int24       = CL_UNORM_INT24
 #endif
-};
+CLXX_ENUM_CLASS_END(channel_type_t)
 
 /** // doc: mem_object_type_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_mem_object_type
@@ -932,7 +932,7 @@ enum class channel_type_t : cl_channel_type {
  * \todo Elaborate where and how is the \ref clxx::mem_object_type_t used.
  *
  */ // }}}
-enum class mem_object_type_t : cl_mem_object_type {
+CLXX_ENUM_CLASS(mem_object_type_t,cl_mem_object_type)
   /// Corresponds to \c CL_MEM_OBJECT_BUFFER
   buffer         = CL_MEM_OBJECT_BUFFER,
   /// Corresponds to \c CL_MEM_OBJECT_IMAGE2D
@@ -950,7 +950,7 @@ enum class mem_object_type_t : cl_mem_object_type {
   /// Corresponds to \c CL_MEM_OBJECT_IMAGE1D_BUFFER
   image1d_buffer = CL_MEM_OBJECT_IMAGE1D_BUFFER
 #endif
-};
+CLXX_ENUM_CLASS_END(mem_object_type_t)
 
 /** // doc: mem_info_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_mem_info
@@ -966,7 +966,7 @@ enum class mem_object_type_t : cl_mem_object_type {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class mem_info_t : cl_mem_info {
+CLXX_ENUM_CLASS(mem_info_t,cl_mem_info)
   /// Corresponds to \c CL_MEM_TYPE
   type                  = CL_MEM_TYPE,
   /// Corresponds to \c CL_MEM_FLAGS
@@ -988,7 +988,7 @@ enum class mem_info_t : cl_mem_info {
   /// Corresponds to \c CL_MEM_OFFSET
   offset                = CL_MEM_OFFSET
 #endif
-};
+CLXX_ENUM_CLASS_END(mem_info_t)
 
 /** // doc: image_info_t {{{ 
  * \brief Corresponds to OpenCL's cl_image_info
@@ -1004,7 +1004,7 @@ enum class mem_info_t : cl_mem_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class image_info_t : cl_image_info {
+CLXX_ENUM_CLASS(image_info_t,cl_image_info)
   /// Corresponds to \c CL_IMAGE_FORMAT
   format          = CL_IMAGE_FORMAT,
   /// Corresponds to \c CL_IMAGE_ELEMENT_SIZE
@@ -1030,7 +1030,7 @@ enum class image_info_t : cl_image_info {
   /// Corresponds to \c CL_IMAGE_NUM_SAMPLES
   num_samples     = CL_IMAGE_NUM_SAMPLES
 #endif
-};
+CLXX_ENUM_CLASS_END(image_info_t)
 
 /** // doc: addressing_mode_t {{{ 
  * \brief Corresponds to OpenCL's cl_addressing_mode
@@ -1046,7 +1046,7 @@ enum class image_info_t : cl_image_info {
  * \todo Elaborate where and how is the \ref clxx::addressing_mode_t used.
  *
  */ // }}}
-enum class addressing_mode_t : cl_addressing_mode {
+CLXX_ENUM_CLASS(addressing_mode_t,cl_addressing_mode)
   /// Corresponds to \c CL_ADDRESS_NONE
   none            = CL_ADDRESS_NONE,
   /// Corresponds to \c CL_ADDRESS_CLAMP_TO_EDGE
@@ -1060,7 +1060,7 @@ enum class addressing_mode_t : cl_addressing_mode {
   /// Corresponds to \c CL_ADDRESS_MIRRORED_REPEAT
   mirrored_repeat = CL_ADDRESS_MIRRORED_REPEAT
 #endif
-};
+CLXX_ENUM_CLASS_END(addressing_mode_t)
 
 /** // doc: filter_mode_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_filter_mode
@@ -1079,12 +1079,12 @@ enum class addressing_mode_t : cl_addressing_mode {
  * \todo Elaborate how to cover the \c clCreateSampler() case.
  *
  */ // }}}
-enum class filter_mode_t : cl_filter_mode {
+CLXX_ENUM_CLASS(filter_mode_t,cl_filter_mode)
   /// Corresponds to \c CL_FILTER_NEAREST
   nearest  = CL_FILTER_NEAREST,
   /// Corresponds to \c CL_FILTER_LINEAR
   linear   = CL_FILTER_LINEAR
-};
+CLXX_ENUM_CLASS_END(filter_mode_t)
 
 /** // doc: sampler_info_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_sampler_info
@@ -1100,7 +1100,7 @@ enum class filter_mode_t : cl_filter_mode {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class sampler_info_t : cl_sampler_info {
+CLXX_ENUM_CLASS(sampler_info_t,cl_sampler_info)
   /// Corresponds to \c CL_SAMPLER_REFERENCE_COUNT
   reference_count   = CL_SAMPLER_REFERENCE_COUNT,
   /// Corresponds to \c CL_SAMPLER_CONTEXT
@@ -1111,7 +1111,7 @@ enum class sampler_info_t : cl_sampler_info {
   addressing_mode   = CL_SAMPLER_ADDRESSING_MODE,
   /// Corresponds to \c CL_SAMPLER_FILTER_MODE
   filter_mode       = CL_SAMPLER_FILTER_MODE
-};
+CLXX_ENUM_CLASS_END(sampler_info_t)
 
 /** // doc: map_flags_t {{{ 
  * \brief Corresponds to OpenCL's cl_map_flags
@@ -1128,7 +1128,7 @@ enum class sampler_info_t : cl_sampler_info {
  * \todo Elaborate where and how are the clxx::map_flags_t used.
  *
  */ // }}}
-enum class map_flags_t : cl_map_flags {
+CLXX_ENUM_CLASS(map_flags_t,cl_map_flags)
   /// Zero
   none                    = 0ul,
   /// Corresponds to \c CL_MAP_READ
@@ -1140,7 +1140,7 @@ enum class map_flags_t : cl_map_flags {
   /// Corresponds to \c CL_MAP_WRITE_INVALIDATE_REGION
   write_invalidate_region = CL_MAP_WRITE_INVALIDATE_REGION
 #endif
-};
+CLXX_ENUM_CLASS_END(map_flags_t)
 
 CLXX_MAKE_BITMASK_ENUM(map_flags_t, cl_map_flags)
 
@@ -1158,7 +1158,7 @@ CLXX_MAKE_BITMASK_ENUM(map_flags_t, cl_map_flags)
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class program_info_t: cl_program_info {
+CLXX_ENUM_CLASS(program_info_t,cl_program_info)
   /// Corresponds to \c CL_PROGRAM_REFERENCE_COUNT
   reference_count = CL_PROGRAM_REFERENCE_COUNT,
   /// Corresponds to \c CL_PROGRAM_CONTEXT
@@ -1180,7 +1180,7 @@ enum class program_info_t: cl_program_info {
   /// Corresponds to \c CL_PROGRAM_KERNEL_NAMES
   kernel_names    = CL_PROGRAM_KERNEL_NAMES
 #endif
-};
+CLXX_ENUM_CLASS_END(program_info_t)
 
 /** // doc: program_build_info_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_program_build_info
@@ -1197,7 +1197,7 @@ enum class program_info_t: cl_program_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class program_build_info_t : cl_program_build_info {
+CLXX_ENUM_CLASS(program_build_info_t,cl_program_build_info)
   /// Corresponds to \c CL_PROGRAM_BUILD_STATUS
   status      = CL_PROGRAM_BUILD_STATUS,
   /// Corresponds to \c CL_PROGRAM_BUILD_OPTIONS
@@ -1209,7 +1209,7 @@ enum class program_build_info_t : cl_program_build_info {
   /// Corresponds to \c CL_PROGRAM_BINARY_TYPE
   binary_type = CL_PROGRAM_BINARY_TYPE
 #endif
-};
+CLXX_ENUM_CLASS_END(program_build_info_t)
 
 #if CL_VERSION_1_2
 /** // doc: program_binary_type_t {{{ 
@@ -1227,7 +1227,7 @@ enum class program_build_info_t : cl_program_build_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class program_binary_type_t : cl_program_binary_type {
+CLXX_ENUM_CLASS(program_binary_type_t,cl_program_binary_type)
   /// Corresponds to \c CL_PROGRAM_BINARY_TYPE_NONE
   none            = CL_PROGRAM_BINARY_TYPE_NONE,
   /// Corresponds to \c CL_PROGRAM_BINARY_TYPE_COMPILED_OBJECT
@@ -1236,7 +1236,7 @@ enum class program_binary_type_t : cl_program_binary_type {
   library         = CL_PROGRAM_BINARY_TYPE_LIBRARY,
   /// Corresponds to \c CL_PROGRAM_BINARY_TYPE_EXECUTABLE
   executable      = CL_PROGRAM_BINARY_TYPE_EXECUTABLE
-};
+CLXX_ENUM_CLASS_END(program_binary_type_t)
 
 CLXX_MAKE_BITMASK_ENUM(program_binary_type_t, cl_program_binary_type)
 #endif
@@ -1255,7 +1255,7 @@ CLXX_MAKE_BITMASK_ENUM(program_binary_type_t, cl_program_binary_type)
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class build_status_t : cl_build_status {
+CLXX_ENUM_CLASS(build_status_t,cl_build_status)
   /// Corresponds to \c CL_BUILD_SUCCESS
   success     = CL_BUILD_SUCCESS,
   /// Corresponds to \c CL_BUILD_NONE
@@ -1264,7 +1264,7 @@ enum class build_status_t : cl_build_status {
   error       = CL_BUILD_ERROR,
   /// Corresponds to \c CL_BUILD_IN_PROGRESS
   in_progress = CL_BUILD_IN_PROGRESS
-};
+CLXX_ENUM_CLASS_END(build_status_t)
 
 /** // doc: is_success {{{
  * \brief Check if the given build status represents a success.
@@ -1299,7 +1299,7 @@ constexpr bool is_error(build_status_t status)
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class kernel_info_t : cl_kernel_info {
+CLXX_ENUM_CLASS(kernel_info_t,cl_kernel_info)
   /// Corresponds to \c CL_KERNEL_FUNCTION_NAME
   function_name    = CL_KERNEL_FUNCTION_NAME,
   /// Corresponds to \c CL_KERNEL_NUM_ARGS
@@ -1315,7 +1315,7 @@ enum class kernel_info_t : cl_kernel_info {
   /// Corresponds to \c CL_KERNEL_ATTRIBUTES
   attributes       = CL_KERNEL_ATTRIBUTES
 #endif
-};
+CLXX_ENUM_CLASS_END(kernel_info_t)
 
 #if CL_VERSION_1_2
 /** // doc: kernel_arg_info_t {{{ 
@@ -1332,7 +1332,7 @@ enum class kernel_info_t : cl_kernel_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class kernel_arg_info_t : cl_kernel_arg_info {
+CLXX_ENUM_CLASS(kernel_arg_info_t,cl_kernel_arg_info)
   /// Corresponds to \c CL_KERNEL_ARG_ADDRESS_QUALIFIER
   address_qualifier  = CL_KERNEL_ARG_ADDRESS_QUALIFIER,
   /// Corresponds to \c CL_KERNEL_ARG_ACCESS_QUALIFIER
@@ -1343,7 +1343,7 @@ enum class kernel_arg_info_t : cl_kernel_arg_info {
   type_qualifier     = CL_KERNEL_ARG_TYPE_QUALIFIER,
   /// Corresponds to \c CL_KERNEL_ARG_NAME
   name               = CL_KERNEL_ARG_NAME
-};
+CLXX_ENUM_CLASS_END(kernel_arg_info_t)
 #endif
 
 #if CL_VERSION_1_2
@@ -1363,7 +1363,7 @@ enum class kernel_arg_info_t : cl_kernel_arg_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class kernel_arg_address_qualifier_t : cl_kernel_arg_address_qualifier {
+CLXX_ENUM_CLASS(kernel_arg_address_qualifier_t,cl_kernel_arg_address_qualifier)
   /// Corresponds to \c CL_KERNEL_ARG_ADDRESS_GLOBAL
   global    = CL_KERNEL_ARG_ADDRESS_GLOBAL,
   /// Corresponds to \c CL_KERNEL_ARG_ADDRESS_LOCAL
@@ -1372,7 +1372,7 @@ enum class kernel_arg_address_qualifier_t : cl_kernel_arg_address_qualifier {
   constant  = CL_KERNEL_ARG_ADDRESS_CONSTANT,
   /// Corresponds to \c CL_KERNEL_ARG_ADDRESS_PRIVATE
   private_  = CL_KERNEL_ARG_ADDRESS_PRIVATE
-};
+CLXX_ENUM_CLASS_END(kernel_arg_address_qualifier_t)
 #endif
 
 #if CL_VERSION_1_2
@@ -1392,7 +1392,7 @@ enum class kernel_arg_address_qualifier_t : cl_kernel_arg_address_qualifier {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class kernel_arg_access_qualifier_t : cl_kernel_arg_access_qualifier {
+CLXX_ENUM_CLASS(kernel_arg_access_qualifier_t,cl_kernel_arg_access_qualifier)
   /// Corresponds to \c CL_KERNEL_ARG_ACCESS_READ_ONLY
   read_only   = CL_KERNEL_ARG_ACCESS_READ_ONLY,
   /// Corresponds to \c CL_KERNEL_ARG_ACCESS_WRITE_ONLY
@@ -1401,7 +1401,7 @@ enum class kernel_arg_access_qualifier_t : cl_kernel_arg_access_qualifier {
   read_write  = CL_KERNEL_ARG_ACCESS_READ_WRITE,
   /// Corresponds to \c CL_KERNEL_ARG_ACCESS_NONE
   none        = CL_KERNEL_ARG_ACCESS_NONE
-};
+CLXX_ENUM_CLASS_END(kernel_arg_access_qualifier_t)
 #endif
 
 #if CL_VERSION_1_2
@@ -1421,7 +1421,7 @@ enum class kernel_arg_access_qualifier_t : cl_kernel_arg_access_qualifier {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class kernel_arg_type_qualifier_t : cl_kernel_arg_type_qualifier {
+CLXX_ENUM_CLASS(kernel_arg_type_qualifier_t,cl_kernel_arg_type_qualifier)
   /// Corresponds to \c CL_KERNEL_ARG_TYPE_NONE
   none       = CL_KERNEL_ARG_TYPE_NONE,
   /// Corresponds to \c CL_KERNEL_ARG_TYPE_CONST
@@ -1430,7 +1430,7 @@ enum class kernel_arg_type_qualifier_t : cl_kernel_arg_type_qualifier {
   restrict_  = CL_KERNEL_ARG_TYPE_RESTRICT,
   /// Corresponds to \c CL_KERNEL_ARG_TYPE_VOLATILE
   volatile_  = CL_KERNEL_ARG_TYPE_VOLATILE
-};
+CLXX_ENUM_CLASS_END(kernel_arg_type_qualifier_t)
 
 CLXX_MAKE_BITMASK_ENUM(kernel_arg_type_qualifier_t, cl_kernel_arg_type_qualifier)
 #endif
@@ -1450,7 +1450,7 @@ CLXX_MAKE_BITMASK_ENUM(kernel_arg_type_qualifier_t, cl_kernel_arg_type_qualifier
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class kernel_work_group_info_t : cl_kernel_work_group_info {
+CLXX_ENUM_CLASS(kernel_work_group_info_t,cl_kernel_work_group_info)
   /// Corresponds to \c CL_KERNEL_WORK_GROUP_SIZE
   work_group_size                    = CL_KERNEL_WORK_GROUP_SIZE,
   /// Corresponds to \c CL_KERNEL_COMPILE_WORK_GROUP_SIZE
@@ -1469,7 +1469,7 @@ enum class kernel_work_group_info_t : cl_kernel_work_group_info {
   /// Corresponds to \c CL_KERNEL_GLOBAL_WORK_SIZE
   global_work_size                   = CL_KERNEL_GLOBAL_WORK_SIZE
 #endif
-};
+CLXX_ENUM_CLASS_END(kernel_work_group_info_t)
 
 /** // doc: event_info_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_event_info
@@ -1487,7 +1487,7 @@ enum class kernel_work_group_info_t : cl_kernel_work_group_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class event_info_t : cl_event_info {
+CLXX_ENUM_CLASS(event_info_t,cl_event_info)
   /// Corresponds to \c CL_EVENT_COMMAND_QUEUE
   command_queue             = CL_EVENT_COMMAND_QUEUE,
   /// Corresponds to \c CL_EVENT_COMMAND_TYPE
@@ -1501,7 +1501,7 @@ enum class event_info_t : cl_event_info {
   /// Corresponds to \c CL_EVENT_CONTEXT
   context                   = CL_EVENT_CONTEXT
 #endif
-};
+CLXX_ENUM_CLASS_END(event_info_t)
 
 /** // doc: command_type_t {{{ 
  * \brief Corresponds to OpenCL's \c cl_commant_type
@@ -1517,7 +1517,7 @@ enum class event_info_t : cl_event_info {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class command_type_t : cl_command_type {
+CLXX_ENUM_CLASS(command_type_t,cl_command_type)
   /// Corresponds to \c CL_COMMAND_NDRANGE_KERNEL
   ndrange_kernel        = CL_COMMAND_NDRANGE_KERNEL,
   /// Corresponds to \c CL_COMMAND_TASK
@@ -1574,7 +1574,7 @@ enum class command_type_t : cl_command_type {
   /// Corresponds to \c CL_COMMAND_FILL_IMAGE
   fill_image            = CL_COMMAND_FILL_IMAGE
 #endif
-};
+CLXX_ENUM_CLASS_END(command_type_t)
 
 /** // doc: command_exec_status_t {{{ 
  * \brief Corresponds to OpenCL's command execution status
@@ -1588,7 +1588,7 @@ enum class command_type_t : cl_command_type {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class command_exec_status_t : cl_int {
+CLXX_ENUM_CLASS(command_exec_status_t,cl_int)
   /// Corresponds to \c CL_COMPLETE
   complete  = CL_COMPLETE,
   /// Corresponds to \c CL_RUNNING
@@ -1597,7 +1597,7 @@ enum class command_exec_status_t : cl_int {
   submitted = CL_SUBMITTED,
   /// Corresponds to \c CL_QUEUED
   queued    = CL_QUEUED
-};
+CLXX_ENUM_CLASS_END(command_exec_status_t)
 
 /** // doc: is_error(command_exec_status_t) {{{
  * \brief Check if a command execution status represents an error.
@@ -1652,6 +1652,7 @@ constexpr bool is_state(command_exec_status_t status) noexcept
 {
   return (static_cast<cl_int>(status) >= 0);
 }
+#if !defined(SWIG) || !CLXX_SWIG_NO_CLASS_ENUM_CMPOPS
 /** // doc: operator==(status_t, command_exec_status_t) {{{
  * \todo Write documentation
  */ // }}}
@@ -1736,6 +1737,7 @@ constexpr bool operator >= (command_exec_status_t s1, status_t s2) noexcept
 {
   return static_cast<cl_int>(s1) >= static_cast<cl_int>(s2);
 }
+#endif
 
 #if CL_VERSION_1_1
 /** // doc: buffer_create_type_t {{{ 
@@ -1753,10 +1755,10 @@ constexpr bool operator >= (command_exec_status_t s1, status_t s2) noexcept
  * \todo Elaborate where and how the clxx::buffer_create_type_t is used.
  *
  */ // }}}
-enum class buffer_create_type_t : cl_buffer_create_type {
+CLXX_ENUM_CLASS(buffer_create_type_t,cl_buffer_create_type)
   /// Corresponds to \c CL_BUFFER_CREATE_TYPE_REGION
   region = CL_BUFFER_CREATE_TYPE_REGION
-};
+CLXX_ENUM_CLASS_END(buffer_create_type_t)
 #endif
 
 /** // doc: profiling_info_t {{{ 
@@ -1773,7 +1775,7 @@ enum class buffer_create_type_t : cl_buffer_create_type {
  * | &radic; | &radic; | &radic; |         |
  *
  */ // }}}
-enum class profiling_info_t : cl_profiling_info {
+CLXX_ENUM_CLASS(profiling_info_t,cl_profiling_info)
   /// Corresponds to \c CL_PROFILING_COMMAND_QUEUED
   queued  = CL_PROFILING_COMMAND_QUEUED,
   /// Corresponds to \c CL_PROFILING_COMMAND_SUBMIT
@@ -1782,7 +1784,7 @@ enum class profiling_info_t : cl_profiling_info {
   start   = CL_PROFILING_COMMAND_START,
   /// Corresponds to \c CL_PROFILING_COMMAND_END
   end     = CL_PROFILING_COMMAND_END
-};
+CLXX_ENUM_CLASS_END(profiling_info_t)
 
 } // end namespace clxx
 

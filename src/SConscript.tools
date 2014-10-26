@@ -24,6 +24,8 @@ env.Tool('cxxtest')
 env.Tool('doxyfile')
 env.Tool('doxygen')
 env.Tool('gcccov')
+env.Tool('swig')
+env.Tool('swigpy')
 
 # Pre-load 'install' tool to create 'install_sandbox' option
 env.Tool('install')

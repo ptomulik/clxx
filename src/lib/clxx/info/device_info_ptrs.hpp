@@ -34,8 +34,8 @@
 
 namespace clxx {
 
-typedef std::vector<device_info_ptr> device_info_ptrs;
-typedef std::vector<const_device_info_ptr> const_device_info_ptrs;
+typedef std::vector<clxx::device_info_ptr> device_info_ptrs;
+typedef std::vector<clxx::const_device_info_ptr> const_device_info_ptrs;
 
 } // end namespace clxx
 

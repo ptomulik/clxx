@@ -1,0 +1,68 @@
+# @COPYRIGHT@
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE
+
+Import(['env'])
+
+from SCons.Util import CLVar
+
+# "Generate" __init__.py
+init_py = env.Substfile(['__init__.py.in'], SUBST_DICT = {})
+# Generate python modules with swig
+libs = env.get('SWIGPY_LIBS', CLVar()) + [
+    'clxx_cl',
+    'OpenCL'
+]
+overrides = {
+    'SWIGPY_LIBS'       : libs
+}
+modules = [
+    'opencl1_0',
+    'opencl1_1',
+    'opencl1_2',
+    'opencl2_0',
+    'opencl_mod',
+    'exception_mod',
+    'platform_mod',
+#    TODO: uncomment context_mod once it's ready
+#    'context_mod',
+#    TODO: uncomment program_mod once it's ready
+#    'program_mod'
+]
+# Build modules
+modfiles = env.SwigPyModule(modules, **overrides)
+instfiles =  [m for m in modfiles if not str(m).endswith('.cc')] + init_py
+
+
+# FIXME: this is only for now, elaborate what should be the destination path,
+#        also the python packages should be compiled when installed, later on
+#        a plain user can't do this (root owns the directory with installed
+#        *.py files)
+instfiles2 = env.Install('${libdir}/python/dist-packages/clxx_/cl', instfiles)
+env.Ignore("${INSTALL_SANDBOX}${libdir}/python/dist-packages/clxx_/cl", instfiles2)
+env.Alias('install-python-clxx',instfiles2)
+env.Alias('install', 'install-python-clxx')
+
+SConscript('_ldr_/SConscript', exports = ['env'])
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:
