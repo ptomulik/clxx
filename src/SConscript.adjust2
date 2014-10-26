@@ -49,7 +49,7 @@ swigflags = [
 
 swigpath = [
     '#%s' % env.Dir('lib').path,
-    '#%s' % env.Dir('lib/swig').path,
+    '#%s' % env.Dir('lib/swig-clxx').path,
     '/usr/include'
 ]
 
@@ -65,8 +65,8 @@ env.Append(SWIGPATH = [ '/usr/include' ])
 #############################################################################
 # SWIGPY_SWIGPATH
 env.Append(SWIGPY_SWIGPATH = ['.'])
-env.Append(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/python').path])
-env.Append(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/swig/python').path])
+env.Append(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/python-clxx').path])
+env.Append(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/swig-clxx/python').path])
 env.Append(SWIGPY_SWIGPATH = swigpath)
 #env.Append(SWIGPY_SWIGPATH = ['/usr/include'])
 
@@ -75,7 +75,7 @@ env.Append(SWIGPY_SWIGFLAGS = swigflags + ['-enumclass'])
 
 # SWIGPY_CPPPATH
 env.Append(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib').path ])
-env.Append(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib/swig').path ])
+env.Append(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib/swig-clxx').path ])
 env.Append(SWIGPY_CPPPATH = [ '#%s' % libdir, '#lib/tml/include' ])
 env.Append(SWIGPY_CPPPATH = sysconfig.get_python_inc())
 

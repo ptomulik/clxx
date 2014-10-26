@@ -1,4 +1,4 @@
-src/lib/swig/
+src/lib/swig-clxx/
 ```````````````````
 
 This subtree contains swig_ library of ``.swg`` interface files used to
@@ -29,7 +29,7 @@ Subdirectory          Description
 ==================== ========================================================
 
 When generating wrappers with swig, the top-level directory of this subtree, i.e
-``#/src/lib/swig`` must be in swig's include path (the ``-I`` flag).
+``#/src/lib/swig-clxx`` must be in swig's include path (the ``-I`` flag).
 
 files that enter bindings: the ``.swg`` files
 :::::::::::::::::::::::::::::::::::::::::::::
@@ -48,7 +48,7 @@ target subtree(s) with bindings definition(s)
 
 Bindings for particular languages are compiled from separate subtrees of clxx 
 source tree. For example, bindings for python are defined under
-``#/src/lib/python/``. We'll call them  *target subtrees*.
+``#/src/lib/python-clxx/``. We'll call them  *target subtrees*.
 
 A target subtree contains ``SConscript`` files which drive the compilation of
 swig ``.i`` interfaces located under the target subtree. Usually, these target
@@ -57,9 +57,9 @@ appropriate ``.swg`` files from this swig library to make-up the body of the
 wrapper.
 
 When generating wrappers with swig, the top-level directory of the target
-tree (``#/src/lib/python``, for example) must be in swig's include path
+tree (``#/src/lib/python-clxx``, for example) must be in swig's include path
 (the ``-I`` flag). The same applies to it's corresponding directory in variant
-dir (``#/build/lib/python`` for example).
+dir (``#/build/lib/python-clxx`` for example).
 
 files that define modules: the ``_mod.swg`` and ``.i`` files
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -74,11 +74,11 @@ It is responsibility of the target subtree to define module names and location o
 ``.i`` files (target subtree layout don't have to be same as the swig
 subtree). For python language, for example, we have such a correspondence:
 
-- ``#/build/lib/python/clxx/exception_mod.i`` %includes
+- ``#/build/lib/python-clxx/clxx/exception_mod.i`` %includes
   ``clxx/exception_mod.swg``
-- ``#/build/lib/python/clxx/cl/exception_mod.i`` %includes
+- ``#/build/lib/python-clxx/clxx/cl/exception_mod.i`` %includes
   ``clxx/cl/exception_mod.swg``
-- ``#/build/lib/python/clxx/cl/platform_mod.i`` %includes
+- ``#/build/lib/python-clxx/clxx/cl/platform_mod.i`` %includes
   ``clxx/cl/platform_mod.swg``
 
 .. _swig: https://swig.org
