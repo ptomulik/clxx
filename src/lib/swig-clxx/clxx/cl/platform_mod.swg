@@ -37,11 +37,11 @@
 #include <clxx/info/platform_info_mod.hpp>
 %}
 
-%include <clxx/cl/device.swg>
-%include <clxx/cl/platform.swg>
-//%include <clxx/cl/devices.swg>
+%include <clxx/cl/device_.swg>
+%include <clxx/cl/platform_.swg>
+%include <clxx/cl/devices.swg>
 %include <clxx/cl/platforms.swg>
-//%include <clxx/cl/platform_layer.swg>
+%include <clxx/cl/platform_layer.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

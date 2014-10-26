@@ -20,25 +20,20 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/info/platform_info_mod.hpp
-
-/** // doc: clxx/info/platform_info_mod.hpp {{{
- * \file clxx/info/platform_info_mod.hpp
- * \todo Write documentation
+/** // doc: python/clxx/types_.swg {{{
+ * \file python/clxx/types_.swg
+ * \brief Python specific implementation of clxx/types_.swg
  */ // }}}
-#ifndef CLXX_CLINFO_PLATFORM_INFO_MOD_HPP_INCLUDED
-#define CLXX_CLINFO_PLATFORM_INFO_MOD_HPP_INCLUDED
 
-// module's core
-#include <clxx/info/platform_query.hpp>
-#include <clxx/info/device_query.hpp>
-#include <clxx/info/platform_info.hpp>
-#include <clxx/info/device_info.hpp>
-#include <clxx/info/platform_layer_info.hpp>
+// Rename some symbols
+%rename(_global) clxx::device_local_mem_type_t::global;
+%rename(_global) clxx::build_status_t::global;
+%rename(_global) clxx::kernel_arg_address_qualifier_t::global;
 
-// dependencies
-#include <clxx/std/string_mod.hpp>
+// use enchanced enums (strongly typed and scoped)
+%include <enums.swg>
 
-#endif /* CLXX_CLINFO_PLATFORM_INFO_MOD_HPP_INCLUDED */
+%include <clxx/types.swg>
+
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

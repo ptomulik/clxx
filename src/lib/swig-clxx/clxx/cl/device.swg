@@ -27,17 +27,11 @@
 %{
 #include <clxx/cl/device.hpp>
 %}
-// TODO: unignore the following once the things work
-%ignore clxx::device::get_partition_properties;
-%ignore clxx::device::get_partition_type;
-%ignore clxx::device::get_partition_affinity_domain;
 %include <clxx/cl/device.hpp>
 
 %include <std_vector.i>
 %template() std::vector<size_t>;
 %template() std::vector<clxx::device_partition_property_t>;
-%template() std::vector<clxx::device_partition_property_t>;
-
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

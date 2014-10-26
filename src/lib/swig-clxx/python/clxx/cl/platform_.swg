@@ -20,25 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/info/platform_info_mod.hpp
-
-/** // doc: clxx/info/platform_info_mod.hpp {{{
- * \file clxx/info/platform_info_mod.hpp
+/** // doc: python/clxx/platform_.swg {{{
+ * \file python/clxx/platform_.swg
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CLINFO_PLATFORM_INFO_MOD_HPP_INCLUDED
-#define CLXX_CLINFO_PLATFORM_INFO_MOD_HPP_INCLUDED
 
-// module's core
-#include <clxx/info/platform_query.hpp>
-#include <clxx/info/device_query.hpp>
-#include <clxx/info/platform_info.hpp>
-#include <clxx/info/device_info.hpp>
-#include <clxx/info/platform_layer_info.hpp>
+%ignore clxx::platform::operator cl_platform_id;
+%ignore clxx::platform::operator=;
+%include <clxx/cl/platform.swg>
 
-// dependencies
-#include <clxx/std/string_mod.hpp>
-
-#endif /* CLXX_CLINFO_PLATFORM_INFO_MOD_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

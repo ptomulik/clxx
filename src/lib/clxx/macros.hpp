@@ -38,9 +38,9 @@
 
 #include <clxx/config.h>
 
-#if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_BITOPS
-# define CLXX_DEFINE_ENUM_BITOPS(__t, __ut)
-#else
+//#if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_BITOPS
+//# define CLXX_DEFINE_ENUM_BITOPS(__t, __ut)
+//#else
 /** // doc: CLXX_DEFINE_ENUM_BITOPS {{{
  * \brief Overload bitwise operators for an (enum) type.
  *
@@ -87,7 +87,7 @@
   { x = x | y; return x; } \
   inline __t& operator^=(__t& x, __t y) noexcept \
   { x = x ^ y; return x; }
-#endif
+//#endif
 
 #if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_BOOLVAL
 # define CLXX_DEFINE_ENUM_BOOLVAL(__t, __ut)

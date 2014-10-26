@@ -33,7 +33,7 @@
 #include <clxx/types.hpp>
 
 // dependencies from other modules
-//#include <clxx/foo_mod.hpp>
+#include <clxx/cl/opencl_mod.hpp>
 
 #endif /* CLXX_TYPES_MOD_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

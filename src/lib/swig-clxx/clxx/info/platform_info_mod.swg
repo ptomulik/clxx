@@ -31,6 +31,8 @@
 #include <clxx/types_mod.hpp>
 %}
 
+%import <clxx/std/string_mod.swg>
+
 %include <clxx/shared_ptr.swg>
 %include <clxx/info/platform_layer_info.swg>
 %include <clxx/info/device_query.swg>
