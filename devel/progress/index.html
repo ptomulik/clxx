@@ -1,0 +1,110 @@
+---
+layout: page
+title: "Development Progress"
+description: ""
+---
+{% include JB/setup %}
+
+<h3 id="disclaimer">Disclaimer</h3>
+
+The clxx project is pretty incomplete. Many things are still missing. This page
+shall give you precise information on what's already finished and what's not
+and rough estimation of the overal progress (in percents).
+
+<h3 id="overview">Overview</h3>
+
+<p>To estimate the development progress of the clxx project we need to estimate
+the total amount of work as well. Let's start with the architectural sketch 
+(<a href="#fig1">Fig.1</a>) and split the project up into smaller parts based
+on its architecture. We should be able then to create lists of things to be
+done at the lowest levels of decomposition and provide a side-to-side
+implementation status for these pieces.</p>
+
+<p>The architecture of the clxx software was already explained in
+<a href="/devel/arch/">The architecture of clxx</a> page. Here we just
+provide a summary of the progress and links to other documents detailing the
+development status of the respective pieces.</p>
+
+<p>To see implementation status of certain parts of the clxx projects click on
+the appropriate region of <a href="#fig1">Fig.1</a>.</p>
+
+<figure id="fig1">
+<img src="/img/clxx-architecture.svg" border="0" usemap="#clxx-architecture.map" />
+<figcaption>Fig. 1. Architecture of the clxx software</figcaption>
+</figure>
+
+<map name="clxx-architecture.map">
+<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+<!-- #$-:Please do not edit lines starting with "#$" -->
+<!-- #$VERSION:2.3 -->
+<!-- #$AUTHOR:Paweł Tomulik -->
+<area shape="rect" coords="25,343,237,405" alt="OpenCL" target="_blank" href="https://www.khronos.org/opencl/" />
+<area shape="rect" coords="410,315,532,405" alt="Boost.Optional" target="_blank" href="http://www.boost.org/libs/optional/doc/html/" />
+<area shape="rect" coords="544,317,692,405" alt="Boost.Serialization" target="_blank" href="http://www.boost.org/libs/serialization/doc/index.html" />
+<area shape="rect" coords="704,316,851,405" alt="C++ Standard Library" target="_blank" href="http://www.cplusplus.com/reference/" />
+<area shape="rect" coords="705,159,851,305" alt="libclxx_io" target="_self" href="/devel/progress/libclxx_io/" />
+<area shape="rect" coords="545,159,690,305" alt="libclxx_s11n" target="_self" href="/devel/progress/libclxx_s11n/" />
+<area shape="rect" coords="410,160,531,306" alt="libclxx_info" target="_self" href="/devel/progress/libclxx_info" />
+<!-- <area shape="rect" coords="26,159,398,308" alt="libclxx" target="_self" href="/devel/progress/libclxx" />-->
+<area shape="poly" coords="27,335,245,335,247,406,399,406,400,317,26,317" alt="cl-mocks" target="_self" href="/devel/progress/cl-mocks/" />
+<area shape="rect" coords="27,119,178,148" alt="libclxx_app_clinfo" target="_self" href="/devel/progress/libclxx_app_clinfo/" />
+<area shape="rect" coords="202,120,350,147" alt="libclxx_app_clcc" target="_self" href="/devel/progress/libclxx_app_clcc/" />
+<area shape="rect" coords="26,49,183,107" alt="clxx-clinfo" target="_self" href="/devel/progress/clxx-clinfo" />
+<area shape="rect" coords="198,49,354,108" alt="clxx-clcc" target="_self" href="/devel/progress/clxx-clcc" />
+<area shape="rect" coords="861,159,908,406" alt="Boost.Program_options" target="_self" href="http://www.boost.org/doc/html/program_options.html" />
+<area shape="rect" coords="45,185,171,243" alt="progress/libclxx/platform_layer" target="_self" href="/devel/progress/libclxx/platform_layer.html" />
+<area shape="rect" coords="180,186,382,242" alt="progress/libclxx/runtime" target="_self" href="/devel/progress/libclxx/runtime.html" />
+<area shape="rect" coords="45,258,382,299" alt="progress/libclxx/functions_types" target="_self" href="/devel/progress/libclxx/functions_types.html" />
+</map>
+
+<h3 id="#progress">Progress Summary</h3>
+
+<p>The following table summarizes the development progress of certain pieces of clxx.</p>
+
+<table class="summary">
+  <tr>
+    <th><a href="/devel/progress/libclxx/platform_layer.html">platform_layer</a></th>
+    <td>{{site.devel_progress.platform_layer}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx/runtime.html">runtime</a></th>
+    <td>{{site.devel_progress.runtime}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx/functions.hpp.html">functions</a></th>
+    <td>{{site.devel_progress.functions}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx/types.hpp.html">types &amp; enums</a></th>
+    <td>{{site.devel_progress.types}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx_info/">libclxx_info</a></th>
+    <td>{{site.devel_progress.libclxx_info}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx_s11n/">libclxx_s11n</a></th>
+    <td>{{site.devel_progress.libclxx_s11n}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx_io/">libclxx_io</a></th>
+    <td>{{site.devel_progress.libclxx_io}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx_app_clinfo/">libclxx_app_clinfo</a></th>
+    <td>{{site.devel_progress.libclxx_app_clinfo}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/libclxx_app_clcc/">libclxx_app_clcc</a></th>
+    <td>{{site.devel_progress.libclxx_app_clcc}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/clxx-info/">clxx-clinfo</a></th>
+    <td>{{site.devel_progress.clxx_clinfo}}%</td>
+  </tr>
+  <tr>
+    <th><a href="/devel/progress/clxx-clcc">clxx-clcc</a></th>
+    <td>{{site.devel_progress.clxx_clcc}}%</td>
+  </tr>
+</table>

@@ -1,0 +1,12 @@
+<img src="[libclxx-architecture] (zaimportowany)" width="460" height="320" border="0" usemap="#map" />
+
+<map name="map">
+<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+<!-- #$-:Please do not edit lines starting with "#$" -->
+<!-- #$VERSION:2.3 -->
+<!-- #$AUTHOR:Paweł Tomulik -->
+<area shape="rect" coords="46,45,172,102" alt="libclxx-platform_layer" target="_self" href="#libclxx-platform_layer" />
+<area shape="rect" coords="178,44,383,103" alt="libclxx_runtime" target="_self" href="#libclxx-runtime" />
+<area shape="rect" coords="44,116,383,159" alt="clxx functions + clxx types &amp; enums" target="_self" href="#libclxxfunctions_types.html" />
+</map>

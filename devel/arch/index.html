@@ -1,0 +1,256 @@
+---
+layout: page
+title: "Architecture of clxx"
+description: ""
+---
+{% include JB/setup %}
+
+<h3 id="disclaimer">Disclaimer</h3>
+
+The clxx project is still incomplete and many pieces described below are not
+implemented yet. To see current development status, visit the
+<a href="/devel/progress/">Development Progress</a> page.
+
+<h3>Overview</h3>
+
+<p>On <a href="#fig1">Fig. 1</a> is shown the architecture of clxx. The project
+consists of several C++ <a href="#libraries">libraries</a> (harsh corners) and
+provides two <a href="#applications">applications</a> (round corners). The
+diagram only shows the C++ part of the software and does not include
+<a href="http://swig.org">swig</a> wrappers used to generate bindings to other
+languages (Python currently), which are also part of clxx.</p>
+
+<figure id="fig1">
+  <img src="/img/clxx-architecture.svg" border="0" usemap="#clxx-architecture.map" />
+  <figcaption>Fig. 1: Architecture of the clxx software</figcaption>
+</figure>
+
+<map name="clxx-architecture.map">
+<area shape="rect" coords="25,343,237,405" alt="OpenCL" target="_blank" href="https://www.khronos.org/opencl/" />
+<area shape="rect" coords="410,315,532,405" alt="Boost.Optional" target="_blank" href="http://www.boost.org/libs/optional/doc/html/" />
+<area shape="rect" coords="544,317,692,405" alt="Boost.Serialization" target="_blank" href="http://www.boost.org/libs/serialization/doc/index.html" />
+<area shape="rect" coords="704,316,851,405" alt="C++ Standard Library" target="_blank" href="http://www.cplusplus.com/reference/" />
+<area shape="rect" coords="705,159,851,305" alt="libclxx_io" target="_self" href="#libclxx_io" />
+<area shape="rect" coords="545,159,690,305" alt="libclxx_s11n" target="_self" href="#libclxx_s11n" />
+<area shape="rect" coords="410,160,531,306" alt="libclxx_info" target="_self" href="#libclxx_info" >
+<area shape="rect" coords="26,159,398,308" alt="libclxx" target="_self" href="#libclxx" />
+<area shape="poly" coords="27,335,245,335,247,406,399,406,400,317,26,317" alt="cl-mocks" target="_self" href="#cl-mocks" >
+<area shape="rect" coords="27,119,178,148" alt="libclxx_app_clinfo" target="_self" href="#libclxx_app_clinfo" />
+<area shape="rect" coords="202,120,350,147" alt="libclxx_app_clcc" target="_self" href="#libclxx_app_clcc" >
+<area shape="rect" coords="26,49,183,107" alt="clxx-clinfo" target="_self" href="#clxx-clinfo" >
+<area shape="rect" coords="104,103,105,105"  nohref="nohref" />
+<area shape="rect" coords="198,49,354,108" alt="clxx-clcc" target="_self" href="#clxx-clcc" >
+<area shape="rect" coords="861,159,908,406" alt="Boost.Program_options" target="_self" href="http://www.boost.org/doc/html/program_options.html" />
+</map>
+
+<h3 id="libraries">Libraries</h3>
+
+<ul>
+  <li><a href="#libclxx">libclxx</a> &mdash; core library,</li>
+  <li><a href="#libclxx_info">libclxx_info</a> &mdash; encapsulates data
+    retrieved from OpenCL,</li>
+  <li><a href="#libclxx_s11n">libclxx_s11n</a> &mdash; provides data
+    <a href="http://en.wikipedia.org/wiki/Serialization">serialization</a>
+    support for <a href="#libclxx_info">libclxx_info</a> objects,</li>
+  <li><a href="#libclxx_io">libclxx_io</a> &mdash; formatting and
+    streaming-out various clxx data types/objects in a human-readable form,</li>
+  <li><a href="#libclxx_app_clinfo">libclxx_app_clinfo</a> &mdash; all
+    the internals of the <a href="#clxx-clinfo">clxx-clinfo</a>  application,</li>
+  <li><a href="#libclxx_app_clcc">libclxx_app_clcc</a> &mdash; all
+    the internals of the <a href="#clxx-clcc">clxx-clcc</a>  compiler.</li>
+</ul>
+
+<h3 id="applications">Applications</h3>
+
+<ul>
+  <li><a href="#clxx-clinfo">clxx-clinfo</a> &mdash; new incarnation of
+    AMD's <a href="https://packages.debian.org/pl/sid/amd-clinfo">clinfo</a>
+    utility,</li>
+  <li><a href="#clxx-clcc">clxx-clcc</a> &mdash; OpenCL C compiler.</li>
+</ul>
+
+
+<h3 id="libclxx">The libclxx library</h3>
+
+<p>In the heart of the clxx project is the libclxx library. Internal structure
+of the libclxx library is shown on <a href="#fig2">Fig. 2</a>.</p>
+
+<p><figure id="fig2">
+<img src="/img/libclxx-architecture.svg" border="0" usemap="#libclxx-architecture.map" />
+<figcaption>Fig. 2: The <b>libclxx</b> library.</figcaption>
+</figure></p>
+
+<map name="libclxx-architecture.map">
+<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+<!-- #$-:Please do not edit lines starting with "#$" -->
+<!-- #$VERSION:2.3 -->
+<!-- #$AUTHOR:Paweł Tomulik -->
+<area shape="rect" coords="46,45,172,102" alt="libclxx-platform_layer" target="_self" href="#libclxx-platform_layer" />
+<area shape="rect" coords="178,44,383,103" alt="libclxx_runtime" target="_self" href="#libclxx-runtime" />
+<area shape="rect" coords="44,116,383,159" alt="clxx functions + clxx types &amp; enums" target="_self" href="#libclxx-functions_types" />
+</map>
+
+<p>The sole purpose of <a href="#libclxx">libclxx</a> is to expose the
+functionality of the <a href="https://www.khronos.org/opencl/">OpenCL</a> API
+in an object-oriented way to C++ programmers. The library is split into two
+sub-layers:</p>
+<ul>
+  <li>the upper layer, which consists of two pieces:
+    <ul>
+      <li>
+        <a href="#libclxx-platform_layer">platform layer</a> &ndash; covers
+        the chapter 4 of the OpenCL standard (The OpenCL Platform Layer), and
+      </li>
+      <li>
+        <a href="#libclxx-runtime">runtime</a> &ndash; covers the chapter 5 of
+        the OpenCL standard (The OpenCL Runtime).
+      </li>
+    </ul>
+    The OpenCL functionality is exposed in an object-oriented, easy to use way.
+  </li>
+  <li>
+    the lower layer &ndash; <a href="#libclxx-functions_types"> clxx functions
+    + clxx types & enums</a> &ndash; contains basic C++ types, enums and
+    functions corresponding to bare OpenCL types, constants and functions. The
+    functions defined here have three purposes:
+    <ul>
+      <li>to use our C++11 enums instead of the OpenCL constants as their
+        arguments &ndash; a step towards type safety,</li>
+      <li>to convert OpenCL-returned error codes into C++ exceptions and
+        throw these exceptions,</li>
+      <li>to pass all calls to the OpenCL functions through our thin <b>OpenCL
+        mocks</b> layer.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="libclxx-platform_layer">libclxx - platform_layer</h4>
+
+<p>The <b>platform layer</b> piece of the libclxx library provides objects and
+methods for accessing the OpenCL API described in chapter 4 of the standard
+(<i>The OpenCL Platform Layer</i>). It consists of several C++ "proxy
+classes" used to access OpenCL objects such as platforms, devices, contexts,
+etc.. It also contains other objects, such as collections, to facilitate
+typical programming tasks.</p>
+
+<h4 id="libclxx-runtime">libclxx - runtime</h4>
+
+<p>The <b>runtime</b> piece of the libclxx library provides objects and methods
+for accessing the OpenCL API described in chapter 5 of the standard
+(<i>The OpenCL Runtime</i>).</p>
+
+<h4 id="libclxx-functions_types">libclxx - functions + types &amp; enums</h4>
+
+<p>Basically, this sublayer provides two elements</p>
+<ul>
+  <li>a set of C++11 enum classes to represent most of the OpenCL constants in a type-safe way,</li>
+  <li>a set of C++ functions, that map 1-to-1 to functions of the OpenCL API.</li>
+</ul>
+
+<p>The <a href="/devel/arch/libclxx/types.hpp.html">types</a> page lists the OpenCL constants and their corresponding clxx enums.</p>
+
+<p>The <a href="/devel/arch/libclxx/functions.hpp.html">functions</a> page lists the OpenCL functions and their corresponding clxx functions.</p>
+
+<h4 id="cl-mocks">OpenCL mocks</h4>
+
+<p>The role of the <b>OpenCL mocks</b> block is the following. In normal
+operation, all the calls are forwarded to OpenCL. When unit-testing, however,
+the original OpenCL functions are replaced with appropriate
+<a href="http://cxxtest.com/guide.html#mock">cxxtest mocks</a>.</p>
+
+<p>The <b>OpenCL mocks</b> contain "replacements" for the original OpenCL
+functions. They're used for unit-testing. When the
+<a href=#libclxx">libclxx</a> is unit-tested, specially crafted mocks are
+invoked internally instead of OpenCL functions. The mocks are preconfigured
+to yield a prescribed response (return value/exception) to caller, which is
+then checked by unit-test. This way tests may be performed even on platforms
+having no OpenCL devices configured.</p>
+
+<h3 id="libclxx_info">The libclxx_info library</h3>
+
+<p>The <b>libclxx_info</b> library implements several C++ classes to encapsulate
+OpenCL information gathered by <a href="#libclxx">libclxx</a> methods. For
+example, all the information retrievable by methods of <tt>clxx::platform</tt>
+object may be encapsulated with <tt>clxx::platform_info</tt> object. The
+purpose of <tt>clxx::*_info</tt> objects is to facilitate passing OpenCL
+information between nodes of a distributed application, enable data I/O and
+<a href="http://en.wikipedia.org/wiki/Serialization">serialization</a>.</p>
+
+<p>There are basically two groups of objects implemented in <b>libclxx_info</b>
+library:</p>
+<ul>
+  <li><tt>clxx::*_query</tt> objects &ndash; which encapsulate queries made to
+    OpenCL in order to retrieve information,</li>
+  <li><tt>clxx::*_info</tt> objects &ndash; which encapsulate response of OpenCL to a
+    query (the encapsulated data).</li>
+</ul>
+
+<p>The <b>libclxx_info</b> library has no (direct nor indirect) dependencies on
+<b>libOpenCL</b>, so it may be used on hosts having no OpenCL installed. This
+may be, for example, a management PC (management UI on user's PC) in a
+distributed application. The management UI will usually send
+<tt>clxx::*_query</tt> objects to a worker and retrieve <tt>clxx::*_info</tt>
+object in response.</p>
+
+
+<h3 id="libclxx_s11n">The libclxx_s11n library</h3>
+
+The <b>libclxx_s11n</b> library may be used to
+<a href="http://en.wikipedia.org/wiki/Serialization">serialize</a> objects
+implemented by the <a href="#libclxx_info">libclxx_info</a> library.
+
+<h3 id="libclxx_io">The libclxx_io library</h3>
+
+The <b>libclxx_io</b> library implements I/O functions for streaming-out
+objects implemented by the <a href="#libclxx_info">libclxx_info</a> library,
+and other data used in clxx.
+
+<h3 id="libclxx_app_clinfo">The libclxx_app_clinfo library</h3>
+
+<p>The <b>libclxx_app_clinfo</b> is a direct application support library for the
+<a href="#clxx-clinfo">clxx-clinfo</a> utility. This means, the library
+implements all the functions of the application. Writing the
+<a href="#clxx-clinfo">clxx-clinfo</a> or a similar program is then just a
+matter of passing command-line arguments to the main function implemented in
+<b>libclxx_app_clinfo</b>.</p>
+
+<h3 id="libclxx_app_clcc">The libclxx_app_clcc library</h3>
+
+<p>The <b>libclxx_app_clcc</b> is a direct application support library for the
+<a href="#clxx-clcc">clxx-clcc</a> compiler. This means, the library implements
+all the functions of the application. Writing the <a href="#clxx-clcc">clxx-clcc</a>
+or a similar program is then just a matter of passing command-line arguments
+to the main function implemented in <b>libclxx_app_clcc</b>.</p>
+
+<h3 id="clxx-clinfo">The clxx-clinfo utility</h3>
+
+<p>The <b>clxx-clinfo</b> utility dumps local OpenCL information including
+OpenCL platforms, devices and their parameters. By default the information is
+printed to stdout in a human-readable form.</p>
+
+<p>It's also able to serialize the information and write it to a file or output
+stream. The serialized data may be later read by the program and displayed to
+user.</p>
+
+<p>The program implements reach set of command-line options to adjust its input
+and output. For details see </p>
+
+<pre>
+  clxx-clinfo --help
+</pre>
+
+<h3 id="clxx-clcc">The clxx-clcc compiler</h3>
+
+<p>The <b>clxx-clcc</b> is a compiler for OpenCL C programs. It facilitates
+implementation of OpenCL C kernels when developing end-user applications. It
+may be used to generate intermediate (object) code, or just to test end-user
+kernels &ndash; whether they compile or not with a given set of compiler
+options.</p>
+
+<p>The program implements reach set of command-line options. For details
+see</p>
+
+<pre>
+  clxx-clcc --help
+</pre>

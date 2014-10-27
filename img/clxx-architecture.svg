@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="984"
+   height="460"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="clxx-architecture.svg">
+  <defs
+     id="defs4">
+    <filter
+       id="filter3862"
+       inkscape:label="filtr1"
+       color-interpolation-filters="sRGB" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#958b8b"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="262.47318"
+     inkscape:cy="222.5457"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1483"
+     inkscape:window-height="700"
+     inkscape:window-x="137"
+     inkscape:window-y="274"
+     inkscape:window-maximized="0"
+     borderlayer="false"
+     showborder="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-592.36476)">
+    <rect
+       ry="29.7995"
+       y="639.21234"
+       x="194.95944"
+       height="59.598999"
+       width="162.63455"
+       id="rect3872"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-opacity:1"
+       rx="29.7995" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-opacity:1"
+       id="rect3870"
+       width="162.63455"
+       height="59.598999"
+       x="22.223356"
+       y="46.84761"
+       transform="translate(0,592.36476)"
+       ry="29.7995"
+       rx="29.7995" />
+    <rect
+       y="751.54639"
+       x="26.102964"
+       height="150.00006"
+       width="373.57141"
+       id="rect3236"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3011"
+       width="336.76041"
+       height="43.140625"
+       x="46.102943"
+       y="849.16461"
+       rx="0"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="214.44214"
+       y="874.59723"
+       id="text3013"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3015"
+         x="214.44214"
+         y="874.59723">clxx functions + clxx types &amp; enums</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2991-6"
+       width="203.57138"
+       height="57.857117"
+       x="179.31726"
+       y="776.9754" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="274.76834"
+       y="811.12323"
+       id="text3023"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         x="274.76834"
+         y="811.12323"
+         id="tspan3027">runtime</tspan></text>
+    <rect
+       style="fill:#dcdcdd;fill-opacity:0.86572439;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3134"
+       width="148.17555"
+       height="90.265991"
+       x="703.89941"
+       y="908.55817" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#7c6f6f;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="777.5907"
+       y="958.78735"
+       id="text3136"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3138"
+         x="777.5907"
+         y="958.78735">C++ STD LIBRARY</tspan></text>
+    <rect
+       style="fill:#dedddd;fill-opacity:0.86925791;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2985"
+       width="210.71426"
+       height="62.857117"
+       x="26.102964"
+       y="936.54639" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#7c6f6f;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="131.1012"
+       y="971.71417"
+       id="text3140"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3142"
+         x="131.1012"
+         y="971.71417">OpenCL</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 26.089575,908.7999 0,19.94233 219.402625,0 0,70.67394 155.17195,0 -0.40716,-90.61627 z"
+       id="rect3086"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="324.33392"
+       y="972.26074"
+       id="text3144"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3146"
+         x="324.33392"
+         y="972.26074">OpenCL mocks</tspan></text>
+    <rect
+       y="908.97656"
+       x="543.47699"
+       height="89.847595"
+       width="148.17549"
+       id="rect3150"
+       style="fill:#dddddd;fill-opacity:0.86925791;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#7c6f6f;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="617.47931"
+       y="959.11957"
+       id="text3152"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3154"
+         x="617.47931"
+         y="959.11957">Boost.Serialization</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3178"
+       width="147.4823"
+       height="147.69067"
+       x="543.77283"
+       y="751.54309" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="617.45587"
+       y="829.05591"
+       id="text3168"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3170"
+         x="617.45587"
+         y="829.05591">libclxx_s11n</tspan></text>
+    <rect
+       y="751.63501"
+       x="703.85132"
+       height="146.79797"
+       width="147.91029"
+       id="rect3172"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="777.52618"
+       y="828.70148"
+       id="text3174"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3176"
+         x="777.52618"
+         y="828.70148">libclxx_io</tspan></text>
+    <rect
+       y="1015.1531"
+       x="491.29688"
+       height="20"
+       width="25.714285"
+       id="rect4050"
+       style="fill:#dcdcdd;fill-opacity:0.86572439;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4052"
+       width="25.714285"
+       height="20"
+       x="668.07355"
+       y="1015.1531" />
+    <text
+       sodipodi:linespacing="117%"
+       id="text4054"
+       y="1029.0154"
+       x="808.52917"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       xml:space="preserve"><tspan
+         y="1029.0154"
+         x="808.52917"
+         id="tspan4056"
+         sodipodi:role="line">developed within clxx project</tspan></text>
+    <text
+       sodipodi:linespacing="117%"
+       id="text4058"
+       y="1030.3723"
+       x="588.16656"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       xml:space="preserve"><tspan
+         y="1030.3723"
+         x="588.16656"
+         id="tspan4060"
+         sodipodi:role="line">external libraries</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2991"
+       width="125.71429"
+       height="57.857117"
+       x="46.460106"
+       y="777.33252" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="108.68835"
+       y="810.12335"
+       id="text3017"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         x="108.68835"
+         y="810.12335"
+         id="tspan3021">platform layer</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="212.45801"
+       y="767.97498"
+       id="text3242"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3244"
+         x="212.45801"
+         y="767.97498">libclxx</tspan></text>
+    <rect
+       y="751.90021"
+       x="409.46609"
+       height="147.33356"
+       width="122.50944"
+       id="rect4016"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       sodipodi:linespacing="117%"
+       id="text4018"
+       y="829.2345"
+       x="471.45065"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       xml:space="preserve"><tspan
+         y="829.2345"
+         x="471.45065"
+         id="tspan4020"
+         sodipodi:role="line">libclxx_info</tspan></text>
+    <rect
+       y="908.55817"
+       x="409.79276"
+       height="90.265991"
+       width="122.46129"
+       id="rect4040"
+       style="fill:#dcdcdd;fill-opacity:0.86572439;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <text
+       sodipodi:linespacing="117%"
+       id="text4042"
+       y="957.55347"
+       x="470.98923"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#7c6f6f;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       xml:space="preserve"><tspan
+         id="tspan4046"
+         y="957.55347"
+         x="470.98923"
+         sodipodi:role="line">Boost.Optional</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3034"
+       width="941.32837"
+       height="35.077026"
+       x="25.714285"
+       y="708.2016" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="105.18626"
+       y="729.85205"
+       id="text3804"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3806"
+         x="105.18626"
+         y="729.85205">libclxx_app_clinfo</tspan></text>
+    <text
+       sodipodi:linespacing="117%"
+       id="text3831"
+       y="729.82806"
+       x="278.75769"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       xml:space="preserve"><tspan
+         y="729.82806"
+         x="278.75769"
+         id="tspan3833"
+         sodipodi:role="line">libclxx_app_clcc</tspan></text>
+    <text
+       sodipodi:linespacing="117%"
+       id="text3827"
+       y="675.16492"
+       x="276.21271"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       xml:space="preserve"><tspan
+         y="675.16492"
+         x="276.21271"
+         id="tspan3829"
+         sodipodi:role="line">clxx-clcc</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="514.16785"
+       y="731.84991"
+       id="text3845"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3847"
+         x="514.16785"
+         y="731.84991"
+         style="font-style:normal;fill:#faf8f8;fill-opacity:1;-inkscape-font-specification:Nimbus Sans L Bold;font-family:Nimbus Sans L;font-weight:bold;font-stretch:normal;font-variant:normal;font-size:14.60000038px;text-anchor:middle;text-align:center;writing-mode:lr;line-height:117%">(direct application support)</tspan></text>
+    <rect
+       style="fill:#dcdcdc;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3856"
+       width="46.42857"
+       height="246.42857"
+       x="861.42859"
+       y="159.28572"
+       transform="translate(0,592.36476)" />
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#7c6f6f;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="-875.16876"
+       y="888.7309"
+       id="text3858"
+       sodipodi:linespacing="117%"
+       transform="matrix(0,-1,1,0,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan3860"
+         x="-875.16876"
+         y="888.7309">Boost.Program_options</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       x="104.67591"
+       y="675.18896"
+       id="text3817"
+       sodipodi:linespacing="117%"><tspan
+         sodipodi:role="line"
+         id="tspan3819"
+         x="104.67591"
+         y="675.18896">clxx-clinfo</tspan></text>
+  </g>
+</svg>

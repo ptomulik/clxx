@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="460"
+   height="320"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="libclxx-architecture.svg"
+   inkscape:export-filename="/home/ptomulik/projects/clxx/img/libclxx-architecture.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <filter
+       id="filter3862"
+       inkscape:label="filtr1"
+       color-interpolation-filters="sRGB" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#958b8b"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="-37.183748"
+     inkscape:cy="211.50494"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1025"
+     inkscape:window-x="-3"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-732.36476)">
+    <rect
+       y="751.54639"
+       x="26.102964"
+       height="150.00006"
+       width="373.57141"
+       id="rect3236"
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect3011"
+       width="336.76041"
+       height="43.140625"
+       x="46.102943"
+       y="849.16461"
+       rx="0"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:#f00000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       x="214.44214"
+       y="874.59723"
+       id="text3013"
+       sodipodi:linespacing="125%"><tspan
+         style="stroke:#f00000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;fill:#faf8f8;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold;font-family:Bitstream Vera Sans;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14px;text-anchor:middle;text-align:center;writing-mode:lr;line-height:125%"
+         sodipodi:role="line"
+         id="tspan3015"
+         x="214.44214"
+         y="874.59723">clxx functions + clxx types &amp; enums</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2991-6"
+       width="203.57138"
+       height="57.857117"
+       x="179.31726"
+       y="776.9754" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       x="274.76834"
+       y="811.12323"
+       id="text3023"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="274.76834"
+         y="811.12323"
+         id="tspan3027">runtime</tspan></text>
+    <rect
+       style="fill:#dedddd;fill-opacity:0.86925791;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2985"
+       width="210.71426"
+       height="62.857117"
+       x="26.102964"
+       y="936.54639" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#7c6f6f;fill-opacity:1;stroke:#f00000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       x="131.1012"
+       y="971.71417"
+       id="text3140"
+       sodipodi:linespacing="125%"><tspan
+         style="stroke:#f00000;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;fill:#7c6f6f;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold;font-family:Bitstream Vera Sans;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14px;text-anchor:middle;text-align:center;writing-mode:lr;line-height:125%"
+         sodipodi:role="line"
+         id="tspan3142"
+         x="131.1012"
+         y="971.71417">OpenCL</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 26.089575,908.7999 0,19.94233 219.402625,0 0,70.67394 155.17195,0 -0.40716,-90.61627 z"
+       id="rect3086"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:#f00000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       x="324.33392"
+       y="972.26074"
+       id="text3144"
+       sodipodi:linespacing="125%"><tspan
+         style="stroke:#f00000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;fill:#faf8f8;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold;font-family:Bitstream Vera Sans;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14px;text-anchor:middle;text-align:center;writing-mode:lr;line-height:125%"
+         sodipodi:role="line"
+         id="tspan3146"
+         x="324.33392"
+         y="972.26074">OpenCL mocks</tspan></text>
+    <rect
+       y="1015.1531"
+       x="25.832775"
+       height="20"
+       width="25.714285"
+       id="rect4050"
+       style="fill:#dcdcdd;fill-opacity:0.86572439;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4052"
+       width="25.714285"
+       height="20"
+       x="202.60948"
+       y="1015.1531" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4054"
+       y="1029.0154"
+       x="343.06509"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="1029.0154"
+         x="343.06509"
+         id="tspan4056"
+         sodipodi:role="line">developed within clxx project</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4058"
+       y="1030.3723"
+       x="122.70246"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="1030.3723"
+         x="122.70246"
+         id="tspan4060"
+         sodipodi:role="line">external libraries</tspan></text>
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect2991"
+       width="125.71429"
+       height="57.857117"
+       x="46.460106"
+       y="777.33252" />
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       x="108.68835"
+       y="810.12335"
+       id="text3017"
+       sodipodi:linespacing="125%"><tspan
+         style="stroke:#f1ecec;stroke-width:1;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none;fill:#faf8f8;fill-opacity:1;-inkscape-font-specification:Bitstream Vera Sans Bold;font-family:Bitstream Vera Sans;font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal;font-size:14px;text-anchor:middle;text-align:center;writing-mode:lr;line-height:125%"
+         sodipodi:role="line"
+         x="108.68835"
+         y="810.12335"
+         id="tspan3021">platform layer</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:14px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Vera Sans Bold"
+       x="212.45801"
+       y="767.97498"
+       id="text3242"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3244"
+         x="212.45801"
+         y="767.97498">libclxx</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,137 @@
+body {
+  background-image: url("../images/pattern.png");
+  background-repeat: repeat;
+  margin: 0;
+  padding: 0;
+}
+
+a:link    { color: #F1ECEC; }
+a:visited { color: #B1ACAC; }
+a:hover   { color: #FFFFFF; }
+
+#page {
+  width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #F1ECEC;
+}
+
+#page-header {
+  height: 260px;
+  background-image: url("../images/header.png");
+  background-repeat: no-repeat;
+  background-position: top center;
+  margin: 0;
+  padding: 0;
+}
+
+#page-navbar {
+  width: 1024px;
+  padding: 5px 20px 5px 20px;
+  border: 1px solid #8E8686;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1ex;
+  font-size: 130%;
+  font-family: sans-serif;
+  border-radius: 6px;
+}
+
+#page-navbar a {
+  font-weight: bold;
+  text-decoration: none;
+  /*  background-color: black; */
+  margin-left: 8px;
+  margin-right: 8px;
+  color: #CBCBB4;
+}
+
+#page-content {
+  width: 1024px;
+
+  padding-top: 1ex;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  border: 1px solid #8E8686;
+  border-radius: 6px;
+}
+
+#page-footer {
+  background-image: none;
+
+  /*padding-top: 1ex;
+  padding-bottom: 1ex; */
+  padding-left: 20px;
+  padding-right: 20px;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 1024px;
+  /* border: 1px solid #8E8686;
+  border-radius: 6px; */
+}
+
+p, li { text-align: justify; }
+
+h1, h2, h3, h4 { 
+  color: #CBCBB4;
+}
+
+h1, h2 {
+  text-align: center;
+  text-decoration: underline;
+}
+
+pre {
+  border: 1px solid #9E9696;
+  border-radius: 6px;
+  color: white;
+}
+
+table {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
+
+table.summary {
+  border-top: 1px solid #9E9696;
+  border-bottom: 1px solid #9E9696;
+  width: 100%;
+}
+
+.summary th, .summary td {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.summary th { text-align: right; width: 192px; }
+.summary td { text-align: left; }
+
+table.api {
+  /*border: 1px solid #9E9696;*/
+}
+table.api th, table.api td {
+  font-family: "Courier New", Courier, monospace;
+  border: 1px solid #9E9696;
+  padding: 1px 2px 1px 2px;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.small {
+  font-size: small;
+}
+
+.xx-small {
+  font-size: xx-small;
+}

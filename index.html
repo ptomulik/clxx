@@ -1,0 +1,71 @@
+---
+layout: default
+---
+
+<div class="home">
+
+  <h2>Overview</h2>
+
+  <p>
+    Clxx is a C++ library which exposes OpenCL's functionality in an
+    object-oriented way. Its goal is to simplify usage of the OpenCL functions
+    by providing type-safe and easy to use interface.
+  </p>
+   
+  <p>
+    Clxx is not just a set of bare wrappers around OpenCL calls. In addition to
+    several objects and functions provided for accessing the OpenCL
+    functionality, it also implements additional facilities such as specialized
+    I/O functions, serialization, swig-based wrappers to access clxx from
+    scripting languages (Python), and even ready-to use applications such as
+    clxx-clinfo or clxx-clcc.
+  </p>
+   
+  <p>
+    Programming OpenCL applications becomes easy with clxx. For example,
+    a fully fledged implementation of the well-known clinfo utility (the
+    original implementation was due to AMD) may be written with only few
+    lines of code using our direct application support library
+    (<a href="/devel/arch/#libclxx_app_clinfo">libclxx_app_clinfo</a>):
+  </p>
+
+  <pre><code>
+    #include &lt;clxx/app/clinfo/main.hpp&gt;
+    #include &lt;exception&gt;
+    #include &lt;iostream&gt;
+
+    int main(int argc, char const* argv[])
+    {
+      try
+        {
+          return clxx::app::clinfo::run(argc, argv);
+        }
+      catch(std::exception const&amp; e)
+        {
+          std::cerr &lt;&lt; "error: " &lt;&lt; e.what() &lt;&lt; std::endl;
+        }
+      catch(...)
+        {
+          std::cerr &lt;&lt; "error: caught unhandled exception" &lt;&lt; std::endl;
+        }
+      return 1;
+    }
+  </code></pre>
+
+  <!--<h1 class="page-heading">Posts</h1>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p> -->
+
+</div>

@@ -1,0 +1,25 @@
+<img src="clxx-architecture.svg" width="1024" height="460" border="0" usemap="#map" />
+
+<map name="map">
+<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+<!-- #$-:Please do not edit lines starting with "#$" -->
+<!-- #$VERSION:2.3 -->
+<!-- #$AUTHOR:Paweł Tomulik -->
+<area shape="rect" coords="25,343,237,405" alt="OpenCL" target="blank_" href="https://www.khronos.org/opencl/" />
+<area shape="rect" coords="410,315,532,405" alt="Boost.Optional" target="blank_" href="http://www.boost.org/libs/optional/doc/html/" />
+<area shape="rect" coords="544,317,692,405" alt="Boost.Serialization" target="blank_" href="http://www.boost.org/libs/serialization/doc/index.html" />
+<area shape="rect" coords="704,316,851,405" alt="C++ Standard Library" target="blank_" href="http://www.cplusplus.com/reference/" />
+<area shape="rect" coords="705,159,851,305" alt="libclxx_io" target="self_" href="/devel/libclxx_io/" />
+<area shape="rect" coords="545,159,690,305" alt="libclxx_s11n" target="self_" href="/devel/libclxx_s11n/" />
+<area shape="rect" coords="410,160,531,306" alt="libclxx_info" target="self_" href="/devel/libclxx_info" />
+<area shape="poly" coords="27,335,245,335,247,406,399,406,400,317,26,317" alt="cl-mocks" target="self_" href="/devel/cl-mocks" />
+<area shape="rect" coords="27,119,178,148" alt="libclxx_app_clinfo" target="self_" href="/deve/libclxx_app_clinfo" />
+<area shape="rect" coords="202,120,350,147" alt="libclxx_app_clcc" target="self_" href="/devel/libclxx_app_clcc" />
+<area shape="rect" coords="26,49,183,107" alt="clxx-clinfo" target="self_" href="/devel/clxx-clinfo" />
+<area shape="rect" coords="198,49,354,108" alt="clxx-clcc" target="self_" href="/devel/clxx-clcc" />
+<area shape="rect" coords="861,159,908,406" alt="Boost.Program_options" target="self_" href="http://www.boost.org/doc/html/program_options.html" />
+<area shape="rect" coords="45,185,171,243" alt="progress/libclxx/platform_layer" target="self_" href="/devel/progress/libclxx/platform_layer.html" />
+<area shape="rect" coords="180,186,382,242" alt="progress/libclxx/runtime" target="self_" href="/devel/progress/libclxx/runtime.html" />
+<area shape="rect" coords="45,258,382,299" alt="progress/libclxx/functions_types" target="self_" href="/devel/progress/libclxx/functions_types.html" />
+</map>
