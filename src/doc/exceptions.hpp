@@ -148,10 +148,10 @@
  *
  * \see clxx/exception.hpp
  * \see clxx/exception_base.hpp
- * \see clxx/cl/clerror.hpp
- * \see clxx/cl/clerror_base.hpp
- * \see clxx/cl/clerror_no.hpp
- * \see clxx/cl/exceptions.hpp
+ * \see clxx/clerror.hpp
+ * \see clxx/clerror_base.hpp
+ * \see clxx/clerror_no.hpp
+ * \see clxx/exceptions.hpp
  * \see clxx::exception,
  * \see clxx::exception_base,
  * \see clxx::clerror,

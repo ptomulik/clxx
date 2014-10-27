@@ -28,11 +28,11 @@ env.Program('exception3.cpp')
 env.Program('exception4.cpp')
 env.Program('autosep1.cpp', LIBS = CLVar('clxx_io'))
 env.Program('io1.cpp', LIBS = CLVar('clxx_io'))
-env.Program('platform1.cpp', LIBS = CLVar('clxx_cl'))
-env.Program('platform2.cpp', LIBS = CLVar('clxx_cl clxx_info clxx_io'))
-env.Program('platform3.cpp', LIBS = CLVar('clxx_cl clxx_info clxx_io'))
-env.Program('platform4.cpp', LIBS = CLVar('clxx_cl clxx_info clxx_io'))
-env.Program('device1.cpp', LIBS = CLVar('clxx_cl'))
+env.Program('platform1.cpp', LIBS = CLVar('clxx'))
+env.Program('platform2.cpp', LIBS = CLVar('clxx clxx_info clxx_io'))
+env.Program('platform3.cpp', LIBS = CLVar('clxx clxx_info clxx_io'))
+env.Program('platform4.cpp', LIBS = CLVar('clxx clxx_info clxx_io'))
+env.Program('device1.cpp', LIBS = CLVar('clxx'))
 
 # Local Variables:
 # # tab-width:4

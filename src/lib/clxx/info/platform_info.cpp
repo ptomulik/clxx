@@ -27,7 +27,7 @@
  * \brief Implements the clxx::platform_info class.
  */ // }}}
 #include <clxx/info/platform_info.hpp>
-#include <clxx/cl/exceptions.hpp>
+#include <clxx/exceptions.hpp>
 
 namespace clxx {
 

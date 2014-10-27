@@ -20,12 +20,23 @@
 
 Import( 'env' )
 
+from SCons.Util import CLVar
+
 # "Generate" __init__.py
 init_py = env.Substfile(['__init__.py.in'], SUBST_DICT = {})
 
-modules = [ 'types_mod', 'exception_mod' ]
+modules = [
+    'types_mod',
+    'exception_mod',
+    'platform_mod',
+#    TODO: uncomment context_mod once it's ready
+#    'context_mod',
+#    TODO: uncomment program_mod once it's ready
+#    'program_mod'
+]
+libs = env.get('SWIGPY_LIBS', CLVar()) + [ 'clxx', 'OpenCL' ]
 # Build modules
-modfiles = env.SwigPyModule(modules)
+modfiles = env.SwigPyModule(modules, SWIGPY_LIBS = libs)
 instfiles =  [m for m in modfiles if not str(m).endswith('.cc')] + init_py
 
 # FIXME: this is only for now, elaborate what should be the destination path,

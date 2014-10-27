@@ -35,6 +35,7 @@
 // dependencies from other modules
 #include <clxx/std/string_mod.hpp>
 #include <clxx/std/exception_mod.hpp>
+#include <clxx/types_mod.hpp>
 
 #endif /* CLXX_EXCEPTION_MOD_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

@@ -31,7 +31,7 @@
  * available locally.
  */ // }}}
 // [Program]
-#include <clxx/cl/platform_layer.hpp>
+#include <clxx/platform_layer.hpp>
 #include <clxx/io/platform_layer_info.hpp>
 #include <iostream>
 

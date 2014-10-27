@@ -25,28 +25,16 @@ from SCons.Util import CLVar
 # "Generate" __init__.py
 init_py = env.Substfile(['__init__.py.in'], SUBST_DICT = {})
 # Generate python modules with swig
-libs = env.get('SWIGPY_LIBS', CLVar()) + [
-    'clxx_cl',
-    'OpenCL'
-]
-overrides = {
-    'SWIGPY_LIBS'       : libs
-}
+libs = env.get('SWIGPY_LIBS', CLVar()) + [ 'OpenCL' ]
 modules = [
     'opencl1_0',
     'opencl1_1',
     'opencl1_2',
     'opencl2_0',
     'opencl_mod',
-    'exception_mod',
-    'platform_mod',
-#    TODO: uncomment context_mod once it's ready
-#    'context_mod',
-#    TODO: uncomment program_mod once it's ready
-#    'program_mod'
 ]
 # Build modules
-modfiles = env.SwigPyModule(modules, **overrides)
+modfiles = env.SwigPyModule(modules, SWIGPY_LIBS = libs)
 instfiles =  [m for m in modfiles if not str(m).endswith('.cc')] + init_py
 
 

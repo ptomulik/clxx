@@ -33,7 +33,7 @@
  */ // }}}
 // [Program]
 // [DumpPlatform]
-#include <clxx/cl/platform.hpp>
+#include <clxx/platform.hpp>
 #include <iostream>
 /// \brief Dump platform information to stdout. Functor.
 class dump_platform
@@ -57,7 +57,7 @@ class dump_platform
 // [DumpPlatform]
 
 // [Main]
-#include <clxx/cl/platforms.hpp>
+#include <clxx/platforms.hpp>
 #include <algorithm>
 /// \brief Main function
 int main(int, char const*[])

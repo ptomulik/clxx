@@ -1,0 +1,269 @@
+/*
+ * @COPYRIGHT@
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE
+ */
+
+// clxx/devices.hpp
+
+/** // doc: clxx/devices.hpp {{{
+ * \file clxx/devices.hpp
+ * \todo Write documentation
+ */ // }}}
+#ifndef CLXX_DEVICES_HPP_INCLUDED
+#define CLXX_DEVICES_HPP_INCLUDED
+
+#include <clxx/device.hpp>
+#include <clxx/platform.hpp>
+#include <clxx/types.hpp>
+
+namespace clxx {
+
+
+/** // doc: devices {{{
+ * \ingroup clxx_platform_layer
+ * \brief Collection of clxx::device objects.
+ */ // }}}
+typedef std::vector<device> devices;
+
+/** \ingroup clxx_platform_layer */
+/** @{ */
+/** // doc: get_num_devices() {{{
+ * \brief Get number of OpenCL devices available locally.
+ *
+ * \param platform
+ *        Refers to the platform ID returned by clxx::get_platform_ids() or can
+ *        be \c NULL. If \b platform is \c NULL, the behavior is
+ *        implementation-defined.
+ * \param device_type
+ *        A bitfield that identifies the type of OpenCL device. The \b
+ *        device_type can be used to query specific OpenCL devices or all
+ *        OpenCL devices available. The valid values for \b device_type are
+ *        specified by the documentation of the clxx::device_type_t.
+ *
+ * \return The number of available OpenCL devices
+ *
+ * \throws clerror_no<status_t::invalid_platform>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_PLATFORM,
+ * \throws clerror_no<status_t::invalid_device_type>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_DEVICE_TYPE,
+ * \throws clerror_no<status_t::invalid_value>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_VALUE,
+ * \throws clerror_no<status_t::out_of_resources>
+ *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_RESOURCES,
+ * \throws clerror_no<status_t::out_of_host_memory>
+ *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_HOST_MEMORY,
+ * \throws unexpected_clerror
+ *         when \c clGetDeviceIDs() returns other error code.
+ *
+ * The unexpected_clerror is thrown only when the \c clGetDeviceIDs()
+ * implementation is not standard conformant, its version is not supported by
+ * %clxx, or when get_device_ids() has a bug.
+ */ // }}}
+cl_uint get_num_devices(cl_platform_id platform, device_type_t device_type);
+/** // doc: get_device_ids() {{{
+ * \brief Retrieve device identifiers of locally available OpenCL devices.
+ *
+ * This function is a C++ wrapper for \c clGetDeviceIDs(). The main difference
+ * between clxx::get_device_ids() and \c clGetDeviceIDs() is that it throws
+ * exceptions instead of returning error codes.
+ *
+ * \param platform
+ *        Refers to the platform ID returned by clxx::get_platform_ids() or can
+ *        be \c NULL. If \b platform is \c NULL, the behavior is
+ *        implementation-defined.
+ * \param device_type
+ *        A bitfield that identifies the type of OpenCL device. The 
+ *        \b device_type can be used to query specific OpenCL devices or all
+ *        OpenCL devices available. The valid values for \b device_type are
+ *        specified by clxx::device_type_t.
+ * \param num_entries
+ *        The number of \c cl_device_id entries that can be added to \b
+ *        devices. If \b devices is not \c NULL, the \b num_entries must be
+ *        greater than zero.
+ * \param devices
+ *        A list of OpenCL devices found. The \c cl_device_id values returned
+ *        in \b devices can be used to identify a specific OpenCL device. If
+ *        \b devices argument is \c NULL, this argument is ignored. The number
+ *        of OpenCL devices returned is the minimum of the value specified by
+ *        \b num_entries or the number of OpenCL devices whose type matches
+ *        \b device_type.
+ * \param num_devices
+ *        Returns the number of OpenCL devices available. If \c num_devices is
+ *        \c NULL, this argument is ignored.
+ *
+ * \return The number of available OpenCL devices
+ *
+ * \throws clerror_no<status_t::invalid_platform>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_PLATFORM,
+ * \throws clerror_no<status_t::invalid_device_type>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_DEVICE_TYPE,
+ * \throws clerror_no<status_t::invalid_value>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_VALUE,
+ * \throws clerror_no<status_t::out_of_resources>
+ *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_RESOURCES,
+ * \throws clerror_no<status_t::out_of_host_memory>
+ *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_HOST_MEMORY,
+ * \throws unexpected_clerror
+ *         when \c clGetDeviceIDs() returns other error code.
+ *
+ * The unexpected_clerror is thrown only when the \c clGetDeviceIDs()
+ * implementation is not standard conformant, its version is not supported by
+ * %clxx, or when get_platform_ids() has a bug.
+ */ // }}}
+void get_device_ids(cl_platform_id platform, device_type_t device_type,
+                    cl_uint num_entries, cl_device_id* devices,
+                    cl_uint* num_devices);
+/** // doc: get_device_ids() {{{
+ * \brief Retrieve device identifiers of locally available OpenCL devices.
+ *
+ * This function is a C++ wrapper for \c clGetDeviceIDs(). The main differences
+ * between clxx::get_device_ids() and \c clGetDeviceIDs() is that 
+ *   - it throws exceptions instead of returning error codes,
+ *   - it internally allocates memory to store the returned identifiers and
+ *        returns them as <tt>std::vector&lt;cl_device_id&gt;</tt>.
+ *
+ * \param platform
+ *        Refers to the platform ID returned by clxx::get_platform_ids() or can
+ *        be \c NULL. If \b platform is \c NULL, the behavior is
+ *        implementation-defined.
+ * \param device_type
+ *        A bitfield that identifies the type of OpenCL device. The 
+ *        \b device_type can be used to query specific OpenCL devices or all
+ *        OpenCL devices available. The valid values for \b device_type are
+ *        specified by clxx::device_type_t.
+ *
+ * \return std::vector<cl_device_id>.
+ *        A collection of device identifiers (<tt>cl_device_id</tt>).
+ *
+ * \throws clerror_no<status_t::invalid_platform>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_PLATFORM,
+ * \throws clerror_no<status_t::invalid_device_type>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_DEVICE_TYPE,
+ * \throws clerror_no<status_t::invalid_value>
+ *         when \c clGetDeviceIDs() returns \c CL_INVALID_VALUE,
+ * \throws clerror_no<status_t::out_of_resources>
+ *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_RESOURCES,
+ * \throws clerror_no<status_t::out_of_host_memory>
+ *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_HOST_MEMORY,
+ * \throws unexpected_clerror
+ *         when \c clGetDeviceIDs() returns other error code.
+ *
+ * Occasionally, exceptions originating from \c std::vector may be raised, for
+ * example \c std::bad_alloc. See documentation of the \c std::vector.
+ *
+ * The unexpected_clerror is thrown only when the \c clGetDeviceIDs()
+ * implementation is not standard conformant, its version is not supported by
+ * %clxx, or when get_device_ids() has a bug.
+ */ // }}}
+std::vector<cl_device_id>
+get_device_ids(cl_platform_id platform,
+               device_type_t device_type = device_type_t::all);
+/** // doc: get_devices() {{{
+ * \brief Get proxy device objects for locally available OpenCL devices.
+ *
+ * \param platform
+ *        Refers to the platform ID returned by clxx::get_platform_ids() or can
+ *        be \c NULL. If \b platform is \c NULL, the behavior is
+ *        implementation-defined
+ * \param device_type
+ *        A bitfield that identifies the type of OpenCL device. The
+ *        \b device_type can be used to query specific OpenCL devices or all
+ *        OpenCL devices available. The valid values for \b device_type are
+ *        specified by clxx::device_type_t
+ *
+ * \return clxx::devices.
+ *         A collection of device identifiers for the given platform.
+ *
+ * \throws clerror_no<status_t::invalid_value>
+ *         when \c clGetPlatformIDs() returns \c CL_INVALID_VALUE,
+ * \throws clerror_no<status_t::out_of_host_memory>
+ *         when \c clGetPlatformIDs() returns \c CL_OUT_OF_HOST_MEMORY,
+ * \throws unexpected_clerror
+ *         when \c clGetPlatformIDs() returns other error code.
+ *
+ * The \c clerror_no<status_t::invalid_value> should never appear in practice.
+ * Otherwise the function is buggy.
+ *
+ * Occasionally, exceptions originating from \c std::vector may be raised, for
+ * example \c std::bad_alloc. See documentation of the \c std::vector.
+ *
+ * The unexpected_clerror is thrown only when the \c clGetPlatformIDs()
+ * implementation is not standard conformant, its version is not supported by
+ * %clxx, or when get_platform_ids() has a bug.
+ */ // }}}
+devices
+get_devices(cl_platform_id platform,
+            device_type_t device_type = device_type_t::all);
+/** // doc: get_devices() {{{
+ * \brief Get proxy device objects for locally available OpenCL devices.
+ *
+ * \param platform
+ *        Refers to the platform ID returned by clxx::get_platform_ids() or can
+ *        be \c NULL. If \b platform is \c NULL, the behavior is
+ *        implementation-defined
+ * \param device_type
+ *        A bitfield that identifies the type of OpenCL device. The
+ *        \b device_type can be used to query specific OpenCL devices or all
+ *        OpenCL devices available. The valid values for \b device_type are
+ *        specified by clxx::device_type_t
+ *
+ * \return clxx::devices.
+ *         A collection of device objects for the given platform.
+ *
+ * \throws clerror_no<status_t::invalid_value>
+ *         when \c clGetPlatformIDs() returns \c CL_INVALID_VALUE,
+ * \throws clerror_no<status_t::out_of_host_memory>
+ *         when \c clGetPlatformIDs() returns \c CL_OUT_OF_HOST_MEMORY,
+ * \throws unexpected_clerror
+ *         when \c clGetPlatformIDs() returns other error code.
+ *
+ * The \c clerror_no<status_t::invalid_value> should never appear in practice.
+ * Otherwise the function is buggy.
+ *
+ * Occasionally, exceptions originating from \c std::vector may be raised, for
+ * example \c std::bad_alloc. See documentation of the \c std::vector.
+ *
+ * The unexpected_clerror is thrown only when the \c clGetPlatformIDs()
+ * implementation is not standard conformant, its version is not supported by
+ * %clxx, or when get_platform_ids() has a bug.
+ */ // }}}
+devices
+get_devices(platform const& platform,
+            device_type_t device_type = device_type_t::all);
+/** // {{{ doc: make_devices(ids)
+ * \brief Wrap device identifiers with clxx::device objects.
+ *
+ * \param ids OpenCL device identifiers
+ *
+ * \return clxx::devices.
+ *         A collection of device objects for the given identifiers.
+ *
+ * Occasionally, exceptions originating from \c std::vector may be raised, for
+ * example \c std::bad_alloc. See documentation of the \c std::vector.
+ */ // }}}
+devices
+make_devices(std::vector<cl_device_id> const& ids);
+/** @} */
+
+} // end namespace clxx
+
+#endif /* CLXX_DEVICES_HPP */
+// vim: set expandtab tabstop=2 shiftwidth=2:
+// vim: set foldmethod=marker foldcolumn=4:

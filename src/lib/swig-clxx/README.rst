@@ -39,8 +39,7 @@ be potentially wrapped with swig. For example, we have following
 correspondence:
 
 - ``#/src/lib/clxx/exception.hpp -> clxx/exception.swg``
-- ``#/src/lib/clxx/cl/exception.hpp -> clxx/cl/exception.swg``
-- ``#/src/lib/clxx/cl/device.hpp -> clxx/cl/device.swg``
+- ``#/src/lib/clxx/device.hpp -> clxx/device.swg``
 - ``[...]``
 
 target subtree(s) with bindings definition(s)
@@ -76,10 +75,8 @@ subtree). For python language, for example, we have such a correspondence:
 
 - ``#/build/lib/python-clxx/clxx/exception_mod.i`` %includes
   ``clxx/exception_mod.swg``
-- ``#/build/lib/python-clxx/clxx/cl/exception_mod.i`` %includes
-  ``clxx/cl/exception_mod.swg``
-- ``#/build/lib/python-clxx/clxx/cl/platform_mod.i`` %includes
-  ``clxx/cl/platform_mod.swg``
+- ``#/build/lib/python-clxx/clxx/platform_mod.i`` %includes
+  ``clxx/platform_mod.swg``
 
 .. _swig: https://swig.org
 

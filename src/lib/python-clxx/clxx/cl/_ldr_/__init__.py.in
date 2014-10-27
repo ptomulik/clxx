@@ -19,6 +19,3 @@
 # SOFTWARE
 
 from clxx_.cl.opencl_mod import *
-from clxx_.cl.exception_mod import *
-from clxx_.cl.platform_mod import *
-#from clxx_.cl.program_mod import *

@@ -21,6 +21,34 @@
 Import('env')
 
 from SCons.Script import GetOption
+from SCons.Util import CLVar
+
+objects = env.SharedObject([
+    'platform.cpp',
+    'platforms.cpp',
+    'device.cpp',
+    'devices.cpp',
+    'platform_layer.cpp'
+])
+
+libs = CLVar('OpenCL clxx_info')
+# rlib - "real" libarary
+rlib = env.SharedLibrary('../clxx', objects + ['cl/real.cpp'], LIBS = libs)
+
+# tlib - library for testing (OpenCL functions replaced with mocks)
+tlib = env.SharedLibrary('../clxx_test', objects + ['cl/mock.cpp'], LIBS = libs)
+env.Ignore('../..', tlib)
+
+ilib = env.Install('${libdir}', rlib)
+env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+
+ihdr = env.Install("${includedir}/clxx/cl", env.Glob("*.hpp"))
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/cl", ihdr)
+
+env.Alias('install-libclxx-headers', ihdr)
+env.Alias('install-libclxx-lib', ilib)
+env.Alias('install-libclxx-dev', ['install-libclxx-headers', 'install-libclxx-lib' ])
+env.Alias('install','install-libclxx-dev')
 
 ihdr = env.Install("${includedir}/clxx", env.Glob("*.hpp"))
 env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx", ihdr)
@@ -33,7 +61,7 @@ env.Alias('install-libclxx_common-dev','install-libclxx_common-headers')
 env.Alias('install','install-libclxx_common-dev')
 
 SConscript('app/SConscript', exports = ['env'])
-SConscript('cl/SConscript', exports = ['env'])
+#SConscript('cl/SConscript', exports = ['env'])
 SConscript('info/SConscript', exports = ['env'])
 SConscript('io/SConscript', exports = ['env'])
 SConscript('s11n/SConscript', exports = ['env'])

@@ -30,12 +30,20 @@
 %{
 #include <clxx/std/string_mod.hpp>
 #include <clxx/std/exception_mod.hpp>
+#include <clxx/types_mod.hpp>
+
+#include <clxx/exception_base.hpp>
+#include <clxx/clerror_no.hpp>
+#include <clxx/exceptions.hpp>
 %}
-%import  <clxx/std/string_mod.i>
-%import  <clxx/std/exception_mod.i>
-%import  <clxx/std/bad_alloc_mod.i>
+%import <clxx/std/string_mod.i>
+%import <clxx/std/exception_mod.i>
+%import <clxx/std/bad_alloc_mod.i>
+%import <clxx/types_mod.i>
 
 %include <clxx/exception_base.swg>
+%include <clxx/clerror_no.swg>
+%include <clxx/exceptions.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

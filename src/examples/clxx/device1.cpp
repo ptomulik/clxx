@@ -31,12 +31,12 @@
  * available locally.
  */ // }}}
 // [Program]
-#include <clxx/cl/platforms.hpp>
-#include <clxx/cl/devices.hpp>
+#include <clxx/platforms.hpp>
+#include <clxx/devices.hpp>
 #include <algorithm>
 
 // [DumpDevice]
-#include <clxx/cl/device.hpp>
+#include <clxx/device.hpp>
 #include <iostream>
 /// \brief Dump OpenCL device info to stdout. Functor.
 class dump_device

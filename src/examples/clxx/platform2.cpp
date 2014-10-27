@@ -32,8 +32,8 @@
  */ // }}}
 // [Program]
 // [Includes]
-#include <clxx/cl/platforms.hpp>
-#include <clxx/cl/devices.hpp>
+#include <clxx/platforms.hpp>
+#include <clxx/devices.hpp>
 #include <clxx/info/platform_info.hpp>
 #include <clxx/info/device_info.hpp>
 #include <clxx/io/platform_info.hpp>
