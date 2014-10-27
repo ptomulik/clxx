@@ -60,6 +60,14 @@ CXXTEST_MOCK_GLOBAL(cl_int, clGetDeviceInfo,
   ( device, param_name, param_value_size, param_value, param_value_size_ret)
 );
 
+#if CL_VERSION_1_2
+CXXTEST_MOCK_GLOBAL(cl_int, clCreateSubDevices,
+  ( cl_device_id in_device, const cl_device_partition_property* properties,
+    cl_uint num_devices, cl_device_id* out_devices, cl_uint* num_devices_ret),
+  ( in_device, properties, num_devices, out_devices, num_devices_ret)
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_context, clCreateContext,
   ( const cl_context_properties *properties, cl_uint num_devices,
     const cl_device_id* devices,

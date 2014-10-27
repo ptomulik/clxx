@@ -194,6 +194,14 @@ get_devices(cl_platform_id platform,
 devices
 get_devices(platform const& platform,
             device_type_t device_type = device_type_t::all);
+#if CL_VERSION_1_2
+/* // {{{ doc: create_sub_devices()
+ * \brief Create subdevices of a given device using clCreateSubDevices()
+ */ // }}}
+// TODO: develop interface for create_dub_devices()
+//devices
+//create_sub_devices(device in_device, device_partition_property_t properties,
+#endif
 /** // {{{ doc: make_devices(ids)
  * \brief Wrap device identifiers with clxx::device objects.
  *
