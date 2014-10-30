@@ -819,51 +819,6 @@ public:
   }
 };
 
-/** // {{{
- * \ingroup clxx_platform_layer
- * \brief Get certain information from device.
- *
- * This is a wrapper around \c clGetDeviceInfo(). The call to this function
- * yields same information as call to 
- *   - \c clGetDeviceInfo(device,name,value_size,value,value_size_ret).
- * The main difference between clxx::get_device_info() and \c clGetDeviceInfo()
- * is that it throws %clxx exceptions instead of returning OpenCL error codes.
- *
- * \param device
- *    %device identifier of type cl_device_id.
- * \param name
- *    An enumeration constant that identifies the device information being
- *    queried. It can be one of the values as specified in the OpenCL
- *    specification (\c clGetDeviceInfo()).
- * \param value_size
- *    Specifies the size in bytes of memory pointed to by \c param_value.
- *    This size in bytes must be greater than or equal to size of return type
- *    specified in the OpenCL specification (\c clGetDeviceInfo()).
- * \param value
- *    A pointer to memory location where appropriate values for a given
- *    \c param_name as specified in the OpenCL specification
- *    (\c clGetDeviceInfo()) will be returned. If \c param_value is \c NULL, it
- *    is ignored.
- * \param value_size_ret
- *    Returns the actual size in bytes of data being queried by \c
- *    param_value. If \c param_value_size_ret is \c NULL, it is ignored
- *
- * \throws  clxx::clerror_no<clxx::status_t::invalid_device>
- *    when \c clGetDeviceInfo() returns \c CL_INVALID_DEVICE,
- * \throws  clxx::clerror_no<clxx::status_t::invalid_value>
- *    when \c clGetDeviceInfo() returns \c CL_INVALID_VALUE,
- * \throws  clxx::clerror_no<clxx::status_t::out_of_resources>
- *    when \c clGetDeviceInfo() returns \c CL_OUT_OF_RESOURCES,
- * \throws  clxx::clerror_no<clxx::status_t::out_of_host_memory>
- *    when \c clGetDeviceInfo() returns \c CL_OUT_OF_HOST_MEMORY.
- * \throws  clxx::unexpected_clerror
- *    when \c clGetDeviceInfo() returns any other error code.
- *
- */ // }}}
-void
-get_device_info( cl_device_id device, device_info_t name, size_t value_size,
-                 void* value, size_t* value_size_ret);
-
 } // end namespace clxx
 
 #include <clxx/info/device_info.hpp>

@@ -265,54 +265,6 @@ public:
    */ // }}}
   std::string get_extensions() const;
 };
-/** // {{{
- * \ingroup clxx_platform_layer
- *
- * \brief Query OpenCL platform layer for platform information.
- *
- * This function is a C++ wrapper for \c clGetGetPlatformInfo(). 
- *
- * \param platform
- *    The platform ID - one of these returned by clxx::get_platform_ids(),
- *    or can be NULL. If platform is NULL, the behavior is
- *    implementation-defined.
- * \param param_name
- *    An enumeration constant that identifies the platform information being
- *    queried. See \ref platform_info_t for details.
- * \param param_value_size
- *    Specifies the size in bytes of memory pointed to by \c param_value. This
- *    size in bytes must be ≥ size of return type specified in the OpenCL
- *    specification (\c clGetPlatformInfo()).
- * \param param_value
- *    A pointer to memory location where appropriate values for a given
- *    \c param_value will be returned. Possible \c param_value values returned
- *    are described in the OpenCL specification (\c clGetPlatformInfo()). If
- *    \c param_value is \c NULL, it is ignored.
- * \param param_value_size_ret
- *    Returns the actual size in bytes of data being queried by \c param_value.
- *    If \c param_value_size_ret is \c NULL, it is ignored.
- *
- * \return void
- *
- * \throws clerror_no<status_t::invalid_platform>
- *         when \c clGetPlatformInfo() returns \c CL_INVALID_PLATFORM,
- * \throws clerror_no<status_t::invalid_value>
- *         when \c clGetPlatformInfo() returns \c CL_INVALID_VALUE,
- * \throws clerror_no<status_t::out_of_host_memory>
- *         when \c clGetPlatformInfo() returns \c CL_OUT_OF_HOST_MEMORY,
- * \throws unexpected_clerror
- *         when \c clGetPlatformInfo() returns other status code.
- *
- * The unexpected_clerror is thrown only when the \c clGetPlatformInfo()
- * implementation is not standard conformant, its version is not supported by
- * CLXX, or when get_platform_info() has a bug.
- */ // }}}
-void
-get_platform_info(  cl_platform_id platform,
-                    platform_info_t param_name,
-                    size_t param_value_size,
-                    void* param_value,
-                    size_t* param_value_size_ret );
 } // end namespace clxx
 
 #include <clxx/info/platform_info.hpp>

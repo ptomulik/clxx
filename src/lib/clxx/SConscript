@@ -24,6 +24,7 @@ from SCons.Script import GetOption
 from SCons.Util import CLVar
 
 objects = env.SharedObject([
+    'functions.cpp',
     'platform.cpp',
     'platforms.cpp',
     'device.cpp',
