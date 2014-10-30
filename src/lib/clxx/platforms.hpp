@@ -63,40 +63,6 @@ typedef std::vector<platform> platforms;
 cl_uint get_num_platforms();
 /** // {{{ doc: get_platform_ids()
  * \brief Retrieve platform identifiers of locally available OpenCL platforms.
- *
- * This function is a C++ wrapper for \c clGetPlatformIDs().
- *
- * \param num_entries
- *    The number of \c cl_platform_id entries that can be added to \c
- *    platforms. If \c platforms is not \c NULL, the \c num_entries must be
- *    greater than zero
- * \param platforms
- *    Returns a list of OpenCL platforms found. The \c cl_platform_id values
- *    returned in \c platforms can be used to identify a specific OpenCL
- *    platform. If platforms argument is \c NULL, this argument is ignored. The
- *    number ofOpenCL platforms returned is the mininum of the value specified
- *    by \c num_entries or the number of OpenCL platforms available
- * \param num_platforms
- *    Returns the number of OpenCL platforms available. If \c num_platforms is
- *    \c NULL, this argument is ignored
- * \return void
- *
- * \throws clerror_no<status_t::invalid_value>
- *         when \c clGetPlatformIDs() returns \c CL_INVALID_VALUE,
- * \throws clerror_no<status_t::out_of_host_memory>
- *         when \c clGetPlatformIDs() returns \c CL_OUT_OF_HOST_MEMORY,
- * \throws unexpected_clerror
- *         when \c clGetPlatformIDs() returns other error code.
- *
- * The unexpected_clerror is thrown only when the \c clGetPlatformIDs()
- * implementation is not standard conformant, its version is not supported by
- * CLXX, or when get_platform_ids() has a bug.
- */ // }}}
-void get_platform_ids( cl_uint num_entries,
-                       cl_platform_id* platforms,
-                       cl_uint* num_platforms );
-/** // {{{ doc: get_platform_ids()
- * \brief Retrieve platform identifiers of locally available OpenCL platforms.
  * \return Vector of \c cl_platform_id identifiers.
  *
  * \throws clerror_no<status_t::invalid_value>

@@ -27,8 +27,8 @@
  * \todo Write documentation
  */ // }}}
 #include <clxx/platform.hpp>
+#include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
 #include <boost/shared_array.hpp>
 
 namespace clxx {
@@ -90,39 +90,6 @@ get_extensions() const
 {
   return _get_string_info(*this, platform_info_t::extensions);
 }
-} // }}} // end namespace clxx
-
-namespace clxx {
-void
-get_platform_info(  cl_platform_id platform,
-                    platform_info_t param_name,
-                    size_t param_value_size,
-                    void* param_value,
-                    size_t* param_value_size_ret  )
-{
-  status_t s = static_cast<status_t>(
-      T::clGetPlatformInfo( platform,
-                            static_cast<cl_platform_info>(param_name),
-                            param_value_size,
-                            param_value,
-                            param_value_size_ret )
-  );
-  if(is_error(s))
-  {
-    switch(s)
-      {
-        case status_t::invalid_platform:
-          throw clerror_no<status_t::invalid_platform>();
-        case status_t::invalid_value:
-          throw clerror_no<status_t::invalid_value>();
-        case status_t::out_of_host_memory:
-          throw clerror_no<status_t::out_of_host_memory>();
-        default:
-          throw unexpected_clerror(s);
-      }
-  }
-}
-
 } // end namespace clxx
 
 namespace clxx {

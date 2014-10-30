@@ -27,8 +27,7 @@
  * \todo Write documentation
  */ // }}}
 #include <clxx/platforms.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/functions.hpp>
 
 namespace clxx {
 
@@ -39,28 +38,6 @@ get_num_platforms()
   cl_uint num_platforms;
   get_platform_ids(0, NULL, &num_platforms);
   return num_platforms;
-}
-/* ------------------------------------------------------------------------ */
-void
-get_platform_ids( cl_uint num_entries,
-                  cl_platform_id* platforms,
-                  cl_uint* num_platforms )
-{
-  status_t s = static_cast<status_t>(
-      T::clGetPlatformIDs(num_entries, platforms, num_platforms)
-  );
-  if(is_error(s))
-    {
-      switch(s)
-        {
-          case status_t::invalid_value:
-            throw clerror_no<status_t::invalid_value>();
-          case status_t::out_of_host_memory:
-            throw clerror_no<status_t::out_of_host_memory>();
-          default:
-            throw unexpected_clerror(s);
-        }
-    }
 }
 /* ------------------------------------------------------------------------ */
 std::vector<cl_platform_id>

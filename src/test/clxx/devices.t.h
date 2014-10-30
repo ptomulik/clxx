@@ -69,29 +69,6 @@ public:
     TS_ASSERT_EQUALS(get_num_devices(p,device_type_t::custom),0);
     TS_ASSERT_EQUALS(get_num_devices(p,device_type_t::all),2);
   }
-  /** // doc: test_get_device_ids_1() {{{
-   * \brief Test get_device_ids() on Newton - array version.
-   */ // }}}
-  void test_get_device_ids_1( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    get_device_ids(p,device_type_t::all,1,devices,NULL);
-    TS_ASSERT_EQUALS(devices[0], T::Newton_clGetDeviceIDs::devices[0]);
-  }
-  /** // doc: test_get_device_ids_2() {{{
-   * \brief Test get_device_ids() on Newton - array version.
-   */ // }}}
-  void test_get_device_ids_2( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[1];
-    cl_device_id devices[2];
-    get_device_ids(p,device_type_t::all,2,devices,NULL);
-    TS_ASSERT_EQUALS(devices[0], T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(devices[1], T::Newton_clGetDeviceIDs::devices[2]);
-  }
   /** // doc: test_get_device_ids_3() {{{
    * \brief Test get_device_ids() on Newton - vector version.
    */ // }}}
@@ -112,67 +89,6 @@ public:
     std::vector<cl_device_id> devices(get_device_ids(p,device_type_t::all));
     TS_ASSERT_EQUALS(devices[0], T::Newton_clGetDeviceIDs::devices[1]);
     TS_ASSERT_EQUALS(devices[1], T::Newton_clGetDeviceIDs::devices[2]);
-  }
-  /** // doc: test_get_device_ids_invalid_platform() {{{
-   * \brief Test get_device_ids() on Newton when called with invalid platform id.
-   */ // }}}
-  void test_get_device_ids_invalid_platform( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = reinterpret_cast<cl_platform_id>(0x123456);
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,1,devices,NULL), clerror_no<status_t::invalid_platform>);
-  }
-  /** // doc: test_get_device_ids_zero_num_entries() {{{
-   * \brief Test get_device_ids() on Newton when called with num_entries == 0 and devices != NULL.
-   */ // }}}
-  void test_get_device_ids_zero_num_entries( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,0,devices,NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test_get_device_ids_null_devices() {{{
-   * \brief Test get_device_ids() on Newton when called with num_devices == NULL and devices != NULL.
-   */ // }}}
-  void test_get_device_ids_null_devices( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,1,NULL,NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test_get_device_ids_invalid_device_type() {{{
-   * \brief Test get_device_ids() on Newton when called with wrong device type.
-   */ // }}}
-  void test_get_device_ids_invalid_device_type( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,static_cast<device_type_t>(0x34545),1,devices,NULL), clerror_no<status_t::invalid_device_type>);
-  }
-  /** // doc: test_get_device_ids_device_not_found() {{{
-   * \brief Test get_device_ids() on Newton when called with wrong device type.
-   */ // }}}
-  void test_get_device_ids_device_not_found( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    cl_uint num_devices;
-    get_device_ids(p,device_type_t::accelerator,1,devices,&num_devices);
-    TS_ASSERT_EQUALS(num_devices, 0);
-  }
-  /** // doc: test_get_device_ids_small_buffer() {{{
-   * \brief Test get_device_ids() on Newton when we provide too small buffer.
-   */ // }}}
-  void test_get_device_ids_small_buffer( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[1];
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,1,devices,NULL), clerror_no<status_t::invalid_value>);
   }
   /** // doc: test_get_devices_1() {{{
    * \brief Test get_devices() on Newton.

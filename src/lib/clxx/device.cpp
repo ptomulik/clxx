@@ -27,8 +27,8 @@
  * \todo Write documentation
  */ // }}}
 #include <clxx/device.hpp>
+#include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
 #include <boost/shared_array.hpp>
 #include <string>
 #include <cstdio>
@@ -541,41 +541,6 @@ get_image_base_address_alignment() const
 } // end namespace clxx
 
 namespace clxx {
-
-/* ------------------------------------------------------------------------ */
-void
-get_device_info(  cl_device_id device,
-                  device_info_t param_name,
-                  size_t param_value_size,
-                  void* param_value,
-                  size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetDeviceInfo(
-        device, 
-        static_cast<cl_device_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
-  );
-  if(is_error(s))
-    {
-      switch(s)
-        {
-          case status_t::invalid_device:
-            throw clerror_no<status_t::invalid_device>();
-          case status_t::invalid_value:
-            throw clerror_no<status_t::invalid_value>();
-          case status_t::out_of_resources:
-            throw clerror_no<status_t::out_of_resources>();
-          case status_t::out_of_host_memory:
-            throw clerror_no<status_t::out_of_host_memory>();
-          default:
-            throw unexpected_clerror(s);
-        }
-    }
-}
 
 /* ------------------------------------------------------------------------ */
 device_info

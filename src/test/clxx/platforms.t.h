@@ -50,17 +50,6 @@ public:
     T::Newton_clGetPlatformIDs mock;
     TS_ASSERT_EQUALS(get_num_platforms(), 2);
   }
-  /** // doc: test_get_platform_ids_1() {{{
-   * \brief Test get_platform_ids() - array version.
-   */ // }}}
-  void test_get_platform_ids_1( )
-  {
-    T::Newton_clGetPlatformIDs mock;
-    cl_platform_id ids[2];
-    get_platform_ids(2, ids, NULL);
-    TS_ASSERT_EQUALS(ids[0], T::Newton_clGetPlatformIDs::platforms[0]);
-    TS_ASSERT_EQUALS(ids[1], T::Newton_clGetPlatformIDs::platforms[1]);
-  }
   /** // doc: test_get_platform_ids_2() {{{
    * \brief Test get_platform_ids() - std::vector version.
    */ // }}}
@@ -83,23 +72,6 @@ public:
     TS_ASSERT_EQUALS(static_cast<platform>(p[0]).id(), T::Newton_clGetPlatformIDs::platforms[0]);
     TS_ASSERT_EQUALS(static_cast<platform>(p[1]).id(), T::Newton_clGetPlatformIDs::platforms[1]);
   }
-  /** // doc: test_get_platform_ids_zero_num_entries() {{{
-   * \brief Test get_platform_ids() - array version with num_entries == 0.
-   */ // }}}
-  void test_get_platform_ids_zero_num_entries( )
-  {
-    T::Newton_clGetPlatformIDs mock;
-    cl_platform_id ids[2];
-    TS_ASSERT_THROWS(get_platform_ids(0, ids, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test_get_platform_ids_nulls() {{{
-   * \brief Test get_platform_ids() - array version num_platforms == NULL and platforms == NULL.
-   */ // }}}
-  void test_get_platform_ids_nulls( )
-  {
-    T::Newton_clGetPlatformIDs mock;
-    TS_ASSERT_THROWS(get_platform_ids(2, NULL, NULL), clerror_no<status_t::invalid_value>);
-  }
 // sorry, but this may irritate OOM instead of throw bad_alloc
 //  /** // doc: test_get_platform_ids_negsize() {{{
 //   * \brief Test get_platform_ids() in a situation when clGetPlatformIDs()
@@ -118,7 +90,6 @@ public:
   {
     T::ErrRet_clGetPlatformIDs mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(get_num_platforms(), clerror_no<status_t::invalid_value>);
-    TS_ASSERT_THROWS(get_platform_ids(0,NULL,NULL), clerror_no<status_t::invalid_value>);
     TS_ASSERT_THROWS(get_platform_ids(), clerror_no<status_t::invalid_value>);
     TS_ASSERT_THROWS(get_platforms(), clerror_no<status_t::invalid_value>);
   }
@@ -130,7 +101,6 @@ public:
   {
     T::ErrRet_clGetPlatformIDs mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(get_num_platforms(), clerror_no<status_t::out_of_host_memory>);
-    TS_ASSERT_THROWS(get_platform_ids(0,NULL,NULL), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(get_platform_ids(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(get_platforms(), clerror_no<status_t::out_of_host_memory>);
   }
@@ -142,7 +112,6 @@ public:
   {
     T::ErrRet_clGetPlatformIDs mock(-0x3456);
     TS_ASSERT_THROWS(get_num_platforms(), unexpected_clerror);
-    TS_ASSERT_THROWS(get_platform_ids(0,NULL,NULL), unexpected_clerror);
     TS_ASSERT_THROWS(get_platform_ids(), unexpected_clerror);
     TS_ASSERT_THROWS(get_platforms(), unexpected_clerror);
   }

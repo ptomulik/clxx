@@ -27,8 +27,7 @@
  * \todo Write documentation
  */ // }}}
 #include <clxx/devices.hpp>
-#include <clxx/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/functions.hpp>
 
 namespace clxx {
 
@@ -39,42 +38,6 @@ get_num_devices(cl_platform_id platform, device_type_t device_type)
   cl_uint num_devices = 0;
   get_device_ids(platform, device_type, 0, NULL, &num_devices);
   return num_devices;
-}
-/* ------------------------------------------------------------------------ */
-void
-get_device_ids(cl_platform_id platform, device_type_t device_type,
-               cl_uint num_entries, cl_device_id* devices, cl_uint* num_devices)
-{
-  status_t s = static_cast<status_t>(
-    T::clGetDeviceIDs(
-      platform,
-      static_cast<cl_device_type>(device_type),
-      num_entries,
-      devices,
-      num_devices
-    )
-  );
-  if(is_error(s))
-    {
-      switch(s)
-        {
-          case status_t::invalid_platform:
-            throw clerror_no<status_t::invalid_platform>();
-          case status_t::invalid_device_type:
-            throw clerror_no<status_t::invalid_device_type>();
-          case status_t::invalid_value:
-            throw clerror_no<status_t::invalid_value>();
-          case status_t::device_not_found:
-            // throw clerror_no<CL_DEVICE_NOT_FOUND>();
-            break;
-          case status_t::out_of_resources:
-            throw clerror_no<status_t::out_of_resources>();
-          case status_t::out_of_host_memory:
-            throw clerror_no<status_t::out_of_host_memory>();
-          default:
-            throw unexpected_clerror(s);
-        }
-    }
 }
 /* ------------------------------------------------------------------------ */
 std::vector<cl_device_id>

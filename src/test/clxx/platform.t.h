@@ -151,14 +151,6 @@ public:
     platform p(reinterpret_cast<cl_platform_id>(0x1234ul));
     TS_ASSERT_EQUALS(p.get_valid_id(), reinterpret_cast<cl_platform_id>(0x1234ul));
   }
-  /** // doc: test_get_platform_info_null_id() {{{
-   * \brief Test get_platform_info(platform_info_t::profile, ...) on platform object having wrong id.
-   */ // }}}
-  void test_get_platform_info_null_id( )
-  {
-    T::Newton_clGetPlatformInfo mock;
-    TS_ASSERT_THROWS(get_platform_info(NULL, platform_info_t::profile, 0, NULL, NULL), clerror_no<status_t::invalid_platform>);
-  }
   /** // doc: test_get_info_wrong_id() {{{
    * \brief Test get_info(platform_info_t::profile, ...) on platform object having wrong id.
    */ // }}}

@@ -80,59 +80,6 @@ cl_uint get_num_devices(cl_platform_id platform, device_type_t device_type);
 /** // doc: get_device_ids() {{{
  * \brief Retrieve device identifiers of locally available OpenCL devices.
  *
- * This function is a C++ wrapper for \c clGetDeviceIDs(). The main difference
- * between clxx::get_device_ids() and \c clGetDeviceIDs() is that it throws
- * exceptions instead of returning error codes.
- *
- * \param platform
- *        Refers to the platform ID returned by clxx::get_platform_ids() or can
- *        be \c NULL. If \b platform is \c NULL, the behavior is
- *        implementation-defined.
- * \param device_type
- *        A bitfield that identifies the type of OpenCL device. The 
- *        \b device_type can be used to query specific OpenCL devices or all
- *        OpenCL devices available. The valid values for \b device_type are
- *        specified by clxx::device_type_t.
- * \param num_entries
- *        The number of \c cl_device_id entries that can be added to \b
- *        devices. If \b devices is not \c NULL, the \b num_entries must be
- *        greater than zero.
- * \param devices
- *        A list of OpenCL devices found. The \c cl_device_id values returned
- *        in \b devices can be used to identify a specific OpenCL device. If
- *        \b devices argument is \c NULL, this argument is ignored. The number
- *        of OpenCL devices returned is the minimum of the value specified by
- *        \b num_entries or the number of OpenCL devices whose type matches
- *        \b device_type.
- * \param num_devices
- *        Returns the number of OpenCL devices available. If \c num_devices is
- *        \c NULL, this argument is ignored.
- *
- * \return The number of available OpenCL devices
- *
- * \throws clerror_no<status_t::invalid_platform>
- *         when \c clGetDeviceIDs() returns \c CL_INVALID_PLATFORM,
- * \throws clerror_no<status_t::invalid_device_type>
- *         when \c clGetDeviceIDs() returns \c CL_INVALID_DEVICE_TYPE,
- * \throws clerror_no<status_t::invalid_value>
- *         when \c clGetDeviceIDs() returns \c CL_INVALID_VALUE,
- * \throws clerror_no<status_t::out_of_resources>
- *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_RESOURCES,
- * \throws clerror_no<status_t::out_of_host_memory>
- *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_HOST_MEMORY,
- * \throws unexpected_clerror
- *         when \c clGetDeviceIDs() returns other error code.
- *
- * The unexpected_clerror is thrown only when the \c clGetDeviceIDs()
- * implementation is not standard conformant, its version is not supported by
- * %clxx, or when get_platform_ids() has a bug.
- */ // }}}
-void get_device_ids(cl_platform_id platform, device_type_t device_type,
-                    cl_uint num_entries, cl_device_id* devices,
-                    cl_uint* num_devices);
-/** // doc: get_device_ids() {{{
- * \brief Retrieve device identifiers of locally available OpenCL devices.
- *
  * This function is a C++ wrapper for \c clGetDeviceIDs(). The main differences
  * between clxx::get_device_ids() and \c clGetDeviceIDs() is that 
  *   - it throws exceptions instead of returning error codes,
