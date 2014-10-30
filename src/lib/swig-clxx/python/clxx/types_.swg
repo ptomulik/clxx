@@ -27,7 +27,6 @@
 
 // Rename some symbols
 %rename(_global) clxx::device_local_mem_type_t::global;
-%rename(_global) clxx::build_status_t::global;
 %rename(_global) clxx::kernel_arg_address_qualifier_t::global;
 
 // use enchanced enums (strongly typed and scoped)
