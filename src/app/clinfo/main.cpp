@@ -21,7 +21,7 @@
  */
 
 #include <clxx/app/clinfo/main.hpp>
-#include <clxx/exception.hpp>
+#include <exception>
 #include <iostream>
 
 int main(int argc, char const* argv[])
