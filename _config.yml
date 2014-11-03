@@ -136,13 +136,13 @@ JB :
 # Clxx custom variables - development progress meters.
 #
 devel_progress:
-  platform_layer: 63.9
+  platform_layer: 64
   runtime: 0
   functions: 4.5
   types: 100
-  libclxx_info: 69.8
-  libclxx_s11n: 53.6 
-  libclxx_io: "??"
+  libclxx_info: 70
+  libclxx_s11n: 54
+  libclxx_io: 35
   libclxx_app_clinfo: 100
   libclxx_app_clcc: 0
   clxx_clinfo: 100
