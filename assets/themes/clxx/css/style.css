@@ -35,6 +35,9 @@ a:hover   { color: #FFFFFF; }
   font-size: 130%;
   font-family: sans-serif;
   border-radius: 6px;
+
+  background-image: none;
+  background-color: #4C4747;
 }
 
 #page-navbar a {
@@ -58,6 +61,9 @@ a:hover   { color: #FFFFFF; }
 
   border: 1px solid #8E8686;
   border-radius: 6px;
+
+  background-image: none;
+  background-color: #4C4747;
 }
 
 #page-footer {
