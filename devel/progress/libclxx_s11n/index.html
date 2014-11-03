@@ -4,3 +4,135 @@ title: "[Progress] The libclxx_s11n library"
 description: ""
 ---
 {% include JB/setup %}
+
+<h3 id="summary">Summary</h3>
+
+<table class="summary">
+  <tr><th>Progress</th><td>{{site.devel_progress.libclxx_s11n}}%</td></tr>
+  <tr><th>Headers</th><td><tt>clxx/s11n/*.hpp</tt></td>
+  </tr>
+  <tr><th>Library</th><td><tt>libclxx_s11n</tt></td></tr>
+</table>
+
+<h3 id="detail">Detail</h3>
+
+<p>The <a href="#detailed-progress-table">detailed progress table</a> shows in
+detail the implementation status of the libclxx_s11n library.</p>
+
+<h3 id="detiled-progress-table">Detailed progress table</h3>
+
+<table cellspacing="0" border="0" class="api small center">
+	<!--<colgroup width="20"></colgroup>
+	<colgroup width="405"></colgroup>
+	<colgroup width="25"></colgroup>
+	<colgroup width="40"></colgroup>
+	<colgroup width="30"></colgroup>
+	<colgroup width="25"></colgroup>
+	<colgroup width="30"></colgroup>
+	<colgroup width="44"></colgroup>
+  <colgroup width="40"></colgroup>-->
+	<tr>
+		<td height="17" align="center"><b>No</b></td>
+		<td align="center"><b>COMPOUND</b></td>
+		<td align="center"><b>C++</b></td>
+		<td align="center"><b>PYTHON</b></td>
+		<td align="center"><b>TEST</b></td>
+		<td align="center"><b>DOC</b></td>
+		<td align="center"><b>DONE</b></td>
+		<td align="center"><b><br></b></td>
+		<td align="center"><b><br></b></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="1" sdnum="1045;">1</td>
+		<td align="left">boost::serialization::serialize(Archive, platform_info&amp;, const unsigned int)</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center"><br></td>
+		<td align="right" sdval="3" sdnum="1045;">3</td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="2" sdnum="1045;">2</td>
+		<td align="left">boost::serialization::serialize(Archive, platform_query&amp;, const unsigned int)</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center"><br></td>
+		<td align="right" sdval="3" sdnum="1045;">3</td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="3" sdnum="1045;">3</td>
+		<td align="left">boost::serialization::serialize(Archive, device_info&amp;, const unsigned int)</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center"><br></td>
+		<td align="right" sdval="3" sdnum="1045;">3</td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="4" sdnum="1045;">4</td>
+		<td align="left">boost::serialization::serialize(Archive, device_query&amp;, const unsigned int)</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center"><br></td>
+		<td align="right" sdval="3" sdnum="1045;">3</td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="5" sdnum="1045;">5</td>
+		<td align="left">boost::serialization::serialize(Archive, platform_layer_info&amp;, const unsigned int)</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center">✓</td>
+		<td align="center"><br></td>
+		<td align="right" sdval="3" sdnum="1045;">3</td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="6" sdnum="1045;">6</td>
+		<td align="left">boost::serialization::serialize(Archive, context_info&amp;, const unsigned int)</td>
+		<td align="center"><br></td>
+		<td align="center"><br></td>
+		<td align="center"><br></td>
+		<td align="center"><br></td>
+		<td align="right" sdval="0" sdnum="1045;">0</td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="7" sdnum="1045;">7</td>
+		<td align="left">boost::serialization::serialize(Archive, context_query&amp;, const unsigned int)</td>
+		<td align="center"><br></td>
+		<td align="center"><br></td>
+		<td align="center"><br></td>
+		<td align="center"><br></td>
+		<td align="right" sdval="0" sdnum="1045;">0</td>
+		<td align="left"><br></td>
+		<td align="left"><br></td>
+	</tr>
+	<tr>
+		<td colspan=9 height="17" align="center"><b>SUMMARY</b></td>
+		</tr>
+	<tr>
+		<td height="17" align="center"><b>N</b></td>
+		<td colspan=5 rowspan=2 align="center"><b><br></b></td>
+		<td align="center"><b>DONE</b></td>
+		<td align="center"><b>PLANNED</b></td>
+		<td align="center"><b>%</b></td>
+	</tr>
+	<tr>
+		<td height="17" align="right" sdval="7" sdnum="1045;">7</td>
+		<td align="right" sdval="15" sdnum="1045;">15</td>
+		<td align="right" sdval="28" sdnum="1045;">28</td>
+		<td align="right" sdval="0,535714285714286" sdnum="1045;0;0,00%">53,57%</td>
+	</tr>
+</table>

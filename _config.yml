@@ -141,7 +141,7 @@ devel_progress:
   functions: 4.5
   types: 100
   libclxx_info: 69.8
-  libclxx_s11n: "??"
+  libclxx_s11n: 53.6 
   libclxx_io: "??"
   libclxx_app_clinfo: 100
   libclxx_app_clcc: 0
