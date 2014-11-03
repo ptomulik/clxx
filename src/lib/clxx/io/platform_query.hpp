@@ -43,7 +43,6 @@ namespace clxx { namespace io {
  *
  * \param os    Output stream.
  * \param query An object to be written out to the stream.
- * \param ind   Indentation level.
  *
  * \returns     Modified output stream \b os.
  */ // }}}
