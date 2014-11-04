@@ -31,11 +31,15 @@
 %include <clxx/exception.swg>
 %include <clxx/util/std_except_ctor_arg.swg>
 
-// Instantiate most commonly used specializations of exception_base
 %include <clxx/exception_base.hpp>
 
-%template(clxx_exception_base__T__clxx_exception__std_logic_error)
+// Instantiate most commonly used specializations of exception_base
+%template(exception_base__T__exception__std__logic_error)
   clxx::exception_base<clxx::exception, std::logic_error>;
+%template(exception_base__T__exception__std__invalid_argument)
+  clxx::exception_base<clxx::exception, std::invalid_argument>;
+%template(exception_base__T__exception__std__length_error)
+  clxx::exception_base<clxx::exception, std::length_error>;
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

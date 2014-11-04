@@ -32,9 +32,9 @@
 #include <clxx/device.hpp>
 #include <clxx/platform.hpp>
 #include <clxx/types.hpp>
+#include <vector>
 
 namespace clxx {
-
 
 /** // doc: devices {{{
  * \ingroup clxx_platform_layer
@@ -81,7 +81,7 @@ cl_uint get_num_devices(cl_platform_id platform, device_type_t device_type);
  * \brief Retrieve device identifiers of locally available OpenCL devices.
  *
  * This function is a C++ wrapper for \c clGetDeviceIDs(). The main differences
- * between clxx::get_device_ids() and \c clGetDeviceIDs() is that 
+ * between clxx::get_device_ids() and \c clGetDeviceIDs() is that
  *   - it throws exceptions instead of returning error codes,
  *   - it internally allocates memory to store the returned identifiers and
  *        returns them as <tt>std::vector&lt;cl_device_id&gt;</tt>.
@@ -91,7 +91,7 @@ cl_uint get_num_devices(cl_platform_id platform, device_type_t device_type);
  *        be \c NULL. If \b platform is \c NULL, the behavior is
  *        implementation-defined.
  * \param device_type
- *        A bitfield that identifies the type of OpenCL device. The 
+ *        A bitfield that identifies the type of OpenCL device. The
  *        \b device_type can be used to query specific OpenCL devices or all
  *        OpenCL devices available. The valid values for \b device_type are
  *        specified by clxx::device_type_t.

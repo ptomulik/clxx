@@ -27,18 +27,24 @@
 
 %import <clxx/swig_config.swg>
 
+%include <std_vector.i>
+%include <std_string.i>
+
 %import <clxx/cl/opencl1_0.i>
 %import <clxx/exception_mod.i>
 %import <clxx/platform_mod.i>
+%import <clxx/types_mod.i>
 
 %{
 #include <clxx/cl/opencl_mod.hpp>
 #include <clxx/exception_mod.hpp>
 #include <clxx/platform_mod.hpp>
+#include <clxx/types_mod.hpp>
 %}
 
-%include <clxx/context_properties.swg>
-%include <clxx/context.swg>
+%include <clxx/context_property.swg>
+%include <clxx/context_properties_.swg>
+%include <clxx/context_.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

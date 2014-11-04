@@ -44,7 +44,12 @@ doxyfile = env.Doxyfile(
     EXPAND_ONLY_PREDEF      = True,
     PREDEFINED              = [ 'DOXYGEN', 'CL_VERSION_1_0', 'CL_VERSION_1_1',
                                 'CL_VERSION_1_2',
-                                'BOOST_CLASS_VERSION(__klass,__ver)=' ]
+                                'BOOST_CLASS_VERSION(__klass,__ver)=',
+                                'cl_khr_gl_sharing',
+                                'cl_khr_dx9_media_sharing',
+                                'cl_khr_d3d10_sharing',
+                                'cl_khr_d3d11_sharing',
+                                '_WIN32' ]
 )
 
 doc = env.Doxygen(doxyfile)

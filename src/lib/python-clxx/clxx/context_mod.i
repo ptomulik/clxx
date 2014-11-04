@@ -25,7 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%module(package="clxx_.cl") context_mod
+%module(package="clxx_") context_mod
 %feature("autodoc","3");
 %include <clxx/context_mod.swg>
 

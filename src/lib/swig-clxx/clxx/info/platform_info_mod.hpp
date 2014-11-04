@@ -37,6 +37,7 @@
 #include <clxx/info/platform_layer_info.hpp>
 
 // dependencies
+#include <clxx/types_mod.hpp>
 #include <clxx/std/string_mod.hpp>
 
 #endif /* CLXX_CLINFO_PLATFORM_INFO_MOD_HPP_INCLUDED */

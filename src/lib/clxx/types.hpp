@@ -34,14 +34,14 @@
 #ifndef CLXX_TYPES_HPP_INCLUDED
 #define CLXX_TYPES_HPP_INCLUDED
 
-#include <CL/cl.h>
+#include <clxx/cl/cl.h>
 #include <clxx/macros.hpp>
 
 /** // doc: namespace clxx {{{
  * \todo Write documentation
  */ // }}}
 namespace clxx {
-/** // doc: status_t {{{ 
+/** // doc: status_t {{{
  * \brief A value returned by several functions to indicate success or failure.
  *
  * Most OpenCL functions (such as \c clGetPlatforms(), \c clGetPlatformInfo(),
@@ -185,7 +185,64 @@ enum class status_t : cl_int {
   /// Corresponds to \c CL_INVALID_DEVICE_PARTITION_COUNT
   invalid_device_partition_count  = CL_INVALID_DEVICE_PARTITION_COUNT
 #endif
+//
+// codes defined by OpenCL extensions
+//
+#if cl_khr_icd
+  ,
+  /// Corresponds to CL_PLATFORM_NOT_FOUND_KHR
+  platform_not_found_khr = CL_PLATFORM_NOT_FOUND_KHR
+#endif
+#if cl_ext_device_fission
+  ,
+  /// Corresponds to \c CL_DEVICE_PARTITION_FAILED_EXT
+  device_partition_failed_ext = CL_DEVICE_PARTITION_FAILED_EXT,
+  /// Corresponds to \c CL_INVALID_PARTITION_COUNT_EXT
+  invalid_partition_count_ext = CL_INVALID_PARTITION_COUNT_EXT,
+  /// Corresponds to \c CL_INVALID_PARTITION_NAME_EXT
+  invalid_partition_name_ext = CL_INVALID_PARTITION_NAME_EXT
+#endif
+#if cl_khr_gl_sharing
+  ,
+  /// Corresponds to \c CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR
+  invalid_gl_sharegroup_reference_khr = CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR
+#endif
+#if cl_khr_dx9_media_sharing
+  ,
+  /// Corresponds to \c CL_INVALID_DX9_MEDIA_ADAPTER_KHR
+  invalid_dx9_media_adapter_khr = CL_INVALID_DX9_MEDIA_ADAPTER_KHR,
+  /// Corresponds to \c CL_INVALID_DX9_MEDIA_SURFACE_KHR
+  invalid_dx9_media_surface_khr = CL_INVALID_DX9_MEDIA_SURFACE_KHR,
+  /// Corresponds to \c CL_DX9_MEDIA_SURFACE_ALREADY_ACQUIRED_KHR
+  dx9_media_surface_already_acquired_khr = CL_DX9_MEDIA_SURFACE_ALREADY_ACQUIRED_KHR,
+  /// Corresponds to \c CL_DX9_MEDIA_SURFACE_NOT_ACQUIRED_KHR
+  dx9_media_surface_not_acquired_khr = CL_DX9_MEDIA_SURFACE_NOT_ACQUIRED_KHR
+#endif
+#if cl_khr_d3d10_sharing
+  ,
+  /// Corresponds to \c CL_INVALID_D3D10_DEVICE_KHR
+  invalid_d3d10_device_khr = CL_INVALID_D3D10_DEVICE_KHR,
+  /// Corresponds to \c CL_INVALID_D3D10_RESOURCE_KHR
+  invalid_d3d10_resource_khr = CL_INVALID_D3D10_RESOURCE_KHR,
+  /// Corresponds to \c CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR
+  d3d10_resource_already_acquired_khr = CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR,
+  /// Corresponds to \c CL_D3D10_RESOURCE_NOT_ACQUIRED_KHR
+  d3d10_resource_not_acquired_khr = CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR,
+#endif
+#if cl_khr_d3d11_sharing
+  ,
+  /// Corresponds to \c CL_INVALID_D3D11_DEVICE_KHR
+  invalid_d3d11_device_khr = CL_INVALID_D3D11_DEVICE_KHR,
+  /// Corresponds to \c CL_INVALID_D3D11_RESOURCE_KHR
+  invalid_d3d11_resource_khr = CL_INVALID_D3D11_RESOURCE_KHR,
+  /// Corresponds to \c CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR
+  d3d11_resource_already_acquired_khr = CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR,
+  /// Corresponds to \c CL_D3D11_RESOURCE_NOT_ACQUIRED_KHR
+  d3d11_resource_not_acquired_khr = CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR,
+#endif
 };
+
+CLXX_MAKE_INTEGER_ENUM(status_t, cl_int)
 
 /** // doc: is_success() {{{
  * \brief Check if the given result code represents a success.
@@ -204,7 +261,7 @@ constexpr bool is_success(status_t code) noexcept
 constexpr bool is_error(status_t code) noexcept
 { return static_cast<cl_int>(code) < 0; }
 
-/** // doc: platform_info_t {{{ 
+/** // doc: platform_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_platform_info.
  *
  * The \c cl_platform_info is used by \c clGetPlatformInfo() to select
@@ -231,11 +288,13 @@ enum class platform_info_t : cl_platform_info {
   extensions = CL_PLATFORM_EXTENSIONS
 };
 
-/** // doc: device_type_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(platform_info_t, cl_platform_info)
+
+/** // doc: device_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_type.
  *
  * The \c cl_device_type is used by \c clGetDeviceIDs() to filter-out unwanted
- * device types when retrieving a list of available OpenCL devices. The 
+ * device types when retrieving a list of available OpenCL devices. The
  * \ref device_type_t is a C++ equivalent of the \c cl_device_type. It's used
  * by some of clxx functions, such as get_devices().
  *
@@ -266,12 +325,12 @@ enum class device_type_t : cl_device_type {
 
 CLXX_MAKE_BITMASK_ENUM(device_type_t, cl_device_type)
 
-/** // doc: device_info_t {{{ 
+/** // doc: device_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_info
  *
  * The \c cl_device_info is used by \c clGetDeviceInfo() to select
  * particular OpenCL device information to be queried from OpenCL device
- * layer. The \ref device_info_t is a C++ equivalent of the 
+ * layer. The \ref device_info_t is a C++ equivalent of the
  * \c cl_device_info, its used by get_device_info().
  *
  * \par Supported OpenCL versions
@@ -442,7 +501,9 @@ enum class device_info_t : cl_device_info {
 #endif
 };
 
-/** // doc: device_fp_config_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(device_info_t, cl_device_info)
+
+/** // doc: device_fp_config_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_fp_config
  *
  * The OpenCL's \c cl_device_fp_config is returned by \c clGetDeviceInfo() when
@@ -486,7 +547,7 @@ enum class device_fp_config_t : cl_device_fp_config {
 
 CLXX_MAKE_BITMASK_ENUM(device_fp_config_t, cl_device_fp_config)
 
-/** // doc: device_mem_cache_type_t {{{ 
+/** // doc: device_mem_cache_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_mem_cache_type
  *
  * The OpenCL's \c cl_mem_cache_type is returned by \c clGetDeviceInfo() when
@@ -510,12 +571,14 @@ enum class device_mem_cache_type_t : cl_device_mem_cache_type {
   read_write_cache  = CL_READ_WRITE_CACHE
 };
 
-/** // doc: device_local_mem_type_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(device_mem_cache_type_t, cl_device_mem_cache_type)
+
+/** // doc: device_local_mem_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_local_mem_type
  *
  * The OpenCL's \c cl_device_local_mem_type is returned by \c clGetDeviceInfo()
- * when querying for \c CL_DEVICE_LOCAL_MEM_TYPE. The 
- * \ref device_local_mem_type_t is a C++ equivalent of 
+ * when querying for \c CL_DEVICE_LOCAL_MEM_TYPE. The
+ * \ref device_local_mem_type_t is a C++ equivalent of
  * \c cl_device_local_mem_type. It's returned by get_device_info() when
  * querying for device_info_t::local_mem_type.
  *
@@ -532,7 +595,9 @@ enum class device_local_mem_type_t : cl_device_local_mem_type {
   global  = CL_GLOBAL
 };
 
-/** // doc: device_exec_capabilities_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(device_local_mem_type_t, cl_device_local_mem_type)
+
+/** // doc: device_exec_capabilities_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_exec_capabilities
  *
  * The OpenCL's \c cl_device_exec_capabilities is returned by
@@ -558,7 +623,7 @@ enum class device_exec_capabilities_t : cl_device_exec_capabilities {
 
 CLXX_MAKE_BITMASK_ENUM(device_exec_capabilities_t, cl_device_exec_capabilities)
 
-/** // doc: device_command_queue_proerties_t {{{ 
+/** // doc: device_command_queue_proerties_t {{{
  * \brief Corresponds to OpenCL's \c cl_command_queue_properties
  *
  * The OpenCL's \c cl_command_queue_properties is returned by
@@ -586,7 +651,7 @@ enum class command_queue_properties_t : cl_command_queue_properties {
 
 CLXX_MAKE_BITMASK_ENUM(command_queue_properties_t, cl_command_queue_properties)
 
-/** // doc: context_info_t {{{ 
+/** // doc: context_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_context_info
  *
  * The OpenCL's \c cl_context_info is used by \c clGetContextInfo() to select
@@ -614,7 +679,9 @@ enum class context_info_t : cl_context_info {
 #endif
 };
 
-/** // doc: context_properties_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(context_info_t, cl_context_info)
+
+/** // doc: context_properties_t {{{
  * \brief Correspons to OpenCL's \c cl_context_properties
  *
  * The OpenCL's \c cl_context_properties are returned by \c clGetContextInfo()
@@ -636,16 +703,50 @@ enum class context_properties_t : cl_context_properties {
   /// Corresponds to \c CL_CONTEXT_INTEROP_USER_SYNC
   interop_user_sync = CL_CONTEXT_INTEROP_USER_SYNC
 #endif
+#if cl_khr_gl_sharing
+  ,
+  /// Corresponds to \c CL_GL_CONTEXT_KHR
+  gl_context_khr = CL_GL_CONTEXT_KHR,
+  /// Corresponds to \c CL_EGL_DISPLAY_KHR
+  egl_display_khr = CL_EGL_DISPLAY_KHR,
+  /// Corresponds to \c CL_GLX_DISPLAY_KHR
+  glx_display_khr = CL_GLX_DISPLAY_KHR,
+  /// Corresponds to \c CL_WGL_HDC_KHR
+  wgl_hdc_khr = CL_WGL_HDC_KHR,
+  /// Corresponds to \c CL_CGL_SHAREGROUP_KHR
+  cgl_sharegroup_khr = CL_CGL_SHAREGROUP_KHR
+#endif
+#if cl_khr_dx9_media_sharing
+  ,
+  /// Corresponds to \c CL_CONTEXT_ADAPTER_D3D9_KHR
+  adapter_d3d9_khr = CL_CONTEXT_ADAPTER_D3D9_KHR,
+  /// Corresponds to \c CL_CONTEXT_ADAPTER_D3D9EX_KHR
+  adapter_d3d9ex_khr = CL_CONTEXT_ADAPTER_D3D9EX_KHR,
+  /// Corresponds to \c CL_CONTEXT_ADAPTER_DXVA_KHR
+  adapter_dxva_khr = CL_CONTEXT_ADAPTER_DXVA_KHR
+#endif
+#if cl_khr_d3d10_sharing
+  ,
+  /// Corresponds to \c CL_CONTEXT_D3D10_DEVICE_KHR
+  d3d10_device_khr = CL_CONTEXT_D3D10_DEVICE_KHR
+#endif
+#if cl_khr_d3d11_sharing
+  ,
+  /// Corresponds to \c CL_CONTEXT_D3D11_DEVICE_KHR
+  d3d11_device_khr = CL_CONTEXT_D3D11_DEVICE_KHR
+#endif
 };
 
+CLXX_MAKE_INTEGER_ENUM(context_properties_t, cl_context_properties)
+
 #if CL_VERSION_1_2
-/** // doc: device_partition_property_t {{{ 
+/** // doc: device_partition_property_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_partition_property
  *
  * The OpenCL's \c cl_device_partition_property is returned by \c
- * clGetDeviceInfo() when querying for \c CL_DEVICE_PARTITION_PROPERTIES 
+ * clGetDeviceInfo() when querying for \c CL_DEVICE_PARTITION_PROPERTIES
  * or \c CL_DEVICE_PARTITION_TYPE. It's also used by \c clCreateSubDevices().
- * The \ref device_partition_property_t is a C++ equivalent of 
+ * The \ref device_partition_property_t is a C++ equivalent of
  * \c cl_device_partition_property. It's returned by get_device_info() when
  * querying for device_info_t::partition_properties or
  * device_info_t::partition_type.
@@ -668,15 +769,17 @@ enum class device_partition_property_t : cl_device_partition_property {
   /// Corresponds to \c CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN
   by_affinity_domain = CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN
 };
+
+CLXX_MAKE_INTEGER_ENUM(device_partition_property_t, cl_device_partition_property)
 #endif
 
 #if CL_VERSION_1_2
-/** // doc: device_affinity_domain_t {{{ 
+/** // doc: device_affinity_domain_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_affinity_domain
  *
  * The OpenCL's \c cl_device_affinity_domain is returned by
  * \c clGetDeviceInfo() when querying for
- * \c CL_DEVICE_PARTITION_AFFINITY_DOMAIN. It's also used by 
+ * \c CL_DEVICE_PARTITION_AFFINITY_DOMAIN. It's also used by
  * \c clCreateSubDevices(). The \ref device_affinity_domain_t is a C++
  * equivalent of \c cl_device_affinity_domain. It's returned by
  * get_device_info() when querying for
@@ -710,7 +813,7 @@ enum class device_affinity_domain_t : cl_device_affinity_domain {
 CLXX_MAKE_BITMASK_ENUM(device_affinity_domain_t, cl_device_affinity_domain)
 #endif
 
-/** // doc: command_queue_info_t {{{ 
+/** // doc: command_queue_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_command_queue_info
  *
  * The OpenCL's \c cl_command_queue_info is used by \c clGetCommandQueueInfo()
@@ -735,11 +838,13 @@ enum class command_queue_info_t : cl_command_queue_info {
   properties      = CL_QUEUE_PROPERTIES
 };
 
-/** // doc: mem_flags_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(command_queue_info_t, cl_command_queue_info)
+
+/** // doc: mem_flags_t {{{
  * \brief Corresponds to OpenCL's \c cl_mem_flags
  *
  * The OpenCL's \c cl_mem_flags are used by \c clCreateSubBuffer(),
- * \c clCreateImage(), \c clGetSupportedImageFormats(), and 
+ * \c clCreateImage(), \c clGetSupportedImageFormats(), and
  * \c clGetMemObjectInfo(). The \ref mem_flags_t is a C++ equivalent of
  * the \c cl_mem_flags.
  *
@@ -780,10 +885,10 @@ enum class mem_flags_t : cl_mem_flags {
 CLXX_MAKE_BITMASK_ENUM(mem_flags_t, cl_mem_flags)
 
 #if CL_VERSION_1_2
-/** // doc: mem_migration_flags_t {{{ 
+/** // doc: mem_migration_flags_t {{{
  * \brief Correspond to OpenCL's \c cl_mem_migration_flags
  *
- * The OpenCL's \c cl_mem_migration_flags are used by 
+ * The OpenCL's \c cl_mem_migration_flags are used by
  * \c clEnqueueMigrateMemObjects(). The \ref mem_migration_flags_t is a
  * C++ equivalent of the \c cl_mem_migration_flags.
  *
@@ -807,10 +912,10 @@ enum class mem_migration_flags_t : cl_mem_migration_flags {
 CLXX_MAKE_BITMASK_ENUM(mem_migration_flags_t, cl_mem_migration_flags)
 #endif
 
-/** // doc: channel_order_t {{{ 
+/** // doc: channel_order_t {{{
  * \brief Corresponds to OpenCL's \c cl_channel_order
  *
- * The OpenCL's \c cl_channel_order is used as an attribute in the 
+ * The OpenCL's \c cl_channel_order is used as an attribute in the
  * \c cl_image_format structure. The channel_order_t is a C++ equivalent of the
  * \c cl_channel_order.
  *
@@ -861,10 +966,12 @@ enum class channel_order_t : cl_channel_order {
 #endif
 };
 
-/** // doc: channel_type_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(channel_order_t, cl_channel_order)
+
+/** // doc: channel_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_channel_type
  *
- * The OpenCL's \c cl_channel_type is used as an attribute in the 
+ * The OpenCL's \c cl_channel_type is used as an attribute in the
  * \c cl_image_format structure. The channel_type_t is a C++ equivalent of the
  * \c cl_channel_type.
  *
@@ -914,7 +1021,9 @@ enum class channel_type_t : cl_channel_type {
 #endif
 };
 
-/** // doc: mem_object_type_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(channel_type_t, cl_channel_type)
+
+/** // doc: mem_object_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_mem_object_type
  *
  * The OpenCL's \c cl_mem_object_type is used by \c
@@ -951,7 +1060,9 @@ enum class mem_object_type_t : cl_mem_object_type {
 #endif
 };
 
-/** // doc: mem_info_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(mem_object_type_t, cl_mem_object_type)
+
+/** // doc: mem_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_mem_info
  *
  * The OpenCL's \c cl_mem_info is used by \c clGetMemObjectInfo() to select
@@ -989,7 +1100,9 @@ enum class mem_info_t : cl_mem_info {
 #endif
 };
 
-/** // doc: image_info_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(mem_info_t, cl_mem_info)
+
+/** // doc: image_info_t {{{
  * \brief Corresponds to OpenCL's cl_image_info
  *
  * The OpenCL's \c cl_image_info is used by \c clGetImageInfo() to select
@@ -1031,10 +1144,12 @@ enum class image_info_t : cl_image_info {
 #endif
 };
 
-/** // doc: addressing_mode_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(image_info_t, cl_image_info)
+
+/** // doc: addressing_mode_t {{{
  * \brief Corresponds to OpenCL's cl_addressing_mode
  *
- * The OpenCL's \c cl_addressing_mode is used by \c clCreateSampler(). The 
+ * The OpenCL's \c cl_addressing_mode is used by \c clCreateSampler(). The
  * \ref addressing_mode_t is a C++ equivalent of the \c cl_addressing_mode.
  *
  * \par Supported OpenCL versions
@@ -1061,7 +1176,9 @@ enum class addressing_mode_t : cl_addressing_mode {
 #endif
 };
 
-/** // doc: filter_mode_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(addressing_mode_t, cl_addressing_mode)
+
+/** // doc: filter_mode_t {{{
  * \brief Corresponds to OpenCL's \c cl_filter_mode
  *
  * The OpenCL's \c cl_filter_mode is used by \c clCreateSampler(). It's also
@@ -1085,7 +1202,9 @@ enum class filter_mode_t : cl_filter_mode {
   linear   = CL_FILTER_LINEAR
 };
 
-/** // doc: sampler_info_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(filter_mode_t, cl_filter_mode)
+
+/** // doc: sampler_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_sampler_info
  *
  * The OpenCL's \c cl_sampler_info is used by \c clGetSamplerInfo() to select
@@ -1112,10 +1231,12 @@ enum class sampler_info_t : cl_sampler_info {
   filter_mode       = CL_SAMPLER_FILTER_MODE
 };
 
-/** // doc: map_flags_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(sampler_info_t, cl_sampler_info)
+
+/** // doc: map_flags_t {{{
  * \brief Corresponds to OpenCL's cl_map_flags
  *
- * The OpenCL's \c cl_map_flags are used by \c clEnqueueMaBuffer() and 
+ * The OpenCL's \c cl_map_flags are used by \c clEnqueueMaBuffer() and
  * \c clEnqueueMapImage(). The \ref map_flags_t is a C++ equivalent of the
  * \c cl_map_flags.
  *
@@ -1143,7 +1264,7 @@ enum class map_flags_t : cl_map_flags {
 
 CLXX_MAKE_BITMASK_ENUM(map_flags_t, cl_map_flags)
 
-/** // doc: program_info_t {{{ 
+/** // doc: program_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_program_info
  *
  * The OpenCL's \c cl_program_info is used by \c clProgramInfo() to select
@@ -1181,7 +1302,9 @@ enum class program_info_t : cl_program_info {
 #endif
 };
 
-/** // doc: program_build_info_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(program_info_t, cl_program_info)
+
+/** // doc: program_build_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_program_build_info
  *
  * The OpenCL's \c cl_program_build_info is used by \c clGetProgramBuildInfo()
@@ -1210,8 +1333,10 @@ enum class program_build_info_t : cl_program_build_info {
 #endif
 };
 
+CLXX_MAKE_INTEGER_ENUM(program_build_info_t, cl_program_build_info)
+
 #if CL_VERSION_1_2
-/** // doc: program_binary_type_t {{{ 
+/** // doc: program_binary_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_program_binary_type
  *
  * The OpenCL's \c cl_program_binary_type is returned by
@@ -1240,7 +1365,7 @@ enum class program_binary_type_t : cl_program_binary_type {
 CLXX_MAKE_BITMASK_ENUM(program_binary_type_t, cl_program_binary_type)
 #endif
 
-/** // doc: build_status_t {{{ 
+/** // doc: build_status_t {{{
  * \brief Corresponds to OpenCL's \c cl_build_status
  *
  * The OpenCL's \c cl_build_status is returned by \c clGetProgramBuildInfo()
@@ -1265,6 +1390,8 @@ enum class build_status_t : cl_build_status {
   in_progress = CL_BUILD_IN_PROGRESS
 };
 
+CLXX_MAKE_INTEGER_ENUM(build_status_t, cl_build_status)
+
 /** // doc: is_success {{{
  * \brief Check if the given build status represents a success.
  *
@@ -1284,7 +1411,7 @@ constexpr bool is_success(build_status_t status)
 constexpr bool is_error(build_status_t status)
 { return !is_success(status); }
 
-/** // doc: kernel_info_t {{{ 
+/** // doc: kernel_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_kernel_info
  *
  * The OpenCL's \c cl_kernel_info is used by \c clGetKernelInfo() to select
@@ -1316,8 +1443,10 @@ enum class kernel_info_t : cl_kernel_info {
 #endif
 };
 
+CLXX_MAKE_INTEGER_ENUM(kernel_info_t, cl_kernel_info)
+
 #if CL_VERSION_1_2
-/** // doc: kernel_arg_info_t {{{ 
+/** // doc: kernel_arg_info_t {{{
  * \brief Corresponds to \c cl_kernel_arg_info
  *
  * The OpenCL's \c cl_kernel_arg_info is used by \c clGetKernelArgInfo() to
@@ -1343,10 +1472,12 @@ enum class kernel_arg_info_t : cl_kernel_arg_info {
   /// Corresponds to \c CL_KERNEL_ARG_NAME
   name               = CL_KERNEL_ARG_NAME
 };
+
+CLXX_MAKE_INTEGER_ENUM(kernel_arg_info_t, cl_kernel_arg_info)
 #endif
 
 #if CL_VERSION_1_2
-/** // doc: kernel_arg_address_qualifier_t {{{ 
+/** // doc: kernel_arg_address_qualifier_t {{{
  * \brief Corresponds to OpenCL's \c cl_kernel_arg_address_qualifier
  *
  * The OpenCL's \c cl_kernel_arg_address_qualifier is returned by
@@ -1372,10 +1503,12 @@ enum class kernel_arg_address_qualifier_t : cl_kernel_arg_address_qualifier {
   /// Corresponds to \c CL_KERNEL_ARG_ADDRESS_PRIVATE
   private_  = CL_KERNEL_ARG_ADDRESS_PRIVATE
 };
+
+CLXX_MAKE_INTEGER_ENUM(kernel_arg_address_qualifier_t, cl_kernel_arg_address_qualifier)
 #endif
 
 #if CL_VERSION_1_2
-/** // doc: kernel_arg_access_qualifier_t {{{ 
+/** // doc: kernel_arg_access_qualifier_t {{{
  * \brief Corresponds to OpenCL's \c cl_kernel_arg_access_qualifier
  *
  * The OpenCL's \c cl_kernel_arg_access_qualifier is returned by
@@ -1401,10 +1534,12 @@ enum class kernel_arg_access_qualifier_t : cl_kernel_arg_access_qualifier {
   /// Corresponds to \c CL_KERNEL_ARG_ACCESS_NONE
   none        = CL_KERNEL_ARG_ACCESS_NONE
 };
+
+CLXX_MAKE_INTEGER_ENUM(kernel_arg_access_qualifier_t, cl_kernel_arg_access_qualifier)
 #endif
 
 #if CL_VERSION_1_2
-/** // doc: kernel_arg_type_qualifier_t {{{ 
+/** // doc: kernel_arg_type_qualifier_t {{{
  * \brief Corresponds to OpenCL's \c cl_kernel_arg_type_qualifier
  *
  * The OpenCL's \c cl_kernel_arg_type_qualifier is returned by
@@ -1434,7 +1569,7 @@ enum class kernel_arg_type_qualifier_t : cl_kernel_arg_type_qualifier {
 CLXX_MAKE_BITMASK_ENUM(kernel_arg_type_qualifier_t, cl_kernel_arg_type_qualifier)
 #endif
 
-/** // doc: kernel_work_group_info_t {{{ 
+/** // doc: kernel_work_group_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_kernel_work_group_info
  *
  * The OpenCL's \c cl_kernel_work_group_info is used by
@@ -1470,7 +1605,9 @@ enum class kernel_work_group_info_t : cl_kernel_work_group_info {
 #endif
 };
 
-/** // doc: event_info_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(kernel_work_group_info_t, cl_kernel_work_group_info)
+
+/** // doc: event_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_event_info
  *
  * \brief Corresponds to OpenCL's \c cl_event_info
@@ -1502,7 +1639,9 @@ enum class event_info_t : cl_event_info {
 #endif
 };
 
-/** // doc: command_type_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(event_info_t, cl_event_info)
+
+/** // doc: command_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_commant_type
  *
  * The OpenCL's \c cl_command_type is returned by \c clGetEventInfo() when
@@ -1575,7 +1714,9 @@ enum class command_type_t : cl_command_type {
 #endif
 };
 
-/** // doc: command_exec_status_t {{{ 
+CLXX_MAKE_INTEGER_ENUM(command_type_t, cl_command_type)
+
+/** // doc: command_exec_status_t {{{
  * \brief Corresponds to OpenCL's command execution status
  *
  * The OpenCL's command execution status is returned by \c clGetEventInfo()
@@ -1598,12 +1739,14 @@ enum class command_exec_status_t : cl_int {
   queued    = CL_QUEUED
 };
 
+CLXX_MAKE_INTEGER_ENUM(command_exec_status_t, cl_int)
+
 /** // doc: is_error(command_exec_status_t) {{{
  * \brief Check if a command execution status represents an error.
  *
- * The values returned by 
+ * The values returned by
  * ``clGetEventInfo(...,CL_EVENT_COMMAND_EXECUTION_STATUS,...)`` may be
- * negative indicating execution errors (see 
+ * negative indicating execution errors (see
  * <a href="http://www.khronos.org/registry/cl/specs/opencl-1.2.pdf">OpenCL 1.2 Specification</a>,
  * Page 183, footnote 18). For all these error values, the is_error()
  * returns \c true. Otherwise it returns \c false.
@@ -1618,7 +1761,7 @@ constexpr bool is_error(command_exec_status_t status) noexcept
 /** // doc: is_success(command_exec_status_t) {{{
  * \brief Check if a command execution status represents success (complete).
  *
- * The values returned by 
+ * The values returned by
  * ``clGetEventInfo(...,CL_EVENT_COMMAND_EXECUTION_STATUS,...)`` may be
  * negative indicating execution errors, positive or zero (see
  * <a href="http://www.khronos.org/registry/cl/specs/opencl-1.2.pdf">OpenCL 1.2 Specification</a>,
@@ -1636,7 +1779,7 @@ constexpr bool is_success(command_exec_status_t status) noexcept
 /** // doc: is_state(command_exec_status_t) {{{
  * \brief Check if a command execution status represents a state.
  *
- * The values returned by 
+ * The values returned by
  * \c clGetEventInfo(...,CL_EVENT_COMMAND_EXECUTION_STATUS,...) may be negative
  * indicating execution errors or non-negative indicating execution state
  * (see <a href="http://www.khronos.org/registry/cl/specs/opencl-1.2.pdf">OpenCL 1.2 Specification</a>,
@@ -1739,7 +1882,7 @@ constexpr bool operator >= (command_exec_status_t s1, status_t s2) noexcept
 #endif
 
 #if CL_VERSION_1_1
-/** // doc: buffer_create_type_t {{{ 
+/** // doc: buffer_create_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_buffer_create_type
  *
  * The OpenCL's \c cl_buffer_create_type is used by \c clCreateSubBuffer(). The
@@ -1758,9 +1901,11 @@ enum class buffer_create_type_t : cl_buffer_create_type {
   /// Corresponds to \c CL_BUFFER_CREATE_TYPE_REGION
   region = CL_BUFFER_CREATE_TYPE_REGION
 };
+
+CLXX_MAKE_INTEGER_ENUM(buffer_create_type_t, cl_buffer_create_type)
 #endif
 
-/** // doc: profiling_info_t {{{ 
+/** // doc: profiling_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_profiling_info
  *
  * The OpenCL's \c cl_profiling_info is used by \c clGetEventProfilingInfo()
@@ -1784,6 +1929,8 @@ enum class profiling_info_t : cl_profiling_info {
   /// Corresponds to \c CL_PROFILING_COMMAND_END
   end     = CL_PROFILING_COMMAND_END
 };
+
+CLXX_MAKE_INTEGER_ENUM(profiling_info_t, cl_profiling_info)
 } // end namespace clxx
 
 #endif /* CLXX_TYPES_HPP_INCLUDED */

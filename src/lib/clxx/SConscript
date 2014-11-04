@@ -29,7 +29,9 @@ objects = env.SharedObject([
     'platforms.cpp',
     'device.cpp',
     'devices.cpp',
-    'platform_layer.cpp'
+    'platform_layer.cpp',
+    'context_properties.cpp',
+    'context.cpp'
 ])
 
 libs = CLVar('OpenCL clxx_info')

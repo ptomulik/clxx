@@ -266,7 +266,7 @@ _init_options_description()
     ("queue-properties"
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
     ,"query for queue-properties")
-    
+
     ("built-in-kernels"
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
     ,"query for built-in-kernels")

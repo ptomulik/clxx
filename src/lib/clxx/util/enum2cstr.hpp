@@ -105,6 +105,35 @@ enum2cstr(status_t x, char const* dflt = nullptr) noexcept
           (x == status_t::invalid_linker_options) ? "invalid linker options" :
           (x == status_t::invalid_device_partition_count) ? "invalid device partition count" :
 #endif
+#if cl_khr_icd
+          (x == status_t::platform_not_found_khr) ? "platform not found khr" :
+#endif
+#if cl_ext_device_fission
+          (x == status_t::device_partition_failed_ext) ? "device partition failed ext" :
+          (x == status_t::invalid_partition_count_ext) ? "invalid partition count ext" :
+          (x == status_t::invalid_partition_name_ext) ? "invalid partition name ext" :
+#endif
+#if cl_khr_gl_sharing
+          (x == status_t::invalid_gl_sharegroup_reference_khr) ? "invalid gl sharegroup reference khr" :
+#endif
+#if cl_khr_dx9_media_sharing
+          (x == status_t::invalid_dx9_media_adapter_khr) ? "invalid dx9 media adapter khr" :
+          (x == status_t::invalid_dx9_media_surface_khr) ? "invalid dx9 media surface khr" :
+          (x == status_t::dx9_media_surface_already_acquired_khr) ? "dx9 media surface already acquired khr" :
+          (x == status_t::dx9_media_surface_not_acquired_khr) ? "dx9 media surface not acquired khr" :
+#endif
+#if cl_khr_d3d10_sharing
+          (x == status_t::invalid_d3d10_device_khr) ? "invalid d3d10 device khr" :
+          (x == status_t::invalid_d3d10_resource_khr) ? "invalid d3d10 resource khr" :
+          (x == status_t::d3d10_resource_already_acquired_khr) ? "d3d10 resource already acquired khr" :
+          (x == status_t::d3d10_resource_not_acquired_khr) ? "d3d10 resource not acquired khr" :
+#endif
+#if cl_khr_d3d11_sharing
+          (x == status_t::invalid_d3d11_device_khr) ? "invalid d3d11 device khr" :
+          (x == status_t::invalid_d3d11_resource_khr) ? "invalid d3d11 resource khr" :
+          (x == status_t::d3d11_resource_already_acquired_khr) ? "d3d11 resource already acquired khr" :
+          (x == status_t::d3d11_resource_not_acquired_khr) ? "d3d11 resource not acquired khr" :
+#endif
           dflt;
 }
 /* ------------------------------------------------------------------------ */
@@ -283,6 +312,34 @@ enum2cstr(context_info_t x, char const* dflt = nullptr) noexcept
           (x == context_info_t::properties) ? "properties" :
 #if CL_VERSION_1_1
           (x == context_info_t::num_devices) ? "num devices" :
+#endif
+          dflt;
+}
+/* ------------------------------------------------------------------------ */
+constexpr char const*
+enum2cstr(context_properties_t x, char const* dflt = nullptr) noexcept
+{
+  return  (x == context_properties_t::platform) ? "platform" :
+#if CL_VERSION_1_2
+          (x == context_properties_t::interop_user_sync) ? "interop user sync" :
+#endif
+#if cl_khr_gl_sharing
+          (x == context_properties_t::gl_context_khr) ? "gl context khr" :
+          (x == context_properties_t::egl_display_khr) ? "egl display khr" :
+          (x == context_properties_t::glx_display_khr) ? "glx display khr" :
+          (x == context_properties_t::wgl_hdc_khr) ? "wgl hdc khr" :
+          (x == context_properties_t::cgl_sharegroup_khr) ? "cgl sharegroup khr" :
+#endif
+#if cl_khr_dx9_media_sharing
+          (x == context_properties_t::adapter_d3d9_khr) ? "adapter d3d9 khr" :
+          (x == context_properties_t::adapter_d3d9ex_khr) ? "adapter d3d9eh khr" :
+          (x == context_properties_t::adapter_dxva_khr) ? "adapter dxva khr" :
+#endif
+#if cl_khr_d3d10_sharing
+          (x == context_properties_t::d3d10_device_khr) ? "d3d10 device khr" :
+#endif
+#if cl_khr_d3d11_sharing
+          (x == context_properties_t::d3d11_device_khr) ? "d3d11 device khr" :
 #endif
           dflt;
 }

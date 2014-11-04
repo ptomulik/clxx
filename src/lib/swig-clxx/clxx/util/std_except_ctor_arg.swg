@@ -28,6 +28,7 @@
 %{
 #include <clxx/util/std_except_ctor_arg.hpp>
 %}
+%include <clxx/util/std_except_ctor_arg_fwd.hpp>
 %include <clxx/util/std_except_ctor_arg.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

@@ -81,7 +81,7 @@ int main()
     std::cout << "C. caught std::runtime_error: " << e.what() << std::endl;
   }
   // [CatchStdRuntimeError]
-  
+
   // [CatchStdException]
   try {
     throw clxx::exception1();
@@ -89,7 +89,7 @@ int main()
     std::cout << "D. caught std::exception: " << e.what() << std::endl;
   }
   // [CatchStdException]
-  
+
   // [CatchHierarchy]
   try {
     throw clxx::exception1();

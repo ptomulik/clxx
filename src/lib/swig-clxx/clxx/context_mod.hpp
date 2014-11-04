@@ -32,12 +32,13 @@
 // module's core
 #include <clxx/cl/context_properties.hpp>
 #include <clxx/cl/context_interface.hpp>
-#include <clxx/cl/context.hpp>
+//#include <clxx/cl/context.hpp>
 
 // dependencies
 #include <clxx/cl/opencl_mod.hpp>
 #include <clxx/exception_mod.hpp>
 #include <clxx/platform_mod.hpp>
+#include <clxx/types_mod.hpp>
 
 #endif /* CLXX_CL_CONTEXT_MOD_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

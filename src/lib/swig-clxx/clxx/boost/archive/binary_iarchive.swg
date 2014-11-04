@@ -39,7 +39,7 @@ namespace boost {
 namespace archive {
 class binary_iarchive;
 %template(interface_iarchive_T_binary_iarchive) detail::interface_iarchive<binary_iarchive>;
-class binary_iarchive 
+class binary_iarchive
   : public detail::interface_iarchive<binary_iarchive>
   {
   public:

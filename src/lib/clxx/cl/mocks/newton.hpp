@@ -63,11 +63,15 @@
 /* Mock class declarations */
 #if defined(CXXTEST_MOCK_TEST_SOURCE_FILE) || defined(CXXTEST_FLAGS) \
   || defined(CXXTEST_RUNNING) || defined(DOXYGEN)
+
+#include <algorithm>
+#include <map>
+#include <vector>
+
 namespace T {
 /** // doc: Newton_clGetPlatformIDs {{{
  * \brief Default mock for clGetPlatformIDs OpenCL function.
- *
- * Does not return any IDs - it behaves as there were no OpenCL platforms.
+ * \todo Write documentation
  */ // }}}
 class Newton_clGetPlatformIDs
   : public T::Base_clGetPlatformIDs
@@ -82,8 +86,7 @@ public:
 
 /** // doc: Newton_clGetPlatformInfo {{{
  * \brief Default mock for clGetPlatformInfo OpenCL function.
- *
- * The mock just returns @c CL_INVALID_PLATFORM error.
+ * \todo Write documentation
  */ // }}}
 class Newton_clGetPlatformInfo
   : public T::Base_clGetPlatformInfo
@@ -101,8 +104,7 @@ public:
 
 /** // doc: Newton_clGetDeviceIDs {{{
  * \brief Default mock for clGetDeviceIDs OpenCL function.
- *
- * The mock just returns @c CL_INVALID_PLATFORM error.
+ * \todo Write documentation
  */ // }}}
 class Newton_clGetDeviceIDs
   : public T::Base_clGetDeviceIDs
@@ -118,8 +120,7 @@ public:
 
 /** // doc: Newton_clGetDeviceInfo {{{
  * \brief Default mock for clGetDeviceInfo OpenCL function.
- *
- * The mock just returns @c CL_INVALID_DEVICE error.
+ * \todo Write documentation
  */ // }}}
 class Newton_clGetDeviceInfo
   : public T::Base_clGetDeviceInfo
@@ -204,6 +205,84 @@ public:
   static size_t const printf_buffer_size[1];
   static cl_uint const image_pitch_alignment[1];
   static cl_uint const image_base_address_alignment[1];
+};
+
+/** // doc: Newton_Context {{{
+ * \todo Write documentation
+ */ // }}}
+class Newton_Context
+{
+public:
+  typedef void(CL_CALLBACK* Callback)(const char*,const void*, size_t, void*);
+
+  static cl_context create();
+  static cl_context create(const cl_context_properties*, cl_uint,
+                           const cl_device_id*, Callback, void*, cl_int*);
+  static cl_int retain(cl_context);
+  static cl_int release(cl_context);
+  static Newton_Context* find(cl_context);
+
+
+  std::vector<cl_device_id> devices;
+  std::vector<cl_context_properties> properties;
+  Callback callback;
+  void* user_data;
+  cl_int refcount;
+
+private:
+  typedef std::map<cl_context, Newton_Context*> Map;
+  static Map contexts;
+
+
+  Newton_Context();
+  Newton_Context(const cl_context_properties*, cl_uint, const cl_device_id*, Callback, void*);
+
+  static cl_context register_(Newton_Context* obj);
+  static size_t properties_size(const cl_context_properties*);
+};
+
+/** // doc: Newton_clCreateContext {{{
+ * \brief Default mock for clCreateContext OpenCL function.
+ */ // }}}
+class Newton_clCreateContext
+  : public T::Base_clCreateContext
+{
+  cl_context clCreateContext(
+      const cl_context_properties*, cl_uint, const cl_device_id*,
+      void(CL_CALLBACK*)(const char*,const void*, size_t, void*),
+      void*, cl_int*);
+public:
+  static cl_context contexts[8];
+};
+
+/** // doc: Newton_clCreateContextFromType {{{
+ * \brief Default mock for clCreateContextFromType OpenCL function.
+ */ // }}}
+class Newton_clCreateContextFromType
+  : public T::Base_clCreateContextFromType
+{
+  cl_context clCreateContextFromType(
+        const cl_context_properties*, cl_device_type,
+        void(CL_CALLBACK*)(const char*, const void*, size_t, void*),
+        void*, cl_int*);
+};
+
+/** // doc: Newton_clRetainContext {{{
+ * \brief Default mock for clRetainContext OpenCL function.
+ */ // }}}
+class Newton_clRetainContext
+  : public T::Base_clRetainContext
+{
+  cl_int clRetainContext(cl_context);
+};
+
+/** // doc: Newton_clReleaseContext {{{
+ * \brief Default mock for clReleaseContext OpenCL function.
+ */ // }}}
+class Newton_clReleaseContext
+  : public T::Base_clReleaseContext
+{
+  cl_int clReleaseContext(cl_context);
 };
 
 //CXXTEST_MOCK_GLOBAL(cl_context, clCreateContext,
@@ -1105,6 +1184,207 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
     }
   return CL_SUCCESS;
 }
+
+Newton_Context::Map Newton_Context::contexts;
+
+Newton_Context::
+Newton_Context()
+  : callback(nullptr), user_data(nullptr), refcount(1)
+{
+  this->properties.push_back((cl_context_properties)0ul);
+}
+
+Newton_Context::
+Newton_Context(const cl_context_properties* properties, cl_uint num_devices,
+               const cl_device_id* devices, Callback callback, void* user_data)
+  : callback(callback), user_data(user_data), refcount(1)
+{
+  size_t n = properties_size(properties);
+
+  // insert properties to our vector
+  this->properties.insert(this->properties.begin(), properties, properties+n);
+  this->devices.insert(this->devices.begin(), devices, devices + num_devices);
+
+  // copy other properties
+  this->callback = callback;
+  this->user_data = user_data;
+}
+
+size_t Newton_Context::
+properties_size(const cl_context_properties* properties)
+{
+  size_t n=1;
+  for(; n<255 && properties[n-1] != (cl_context_properties)0ul; n+=2) { }
+  return n;
+}
+
+cl_context Newton_Context::
+register_(Newton_Context* obj)
+{
+  cl_context context = reinterpret_cast<cl_context>(obj);
+  contexts[context] = obj;
+  return context;
+}
+
+cl_context Newton_Context::
+create()
+{
+  Newton_Context *obj = new Newton_Context();
+  return Newton_Context::register_(obj);
+}
+
+cl_context Newton_Context::
+create(const cl_context_properties* properties, cl_uint num_devices,
+       const cl_device_id* devices, Callback callback, void* user_data,
+       cl_int* errcode_ret)
+{
+  if(properties_size(properties) >= 255)
+    {
+      if(errcode_ret)
+        {
+          *errcode_ret = CL_OUT_OF_HOST_MEMORY;
+        }
+      return NULL;
+    }
+  Newton_Context *obj = new Newton_Context(properties, num_devices, devices, callback, user_data);
+  return Newton_Context::register_(obj);
+}
+
+Newton_Context* Newton_Context::
+find(cl_context context)
+{
+  Map::iterator found(contexts.find(context));
+  if(found == contexts.end()) {
+    return NULL;
+  }
+  return found->second;
+}
+
+cl_int Newton_Context::
+retain(cl_context context)
+{
+  Newton_Context* obj = find(context);
+  if(obj == nullptr) {
+    return CL_INVALID_CONTEXT;
+  }
+  obj->refcount++;
+  return CL_SUCCESS;
+}
+
+cl_int Newton_Context::
+release(cl_context context)
+{
+  Map::iterator found(contexts.find(context));
+  if(found == contexts.end()) {
+    return CL_INVALID_CONTEXT;
+  }
+  if(found->second->refcount > 1)
+    {
+      found->second->refcount--;
+    }
+  else
+    {
+      contexts.erase(found);
+      delete found->second;
+    }
+  return CL_SUCCESS;
+}
+
+
+cl_context Newton_clCreateContext::
+contexts[8] = {
+  reinterpret_cast<cl_context>(0),
+  reinterpret_cast<cl_context>(0x02c0293c),
+  reinterpret_cast<cl_context>(0x192f7300),
+  reinterpret_cast<cl_context>(0x0eb916ec),
+  reinterpret_cast<cl_context>(0x50575d9a),
+  reinterpret_cast<cl_context>(0xf1f1b0c6),
+  reinterpret_cast<cl_context>(0x3f0165af),
+  reinterpret_cast<cl_context>(0x3258d035)
+};
+
+cl_context Newton_clCreateContext::
+clCreateContext(const cl_context_properties* properties,
+                cl_uint num_devices,
+                const cl_device_id* devices,
+                void(CL_CALLBACK* pfn_notify)(const char*,const void*, size_t, void*),
+                void* user_data,
+                cl_int* errcode_ret)
+{
+  if(num_devices == 0 || devices == NULL
+     || (pfn_notify == NULL && user_data != NULL)) {
+    if(errcode_ret) {
+      *errcode_ret = CL_INVALID_VALUE;
+    }
+    return NULL;
+  }
+
+  if(properties == NULL) {
+    // no platform can be selected? (we have two platforms on newton)
+    if(errcode_ret) {
+      *errcode_ret = CL_INVALID_PLATFORM;
+    }
+    return NULL;
+  }
+
+  if(properties) {
+    const cl_context_properties *p = properties;
+    while(*p) {
+      switch(*p) {
+        case CL_CONTEXT_PLATFORM:
+          p+=2;
+          break;
+        case CL_CONTEXT_INTEROP_USER_SYNC:
+          p+=2;
+          break;
+        default:
+          if(errcode_ret) {
+            *errcode_ret = CL_INVALID_PROPERTY;
+          }
+          return NULL;
+      }
+    }
+  }
+
+  int ctx_i = 0;
+  for(cl_uint i = 0; i < num_devices; ++i) {
+    int dev_i = Newton_clGetDeviceIDs::find(devices[i]);
+    if(dev_i == -1) {
+      if(errcode_ret) {
+        *errcode_ret = CL_INVALID_DEVICE;
+      }
+      return NULL;
+    }
+    ctx_i |= (1 << dev_i);
+  }
+  if(errcode_ret) {
+    *errcode_ret = CL_SUCCESS;
+  }
+  return Newton_clCreateContext::contexts[ctx_i];
+}
+
+cl_context Newton_clCreateContextFromType::
+clCreateContextFromType(const cl_context_properties*,
+                        cl_device_type,
+                        void(CL_CALLBACK*)(const char*, const void*, size_t, void*),
+                        void*,
+                        cl_int*)
+{
+  return NULL;
+}
+
+cl_int Newton_clRetainContext::
+clRetainContext(cl_context context)
+{
+  return Newton_Context::retain(context);
+}
+
+cl_int Newton_clReleaseContext::
+clReleaseContext(cl_context context)
+{
+  return Newton_Context::release(context);
+}
+
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
 

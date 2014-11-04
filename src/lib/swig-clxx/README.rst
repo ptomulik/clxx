@@ -45,7 +45,7 @@ correspondence:
 target subtree(s) with bindings definition(s)
 :::::::::::::::::::::::::::::::::::::::::::::
 
-Bindings for particular languages are compiled from separate subtrees of clxx 
+Bindings for particular languages are compiled from separate subtrees of clxx
 source tree. For example, bindings for python are defined under
 ``#/src/lib/python-clxx/``. We'll call them  *target subtrees*.
 

@@ -49,6 +49,14 @@ decls = GVarDeclsU(
         'var_key'   : 'CLXX_ENABLE_GCOV',
         'help'      : 'Compile with GCOV support',
         'default'   : 'no'
+    },
+    WITHOUT_CL_EGL = {
+        'env_key'   : 'WITHOUT_CL_EGL',
+#        'var_key'   : 'WITHOUT_CL_EGL',
+        'opt_key'   : 'WITHOUT_CL_EGL',
+        'option'    : '--without-cl-egl',
+        'action'    : 'store_true',
+        'help'      : 'Do not include CL/cl_egl.h, even if it is available'
     }
 )
 ##############################################################################

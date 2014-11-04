@@ -53,11 +53,11 @@ platform_detail_options_description( const std::string & caption
 }
 platform_detail_options_description::
 ~platform_detail_options_description()
-{ 
+{
 }
 void platform_detail_options_description::
 _init_options_description()
-{ 
+{
   using clxx::app::options::value;
   using std::vector;
   using std::string;
@@ -78,7 +78,7 @@ _init_options_description()
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
     , "query for platform extensions?")
   ;
-} 
+}
 
 } } } // end namespace clxx
 

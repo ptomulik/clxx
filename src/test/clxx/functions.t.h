@@ -42,162 +42,466 @@ namespace clxx { class functions_test_suite; }
 class clxx::functions_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test_get_device_ids_1() {{{
-   * \brief Test get_device_ids() on Newton - array version.
+  /** // doc: test_get_platform_ids__success() {{{
+   * \brief Test get_platform_ids() in a normal situation
    */ // }}}
-  void test_get_device_ids_1( )
+  void test_get_platform_ids__success( )
   {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    get_device_ids(p,device_type_t::all,1,devices,NULL);
-    TS_ASSERT_EQUALS(devices[0], T::Newton_clGetDeviceIDs::devices[0]);
+    T::Dummy_clGetPlatformIDs mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(get_platform_ids(0,nullptr,NULL));
+    TS_ASSERT(mock.called_once_with(0,nullptr,NULL));
   }
-  /** // doc: test_get_device_ids_2() {{{
-   * \brief Test get_device_ids() on Newton - array version.
+  /** // doc: test_get_platform_ids__invalid_value() {{{
+   * \brief Test get_platform_ids() in a situation when clGetPlatformIDs() returns CL_INVALID_VALUE
    */ // }}}
-  void test_get_device_ids_2( )
+  void test_get_platform_ids__invalid_value( )
   {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[1];
-    cl_device_id devices[2];
-    get_device_ids(p,device_type_t::all,2,devices,NULL);
-    TS_ASSERT_EQUALS(devices[0], T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(devices[1], T::Newton_clGetDeviceIDs::devices[2]);
-  }
-  /** // doc: test_get_device_ids_invalid_platform() {{{
-   * \brief Test get_device_ids() on Newton when called with invalid platform id.
-   */ // }}}
-  void test_get_device_ids_invalid_platform( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = reinterpret_cast<cl_platform_id>(0x123456);
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,1,devices,NULL), clerror_no<status_t::invalid_platform>);
-  }
-  /** // doc: test_get_device_ids_zero_num_entries() {{{
-   * \brief Test get_device_ids() on Newton when called with num_entries == 0 and devices != NULL.
-   */ // }}}
-  void test_get_device_ids_zero_num_entries( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,0,devices,NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test_get_device_ids_null_devices() {{{
-   * \brief Test get_device_ids() on Newton when called with num_devices == NULL and devices != NULL.
-   */ // }}}
-  void test_get_device_ids_null_devices( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,1,NULL,NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test_get_device_ids_invalid_device_type() {{{
-   * \brief Test get_device_ids() on Newton when called with wrong device type.
-   */ // }}}
-  void test_get_device_ids_invalid_device_type( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,static_cast<device_type_t>(0x34545),1,devices,NULL), clerror_no<status_t::invalid_device_type>);
-  }
-  /** // doc: test_get_device_ids_device_not_found() {{{
-   * \brief Test get_device_ids() on Newton when called with wrong device type.
-   */ // }}}
-  void test_get_device_ids_device_not_found( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[0];
-    cl_device_id devices[1];
-    cl_uint num_devices;
-    get_device_ids(p,device_type_t::accelerator,1,devices,&num_devices);
-    TS_ASSERT_EQUALS(num_devices, 0);
-  }
-  /** // doc: test_get_device_ids_small_buffer() {{{
-   * \brief Test get_device_ids() on Newton when we provide too small buffer.
-   */ // }}}
-  void test_get_device_ids_small_buffer( )
-  {
-    T::Newton_clGetDeviceIDs mock;
-    cl_platform_id p = T::Newton_clGetPlatformIDs::platforms[1];
-    cl_device_id devices[1];
-    TS_ASSERT_THROWS(get_device_ids(p,device_type_t::all,1,devices,NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test_get_platform_ids_1() {{{
-   * \brief Test get_platform_ids() - array version.
-   */ // }}}
-  void test_get_platform_ids_1( )
-  {
-    T::Newton_clGetPlatformIDs mock;
-    cl_platform_id ids[2];
-    get_platform_ids(2, ids, NULL);
-    TS_ASSERT_EQUALS(ids[0], T::Newton_clGetPlatformIDs::platforms[0]);
-    TS_ASSERT_EQUALS(ids[1], T::Newton_clGetPlatformIDs::platforms[1]);
-  }
-  /** // doc: test_get_platform_ids_zero_num_entries() {{{
-   * \brief Test get_platform_ids() - array version with num_entries == 0.
-   */ // }}}
-  void test_get_platform_ids_zero_num_entries( )
-  {
-    T::Newton_clGetPlatformIDs mock;
-    cl_platform_id ids[2];
-    TS_ASSERT_THROWS(get_platform_ids(0, ids, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test_get_platform_ids_nulls() {{{
-   * \brief Test get_platform_ids() - array version num_platforms == NULL and platforms == NULL.
-   */ // }}}
-  void test_get_platform_ids_nulls( )
-  {
-    T::Newton_clGetPlatformIDs mock;
-    TS_ASSERT_THROWS(get_platform_ids(2, NULL, NULL), clerror_no<status_t::invalid_value>);
-  }
-// sorry, but this may irritate OOM instead of throw bad_alloc
-//  /** // doc: test_get_platform_ids_get_platform_ids_negsize() {{{
-//   * \brief Test get_platform_ids() in a situation when clGetPlatformIDs()
-//   *        returns negative num_platforms.
-//   */ // }}}
-//  void test_get_platform_ids_get_platform_ids_negsize( )
-//  {
-//    T::SizeRet_clGetPlatformIDs mock(-32);
-//    TS_ASSERT_THROWS(get_platform_ids(), CLXX_EXCEPTION(Bad_Alloc));
-//  }
-  /** // doc: test_get_platform_ids_invalid_value() {{{
-   * \brief Test get_xxx() in a situation when clGetPlatformIDs() returns
-   *        status_t::invalid_value.
-   */ // }}}
-  void test_get_platform_ids_invalid_value( )
-  {
-    T::ErrRet_clGetPlatformIDs mock(CL_INVALID_VALUE);
+    T::Dummy_clGetPlatformIDs mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(get_platform_ids(0,NULL,NULL), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test_get_platform_ids_out_of_host_memory() {{{
-   * \brief Test get_xxx() in a situation when clGetPlatformIDs() returns
-   *        status_t::out_of_host_memory.
+  /** // doc: test_get_platform_ids__out_of_host_memory() {{{
+   * \brief Test get_platform_ids() in a situation when clGetPlatformIDs() returns CL_OUT_OF_HOST_MEMORY
    */ // }}}
-  void test_get_platform_ids_out_of_host_memory( )
+  void test_get_platform_ids__out_of_host_memory( )
   {
-    T::ErrRet_clGetPlatformIDs mock(CL_OUT_OF_HOST_MEMORY);
+    T::Dummy_clGetPlatformIDs mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(get_platform_ids(0,NULL,NULL), clerror_no<status_t::out_of_host_memory>);
   }
-  /** // doc: test_get_platform_ids_other_error() {{{
-   * \brief Test get_xxx() in a situation when clGetPlatformIDs() returns
-   *        unknown error code.
+  /** // doc: test_get_platform_ids__other_error() {{{
+   * \brief Test get_platform_ids() in a situation when clGetPlatformIDs() returns unexpected error code.
    */ // }}}
-  void test_get_platform_ids_other_error( )
+  void test_get_platform_ids__other_error( )
   {
-    T::ErrRet_clGetPlatformIDs mock(-0x3456);
+    T::Dummy_clGetPlatformIDs mock(-0x3456);
     TS_ASSERT_THROWS(get_platform_ids(0,NULL,NULL), unexpected_clerror);
   }
-  /** // doc: test_get_platform_info_null_id() {{{
-   * \brief Test get_platform_info(platform_info_t::profile, ...) on platform object having wrong id.
+  /** // doc: test_get_platform_info__success() {{{
+   * \brief Test get_platform_info()
    */ // }}}
-  void test_get_platform_info_null_id( )
+  void test_get_platform_info__success( )
   {
-    T::Newton_clGetPlatformInfo mock;
-    TS_ASSERT_THROWS(get_platform_info(NULL, platform_info_t::profile, 0, NULL, NULL), clerror_no<status_t::invalid_platform>);
+    T::Dummy_clGetPlatformInfo mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(get_platform_info((cl_platform_id)NULL, static_cast<platform_info_t>(0), 0, nullptr, nullptr));
+    TS_ASSERT(mock.called_once_with((cl_platform_id)NULL, (cl_platform_info)0, 0, nullptr, nullptr));
+  }
+  /** // doc: test_get_platform_info__invalid_platform() {{{
+   * \brief Test get_platform_info() in a situation when clGetPlatformInfo() returns CL_INVALID_PLATFORM
+   */ // }}}
+  void test_get_platform_info__invalid_platform( )
+  {
+    T::Dummy_clGetPlatformInfo mock(CL_INVALID_PLATFORM);
+    TS_ASSERT_THROWS(get_platform_info((cl_platform_id)NULL, static_cast<platform_info_t>(0), 0, nullptr, nullptr), clerror_no<status_t::invalid_platform>);
+  }
+  /** // doc: test_get_platform_info__invalid_value() {{{
+   * \brief Test get_platform_info() in a situation when clGetPlatformInfo() returns CL_INVALID_VALUE
+   */ // }}}
+  void test_get_platform_info__invalid_value( )
+  {
+    T::Dummy_clGetPlatformInfo mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_platform_info((cl_platform_id)NULL, static_cast<platform_info_t>(0), 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_get_platform_info__out_of_host_memory() {{{
+   * \brief Test get_platform_info() in a situation when clGetPlatformInfo() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_get_platform_info__out_of_host_memory( )
+  {
+    T::Dummy_clGetPlatformInfo mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_platform_info((cl_platform_id)NULL, static_cast<platform_info_t>(0), 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_platform_info__other_error() {{{
+   * \brief Test get_platform_info() in a situation when clGetPlatformInfo() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_get_platform_info__other_error( )
+  {
+    T::Dummy_clGetPlatformInfo mock(-0x3456);
+    TS_ASSERT_THROWS(get_platform_info((cl_platform_id)NULL, static_cast<platform_info_t>(0), 0, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_get_device_ids__success() {{{
+   * \brief Test get_device_ids()
+   */ // }}}
+  void test_get_device_ids__success( )
+  {
+    T::Dummy_clGetDeviceIDs mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr));
+    TS_ASSERT(mock.called_once_with((cl_platform_id)NULL, CL_DEVICE_TYPE_ALL, 0, nullptr, nullptr));
+  }
+  /** // doc: test_get_device_ids__invalid_platform() {{{
+   * \brief Test get_device_ids() in a situation when clGetDeviceIDs() returns CL_INVALID_PLATFORM
+   */ // }}}
+  void test_get_device_ids__invalid_platform()
+  {
+    T::Dummy_clGetDeviceIDs mock(CL_INVALID_PLATFORM);
+    TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), clerror_no<status_t::invalid_platform>);
+  }
+  /** // doc: test_get_device_ids__invalid_device_type() {{{
+   * \brief Test get_device_ids() in a situation when clGetDeviceIDs() returns CL_INVALID_DEVICE_TYPE
+   */ // }}}
+  void test_get_device_ids__invalid_device_type()
+  {
+    T::Dummy_clGetDeviceIDs mock(CL_INVALID_DEVICE_TYPE);
+    TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), clerror_no<status_t::invalid_device_type>);
+  }
+  /** // doc: test_get_device_ids__invalid_value() {{{
+   * \brief Test get_device_ids() in a situation when clGetDeviceIDs() returns CL_INVALID_VALUE
+   */ // }}}
+  void test_get_device_ids__invalid_value()
+  {
+    T::Dummy_clGetDeviceIDs mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_get_device_ids__device_not_found() {{{
+   * \brief Test get_device_ids() in a situation when clGetDeviceIDs() returns CL_DEVICE_NOT_FOUND
+   */ // }}}
+  void test_get_device_ids__device_not_found()
+  {
+    T::Dummy_clGetDeviceIDs mock(CL_DEVICE_NOT_FOUND);
+    //TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), clerror_no<status_t::device_not_found>);
+    TS_ASSERT_THROWS_NOTHING(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr));
+  }
+  /** // doc: test_get_device_ids__out_of_resources() {{{
+   * \brief Test get_device_ids() in a situation when clGetDeviceIDs() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_get_device_ids__out_of_resources()
+  {
+    T::Dummy_clGetDeviceIDs mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_get_device_ids__out_of_host_memory() {{{
+   * \brief Test get_device_ids() in a situation when clGetDeviceIDs() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_get_device_ids__out_of_host_memory()
+  {
+    T::Dummy_clGetDeviceIDs mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_device_ids__other_error() {{{
+   * \brief Test get_device_ids() in a situation when clGetDeviceIDs() returns an unexpected error code
+   */ // }}}
+  void test_get_device_ids__other_error()
+  {
+    T::Dummy_clGetDeviceIDs mock(-0x3456);
+    TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_get_device_info__success() {{{
+   * \brief Test get_device_info() in a normal situation
+   */ // }}}
+  void test_get_device_info__success()
+  {
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr));
+    TS_ASSERT(mock.called_once_with((cl_device_id)NULL, CL_DEVICE_VENDOR_ID, 0, nullptr, nullptr));
+  }
+  /** // doc: test_get_device_info__invalid_device() {{{
+   * \brief Test get_device_info() in a situation when clGetDeviceInfo() returns CL_INVALID_DEVICE
+   */ // }}}
+  void test_get_device_info__invalid_device()
+  {
+    T::Dummy_clGetDeviceInfo mock(CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr), clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_get_device_info__invalid_value() {{{
+   * \brief Test get_device_info() in a situation when clGetDeviceInfo() returns CL_INVALID_VALUE
+   */ // }}}
+  void test_get_device_info__invalid_value()
+  {
+    T::Dummy_clGetDeviceInfo mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_get_device_info__out_of_resources() {{{
+   * \brief Test get_device_info() in a situation when clGetDeviceInfo() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_get_device_info__out_of_resources()
+  {
+    T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_get_device_info__out_of_host_memory() {{{
+   * \brief Test get_device_info() in a situation when clGetDeviceInfo() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_get_device_info__out_of_host_memory()
+  {
+    T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_device_info__other_error() {{{
+   * \brief Test get_device_info() in a situation when clGetDeviceInfo() returns an unexpected error code
+   */ // }}}
+  void test_get_device_info__other_error()
+  {
+    T::Dummy_clGetDeviceInfo mock(-0x3456);
+    TS_ASSERT_THROWS(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_create_context__success() {{{
+   * \brief Test create_context() in a normal situation.
+   */ // }}}
+  void test_create_context__success( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)0x1234, CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr));
+    //TS_ASSERT(mock.called_once_with(nullptr,0,nullptr,nullptr,nullptr,??? - local variable within create_context(...){...}));
+  }
+  /** // doc: test_create_context__invalid_platform() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_INVALID_PLATFORM.
+   */ // }}}
+  void test_create_context__invalid_platform( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_INVALID_PLATFORM);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::invalid_platform>);
+  }
+  /** // doc: test_create_context__invalid_property() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_INVALID_PROPERTY.
+   */ // }}}
+  void test_create_context__invalid_property( )
+  {
+#if CL_VERSION_1_1
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_INVALID_PROPERTY);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::invalid_property>);
+#endif
+  }
+  /** // doc: test_create_context__invalid_operation() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_INVALID_OPERATION.
+   */ // }}}
+  void test_create_context__invalid_operation( )
+  {
+#if CL_VERSION_1_1
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_INVALID_OPERATION);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::invalid_operation>);
+#endif
+  }
+  /** // doc: test_create_context__invalid_value() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_INVALID_VALUE.
+   */ // }}}
+  void test_create_context__invalid_value( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_create_context__invalid_device() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_INVALID_DEVICE.
+   */ // }}}
+  void test_create_context__invalid_device( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_create_context__device_not_available() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_DEVICE_NOT_AVAILABLE.
+   */ // }}}
+  void test_create_context__device_not_available( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_DEVICE_NOT_AVAILABLE);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::device_not_available>);
+  }
+  /** // doc: test_create_context__out_of_resources() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_OUT_OF_RESOURCES.
+   */ // }}}
+  void test_create_context__out_of_resources( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_create_context__out_of_host_memory() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns CL_OUT_OF_HOST_MEMORY.
+   */ // }}}
+  void test_create_context__out_of_host_memory( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_create_context__other_error() {{{
+   * \brief Test create_context() in a situation when clCreateContext() returns an unexpected error code.
+   */ // }}}
+  void test_create_context__other_error( )
+  {
+    T::Dummy_clCreateContext mock((cl_context)NULL, -0x3456);
+    TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), unexpected_clerror);
+  }
+  /** // doc: test_create_context_from_type__success() {{{
+   * \brief Test create_context_from_type().
+   */ // }}}
+  void test_create_context_from_type__success( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)0x1234, CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr));
+  }
+  /** // doc: test_create_context_from_type__invalid_platform() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_PLATFORM.
+   */ // }}}
+  void test_create_context_from_type__invalid_platform( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_PLATFORM);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_platform>);
+  }
+  /** // doc: test_create_context_from_type__invalid_property() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_PROPERTY.
+   */ // }}}
+  void test_create_context_from_type__invalid_property( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_PROPERTY);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_property>);
+  }
+  /** // doc: test_create_context_from_type__invalid_value() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_VALUE.
+   */ // }}}
+  void test_create_context_from_type__invalid_value( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_create_context_from_type__invalid_device_type() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_DEVICE_TYPE.
+   */ // }}}
+  void test_create_context_from_type__invalid_device_type( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_DEVICE_TYPE);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_device_type>);
+  }
+  /** // doc: test_create_context_from_type__device_not_available() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_DEVICE_NOT_AVAILABLE.
+   */ // }}}
+  void test_create_context_from_type__device_not_available( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_DEVICE_NOT_AVAILABLE);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::device_not_available>);
+  }
+  /** // doc: test_create_context_from_type__out_of_resources() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_OUT_OF_RESOURCES.
+   */ // }}}
+  void test_create_context_from_type__out_of_resources( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_create_context_from_type__out_of_host_memory() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_OUT_OF_HOST_MEMORY.
+   */ // }}}
+  void test_create_context_from_type__out_of_host_memory( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_create_context_from_type__other_error() {{{
+   * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns an unexpected error code.
+   */ // }}}
+  void test_create_context_from_type__other_error( )
+  {
+    T::Dummy_clCreateContextFromType mock((cl_context)NULL, -0x3456);
+    TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), unexpected_clerror);
+  }
+  /** // doc: test_retain_context__success() {{{
+   * \brief Test retain_context() in a normal situation
+   */ // }}}
+  void test_retain_context__success( )
+  {
+    T::Dummy_clRetainContext mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(retain_context((cl_context)NULL));
+    TS_ASSERT(mock.called_once_with((cl_context)NULL));
+  }
+  /** // doc: test_retain_context__invalid_context() {{{
+   * \brief Test retain_context() in a situation when clRetainContext() returns CL_INVALID_CONTEXT
+   */ // }}}
+  void test_retain_context__invalid_context( )
+  {
+    T::Dummy_clRetainContext mock(CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(retain_context((cl_context)NULL), clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_retain_context__out_of_resources() {{{
+   * \brief Test retain_context() in a situation when clRetainContext() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_retain_context__out_of_resources( )
+  {
+    T::Dummy_clRetainContext mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(retain_context((cl_context)NULL), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_retain_context__out_of_host_memory() {{{
+   * \brief Test retain_context() in a situation when clRetainContext() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_retain_context__out_of_host_memory( )
+  {
+    T::Dummy_clRetainContext mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(retain_context((cl_context)NULL), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_release_context__success() {{{
+   * \brief Test release_context() in a normal situation
+   */ // }}}
+  void test_release_context__success( )
+  {
+    T::Dummy_clReleaseContext mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(release_context((cl_context)NULL));
+    TS_ASSERT(mock.called_once_with((cl_context)NULL));
+  }
+  /** // doc: test_release_context__invalid_context() {{{
+   * \brief Test release_context() in a situation when clReleaseContext() returns CL_INVALID_CONTEXT
+   */ // }}}
+  void test_release_context__invalid_context( )
+  {
+    T::Dummy_clReleaseContext mock(CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(release_context((cl_context)NULL), clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_release_context__out_of_resources() {{{
+   * \brief Test release_context() in a situation when clReleaseContext() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_release_context__out_of_resources( )
+  {
+    T::Dummy_clReleaseContext mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(release_context((cl_context)NULL), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_release_context__out_of_host_memory() {{{
+   * \brief Test release_context() in a situation when clReleaseContext() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_release_context__out_of_host_memory( )
+  {
+    T::Dummy_clReleaseContext mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(release_context((cl_context)NULL), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_context_info__success() {{{
+   * \brief Test get_context_info() in a normal situation
+   */ // }}}
+  void test_get_context_info__success( )
+  {
+    T::Dummy_clGetContextInfo mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr));
+    TS_ASSERT(mock.called_once_with((cl_context)NULL, CL_CONTEXT_REFERENCE_COUNT, 0, nullptr, nullptr));
+  }
+  /** // doc: test_get_context_info__invalid_context() {{{
+   * \brief Test get_context_info() in a situation when clGetContextInfo() returns CL_INVALID_CONTEXT
+   */ // }}}
+  void test_get_context_info__invalid_context( )
+  {
+    T::Dummy_clGetContextInfo mock(CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_get_context_info__invalid_value() {{{
+   * \brief Test get_context_info() in a situation when clGetContextInfo() returns CL_INVALID_VALUE
+   */ // }}}
+  void test_get_context_info__invalid_value( )
+  {
+    T::Dummy_clGetContextInfo mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_get_context_info__out_of_resources() {{{
+   * \brief Test get_context_info() in a situation when clGetContextInfo() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_get_context_info__out_of_resources( )
+  {
+    T::Dummy_clGetContextInfo mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_get_context_info__out_of_host_memory() {{{
+   * \brief Test get_context_info() in a situation when clGetContextInfo() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_get_context_info__out_of_host_memory( )
+  {
+    T::Dummy_clGetContextInfo mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_context_info__other_error() {{{
+   * \brief Test get_context_info() in a situation when clGetContextInfo() returns an unexpected error code.
+   */ // }}}
+  void test_get_context_info__other_error( )
+  {
+    T::Dummy_clGetContextInfo mock(-0x3456);
+    TS_ASSERT_THROWS(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
   }
 };
 

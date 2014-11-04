@@ -44,9 +44,9 @@ namespace clxx {
  *
  * This class provides access to OpenCL device information equivalent to
  * OpenCL's \c clGetDeviceInfo(), but:
- * 
+ *
  * - it has easy to use, type-safe c++ interface,
- * - whenever necessary, returns \c std::strig, \c std::vector and so on,
+ * - whenever necessary, returns \c std::string, \c std::vector and so on,
  *   instead of operating on plain C buffers/arrays,
  * - replaces OpenCL error codes with exceptions (see \ref clxx_exceptions).
  *
@@ -157,8 +157,7 @@ public:
    */ // }}}
   device() noexcept
     :_device_id(NULL)
-  {
-  }
+  { }
   /** // {{{
    * \brief Copy constructor
    *
@@ -166,8 +165,7 @@ public:
    */ // }}}
   device(device const& rhs) noexcept
     : _device_id(rhs.id())
-  {
-  }
+  { }
   /** // {{{
    * \brief Converting constructor.
    *
@@ -175,14 +173,12 @@ public:
    */ // }}}
   explicit device(cl_device_id devid) noexcept
     : _device_id(devid)
-  {
-  }
+  { }
   /** // {{{
    * \brief Destructor
    */ // }}}
-  ~device()
-  {
-  }
+  ~device() noexcept
+  { }
   /** // {{{
    * \brief Assignment operator.
    * \return Reference to this object.
@@ -275,7 +271,7 @@ public:
    * \throws  clxx::clerror_no<clxx::status_t::out_of_host_memory>
    *   when \c clGetDeviceInfo() returns \c CL_OUT_OF_HOST_MEMORY.
    * \throws  clxx::unexpected_clerror
-   *   when \c clGetDeviceInfo() returns any other error code. 
+   *   when \c clGetDeviceInfo() returns any other error code.
    *
    */ // }}}
   void get_info( device_info_t name, size_t value_size, void* value,

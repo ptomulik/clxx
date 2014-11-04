@@ -46,7 +46,7 @@
  *
  * The macro defines all the bitwise operators necessary for a given (enum)
  * type to behave as a bitmask. The macro implementation follows guidelines
- * given in the \c 17.5.2.1.3 of 
+ * given in the \c 17.5.2.1.3 of
  * <a href="https://isocpp.org/files/papers/N3690.pdf">C++11 standard draft (N3690)</a>.
  *
  * \param [in] __t enum type,
@@ -58,7 +58,7 @@
  * **Example**:
  *
  * \code
- * enum class flags_t : int 
+ * enum class flags_t : int
  *   {
  *     f1 = 1,
  *     f2 = 2,
@@ -106,7 +106,7 @@
  *
  * **Example**:
  * \code
- * enum class flags_t : int 
+ * enum class flags_t : int
  *   {
  *     f0 = 0,
  *     f1 = 1,
@@ -148,7 +148,7 @@
  *
  * **Example**:
  * \code
- * enum class flags_t : int 
+ * enum class flags_t : int
  *   {
  *     f0 = 0,
  *     f1 = 1,
@@ -187,7 +187,7 @@
  *
  * **Example**:
  * \code
- * enum class flags_t : int 
+ * enum class flags_t : int
  *   {
  *     f0 = 0,
  *     f1 = 1,
@@ -233,7 +233,7 @@
  *
  * **Example**:
  * \code
- * enum class flags_t : int 
+ * enum class flags_t : int
  *   {
  *     f0 = 0,
  *     f1 = 1,

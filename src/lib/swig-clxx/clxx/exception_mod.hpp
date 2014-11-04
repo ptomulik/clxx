@@ -30,7 +30,8 @@
 #define CLXX_EXCEPTION_MOD_HPP_INCLUDED
 
 // module core
-#include <clxx/exception_base.hpp>
+//#include <clxx/exception_base.hpp>
+#include <clxx/exceptions.hpp>
 
 // dependencies from other modules
 #include <clxx/std/string_mod.hpp>

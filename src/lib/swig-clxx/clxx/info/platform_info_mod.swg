@@ -26,12 +26,14 @@
  */ // }}}
 %import <clxx/swig_config.swg>
 
+// XXX: we need these here, before other modules are included
+%include <std_vector.i>
+%include <std_string.i>
+
 %import <clxx/types_mod.swg>
 %{
 #include <clxx/types_mod.hpp>
 %}
-
-%import <clxx/std/string_mod.swg>
 
 %include <clxx/shared_ptr.swg>
 %include <clxx/info/platform_layer_info.swg>

@@ -92,7 +92,7 @@
  * \section clxx_exceptions_developer_view Developer's view
  *
  * Developers should derive new exceptions from clxx::exception_base. It takes
- * a base exception class as the first template argument. The clxx::exception 
+ * a base exception class as the first template argument. The clxx::exception
  * is the first candidate to be put here,
  * \code
  * struct fooerror1

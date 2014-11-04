@@ -21,7 +21,7 @@
 Import('env')
 
 ## from SCons.Util import CLVar
-## 
+##
 ## objects = env.SharedObject([
 ##     'platform.cpp',
 ##     'platforms.cpp',
@@ -29,21 +29,21 @@ Import('env')
 ##     'devices.cpp',
 ##     'platform_layer.cpp'
 ## ])
-## 
+##
 ## libs = CLVar('OpenCL clxx_info')
 ## # rlib - "real" libarary
 ## rlib = env.SharedLibrary('../../clxx', objects + ['real.cpp'], LIBS = libs)
-## 
+##
 ## # tlib - library for testing (OpenCL functions replaced with mocks)
 ## tlib = env.SharedLibrary('../../clxx_test', objects + ['mock.cpp'], LIBS = libs)
 ## env.Ignore('../../..', tlib)
-## 
+##
 ## ilib = env.Install('${libdir}', rlib)
 ## env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
-## 
+##
 ## ihdr = env.Install("${includedir}/clxx/cl", env.Glob("*.hpp"))
 ## env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/cl", ihdr)
-## 
+##
 ## env.Alias('install-libclxx-headers', ihdr)
 ## env.Alias('install-libclxx-lib', ilib)
 ## env.Alias('install-libclxx-dev', ['install-libclxx-headers', 'install-libclxx-lib' ])

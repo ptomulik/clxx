@@ -27,20 +27,27 @@
 
 %import <clxx/swig_config.swg>
 
-%import  <clxx/exception_mod.i>
-%import  <clxx/cl/opencl1_0.i>
-%import  <clxx/info/platform_info_mod.i>
+// XXX: we need them here, before other files are included
+%include <std_vector.i>
+%include <std_string.i>
+
+%import <clxx/types_mod.i>
+%import <clxx/exception_mod.i>
+%import <clxx/cl/opencl1_0.i>
+%import <clxx/info/platform_info_mod.i>
 
 %{
+// dependencies
+#include <clxx/types_mod.hpp>
 #include <clxx/exception_mod.hpp>
 #include <clxx/cl/opencl_mod.hpp>
 #include <clxx/info/platform_info_mod.hpp>
 %}
 
-%include <clxx/device_.swg>
 %include <clxx/platform_.swg>
-%include <clxx/devices.swg>
+%include <clxx/device_.swg>
 %include <clxx/platforms.swg>
+%include <clxx/devices.swg>
 %include <clxx/platform_layer.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

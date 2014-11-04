@@ -29,12 +29,12 @@
 #include <clxx/devices.hpp>
 %}
 
-%include <clxx/device.swg>
-%include <clxx/platform.swg>
+//%include <clxx/device.swg>
+//%include <clxx/platform.swg>
 %include <std_vector.i>
-%template() std::vector<clxx::device>;
-// TODO: investigate what's wrong with the following
-//%template() std::vector<cl_device_id>; // used by get_device_ids();
+%template() std::vector<cl_device_id>; // used by get_device_ids();
+%template(devices) std::vector<clxx::device>;
+%ignore clxx::devices;
 %include <clxx/devices.hpp>
 
 

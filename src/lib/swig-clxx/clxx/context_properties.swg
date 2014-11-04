@@ -26,9 +26,30 @@
  */ // }}}
 
 %{
-#include <clxx/cl/context_properties.hpp>
+#include <clxx/context_properties.hpp>
 %}
-%include <clxx/cl/context_properties.hpp>
+%include <std_vector.i>
+%template (context_properties) std::vector<clxx::context_property>;
+%include <clxx/context_properties.hpp>
+
+namespace clxx {
+  inline context_properties make_context_properties(context_property const&);
+  inline context_properties make_context_properties(context_property const&, context_property const&);
+  inline context_properties make_context_properties(context_property const&, context_property const&, context_property const&);
+  inline context_properties make_context_properties(context_property const&, context_property const&, context_property const&, context_property const&);
+
+  inline context_properties make_context_properties(platform const&);
+  inline context_properties make_context_properties(platform const&, context_property const&);
+  inline context_properties make_context_properties(platform const&, context_property const&, context_property const&);
+  inline context_properties make_context_properties(platform const&, context_property const&, context_property const&, context_property const&);
+
+  inline context_properties make_context_properties(context_properties const&);
+  inline context_properties make_context_properties(context_properties const&, context_property const&);
+  inline context_properties make_context_properties(context_properties const&, context_property const&, context_property const&);
+  inline context_properties make_context_properties(context_properties const&, context_property const&, context_property const&, context_property const&);
+
+  inline context_properties make_context_properties(platform const&, context_properties const&);
+};
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

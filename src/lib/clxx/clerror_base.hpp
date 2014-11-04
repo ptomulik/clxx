@@ -120,7 +120,7 @@ template < status_t Code, class StdExcept>
      *
      * Passes the default message string to the underlying standard exception.
      */ // }}}
-    clerror_base() 
+    clerror_base()
       : exception_base<clerror, StdExcept, char const*>(static_what)
     { }
     /** // doc: code() {{{

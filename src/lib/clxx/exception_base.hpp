@@ -55,7 +55,7 @@ namespace clxx {
  *
  * The **StdCtorArg** should be set to std_except_no_ctor_arg_tag for standard
  * exceptions having only default constructors (without arguments), such as
- * \c std::bad_alloc. 
+ * \c std::bad_alloc.
  *
  * The basic usage is the following:
  * 1. Include necessary headers:
@@ -74,7 +74,7 @@ namespace clxx {
  *
  *    \snippet exception4.cpp ExceptionDefinition
  */ // }}}
-template < class ClxxExcept 
+template < class ClxxExcept
          , class StdExcept
          , class StdCtorArg = typename std_except_ctor_arg<StdExcept>::type >
   struct exception_base

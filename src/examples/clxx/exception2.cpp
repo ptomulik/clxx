@@ -28,7 +28,7 @@
  * \example exception2.cpp
  * This example illustrates the basic technique for extending the hierarchy of
  * clxx exceptions. We define new exception class named \c exception2 which
- * derives directly from clxx::exception and std::bad_alloc. 
+ * derives directly from clxx::exception and std::bad_alloc.
  */ // }}}
 
 // [Includes]
@@ -80,7 +80,7 @@ int main()
     std::cout << "C. caught std::bad_alloc: " << e.what() << std::endl;
   }
   // [CatchStdRuntimeError]
-  
+
   // [CatchStdException]
   try {
     throw clxx::exception2();
@@ -88,7 +88,7 @@ int main()
     std::cout << "D. caught std::exception: " << e.what() << std::endl;
   }
   // [CatchStdException]
-  
+
   // [CatchHierarchy]
   try {
     throw clxx::exception2();

@@ -26,9 +26,9 @@
  */ // }}}
 
 %{
-#include <clxx/cl/context.hpp>
+#include <clxx/context.hpp>
 %}
-%include <clxx/cl/context.hpp>
+%include <clxx/context.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

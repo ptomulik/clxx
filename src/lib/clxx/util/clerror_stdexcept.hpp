@@ -234,6 +234,77 @@ template<>
   struct clerror_stdexcept<status_t::invalid_device_partition_count>
   { typedef std::invalid_argument type; };
 #endif
+#if cl_khr_d3d10_sharing
+template<>
+  struct clerror_stdexcept<status_t::invalid_d3d10_device_khr>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::invalid_d3d10_resource_khr>
+  { typedef std::invalid_argument type; };
+#endif
+#if cl_khr_icd
+template<>
+  struct clerror_stdexcept<status_t::platform_not_found_khr>
+  { typedef std::runtime_error type; };
+#endif
+#if cl_ext_device_fission
+template<>
+  struct clerror_stdexcept<status_t::device_partition_failed_ext>
+  { typedef std::runtime_error type; };
+template<>
+  struct clerror_stdexcept<status_t::invalid_partition_count_ext>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::invalid_partition_name_ext>
+  { typedef std::invalid_argument type; };
+#endif
+#if cl_khr_gl_sharing
+template<>
+  struct clerror_stdexcept<status_t::invalid_gl_sharegroup_reference_khr>
+  { typedef std::invalid_argument type; };
+#endif
+#if cl_khr_dx9_media_sharing
+template<>
+  struct clerror_stdexcept<status_t::invalid_dx9_media_adapter_khr>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::invalid_dx9_media_surface_khr>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::dx9_media_surface_already_acquired_khr>
+  { typedef std::runtime_error type; };
+template<>
+  struct clerror_stdexcept<status_t::dx9_media_surface_not_acquired_khr>
+  { typedef std::runtime_error type; };
+#endif
+#if cl_khr_d3d10_sharing
+template<>
+  struct clerror_stdexcept<status_t::invalid_d3d10_device_khr>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::invalid_d3d10_resource_khr>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::d3d10_resource_already_acquired_khr>
+  { typedef std::runtime_error type; };
+template<>
+  struct clerror_stdexcept<status_t::d3d10_resource_not_acquired_khr>
+  { typedef std::runtime_error type; };
+#endif
+#if cl_khr_d3d11_sharing
+template<>
+  struct clerror_stdexcept<status_t::invalid_d3d11_device_khr>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::invalid_d3d11_resource_khr>
+  { typedef std::invalid_argument type; };
+template<>
+  struct clerror_stdexcept<status_t::d3d11_resource_already_acquired_khr>
+  { typedef std::runtime_error type; };
+template<>
+  struct clerror_stdexcept<status_t::d3d11_resource_not_acquired_khr>
+  { typedef std::runtime_error type; };
+#endif
 /** \endcond */
 
 } // end namespace clxx

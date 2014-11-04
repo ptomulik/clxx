@@ -354,7 +354,7 @@ public:
    */ // }}}
   void test_out_of_host_memory( )
   {
-    T::ErrRet_clGetPlatformInfo mock(CL_OUT_OF_HOST_MEMORY);
+    T::Dummy_clGetPlatformInfo mock(CL_OUT_OF_HOST_MEMORY);
     platform p(reinterpret_cast<cl_platform_id>(0x34556ul));
     TS_ASSERT_THROWS(p.get_profile(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(p.get_version(), clerror_no<status_t::out_of_host_memory>);
@@ -367,7 +367,7 @@ public:
    */ // }}}
   void test_other_error( )
   {
-    T::ErrRet_clGetPlatformInfo mock(-0x432534);
+    T::Dummy_clGetPlatformInfo mock(-0x432534);
     platform p(reinterpret_cast<cl_platform_id>(0x34556ul));
     TS_ASSERT_THROWS(p.get_profile(), unexpected_clerror);
     TS_ASSERT_THROWS(p.get_version(), unexpected_clerror);

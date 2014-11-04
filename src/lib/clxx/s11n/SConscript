@@ -25,7 +25,7 @@ from SCons.Util import CLVar
 libs =  CLVar('clxx_info boost_serialization')
 
 # rlib - "real" library
-lib = env.SharedLibrary('../../clxx_s11n', 
+lib = env.SharedLibrary('../../clxx_s11n',
     [ 'platform_info.cpp'
     , 'platform_query.cpp'
     , 'device_info.cpp'

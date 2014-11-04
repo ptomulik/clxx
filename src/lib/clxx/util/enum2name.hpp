@@ -105,6 +105,35 @@ enum2name(status_t x, char const* dflt = nullptr) noexcept
           (x == status_t::invalid_linker_options) ? "invalid_linker_options" :
           (x == status_t::invalid_device_partition_count) ? "invalid_device_partition_count" :
 #endif
+#if cl_khr_icd
+          (x == status_t::platform_not_found_khr) ? "platform_not_found_khr" :
+#endif
+#if cl_ext_device_fission
+          (x == status_t::device_partition_failed_ext) ? "device_partition_failed_ext" :
+          (x == status_t::invalid_partition_count_ext) ? "invalid_partition_count_ext" :
+          (x == status_t::invalid_partition_name_ext) ? "invalid_partition_name_ext" :
+#endif
+#if cl_khr_gl_sharing
+          (x == status_t::invalid_gl_sharegroup_reference_khr) ? "invalid_gl_sharegroup_reference_khr" :
+#endif
+#if cl_khr_dx9_media_sharing
+          (x == status_t::invalid_dx9_media_adapter_khr) ? "invalid_dx9_media_adapter_khr" :
+          (x == status_t::invalid_dx9_media_surface_khr) ? "invalid_dx9_media_surface_khr" :
+          (x == status_t::dx9_media_surface_already_acquired_khr) ? "dx9_media_surface_already_acquired_khr" :
+          (x == status_t::dx9_media_surface_not_acquired_khr) ? "dx9_media_surface_not_acquired_khr" :
+#endif
+#if cl_khr_d3d10_sharing
+          (x == status_t::invalid_d3d10_device_khr) ? "invalid_d3d10_device_khr" :
+          (x == status_t::invalid_d3d10_resource_khr) ? "invalid_d3d10_resource_khr" :
+          (x == status_t::d3d10_resource_already_acquired_khr) ? "d3d10_resource_already_acquired_khr" :
+          (x == status_t::d3d10_resource_not_acquired_khr) ? "d3d10_resource_not_acquired_khr" :
+#endif
+#if cl_khr_d3d11_sharing
+          (x == status_t::invalid_d3d11_device_khr) ? "invalid_d3d11_device_khr" :
+          (x == status_t::invalid_d3d11_resource_khr) ? "invalid_d3d11_resource_khr" :
+          (x == status_t::d3d11_resource_already_acquired_khr) ? "d3d11_resource_already_acquired_khr" :
+          (x == status_t::d3d11_resource_not_acquired_khr) ? "d3d11_resource_not_acquired_khr" :
+#endif
           dflt;
 }
 /* ------------------------------------------------------------------------ */
@@ -293,6 +322,24 @@ enum2name(context_properties_t x, char const* dflt = nullptr) noexcept
   return  (x == context_properties_t::platform) ? "platform" :
 #if CL_VERSION_1_2
           (x == context_properties_t::interop_user_sync) ? "interop_user_sync" :
+#endif
+#if cl_khr_gl_sharing
+          (x == context_properties_t::gl_context_khr) ? "gl_context_khr" :
+          (x == context_properties_t::egl_display_khr) ? "egl_display_khr" :
+          (x == context_properties_t::glx_display_khr) ? "glx_display_khr" :
+          (x == context_properties_t::wgl_hdc_khr) ? "wgl_hdc_khr" :
+          (x == context_properties_t::cgl_sharegroup_khr) ? "cgl_sharegroup_khr" :
+#endif
+#if cl_khr_dx9_media_sharing
+          (x == context_properties_t::adapter_d3d9_khr) ? "adapter_d3d9_khr" :
+          (x == context_properties_t::adapter_d3d9ex_khr) ? "adapter_d3d9ex_khr" :
+          (x == context_properties_t::adapter_dxva_khr) ? "adapter_dxva_khr" :
+#endif
+#if cl_khr_d3d10_sharing
+          (x == context_properties_t::d3d10_device_khr) ? "d3d10_device_khr" :
+#endif
+#if cl_khr_d3d11_sharing
+          (x == context_properties_t::d3d11_device_khr) ? "d3d11_device_khr" :
 #endif
           dflt;
 }

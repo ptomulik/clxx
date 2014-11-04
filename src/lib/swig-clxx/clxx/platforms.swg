@@ -28,11 +28,11 @@
 %{
 #include <clxx/platforms.hpp>
 %}
-%include <clxx/platform.swg>
+//%include <clxx/platform.swg>
 %include <std_vector.i>
-%template() std::vector<clxx::platform>;
-// TODO: investigate what's wrong with the following
-//%template() std::vector<cl_platform_id>; // used by get_platform_ids();
+%template() std::vector<cl_platform_id>; // used by get_platform_ids();
+%template(platforms) std::vector<clxx::platform>;
+%ignore clxx::platforms;
 %include <clxx/platforms.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

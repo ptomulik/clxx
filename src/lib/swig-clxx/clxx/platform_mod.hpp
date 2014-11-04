@@ -35,11 +35,14 @@
 #include <clxx/platform.hpp>
 #include <clxx/platforms.hpp>
 #include <clxx/platform_layer.hpp>
+#include <clxx/context_property.hpp>
+#include <clxx/context_properties.hpp>
 
 // dependencies
-//#include <clxx/cl/types_mod.hpp>
+#include <clxx/types_mod.hpp>
 #include <clxx/exception_mod.hpp>
 #include <clxx/cl/opencl_mod.hpp>
+#include <clxx/info/platform_info_mod.hpp>
 
 #endif /* CLXX_CL_PLATFORM_MOD_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

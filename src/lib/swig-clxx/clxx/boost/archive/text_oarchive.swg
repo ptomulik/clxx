@@ -37,7 +37,7 @@ namespace boost {
 namespace archive {
 class text_oarchive;
 %template(interface_oarchive_T_text_oarchive) detail::interface_oarchive<text_oarchive>;
-class text_oarchive 
+class text_oarchive
   : public detail::interface_oarchive<text_oarchive>
   {
   public:

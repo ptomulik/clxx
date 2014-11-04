@@ -112,6 +112,35 @@ public:
     TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_linker_options),"invalid linker options");
     TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_device_partition_count),"invalid device partition count");
 #endif
+#if cl_khr_icd
+    TS_ASSERT_EQUALS(enum2cstr(status_t::platform_not_found_khr),"platform not found khr");
+#endif
+#if cl_ext_device_fission
+    TS_ASSERT_EQUALS(enum2cstr(status_t::device_partition_failed_ext),"device partition failed ext");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_partition_count_ext),"invalid partition count ext");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_partition_name_ext),"invalid partition name ext");
+#endif
+#if cl_khr_gl_sharing
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_gl_sharegroup_reference_khr),"invalid gl sharegroup reference khr");
+#endif
+#if cl_khr_dx9_media_sharing
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_dx9_media_adapter_khr),"invalid dx9 media adapter khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_dx9_media_surface_khr),"invalid dx9 media surface khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::dx9_media_surface_already_acquired_khr),"dx9 media surface already acquired khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::dx9_media_surface_not_acquired_khr),"dx9 media surface not acquired khr");
+#endif
+#if cl_khr_d3d10_sharing
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_d3d10_device_khr),"invalid d3d10 device khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_d3d10_resource_khr),"invalid d3d10 resource khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::d3d10_resource_already_acquired_khr),"d3d10 resource already acquired khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::d3d10_resource_not_acquired_khr),"d3d10 resource not acquired khr");
+#endif
+#if cl_khr_d3d11_sharing
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_d3d11_device_khr),"invalid d3d11 device khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::invalid_d3d11_resource_khr),"invalid d3d11 resource khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::d3d11_resource_already_acquired_khr),"d3d11 resource already acquired khr");
+    TS_ASSERT_EQUALS(enum2cstr(status_t::d3d11_resource_not_acquired_khr),"d3d11 resource not acquired khr");
+#endif
     TS_ASSERT_EQUALS(enum2cstr(static_cast<status_t>(0x7FFF)), nullptr);
     TS_ASSERT_EQUALS(enum2cstr(static_cast<status_t>(-0x7FFF)), nullptr);
   }
@@ -302,6 +331,35 @@ public:
     TS_ASSERT_EQUALS(enum2cstr(context_info_t::num_devices), "num devices");
 #endif
     TS_ASSERT_EQUALS(enum2cstr(static_cast<context_info_t>(-1l)), nullptr);
+  }
+  /** // doc: test_context_properties_t() {{{
+   * \brief Ensure that enum2cstr() works with context_properties_t.
+   */ // }}}
+  void test_context_properties_t( )
+  {
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::platform),"platform");
+#if CL_VERSION_1_2
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::interop_user_sync),"interop user sync");
+#endif
+#if cl_khr_gl_sharing
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::gl_context_khr),"gl context khr");
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::egl_display_khr),"egl display khr");
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::glx_display_khr),"glx display khr");
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::wgl_hdc_khr),"wgl hdc khr");
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::cgl_sharegroup_khr),"cgl sharegroup khr");
+#endif
+#if cl_khr_dx9_media_sharing
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::adapter_d3d9_khr),"adapter d3d9 khr");
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::adapter_d3d9ex_khr),"adapter d3d9eh khr");
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::adapter_dxva_khr),"adapter dxva khr");
+#endif
+#if cl_khr_d3d10_sharing
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::d3d10_device_khr),"d3d10 device khr");
+#endif
+#if cl_khr_d3d11_sharing
+    TS_ASSERT_EQUALS(enum2cstr(context_properties_t::d3d11_device_khr),"d3d11 device khr");
+#endif
+    TS_ASSERT_EQUALS(enum2cstr(static_cast<context_properties_t>(-1l)), nullptr);
   }
 #if CL_VERSION_1_2
   /** // doc: test_device_partition_property_t() {{{

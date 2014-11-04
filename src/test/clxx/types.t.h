@@ -120,6 +120,35 @@ public:
     TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_linker_options), CL_INVALID_LINKER_OPTIONS);
     TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_device_partition_count), CL_INVALID_DEVICE_PARTITION_COUNT);
 #endif
+#if cl_khr_icd
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::platform_not_found_khr), CL_PLATFORM_NOT_FOUND_KHR);
+#endif
+#if cl_ext_device_fission
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::device_partition_failed_ext), CL_DEVICE_PARTITION_FAILED_EXT);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_partition_count_ext), CL_INVALID_PARTITION_COUNT_EXT);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_partition_name_ext), CL_INVALID_PARTITION_NAME_EXT);
+#endif
+#if cl_khr_gl_sharing
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_gl_sharegroup_reference_khr), CL_INVALID_GL_SHAREGROUP_REFERENCE_KHR);
+#endif
+#if cl_khr_dx9_media_sharing
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_dx9_media_adapter_khr), CL_INVALID_DX9_MEDIA_ADAPTER_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_dx9_media_surface_khr), CL_INVALID_DX9_MEDIA_SURFACE_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::dx9_media_surface_already_acquired_khr), CL_DX9_MEDIA_SURFACE_ALREADY_ACQUIRED_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::dx9_media_surface_not_acquired_khr), CL_DX9_MEDIA_SURFACE_NOT_ACQUIRED_KHR);
+#endif
+#if cl_khr_d3d10_sharing
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_d3d10_device_khr), CL_INVALID_D3D10_DEVICE_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_d3d10_resource_khr), CL_INVALID_D3D10_RESOURCE_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::d3d10_resource_already_acquired_khr), CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::d3d10_resource_not_acquired_khr), CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR);
+#endif
+#if cl_khr_d3d11_sharing
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_d3d11_device_khr), CL_INVALID_D3D11_DEVICE_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::invalid_d3d11_resource_khr), CL_INVALID_D3D11_RESOURCE_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::d3d11_resource_already_acquired_khr), CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR);
+  TS_ASSERT_EQUALS(static_cast<cl_int>(status_t::d3d11_resource_not_acquired_khr), CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR);
+#endif
   }
   /** // doc: test_status_t__is_success() {{{
    * \brief Ensure that is_success() works correctly with status_t.
@@ -127,7 +156,7 @@ public:
   void test_status_t__is_success( )
   {
     //
-    // Success 
+    // Success
     //
     TS_ASSERT(is_success(status_t::success));
     //
@@ -198,6 +227,35 @@ public:
     TS_ASSERT(!is_success(status_t::invalid_compiler_options));
     TS_ASSERT(!is_success(status_t::invalid_linker_options));
     TS_ASSERT(!is_success(status_t::invalid_device_partition_count));
+#endif
+#if cl_khr_icd
+  TS_ASSERT(!is_success(status_t::platform_not_found_khr));
+#endif
+#if cl_ext_device_fission
+  TS_ASSERT(!is_success(status_t::device_partition_failed_ext));
+  TS_ASSERT(!is_success(status_t::invalid_partition_count_ext));
+  TS_ASSERT(!is_success(status_t::invalid_partition_name_ext));
+#endif
+#if cl_khr_gl_sharing
+  TS_ASSERT(!is_success(status_t::invalid_gl_sharegroup_reference_khr));
+#endif
+#if cl_khr_dx9_media_sharing
+  TS_ASSERT(!is_success(status_t::invalid_dx9_media_adapter_khr));
+  TS_ASSERT(!is_success(status_t::invalid_dx9_media_surface_khr));
+  TS_ASSERT(!is_success(status_t::dx9_media_surface_already_acquired_khr));
+  TS_ASSERT(!is_success(status_t::dx9_media_surface_not_acquired_khr));
+#endif
+#if cl_khr_d3d10_sharing
+  TS_ASSERT(!is_success(status_t::invalid_d3d10_device_khr));
+  TS_ASSERT(!is_success(status_t::invalid_d3d10_resource_khr));
+  TS_ASSERT(!is_success(status_t::d3d10_resource_already_acquired_khr));
+  TS_ASSERT(!is_success(status_t::d3d10_resource_not_acquired_khr));
+#endif
+#if cl_khr_d3d11_sharing
+  TS_ASSERT(!is_success(status_t::invalid_d3d11_device_khr));
+  TS_ASSERT(!is_success(status_t::invalid_d3d11_resource_khr));
+  TS_ASSERT(!is_success(status_t::d3d11_resource_already_acquired_khr));
+  TS_ASSERT(!is_success(status_t::d3d11_resource_not_acquired_khr));
 #endif
   }
   /** // doc: test_status_t__is_error() {{{
@@ -277,6 +335,35 @@ public:
     TS_ASSERT(is_error(status_t::invalid_compiler_options));
     TS_ASSERT(is_error(status_t::invalid_linker_options));
     TS_ASSERT(is_error(status_t::invalid_device_partition_count));
+#endif
+#if cl_khr_icd
+  TS_ASSERT(is_error(status_t::platform_not_found_khr));
+#endif
+#if cl_ext_device_fission
+  TS_ASSERT(is_error(status_t::device_partition_failed_ext));
+  TS_ASSERT(is_error(status_t::invalid_partition_count_ext));
+  TS_ASSERT(is_error(status_t::invalid_partition_name_ext));
+#endif
+#if cl_khr_gl_sharing
+  TS_ASSERT(is_error(status_t::invalid_gl_sharegroup_reference_khr));
+#endif
+#if cl_khr_dx9_media_sharing
+  TS_ASSERT(is_error(status_t::invalid_dx9_media_adapter_khr));
+  TS_ASSERT(is_error(status_t::invalid_dx9_media_surface_khr));
+  TS_ASSERT(is_error(status_t::dx9_media_surface_already_acquired_khr));
+  TS_ASSERT(is_error(status_t::dx9_media_surface_not_acquired_khr));
+#endif
+#if cl_khr_d3d10_sharing
+  TS_ASSERT(is_error(status_t::invalid_d3d10_device_khr));
+  TS_ASSERT(is_error(status_t::invalid_d3d10_resource_khr));
+  TS_ASSERT(is_error(status_t::d3d10_resource_already_acquired_khr));
+  TS_ASSERT(is_error(status_t::d3d10_resource_not_acquired_khr));
+#endif
+#if cl_khr_d3d11_sharing
+  TS_ASSERT(is_error(status_t::invalid_d3d11_device_khr));
+  TS_ASSERT(is_error(status_t::invalid_d3d11_resource_khr));
+  TS_ASSERT(is_error(status_t::d3d11_resource_already_acquired_khr));
+  TS_ASSERT(is_error(status_t::d3d11_resource_not_acquired_khr));
 #endif
   }
   /** // doc: test_platform_info_t() {{{
@@ -527,7 +614,7 @@ public:
     TS_ASSERT_EQUALS(static_cast<cl_device_exec_capabilities>(device_exec_capabilities_t::native_kernel), CL_EXEC_NATIVE_KERNEL);
   }
   /** // doc: test_device_exec_capabilities_t__bitops() {{{
-   * \brief Ensure that bitwise operators work with device_exec_capabilities_t 
+   * \brief Ensure that bitwise operators work with device_exec_capabilities_t
    */ // }}}
   void test_device_exec_capabilities_t__bitops( )
   {
@@ -616,6 +703,24 @@ public:
     TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::platform), CL_CONTEXT_PLATFORM);
 #if CL_VERSION_1_2
     TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::interop_user_sync), CL_CONTEXT_INTEROP_USER_SYNC);
+#endif
+#if cl_khr_gl_sharing
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::gl_context_khr), CL_GL_CONTEXT_KHR);
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::egl_display_khr), CL_EGL_DISPLAY_KHR);
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::glx_display_khr), CL_GLX_DISPLAY_KHR);
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::wgl_hdc_khr), CL_WGL_HDC_KHR);
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::cgl_sharegroup_khr), CL_CGL_SHAREGROUP_KHR);
+#endif
+#if cl_khr_dx9_media_sharing
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::adapter_d3d9_khr), CL_CONTEXT_ADAPTER_D3D9_KHR);
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::adapter_d3d9ex_khr), CL_CONTEXT_ADAPTER_D3D9EX_KHR);
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::adapter_dxva_khr), CL_CONTEXT_ADAPTER_DXVA_KHR);
+#endif
+#if cl_khr_d3d10_sharing
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::d3d10_device_khr), CL_CONTEXT_D3D10_DEVICE_KHR);
+#endif
+#if cl_khr_d3d11_sharing
+    TS_ASSERT_EQUALS(static_cast<cl_context_properties>(context_properties_t::d3d11_device_khr), CL_CONTEXT_D3D11_DEVICE_KHR);
 #endif
   }
 #if CL_VERSION_1_2

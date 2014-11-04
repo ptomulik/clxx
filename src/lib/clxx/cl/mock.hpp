@@ -33,7 +33,7 @@
 #ifndef CLXX_CL_MOCK_HPP_INCLUDED
 #define CLXX_CL_MOCK_HPP_INCLUDED
 
-#include <CL/cl.h>
+#include <clxx/cl/cl.h>
 #include <cxxtest/Mock.h>
 
 
@@ -85,15 +85,8 @@ CXXTEST_MOCK_GLOBAL(cl_int, clGetContextInfo,
   ( context, param_name, param_value_size, param_value, param_value_size_ret)
 );
 
-CXXTEST_MOCK_GLOBAL(cl_int, clRetainContext,
-  (cl_context context),
-  (context)
-);
-
-CXXTEST_MOCK_GLOBAL(cl_int, clReleaseContext,
-  (cl_context context),
-  (context)
-);
+CXXTEST_MOCK_GLOBAL(cl_int, clRetainContext,(cl_context context),(context));
+CXXTEST_MOCK_GLOBAL(cl_int, clReleaseContext,(cl_context context),(context));
 
 CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramInfo,
   ( cl_program program, cl_program_info param_name,
@@ -105,7 +98,7 @@ CXXTEST_MOCK_GLOBAL(cl_int, clRetainProgram, (cl_program program), (program));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseProgram, (cl_program program), (program));
 
 #include <clxx/cl/mocks/newton.hpp>
-#include <clxx/cl/mocks/corner.hpp>
+#include <clxx/cl/mocks/dummy.hpp>
 
 #endif /* CLXX_CL_MOCK_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

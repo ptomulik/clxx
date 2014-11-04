@@ -32,7 +32,7 @@
 #define CLXX_PLATFORMS_HPP_INCLUDED
 
 #include <clxx/platform.hpp>
-#include <CL/cl.h>
+#include <clxx/cl/cl.h>
 #include <vector>
 
 namespace clxx {
@@ -42,6 +42,7 @@ namespace clxx {
  * \brief Collection of clxx::platform objects.
  */ // }}}
 typedef std::vector<platform> platforms;
+
 /** \ingroup clxx_platform_layer */
 /** @{ */
 /** // {{{ doc: get_num_platforms()

@@ -27,10 +27,10 @@ init_py = env.Substfile(['__init__.py.in'], SUBST_DICT = {})
 
 modules = [
     'types_mod',
+    'functions_mod',
     'exception_mod',
     'platform_mod',
-#    TODO: uncomment context_mod once it's ready
-#    'context_mod',
+    'context_mod',
 #    TODO: uncomment program_mod once it's ready
 #    'program_mod'
 ]

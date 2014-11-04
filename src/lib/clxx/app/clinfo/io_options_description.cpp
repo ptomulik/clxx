@@ -55,7 +55,7 @@ io_options_description( const std::string & caption
 /* ------------------------------------------------------------------------ */
 io_options_description::
 ~io_options_description()
-{ 
+{
 }
 /* ------------------------------------------------------------------------ */
 void io_options_description::

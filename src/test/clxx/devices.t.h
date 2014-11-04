@@ -138,7 +138,7 @@ public:
    */ // }}}
   void test_invalid_platform( )
   {
-    T::ErrRet_clGetDeviceIDs mock(CL_INVALID_PLATFORM);
+    T::Dummy_clGetDeviceIDs mock(CL_INVALID_PLATFORM);
     TS_ASSERT_THROWS(get_num_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_platform>);
     TS_ASSERT_THROWS(get_device_ids(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_platform>);
     TS_ASSERT_THROWS(get_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_platform>);
@@ -149,7 +149,7 @@ public:
    */ // }}}
   void test_invalid_device_type( )
   {
-    T::ErrRet_clGetDeviceIDs mock(CL_INVALID_DEVICE_TYPE);
+    T::Dummy_clGetDeviceIDs mock(CL_INVALID_DEVICE_TYPE);
     TS_ASSERT_THROWS(get_num_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_device_type>);
     TS_ASSERT_THROWS(get_device_ids(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_device_type>);
     TS_ASSERT_THROWS(get_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_device_type>);
@@ -161,7 +161,7 @@ public:
    */ // }}}
   void test_invalid_value( )
   {
-    T::ErrRet_clGetDeviceIDs mock(CL_INVALID_VALUE);
+    T::Dummy_clGetDeviceIDs mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(get_num_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_value>);
     TS_ASSERT_THROWS(get_device_ids(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_value>);
     TS_ASSERT_THROWS(get_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::invalid_value>);
@@ -173,7 +173,7 @@ public:
    */ // }}}
   void test_device_not_found( )
   {
-    T::ErrRet_clGetDeviceIDs mock(CL_DEVICE_NOT_FOUND);
+    T::Dummy_clGetDeviceIDs mock(CL_DEVICE_NOT_FOUND);
     TS_ASSERT_THROWS_NOTHING(get_num_devices(NULL,static_cast<device_type_t>(0)))
     TS_ASSERT_THROWS_NOTHING(get_device_ids(NULL,static_cast<device_type_t>(0)))
     TS_ASSERT_THROWS_NOTHING(get_devices(NULL,static_cast<device_type_t>(0)))
@@ -185,7 +185,7 @@ public:
    */ // }}}
   void test_out_of_resources( )
   {
-    T::ErrRet_clGetDeviceIDs mock(CL_OUT_OF_RESOURCES);
+    T::Dummy_clGetDeviceIDs mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(get_num_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(get_device_ids(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(get_devices(NULL,static_cast<device_type_t>(0)),clerror_no<status_t::out_of_resources>);
@@ -197,7 +197,7 @@ public:
    */ // }}}
   void test_out_of_host_memory( )
   {
-    T::ErrRet_clGetDeviceIDs mock(CL_OUT_OF_HOST_MEMORY);
+    T::Dummy_clGetDeviceIDs mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(get_num_devices(NULL,static_cast<device_type_t>(0)), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(get_device_ids(NULL,static_cast<device_type_t>(0)), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(get_devices(NULL,static_cast<device_type_t>(0)), clerror_no<status_t::out_of_host_memory>);
@@ -209,7 +209,7 @@ public:
    */ // }}}
   void test_other_error( )
   {
-    T::ErrRet_clGetDeviceIDs mock(-0x3456);
+    T::Dummy_clGetDeviceIDs mock(-0x3456);
     TS_ASSERT_THROWS(get_num_devices(NULL,static_cast<device_type_t>(0)),unexpected_clerror);
     TS_ASSERT_THROWS(get_device_ids(NULL,static_cast<device_type_t>(0)),unexpected_clerror);
     TS_ASSERT_THROWS(get_devices(NULL,static_cast<device_type_t>(0)),unexpected_clerror);

@@ -36,6 +36,57 @@
 #include <string>
 
 namespace clxx {
+/** // doc: invalid_argument_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct invalid_argument_error
+    : public exception_base<clxx::exception, std::invalid_argument>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::invalid_argument> Base;
+    /** // doc: invalid_argument_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    invalid_argument_error() noexcept
+      : Base("invalid argument")
+    { }
+  };
+/** // doc: length_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct length_error
+    : public exception_base<clxx::exception, std::length_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::length_error> Base;
+    /** // doc: length_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    length_error() noexcept
+      : Base("length error")
+    { }
+  };
+/** // doc: not_enough_space_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct not_enough_space_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: not_enough_space_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    not_enough_space_error() noexcept
+      : Base("not enough space")
+    { }
+  };
 /** // doc: uninitialized_platform_error {{{
  * \todo Write documentation
  */ // }}}
@@ -49,8 +100,8 @@ struct uninitialized_platform_error
     /** // doc: uninitialized_platform_error() {{{
      * \brief Default constructor
      */ // }}}
-    uninitialized_platform_error() noexcept 
-      : Base("attempted to use uninitialized clxx::platform object") 
+    uninitialized_platform_error() noexcept
+      : Base("attempted to use uninitialized clxx::platform object")
     { }
   };
 /** // doc: uninitialized_device_error {{{
@@ -66,8 +117,25 @@ struct uninitialized_device_error
     /** // doc: uninitialized_device_error() {{{
      * \brief Default constructor
      */ // }}}
-    uninitialized_device_error() noexcept 
-      : Base("attempted to use uninitialized clxx::device object") 
+    uninitialized_device_error() noexcept
+      : Base("attempted to use uninitialized clxx::device object")
+    { }
+  };
+/** // doc: uninitialized_context_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct uninitialized_context_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: uninitialized_context_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    uninitialized_context_error() noexcept
+      : Base("attempted to use uninitialized clxx::context object")
     { }
   };
 /** // doc: uninitialized_value_error {{{
@@ -83,8 +151,8 @@ struct uninitialized_value_error
     /** // doc: uninitialized_value_error() {{{
      * \brief Default constructor
      */ // }}}
-    uninitialized_value_error() noexcept 
-      : Base("attempted to access uninitialized value") 
+    uninitialized_value_error() noexcept
+      : Base("attempted to access uninitialized value")
     { }
   };
 /** // doc: unexpected_clerror {{{
@@ -100,7 +168,7 @@ struct unexpected_clerror
     /** // doc: unexpected_clerror() {{{
      * \brief Default constructor
      */ // }}}
-    unexpected_clerror(status_t c) noexcept 
+    unexpected_clerror(status_t c) noexcept
       : Base((std::string("unexpected OpenCL error: ") + std::to_string(c)).c_str())
       , _code(c)
     { }

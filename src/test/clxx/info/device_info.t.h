@@ -869,7 +869,7 @@ public:
     };
     device_partition_property_t partition_type1[2] = {
       device_partition_property_t::by_counts,
-      device_partition_property_t::by_affinity_domain 
+      device_partition_property_t::by_affinity_domain
     };
 
     TS_ASSERT((device_info().set_id(0x1234ul) != device_info()));

@@ -31,76 +31,6 @@
 namespace clxx {
 /* ------------------------------------------------------------------------ */
 void
-get_device_ids(cl_platform_id platform, device_type_t device_type,
-               cl_uint num_entries, cl_device_id* devices, cl_uint* num_devices)
-{
-  status_t s = static_cast<status_t>(
-    T::clGetDeviceIDs(
-      platform,
-      static_cast<cl_device_type>(device_type),
-      num_entries,
-      devices,
-      num_devices
-    )
-  );
-  if(is_error(s))
-    {
-      switch(s)
-        {
-          case status_t::invalid_platform:
-            throw clerror_no<status_t::invalid_platform>();
-          case status_t::invalid_device_type:
-            throw clerror_no<status_t::invalid_device_type>();
-          case status_t::invalid_value:
-            throw clerror_no<status_t::invalid_value>();
-          case status_t::device_not_found:
-            // throw clerror_no<CL_DEVICE_NOT_FOUND>();
-            break;
-          case status_t::out_of_resources:
-            throw clerror_no<status_t::out_of_resources>();
-          case status_t::out_of_host_memory:
-            throw clerror_no<status_t::out_of_host_memory>();
-          default:
-            throw unexpected_clerror(s);
-        }
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_device_info(  cl_device_id device,
-                  device_info_t param_name,
-                  size_t param_value_size,
-                  void* param_value,
-                  size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetDeviceInfo(
-        device, 
-        static_cast<cl_device_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
-  );
-  if(is_error(s))
-    {
-      switch(s)
-        {
-          case status_t::invalid_device:
-            throw clerror_no<status_t::invalid_device>();
-          case status_t::invalid_value:
-            throw clerror_no<status_t::invalid_value>();
-          case status_t::out_of_resources:
-            throw clerror_no<status_t::out_of_resources>();
-          case status_t::out_of_host_memory:
-            throw clerror_no<status_t::out_of_host_memory>();
-          default:
-            throw unexpected_clerror(s);
-        }
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
 get_platform_ids( cl_uint num_entries,
                   cl_platform_id* platforms,
                   cl_uint* num_platforms )
@@ -150,6 +80,265 @@ get_platform_info(  cl_platform_id platform,
           throw unexpected_clerror(s);
       }
   }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_device_ids(cl_platform_id platform, device_type_t device_type,
+               cl_uint num_entries, cl_device_id* devices, cl_uint* num_devices)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetDeviceIDs(
+      platform,
+      static_cast<cl_device_type>(device_type),
+      num_entries,
+      devices,
+      num_devices
+    )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_platform:
+            throw clerror_no<status_t::invalid_platform>();
+          case status_t::invalid_device_type:
+            throw clerror_no<status_t::invalid_device_type>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::device_not_found:
+            // throw clerror_no<CL_DEVICE_NOT_FOUND>();
+            break;
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_device_info(  cl_device_id device,
+                  device_info_t param_name,
+                  size_t param_value_size,
+                  void* param_value,
+                  size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetDeviceInfo(
+        device,
+        static_cast<cl_device_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
+cl_context
+create_context(const cl_context_properties* properties, cl_uint num_devices,
+               const cl_device_id* devices,
+               void(*pfn_notify)(const char* errinfo, const void* private_info,
+                                 size_t cb, void* user_data),
+               void* user_data)
+{
+  cl_int s;
+  cl_context ctx;
+  ctx = T::clCreateContext(properties, num_devices, devices, pfn_notify, user_data, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      switch(static_cast<status_t>(s))
+        {
+          case status_t::invalid_platform:
+            throw clerror_no<status_t::invalid_platform>();
+#if CL_VERSION_1_1
+          case status_t::invalid_property:
+            throw clerror_no<status_t::invalid_property>();
+          case status_t::invalid_operation:
+            throw clerror_no<status_t::invalid_operation>();
+#endif
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::device_not_available:
+            throw clerror_no<status_t::device_not_available>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+#if cl_khr_gl_sharing
+          case status_t::invalid_gl_sharegroup_reference_khr:
+            throw clerror_no<status_t::invalid_gl_sharegroup_reference_khr>();
+#endif
+#if cl_khr_dx9_media_sharing
+          case status_t::invalid_dx9_media_adapter_khr:
+            throw clerror_no<status_t::invalid_dx9_media_adapter_khr>();
+#endif
+#if cl_khr_d3d10_sharing
+          case status_t::invalid_d3d10_device_khr:
+            throw clerror_no<status_t::invalid_d3d10_device_khr>();
+#endif
+#if cl_khr_d3d11_sharing
+          case status_t::invalid_d3d11_device_khr:
+            throw clerror_no<status_t::invalid_d3d11_device_khr>();
+#endif
+          default:
+            throw unexpected_clerror(static_cast<status_t>(s));
+        }
+    }
+
+  return ctx;
+}
+/* ------------------------------------------------------------------------ */
+cl_context
+create_context_from_type(const cl_context_properties* properties,
+               device_type_t device_type,
+               void(*pfn_notify)(const char* errinfo, const void* private_info,
+                                 size_t cb, void* user_data),
+               void* user_data)
+{
+  cl_int s;
+  cl_context ctx;
+  ctx = T::clCreateContextFromType(
+      properties,
+      static_cast<cl_device_type>(device_type),
+      pfn_notify,
+      user_data,
+      &s);
+
+  if(is_error(static_cast<status_t>(s)))
+    {
+      switch(static_cast<status_t>(s))
+        {
+          case status_t::invalid_platform:
+            throw clerror_no<status_t::invalid_platform>();
+#if CL_VERSION_1_1
+          case status_t::invalid_property:
+            throw clerror_no<status_t::invalid_property>();
+          case status_t::invalid_operation:
+            throw clerror_no<status_t::invalid_operation>();
+#endif
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_device_type:
+            throw clerror_no<status_t::invalid_device_type>();
+          case status_t::device_not_available:
+            throw clerror_no<status_t::device_not_available>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::device_not_found:
+            throw clerror_no<status_t::device_not_found>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+#if cl_khr_gl_sharing
+          case status_t::invalid_gl_sharegroup_reference_khr:
+            throw clerror_no<status_t::invalid_gl_sharegroup_reference_khr>();
+#endif
+#if cl_khr_dx9_media_sharing
+          case status_t::invalid_dx9_media_adapter_khr:
+            throw clerror_no<status_t::invalid_dx9_media_adapter_khr>();
+#endif
+#if cl_khr_d3d10_sharing
+          case status_t::invalid_d3d10_device_khr:
+            throw clerror_no<status_t::invalid_d3d10_device_khr>();
+#endif
+#if cl_khr_d3d11_sharing
+          case status_t::invalid_d3d11_device_khr:
+            throw clerror_no<status_t::invalid_d3d11_device_khr>();
+#endif
+          default:
+            throw unexpected_clerror(static_cast<status_t>(s));
+        }
+    }
+
+  return ctx;
+}
+/* ------------------------------------------------------------------------ */
+void retain_context(cl_context context)
+{
+  status_t s = static_cast<status_t>(T::clRetainContext(context));
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
+void release_context(cl_context context)
+{
+  status_t s = static_cast<status_t>(T::clReleaseContext(context));
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
+void get_context_info(cl_context context, context_info_t param_name,
+                      size_t param_value_size, void* param_value,
+                      size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetContextInfo(
+      context,
+      static_cast<cl_context_info>(param_name),
+      param_value_size,
+      param_value,
+      param_value_size_ret
+    )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
 }
 } // end namespace clxx
 

@@ -1052,7 +1052,7 @@ public:
     device d(T::Newton_clGetDeviceIDs::devices[0]);
     device_fp_config_t value;
     d.get_info(device_info_t::single_fp_config, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_fp_config_t::denorm 
+    TS_ASSERT_EQUALS(value, device_fp_config_t::denorm
                           | device_fp_config_t::inf_nan
                           | device_fp_config_t::round_to_nearest
                           | device_fp_config_t::round_to_zero
@@ -4187,7 +4187,7 @@ public:
    */ // }}}
   void test_out_of_resources( )
   {
-    T::ErrRet_clGetDeviceInfo mock(CL_OUT_OF_RESOURCES);
+    T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_RESOURCES);
     device d(reinterpret_cast<cl_device_id>(0x34556ul));
     TS_ASSERT_THROWS(d.get_type(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_vendor_id(), clerror_no<status_t::out_of_resources>);
@@ -4271,7 +4271,7 @@ public:
    */ // }}}
   void test_out_of_host_memory( )
   {
-    T::ErrRet_clGetDeviceInfo mock(CL_OUT_OF_HOST_MEMORY);
+    T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_HOST_MEMORY);
     device d(reinterpret_cast<cl_device_id>(0x34556ul));
     TS_ASSERT_THROWS(d.get_type(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_vendor_id(), clerror_no<status_t::out_of_host_memory>);
@@ -4355,7 +4355,7 @@ public:
    */ // }}}
   void test_other_error( )
   {
-    T::ErrRet_clGetDeviceInfo mock(-0x432534);
+    T::Dummy_clGetDeviceInfo mock(-0x432534);
     device d(reinterpret_cast<cl_device_id>(0x34556ul));
     TS_ASSERT_THROWS(d.get_type(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_vendor_id(), unexpected_clerror);

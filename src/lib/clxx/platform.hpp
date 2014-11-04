@@ -55,7 +55,7 @@ namespace clxx {
  * The class has non-virtual destructor to not bloat the objects with virtual
  * tables. It should not be used as a base class.
  *
- * 
+ *
  * \par Example:
  * Simple functor to print platform info:
  * \snippet platform1.cpp DumpPlatform
@@ -72,32 +72,29 @@ public:
    * Sets underlying platform ID to NULL, so the proxy object is regarder
    * uninitialized (is_initialized() returns \c false).
    */ // }}}
-  platform() noexcept
+  constexpr platform() noexcept
     : _platform_id(nullptr)
-  {
-  }
+  { }
   /** // {{{
    * \brief Copy constructor
    *
    * Initializes this object with the platform ID of another one (\c rhs).
    */ // }}}
-  platform(platform const& rhs) noexcept
+  constexpr platform(platform const& rhs) noexcept
     : _platform_id(rhs.id())
-  {
-  }
+  { }
   /** // {{{
    * \brief Constructor with explicit conversion.
    *
    * Initializes this object with platform ID provided by caller.
    */ // }}}
-  explicit platform(cl_platform_id platid) noexcept
-    : _platform_id(platid)
-  {
-  }
-  /** // {{{
-   * \brief Desctructor
-   */ // }}}
-  ~platform() noexcept { }
+  explicit
+#ifndef SWIG // workaround for swig issue #284
+  constexpr
+#endif
+  platform(cl_platform_id id) noexcept
+    : _platform_id(id)
+  { }
   /** // {{{
    * \brief Assignment operator.
    * \return Reference to this object.
@@ -113,7 +110,11 @@ public:
    *
    * Casts platform object to \c cl_platform_id.
    */ // }}}
-  explicit operator cl_platform_id () const
+  explicit
+#ifndef SWIG // workaround for swig issue #284
+  constexpr
+#endif
+  operator cl_platform_id () const noexcept
   {
     return this->id();
   }
@@ -134,7 +135,7 @@ public:
    * \brief Tell whether this object is initialised or not
    * \return \c true if object is initialised or \c false otherwise
    */ // }}}
-  bool is_initialized() const noexcept
+  constexpr bool is_initialized() const noexcept
   {
     return (this->_platform_id != NULL);
   }
@@ -142,7 +143,7 @@ public:
    * \brief Get the OpenCL platform ID of this platform.
    * \return The platform ID of this platform
    */ // }}}
-  cl_platform_id id() const
+  constexpr cl_platform_id id() const noexcept
   {
     return this->_platform_id;
   }

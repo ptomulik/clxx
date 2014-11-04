@@ -18,5 +18,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE
 from clxx_.types_mod import *
+from clxx_.functions_mod import *
 from clxx_.exception_mod import *
 from clxx_.platform_mod import *
+from clxx_.context_mod import *

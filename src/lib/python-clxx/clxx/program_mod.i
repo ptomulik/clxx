@@ -25,7 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%module(package="clxx_.cl") program_mod
+%module(package="clxx_") program_mod
 %feature("autodoc","3");
 %include <clxx/program_mod.swg>
 
