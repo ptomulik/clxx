@@ -136,7 +136,7 @@ JB :
 # Clxx custom variables - development progress meters.
 #
 devel_progress:
-  platform_layer: 64
+  platform_layer: 83
   runtime: 0
   functions: 4.5
   types: 100
