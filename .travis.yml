@@ -44,6 +44,8 @@ after_success:
                   -e .git -e HOWTO -e lib -e bin -e src/app -e build/app
                   -e build/.sconf_temp -e build/lib/clxx/.sconf_temp
                   -e src/doc -e src/test -e build/doc -e build/test
+                  -e src/lib/swig-clxx -e build/lib/swig-clxx
+                  -e src/lib/python-clxx -e build/lib/python-clxx
                   -e site_scons -e template -e valgrid -e /usr;
     fi
 after_failure:
