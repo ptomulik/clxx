@@ -20,35 +20,26 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: swig/clxx/context_mod.swg {{{
- * \file swig/clxx/context_mod.swg
+// clxx/device_partition_mod.hpp
+
+/** // doc: clxx/device_partition_mod.hpp {{{
+ * \file clxx/device_partition_mod.hpp
  * \todo Write documentation
  */ // }}}
+#ifndef CLXX_CL_DEVICE_PARTITION_MOD_HPP_INCLUDED
+#define CLXX_CL_DEVICE_PARTITION_MOD_HPP_INCLUDED
 
-%import <clxx/swig_config.swg>
+// module's core
+#include <clxx/cl/device_partition_property.hpp>
+#include <clxx/cl/device_partition_properties.hpp>
+#include <clxx/cl/device_partition.hpp>
 
-%include <std_vector.i>
-%include <std_string.i>
-
-%import <clxx/cl/opencl1_0.i>
-%import <clxx/exception_mod.i>
-%import <clxx/platform_mod.i>
-%import <clxx/types_mod.i>
-
-%{
+// dependencies
 #include <clxx/cl/opencl_mod.hpp>
 #include <clxx/exception_mod.hpp>
 #include <clxx/platform_mod.hpp>
 #include <clxx/types_mod.hpp>
 
-#include <clxx/context_property.hpp>
-#include <clxx/context_properties.hpp>
-#include <clxx/context.hpp>
-%}
-
-%include <clxx/context_property.swg>
-%include <clxx/context_properties_.swg>
-%include <clxx/context_.swg>
-
+#endif /* CLXX_CL_DEVICE_PARTITION_MOD_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

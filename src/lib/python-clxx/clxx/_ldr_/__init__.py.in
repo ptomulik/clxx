@@ -22,3 +22,4 @@ from clxx_.functions_mod import *
 from clxx_.exception_mod import *
 from clxx_.platform_mod import *
 from clxx_.context_mod import *
+from clxx_.device_partition_mod import *

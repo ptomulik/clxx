@@ -31,6 +31,7 @@ modules = [
     'exception_mod',
     'platform_mod',
     'context_mod',
+    'device_partition_mod',
 #    TODO: uncomment program_mod once it's ready
 #    'program_mod'
 ]

@@ -155,6 +155,23 @@ struct uninitialized_value_error
       : Base("attempted to access uninitialized value")
     { }
   };
+/** // doc: value_access_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct value_access_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: value_access_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    value_access_error() noexcept
+      : Base("attempted to access value in a wrong way")
+    { }
+  };
 /** // doc: unexpected_clerror {{{
  * \todo Write documentation
  */ // }}}

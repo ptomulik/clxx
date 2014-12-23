@@ -234,13 +234,61 @@ class Dummy_clGetContextInfo
 public:
   Dummy_clGetContextInfo(cl_int err, void* pv = nullptr, size_t pvs = 0);
 };
+#if HAVE_OPENCL_clCreateSubDevices
+/** // doc: Dummy_clCreateSubDevices {{{
+ * \brief Default mock for clCreateSubDevices OpenCL function.
+ */ // }}}
+class Dummy_clCreateSubDevices
+  : public T::Base_clCreateSubDevices,
+    public T::Dummy_CallArgs<cl_device_id,const cl_device_partition_property*,cl_uint,cl_device_id*,cl_uint*>
+{
+  cl_int _err;
+  cl_device_id const* _out_devices;
+  cl_uint const* _num_devices_ret;
+  cl_int clCreateSubDevices(cl_device_id in_device,
+                            const cl_device_partition_property* properties,
+                            cl_uint num_devices,
+                            cl_device_id* out_devices,
+                            cl_uint* num_devices_ret);
+public:
+  Dummy_clCreateSubDevices(cl_int err, cl_device_id const* out_devices = nullptr, cl_uint const* num_devices_ret = nullptr);
+};
+#endif
+#if HAVE_OPENCL_clRetainDevice
+/** // doc: Dummy_clRetainDevice {{{
+ * \brief Default mock for clRetainDevice OpenCL function.
+ */ // }}}
+class Dummy_clRetainDevice
+  : public T::Base_clRetainDevice,
+    public T::Dummy_CallArgs<cl_device_id>
+{
+  cl_int _err;
+  cl_int clRetainDevice(cl_device_id device);
+public:
+  Dummy_clRetainDevice(cl_int err);
+};
+#endif
+#if HAVE_OPENCL_clReleaseDevice
+/** // doc: Dummy_clReleaseDevice {{{
+ * \brief Default mock for clReleaseDevice OpenCL function.
+ */ // }}}
+class Dummy_clReleaseDevice
+  : public T::Base_clReleaseDevice,
+    public T::Dummy_CallArgs<cl_device_id>
+{
+  cl_int _err;
+  cl_int clReleaseDevice(cl_device_id device);
+public:
+  Dummy_clReleaseDevice(cl_int err);
+};
+#endif
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
 /* Mock class implementations */
 #if defined(CXXTEST_MOCK_TEST_SOURCE_FILE)
 namespace T {
-
+/* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetPlatformIDs::
 clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,
                  cl_uint* num_platforms)
@@ -253,7 +301,7 @@ Dummy_clGetPlatformIDs(cl_int err)
   : _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetPlatformInfo::
 clGetPlatformInfo(cl_platform_id platform, cl_platform_info param_name,
                   size_t param_value_size, void* param_value,
@@ -267,7 +315,7 @@ Dummy_clGetPlatformInfo(cl_int err)
   : _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetDeviceIDs::
 clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,
                cl_uint num_entries, cl_device_id* devices,
@@ -281,7 +329,7 @@ Dummy_clGetDeviceIDs(cl_int err)
   : _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetDeviceInfo::
 clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
                 size_t param_value_size, void* param_value,
@@ -296,7 +344,7 @@ Dummy_clGetDeviceInfo(cl_int err)
   : _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_context Dummy_clCreateContext::
 clCreateContext(const cl_context_properties* properties,
                 cl_uint num_devices,
@@ -317,7 +365,7 @@ Dummy_clCreateContext(cl_context ctx, cl_int err)
   : _ctx(ctx), _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_context Dummy_clCreateContextFromType::
 clCreateContextFromType(const cl_context_properties* properties,
                         cl_device_type device_type,
@@ -337,7 +385,7 @@ Dummy_clCreateContextFromType(cl_context ctx, cl_int err)
   : _ctx(ctx), _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_int Dummy_clRetainContext::
 clRetainContext(cl_context context)
 {
@@ -349,7 +397,7 @@ Dummy_clRetainContext(cl_int err)
   : _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_int Dummy_clReleaseContext::
 clReleaseContext(cl_context context)
 {
@@ -361,7 +409,7 @@ Dummy_clReleaseContext(cl_int err)
   : _err(err)
 {
 }
-
+/* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetContextInfo::
 clGetContextInfo(cl_context context, cl_context_info param_name,
                  size_t param_value_size, void* param_value,
@@ -381,6 +429,61 @@ Dummy_clGetContextInfo(cl_int err, void* pv, size_t pvs)
   : _err(err), _param_value(pv), _param_value_size_ret(pvs)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if HAVE_OPENCL_clCreateSubDevices
+cl_int Dummy_clCreateSubDevices::
+clCreateSubDevices(cl_device_id in_device,
+                   const cl_device_partition_property* properties,
+                   cl_uint num_devices,
+                   cl_device_id* out_devices,
+                   cl_uint* num_devices_ret)
+{
+  call_with(in_device, properties, num_devices, out_devices, num_devices_ret);
+  if(out_devices && _out_devices && _num_devices_ret)
+    {
+      std::memcpy(out_devices, _out_devices, std::min(num_devices, *_num_devices_ret) * sizeof(cl_device_id));
+    }
+  if(num_devices_ret && _num_devices_ret)
+    {
+      *num_devices_ret = *_num_devices_ret;
+    }
+  return _err;
+}
+Dummy_clCreateSubDevices::
+Dummy_clCreateSubDevices(cl_int err, cl_device_id const* out_devices, cl_uint const* num_devices_ret)
+  : _err(err), _out_devices(out_devices), _num_devices_ret(num_devices_ret)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if HAVE_OPENCL_clRetainDevice
+cl_int Dummy_clRetainDevice::
+clRetainDevice(cl_device_id device)
+{
+  call_with(device);
+  return _err;
+}
+Dummy_clRetainDevice::
+Dummy_clRetainDevice(cl_int err)
+  : _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if HAVE_OPENCL_clReleaseDevice
+cl_int Dummy_clReleaseDevice::
+clReleaseDevice(cl_device_id device)
+{
+  call_with(device);
+  return _err;
+}
+Dummy_clReleaseDevice::
+Dummy_clReleaseDevice(cl_int err)
+  : _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
 

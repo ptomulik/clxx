@@ -20,8 +20,8 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: swig/clxx/context_mod.swg {{{
- * \file swig/clxx/context_mod.swg
+/** // doc: swig/clxx/device_partition_mod.swg {{{
+ * \file swig/clxx/device_partition_mod.swg
  * \todo Write documentation
  */ // }}}
 
@@ -41,14 +41,14 @@
 #include <clxx/platform_mod.hpp>
 #include <clxx/types_mod.hpp>
 
-#include <clxx/context_property.hpp>
-#include <clxx/context_properties.hpp>
-#include <clxx/context.hpp>
+#include <clxx/device_partition_property.hpp>
+#include <clxx/device_partition_properties.hpp>
+#include <clxx/device_partition.hpp>
 %}
 
-%include <clxx/context_property.swg>
-%include <clxx/context_properties_.swg>
-%include <clxx/context_.swg>
+%include <clxx/device_partition_property.swg>
+%include <clxx/device_partition_properties_.swg>
+%include <clxx/device_partition.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

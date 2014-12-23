@@ -20,35 +20,14 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: swig/clxx/context_mod.swg {{{
- * \file swig/clxx/context_mod.swg
+/** // doc: clxx/device_partition_mod.i {{{
+ * \file clxx/device_partition_mod.i
  * \todo Write documentation
  */ // }}}
 
-%import <clxx/swig_config.swg>
-
-%include <std_vector.i>
-%include <std_string.i>
-
-%import <clxx/cl/opencl1_0.i>
-%import <clxx/exception_mod.i>
-%import <clxx/platform_mod.i>
-%import <clxx/types_mod.i>
-
-%{
-#include <clxx/cl/opencl_mod.hpp>
-#include <clxx/exception_mod.hpp>
-#include <clxx/platform_mod.hpp>
-#include <clxx/types_mod.hpp>
-
-#include <clxx/context_property.hpp>
-#include <clxx/context_properties.hpp>
-#include <clxx/context.hpp>
-%}
-
-%include <clxx/context_property.swg>
-%include <clxx/context_properties_.swg>
-%include <clxx/context_.swg>
+%module(package="clxx_") device_partition_mod
+%feature("autodoc","3");
+%include <clxx/device_partition_mod.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -30,9 +30,9 @@
 #define CLXX_CL_CONTEXT_MOD_HPP_INCLUDED
 
 // module's core
+#include <clxx/cl/context_property.hpp>
 #include <clxx/cl/context_properties.hpp>
-#include <clxx/cl/context_interface.hpp>
-//#include <clxx/cl/context.hpp>
+#include <clxx/cl/context.hpp>
 
 // dependencies
 #include <clxx/cl/opencl_mod.hpp>

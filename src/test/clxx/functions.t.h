@@ -503,6 +503,189 @@ public:
     T::Dummy_clGetContextInfo mock(-0x3456);
     TS_ASSERT_THROWS(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
   }
+  /** // doc: test_create_sub_devices() {{{
+   * \brief Test \ref create_sub_devices()() in normal situation.
+   */ // }}}
+  void test_create_sub_devices( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(create_sub_devices((cl_device_id)0x1234, (const cl_device_partition_property*)0x5678, 2, (cl_device_id*)0x4321, (cl_uint*)0x8765));
+    TS_ASSERT(mock.called_once_with((cl_device_id)0x1234, (const cl_device_partition_property*)0x5678, 2, (cl_device_id*)0x4321, (cl_uint*)0x8765));
+#endif
+  }
+  /** // doc: test_create_sub_devices__invalid_device() {{{
+   * \brief Test \ref create_sub_devices() in a situation when \c clCreateSubDevices() returns CL_INVALID_DEVICE
+   */ // }}}
+  void test_create_sub_devices__invalid_device( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_device>);
+#endif // HAVE_OPENCL_clCreateSubDevices
+  }
+  /** // doc: test_create_sub_devices__invalid_value() {{{
+   * \brief Test \ref create_sub_devices() in a situation when \c clCreateSubDevices() returns CL_INVALID_VALUE
+   */ // }}}
+  void test_create_sub_devices__invalid_value( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+#endif // HAVE_OPENCL_clCreateSubDevices
+  }
+  /** // doc: test_create_sub_devices__device_partition_failed() {{{
+   * \brief Test \ref create_sub_devices() in a situation when \c clCreateSubDevices() returns CL_DEVICE_PARTITION_FAILED
+   */ // }}}
+  void test_create_sub_devices__device_partition_failed( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(CL_DEVICE_PARTITION_FAILED);
+    TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), clerror_no<status_t::device_partition_failed>);
+#endif // HAVE_OPENCL_clCreateSubDevices
+  }
+  /** // doc: test_create_sub_devices__invalid_device_partition_count() {{{
+   * \brief Test \ref create_sub_devices() in a situation when \c clCreateSubDevices() returns CL_INVALID_DEVICE_PARTITION_COUNT
+   */ // }}}
+  void test_create_sub_devices__invalid_device_partition_count( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(CL_INVALID_DEVICE_PARTITION_COUNT);
+    TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_device_partition_count>);
+#endif // HAVE_OPENCL_clCreateSubDevices
+  }
+  /** // doc: test_create_sub_devices__out_of_resources() {{{
+   * \brief Test \ref create_sub_devices() in a situation when \c clCreateSubDevices() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_create_sub_devices__out_of_resources( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+#endif // HAVE_OPENCL_clCreateSubDevices
+  }
+  /** // doc: test_create_sub_devices__out_of_host_memory() {{{
+   * \brief Test \ref create_sub_devices() in a situation when \c clCreateSubDevices() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_create_sub_devices__out_of_host_memory( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+#endif // HAVE_OPENCL_clCreateSubDevices
+  }
+  /** // doc: test_create_sub_devices__unexpected_clerror() {{{
+   * \brief Test \ref create_sub_devices() in a situation when \c clCreateSubDevices() returns unexpected error code
+   */ // }}}
+  void test_create_sub_devices__unexpected_clerror( )
+  {
+#if HAVE_OPENCL_clCreateSubDevices
+    T::Dummy_clCreateSubDevices mock(-0x12334567);
+    TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), unexpected_clerror);
+#endif // HAVE_OPENCL_clCreateSubDevices
+  }
+  /** // doc: test_retain_device() {{{
+   * Test \ref retain_device() in normal situation
+   */ // }}}
+  void test_retain_device( )
+  {
+#if HAVE_OPENCL_clRetainDevice
+    T::Dummy_clRetainDevice mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(retain_device((cl_device_id)0x1234));
+    TS_ASSERT(mock.called_once_with((cl_device_id)0x1234));
+#endif // HAVE_OPENCL_clRetainDevice
+  }
+  /** // doc: test_retain_device__invalid_device() {{{
+   * \brief Test \ref retain_device() in a situation when \c clRetainDevice() returns CL_INVALID_DEVICE
+   */ // }}}
+  void test_retain_device__invalid_device( )
+  {
+#if HAVE_OPENCL_clRetainDevice
+    T::Dummy_clRetainDevice mock(CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(retain_device(NULL),clerror_no<status_t::invalid_device>);
+#endif // HAVE_OPENCL_clRetainDevice
+  }
+  /** // doc: test_retain_device__out_of_resources() {{{
+   * \brief Test \ref retain_device() in a situation when \c clRetainDevice() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_retain_device__out_of_resources( )
+  {
+#if HAVE_OPENCL_clRetainDevice
+    T::Dummy_clRetainDevice mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(retain_device(NULL),clerror_no<status_t::out_of_resources>);
+#endif // HAVE_OPENCL_clRetainDevice
+  }
+  /** // doc: test_retain_device__out_of_host_memory() {{{
+   * \brief Test \ref retain_device() in a situation when \c clRetainDevice() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_retain_device__out_of_host_memory( )
+  {
+#if HAVE_OPENCL_clRetainDevice
+    T::Dummy_clRetainDevice mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(retain_device(NULL),clerror_no<status_t::out_of_host_memory>);
+#endif // HAVE_OPENCL_clRetainDevice
+  }
+  /** // doc: test_retain_device__unexpected_clerror() {{{
+   * \brief Test \ref retain_device() in a situation when \c clRetainDevice() returns unexpected error code
+   */ // }}}
+  void test_retain_device__unexpected_clerror( )
+  {
+#if HAVE_OPENCL_clRetainDevice
+    T::Dummy_clRetainDevice mock(-0x1234567);
+    TS_ASSERT_THROWS(retain_device(NULL),unexpected_clerror);
+#endif // HAVE_OPENCL_clRetainDevice
+  }
+  /** // doc: test_release_device() {{{
+   * \brief Test \ref release_device() in normal situation
+   */ // }}}
+  void test_release_device( )
+  {
+#if HAVE_OPENCL_clReleaseDevice
+    T::Dummy_clReleaseDevice mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(release_device((cl_device_id)0x1234));
+    TS_ASSERT(mock.called_once_with((cl_device_id)0x1234));
+#endif // HAVE_OPENCL_clReleaseDevice
+  }
+  /** // doc: test_release_device__invalid_device() {{{
+   * \brief Test \ref release_device() in a situation when \c clReleaseDevice() returns CL_INVALID_DEVICE
+   */ // }}}
+  void test_release_device__invalid_device( )
+  {
+#if HAVE_OPENCL_clReleaseDevice
+    T::Dummy_clReleaseDevice mock(CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(release_device(NULL),clerror_no<status_t::invalid_device>);
+#endif // HAVE_OPENCL_clReleaseDevice
+  }
+  /** // doc: test_release_device__out_of_resources() {{{
+   * \brief Test \ref release_device() in a situation when \c clReleaseDevice() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_release_device__out_of_resources( )
+  {
+#if HAVE_OPENCL_clReleaseDevice
+    T::Dummy_clReleaseDevice mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(release_device(NULL),clerror_no<status_t::out_of_resources>);
+#endif // HAVE_OPENCL_clReleaseDevice
+  }
+  /** // doc: test_release_device__out_of_host_memory() {{{
+   * \brief Test \ref release_device() in a situation when \c clReleaseDevice() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_release_device__out_of_host_memory( )
+  {
+#if HAVE_OPENCL_clReleaseDevice
+    T::Dummy_clReleaseDevice mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(release_device(NULL),clerror_no<status_t::out_of_host_memory>);
+#endif // HAVE_OPENCL_clReleaseDevice
+  }
+  /** // doc: test_release_device__unexpected_clerror() {{{
+   * \brief Test \ref release_device() in a situation when \c clReleaseDevice() returns unexpected error code
+   */ // }}}
+  void test_release_device__unexpected_clerror( )
+  {
+#if HAVE_OPENCL_clReleaseDevice
+    T::Dummy_clReleaseDevice mock(-0x1234567);
+    TS_ASSERT_THROWS(release_device(NULL),unexpected_clerror);
+#endif // HAVE_OPENCL_clReleaseDevice
+  }
 };
 
 #endif /* CLXX_FUNCTIONS_T_H_INCLUDED */

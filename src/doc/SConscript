@@ -1,4 +1,3 @@
-#
 # @COPYRIGHT@
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,45 +19,7 @@
 # SOFTWARE
 
 Import(['env'])
-
-doxyfile = env.Doxyfile(
-    INPUT                   = ['../lib', '../examples', '.'],
-    RECURSIVE               = True,
-    PROJECT_NAME            = "clxx",
-    PROJECT_NUMBER          = '0.1.0',
-    PROJECT_BRIEF           = 'C++ wrapper for OpenCL',
-    OUTPUT_DIRECTORY        = '.',
-    STRIP_FROM_PATH         = '../..',
-    STRIP_FROM_INC_PATH     = ['../lib', '../examples'],
-    EXAMPLE_PATH            = '../examples',
-    FILTER_PATTERNS         = { '*.cpp' : env.File('../../bin/doxycppfilter'),
-                                '*.hpp' : env.File('../../bin/doxycppfilter'),
-                                '*.h'   : env.File('../../bin/doxycppfilter') },
-    FILTER_SOURCE_FILES     = True,
-    FILTER_SOURCE_PATTERNS  = { '*.cpp' : env.File('../../bin/doxycppfilter'),
-                                '*.hpp' : env.File('../../bin/doxycppfilter'),
-                                '*.h'   : env.File('../../bin/doxycppfilter') },
-    ENUM_VALUES_PER_LINE    = 0,
-    ENABLE_PREPROCESSING    = True,
-    MACRO_EXPANSION         = True,
-    EXPAND_ONLY_PREDEF      = True,
-    PREDEFINED              = [ 'DOXYGEN', 'CL_VERSION_1_0', 'CL_VERSION_1_1',
-                                'CL_VERSION_1_2',
-                                'BOOST_CLASS_VERSION(__klass,__ver)=',
-                                'cl_khr_gl_sharing',
-                                'cl_khr_dx9_media_sharing',
-                                'cl_khr_d3d10_sharing',
-                                'cl_khr_d3d11_sharing',
-                                '_WIN32' ]
-)
-
-doc = env.Doxygen(doxyfile)
-
-env.Clean('..', '.')
-env.Ignore('..', '.')
-env.Alias('api-doc', '.')
-tgt = env.AlwaysBuild(env.Alias('api-doc'))
-env.Depends(tgt, env.Glob('../../bin/doxy*'))
+SConscript('clxx/SConscript', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4

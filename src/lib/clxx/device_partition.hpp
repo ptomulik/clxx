@@ -20,35 +20,38 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: swig/clxx/context_mod.swg {{{
- * \file swig/clxx/context_mod.swg
+// clxx/device_partition.hpp
+
+/** // doc: clxx/device_partition.hpp {{{
+ * \file clxx/device_partition.hpp
  * \todo Write documentation
  */ // }}}
+#ifndef CLXX_DEVICE_PARTITION_HPP_INCLUDED
+#define CLXX_DEVICE_PARTITION_HPP_INCLUDED
 
-%import <clxx/swig_config.swg>
+#include <clxx/devices.hpp>
+#include <clxx/device_partition_properties.hpp>
 
-%include <std_vector.i>
-%include <std_string.i>
+namespace clxx {
 
-%import <clxx/cl/opencl1_0.i>
-%import <clxx/exception_mod.i>
-%import <clxx/platform_mod.i>
-%import <clxx/types_mod.i>
+/** \ingroup clxx_platform_layer */
+/** @{ */
+#if HAVE_OPENCL_clCreateSubDevices
+/** // doc: get_num_sub_devices() {{{
+ * \todo Write documentation
+ */ // }}}
+cl_uint get_num_sub_devices(device const& in_device,
+                            device_partition_properties const& properties);
+/** // doc: get_sub_devices() {{{
+ * \todo Write documentation
+ */ // }}}
+devices get_sub_devices(device const& in_device,
+                        device_partition_properties const& properties);
+#endif
+/** @} */
 
-%{
-#include <clxx/cl/opencl_mod.hpp>
-#include <clxx/exception_mod.hpp>
-#include <clxx/platform_mod.hpp>
-#include <clxx/types_mod.hpp>
+} // end namespace clxx
 
-#include <clxx/context_property.hpp>
-#include <clxx/context_properties.hpp>
-#include <clxx/context.hpp>
-%}
-
-%include <clxx/context_property.swg>
-%include <clxx/context_properties_.swg>
-%include <clxx/context_.swg>
-
+#endif /* CLXX_DEVICE_PARTITION_HPP */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

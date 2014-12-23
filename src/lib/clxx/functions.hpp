@@ -33,8 +33,9 @@
 
 namespace clxx {
 
+/** \ingroup clxx_cl_functions
+ *  @{ */
 /** // {{{ doc: get_platform_ids(...)
- * \ingroup clxx_platform_layer
  * \brief Retrieve platform identifiers of locally available OpenCL platforms.
  *
  * This function is a C++ wrapper for \c clGetPlatformIDs().
@@ -64,13 +65,17 @@ namespace clxx {
  * The unexpected_clerror is thrown only when the \c clGetPlatformIDs()
  * implementation is not standard conformant, its version is not supported by
  * CLXX, or when get_platform_ids() has a bug.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 void get_platform_ids( cl_uint num_entries,
                        cl_platform_id* platforms,
                        cl_uint* num_platforms );
 
 /** // doc: get_platform_info(...) {{{
- * \ingroup clxx_platform_layer
  *
  * \brief Query OpenCL platform layer for platform information.
  *
@@ -110,6 +115,11 @@ void get_platform_ids( cl_uint num_entries,
  * The unexpected_clerror is thrown only when the \c clGetPlatformInfo()
  * implementation is not standard conformant, its version is not supported by
  * CLXX, or when get_platform_info() has a bug.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 void
 get_platform_info(  cl_platform_id platform,
@@ -119,7 +129,6 @@ get_platform_info(  cl_platform_id platform,
                     size_t* param_value_size_ret );
 
 /** // doc: get_device_ids() {{{
- * \ingroup clxx_platform_layer
  * \brief Retrieve device identifiers of locally available OpenCL devices.
  *
  * This function is a C++ wrapper for \c clGetDeviceIDs(). The main difference
@@ -168,13 +177,17 @@ get_platform_info(  cl_platform_id platform,
  * The unexpected_clerror is thrown only when the \c clGetDeviceIDs()
  * implementation is not standard conformant, its version is not supported by
  * %clxx, or when get_platform_ids() has a bug.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 void get_device_ids(cl_platform_id platform, device_type_t device_type,
                     cl_uint num_entries, cl_device_id* devices,
                     cl_uint* num_devices);
 
 /** // doc: get_device_info(...) {{{
- * \ingroup clxx_platform_layer
  * \brief Get certain information from device.
  *
  * This is a wrapper around \c clGetDeviceInfo(). The call to this function
@@ -214,13 +227,16 @@ void get_device_ids(cl_platform_id platform, device_type_t device_type,
  * \throws  clxx::unexpected_clerror
  *    when \c clGetDeviceInfo() returns any other error code.
  *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 void
 get_device_info( cl_device_id device, device_info_t name, size_t value_size,
                  void* value, size_t* value_size_ret);
 
 /** // doc: create_context(...) {{{
- * \ingroup clxx_platform_layer
  * \brief Create OpenCL context
  *
  * This is a wrapper around \c clCreateContext(). The call to this function has
@@ -291,6 +307,11 @@ get_device_info( cl_device_id device, device_info_t name, size_t value_size,
  *    When \c clCreateContext() returns error \c CL_INVALID_D3D11_DEVICE_KHR
  * \throw unexpected_clerror
  *    When \c clCreateContext() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 cl_context create_context(const cl_context_properties* properties,
                cl_uint num_devices, const cl_device_id* devices,
@@ -299,7 +320,6 @@ cl_context create_context(const cl_context_properties* properties,
                void* user_data);
 
 /** // doc: create_context_from_type_from_type(...) {{{
- * \ingroup clxx_platform_layer
  * \brief Create OpenCL context
  *
  * This is a wrapper around \c clCreateContextFromType(). The call to this function has
@@ -368,6 +388,11 @@ cl_context create_context(const cl_context_properties* properties,
  *    When \c clCreateContextFromType() returns error \c CL_INVALID_D3D11_DEVICE_KHR
  * \throw unexpected_clerror
  *    When \c clCreateContextFromType() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 cl_context create_context_from_type(const cl_context_properties* properties,
                device_type_t device_type,
@@ -376,7 +401,6 @@ cl_context create_context_from_type(const cl_context_properties* properties,
                void* user_data);
 
 /** // doc: retain_context(...) {{{
- * \ingroup clxx_platform_layer
  * \brief Increment the context reference count
  *
  * This is a wrapper around \c clRetainContext(). The call to this function has
@@ -400,11 +424,15 @@ cl_context create_context_from_type(const cl_context_properties* properties,
  *
  * \note \ref create_context() and \ref create_context_from_type() perform an
  *    implicit retain.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 void retain_context(cl_context context);
 
 /** // doc: release_context(...) {{{
- * \ingroup clxx_platform_layer
  * \brief Decrement the context reference count
  *
  * This is a wrapper around \c clReleaseContext(). The call to this function has
@@ -426,11 +454,14 @@ void retain_context(cl_context context);
  * \throw unexpeced_clerror
  *    When \c clReleaseContext() returns other error code.
  *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 void release_context(cl_context context);
 
 /** // doc: get_context_info(...) {{{
- * \ingroup clxx_platform_layer
  * \brief Query information about a context.
  *
  * This is a wrapper for \c clGetContextInfo(). The call to \ref
@@ -466,10 +497,148 @@ void release_context(cl_context context);
  *    When \c clGetContextInfo() returns \c CL_OUT_OF_HOST_MEMORY.
  * \throw unexpected_clerror
  *    When \c clGetContextInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
  */ // }}}
 void get_context_info(cl_context context, context_info_t param_name,
                       size_t param_value_size, void* param_value,
                       size_t* param_value_size_ret);
+#if HAVE_OPENCL_clCreateSubDevices
+/** // doc: create_sub_devices(...) {{{
+ * \brief Creates an array of sub-devices that each reference
+ *    a non-intersecting set of compute units within **in_device**.
+ *
+ * This function is a wrapper around \c clCreateSubDevices(). The main
+ * difference between \ref create_sub_devices() and \c clCreateSubDevices() is
+ * that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param in_device
+ *    The device to be partitioned
+ * \param properties
+ *    Specifies how **in_device** is to be partition described by a partition
+ *    name and its corresponding value. Each partition name is immediately
+ *    followed by the corresponding desired value. The list is terminated with
+ *    0. The list of supported partitioning schemes is described by the OpenCL
+ *    standard (ver. 1.2 and later), see documentation for
+ *    \c clCreateSubDevices().
+ * \param num_devices
+ *    Size of memory pointed to by **out_devices&& specified as the number of
+ *    \c cl_device_id entries.
+ * \param out_devices
+ *    The buffer where OpenCL sub-devices will be returned. If **out_devices**
+ *    is \c NULL, this argument is ignored. If **out_devices** is not \c NULL,
+ *    **num_devices** must be greater than or equal to the number of
+ *    sub-devices than **in_device** may be partitioned into according to the
+ *    partitioning scheme specified in **properties**.
+ * \param num_devices_ret
+ *    Returns the number of sub-devices that device may be partitioned into
+ *    according to the partitioning scheme specified in **properties**. If
+ *    **num_devices_reg** is \c NULL, it is ignored.
+ *
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clCreateSubDevices() returns CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateSubDevices() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::device_partition_failed>
+ *    When \c clCreateSubDevices() returns CL_DEVICE_PARTITION_FAILED.
+ * \throw clerror_no<status_t::invalid_device_partition_count>
+ *    When \c clCreateSubDevices() returns CL_INVALID_DEVICE_PARTITION_COUNT.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateSubDevices() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateSubDevices() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateSubDevices() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * |         |         | &radic; |         |
+ */ // }}}
+void create_sub_devices(cl_device_id in_device,
+                        const cl_device_partition_property* properties,
+                        cl_uint num_devices,
+                        cl_device_id* out_devices,
+                        cl_uint *num_devices_ret);
+#endif
+#if HAVE_OPENCL_clRetainDevice
+/** // doc: retain_device(...) {{{
+ * \brief Increments the **devices** reference count
+ *
+ * This function is a wrapper around \c clRetainDevice(). The call to this
+ * function has same effect as
+ *  - \c clRetainDevice(device)
+ *
+ * The main difference between \ref retain_device() and
+ * \c clRetainDevice() is that it throws %clxx exceptions instead of returning
+ * OpenCL error codes.
+ *
+ * The function increments the **device** reference count if **device** is a
+ * valid sub-device created by call to \ref create_sub_devices() or
+ * \c clCreateSubDevices(). If **device** is a root level device i.e.
+ * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
+ * the **device** reference count remains unchanged.
+ *
+ * \param device
+ *    The device to be retained
+ *
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clRetainDevice() returns CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clRetainDevice() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clRetainDevice() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clRetainDevice() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * |         |         | &radic; |         |
+ */ // }}}
+void retain_device(cl_device_id device);
+#endif
+#if HAVE_OPENCL_clReleaseDevice
+/** // doc: release_device(...) {{{
+ * \brief Decrements the **devices** reference count
+ *
+ * This function is a wrapper around \c clReleaseDevice(). The call to this
+ * function has same effect as
+ *  - \c clReleaseDevice(device)
+ *
+ * The main difference between \ref release_device() and
+ * \c clReleaseDevice() is that it throws %clxx exceptions instead of returning
+ * OpenCL error codes.
+ *
+ * The function decrements the **device** reference count if **device** is a
+ * valid sub-device created by call to \ref create_sub_devices() or
+ * \c clCreateSubDevices(). If **device** is a root level device i.e.
+ * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
+ * the **device** reference count remains unchanged.
+ *
+ * \param device
+ *    The device to be releaseed
+ *
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clReleaseDevice() returns CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clReleaseDevice() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clReleaseDevice() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clReleaseDevice() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * |         |         | &radic; |         |
+ */ // }}}
+void release_device(cl_device_id device);
+#endif
+/** @} */
 } // end namespace clxx
 
 #endif /* CLXX_FUNCTIONS_HPP_INCLUDED */

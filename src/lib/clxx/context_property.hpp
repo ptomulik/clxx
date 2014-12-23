@@ -99,7 +99,7 @@ struct context_property
    *  make_context_properties(p)
    * \endcode
    *
-   * \param p   platform used to initialize 
+   * \param p   platform used to initialize
    */ // }}}
   context_property(platform const& p) noexcept
     : _name(context_properties_t::platform), _value((cl_context_properties)p.id())
@@ -116,14 +116,14 @@ struct context_property
    */ // }}}
   constexpr cl_context_properties value() const noexcept
   { return _value; }
-  /** // doc: set_name() const {{{
+  /** // doc: set_name() {{{
    * \brief Set property's name
    *
    * \param name new name for this property
    */ // }}}
   void set_name(context_properties_t name) noexcept
   { _name = name; }
-  /** // doc: set_value() const {{{
+  /** // doc: set_value() {{{
    * \brief Set property value
    *
    * \param value new value for this property
@@ -197,7 +197,7 @@ make_context_property(typename context_property_type<N>::type x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::platform>(x);
+ *   y = make_context_property<context_properties_t::platform>(x);
  * \endcode
  */ // }}}
 constexpr context_property
@@ -235,7 +235,7 @@ context_platform(const platform& x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::interop_user_sync>(x);
+ *   y = make_context_property<context_properties_t::interop_user_sync>(x);
  * \endcode
  */ // }}}
 constexpr context_property
@@ -256,7 +256,7 @@ context_interop_user_sync(bool x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::gl_context_khr>(x);
+ *   y = make_context_property<context_properties_t::gl_context_khr>(x);
  * \endcode
  *
  * The function is defined only when \c cl_khr_gl_sharing extension is enabled.
@@ -277,7 +277,7 @@ context_gl_context_khr(void* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::egl_display_khr>(x);
+ *   y = make_context_property<context_properties_t::egl_display_khr>(x);
  * \endcode
  *
  * The function is defined only when \c cl_khr_gl_sharing extension is enabled.
@@ -298,7 +298,7 @@ context_egl_display_khr(void* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::glx_display_khr>(x);
+ *   y = make_context_property<context_properties_t::glx_display_khr>(x);
  * \endcode
  *
  * The function is defined only when \c cl_khr_gl_sharing extension is enabled.
@@ -319,7 +319,7 @@ context_glx_display_khr(void* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::wgl_hdc_khr>(x);
+ *   y = make_context_property<context_properties_t::wgl_hdc_khr>(x);
  * \endcode
  *
  * The function is defined only when \c cl_khr_gl_sharing extension is enabled.
@@ -340,7 +340,7 @@ context_wgl_hdc_khr(void* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::cgl_sharegroup_khr>(x);
+ *   y = make_context_property<context_properties_t::cgl_sharegroup_khr>(x);
  * \endcode
  *
  * The function is defined only when \c cl_khr_gl_sharing extension is enabled.
@@ -364,7 +364,7 @@ context_cgl_sharegroup_khr(void* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::adapter_d3d9_khr>(x);
+ *   y = make_context_property<context_properties_t::adapter_d3d9_khr>(x);
  * \endcode
  *
  * The function is defined only on Windows when \c cl_khr_dx9_media_sharing
@@ -386,7 +386,7 @@ context_adapter_d3d9_khr(IDirect3DDevice9* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::adapter_d3d9ex_khr>(x);
+ *   y = make_context_property<context_properties_t::adapter_d3d9ex_khr>(x);
  * \endcode
  *
  * The function is defined only on Windows when \c cl_khr_dx9_media_sharing
@@ -408,7 +408,7 @@ context_adapter_d3d9ex_khr(IDirect3DDeviceEx* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::adapter_dxva_khr>(x);
+ *   y = make_context_property<context_properties_t::adapter_dxva_khr>(x);
  * \endcode
  *
  * The function is defined only on Windows when \c cl_khr_dx9_media_sharing
@@ -433,7 +433,7 @@ context_adapter_dxva_khr(IDXVAHD_Device* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::d3d10_device_khr>(x);
+ *   y = make_context_property<context_properties_t::d3d10_device_khr>(x);
  * \endcode
  *
  * The function is defined only when \c cl_khr_d3d10_sharing extension is
@@ -458,7 +458,7 @@ context_d3d10_device_khr(ID3D10Device* x) noexcept
  * is equivalent to
  *
  * \code
- *   y = make_context_property<context_parameters_t::d3d11_device_khr>(x);
+ *   y = make_context_property<context_properties_t::d3d11_device_khr>(x);
  * \endcode
  *
  * The function is defined only when \c cl_khr_d3d11_sharing extension is

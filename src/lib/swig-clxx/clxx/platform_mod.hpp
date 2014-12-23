@@ -35,8 +35,6 @@
 #include <clxx/platform.hpp>
 #include <clxx/platforms.hpp>
 #include <clxx/platform_layer.hpp>
-#include <clxx/context_property.hpp>
-#include <clxx/context_properties.hpp>
 
 // dependencies
 #include <clxx/types_mod.hpp>

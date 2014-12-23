@@ -340,6 +340,88 @@ void get_context_info(cl_context context, context_info_t param_name,
         }
     }
 }
+/* ------------------------------------------------------------------------ */
+#if HAVE_OPENCL_clCreateSubDevices
+void create_sub_devices(cl_device_id in_device,
+                        const cl_device_partition_property* properties,
+                        cl_uint num_devices,
+                        cl_device_id* out_devices,
+                        cl_uint *num_devices_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clCreateSubDevices(
+        in_device,
+        properties,
+        num_devices,
+        out_devices,
+        num_devices_ret
+      )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::device_partition_failed:
+            throw clerror_no<status_t::device_partition_failed>();
+          case status_t::invalid_device_partition_count:
+            throw clerror_no<status_t::invalid_device_partition_count>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+#endif // HAVE_OPENCL_clCreateSubDevices
+/* ------------------------------------------------------------------------ */
+#if HAVE_OPENCL_clRetainDevice
+void retain_device(cl_device_id device)
+{
+  status_t s = static_cast<status_t>(T::clRetainDevice(device));
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+#endif // HAVE_OPENCL_clRetainDevice
+/* ------------------------------------------------------------------------ */
+#if HAVE_OPENCL_clReleaseDevice
+void release_device(cl_device_id device)
+{
+  status_t s = static_cast<status_t>(T::clReleaseDevice(device));
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+#endif // HAVE_OPENCL_clReleaseDevice
+/* ------------------------------------------------------------------------ */
 } // end namespace clxx
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

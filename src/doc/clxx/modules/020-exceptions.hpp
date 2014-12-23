@@ -20,11 +20,11 @@
  * IN THE SOFTWARE
  */
 /** // doc: \group clxx_exceptions  {{{
- * \defgroup clxx_exceptions Exceptions in clxx
+ * \defgroup clxx_exceptions Clxx exceptions
  *
  * This module introduces clxx exceptions.
  *
- * \section clxx_exceptions_user_view User's view
+ * <h4>User's view</h4>
  *
  * %Clxx uses exceptions to report errors. A hierarchy of exception classes is
  * developed to represent all errors which may occur in %clxx. This hierarchy
@@ -89,7 +89,7 @@
  * }
  * \endcode
  *
- * \section clxx_exceptions_developer_view Developer's view
+ * <h4>Developer's view</h4>
  *
  * Developers should derive new exceptions from clxx::exception_base. It takes
  * a base exception class as the first template argument. The clxx::exception
