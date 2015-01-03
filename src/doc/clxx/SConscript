@@ -49,6 +49,9 @@ doxyfile = env.Doxyfile(
                                 'cl_khr_dx9_media_sharing',
                                 'cl_khr_d3d10_sharing',
                                 'cl_khr_d3d11_sharing',
+                                'HAVE_OPENCL_clCreateSubDevices',
+                                'HAVE_OPENCL_clRetainDevice',
+                                'HAVE_OPENCL_clReleaseDevice',
                                 '_WIN32' ]
 )
 
