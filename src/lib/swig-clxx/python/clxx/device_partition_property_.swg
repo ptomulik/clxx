@@ -20,21 +20,27 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: python/clxx/device_partition_properties_.swg {{{
- * \file python/clxx/device_partition_properties_.swg
+/** // doc: python/clxx/device_partition_property_.swg {{{
+ * \file python/clxx/device_partition_property_.swg
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/device_partition_properties.swg>
+// We need the following include here, as we use clxx::operator& which is
+// defined in clxx/device_partition_properties.hpp
+%{
+#include <clxx/device_partition_properties.hpp>
+%}
 
-%extend std::vector<clxx::device_partition_property> {
+%include <clxx/device_partition_property.swg>
+
+%extend clxx::device_partition_property {
   std::vector<clxx::device_partition_property> __and__(clxx::device_partition_property const& right) const {
     return clxx::operator&(*$self, right);
   }
   std::vector<clxx::device_partition_property> __and__(std::vector<clxx::device_partition_property> const& right) const {
     return clxx::operator&(*$self, right);
   }
-};
+}
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

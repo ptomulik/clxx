@@ -40,13 +40,9 @@
 #include <clxx/exception_mod.hpp>
 #include <clxx/platform_mod.hpp>
 #include <clxx/types_mod.hpp>
-
-#include <clxx/context_property.hpp>
-#include <clxx/context_properties.hpp>
-#include <clxx/context.hpp>
 %}
 
-%include <clxx/context_property.swg>
+%include <clxx/context_property_.swg>
 %include <clxx/context_properties_.swg>
 %include <clxx/context_.swg>
 

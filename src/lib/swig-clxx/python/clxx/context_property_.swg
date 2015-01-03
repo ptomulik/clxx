@@ -20,21 +20,26 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: python/clxx/device_partition_properties_.swg {{{
- * \file python/clxx/device_partition_properties_.swg
+/** // doc: python/clxx/context_property_.swg {{{
+ * \file python/clxx/context_property_.swg
  * \todo Write documentation
  */ // }}}
+// We need the following include here, as we use clxx::operator& which is
+// defined in clxx/context_properties.hpp
+%{
+#include <clxx/context_properties.hpp>
+%}
 
-%include <clxx/device_partition_properties.swg>
+%include <clxx/context_property.swg>
 
-%extend std::vector<clxx::device_partition_property> {
-  std::vector<clxx::device_partition_property> __and__(clxx::device_partition_property const& right) const {
+%extend clxx::context_property {
+  std::vector<clxx::context_property> __and__(clxx::context_property const& right) const {
     return clxx::operator&(*$self, right);
   }
-  std::vector<clxx::device_partition_property> __and__(std::vector<clxx::device_partition_property> const& right) const {
+  std::vector<clxx::context_property> __and__(std::vector<clxx::context_property> const& right) const {
     return clxx::operator&(*$self, right);
   }
-};
+}
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -40,13 +40,9 @@
 #include <clxx/exception_mod.hpp>
 #include <clxx/platform_mod.hpp>
 #include <clxx/types_mod.hpp>
-
-#include <clxx/device_partition_property.hpp>
-#include <clxx/device_partition_properties.hpp>
-#include <clxx/device_partition.hpp>
 %}
 
-%include <clxx/device_partition_property.swg>
+%include <clxx/device_partition_property_.swg>
 %include <clxx/device_partition_properties_.swg>
 %include <clxx/device_partition.swg>
 

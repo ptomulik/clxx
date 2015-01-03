@@ -20,21 +20,12 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: python/clxx/device_partition_properties_.swg {{{
- * \file python/clxx/device_partition_properties_.swg
+/** // doc: clxx/context_property_.swg {{{
+ * \file clxx/context_property_.swg
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/device_partition_properties.swg>
-
-%extend std::vector<clxx::device_partition_property> {
-  std::vector<clxx::device_partition_property> __and__(clxx::device_partition_property const& right) const {
-    return clxx::operator&(*$self, right);
-  }
-  std::vector<clxx::device_partition_property> __and__(std::vector<clxx::device_partition_property> const& right) const {
-    return clxx::operator&(*$self, right);
-  }
-};
+%include <clxx/context_property.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
