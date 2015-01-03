@@ -29,7 +29,7 @@
 
 // We need clxx/cl/opencl1_0.swg for types defined in CL/cl.h
 %import <clxx/cl/opencl1_0.swg>
-%include <clxx/types_.swg>
+%include <clxx/types.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

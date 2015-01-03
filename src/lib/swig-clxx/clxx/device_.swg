@@ -24,8 +24,14 @@
  * \file clxx/device_.swg
  * \todo Write documentation
  */ // }}}
-
-%include <clxx/device.swg>
+%{
+#include <clxx/device.hpp>
+%}
+%include <std_vector.i>
+%include <std_string.i>
+%template() std::vector<size_t>;
+%template() std::vector<clxx::device_partition_property_t>;
+%include <clxx/device.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

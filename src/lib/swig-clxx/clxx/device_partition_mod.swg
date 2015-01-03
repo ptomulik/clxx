@@ -42,8 +42,8 @@
 #include <clxx/types_mod.hpp>
 %}
 
-%include <clxx/device_partition_property_.swg>
-%include <clxx/device_partition_properties_.swg>
+%include <clxx/device_partition_property.swg>
+%include <clxx/device_partition_properties.swg>
 %include <clxx/device_partition.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

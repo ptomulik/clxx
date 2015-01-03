@@ -20,14 +20,13 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: python/clxx/platform_.swg {{{
- * \file python/clxx/platform_.swg
+/** // doc: python/clxx/context.swg {{{
+ * \file python/clxx/context.swg
  * \todo Write documentation
  */ // }}}
 
-%ignore clxx::platform::operator cl_platform_id;
-%ignore clxx::platform::operator=;
-%include <clxx/platform.swg>
+%ignore clxx::context::operator=;
+%include <clxx/context_.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

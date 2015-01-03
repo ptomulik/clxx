@@ -25,7 +25,10 @@
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/device_partition_property.swg>
+%{
+#include <clxx/device_partition_property.hpp>
+%}
+%include <clxx/device_partition_property.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

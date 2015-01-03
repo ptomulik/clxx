@@ -42,9 +42,9 @@
 #include <clxx/types_mod.hpp>
 %}
 
-%include <clxx/context_property_.swg>
-%include <clxx/context_properties_.swg>
-%include <clxx/context_.swg>
+%include <clxx/context_property.swg>
+%include <clxx/context_properties.swg>
+%include <clxx/context.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

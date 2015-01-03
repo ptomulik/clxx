@@ -44,8 +44,8 @@
 #include <clxx/info/platform_info_mod.hpp>
 %}
 
-%include <clxx/platform_.swg>
-%include <clxx/device_.swg>
+%include <clxx/platform.swg>
+%include <clxx/device.swg>
 %include <clxx/platforms.swg>
 %include <clxx/devices.swg>
 %include <clxx/platform_layer.swg>

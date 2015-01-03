@@ -20,8 +20,8 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: python/clxx/device_partition_property_.swg {{{
- * \file python/clxx/device_partition_property_.swg
+/** // doc: python/clxx/device_partition_property.swg {{{
+ * \file python/clxx/device_partition_property.swg
  * \todo Write documentation
  */ // }}}
 
@@ -31,7 +31,7 @@
 #include <clxx/device_partition_properties.hpp>
 %}
 
-%include <clxx/device_partition_property.swg>
+%include <clxx/device_partition_property_.swg>
 
 %extend clxx::device_partition_property {
   std::vector<clxx::device_partition_property> __and__(clxx::device_partition_property const& right) const {

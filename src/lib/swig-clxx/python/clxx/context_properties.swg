@@ -20,12 +20,12 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: python/clxx/context_properties_.swg {{{
- * \file python/clxx/context_properties_.swg
+/** // doc: python/clxx/context_properties.swg {{{
+ * \file python/clxx/context_properties.swg
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/context_properties.swg>
+%include <clxx/context_properties_.swg>
 
 %extend std::vector<clxx::context_property> {
   std::vector<clxx::context_property> __and__(clxx::context_property const& right) const {

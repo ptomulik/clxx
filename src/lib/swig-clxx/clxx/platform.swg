@@ -25,12 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/platform.hpp>
-%}
-%include <clxx/platform.hpp>
-
-
+%include <clxx/platform_.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

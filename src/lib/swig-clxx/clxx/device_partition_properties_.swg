@@ -25,7 +25,24 @@
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/device_partition_properties.swg>
+%{
+#include <clxx/device_partition_properties.hpp>
+%}
+%include <std_vector.i>
+%template (device_partition_properties) std::vector<clxx::device_partition_property>;
+%include <clxx/device_partition_properties.hpp>
+
+namespace clxx {
+  inline device_partition_properties make_device_partition_properties(device_partition_property const&);
+  inline device_partition_properties make_device_partition_properties(device_partition_property const&, device_partition_property const&);
+  inline device_partition_properties make_device_partition_properties(device_partition_property const&, device_partition_property const&, device_partition_property const&);
+  inline device_partition_properties make_device_partition_properties(device_partition_property const&, device_partition_property const&, device_partition_property const&, device_partition_property const&);
+
+  inline device_partition_properties make_device_partition_properties(device_partition_properties const&);
+  inline device_partition_properties make_device_partition_properties(device_partition_properties const&, device_partition_property const&);
+  inline device_partition_properties make_device_partition_properties(device_partition_properties const&, device_partition_property const&, device_partition_property const&);
+  inline device_partition_properties make_device_partition_properties(device_partition_properties const&, device_partition_property const&, device_partition_property const&, device_partition_property const&);
+};
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

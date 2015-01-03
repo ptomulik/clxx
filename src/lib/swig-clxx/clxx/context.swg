@@ -20,15 +20,12 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: swig/clxx/context.swg {{{
- * \file swig/clxx/context.swg
+/** // doc: clxx/context.swg {{{
+ * \file clxx/context.swg
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/context.hpp>
-%}
-%include <clxx/context.hpp>
+%include <clxx/context_.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -20,15 +20,12 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: swig/clxx/device_partition_property.swg {{{
- * \file swig/clxx/device_partition_property.swg
+/** // doc: clxx/device_partition_property.swg {{{
+ * \file clxx/device_partition_property.swg
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/device_partition_property.hpp>
-%}
-%include <clxx/device_partition_property.hpp>
+%include <clxx/device_partition_property_.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
