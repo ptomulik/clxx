@@ -183,7 +183,7 @@ struct device_partition_property
   {
     props[0] = intval(_name);
     cl_device_partition_property* end = std::copy(_values.begin(),_values.end(), props + 1);
-    if(uses_trailing_zero())
+    if(is_list())
       {
         *end++ = (cl_device_partition_property)0;
       }
@@ -222,11 +222,6 @@ struct device_partition_property
    */ // }}}
   bool is_list() const noexcept
   { return name() == device_partition_property_t::by_counts; }
-  /** // doc: uses_trailing_zero() {{{
-   * \todo Write documentation
-   */ // }}}
-  bool uses_trailing_zero() const noexcept
-  { return is_list(); }
   /** // doc: size() {{{
    * \brief Return size of the property
    *
@@ -234,7 +229,7 @@ struct device_partition_property
    *          OpenCL array.
    */ // }}}
   size_t size() const noexcept
-  { return 1 + _values.size() + (uses_trailing_zero() ? 1 : 0); }
+  { return 1 + _values.size() + (is_list() ? 1 : 0); }
 private:
   device_partition_property_t _name;
   std::vector<cl_device_partition_property> _values;
