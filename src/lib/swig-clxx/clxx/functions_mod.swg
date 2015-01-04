@@ -27,9 +27,23 @@
 
 %include <clxx/config.h>
 
+// XXX: without these, exception specifications won't compile work.
+// I don't know why this happens
+//%include <std_vector.i>
+//%include <std_string.i>
+%include <exception.i>
+
 // We need clxx/cl/opencl1_0.swg for types defined in CL/cl.h
 %import <clxx/cl/opencl1_0.swg>
 %import <clxx/types_mod.swg>
+%import <clxx/exception_mod.swg>
+
+%{
+#include <clxx/cl/opencl_mod.hpp>
+#include <clxx/types_mod.hpp>
+#include <clxx/exception_mod.hpp>
+%}
+
 %include <clxx/functions.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

@@ -30,6 +30,27 @@
 %}
 %include <std_vector.i>
 %template (context_properties) std::vector<clxx::context_property>;
+
+%include <clxx/exception_support.swg>
+
+%exception clxx::context_properties_fill_array(clxx::context_properties const&, cl_context_properties *, size_t) {
+  try { $action }
+  %catch_invalid_argument_error
+  %catch_not_enough_space_error
+  %catch_exception
+}
+%exception clxx::context_properties_parse_array(clxx::context_properties&, cl_context_properties const *) {
+  try { $action }
+  %catch_invalid_argument_error
+  %catch_badalloc
+  %catch_exception
+}
+%throws_badalloc(clxx::operator&(context_property const&, context_property const&));
+%throws_badalloc(clxx::operator&(context_properties const&, context_property const&))
+%throws_badalloc(clxx::operator&(context_property const&, context_properties const&));
+%throws_badalloc(clxx::operator&(context_properties const&, context_properties const&));
+%throws_badalloc(clxx::make_context_properties);
+
 %include <clxx/context_properties.hpp>
 
 namespace clxx {

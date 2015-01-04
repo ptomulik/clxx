@@ -29,6 +29,7 @@
 
 %include <std_vector.i>
 %include <std_string.i>
+%include <clxx/exception_support.swg>
 
 %import <clxx/cl/opencl1_0.i>
 %import <clxx/exception_mod.i>

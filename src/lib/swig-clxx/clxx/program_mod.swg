@@ -27,6 +27,8 @@
 
 %import <clxx/swig_config.swg>
 
+%include <exception.i>
+
 %import <clxx/cl/opencl1_0.i>
 %import <clxx/exception_mod.i>
 %{

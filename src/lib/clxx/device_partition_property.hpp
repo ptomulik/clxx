@@ -83,7 +83,7 @@ struct device_partition_property
    * \param value property value
    */ // }}}
   template <typename T, typename A>
-  device_partition_property(device_partition_property_t name, std::vector<T,A> const& values) noexcept
+  device_partition_property(device_partition_property_t name, std::vector<T,A> const& values)
     : _name(name)
   {
     set_values(values);
@@ -95,7 +95,7 @@ struct device_partition_property
    * \param value property value
    */ // }}}
   template <typename T, typename A>
-  device_partition_property(cl_device_partition_property name, std::vector<T,A> const& values) noexcept
+  device_partition_property(cl_device_partition_property name, std::vector<T,A> const& values)
     : _name(static_cast<device_partition_property_t>(name))
   {
     set_values(values);
@@ -131,8 +131,12 @@ struct device_partition_property
   /** // doc: values() const {{{
    * \todo Write documentation
    */ // }}}
-  std::vector<cl_device_partition_property> const& values() const noexcept
-  { return _values; }
+  std::vector<cl_device_partition_property> const& values() const
+  { 
+    if(!is_list())
+      throw value_access_error();
+    return _values;
+  }
   /** // doc: set_name() {{{
    * \brief Set property's name
    *
@@ -179,7 +183,7 @@ struct device_partition_property
    * \note **props[0]** and **props[1]** must be writeable. The function **does
    *        not** append trailing zero to array.
    */ // }}}
-  size_t write(cl_device_partition_property* props) const
+  size_t write(cl_device_partition_property* props) const noexcept
   {
     props[0] = intval(_name);
     cl_device_partition_property* end = std::copy(_values.begin(),_values.end(), props + 1);

@@ -30,6 +30,7 @@
 // XXX: we need them here, before other files are included
 %include <std_vector.i>
 %include <std_string.i>
+%include <clxx/exception_support.swg>
 
 %import <clxx/types_mod.i>
 %import <clxx/exception_mod.i>
