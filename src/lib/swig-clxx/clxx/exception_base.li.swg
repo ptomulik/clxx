@@ -20,50 +20,26 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/platform_.swg {{{
- * \file clxx/platform_.swg
+/** // doc: clxx/exception_base.li.swg {{{
+ * \file clxx/exception_base.li.swg
  * \todo Write documentation
  */ // }}}
 
 %{
-#include <clxx/platform.hpp>
+#include <clxx/exception_base.hpp>
 %}
+%include <clxx/exception.swg>
+%include <clxx/util/std_except_ctor_arg.swg>
 
-%include <clxx/exception_support.swg>
+%include <clxx/exception_base.hpp>
 
-%define %throws_as_platform_get_str_info(decl)
-%exception decl {
-  try { $action }
-  %catch_uninitialized_platform_error
-  %catch_clerror
-  %catch_badalloc
-  %catch_exception
-}
-%enddef
-
-%exception clxx::platform::get_valid_id() const {
-  try { $action }
-  %catch_uninitialized_platform_error
-  %catch_exception
-}
-
-%exception clxx::platform::get_info(clxx::platform_info_t, size_t, void *, size_t *) const {
-  try { $action }
-  %catch_uninitialized_platform_error
-  %catch_clerror
-  %catch_exception
-}
-
-%throws_as_platform_get_str_info(clxx::platform::get_profile() const);
-%throws_as_platform_get_str_info(clxx::platform::get_version() const);
-%throws_as_platform_get_str_info(clxx::platform::get_name() const);
-%throws_as_platform_get_str_info(clxx::platform::get_vendor() const);
-%throws_as_platform_get_str_info(clxx::platform::get_extensions() const);
-
-// TODO: specify exceptions for the following function
-//clxx::get_platform_info(clxx::platform, const& p, clxx::platform_query const&)
-
-%include <clxx/platform.hpp>
+// Instantiate most commonly used specializations of exception_base
+%template(exception_base__T__exception__std__logic_error)
+  clxx::exception_base<clxx::exception, std::logic_error>;
+%template(exception_base__T__exception__std__invalid_argument)
+  clxx::exception_base<clxx::exception, std::invalid_argument>;
+%template(exception_base__T__exception__std__length_error)
+  clxx::exception_base<clxx::exception, std::length_error>;
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

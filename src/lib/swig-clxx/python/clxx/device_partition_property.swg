@@ -31,7 +31,7 @@
 #include <clxx/device_partition_properties.hpp>
 %}
 
-%include <clxx/device_partition_property_.swg>
+%include <clxx/device_partition_property.li.swg>
 
 %extend clxx::device_partition_property {
   std::vector<clxx::device_partition_property> __and__(clxx::device_partition_property const& right) const {

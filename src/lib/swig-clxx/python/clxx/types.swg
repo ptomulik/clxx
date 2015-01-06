@@ -32,7 +32,7 @@
 // use enchanced enums (strongly typed and scoped)
 %include <enums.swg>
 
-%include <clxx/types_.swg>
+%include <clxx/types.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

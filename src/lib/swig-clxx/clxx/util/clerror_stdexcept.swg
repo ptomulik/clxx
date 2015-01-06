@@ -25,10 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/util/clerror_stdexcept.hpp>
-%}
-%include <clxx/util/clerror_stdexcept.hpp>
+%include <clxx/util/clerror_stdexcept.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

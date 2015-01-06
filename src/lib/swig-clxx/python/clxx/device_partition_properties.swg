@@ -25,7 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/device_partition_properties_.swg>
+%include <clxx/device_partition_properties.li.swg>
 
 %extend std::vector<clxx::device_partition_property> {
   std::vector<clxx::device_partition_property> __and__(clxx::device_partition_property const& right) const {

@@ -25,12 +25,13 @@
  * \todo Write documentation
  */ // }}}
 // We need the following include here, as we use clxx::operator& which is
-// defined in clxx/context_properties.hpp
+// defined in clxx/context_properties.hpp. It's python specific, because we
+// need it for the python %extend clxx::context_property.
 %{
 #include <clxx/context_properties.hpp>
 %}
 
-%include <clxx/context_property_.swg>
+%include <clxx/context_property.li.swg>
 
 %extend clxx::context_property {
   std::vector<clxx::context_property> __and__(clxx::context_property const& right) const {

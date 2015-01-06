@@ -27,7 +27,7 @@
 
 %ignore clxx::platform::operator cl_platform_id;
 %ignore clxx::platform::operator=;
-%include <clxx/platform_.swg>
+%include <clxx/platform.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

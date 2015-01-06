@@ -25,7 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/context_properties_.swg>
+%include <clxx/context_properties.li.swg>
 
 %extend std::vector<clxx::context_property> {
   std::vector<clxx::context_property> __and__(clxx::context_property const& right) const {

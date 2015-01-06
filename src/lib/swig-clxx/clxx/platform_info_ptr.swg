@@ -25,13 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/platform_info_ptr.hpp>
-%}
-
-%include <clxx/shared_ptr.swg>
-namespace clxx { class platform_info; }
-CLXX_DECL_CLASS_SHARED_PTR1(clxx, platform_info)
+%include <clxx/platform_info_ptr.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

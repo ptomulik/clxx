@@ -25,11 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/util/context_property_type.hpp>
-%}
-%include <clxx/util/context_property_type_fwd.hpp>
-%include <clxx/util/context_property_type.hpp>
+%include <clxx/util/context_property_type.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -25,21 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/exception_base.hpp>
-%}
-%include <clxx/exception.swg>
-%include <clxx/util/std_except_ctor_arg.swg>
-
-%include <clxx/exception_base.hpp>
-
-// Instantiate most commonly used specializations of exception_base
-%template(exception_base__T__exception__std__logic_error)
-  clxx::exception_base<clxx::exception, std::logic_error>;
-%template(exception_base__T__exception__std__invalid_argument)
-  clxx::exception_base<clxx::exception, std::invalid_argument>;
-%template(exception_base__T__exception__std__length_error)
-  clxx::exception_base<clxx::exception, std::length_error>;
+%include <clxx/exception_base.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

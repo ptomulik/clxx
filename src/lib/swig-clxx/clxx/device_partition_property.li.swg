@@ -20,8 +20,8 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/device_partition_property_.swg {{{
- * \file clxx/device_partition_property_.swg
+/** // doc: clxx/device_partition_property.li.swg {{{
+ * \file clxx/device_partition_property.li.swg
  * \todo Write documentation
  */ // }}}
 

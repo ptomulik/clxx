@@ -25,10 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/platform_layer_info.hpp>
-%}
+%include <clxx/platform_layer_info.li.swg>
 
-%include <clxx/device_info_ptrs.swg>
-%include <clxx/platform_info_ptrs.swg>
-%include <clxx/platform_layer_info.hpp>
+// vim: set expandtab tabstop=2 shiftwidth=2:
+// vim: set foldmethod=marker foldcolumn=4:

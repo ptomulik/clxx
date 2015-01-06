@@ -20,8 +20,8 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: swig/clxx/context_properties_.swg {{{
- * \file swig/clxx/context_properties_.swg
+/** // doc: swig/clxx/context_properties.li.swg {{{
+ * \file swig/clxx/context_properties.li.swg
  * \todo Write documentation
  */ // }}}
 

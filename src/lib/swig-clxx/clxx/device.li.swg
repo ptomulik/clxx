@@ -20,8 +20,8 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/device_.swg {{{
- * \file clxx/device_.swg
+/** // doc: clxx/device.li.swg {{{
+ * \file clxx/device.li.swg
  * \todo Write documentation
  */ // }}}
 %{
