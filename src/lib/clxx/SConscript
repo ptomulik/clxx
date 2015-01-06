@@ -20,56 +20,13 @@
 
 Import('env')
 
-from SCons.Script import GetOption
-from SCons.Util import CLVar
-
-objects = env.SharedObject([
-    'functions.cpp',
-    'platform.cpp',
-    'platforms.cpp',
-    'device.cpp',
-    'devices.cpp',
-    'platform_layer.cpp',
-    'context_properties.cpp',
-    'context.cpp',
-    'device_partition_properties.cpp',
-    'device_partition.cpp',
-])
-
-libs = CLVar('OpenCL clxx_info')
-# rlib - "real" libarary
-rlib = env.SharedLibrary('../clxx', objects + ['cl/real.cpp'], LIBS = libs)
-
-# tlib - library for testing (OpenCL functions replaced with mocks)
-tlib = env.SharedLibrary('../clxx_test', objects + ['cl/mock.cpp'], LIBS = libs)
-env.Ignore('../..', tlib)
-
-ilib = env.Install('${libdir}', rlib)
-env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
-
-ihdr = env.Install("${includedir}/clxx/cl", env.Glob("*.hpp"))
-env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/cl", ihdr)
-
-env.Alias('install-libclxx-headers', ihdr)
-env.Alias('install-libclxx-lib', ilib)
-env.Alias('install-libclxx-dev', ['install-libclxx-headers', 'install-libclxx-lib' ])
-env.Alias('install','install-libclxx-dev')
-
-ihdr = env.Install("${includedir}/clxx", env.Glob("*.hpp"))
-env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx", ihdr)
-
-util_ihdr = env.Install("${includedir}/clxx/util", env.Glob("util/*.hpp"))
-env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/util", util_ihdr)
-
-env.Alias('install-libclxx_common-headers', ihdr + util_ihdr)
-env.Alias('install-libclxx_common-dev','install-libclxx_common-headers')
-env.Alias('install','install-libclxx_common-dev')
-
-SConscript('app/SConscript', exports = ['env'])
-#SConscript('cl/SConscript', exports = ['env'])
-SConscript('info/SConscript', exports = ['env'])
-SConscript('io/SConscript', exports = ['env'])
-SConscript('s11n/SConscript', exports = ['env'])
+SConscript('SConscript.libclxx_common', exports = ['env'])
+SConscript('SConscript.libclxx', exports = ['env'])
+SConscript('SConscript.libclxx_app', exports = ['env'])
+SConscript('SConscript.libclxx_app_clinfo', exports = ['env'])
+SConscript('SConscript.libclxx_info', exports = ['env'])
+SConscript('SConscript.libclxx_io', exports = ['env'])
+SConscript('SConscript.libclxx_s11n', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4

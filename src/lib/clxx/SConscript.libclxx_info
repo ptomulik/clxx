@@ -22,31 +22,40 @@ Import('env')
 
 from SCons.Util import CLVar
 
-libs = CLVar('clxx_app clxx_io clxx clxx_s11n clxx_info')
+sources = [
+    'info/device_info.cpp',
+    'info/device_query.cpp',
+    'info/platform_info.cpp',
+    'info/platform_layer_info.cpp',
+    'info/platform_query.cpp',
+]
 
-lib = env.SharedLibrary('../../../clxx_app_clinfo',
-    [ 'options_description.cpp'
-    , 'common_options_description.cpp'
-    , 'platform_general_options_description.cpp'
-    , 'platform_detail_options_description.cpp'
-    , 'device_general_options_description.cpp'
-    , 'device_detail_options_description.cpp'
-    , 'io_options_description.cpp'
-    , 'create_query.cpp'
-    , 'main.cpp' ],
-    LIBS = libs
-)
+headers = [
+    'info/device_info.hpp',
+    'info/device_info_ptr.hpp',
+    'info/device_info_ptrs.hpp',
+    'info/device_query.hpp',
+    'info/platform_info.hpp',
+    'info/platform_info_ptr.hpp',
+    'info/platform_info_ptrs.hpp',
+    'info/platform_layer_info.hpp',
+    'info/platform_query.hpp',
+]
+
+objects = env.SharedObject(sources)
+
+lib = env.SharedLibrary('../clxx_info', objects)
 
 ilib = env.Install('${libdir}', lib)
 env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
-ihdr = env.Install("${includedir}/clxx/app_clinfo", env.Glob("*.hpp"))
-env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/app_clinfo", ihdr)
+iheaders = env.Install("${includedir}/clxx/info", headers)
+env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/info", iheaders)
 
-env.Alias('install-libclxx_app_clinfo-headers', ihdr)
-env.Alias('install-libclxx_app_clinfo-lib', ilib)
-env.Alias('install-libclxx_app_clinfo-dev', ['install-libclxx_app_clinfo-headers', 'install-libclxx_app_clinfo-lib' ])
-env.Alias('install','install-libclxx_app_clinfo-dev')
+env.Alias('install-libclxx_info-headers', iheaders)
+env.Alias('install-libclxx_info-lib', ilib)
+env.Alias('install-libclxx_info-dev', ['install-libclxx_info-headers', 'install-libclxx_info-lib' ])
+env.Alias('install','install-libclxx_info-dev')
 
 # Local Variables:
 # # tab-width:4
