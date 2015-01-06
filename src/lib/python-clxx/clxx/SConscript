@@ -35,7 +35,7 @@ modules = [
 #    TODO: uncomment program_mod once it's ready
 #    'program_mod'
 ]
-libs = env.get('SWIGPY_LIBS', CLVar()) + [ 'clxx', 'OpenCL' ]
+libs = env.get('SWIGPY_LIBS', CLVar()) + [ 'clxx_cl', 'OpenCL' ]
 # Build modules
 modfiles = env.SwigPyModule(modules, SWIGPY_LIBS = libs)
 instfiles =  [m for m in modfiles if not str(m).endswith('.cc')] + init_py

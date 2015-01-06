@@ -46,7 +46,7 @@ headers = [
     'app/clinfo/platform_general_options_description.hpp',
 ]
 
-libs = CLVar('clxx_app clxx_io clxx clxx_s11n clxx_info')
+libs = CLVar('clxx_app clxx_io clxx_cl clxx_s11n clxx_info')
 
 lib = env.SharedLibrary('../clxx_app_clinfo', sources, LIBS = libs)
 

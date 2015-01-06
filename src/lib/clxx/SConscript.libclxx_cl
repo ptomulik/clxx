@@ -55,10 +55,10 @@ objects = env.SharedObject(sources)
 libs = CLVar('OpenCL clxx_info')
 
 # rlib - "real" libarary
-rlib = env.SharedLibrary('../clxx', objects + ['cl/real.cpp'], LIBS = libs)
+rlib = env.SharedLibrary('../clxx_cl', objects + ['cl/real.cpp'], LIBS = libs)
 
 # tlib - library for testing (OpenCL functions replaced with mocks)
-tlib = env.SharedLibrary('../clxx_test', objects + ['cl/mock.cpp'], LIBS = libs)
+tlib = env.SharedLibrary('../clxx_cl_test', objects + ['cl/mock.cpp'], LIBS = libs)
 env.Ignore('../..', tlib)
 
 ilib = env.Install('${libdir}', rlib)
