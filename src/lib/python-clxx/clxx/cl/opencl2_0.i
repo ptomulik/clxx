@@ -25,7 +25,7 @@
  * \todo Write documentation
  */ // }}}
 
-%module(package="clxx_.cl") opencl2_0
+%module(package="clxx.cl") opencl2_0
 %feature("autodoc","3");
 %include <clxx/cl/opencl2_0.swg>
 

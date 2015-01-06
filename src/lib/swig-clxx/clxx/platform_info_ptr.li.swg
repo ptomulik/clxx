@@ -30,7 +30,6 @@
 %}
 
 %include <clxx/shared_ptr.swg>
-namespace clxx { class platform_info; }
 CLXX_DECL_CLASS_SHARED_PTR1(clxx, platform_info)
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

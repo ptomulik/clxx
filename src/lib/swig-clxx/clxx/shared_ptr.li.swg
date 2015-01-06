@@ -34,6 +34,7 @@
 //       CLXX_SHARED_PTR macro defined here
 //%include <clxx/shared_ptr.hpp>
 %include <boost_shared_ptr.i>
+%include <boost/shared_ptr.hpp>
 
 #define CLXX_SHARED_PTR(__t) boost::shared_ptr<__t>
 
@@ -47,6 +48,7 @@
 %define CLXX_DECL_CLASS_SHARED_PTR1(__ns1,__klass)
 %shared_ptr(__ns1::__klass);
 namespace __ns1 {
+  struct __klass;
   typedef CLXX_SHARED_PTR(__ns1::__klass) __klass ## _ptr;
   typedef CLXX_SHARED_PTR(__ns1::__klass const) const_ ## __klass ## _ptr;
 }
@@ -64,6 +66,7 @@ namespace __ns1 {
 %define CLXX_DECL_CLASS_SHARED_PTR2(__ns1,__ns2,__klass)
 %shared_ptr(__ns1::__ns2::__klass);
 namespace __ns1 { namespace __ns2 {
+  struct __klass;
   typedef CLXX_SHARED_PTR(__ns1::__ns2::__klass) __klass ## _ptr;
   typedef CLXX_SHARED_PTR(__ns1::__ns2::__klass const) const_ ## __klass ## _ptr;
 } }

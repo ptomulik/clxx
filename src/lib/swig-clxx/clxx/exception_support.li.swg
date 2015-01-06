@@ -92,6 +92,34 @@
 }
 %enddef
 
+%define %throws_uninitialized_value_error(decl)
+%exception decl {
+  try { $action }
+  %catch_uninitialized_value_error
+  %catch_exception
+}
+%enddef
+
+%define %throws_badalloc_uninitialized_value_error(decl)
+%exception decl {
+  try { $action }
+  %catch_badalloc
+  %catch_uninitialized_value_error
+  %catch_exception
+}
+%enddef
+
+%import <clxx/exceptions.i>
+%{
+#include <clxx/exceptions.i.hpp>
+%}
+%exception {
+  try {
+    $action
+  } catch(std::exception const& e) {
+    SWIG_exception(SWIG_RuntimeError, e.what());
+  }
+}
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -31,8 +31,7 @@
 %include <clxx/clerror.hpp>
 
 // instantiate commonly used specializations of clxx::exception_base
-%template(clxx_exception_base__T__clxxerror__std_logic_error)
-  clxx::exception_base<clxx::clerror,std::logic_error>;
+%template(exception_base_logic_clerror) clxx::exception_base<clxx::clerror,std::logic_error>;
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

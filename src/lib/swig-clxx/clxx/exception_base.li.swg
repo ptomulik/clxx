@@ -34,12 +34,9 @@
 %include <clxx/exception_base.hpp>
 
 // Instantiate most commonly used specializations of exception_base
-%template(exception_base__T__exception__std__logic_error)
-  clxx::exception_base<clxx::exception, std::logic_error>;
-%template(exception_base__T__exception__std__invalid_argument)
-  clxx::exception_base<clxx::exception, std::invalid_argument>;
-%template(exception_base__T__exception__std__length_error)
-  clxx::exception_base<clxx::exception, std::length_error>;
+%template(exception_base_logic_error) clxx::exception_base<clxx::exception, std::logic_error>;
+%template(exception_base_invalid_argument) clxx::exception_base<clxx::exception, std::invalid_argument>;
+%template(exception_base_length_error) clxx::exception_base<clxx::exception, std::length_error>;
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

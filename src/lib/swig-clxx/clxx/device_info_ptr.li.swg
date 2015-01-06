@@ -30,7 +30,6 @@
 %}
 
 %include <clxx/shared_ptr.swg>
-namespace clxx { class device_info; }
 CLXX_DECL_CLASS_SHARED_PTR1(clxx, device_info);
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
