@@ -18,17 +18,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE
 
-Import(['env'])
+## Import(['env'])
 
-from SCons.Util import CLVar
+## from SCons.Util import CLVar
 
-SConscript('SConscript.libclxx_app', exports = ['env'])
-SConscript('SConscript.libclxx_app_clinfo', exports = ['env'])
-SConscript('SConscript.libclxx_cl', exports = ['env'])
-SConscript('SConscript.libclxx_common', exports = ['env'])
-SConscript('SConscript.libclxx_info', exports = ['env'])
-SConscript('SConscript.libclxx_io', exports = ['env'])
-SConscript('SConscript.libclxx_s11n', exports = ['env'])
+## tests = [
+## ]
+
+## env.CxxTest('../check-libclxx_app_clinfo', tests,
+##            LIBS = CLVar('clxx_app_clinfo clxx_app boost_program_options'),
+##            CXXTEST_CPPPATH = ['..'],
+##            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
+##            CXXTEST_TARGET = 'check-libclxx_app_clinfo')
+
+## env.Alias('check', [ 'check-libclxx_app_clinfo' ])
+## env.AlwaysBuild('check-libclxx_app')
 
 # Local Variables:
 # # tab-width:4

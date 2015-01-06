@@ -22,13 +22,26 @@ Import(['env'])
 
 from SCons.Util import CLVar
 
-SConscript('SConscript.libclxx_app', exports = ['env'])
-SConscript('SConscript.libclxx_app_clinfo', exports = ['env'])
-SConscript('SConscript.libclxx_cl', exports = ['env'])
-SConscript('SConscript.libclxx_common', exports = ['env'])
-SConscript('SConscript.libclxx_info', exports = ['env'])
-SConscript('SConscript.libclxx_io', exports = ['env'])
-SConscript('SConscript.libclxx_s11n', exports = ['env'])
+tests = [
+    'info/device_info.t.h',
+#    'info/device_info_ptr.t.h',
+#    'info/device_info_ptrs.t.h',
+    'info/device_query.t.h',
+    'info/platform_info.t.h',
+#    'info/platform_info_ptr.t.h',
+#    'info/platform_info_ptrs.t.h',
+    'info/platform_layer_info.t.h',
+    'info/platform_query.t.h',
+]
+
+env.CxxTest('../check-libclxx_info', tests,
+           LIBS = CLVar('clxx_info'),
+           CXXTEST_CPPPATH = ['..'],
+           CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
+           CXXTEST_TARGET = 'check-libclxx_info')
+
+env.Alias('check', [ 'check-libclxx_info' ])
+env.AlwaysBuild('check-libclxx_info')
 
 # Local Variables:
 # # tab-width:4
