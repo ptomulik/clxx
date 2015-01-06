@@ -29,7 +29,7 @@
 #ifndef CLXX_S11N_PLATFORM_INFO_HPP_INCLUDED
 #define CLXX_S11N_PLATFORM_INFO_HPP_INCLUDED
 
-#include <clxx/info/platform_info.hpp>
+#include <clxx/platform_info.hpp>
 #include <boost/serialization/version.hpp>
 
 BOOST_CLASS_VERSION( clxx::platform_info

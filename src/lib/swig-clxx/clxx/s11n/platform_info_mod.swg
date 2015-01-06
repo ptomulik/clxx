@@ -24,7 +24,7 @@
  * \file clxx/s11n/platform_mod.swg
  * \todo Write documentation
  */ // }}}
-%import <clxx/info/platform_info_mod.swg>
+%import <clxx/platform_info_mod.swg>
 
 %include <clxx/s11n/platform_layer_info.swg>
 %include <clxx/s11n/device_query.swg>

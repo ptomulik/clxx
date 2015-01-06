@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/info/platform_info.t.h
+// clxx/platform_info.t.h
 
 /** // doc: clxx/s11n/platform_info.t.h {{{
  * \file clxx/s11n/platform_info.t.h
@@ -31,7 +31,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/s11n/platform_info.hpp>
-#include <clxx/info/platform_info_fixtures.hpp>
+#include <clxx/platform_info_fixtures.hpp>
 
 // For serialization
 #include <boost/archive/text_oarchive.hpp>

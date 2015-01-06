@@ -29,8 +29,8 @@
 #ifndef CLXX_APP_CLINFO_CREATE_QUERY_HPP_INCLUDED
 #define CLXX_APP_CLINFO_CREATE_QUERY_HPP_INCLUDED
 
-#include <clxx/info/platform_query.hpp>
-#include <clxx/info/device_query.hpp>
+#include <clxx/platform_query.hpp>
+#include <clxx/device_query.hpp>
 #include <clxx/app/options/options_map.hpp>
 
 namespace clxx { namespace app { namespace clinfo {

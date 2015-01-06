@@ -268,8 +268,8 @@ public:
 };
 } // end namespace clxx
 
-#include <clxx/info/platform_info.hpp>
-#include <clxx/info/platform_query.hpp>
+#include <clxx/platform_info.hpp>
+#include <clxx/platform_query.hpp>
 
 namespace clxx {
 /** // doc: query_platform_info(platform, query) {{{

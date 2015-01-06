@@ -35,14 +35,14 @@
 %import <clxx/types_mod.i>
 %import <clxx/exception_mod.i>
 %import <clxx/cl/opencl1_0.i>
-%import <clxx/info/platform_info_mod.i>
+%import <clxx/platform_info_mod.i>
 
 %{
 // dependencies
 #include <clxx/types_mod.hpp>
 #include <clxx/exception_mod.hpp>
 #include <clxx/cl/opencl_mod.hpp>
-#include <clxx/info/platform_info_mod.hpp>
+#include <clxx/platform_info_mod.hpp>
 %}
 
 %include <clxx/platform.swg>

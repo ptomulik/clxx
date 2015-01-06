@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/info/device_info.t.h
+// clxx/device_info.t.h
 
 /** // doc: clxx/s11n/device_info.t.h {{{
  * \file clxx/s11n/device_info.t.h
@@ -31,7 +31,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/s11n/device_info.hpp>
-#include <clxx/info/device_info_fixtures.hpp>
+#include <clxx/device_info_fixtures.hpp>
 
 // For serialization
 #include <boost/archive/text_iarchive.hpp>

@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/info/device_query.t.h
+// clxx/device_query.t.h
 
 /** // doc: clxx/s11n/device_query.t.h {{{
  * \file clxx/s11n/device_query.t.h
@@ -31,7 +31,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/s11n/device_query.hpp>
-#include <clxx/info/device_query_fixtures.hpp>
+#include <clxx/device_query_fixtures.hpp>
 
 // For serialization
 #include <boost/archive/text_oarchive.hpp>

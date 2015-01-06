@@ -817,8 +817,8 @@ public:
 
 } // end namespace clxx
 
-#include <clxx/info/device_info.hpp>
-#include <clxx/info/device_query.hpp>
+#include <clxx/device_info.hpp>
+#include <clxx/device_query.hpp>
 
 namespace clxx {
 /** // doc: query_device_info(device, query) {{{

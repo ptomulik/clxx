@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/info/platform_layer_info.t.h
+// clxx/platform_layer_info.t.h
 
 /** // doc: clxx/s11n/platform_layer_info.t.h {{{
  * \file clxx/s11n/platform_layer_info.t.h
@@ -31,7 +31,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/s11n/platform_layer_info.hpp>
-#include <clxx/info/platform_layer_info_fixtures.hpp>
+#include <clxx/platform_layer_info_fixtures.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>

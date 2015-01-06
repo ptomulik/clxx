@@ -20,7 +20,7 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-// clxx/info/platform_query.t.h
+// clxx/platform_query.t.h
 
 /** // doc: clxx/s11n/platform_query.t.h {{{
  * \file clxx/s11n/platform_query.t.h
@@ -31,7 +31,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/s11n/platform_query.hpp>
-#include <clxx/info/platform_query_fixtures.hpp>
+#include <clxx/platform_query_fixtures.hpp>
 
 // For serialization
 #include <boost/archive/text_oarchive.hpp>

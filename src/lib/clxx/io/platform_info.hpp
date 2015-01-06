@@ -29,7 +29,7 @@
 #ifndef CLXX_IO_PLATFORM_INFO_HPP_INCLUDED
 #define CLXX_IO_PLATFORM_INFO_HPP_INCLUDED
 
-#include <clxx/info/platform_info.hpp>
+#include <clxx/platform_info.hpp>
 #include <iosfwd>
 
 namespace clxx { namespace io {

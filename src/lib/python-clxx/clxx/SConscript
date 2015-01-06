@@ -53,7 +53,7 @@ env.Alias('install', 'install-python-clxx')
 SConscript( 'std/SConscript', exports = ['env'] )
 SConscript( 'boost/SConscript', exports = ['env'] )
 SConscript( 'cl/SConscript', exports = ['env'] )
-SConscript( 'info/SConscript', exports = ['env'] )
+SConscript( 'SConscript.clxx_info', exports = ['env'] ) ## FIXME: this doesn't work currently
 SConscript( 's11n/SConscript', exports = ['env'] )
 
 # Build in _ldr_

@@ -29,7 +29,7 @@
 #ifndef CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED
 #define CLXX_S11N_DEVICE_QUERY_HPP_INCLUDED
 
-#include <clxx/info/device_query.hpp>
+#include <clxx/device_query.hpp>
 #include <boost/serialization/version.hpp>
 
 BOOST_CLASS_VERSION( clxx::device_query
