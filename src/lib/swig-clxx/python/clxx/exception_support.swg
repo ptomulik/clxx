@@ -20,19 +20,16 @@
  * DEALINGS IN THE SOFTWARE
  */
 
-/** // doc: clxx/device_query.li.swg {{{
- * \file clxx/device_query.li.swg
+/** // doc: clxx/exception_support.swg {{{
+ * \file clxx/exception_support.swg
  * \todo Write documentation
  */ // }}}
 
+%include <clxx/exception_support.li.swg>
+
 %{
-#include <clxx/device_query.hpp>
+#define SWIG_Clxx_KeyError(e) { PyErr_SetString(PyExc_KeyError, const_cast<char*>(e.what())); SWIG_fail; }
 %}
-
-// The clxx::device_query class has only noexcept methods. There is no need for
-// specifying exceptions.
-
-%include <clxx/device_query.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
