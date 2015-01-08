@@ -106,8 +106,7 @@ get_device_ids(cl_platform_id platform, device_type_t device_type,
           case status_t::invalid_value:
             throw clerror_no<status_t::invalid_value>();
           case status_t::device_not_found:
-            // throw clerror_no<CL_DEVICE_NOT_FOUND>();
-            break;
+            break; // not found, so we return "empty sequence"
           case status_t::out_of_resources:
             throw clerror_no<status_t::out_of_resources>();
           case status_t::out_of_host_memory:

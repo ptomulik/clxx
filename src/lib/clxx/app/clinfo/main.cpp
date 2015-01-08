@@ -287,7 +287,7 @@ retrieve_info(options_map const& om)
   else
     {
       return clxx::query_platform_layer_info(
-          clxx::platform_layer(),
+          clxx::platform_layer(true),
           create_platform_query(om),
           create_device_query(om)
      );

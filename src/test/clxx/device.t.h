@@ -4476,6 +4476,74 @@ public:
     TS_ASSERT_EQUALS(info.profile(), "FULL_PROFILE");
     TS_ASSERT_EQUALS(info.version(), "OpenCL 1.0 CUDA");
   }
+//  /** // doc: test_eq_op_1() {{{
+//   * \brief Test operator==()
+//   */ // }}}
+  void test_eq_op_1( )
+  {
+    TS_ASSERT(  device((cl_device_id)0x0000) == device((cl_device_id)0x0000));
+    TS_ASSERT(  device((cl_device_id)0x1234) == device((cl_device_id)0x1234));
+    TS_ASSERT(!(device((cl_device_id)0x1234) == device((cl_device_id)0x0000)));
+    TS_ASSERT(!(device((cl_device_id)0x0000) == device((cl_device_id)0x1234)));
+  }
+//  /** // doc: test_neq_op_1() {{{
+//   * \brief Test operator!=()
+//   */ // }}}
+  void test_neq_op_1( )
+  {
+    TS_ASSERT(!(device((cl_device_id)0x0000) != device((cl_device_id)0x0000)));
+    TS_ASSERT(!(device((cl_device_id)0x1234) != device((cl_device_id)0x1234)));
+    TS_ASSERT(  device((cl_device_id)0x1234) != device((cl_device_id)0x0000));
+    TS_ASSERT(  device((cl_device_id)0x0000) != device((cl_device_id)0x1234));
+  }
+//  /** // doc: test_lt_op_1() {{{
+//   * \brief Test operator<
+//   */ // }}}
+  void test_lt_op_1( )
+  {
+    TS_ASSERT(!(device((cl_device_id)0x0000) < device((cl_device_id)0x0000)));
+    TS_ASSERT(!(device((cl_device_id)0x1234) < device((cl_device_id)0x1234)));
+    TS_ASSERT(!(device((cl_device_id)0x1234) < device((cl_device_id)0x0000)));
+    TS_ASSERT(  device((cl_device_id)0x0000) < device((cl_device_id)0x1234));
+  }
+//  /** // doc: test_gt_op_1() {{{
+//   * \brief Test operator>
+//   */ // }}}
+  void test_gt_op_1( )
+  {
+    TS_ASSERT(!(device((cl_device_id)0x0000) > device((cl_device_id)0x0000)));
+    TS_ASSERT(!(device((cl_device_id)0x1234) > device((cl_device_id)0x1234)));
+    TS_ASSERT(  device((cl_device_id)0x1234) > device((cl_device_id)0x0000));
+    TS_ASSERT(!(device((cl_device_id)0x0000) > device((cl_device_id)0x1234)));
+  }
+//  /** // doc: test_le_op_1() {{{
+//   * \brief Test operator<=
+//   */ // }}}
+  void test_le_op_1( )
+  {
+    TS_ASSERT(  device((cl_device_id)0x0000) <= device((cl_device_id)0x0000));
+    TS_ASSERT(  device((cl_device_id)0x1234) <= device((cl_device_id)0x1234));
+    TS_ASSERT(!(device((cl_device_id)0x1234) <= device((cl_device_id)0x0000)));
+    TS_ASSERT(  device((cl_device_id)0x0000) <= device((cl_device_id)0x1234));
+  }
+//  /** // doc: test_ge_op_1() {{{
+//   * \brief Test operator>=
+//   */ // }}}
+  void test_ge_op_1( )
+  {
+    TS_ASSERT(  device((cl_device_id)0x0000) >= device((cl_device_id)0x0000));
+    TS_ASSERT(  device((cl_device_id)0x1234) >= device((cl_device_id)0x1234));
+    TS_ASSERT(  device((cl_device_id)0x1234) >= device((cl_device_id)0x0000));
+    TS_ASSERT(!(device((cl_device_id)0x0000) >= device((cl_device_id)0x1234)));
+  }
+//  /** // doc: test_bool_op_1() {{{
+//   * \brief Test operator bool
+//   */ // }}}
+  void test_bool_op_1( )
+  {
+    TS_ASSERT((bool)device((cl_device_id)0x1234));
+    TS_ASSERT(!(bool)device((cl_device_id)0x000));
+  }
 };
 
 #endif /* CLXX_CL_DEVICE_T_H_INCLUDED */

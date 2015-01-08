@@ -800,19 +800,47 @@ public:
   cl_uint get_image_base_address_alignment() const;
 #endif
   /** // {{{
-   * \brief Equal-to overloade operator.
+   * \brief Equal-to overloaded operator.
+   * Compares identifiers of two \ref device objects.
    */ // }}}
   bool operator == (device const& x) const
-  {
-    return x.id() == this->id();
-  }
+  { return this->id() == x.id(); }
   /** // {{{
-   * \brief Non equal-to overloade operator.
+   * \brief Not equal-to overloaded operator.
+   * Compares identifiers of two \ref device objects.
    */ // }}}
   bool operator != (device const& x) const
-  {
-    return x.id() != this->id();
-  }
+  { return this->id() != x.id(); }
+  /** // {{{
+   * \brief Less-than overloaded operator.
+   * Compares identifiers of two \ref device objects.
+   */ // }}}
+  bool operator < (device const& x) const
+  { return this->id() < x.id(); }
+  /** // {{{
+   * \brief Greater-than overloaded operator.
+   * Compares identifiers of two \ref device objects.
+   */ // }}}
+  bool operator > (device const& x) const
+  { return this->id() > x.id(); }
+  /** // {{{
+   * \brief Less-or-equal-to overloaded operator.
+   * Compares identifiers of two \ref device objects.
+   */ // }}}
+  bool operator <= (device const& x) const
+  { return this->id() <= x.id(); }
+  /** // {{{
+   * \brief Greater-or-equal-to overloaded operator.
+   * Compares identifiers of two \ref device objects.
+   */ // }}}
+  bool operator >= (device const& x) const
+  { return this->id() >= x.id(); }
+  /** // {{{
+   * \brief Conversion to bool
+   * \returns true if the object is initialized or false otherwise
+   */ // }}}
+  operator bool() const
+  { return this->is_initialized(); }
 };
 
 } // end namespace clxx

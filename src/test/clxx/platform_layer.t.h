@@ -32,6 +32,7 @@
 #include <cxxtest/TestSuite.h>
 #include <clxx/platform_layer.hpp>
 #include <clxx/cl/mock.hpp>
+#include <clxx/exceptions.hpp>
 
 namespace clxx { class platform_layer_test_suite; }
 
@@ -41,18 +42,56 @@ namespace clxx { class platform_layer_test_suite; }
 class clxx::platform_layer_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test_defaults_1() {{{
+  /** // doc: test_ctor_0() {{{
    * \todo Write documentation
    */ // }}}
-  void test_defaults_1( )
+  void test_ctor_0( )
   {
     T::Newton_clGetPlatformIDs mock1;
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
 
-    TS_ASSERT_EQUALS(platform_layer().get_platforms().size(), 2);
-    TS_ASSERT_EQUALS(platform_layer().get_devices().size(), 3);
+    TS_ASSERT_EQUALS(platform_layer().get_platforms().size(), 0);
+    TS_ASSERT_EQUALS(platform_layer().get_devices().size(), 0);
+  }
+  /** // doc: test_ctor_1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_ctor_1( )
+  {
+    T::Newton_clGetPlatformIDs mock1;
+    T::Newton_clGetPlatformInfo mock2;
+    T::Newton_clGetDeviceIDs mock3;
+    T::Newton_clGetDeviceInfo mock4;
+
+    TS_ASSERT_EQUALS(platform_layer(true).get_platforms().size(), 2);
+    TS_ASSERT_EQUALS(platform_layer(true).get_devices().size(), 3);
+
+    TS_ASSERT_EQUALS(platform_layer(false).get_platforms().size(), 0);
+    TS_ASSERT_EQUALS(platform_layer(false).get_devices().size(), 0);
+
+    TS_ASSERT_EQUALS(platform_layer(true, device_type_t::gpu).get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(platform_layer(true, device_type_t::gpu).get_devices().size(), 2);
+
+    TS_ASSERT_EQUALS(platform_layer(true, device_type_t::cpu).get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(platform_layer(true, device_type_t::cpu).get_devices().size(), 1);
+  }
+  /** // doc: test_ctor_2() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_ctor_2( )
+  {
+    T::Newton_clGetPlatformIDs mock1;
+    T::Newton_clGetPlatformInfo mock2;
+    T::Newton_clGetDeviceIDs mock3;
+    T::Newton_clGetDeviceInfo mock4;
+
+    TS_ASSERT_EQUALS(platform_layer(device_type_t::gpu).get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(platform_layer(device_type_t::gpu).get_devices().size(), 2);
+
+    TS_ASSERT_EQUALS(platform_layer(device_type_t::cpu).get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(platform_layer(device_type_t::cpu).get_devices().size(), 1);
   }
   /** // doc: test_get_platforms_1() {{{
    * \todo Write documentation
@@ -63,7 +102,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     platform p = pl.get_platforms()[0];
 
     TS_ASSERT_EQUALS(p.id(), T::Newton_clGetPlatformIDs::platforms[0]);
@@ -82,7 +121,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     platform p = pl.get_platforms()[1];
 
     TS_ASSERT_EQUALS(p.id(), T::Newton_clGetPlatformIDs::platforms[1]);
@@ -101,7 +140,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     devices d = pl.get_devices();
 
     TS_ASSERT_EQUALS(pl.get_devices().size(), 3);
@@ -118,7 +157,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     device d = pl.get_devices()[0];
 
     TS_ASSERT_EQUALS(d.id(), T::Newton_clGetDeviceIDs::devices[0]);
@@ -137,7 +176,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     device d = pl.get_devices()[1];
 
     TS_ASSERT_EQUALS(d.id(), T::Newton_clGetDeviceIDs::devices[1]);
@@ -156,7 +195,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     device d = pl.get_devices()[2];
 
     TS_ASSERT_EQUALS(d.id(), T::Newton_clGetDeviceIDs::devices[2]);
@@ -175,7 +214,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     platform p = pl.get_platforms()[0];
     devices ds = pl.get_devices(p);
 
@@ -194,7 +233,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     platform p = pl.get_platforms()[1];
     devices ds = pl.get_devices(p);
 
@@ -213,7 +252,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer pl;
+    platform_layer pl(true);
     platform p = pl.get_platforms()[1];
     devices ds = pl.get_devices(p);
 
@@ -222,6 +261,127 @@ public:
     device d = ds[1];
 
     TS_ASSERT_EQUALS(d.id(), T::Newton_clGetDeviceIDs::devices[2]);
+  }
+  /** // doc: test_has_platform_1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_has_platform_1( )
+  {
+    platform_layer pl;
+    TS_ASSERT(!pl.has_platform(platform((cl_platform_id)0x1234)));
+    pl.add(device((cl_device_id)0x5678), platform((cl_platform_id)0x1234));
+    TS_ASSERT(pl.has_platform(platform((cl_platform_id)0x1234)));
+  }
+  /** // doc: test_has_device_1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_has_device_1( )
+  {
+    platform_layer pl;
+    TS_ASSERT(!pl.has_device(device((cl_device_id)0x5678)));
+    pl.add(device((cl_device_id)0x5678), platform((cl_platform_id)0x1234));
+    TS_ASSERT(pl.has_device(device((cl_device_id)0x5678)));
+  }
+  /** // doc: test_add_1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_add_1( )
+  {
+    platform_layer pl;
+
+    TS_ASSERT(pl.add(device((cl_device_id)0x1000), platform((cl_platform_id)0x1234)));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 1);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x1000)), platform((cl_platform_id)0x1234));
+
+    TS_ASSERT(pl.add(device((cl_device_id)0x2000), platform((cl_platform_id)0x1234)));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 2);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x1000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x2000)), platform((cl_platform_id)0x1234));
+
+    TS_ASSERT(pl.add(device((cl_device_id)0x3000), platform((cl_platform_id)0x5678)));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 3);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 2);
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x1000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x2000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x3000)), platform((cl_platform_id)0x5678));
+
+    TS_ASSERT(!pl.add(device((cl_device_id)0x3000), platform((cl_platform_id)0x1234)));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 3);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x1000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x2000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x3000)), platform((cl_platform_id)0x1234));
+  }
+  /** // doc: test_add_2() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_add_2( )
+  {
+    platform_layer pl;
+
+    TS_ASSERT_EQUALS(pl.add(make_devices({ (cl_device_id)0x1000, (cl_device_id)0x2000, (cl_device_id)0x3000 }), platform((cl_platform_id)0x1234)), 3);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 1);
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 3);
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x1000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x2000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x3000)), platform((cl_platform_id)0x1234));
+
+    TS_ASSERT_EQUALS(pl.add(make_devices({ (cl_device_id)0x1000, (cl_device_id)0x4000, (cl_device_id)0x5000 }), platform((cl_platform_id)0x5678)), 2);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 2);
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 5);
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x1000)), platform((cl_platform_id)0x5678));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x2000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x3000)), platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x4000)), platform((cl_platform_id)0x5678));
+    TS_ASSERT_EQUALS(pl.get_platform(device((cl_device_id)0x5000)), platform((cl_platform_id)0x5678));
+  }
+  /** // doc: test_erase_1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_erase_1( )
+  {
+    platform_layer pl;
+    TS_ASSERT_EQUALS(pl.add(make_devices({ (cl_device_id)0x1000, (cl_device_id)0x2000, (cl_device_id)0x3000 }), platform((cl_platform_id)0x1234)), 3);
+    TS_ASSERT_EQUALS(pl.add(make_devices({ (cl_device_id)0x4000, (cl_device_id)0x5000 }), platform((cl_platform_id)0x5678)), 2);
+
+    pl.erase(device((cl_device_id)0x1000));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 4);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 2);
+
+    pl.erase(device((cl_device_id)0x2000));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 3);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 2);
+
+    pl.erase(device((cl_device_id)0x3000));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 2);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 1);
+
+    pl.erase(device((cl_device_id)0x4000));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 1);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 1);
+
+    pl.erase(device((cl_device_id)0x5000));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 0);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 0);
+
+    TS_ASSERT_THROWS(pl.erase(device((cl_device_id)0x1234)), invalid_key_error);
+  }
+  /** // doc: test_clear_1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_clear_1( )
+  {
+    T::Newton_clGetPlatformIDs mock1;
+    T::Newton_clGetPlatformInfo mock2;
+    T::Newton_clGetDeviceIDs mock3;
+    T::Newton_clGetDeviceInfo mock4;
+
+    platform_layer pl(true);
+    pl.clear();
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 0);
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 0);
   }
   /** // doc: test_query_platform_layer_info_1() {{{
    * \brief Test the get_platforms() method.
@@ -232,7 +392,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer layer;
+    platform_layer layer(true);
     platform_layer_info p(query_platform_layer_info(layer));
     platform_info_ptrs infos(p.get_platforms());
 
@@ -262,7 +422,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer layer;
+    platform_layer layer(true);
     platform_layer_info p(query_platform_layer_info(layer));
     device_info_ptrs infos(p.get_devices());
 
@@ -300,7 +460,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer layer;
+    platform_layer layer(true);
     platform_layer_info p(query_platform_layer_info(layer));
     device_info_ptrs infos(p.get_devices(p.get_platforms()[0]));
 
@@ -324,7 +484,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer layer;
+    platform_layer layer(true);
     platform_layer_info p(query_platform_layer_info(layer));
     device_info_ptrs infos(p.get_devices(p.get_platforms()[1]));
 
@@ -355,7 +515,7 @@ public:
     T::Newton_clGetPlatformInfo mock2;
     T::Newton_clGetDeviceIDs mock3;
     T::Newton_clGetDeviceInfo mock4;
-    platform_layer layer;
+    platform_layer layer(true);
     platform_layer_info p(query_platform_layer_info(layer));
     const_platform_info_ptr unknown_platform(NULL);
     device_info_ptrs infos(p.get_devices(unknown_platform));

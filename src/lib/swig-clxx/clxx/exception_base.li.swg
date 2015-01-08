@@ -37,6 +37,7 @@
 %template(exception_base_logic_error) clxx::exception_base<clxx::exception, std::logic_error>;
 %template(exception_base_invalid_argument) clxx::exception_base<clxx::exception, std::invalid_argument>;
 %template(exception_base_length_error) clxx::exception_base<clxx::exception, std::length_error>;
+%template(exception_base_out_of_range) clxx::exception_base< clxx::exception,std::out_of_range >;
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

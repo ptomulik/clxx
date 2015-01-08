@@ -335,6 +335,74 @@ public:
     platform p(T::Newton_clGetPlatformIDs::platforms[0]);
     TS_ASSERT_EQUALS(p.get_extensions(), "cl_khr_icd cl_amd_event_callback cl_amd_offline_devices");
   }
+//  /** // doc: test_eq_op_1() {{{
+//   * \brief Test operator==()
+//   */ // }}}
+  void test_eq_op_1( )
+  {
+    TS_ASSERT(  platform((cl_platform_id)0x0000) == platform((cl_platform_id)0x0000));
+    TS_ASSERT(  platform((cl_platform_id)0x1234) == platform((cl_platform_id)0x1234));
+    TS_ASSERT(!(platform((cl_platform_id)0x1234) == platform((cl_platform_id)0x0000)));
+    TS_ASSERT(!(platform((cl_platform_id)0x0000) == platform((cl_platform_id)0x1234)));
+  }
+//  /** // doc: test_neq_op_1() {{{
+//   * \brief Test operator!=()
+//   */ // }}}
+  void test_neq_op_1( )
+  {
+    TS_ASSERT(!(platform((cl_platform_id)0x0000) != platform((cl_platform_id)0x0000)));
+    TS_ASSERT(!(platform((cl_platform_id)0x1234) != platform((cl_platform_id)0x1234)));
+    TS_ASSERT(  platform((cl_platform_id)0x1234) != platform((cl_platform_id)0x0000));
+    TS_ASSERT(  platform((cl_platform_id)0x0000) != platform((cl_platform_id)0x1234));
+  }
+//  /** // doc: test_lt_op_1() {{{
+//   * \brief Test operator<
+//   */ // }}}
+  void test_lt_op_1( )
+  {
+    TS_ASSERT(!(platform((cl_platform_id)0x0000) < platform((cl_platform_id)0x0000)));
+    TS_ASSERT(!(platform((cl_platform_id)0x1234) < platform((cl_platform_id)0x1234)));
+    TS_ASSERT(!(platform((cl_platform_id)0x1234) < platform((cl_platform_id)0x0000)));
+    TS_ASSERT(  platform((cl_platform_id)0x0000) < platform((cl_platform_id)0x1234));
+  }
+//  /** // doc: test_gt_op_1() {{{
+//   * \brief Test operator>
+//   */ // }}}
+  void test_gt_op_1( )
+  {
+    TS_ASSERT(!(platform((cl_platform_id)0x0000) > platform((cl_platform_id)0x0000)));
+    TS_ASSERT(!(platform((cl_platform_id)0x1234) > platform((cl_platform_id)0x1234)));
+    TS_ASSERT(  platform((cl_platform_id)0x1234) > platform((cl_platform_id)0x0000));
+    TS_ASSERT(!(platform((cl_platform_id)0x0000) > platform((cl_platform_id)0x1234)));
+  }
+//  /** // doc: test_le_op_1() {{{
+//   * \brief Test operator<=
+//   */ // }}}
+  void test_le_op_1( )
+  {
+    TS_ASSERT(  platform((cl_platform_id)0x0000) <= platform((cl_platform_id)0x0000));
+    TS_ASSERT(  platform((cl_platform_id)0x1234) <= platform((cl_platform_id)0x1234));
+    TS_ASSERT(!(platform((cl_platform_id)0x1234) <= platform((cl_platform_id)0x0000)));
+    TS_ASSERT(  platform((cl_platform_id)0x0000) <= platform((cl_platform_id)0x1234));
+  }
+//  /** // doc: test_ge_op_1() {{{
+//   * \brief Test operator>=
+//   */ // }}}
+  void test_ge_op_1( )
+  {
+    TS_ASSERT(  platform((cl_platform_id)0x0000) >= platform((cl_platform_id)0x0000));
+    TS_ASSERT(  platform((cl_platform_id)0x1234) >= platform((cl_platform_id)0x1234));
+    TS_ASSERT(  platform((cl_platform_id)0x1234) >= platform((cl_platform_id)0x0000));
+    TS_ASSERT(!(platform((cl_platform_id)0x0000) >= platform((cl_platform_id)0x1234)));
+  }
+//  /** // doc: test_bool_op_1() {{{
+//   * \brief Test operator bool
+//   */ // }}}
+  void test_bool_op_1( )
+  {
+    TS_ASSERT((bool)platform((cl_platform_id)0x1234));
+    TS_ASSERT(!(bool)platform((cl_platform_id)0x000));
+  }
 // sorry, but this may irritate OOM instead of throwing bad_alloc
 //  /** // doc: test_negsize() {{{
 //   * \brief Test get_xxx() methods in a situation when clGetPlatformInfo returns negative string size.

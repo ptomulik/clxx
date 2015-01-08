@@ -43,7 +43,7 @@ int main(int, char const*[])
   using namespace clxx;
   try {
     // [CreatePlatformLayer]
-    platform_layer pl;
+    platform_layer pl(device_type_t::all);
     // [CreatePlatformLayer]
     // [CreatePlatformLayerInfo]
     platform_layer_info info(query_platform_layer_info(pl));

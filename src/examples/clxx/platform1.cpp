@@ -28,8 +28,7 @@
  * \example platform1.cpp
  * This example demonstrates, how OpenCL Platfrom Layer may be accessed from
  * local machine. We get and display some info about platforms and devices
- * available locally. We use clxx::platform_layer and clxx::platform_layer_info
- * for this purpose.
+ * available locally. We use clxx::platforms and clxx::platform.
  */ // }}}
 // [Program]
 // [DumpPlatform]

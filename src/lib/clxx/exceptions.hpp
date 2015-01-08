@@ -172,6 +172,29 @@ struct value_access_error
       : Base("attempted to access value in a wrong way")
     { }
   };
+/** // doc: invalid_key_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct invalid_key_error
+    : public exception_base<clxx::exception, std::out_of_range>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::out_of_range> Base;
+    /** // doc: invalid_key_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    invalid_key_error() noexcept
+      : Base("invalid key")
+    { }
+    /** // doc: invalid_key_error(char const*) {{{
+     * \brief Default constructor
+     */ // }}}
+    invalid_key_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
+  };
 /** // doc: unexpected_clerror {{{
  * \todo Write documentation
  */ // }}}

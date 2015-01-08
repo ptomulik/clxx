@@ -265,7 +265,50 @@ public:
    * CLXX_EXCEPTION(Bad_Alloc).
    */ // }}}
   std::string get_extensions() const;
+  /** // {{{
+   * \brief Equal-to overloaded operator.
+   * Compares identifiers of two \ref platform objects.
+   */ // }}}
+  bool operator == (platform const& x) const
+  { return this->id() == x.id(); }
+  /** // {{{
+   * \brief Not equal-to overloaded operator.
+   * Compares identifiers of two \ref platform objects.
+   */ // }}}
+  bool operator != (platform const& x) const
+  { return this->id() != x.id(); }
+  /** // {{{
+   * \brief Less-than overloaded operator.
+   * Compares identifiers of two \ref platform objects.
+   */ // }}}
+  bool operator < (platform const& x) const
+  { return this->id() < x.id(); }
+  /** // {{{
+   * \brief Greater-than overloaded operator.
+   * Compares identifiers of two \ref platform objects.
+   */ // }}}
+  bool operator > (platform const& x) const
+  { return this->id() > x.id(); }
+  /** // {{{
+   * \brief Less-or-equal-to overloaded operator.
+   * Compares identifiers of two \ref platform objects.
+   */ // }}}
+  bool operator <= (platform const& x) const
+  { return this->id() <= x.id(); }
+  /** // {{{
+   * \brief Greater-or-equal-to overloaded operator.
+   * Compares identifiers of two \ref platform objects.
+   */ // }}}
+  bool operator >= (platform const& x) const
+  { return this->id() >= x.id(); }
+  /** // {{{
+   * \brief Conversion to bool
+   * \returns true if the object is initialized or false otherwise
+   */ // }}}
+  operator bool() const
+  { return this->is_initialized(); }
 };
+
 } // end namespace clxx
 
 #include <clxx/platform_info.hpp>

@@ -44,49 +44,246 @@ namespace clxx {
 
 /** // doc: class platform_layer {{{
  * \ingroup Clxx_Cl_platform
- * \todo Write documentation
+ *
+ * Simple associative container to store \ref clxx::device "devices",
+ * \ref clxx::platform "platforms" and relations between these. It represents
+ * information about devices belonging to given platforms, and provides simple
+ * interface to create and modify its contents and relations.
+ *
+ * Note, that this is just a container. It's not synchronized with OpenCL
+ * platform layer by definition (it may be filled quite arbitrarily by user).
+ * However, it has an interface that allows to initialize it with the actual
+ * data retrieved from OpenCL, see \ref load_opencl().
+ *
+ * The implemented relations have the following properties
+ *
+ *  - each \ref clxx::device "device" stored in the container refers to exactly
+ *    one \ref clxx::platform "platform" (also stored in the container),
+ *  - each \ref clxx::platform "platform" stored in the container refers on one
+ *    or more \ref clxx::device "devices" (stored in the container).
+ *
+ * These constraints are enforced internally by the class. The contents may be
+ * accessed by the following methods:
+ *
+ *  - \ref get_devices() const get_devices() returns a plain sequence of
+ *    \ref clxx::device "devices", where the \ref clxx::device "devices" appear
+ *    in the same order as they were added to the container,
+ *  - \ref get_platforms() const get_platforms() returns a plain sequence of
+ *    \ref clxx::platform "platforms", where the \ref clxx::platform "platforms"
+ *    appear in the same order as they were added to the container,
+ *  - \ref get_devices(platform const&) const get_devices(platform const&)
+ *    returns plain sequence of \ref clxx::device "devices" related to a given
+ *    platform,
+ *  - \ref get_platform(device const&) const get_platform(device const&)
+ *    returns a \ref clxx::platform "platform" related to a given device,
+ *
+ * The contents may be modified by the following methods:
+ *
+ *   - \ref add(device const&, platform const&) stores device, platform and
+ *     relation between device and platform in the container,
+ *   - \ref add(devices const&, platform const&) stores multiple devices and a
+ *     single platform at once and establishes relations between devices and
+ *     the platform,
+ *   - \ref erase(device const&) removes device from the container, if it was
+ *     the last device referencing its platform, the platform will also be
+ *     removed from container,
+ *   - \ref clear() clears the container entirely.
+ *
+ * and
+ *
+ *   - \ref load_opencl(device_type_t) retrieves the platforms, devices and
+ *     relations from OpenCL platform layer and adds them to the container.
+ *     Note, that this appends stuff to or overrides the existing content.
+ *
+ * The container may also be filled-in with a data obtained from OpenCL at
+ * initialization phase (in constructor).
  */ // }}}
 class platform_layer
 {
 public:
-  typedef std::vector<cl_platform_id> platform_ids;
-  typedef std::vector<cl_device_id> device_ids;
-  typedef std::map<cl_device_id, cl_platform_id> device_platform_map;
-  typedef std::map<cl_platform_id, device_ids > platform_devices_map;
+  typedef std::map<device, platform> device_platform_map;
 public:
   /** // doc: platform_layer() {{{
-   * \todo Write documentation
+   * \brief Default constructor
+   *
+   * Initializes empty container.
    */ // }}}
-  platform_layer();
+  platform_layer() noexcept;
+  /** // doc: platform_layer(device_type_t) {{{
+   * \brief Constructor
+   *
+   * Initializes container with OpenCL data.
+   *
+   * \param type OpenCL device type, retrieve only devices of a given type.
+   *
+   * \code
+   *  platform_layer pl(t);
+   * \endcode
+   *
+   * is equivalent to:
+   *
+   * \code
+   *  platform_layer pl;
+   *  pl.load_opencl(t);
+   * \endcode
+   *
+   * \throws clerror_no<status_t::invalid_device_type>
+   *    propagated from clxx::get_device_ids()
+   * \throws clerror_no<status_t::invalid_platform>
+   *    propagated from clxx::get_device_ids()
+   * \throws clerror_no<status_t::invalid_value>
+   *    propagated from clxx::get_device_ids() and clxx::get_platform_ids()
+   * \throws clerror_no<status_t::out_of_host_memory>
+   *    propagated from clxx::get_device_ids() and clxx::get_platform_ids()
+   * \throws clerror_no<status_t::out_of_resources>
+   *    propagated from clxx::get_device_ids()
+   * \throws std::bad_alloc
+   *    may be raised occasionally
+   */ // }}}
+  platform_layer(device_type_t type);
+  /** // doc: platform_layer(bool, device_type_t) {{{
+   * \brief Constructor
+   *
+   * Either, initializes empty container or retrieves data from OpenCL,
+   * depending on the value of \e load flag. The following calls are
+   * equivalent
+   *
+   * \code
+   *  platform_layer(false);         // =>  platform_layer();
+   *  platform_layer(false, type);   // =>  platform_layer();
+   *  platform_layer(true);          // =>  platform_layer(device_type_t::all);
+   *  platform_layer(true, type);    // =>  platform_layer(type);
+   * \endcode
+   *
+   *
+   * \param load  decides whether to load OpenCL platform layer layout or not,
+   * \param type  if \e load is \c true, then retrieve from OpenCL only devices
+   *  of this \e type 
+   *
+   * \throws clerror_no<status_t::invalid_device_type>
+   *    propagated from clxx::get_device_ids()
+   * \throws clerror_no<status_t::invalid_platform>
+   *    propagated from clxx::get_device_ids()
+   * \throws clerror_no<status_t::invalid_value>
+   *    propagated from clxx::get_device_ids() and clxx::get_platform_ids()
+   * \throws clerror_no<status_t::out_of_host_memory>
+   *    propagated from clxx::get_device_ids() and clxx::get_platform_ids()
+   * \throws clerror_no<status_t::out_of_resources>
+   *    propagated from clxx::get_device_ids()
+   * \throws std::bad_alloc
+   *    may be raised occasionally
+   */ // }}}
+  platform_layer(bool load, device_type_t type = device_type_t::all);
   /** // doc: ~platform_layer() {{{
-   * \todo Write documentation for class platform_layer
+   * \brief Destructor
    */ // }}}
-  virtual ~platform_layer();
+  virtual ~platform_layer() noexcept;
   /** // doc: get_platforms() {{{
-   * \todo Write documentation
+   * \fn get_platforms() const
+   * \brief Get platforms
+   *
+   * Return flat sequence of platforms stored in container. The order of
+   * elements in sequence is same as the order of their insertion to the
+   * container.
+   *
+   * \returns flat sequence of platforms stored in container.
    */ // }}}
-  platforms get_platforms() const;
+  platforms const& get_platforms() const noexcept;
   /** // doc: get_devices() {{{
-   * \todo Write documentation
+   * \fn get_devices() const
+   * \brief Get devices
+   * 
+   * Returns flat sequence of devices stored in container. The order of
+   * elements in sequence is same as the order of their insertion to the
+   * container.
+   *
+   * \returns sequence of devices stored in container.
    */ // }}}
-  devices get_devices() const;
+  devices const& get_devices() const noexcept;
   /** // doc: get_devices(platform const&) {{{
-   * \todo Write documentation
+   * \fn get_devices(platform const&) const
+   * \brief Get devices that refer platform \e p
+   * \param p the platform
+   * \returns flat sequence of devices that reference platform \e p
+   * \throws std::bad_alloc may be raised occasionally
    */ // }}}
-  devices get_devices(platform const&) const;
+  devices get_devices(platform const& p) const;
   /** // doc: get_platform(device const&) {{{
-   * \todo Write documentation
+   * \fn get_platform(device const&) const
+   * \brief Get platform referenced by given device
+   * \param d the device
+   * \throws invalid_key_error if \e d does not exist in the container
+   * \returns a platform referred by \e d.
    */ // }}}
-  platform get_platform(device const&) const;
+  platform const& get_platform(device const& d) const;
+  /** // doc: has_device(device const&) {{{
+   * \brief Check presence of device \e d in container
+   * \param d the clxx::device "device" to check
+   * \returns \c true if device is found in container, otherwise \c false
+   */ // }}}
+  bool has_device(device const& d) const noexcept;
+  /** // doc: has_platform(platform const&) {{{
+   * \brief Check presence of platform \e p in container
+   * \param p the \ref clxx::platform "platform" to check
+   * \returns \c true if device is found in container, otherwise \c false
+   */ // }}}
+  bool has_platform(platform const& p) const noexcept;
+  /** // doc: add(platform const&, device const&) {{{
+   * \brief Add device to container
+   * \param d device,
+   * \param p platform referenced by device \e d
+   * \returns \c true if the number of devices in container increased,
+   *    if the device already existed in container returns \c false
+   * \throws std::bad_alloc may be raised occasionally
+   */ // }}}
+  bool add(device const& d, platform const& p);
+  /** // doc: add(platform const&, devices const&) {{{
+   * \brief Add device to container
+   * \param ds devices
+   * \param p platform referenced by devices \e ds
+   * \returns number of new devices added to container, the devices that
+   *    already existed in container are not counted in the return value
+   * \throws std::bad_alloc may be raised occasionally
+   */ // }}}
+  size_t add(devices const& ds, platform const& p);
+  /** // doc: erase(device const&) {{{
+   * \brief Remove device from container
+   * \param d the device to remove from container
+   * \throws invalid_key_error if \e d does not exist in the container
+   * \throws std::bad_alloc may be raised occasionally
+   */ // }}}
+  void erase(device const& d);
+  /** // doc: clear() {{{
+   * \brief Clear the container entirelly
+   * \throws std::bad_alloc may be raised occasionally
+   */ // }}}
+  void clear() noexcept;
+  /** // doc: load_opencl(device_type_t) {{{
+   * \brief Retrieve and load data from OpenCL
+   *
+   * This function retrieves from OpenCL and stores in container the platform
+   * layer layout (devices, platforms and relations).
+   *
+   * \param type retrieve only devices of given type
+   *
+   * \throws clerror_no<status_t::invalid_device_type>
+   *    propagated from clxx::get_device_ids()
+   * \throws clerror_no<status_t::invalid_platform>
+   *    propagated from clxx::get_device_ids()
+   * \throws clerror_no<status_t::invalid_value>
+   *    propagated from clxx::get_device_ids() and clxx::get_platform_ids()
+   * \throws clerror_no<status_t::out_of_host_memory>
+   *    propagated from clxx::get_device_ids() and clxx::get_platform_ids()
+   * \throws clerror_no<status_t::out_of_resources>
+   *    propagated from clxx::get_device_ids()
+   * \throws std::bad_alloc
+   *    may be raised occasionally
+   */ // }}}
+  void load_opencl(device_type_t type = device_type_t::all);
 private:
-  void _init();
-  void _insert(cl_platform_id id);
-  void _insert(cl_platform_id platform_id, cl_device_id id);
-  void _insert(cl_platform_id platform_id, device_ids const& ids);
-  platform_ids _platform_ids;
-  device_ids _device_ids;
-  device_platform_map _device_platform_map;
-  platform_devices_map _platform_devices_map;
+  platforms _platforms;
+  devices _devices;
+  device_platform_map _device_platform;
 };
 
 /** // doc: query_platform_layer_info(layer,pquery,dquery) {{{
@@ -94,7 +291,7 @@ private:
  */ // }}}
 platform_layer_info
 query_platform_layer_info(
-    platform_layer const& layer = platform_layer(),
+    platform_layer const& layer = platform_layer(device_type_t::all),
     platform_query const& pquery = platform_query(),
     device_query const& dquery = device_query()
 );
