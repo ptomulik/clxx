@@ -215,7 +215,7 @@ public:
   platform const& get_platform(device const& d) const;
   /** // doc: has_device(device const&) {{{
    * \brief Check presence of device \e d in container
-   * \param d the clxx::device "device" to check
+   * \param d the \ref clxx::device "device" to check
    * \returns \c true if device is found in container, otherwise \c false
    */ // }}}
   bool has_device(device const& d) const noexcept;
