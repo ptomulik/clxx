@@ -19,8 +19,8 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE
  */
-/** // \defgroup clxx_io {{{
- * \defgroup clxx_io Formatting and streaming out clxx objects
+/**
+ * \defgroup clxx_io I/O module
  *
  * This module implements several I/O routines which stream out %clxx objects
  * to output streams in a user-readable form. They may be used for simple
@@ -38,6 +38,6 @@
  * Programs using functions described in this module shall be linked against
  * \c libclxx_io library (\c -lclxx_io).
  *
- */ // }}}
+ */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

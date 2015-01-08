@@ -19,7 +19,7 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE
  */
-/** // doc: \group clxx_exceptions  {{{
+/**
  * \defgroup clxx_exceptions Clxx exceptions
  *
  * This module introduces clxx exceptions.
@@ -157,6 +157,6 @@
  * \see clxx::clerror,
  * \see clxx::clerror_base,
  * \see clxx::clerror_no.
- */ // }}}
+ */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -19,10 +19,10 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE
  */
-/** // \defgroup clxx_s11n {{{
+/**
  * \defgroup clxx_s11n Serialization
  *
  * \todo Write few words about serialization in %clxx.
- */ // }}}
+ */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

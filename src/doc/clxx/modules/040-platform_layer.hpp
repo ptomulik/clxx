@@ -19,8 +19,8 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE
  */
-/** // \defgroup clxx_platform_layer {{{
- * \defgroup clxx_platform_layer Objec-oriented interface to OpenCL platform layer
+/** 
+ * \defgroup clxx_platform_layer OpenCL platform layer
  *
  * This module documents object-oriented c++11 interface to *OpenCL platform
  * layer* described by the OpenCL specification under chapter 4 "The OpenCL
@@ -100,6 +100,6 @@
  * such as context reference count or context properties. It also internally
  * maintains reference count for context.
  *
- */ // }}}
+ */ 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
