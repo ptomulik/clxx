@@ -420,6 +420,139 @@ void release_device(cl_device_id device)
     }
 }
 #endif // HAVE_OPENCL_clReleaseDevice
+/** // doc: create_program_with_source(...) {{{
+ * \todo Write documentation
+ */ // }}}
+cl_program create_program_with_source(cl_context context,
+                                      cl_uint count,
+                                      const char** strings,
+                                      const size_t* lengths)
+{
+  cl_int s;
+  cl_program p;
+  p = clCreateProgramWithSource(context, count, strings, lengths, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      switch(static_cast<status_t>(s))
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(static_cast<status_t>(s));
+        }
+    }
+  return p;
+}
+/* ------------------------------------------------------------------------ */
+cl_program create_program_with_binary(cl_context context,
+                                      cl_uint num_devices,
+                                      const cl_device_id* device_list,
+                                      const size_t* lengths,
+                                      const unsigned char** binaries,
+                                      cl_int* binary_status)
+{
+  cl_int s;
+  cl_program p = clCreateProgramWithBinary(context, num_devices, device_list,
+                                           lengths, binaries, binary_status,
+                                           &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      switch(static_cast<status_t>(s))
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_binary:
+            throw clerror_no<status_t::invalid_binary>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(static_cast<status_t>(s));
+        }
+    }
+  return p;
+}
+#if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
+/* ------------------------------------------------------------------------ */
+cl_program create_program_with_built_in_kernels(cl_context context,
+                                                cl_uint num_devices,
+                                                const cl_device_id* device_list,
+                                                const char* kernel_names)
+{
+  cl_int s;
+  cl_program p = clCreateProgramWithBuiltInKernels(context, num_devices,
+                                                   device_list, kernel_names,
+                                                   &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      switch(static_cast<status_t>(s))
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(static_cast<status_t>(s));
+        }
+    }
+  return p;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+void retain_program(cl_program program)
+{
+  status_t s = static_cast<status_t>(T::clRetainProgram(program));
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_program:
+            throw clerror_no<status_t::invalid_program>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
+void release_program(cl_program program)
+{
+  status_t s = static_cast<status_t>(T::clReleaseProgram(program));
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_program:
+            throw clerror_no<status_t::invalid_program>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
 /* ------------------------------------------------------------------------ */
 } // end namespace clxx
 

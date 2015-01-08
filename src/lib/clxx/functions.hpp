@@ -137,24 +137,24 @@ get_platform_info(  cl_platform_id platform,
  *
  * \param platform
  *        Refers to the platform ID returned by clxx::get_platform_ids() or can
- *        be \c NULL. If \b platform is \c NULL, the behavior is
+ *        be \c NULL. If \e platform is \c NULL, the behavior is
  *        implementation-defined.
  * \param device_type
  *        A bitfield that identifies the type of OpenCL device. The
- *        \b device_type can be used to query specific OpenCL devices or all
- *        OpenCL devices available. The valid values for \b device_type are
+ *        \e device_type can be used to query specific OpenCL devices or all
+ *        OpenCL devices available. The valid values for \e device_type are
  *        specified by clxx::device_type_t.
  * \param num_entries
- *        The number of \c cl_device_id entries that can be added to \b
- *        devices. If \b devices is not \c NULL, the \b num_entries must be
+ *        The number of \c cl_device_id entries that can be added to \e
+ *        devices. If \e devices is not \c NULL, the \e num_entries must be
  *        greater than zero.
  * \param devices
  *        A list of OpenCL devices found. The \c cl_device_id values returned
- *        in \b devices can be used to identify a specific OpenCL device. If
- *        \b devices argument is \c NULL, this argument is ignored. The number
+ *        in \e devices can be used to identify a specific OpenCL device. If
+ *        \e devices argument is \c NULL, this argument is ignored. The number
  *        of OpenCL devices returned is the minimum of the value specified by
- *        \b num_entries or the number of OpenCL devices whose type matches
- *        \b device_type.
+ *        \e num_entries or the number of OpenCL devices whose type matches
+ *        \e device_type.
  * \param num_devices
  *        Returns the number of OpenCL devices available. If \c num_devices is
  *        \c NULL, this argument is ignored.
@@ -249,12 +249,12 @@ get_device_info( cl_device_id device, device_info_t name, size_t value_size,
  * \param properties
  *    Specifies a list of context property names and their corresponding
  *    values. Each property name is immediately followed by the corresponding
- *    desired value. The list is terminated with \c 0. **properties** can be
+ *    desired value. The list is terminated with \c 0. \e properties can be
  *    NULL in which case the platform that is selected is
  *    implementation-defined. The list of supported propertes is described in
  *    the OpenCL standard.
  * \param num_devices
- *    The number of devices specified in **devices** argument.
+ *    The number of devices specified in \e devices argument.
  * \param devices
  *    A pointer to a list of unique devices returned by \ref get_device_ids()
  *    or sub-devices created by \ref create_sub_devices().
@@ -265,7 +265,7 @@ get_device_info( cl_device_id device, device_info_t name, size_t value_size,
  *    occur at runtime in this context. This callback function may be called
  *    asynchronously by the OpenCL implementation. It is the application's
  *    responsibility to ensure that the callback function is thread-save. If
- *    **pfn_notify** is \c NULL, no callback function is registered. The
+ *    \e pfn_notify is \c NULL, no callback function is registered. The
  *    parameters to this callback function are:
  *      - *errinfo* is a pointer to an error string.
  *      - *private_info*  and *cb* represent a pointer to binary data that is
@@ -273,12 +273,12 @@ get_device_info( cl_device_id device, device_info_t name, size_t value_size,
  *        additional information helpful in debugging the error.
  *      - *user_data* is a pointer to user supplied data.
  * \param user_data
- *    Passed as the *user_data* argument when **pfn_notify** is called.
- *    **user_data** can be \c NULL.
+ *    Passed as the *user_data* argument when \e pfn_notify is called.
+ *    \e user_data can be \c NULL.
  *
  * \note there are a number of cases where error notifications need to be
  *    delivered due to an error that occurs outside a context. Such
- *    notification may not be delivered through the **pfn_notify** callback.
+ *    notification may not be delivered through the \e pfn_notify callback.
  *    Where these notification go is implementation-defined.
  *
  * \throw clerror_no<status_t::invalid_platform>
@@ -333,7 +333,7 @@ cl_context create_context(const cl_context_properties* properties,
  * \param properties
  *    Specifies a list of context property names and their corresponding
  *    values. Each property name is immediately followed by the corresponding
- *    desired value. The list is terminated with \c 0. **properties** can be
+ *    desired value. The list is terminated with \c 0. \e properties can be
  *    NULL in which case the platform that is selected is
  *    implementation-defined. The list of supported propertes is described in
  *    the OpenCL standard.
@@ -346,7 +346,7 @@ cl_context create_context(const cl_context_properties* properties,
  *    occur at runtime in this context. This callback function may be called
  *    asynchronously by the OpenCL implementation. It is the application's
  *    responsibility to ensure that the callback function is thread-save. If
- *    **pfn_notify** is \c NULL, no callback function is registered. The
+ *    \e pfn_notify is \c NULL, no callback function is registered. The
  *    parameters to this callback function are:
  *      - *errinfo* is a pointer to an error string.
  *      - *private_info*  and *cb* represent a pointer to binary data that is
@@ -354,12 +354,12 @@ cl_context create_context(const cl_context_properties* properties,
  *        additional information helpful in debugging the error.
  *      - *user_data* is a pointer to user supplied data.
  * \param user_data
- *    Passed as the *user_data* argument when **pfn_notify** is called.
- *    **user_data** can be \c NULL.
+ *    Passed as the *user_data* argument when \e pfn_notify is called.
+ *    \e user_data can be \c NULL.
  *
  * \note there are a number of cases where error notifications need to be
  *    delivered due to an error that occurs outside a context. Such
- *    notification may not be delivered through the **pfn_notify** callback.
+ *    notification may not be delivered through the \e pfn_notify callback.
  *    Where these notification go is implementation-defined.
  *
  * \throw clerror_no<status_t::invalid_platform>
@@ -477,15 +477,15 @@ void release_context(cl_context context);
  *    An enumeration constant that specifies the information to query. See \ref
  *    context_info_t.
  * \param param_value_size
- *    Specifies the size in bytes of memory pointed to by **param_value**. This
+ *    Specifies the size in bytes of memory pointed to by \e param_value. This
  *    size must be grater than or equal to the size of return type for
- *    **param_name** as described in the OpenCL standard.
+ *    \e param_name as described in the OpenCL standard.
  * \param param_value
  *    A pointer to memory where the appropriate result being queried is
  *    returned. if *param_value* is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data being queried by
- *    **param_value**. If **param_value_size_ret** is \c NULL, it is ignored.
+ *    \e param_value. If \e param_value_size_ret is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_context>
  *    When \c clGetContextInfo() returns \c CL_INVALID_CONTEXT.
@@ -509,7 +509,7 @@ void get_context_info(cl_context context, context_info_t param_name,
 #if HAVE_OPENCL_clCreateSubDevices
 /** // doc: create_sub_devices(...) {{{
  * \brief Creates an array of sub-devices that each reference
- *    a non-intersecting set of compute units within **in_device**.
+ *    a non-intersecting set of compute units within \e in_device.
  *
  * This function is a wrapper around \c clCreateSubDevices(). The main
  * difference between \ref create_sub_devices() and \c clCreateSubDevices() is
@@ -518,7 +518,7 @@ void get_context_info(cl_context context, context_info_t param_name,
  * \param in_device
  *    The device to be partitioned
  * \param properties
- *    Specifies how **in_device** is to be partition described by a partition
+ *    Specifies how \e in_device is to be partition described by a partition
  *    name and its corresponding value. Each partition name is immediately
  *    followed by the corresponding desired value. The list is terminated with
  *    0. The list of supported partitioning schemes is described by the OpenCL
@@ -528,15 +528,15 @@ void get_context_info(cl_context context, context_info_t param_name,
  *    Size of memory pointed to by **out_devices&& specified as the number of
  *    \c cl_device_id entries.
  * \param out_devices
- *    The buffer where OpenCL sub-devices will be returned. If **out_devices**
- *    is \c NULL, this argument is ignored. If **out_devices** is not \c NULL,
- *    **num_devices** must be greater than or equal to the number of
- *    sub-devices than **in_device** may be partitioned into according to the
- *    partitioning scheme specified in **properties**.
+ *    The buffer where OpenCL sub-devices will be returned. If \e out_devices
+ *    is \c NULL, this argument is ignored. If \e out_devices is not \c NULL,
+ *    \e num_devices must be greater than or equal to the number of
+ *    sub-devices than \e in_device may be partitioned into according to the
+ *    partitioning scheme specified in \e properties.
  * \param num_devices_ret
  *    Returns the number of sub-devices that device may be partitioned into
- *    according to the partitioning scheme specified in **properties**. If
- *    **num_devices_reg** is \c NULL, it is ignored.
+ *    according to the partitioning scheme specified in \e properties. If
+ *    \e num_devices_reg is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_device>
  *    When \c clCreateSubDevices() returns CL_INVALID_DEVICE.
@@ -566,7 +566,7 @@ void create_sub_devices(cl_device_id in_device,
 #endif
 #if HAVE_OPENCL_clRetainDevice
 /** // doc: retain_device(...) {{{
- * \brief Increments the **devices** reference count
+ * \brief Increments the \e devices reference count
  *
  * This function is a wrapper around \c clRetainDevice(). The call to this
  * function has same effect as
@@ -576,11 +576,11 @@ void create_sub_devices(cl_device_id in_device,
  * \c clRetainDevice() is that it throws %clxx exceptions instead of returning
  * OpenCL error codes.
  *
- * The function increments the **device** reference count if **device** is a
+ * The function increments the \e device reference count if \e device is a
  * valid sub-device created by call to \ref create_sub_devices() or
- * \c clCreateSubDevices(). If **device** is a root level device i.e.
+ * \c clCreateSubDevices(). If \e device is a root level device i.e.
  * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
- * the **device** reference count remains unchanged.
+ * the \e device reference count remains unchanged.
  *
  * \param device
  *    The device to be retained
@@ -603,7 +603,7 @@ void retain_device(cl_device_id device);
 #endif
 #if HAVE_OPENCL_clReleaseDevice
 /** // doc: release_device(...) {{{
- * \brief Decrements the **devices** reference count
+ * \brief Decrements the \e devices reference count
  *
  * This function is a wrapper around \c clReleaseDevice(). The call to this
  * function has same effect as
@@ -613,14 +613,14 @@ void retain_device(cl_device_id device);
  * \c clReleaseDevice() is that it throws %clxx exceptions instead of returning
  * OpenCL error codes.
  *
- * The function decrements the **device** reference count if **device** is a
+ * The function decrements the \e device reference count if \e device is a
  * valid sub-device created by call to \ref create_sub_devices() or
- * \c clCreateSubDevices(). If **device** is a root level device i.e.
+ * \c clCreateSubDevices(). If \e device is a root level device i.e.
  * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
- * the **device** reference count remains unchanged.
+ * the \e device reference count remains unchanged.
  *
  * \param device
- *    The device to be releaseed
+ *    The device to be released
  *
  * \throw clerror_no<status_t::invalid_device>
  *    When \c clReleaseDevice() returns CL_INVALID_DEVICE.
@@ -638,6 +638,291 @@ void retain_device(cl_device_id device);
  */ // }}}
 void release_device(cl_device_id device);
 #endif
+/** // doc: create_program_with_source(...) {{{
+ * \brief Creates a program object for a context, and loads the source
+ *    code specified by the text strings in the \e strings array into the program
+ *    object.
+ *
+ * This function is a wrapper around \c clCreateProgramWithSource(). The call
+ * to this function has same effect as
+ *  - \c clCreateProgramWithSource(context, count, strings, lengths, &errcode_ret)
+ * with \c errcode_ret defined internally in create_program_with_source().
+ *
+ * The main difference between \ref create_program_with_source() and
+ * \c clCreateProgramWithSource() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * This function creates a program object for a context, and loads the source
+ * code specified by the text strings in the \e strings array into the program
+ * object. The devices associated with the program object are the devices
+ * associated with \e context. The source code specified by \e strings is
+ * either an OpenCL C program source, header or implementation-defined source
+ * for custom devices that support an online compiler.
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param count
+ *    Number of elements in \e strings and \e lengths.
+ * \param string
+ *    An array of \e count pointers to optionally null-terminated character
+ *    strings that make up the source code.
+ * \param lengths
+ *    An array with the number of chars in each string (the string length). I
+ *    an element in lengths i zero, its accompanuing string is null-terminated.
+ *    If \e lengths is NULL, all strings in the \e strings argument are
+ *    considered null-terminated. Any length value passed in that is greater
+ *    than zero excludes the null terminator in its count.
+ *
+ * \returns
+ *    A valid non-zero program object if the program object is created
+ *    successfully (otherwise it throws an exception).
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateProgramWithSource() returns CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateProgramWithSource() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateProgramWithSource() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateProgramWithSource() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateProgramWithSource() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+cl_program create_program_with_source(cl_context context,
+                                      cl_uint count,
+                                      const char** strings,
+                                      const size_t* lengths);
+/** // doc: create_program_with_binary(...) {{{
+ * \brief Creates a program object for a context, and loads the binary bits
+ *    specified by binary into the program object
+ *
+ * This function is a wrapper around \c clCreateProgramWithBinary(). The call
+ * to this function has same effect as
+ *  - \c clCreateProgramWithBinary(context, num_devices, device_list, lengths, binaries, binary_status, &errcode_ret)
+ * with \c errcode_ret defined internally in create_program_with_binary().
+ *
+ * The main difference between \ref create_program_with_binary() and
+ * \c clCreateProgramWithBinary() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * OpenCL allows applications to create a program object using the program
+ * source or binary and build appropriate program executables. This can be very
+ * useful as it allows applications to load program source and then compile and
+ * link to generate a program executable online on its first instance for
+ * appropriate OpenCL devices in the system. These executables can now be
+ * queried and cached by the application. Future instances of the application
+ * launching will no longer need to compile and link the program executables.
+ * The cached executables can be read and loaded by the application, which can
+ * help significantly reduce the application initialization time. 
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param num_devices
+ *    The number of devices listed in \e device_list.
+ *    The devices associated with the program object will be the list of
+ *    devices specified by \e device_list. The list of devices specified by \e
+ *    device_list must be devices associated with context.
+ * \param device_list
+ *    A pointer to a list of devices that are in \e context. \c device_list
+ *    must be a non-NULL value. The binaries are loaded for devices specified
+ *    in this list.
+ * \param binaries
+ *    An array of pointers to program binaries to be loaded for devices
+ *    specified by \e device_list. For each device given by \e device_list[i],
+ *    the pointer to the program binary for that device is given by
+ *    \e binaries[i] and the length of this corresponding binary is given by
+ *    \e lengths[i]. \e lengths[i] cannot be zero and \e binaries[i] cannot be
+ *    a NULL pointer. The program binaries specified by binaries contain the
+ *    bits that describe one of the following:
+ *      - a program executable to be run on the device(s) associated with \e context.
+ *      - a compiled program for \e device(s) associated with context.
+ *      - a library of compiled programs for \e device(s) associated with context.
+ *    The program binary can consist of either or both of device-specific code
+ *    and/or implementation-specific intermediate representation (IR) which
+ *    will be converted to the device-specific code.
+ * \param binary_status
+ *    Returns whether the program binary for each device specified in
+ *    device_list was loaded successfully or not. It is an array of
+ *    \e num_devices entries and returns \c CL_SUCCESS in \e binary_status[i]
+ *    if binary was successfully loaded for device specified by \e device_list[i];
+ *    otherwise returns CL_INVALID_VALUE if \e lengths[i] is zero or if
+ *    \e binaries[i] is a \c NULL value or \c CL_INVALID_BINARY in
+ *    \e binary_status[i] if program binary is not a valid binary for the
+ *    specified device. If \e binary_status is \c NULL, it is ignored.
+ *
+ * \returns
+ *    A valid non-zero program object if the program object is created
+ *    successfully (otherwise it throws an exception).
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateProgramWithSource() returns CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateProgramWithSource() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clCreateProgramWithSource() returns CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::invalid_binary>
+ *    When \c clCreateProgramWithSource() returns CL_INVALID_BINARY.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateProgramWithSource() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateProgramWithSource() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateProgramWithSource() returns other error code.
+ *
+ * \note This function throws <tt>clerror_no<status_t::invalid_binary></tt>
+ *    if any of the provided binaries is invalid. Before raising the exception,
+ *    the array pointed to by \e binary_status gets filled with error
+ *    information. To ensure that storage for \e binary_status is maintained
+ *    properly and does not go out of scope when exception is caught or
+ *    propagated, the following (or similar) code pattern should be used
+ *    \code
+ *      cl_int binary_status[SIZE]; // the array declared in the outer scope
+ *      cl_program program = NULL;
+ *      try {
+ *        program = create_program_with_binary( ..., binary_status );
+ *      } catch(clerror_no<status_t::invalid_binary> const& e) {
+ *        // scan binary_status to find out which binary caused the problem ...
+ *      }
+ *    \endcode
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+cl_program create_program_with_binary(cl_context context,
+                                      cl_uint num_devices,
+                                      const cl_device_id* device_list,
+                                      const size_t* lengths,
+                                      const unsigned char** binaries,
+                                      cl_int* binary_status);
+#if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
+/** // doc: create_program_with_built_in_kernels(...) {{{
+ * \brief  Creates a program object for a context, and loads the information
+ * related to the built-in kernels into a program object. 
+ *
+ * This function is a wrapper around \c clCreateProgramWithBuiltInKernels().
+ * The call to this function has same effect as
+ *  - \c clCreateProgramWithBuiltInKernels(context, num_devices, device_list, kernel_names, &errcode_ret)
+ *
+ * with \c errcode_ret defined internally in create_program_with_built_in_kernels().
+ *
+ * The main difference between \ref create_program_with_built_in_kernels() and
+ * \c clCreateProgramWithBuiltInKernels() is that it throws %clxx exceptions instead of returning
+ * OpenCL error codes.
+ *
+ * The function decrements the \e device reference count if \e device is a
+ * valid sub-device created by call to \ref create_sub_devices() or
+ * \c clCreateSubDevices(). If \e device is a root level device i.e.
+ * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
+ * the \e device reference count remains unchanged.
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param num_devices
+ *    The number of devices listed in \e device_list.
+ * \param device_list
+ *    A pointer to a list of devices that are in \e context. \e device_list
+ *    must be a non-NULL value. The built-in kernels are loaded for devices
+ *    specified in this list. The devices associated with the program object
+ *    will be the list of devices specified by \e device_list. The list of
+ *    devices specified by device_list must be devices associated with context.
+ * \param kernel_names
+ *    A semi-colon separated list of built-in kernel names.
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateProgramWithBuiltInKernels() returns CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateProgramWithBuiltInKernels() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clCreateProgramWithBuiltInKernels() returns CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateProgramWithBuiltInKernels() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateProgramWithBuiltInKernels() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateProgramWithBuiltInKernels() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * |         |         | &radic; |         |
+ */ // }}}
+cl_program create_program_with_built_in_kernels(cl_context context,
+                                                cl_uint num_devices,
+                                                const cl_device_id* device_list,
+                                                const char* kernel_names);
+#endif
+/** // doc: retain_program(...) {{{
+ * \brief Increments the \e program reference count
+ *
+ * This function is a wrapper around \c clRetainProgram(). The call to this
+ * function has same effect as
+ *  - \c clRetainProgram(program)
+ *
+ * The main difference between \ref retain_program() and
+ * \c clRetainProgram() is that it throws %clxx exceptions instead of returning
+ * OpenCL error codes.
+ *
+ * \note create_program_with_source(), create_program_with_binary() and
+ *    create_program_with_built_in_kernels() does an implicit retain. The same
+ *    applies to \c clCreateProgramXyz() functions.
+ *
+ * \param program
+ *    The program to be retained
+ *
+ * \throw clerror_no<status_t::invalid_program>
+ *    When \c clRetainProgram() returns CL_INVALID_PROGRAM.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clRetainProgram() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clRetainProgram() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clRetainProgram() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+void retain_program(cl_program program);
+/** // doc: release_program(...) {{{
+ * \brief Decrements the \e program reference count
+ *
+ * This function is a wrapper around \c clReleaseProgram(). The call to this
+ * function has same effect as
+ *  - \c clReleaseProgram(program)
+ *
+ * The main difference between \ref release_program() and
+ * \c clReleaseProgram() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \note The program object is deleted after all kernel objects associated with
+ *    program have been deleted and the program reference count becomes zero.
+ *
+ * \param program
+ *    The program to be released
+ *
+ * \throw clerror_no<status_t::invalid_program>
+ *    When \c clReleaseProgram() returns CL_INVALID_PROGRAM.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clReleaseProgram() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clReleaseProgram() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clReleaseProgram() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+void release_program(cl_program program);
 /** @} */
 } // end namespace clxx
 

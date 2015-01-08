@@ -52,6 +52,7 @@ doxyfile = env.Doxyfile(
                                 'HAVE_OPENCL_clCreateSubDevices',
                                 'HAVE_OPENCL_clRetainDevice',
                                 'HAVE_OPENCL_clReleaseDevice',
+                                 'HAVE_OPENCL_clCreateProgramWithBuiltInKernels',
                                 '_WIN32' ]
 )
 

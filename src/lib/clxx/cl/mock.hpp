@@ -102,14 +102,36 @@ CXXTEST_MOCK_GLOBAL(cl_int, clRetainDevice, (cl_device_id device), (device));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseDevice, (cl_device_id device), (device));
 #endif
 
+CXXTEST_MOCK_GLOBAL(cl_program, clCreateProgramWithSource,
+  ( cl_context context, cl_uint count, const char** strings,
+    const size_t* lengths, cl_int* errcode_ret),
+  ( context, count, strings, lengths, errcode_ret )
+);
+
+CXXTEST_MOCK_GLOBAL(cl_program, clCreateProgramWithBinary,
+  ( cl_context context, cl_uint num_devices, const cl_device_id* device_list,
+    const size_t* lengths, const unsigned char** binaries,
+    cl_int* binary_status, cl_int* errcode_ret),
+  ( context, num_devices, device_list, lengths, binaries, binary_status,
+    errcode_ret)
+);
+
+#if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
+CXXTEST_MOCK_GLOBAL(cl_program, clCreateProgramWithBuiltInKernels,
+  ( cl_context context, cl_uint num_devices, const cl_device_id* device_list,
+    const char* kernel_names, cl_int* errcode_ret),
+  ( context, num_devices, device_list, kernel_names, errcode_ret )
+);
+#endif
+
+CXXTEST_MOCK_GLOBAL(cl_int, clRetainProgram, (cl_program program), (program));
+CXXTEST_MOCK_GLOBAL(cl_int, clReleaseProgram, (cl_program program), (program));
+
 CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramInfo,
   ( cl_program program, cl_program_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( program, param_name, param_value_size, param_value, param_value_size_ret)
 );
-
-CXXTEST_MOCK_GLOBAL(cl_int, clRetainProgram, (cl_program program), (program));
-CXXTEST_MOCK_GLOBAL(cl_int, clReleaseProgram, (cl_program program), (program));
 
 #include <clxx/cl/mocks/newton.hpp>
 #include <clxx/cl/mocks/dummy.hpp>

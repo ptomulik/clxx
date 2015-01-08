@@ -282,6 +282,88 @@ public:
   Dummy_clReleaseDevice(cl_int err);
 };
 #endif
+/** // doc: Dummy_clCreateProgramWithSource {{{
+ * \brief Default mock for clCreateProgramWithSource OpenCL function.
+ */ // }}}
+class Dummy_clCreateProgramWithSource
+  : public T::Base_clCreateProgramWithSource,
+    public T::Dummy_CallArgs<cl_context, cl_uint, const char**, const size_t*, cl_int*>
+{
+  cl_program _program;
+  cl_int _err;
+  cl_program clCreateProgramWithSource(cl_context context,
+                                       cl_uint count,
+                                       const char** strings,
+                                       const size_t* lengths,
+                                       cl_int* errcode_ret);
+public:
+  Dummy_clCreateProgramWithSource(cl_program program, cl_int err);
+};
+/** // doc: Dummy_clCreateProgramWithBinary {{{
+ * \brief Default mock for clCreateProgramWithBinary OpenCL function.
+ */ // }}}
+class Dummy_clCreateProgramWithBinary
+  : public T::Base_clCreateProgramWithBinary,
+    public T::Dummy_CallArgs<cl_context, cl_uint, const cl_device_id*,
+                              const size_t*, const unsigned char**, cl_int*,
+                              cl_int*>
+{
+  cl_program _program;
+  cl_int _err;
+  cl_program clCreateProgramWithBinary(cl_context context,
+                                       cl_uint num_devices,
+                                       const cl_device_id* device_list,
+                                       const size_t* lengths,
+                                       const unsigned char** binaries,
+                                       cl_int* binary_status,
+                                       cl_int* errcode_ret);
+public:
+  Dummy_clCreateProgramWithBinary(cl_program program, cl_int err);
+};
+#if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
+/** // doc: Dummy_clCreateProgramWithBuiltInKernels {{{
+ * \brief Default mock for clCreateProgramWithBuiltInKernels OpenCL function.
+ */ // }}}
+class Dummy_clCreateProgramWithBuiltInKernels
+  : public T::Base_clCreateProgramWithBuiltInKernels,
+    public T::Dummy_CallArgs<cl_context, cl_uint, const cl_device_id*,
+                              const char*, cl_int*>
+{
+  cl_program _program;
+  cl_int _err;
+  cl_program clCreateProgramWithBuiltInKernels(cl_context context,
+                                               cl_uint num_devices,
+                                               const cl_device_id* device_list,
+                                               const char* kernel_names,
+                                               cl_int* errcode_ret);
+public:
+  Dummy_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err);
+};
+#endif
+/** // doc: Dummy_clRetainProgram {{{
+ * \brief Default mock for clRetainProgram OpenCL function.
+ */ // }}}
+class Dummy_clRetainProgram
+  : public T::Base_clRetainProgram,
+    public T::Dummy_CallArgs<cl_program>
+{
+  cl_int _err;
+  cl_int clRetainProgram(cl_program program);
+public:
+  Dummy_clRetainProgram(cl_int err);
+};
+/** // doc: Dummy_clReleaseProgram {{{
+ * \brief Default mock for clReleaseProgram OpenCL function.
+ */ // }}}
+class Dummy_clReleaseProgram
+  : public T::Base_clReleaseProgram,
+    public T::Dummy_CallArgs<cl_program>
+{
+  cl_int _err;
+  cl_int clReleaseProgram(cl_program program);
+public:
+  Dummy_clReleaseProgram(cl_int err);
+};
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -484,6 +566,87 @@ Dummy_clReleaseDevice(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+cl_program Dummy_clCreateProgramWithSource::
+clCreateProgramWithSource(cl_context context,
+                          cl_uint count,
+                          const char** strings,
+                          const size_t* lengths,
+                          cl_int* errcode_ret)
+{
+  call_with(context, count, strings, lengths, errcode_ret);
+  if(errcode_ret)
+    *errcode_ret = _err;
+  return _program;
+}
+Dummy_clCreateProgramWithSource::
+Dummy_clCreateProgramWithSource(cl_program program, cl_int err)
+  :_program(program), _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_program Dummy_clCreateProgramWithBinary::
+clCreateProgramWithBinary(cl_context context,
+                          cl_uint num_devices,
+                          const cl_device_id* device_list,
+                          const size_t* lengths,
+                          const unsigned char** binaries,
+                          cl_int* binary_status,
+                          cl_int* errcode_ret)
+{
+  call_with(context, num_devices, device_list, lengths, binaries, binary_status, errcode_ret);
+  if(errcode_ret)
+    *errcode_ret = _err;
+  return _program;
+}
+Dummy_clCreateProgramWithBinary::
+Dummy_clCreateProgramWithBinary(cl_program program, cl_int err)
+  : _program(program), _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
+cl_program Dummy_clCreateProgramWithBuiltInKernels::
+clCreateProgramWithBuiltInKernels(cl_context context,
+                                  cl_uint num_devices,
+                                  const cl_device_id* device_list,
+                                  const char* kernel_names,
+                                  cl_int* errcode_ret)
+{
+  call_with(context, num_devices, device_list, kernel_names, errcode_ret);
+  if(errcode_ret)
+    *errcode_ret = _err;
+  return _program;
+}
+Dummy_clCreateProgramWithBuiltInKernels::
+Dummy_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err)
+  :_program(program), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clRetainProgram::
+clRetainProgram(cl_program program)
+{
+  call_with(program);
+  return _err;
+}
+Dummy_clRetainProgram::
+Dummy_clRetainProgram(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clReleaseProgram::
+clReleaseProgram(cl_program program)
+{
+  call_with(program);
+  return _err;
+}
+Dummy_clReleaseProgram::
+Dummy_clReleaseProgram(cl_int err)
+  : _err(err)
+{
+}
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
 
