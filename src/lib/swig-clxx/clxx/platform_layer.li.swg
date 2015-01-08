@@ -28,6 +28,19 @@
 %{
 #include <clxx/platform_layer.hpp>
 %}
+
+%include <clxx/exception_support.swg>
+
+%throws_clerror_badalloc(clxx::platform_layer::platform_layer(clxx::device_type_t));
+%throws_clerror_badalloc(clxx::platform_layer::platform_layer(bool, clxx::device_type_t));
+%throws_badalloc(clxx::platform_layer::get_devices(clxx::platform const&p) const);
+%throws_invalid_key_error(clxx::platform_layer::get_platform(clxx::device const&) const);
+%throws_badalloc(clxx::platform_layer::add);
+%throws_invalid_key_error_badalloc(clxx::platform_layer::erase(clxx::device const&));
+%throws_clerror_badalloc(clxx::platform_layer::load_opencl(clxx::device_type_t));
+
+%throws_clerror_badalloc(clxx::query_platform_layer_info);
+
 %include <clxx/platform_layer.hpp>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

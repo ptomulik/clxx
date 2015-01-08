@@ -30,15 +30,15 @@
 
 %{
 #define SWIG_Clxx_MemoryError(e) SWIG_exception(SWIG_MemoryError, (e).what())
-#define SWIG_Clxx_IOError(e) SWIG_exception(SWIG_MemoryError, (e).what())
+#define SWIG_Clxx_IOError(e) SWIG_exception(SWIG_IOError, (e).what())
 #define SWIG_Clxx_RuntimeError(e) SWIG_exception(SWIG_RuntimeError, (e).what())
-#define SWIG_Clxx_IndexError(e) SWIG_exception(SWIG_MemoryError, (e).what())
-#define SWIG_Clxx_TypeError(e) SWIG_exception(SWIG_MemoryError, (e).what())
-#define SWIG_Clxx_DivisionByZeroError(e) SWIG_exception(SWIG_MemoryError, (e).what())
-#define SWIG_Clxx_OverflowError(e) SWIG_exception(SWIG_MemoryError, (e).what())
-#define SWIG_Clxx_SyntaxError(e) SWIG_exception(SWIG_MemoryError, (e).what())
+#define SWIG_Clxx_IndexError(e) SWIG_exception(SWIG_IndexError, (e).what())
+#define SWIG_Clxx_TypeError(e) SWIG_exception(SWIG_TypeError, (e).what())
+#define SWIG_Clxx_DivisionByZeroError(e) SWIG_exception(SWIG_DivisionByZeroError, (e).what())
+#define SWIG_Clxx_OverflowError(e) SWIG_exception(SWIG_OverflowError, (e).what())
+#define SWIG_Clxx_SyntaxError(e) SWIG_exception(SWIG_SyntaxError, (e).what())
 #define SWIG_Clxx_ValueError(e) SWIG_exception(SWIG_ValueError, (e).what())
-#define SWIG_Clxx_SystemError(e) SWIG_exception(SWIG_MemoryError, (e).what())
+#define SWIG_Clxx_SystemError(e) SWIG_exception(SWIG_SystemError, (e).what())
 %}
 
 //
@@ -61,6 +61,7 @@
 #define %catch_uninitialized_context_error catch(clxx::uninitialized_context_error const& e) { SWIG_Clxx_RuntimeError(e); }
 #define %catch_uninitialized_value_error catch(clxx::uninitialized_value_error const& e) { SWIG_Clxx_RuntimeError(e); }
 #define %catch_value_access_error catch(clxx::value_access_error const& e) { SWIG_Clxx_RuntimeError(e); }
+#define %catch_invalid_key_error catch(clxx::invalid_key_error const& e) { SWIG_Clxx_KeyError(e); }
 #define %catch_unexpected_clerror catch(clxx::unexpected_clerror const& e) { SWIG_Clxx_clerror(e); }
 
 //
@@ -105,6 +106,22 @@
   try { $action }
   %catch_badalloc
   %catch_uninitialized_value_error
+  %catch_exception
+}
+%enddef
+
+%define %throws_invalid_key_error(decl)
+%exception decl {
+  try { $action }
+  %catch_invalid_key_error
+  %catch_exception
+}
+%enddef
+%define %throws_invalid_key_error_badalloc(decl)
+%exception decl {
+  try { $action }
+  %catch_invalid_key_error
+  %catch_badalloc
   %catch_exception
 }
 %enddef
