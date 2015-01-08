@@ -46,24 +46,21 @@ namespace clxx {
  * \ingroup Clxx_Cl_platform
  *
  * Simple associative container to store \ref clxx::device "devices",
- * \ref clxx::platform "platforms" and relations between these. It represents
- * information about devices belonging to given platforms, and provides simple
- * interface to create and modify its contents and relations.
+ * \ref clxx::platform "platforms" and relations between them. Note, that this
+ * is just a container. It's not synchronized with OpenCL platform layer by
+ * definition (it may be filled-in quite arbitrarily by user). However, it has
+ * an interface that allows to initialize it with the actual data retrieved
+ * from OpenCL, see \ref load_opencl().
  *
- * Note, that this is just a container. It's not synchronized with OpenCL
- * platform layer by definition (it may be filled quite arbitrarily by user).
- * However, it has an interface that allows to initialize it with the actual
- * data retrieved from OpenCL, see \ref load_opencl().
+ * The implemented relations fulfill the following constraints (enforced
+ * internally by the class):
  *
- * The implemented relations have the following properties
- *
- *  - each \ref clxx::device "device" stored in the container refers to exactly
+ *  - each \ref clxx::device "device" stored in the container refers exactly
  *    one \ref clxx::platform "platform" (also stored in the container),
- *  - each \ref clxx::platform "platform" stored in the container refers on one
- *    or more \ref clxx::device "devices" (stored in the container).
+ *  - each \ref clxx::platform "platform" stored in the container is referred
+ *    by one or more \ref clxx::device "devices" (stored in the container).
  *
- * These constraints are enforced internally by the class. The contents may be
- * accessed by the following methods:
+ * The contents may be accessed by the following methods:
  *
  *  - \ref get_devices() const get_devices() returns a plain sequence of
  *    \ref clxx::device "devices", where the \ref clxx::device "devices" appear
@@ -72,10 +69,10 @@ namespace clxx {
  *    \ref clxx::platform "platforms", where the \ref clxx::platform "platforms"
  *    appear in the same order as they were added to the container,
  *  - \ref get_devices(platform const&) const get_devices(platform const&)
- *    returns plain sequence of \ref clxx::device "devices" related to a given
+ *    returns plain sequence of \ref clxx::device "devices" that refer given
  *    platform,
  *  - \ref get_platform(device const&) const get_platform(device const&)
- *    returns a \ref clxx::platform "platform" related to a given device,
+ *    returns a \ref clxx::platform "platform" referred by given device,
  *
  * The contents may be modified by the following methods:
  *
@@ -93,7 +90,7 @@ namespace clxx {
  *
  *   - \ref load_opencl(device_type_t) retrieves the platforms, devices and
  *     relations from OpenCL platform layer and adds them to the container.
- *     Note, that this appends stuff to or overrides the existing content.
+ *     Note, that this appends stuff to- or overrides the existing content.
  *
  * The container may also be filled-in with a data obtained from OpenCL at
  * initialization phase (in constructor).
