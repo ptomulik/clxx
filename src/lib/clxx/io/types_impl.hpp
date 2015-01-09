@@ -7,8 +7,8 @@
 #define CLXX_IO_TYPES_IMPL
 
 /** // doc: clxx/io/types_impl.hpp {{{
- * @file clxx/io/types_impl.hpp
- * @todo Write documentation
+ * \file clxx/io/types_impl.hpp
+ * \todo Write documentation
  */ // }}}
 #include <clxx/io/types.hpp>
 #include <clxx/util/to_string.hpp>

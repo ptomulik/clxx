@@ -4,8 +4,8 @@
 // clxx/io/types.cpp
 
 /** // doc: clxx/io/types.cpp {{{
- * @file clxx/io/types.cpp
- * @todo Write documentation
+ * \file clxx/io/types.cpp
+ * \todo Write documentation
  */ // }}}
 #include <ostream>
 #include <string>

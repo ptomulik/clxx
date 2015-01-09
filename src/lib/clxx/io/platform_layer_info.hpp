@@ -4,8 +4,8 @@
 // clxx/io/platform_layer_info.hpp
 
 /** // doc: clxx/io/platform_layer_info.hpp {{{
- * @file clxx/io/platform_layer_info.hpp
- * @todo Write documentation
+ * \file clxx/io/platform_layer_info.hpp
+ * \todo Write documentation
  */ // }}}
 #ifndef CLXX_IO_PLATFORM_LAYER_INFO_HPP_INCLUDED
 #define CLXX_IO_PLATFORM_LAYER_INFO_HPP_INCLUDED

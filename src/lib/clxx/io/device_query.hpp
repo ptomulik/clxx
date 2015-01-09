@@ -4,8 +4,8 @@
 // clxx/io/device_query.hpp
 
 /** // doc: clxx/io/device_query.hpp {{{
- * @file clxx/io/device_query.hpp
- * @todo Write documentation
+ * \file clxx/io/device_query.hpp
+ * \todo Write documentation
  */ // }}}
 #ifndef CLXX_IO_DEVICE_QUERY_HPP_INCLUDED
 #define CLXX_IO_DEVICE_QUERY_HPP_INCLUDED

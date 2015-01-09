@@ -4,8 +4,8 @@
 // clxx/io/device_info.hpp
 
 /** // doc: clxx/io/device_info.hpp {{{
- * @file clxx/io/device_info.hpp
- * @todo Write documentation
+ * \file clxx/io/device_info.hpp
+ * \todo Write documentation
  */ // }}}
 #ifndef CLXX_IO_DEVICE_INFO_HPP_INCLUDED
 #define CLXX_IO_DEVICE_INFO_HPP_INCLUDED

@@ -4,8 +4,8 @@
 // clxx/device_info.cpp
 
 /** // doc: clxx/device_info.cpp {{{
- * @file clxx/device_info.cpp
- * @todo Write documentation
+ * \file clxx/device_info.cpp
+ * \todo Write documentation
  */ // }}}
 #include <clxx/device_info.hpp>
 #include <clxx/exceptions.hpp>

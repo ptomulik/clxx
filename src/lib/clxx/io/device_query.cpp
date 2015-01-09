@@ -4,8 +4,8 @@
 // clxx/io/device_query.cpp
 
 /** // doc: clxx/io/device_query.cpp {{{
- * @file clxx/io/device_query.cpp
- * @todo Write documentation
+ * \file clxx/io/device_query.cpp
+ * \todo Write documentation
  */ // }}}
 #include <ostream>
 

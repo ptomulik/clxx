@@ -4,8 +4,8 @@
 // clxx/io/types.hpp
 
 /** // doc: clxx/io/types.hpp {{{
- * @file clxx/io/types.hpp
- * @todo Write documentation
+ * \file clxx/io/types.hpp
+ * \todo Write documentation
  */ // }}}
 #ifndef CLXX_IO_TYPES_HPP_INCLUDED
 #define CLXX_IO_TYPES_HPP_INCLUDED

@@ -4,8 +4,8 @@
 // clxx/platform_query.cpp
 
 /** // doc: clxx/platform_query.cpp {{{
- * @file clxx/platform_query.cpp
- * @todo Write documentation
+ * \file clxx/platform_query.cpp
+ * \todo Write documentation
  */ // }}}
 #include <clxx/platform_query.hpp>
 

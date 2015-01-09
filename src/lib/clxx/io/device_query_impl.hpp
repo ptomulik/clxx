@@ -7,8 +7,8 @@
 #define CLXX_IO_DEVICE_QUERY_IMPL
 
 /** // doc: clxx/io/device_query_impl.hpp {{{
- * @file clxx/io/device_query_impl.hpp
- * @todo Write documentation
+ * \file clxx/io/device_query_impl.hpp
+ * \todo Write documentation
  */ // }}}
 #include <clxx/io/device_query.hpp>
 #include <clxx/io/autosep.hpp>

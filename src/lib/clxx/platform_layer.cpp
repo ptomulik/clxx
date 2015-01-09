@@ -4,8 +4,8 @@
 // clxx/platform_layer.cpp
 
 /** // doc: clxx/platform_layer.cpp {{{
- * @file clxx/platform_layer.cpp
- * @todo Write documentation
+ * \file clxx/platform_layer.cpp
+ * \todo Write documentation
  */ // }}}
 #include <clxx/platform_layer.hpp>
 #include <clxx/platform.hpp>

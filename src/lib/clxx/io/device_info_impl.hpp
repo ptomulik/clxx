@@ -7,8 +7,8 @@
 #define CLXX_IO_DEVICE_INFO_IMPL
 
 /** // doc: clxx/io/device_info_impl.hpp {{{
- * @file clxx/io/device_info_impl.hpp
- * @todo Write documentation
+ * \file clxx/io/device_info_impl.hpp
+ * \todo Write documentation
  */ // }}}
 #include <clxx/io/device_info.hpp>
 #include <clxx/io/autosep.hpp>

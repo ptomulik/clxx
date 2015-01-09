@@ -4,8 +4,8 @@
 // clxx/io/platform_query.cpp
 
 /** // doc: clxx/io/platform_query.cpp {{{
- * @file clxx/io/platform_query.cpp
- * @todo Write documentation
+ * \file clxx/io/platform_query.cpp
+ * \todo Write documentation
  */ // }}}
 #include <clxx/io/platform_query.hpp>
 #include <clxx/io/autosep.hpp>

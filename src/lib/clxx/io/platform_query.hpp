@@ -4,8 +4,8 @@
 // clxx/io/platform_query.hpp
 
 /** // doc: clxx/io/platform_query.hpp {{{
- * @file clxx/io/platform_query.hpp
- * @todo Write documentation
+ * \file clxx/io/platform_query.hpp
+ * \todo Write documentation
  */ // }}}
 #ifndef CLXX_IO_PLATFORM_QUERY_HPP_INCLUDED
 #define CLXX_IO_PLATFORM_QUERY_HPP_INCLUDED
