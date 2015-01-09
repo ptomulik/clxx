@@ -30,6 +30,9 @@ class platform_info
   template <class Archive>
   friend void _serialize(Archive&, platform_info&, const unsigned int);
 public:
+  /** // doc: class_version {{{
+   * \todo Write documentation
+   */ // }}}
   static constexpr unsigned int class_version = 0x000001;
 public:
   /** // doc: platform_info() {{{

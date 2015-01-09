@@ -94,10 +94,6 @@ private:
  *
  * This function is useful in expressions, where you don't have to declare
  * autosep object by hand. The template parameter is deduced by C++ compiler.
- *
- * \b Example:
- *
- * \snippet autosep2.cpp Program
  */ // }}}
 template<typename SepT>
 autosep_<SepT> autosep(SepT sep)

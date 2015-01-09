@@ -569,7 +569,9 @@ public:
    *
    * Returns the OpenCL version supported by the device. This version string
    * has the following format:
-   * <verbatim>OpenCL<space><major_version.minor_version><space><vendor-specific information></verbatim>
+    \verbatim
+    OpenCL<space><major_version.minor_version><space><vendor-specific information>
+    \endverbatim
    */ // }}}
   std::string get_version() const;
   /** // {{{
@@ -654,7 +656,9 @@ public:
    *
    * Returns the highest OpenCL C version supported by the compiler for this
    * device. This version string has the following format:
-   * <verbatim>OpenCL<space>C<space><major_version.minor_version><space><vendor-specific information></verbatim>
+   * \verbatim
+      OpenCL<space>C<space><major_version.minor_version><space><vendor-specific information>
+    \endverbatim
    */ // }}}
   std::string get_opencl_c_version() const;
 #endif

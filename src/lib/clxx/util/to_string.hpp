@@ -20,14 +20,18 @@
 #include <type_traits>
 
 namespace clxx {
-
+/** // doc: enum_to_name_of_hex {{{
+ * \todo Write documentation
+ */ // }}}
 template<typename E>
 std::string enum_to_name_or_hex(E x)
 {
   char const* name = clxx::enum2name(x);
   return name ? std::string(name) : enum2hex(x);
 }
-
+/** // doc: enum_to_name_of_hex {{{
+ * \todo Write documentation
+ */ // }}}
 template<typename E>
 std::string enum_bitmask_to_string(E x, typename std::underlying_type<E>::type end = 0)
 {

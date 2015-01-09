@@ -22,6 +22,7 @@
 #include <iostream>
 // [Includes]
 
+/// Main function
 int main(int, char const*[])
 {
   using namespace std;

@@ -15,13 +15,18 @@
 #include <boost/program_options/errors.hpp>
 
 namespace clxx {
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::multiple_occurrences>
   { typedef boost::program_options::multiple_occurrences type; };
+/** \endcond */
 } // end namespace clxx
 
 namespace clxx { namespace app { namespace options {
 
+/** // doc: multiple_option_occurrences_error {{{
+ * \todo Write documentation
+ */ // }}}
 class multiple_option_occurrences_error
   : public clxx::exception_base<
       clxx::app::options::exception
@@ -33,6 +38,9 @@ class multiple_option_occurrences_error
     , boost::program_options::multiple_occurrences
     > base_;
 public:
+  /** // doc: multiple_option_occurrences_error(boost::program_options::multiple_occurrences) {{{
+   * \todo Write documentation
+   */ // }}}
   multiple_option_occurrences_error(boost::program_options::multiple_occurrences const& e)
     : base_(e)
   { }

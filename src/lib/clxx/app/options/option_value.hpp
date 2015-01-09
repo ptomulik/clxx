@@ -24,12 +24,13 @@
  * #define BOOST_PROGRAM_OPTIONS_NEED_VALUE_NAME_FIX \
  *   (BOOST_PROGRAM_OPTIONS_VERSION <= 2) */
 
-
+/** \cond SHOW_IGNORED_COMPOUNDS */
 #if BOOST_PROGRAM_OPTIONS_NEED_VALUE_NAME_FIX
 namespace boost { namespace program_options {
 extern BOOST_PROGRAM_OPTIONS_DECL std::string arg;
 }}
 #endif
+/** \endcond */
 
 namespace clxx { namespace app { namespace options {
 

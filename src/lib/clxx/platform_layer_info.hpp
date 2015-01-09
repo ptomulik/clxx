@@ -29,6 +29,9 @@ class platform_layer_info
   template <class Archive>
   friend void _serialize(Archive&, platform_layer_info&, const unsigned int);
 public:
+  /** // doc: class_version {{{
+   * \todo Write documentation
+   */ // }}}
   static constexpr unsigned int class_version = 0x000001;
 private:
   typedef boost::bimaps::vector_of<const_platform_info_ptr> Left_Set;

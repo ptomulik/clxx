@@ -10,6 +10,7 @@
 #include <ostream>
 #include <string>
 
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<typename _Traits>
 static std::basic_ostream<wchar_t, _Traits>&
 operator << ( std::basic_ostream<wchar_t, _Traits>& os
@@ -223,6 +224,7 @@ operator<< (std::basic_ostream<wchar_t>&, clxx::buffer_create_type_t);
 #endif
 template std::basic_ostream<wchar_t>&
 operator<< (std::basic_ostream<wchar_t>&, clxx::profiling_info_t);
+/** \endcond */
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

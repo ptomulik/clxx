@@ -17,7 +17,7 @@
 #include <clxx/cl/cl.h>
 #include <cxxtest/Mock.h>
 
-
+/** \cond SHOW_IGNORED_COMPOUNDS */
 CXXTEST_MOCK_GLOBAL(cl_int, clGetPlatformIDs,
   (cl_uint num_entries, cl_platform_id* platforms, cl_uint *num_platforms),
   (num_entries, platforms, num_platforms)
@@ -113,6 +113,7 @@ CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramInfo,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( program, param_name, param_value_size, param_value, param_value_size_ret)
 );
+/** \endcond */
 
 #include <clxx/cl/mocks/newton.hpp>
 #include <clxx/cl/mocks/dummy.hpp>

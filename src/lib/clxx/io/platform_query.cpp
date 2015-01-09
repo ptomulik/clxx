@@ -20,12 +20,13 @@ operator << ( std::basic_ostream<wchar_t, _Traits>& os
   return os << s.c_str();
 }
 
-/* Name-pointer pair */
+/// Name-pointer pair
 struct Npp
 {
-  const char* name;
-  bool (clxx::platform_query::*ptr) () const;
+  const char* name; //!< name of the named pointer
+  bool (clxx::platform_query::*ptr) () const; //!< the pointer stored by Npp
 };
+/// Supports creation of Npp pairs
 #define NPP(name) { #name, &clxx::platform_query::name ## _selected}
 
 static Npp npps[] =
@@ -39,7 +40,7 @@ static Npp npps[] =
 };
 
 namespace clxx { namespace io {
-
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template <class Ostream> Ostream&
 write(Ostream& os, clxx::platform_query const& query, int ind)
 {
@@ -57,9 +58,10 @@ write(Ostream& os, clxx::platform_query const& query)
 {
   return write(os, query, 0);
 }
-
+/** \endcond */
 } } // end namespace clxx::io
 
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template <typename _CharT, typename _Traits>
 std::basic_ostream<_CharT, _Traits>&
 operator << ( std::basic_ostream<_CharT, _Traits>& os
@@ -75,6 +77,7 @@ operator << ( std::basic_ostream<char>& os
 template std::basic_ostream<wchar_t>&
 operator << ( std::basic_ostream<wchar_t>& os
             , clxx::platform_query const& query );
+/** \endcond */
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

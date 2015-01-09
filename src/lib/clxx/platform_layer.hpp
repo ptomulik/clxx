@@ -79,6 +79,9 @@ namespace clxx {
 class platform_layer
 {
 public:
+  /** // doc: device_platform_map {{{
+   * \todo Write documetnation
+   */ // }}}
   typedef std::map<device, platform> device_platform_map;
 public:
   /** // doc: platform_layer() {{{

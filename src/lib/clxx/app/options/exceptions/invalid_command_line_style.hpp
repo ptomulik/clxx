@@ -15,13 +15,18 @@
 #include <boost/program_options/errors.hpp>
 
 namespace clxx {
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::invalid_command_line_style>
   { typedef boost::program_options::invalid_command_line_style type; };
+/** \endcond */
 } // end namespace clxx
 
 namespace clxx { namespace app { namespace options {
 
+/** // doc: invalid_command_line_style_error {{{
+ * \todo Write documentation
+ */ // }}}
 class invalid_command_line_style_error
   : public clxx::exception_base<
       clxx::app::options::exception
@@ -33,6 +38,9 @@ class invalid_command_line_style_error
     , boost::program_options::invalid_command_line_style
     > base_;
 public:
+  /** // doc: invalid_command_line_style_error(boost::program_options::invalid_command_line_style) {{{
+   * \todo Write documentation
+   */ // }}}
   invalid_command_line_style_error(boost::program_options::invalid_command_line_style const& e)
     : base_(e)
   { }

@@ -32,34 +32,73 @@ template<class... Args>
 class Dummy_CallArgs
 {
 public:
+  /** // doc: args_tuple {{{
+   * \todo Write documentation
+   */ // }}}
   typedef std::tuple<Args...> args_tuple;
+  /** // doc: reset() {{{
+   * \todo Write documentation
+   */ // }}}
   inline void reset() { _calls.clear(); }
 
   // return the calls
+  /** // doc: () {{{
+   * \todo Write documentation
+   */ // }}}
   inline std::vector<args_tuple> const& calls() const { return _calls; }
 
   // mock tests
+  /** // doc: never_called() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool never_called() const noexcept
   { return _calls.size() == 0ul; }
+  /** // doc: called_once() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool called_once() const noexcept
   { return _calls.size() == 1ul; }
+  /** // doc: called_twice() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool called_twice() const noexcept
   { return _calls.size() == 2ul; }
+  /** // doc: called_three_times() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool called_three_times() const noexcept
   { return _calls.size() == 3ul; }
+  /** // doc: called_four_times() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool called_four_times() const noexcept
   { return _calls.size() == 3ul; }
+  /** // doc: called_n_times() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool called_n_times(unsigned long n) const noexcept
   { return _calls.size() == n; }
+  /** // doc: last_called_with() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool last_called_with(Args... args) const
   { return (_calls.back() == args_tuple(args...)); }
+  /** // doc: caled_once_with() {{{
+   * \todo Write documentation
+   */ // }}}
   inline bool called_once_with(Args... args) const
   { return called_once() && last_called_with(args...); }
 protected:
+  /** // doc: call_with(args) {{{
+   * \todo Write documentation
+   */ // }}}
   inline void call_with(Args... args)
   {
     _calls.push_back(args_tuple(args...));
   }
+  /** // doc: call_with(args) {{{
+   * \todo Write documentation
+   */ // }}}
   std::vector<args_tuple> _calls;
 };
 
@@ -78,6 +117,9 @@ class Dummy_clGetPlatformIDs
   cl_int clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,
                           cl_uint* num_platforms);
 public:
+  /** // doc: Dummy_clGetPlatformIDs() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clGetPlatformIDs(cl_int err);
 };
 /** // doc: Dummy_clGetPlatformInfo {{{
@@ -94,6 +136,9 @@ class Dummy_clGetPlatformInfo
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
 public:
+  /** // doc: Dummy_clGetPlatformInfo() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clGetPlatformInfo(cl_int err);
 };
 /** // doc: Dummy_clGetDeviceIDs {{{
@@ -112,6 +157,9 @@ class Dummy_clGetDeviceIDs
                         cl_uint num_entries, cl_device_id* devices,
                         cl_uint* num_devices);
 public:
+  /** // doc: Dummy_clGetDeviceIDs() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clGetDeviceIDs(cl_int err);
 };
 /** // doc: Dummy_clGetDeviceInfo {{{
@@ -128,6 +176,9 @@ class Dummy_clGetDeviceInfo
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
 public:
+  /** // doc: Dummy_clGetDeviceInfo() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clGetDeviceInfo(cl_int err);
 };
 /** // doc: Dummy_clCreateContext {{{
@@ -149,6 +200,9 @@ class Dummy_clCreateContext
       cl_int* errcode_ret
   );
 public:
+  /** // doc: Dummy_clCreateContext() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clCreateContext(cl_context ctx, cl_int err);
 };
 
@@ -171,6 +225,9 @@ class Dummy_clCreateContextFromType
       cl_int* errcode_ret
   );
 public:
+  /** // doc: Dummy_clCreateContextFromType() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clCreateContextFromType(cl_context ctx, cl_int err);
 };
 
@@ -184,6 +241,9 @@ class Dummy_clRetainContext
   cl_int _err;
   cl_int clRetainContext(cl_context);
 public:
+  /** // doc: Dummy_clRetainContext() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clRetainContext(cl_int err);
 };
 
@@ -197,6 +257,9 @@ class Dummy_clReleaseContext
   cl_int _err;
   cl_int clReleaseContext(cl_context);
 public:
+  /** // doc: Dummy_clReleaseContext() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clReleaseContext(cl_int err);
 };
 /** // doc: Dummy_clGetContextInfo {{{
@@ -213,6 +276,9 @@ class Dummy_clGetContextInfo
                           size_t param_value_size, void* param_value,
                           size_t* param_value_size_ret);
 public:
+  /** // doc: Dummy_clGetContextInfo() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clGetContextInfo(cl_int err, void* pv = nullptr, size_t pvs = 0);
 };
 #if HAVE_OPENCL_clCreateSubDevices
@@ -232,6 +298,9 @@ class Dummy_clCreateSubDevices
                             cl_device_id* out_devices,
                             cl_uint* num_devices_ret);
 public:
+  /** // doc: Dummy_clCreateSubDevices() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clCreateSubDevices(cl_int err, cl_device_id const* out_devices = nullptr, cl_uint const* num_devices_ret = nullptr);
 };
 #endif
@@ -246,6 +315,9 @@ class Dummy_clRetainDevice
   cl_int _err;
   cl_int clRetainDevice(cl_device_id device);
 public:
+  /** // doc: Dummy_clRetainDevice() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clRetainDevice(cl_int err);
 };
 #endif
@@ -260,6 +332,9 @@ class Dummy_clReleaseDevice
   cl_int _err;
   cl_int clReleaseDevice(cl_device_id device);
 public:
+  /** // doc: Dummy_clReleaseDevice() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clReleaseDevice(cl_int err);
 };
 #endif
@@ -278,6 +353,9 @@ class Dummy_clCreateProgramWithSource
                                        const size_t* lengths,
                                        cl_int* errcode_ret);
 public:
+  /** // doc: Dummy_clCreateProgramWithSource() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clCreateProgramWithSource(cl_program program, cl_int err);
 };
 /** // doc: Dummy_clCreateProgramWithBinary {{{
@@ -299,6 +377,9 @@ class Dummy_clCreateProgramWithBinary
                                        cl_int* binary_status,
                                        cl_int* errcode_ret);
 public:
+  /** // doc: Dummy_clCreateProgramWithBinary() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clCreateProgramWithBinary(cl_program program, cl_int err);
 };
 #if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
@@ -318,6 +399,9 @@ class Dummy_clCreateProgramWithBuiltInKernels
                                                const char* kernel_names,
                                                cl_int* errcode_ret);
 public:
+  /** // doc: Dummy_clCreateProgramWithBuiltInKernels() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err);
 };
 #endif
@@ -331,6 +415,9 @@ class Dummy_clRetainProgram
   cl_int _err;
   cl_int clRetainProgram(cl_program program);
 public:
+  /** // doc: Dummy_clRetainProgram() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clRetainProgram(cl_int err);
 };
 /** // doc: Dummy_clReleaseProgram {{{
@@ -343,6 +430,9 @@ class Dummy_clReleaseProgram
   cl_int _err;
   cl_int clReleaseProgram(cl_program program);
 public:
+  /** // doc: Dummy_clReleaseProgram() {{{
+   * \todo Write documentation
+   */ // }}}
   Dummy_clReleaseProgram(cl_int err);
 };
 } // end namespace T

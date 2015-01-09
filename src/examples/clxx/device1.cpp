@@ -1,12 +1,12 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: clxx/platform3.cpp {{{
- * \file clxx/platform3.cpp
+/** // doc: clxx/device1.cpp {{{
+ * \file clxx/device1.cpp
  * \todo Write file documentation
  */ // }}}
-/** // doc: platform3.cpp {{{
- * \example platform3.cpp
+/** // doc: device1.cpp {{{
+ * \example device1.cpp
  * This example demonstrates, how OpenCL Platfrom Layer may be accessed from
  * local machine. We get and display some info about platforms and devices
  * available locally.

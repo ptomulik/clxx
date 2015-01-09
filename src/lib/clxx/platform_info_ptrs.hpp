@@ -14,10 +14,10 @@
 #include <vector>
 
 namespace clxx {
-
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 typedef std::vector<clxx::platform_info_ptr> platform_info_ptrs;
 typedef std::vector<clxx::const_platform_info_ptr> const_platform_info_ptrs;
-
+/** \endcond */
 } // end namespace clxx
 
 #endif /* CLXX_PLATFORM_INFO_PTRS_HPP_INCLUDED */

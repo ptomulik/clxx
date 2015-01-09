@@ -15,9 +15,10 @@
 namespace clxx {
 
 class device_info;
-
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 typedef shared_ptr<device_info> device_info_ptr;
 typedef shared_ptr<const device_info> const_device_info_ptr;
+/** \endcond */
 
 } // end namespace clxx;
 

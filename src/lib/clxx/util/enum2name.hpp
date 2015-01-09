@@ -15,7 +15,9 @@
 #include <type_traits>
 
 namespace clxx {
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(status_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(status_t x, char const* dflt = nullptr) noexcept
 {
@@ -117,7 +119,9 @@ enum2name(status_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(platform_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(platform_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -128,7 +132,9 @@ enum2name(platform_info_t x, char const* dflt = nullptr) noexcept
           (x == platform_info_t::extensions) ? "extensions" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(device_type_t x, char const* dflt = nullptr) noexcept
 {
@@ -143,7 +149,9 @@ enum2name(device_type_t x, char const* dflt = nullptr) noexcept
           (x == device_type_t::all) ? "all" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(device_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -230,7 +238,9 @@ enum2name(device_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_fp_config_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(device_fp_config_t x, char const* dflt = nullptr) noexcept
 {
@@ -249,7 +259,9 @@ enum2name(device_fp_config_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_mem_cache_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(device_mem_cache_type_t x, char const* dflt = nullptr) noexcept
 {
@@ -258,7 +270,9 @@ enum2name(device_mem_cache_type_t x, char const* dflt = nullptr) noexcept
          (x == device_mem_cache_type_t::read_write_cache) ? "read_write_cache" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_local_mem_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(device_local_mem_type_t x, char const* dflt = nullptr) noexcept
 {
@@ -266,7 +280,9 @@ enum2name(device_local_mem_type_t x, char const* dflt = nullptr) noexcept
           (x == device_local_mem_type_t::global) ? "global" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_exec_capabilities_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(device_exec_capabilities_t x, char const* dflt = nullptr) noexcept
 {
@@ -275,7 +291,9 @@ enum2name(device_exec_capabilities_t x, char const* dflt = nullptr) noexcept
          (x == device_exec_capabilities_t::native_kernel) ? "native_kernel" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(command_queue_properties_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(command_queue_properties_t x, char const* dflt = nullptr) noexcept
 {
@@ -284,7 +302,9 @@ enum2name(command_queue_properties_t x, char const* dflt = nullptr) noexcept
           (x == command_queue_properties_t::profiling_enable) ? "profiling_enable" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(context_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(context_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -296,7 +316,9 @@ enum2name(context_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(context_properties_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(context_properties_t x, char const* dflt = nullptr) noexcept
 {
@@ -324,7 +346,9 @@ enum2name(context_properties_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_partition_property_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(device_partition_property_t x, char const* dflt = nullptr) noexcept
@@ -336,7 +360,9 @@ enum2name(device_partition_property_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(device_affinity_domain_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(device_affinity_domain_t x, char const* dflt = nullptr) noexcept
@@ -351,7 +377,9 @@ enum2name(device_affinity_domain_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(command_queue_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(command_queue_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -361,7 +389,9 @@ enum2name(command_queue_info_t x, char const* dflt = nullptr) noexcept
           (x == command_queue_info_t::properties) ? "properties" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(mem_flags_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(mem_flags_t x, char const* dflt = nullptr) noexcept
 {
@@ -379,7 +409,9 @@ enum2name(mem_flags_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(mem_migration_flags_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(mem_migration_flags_t x, char const* dflt = nullptr) noexcept
@@ -390,7 +422,9 @@ enum2name(mem_migration_flags_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(channel_order_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(channel_order_t x, char const* dflt = nullptr) noexcept
 {
@@ -415,7 +449,9 @@ enum2name(channel_order_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(channel_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(channel_type_t x, char const* dflt = nullptr) noexcept
 {
@@ -439,7 +475,9 @@ enum2name(channel_type_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(mem_object_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(mem_object_type_t x, char const* dflt = nullptr) noexcept
 {
@@ -454,7 +492,9 @@ enum2name(mem_object_type_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(mem_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(mem_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -471,7 +511,9 @@ enum2name(mem_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(image_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(image_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -490,7 +532,9 @@ enum2name(image_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(addressing_mode_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(addressing_mode_t x, char const* dflt = nullptr) noexcept
 {
@@ -503,7 +547,9 @@ enum2name(addressing_mode_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(filter_mode_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(filter_mode_t x, char const* dflt = nullptr) noexcept
 {
@@ -511,7 +557,9 @@ enum2name(filter_mode_t x, char const* dflt = nullptr) noexcept
           (x == filter_mode_t::linear) ? "linear" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(sampler_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(sampler_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -522,7 +570,9 @@ enum2name(sampler_info_t x, char const* dflt = nullptr) noexcept
           (x == sampler_info_t::filter_mode) ? "filter_mode" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(mem_flags_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(map_flags_t x, char const* dflt = nullptr) noexcept
 {
@@ -534,7 +584,9 @@ enum2name(map_flags_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(program_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(program_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -551,7 +603,9 @@ enum2name(program_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(program_build_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(program_build_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -563,7 +617,9 @@ enum2name(program_build_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(program_binary_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(program_binary_type_t x, char const* dflt = nullptr) noexcept
@@ -575,7 +631,9 @@ enum2name(program_binary_type_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(build_status_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(build_status_t x, char const* dflt = nullptr) noexcept
 {
@@ -585,7 +643,9 @@ enum2name(build_status_t x, char const* dflt = nullptr) noexcept
           (x == build_status_t::in_progress) ? "in_progress" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(kernel_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(kernel_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -599,7 +659,9 @@ enum2name(kernel_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(kernel_arg_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(kernel_arg_info_t x, char const* dflt = nullptr) noexcept
@@ -612,7 +674,9 @@ enum2name(kernel_arg_info_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(kernel_arg_address_qualifier_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(kernel_arg_address_qualifier_t x, char const* dflt = nullptr) noexcept
@@ -624,7 +688,9 @@ enum2name(kernel_arg_address_qualifier_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(kernel_arg_access_qualifier_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(kernel_arg_access_qualifier_t x, char const* dflt = nullptr) noexcept
@@ -636,7 +702,9 @@ enum2name(kernel_arg_access_qualifier_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(kernel_arg_type_qualifier_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_2
 constexpr char const*
 enum2name(kernel_arg_type_qualifier_t x, char const* dflt = nullptr) noexcept
@@ -648,7 +716,9 @@ enum2name(kernel_arg_type_qualifier_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(kernel_work_group_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(kernel_work_group_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -664,7 +734,9 @@ enum2name(kernel_work_group_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(event_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(event_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -677,7 +749,9 @@ enum2name(event_info_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(command_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(command_type_t x, char const* dflt = nullptr) noexcept
 {
@@ -712,7 +786,9 @@ enum2name(command_type_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(command_exec_status_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(command_exec_status_t x, char const* dflt = nullptr) noexcept
 {
@@ -722,7 +798,9 @@ enum2name(command_exec_status_t x, char const* dflt = nullptr) noexcept
          (x == command_exec_status_t::queued) ? "queued" :
          enum2name(static_cast<status_t>(x), dflt);
 }
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(buffer_create_type_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 #if CL_VERSION_1_1
 constexpr char const*
 enum2name(buffer_create_type_t x, char const* dflt = nullptr) noexcept
@@ -731,7 +809,9 @@ enum2name(buffer_create_type_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 #endif
-/* ------------------------------------------------------------------------ */
+/** // doc: enum2name(profiling_info_t, char const*) {{{
+ * \todo Write documentation
+ */ // }}}
 constexpr char const*
 enum2name(profiling_info_t x, char const* dflt = nullptr) noexcept
 {
@@ -741,8 +821,6 @@ enum2name(profiling_info_t x, char const* dflt = nullptr) noexcept
           (x == profiling_info_t::end) ? "end" :
           dflt;
 }
-/* ------------------------------------------------------------------------ */
-
 } // end namespace clxx
 
 #endif /* CLXX_UTIL_ENUM2NAME_HPP_INCLUDED */

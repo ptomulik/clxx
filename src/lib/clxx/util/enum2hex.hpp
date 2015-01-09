@@ -34,7 +34,10 @@ namespace clxx { namespace detail {
 // See also http://www.cplusplus.com/reference/cstdio/printf/.
 //
 
-// Precision
+/** // doc: enum_hex_fmt_prec {{{
+ * \brief Precission
+ * \todo Write documentation
+ */ // }}}
 template<typename T>
   struct enum_hex_fmt_prec
     : tml::join<
@@ -43,31 +46,46 @@ template<typename T>
       >
   { };
 
-// Argument type
+/** // doc: enum_hex_fmt_prec {{{
+ * \brief Argument type
+ * \todo Write documentation
+ */ // }}}
 template<typename T>
   struct enum_hex_fmt_argt
   {
-    typedef typename tml::string<> type;
+    typedef typename tml::string<> type; ///< The resultant type
   };
 
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
+/// Specialization of the enum_hex_fmt_argt for <tt>signed char</tt>
 template<>
   struct enum_hex_fmt_argt<signed char>
   { typedef typename tml::string<'h','h'> type; };
+/// Specialization of the enum_hex_fmt_argt for <tt>signed short</tt>
 template<>
   struct enum_hex_fmt_argt<signed short>
   { typedef typename tml::string<'h'> type; };
+/// Specialization of the enum_hex_fmt_argt for <tt>signed long</tt>
 template<>
   struct enum_hex_fmt_argt<signed long>
   { typedef typename tml::string<'l'> type; };
+/// Specialization of the enum_hex_fmt_argt for <tt>signed long long</tt>
 template<>
   struct enum_hex_fmt_argt<signed long long>
   { typedef typename tml::string<'l','l'> type; };
+/// Specialization of the enum_hex_fmt_argt for <tt>size_t</tt>
 template<>
   struct enum_hex_fmt_argt<size_t>
   { typedef typename tml::string<'z'> type; };
+/** \endcond */
 
+/** // doc: enum_hex_fmt {{{
+ * \todo Write documentation
+ */ // }}}
 template<typename T, bool Negative>
   struct enum_hex_fmt;
+
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<typename T>
   struct enum_hex_fmt<T,false>
     : tml::join<
@@ -81,6 +99,7 @@ template<typename T>
         >::type
       >
   { };
+/// Specialization of the enum_hex_fmt for <tt>lt;T, true&gt;</tt>
 template<typename T>
   struct enum_hex_fmt<T,true>
     : tml::join<
@@ -94,6 +113,7 @@ template<typename T>
         >::type
       >
   { };
+/** \endcond */
 
 } } // end namespace clxx::detail
 

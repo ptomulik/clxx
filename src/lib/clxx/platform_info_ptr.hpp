@@ -15,9 +15,10 @@
 namespace clxx {
 
 class platform_info;
-
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 typedef shared_ptr<platform_info> platform_info_ptr;
 typedef shared_ptr<const platform_info> const_platform_info_ptr;
+/** \endcond */
 
 } // end namespace clxx
 

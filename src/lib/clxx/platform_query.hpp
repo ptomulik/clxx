@@ -28,6 +28,9 @@ class platform_query
   template <class Archive>
   friend void _serialize(Archive&, platform_query&, const unsigned int);
 public:
+  /** // doc: class_version {{{
+   * \todo Write documentation
+   */ // }}}
   static constexpr unsigned int class_version = 0x000001;
 public:
   /** // doc: ~platform_query() {{{
@@ -160,8 +163,13 @@ private:
   bool _extensions;
   // }}}
 };
-
+/** // doc: operator==(platform_query, platform_query) {{{
+ * \todo Write documentation
+ */ // }}}
 bool operator==(platform_query const&, platform_query const&);
+/** // doc: operator==(platform_query, platform_query) {{{
+ * \todo Write documentation
+ */ // }}}
 inline bool operator!=(platform_query const& a, platform_query const& b)
 { return !(a == b); }
 

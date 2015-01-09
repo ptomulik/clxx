@@ -25,6 +25,9 @@ class main
   : public clxx::app::main
 {
 public:
+  /** // doc: options_map {{{
+   * \todo Write documentation
+   */ // }}}
   typedef clxx::app::options::options_map options_map;
 public:
   /** // doc: ~main() {{{
@@ -39,7 +42,7 @@ public:
    * \todo Write documentation
    */ // }}}
   main(int argc, char const* argv[]);
-  /** // doc: init() {{{
+  /** // doc: init(argc, argv) {{{
    * \todo Write documentation
    */ // }}}
   virtual void init(int argc, char const* argv[]) ;
@@ -47,23 +50,20 @@ public:
    * \todo Write documentation
    */ // }}}
   virtual int run( ) ;
-  /** // doc: options_description() {{{
+  /** // doc: get_options_description() {{{
    * \todo Write documentation
    */ // }}}
   inline options_description const& get_options_description() const
   {
     return this->_options_description;
   }
-  /** // doc: options_map() {{{
+  /** // doc: get_options_map() {{{
    * \todo Write documentation
    */ // }}}
   inline options_map const& get_options_map() const
   {
     return this->_options_map;
   }
-  /** // doc: process_options(om) {{{
-   * \todo Write documentation
-   */ // }}}
 private:
   void _init_main( );
 private:
@@ -71,6 +71,9 @@ private:
   options_map _options_map;
 };
 
+/** // doc: run(argc, argv) {{{
+ * \todo Write documentation
+ */ // }}}
 int run(int argc, char const* argv[]);
 
 } } } // end namespace clxx::app::clinfo

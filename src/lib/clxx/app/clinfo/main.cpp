@@ -34,6 +34,9 @@ namespace clxx {
 namespace app {
 namespace clinfo {
 
+/** doc: io_format {{{
+ * \todo Write documentation
+ */ // }}}
 enum io_format {
   iof_uff,          // User-friendly format (only for output)
   iof_txt,          // boost::archive::text_(io)archive,
@@ -349,12 +352,14 @@ _init_main()
 {
 }
 
+/** \cond SHOW_IGNORED_COMPOUNDS */
 int
 run(int argc, char const* argv[])
 {
   main clinfo(argc,argv);
   return clinfo.run();
 }
+/* \endcond */
 
 } /* namespace clinfo */
 } /* namespace app */

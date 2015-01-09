@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/app/clinfo/build_platform_query.cpp
+// clxx/app/clinfo/create_query.cpp
 
-/** // doc: clxx/app/clinfo/build_platform_query.cpp {{{
- * \file clxx/app/clinfo/build_platform_query.cpp
+/** // doc: clxx/app/clinfo/create_query.cpp {{{
+ * \file clxx/app/clinfo/create_query.cpp
  * \todo Write documentation
  */ // }}}
 #include <clxx/app/clinfo/create_query.hpp>
@@ -141,7 +141,6 @@ create_device_query( clxx::app::options::options_map const& om )
     }
   else
     {
-      // A lot of commands {{{
       if(om.count("device-id"))
         query.select_id(om["device-id"].as<bool>());
       if(om.count("device-type"))
@@ -292,7 +291,6 @@ create_device_query( clxx::app::options::options_map const& om )
         query.select_partition_type(om["partition-type"].as<bool>());
       if(om.count("reference-count"))
         query.select_reference_count(om["reference-count"].as<bool>());
-      // }}}
     }
 
   if(om.count("device-info"))

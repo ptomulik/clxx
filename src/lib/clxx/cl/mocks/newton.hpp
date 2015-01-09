@@ -48,10 +48,9 @@
 #include <algorithm>
 #include <map>
 #include <vector>
-
+/** \cond SHOW_IGNORED_COMPOUNDS */
 namespace T {
 /** // doc: Newton_clGetPlatformIDs {{{
- * \brief Default mock for clGetPlatformIDs OpenCL function.
  * \todo Write documentation
  */ // }}}
 class Newton_clGetPlatformIDs
@@ -66,7 +65,6 @@ public:
 };
 
 /** // doc: Newton_clGetPlatformInfo {{{
- * \brief Default mock for clGetPlatformInfo OpenCL function.
  * \todo Write documentation
  */ // }}}
 class Newton_clGetPlatformInfo
@@ -84,7 +82,6 @@ public:
 };
 
 /** // doc: Newton_clGetDeviceIDs {{{
- * \brief Default mock for clGetDeviceIDs OpenCL function.
  * \todo Write documentation
  */ // }}}
 class Newton_clGetDeviceIDs
@@ -100,7 +97,6 @@ public:
 };
 
 /** // doc: Newton_clGetDeviceInfo {{{
- * \brief Default mock for clGetDeviceInfo OpenCL function.
  * \todo Write documentation
  */ // }}}
 class Newton_clGetDeviceInfo
@@ -223,7 +219,7 @@ private:
 };
 
 /** // doc: Newton_clCreateContext {{{
- * \brief Default mock for clCreateContext OpenCL function.
+ * \todo Write documentation
  */ // }}}
 class Newton_clCreateContext
   : public T::Base_clCreateContext
@@ -237,7 +233,7 @@ public:
 };
 
 /** // doc: Newton_clCreateContextFromType {{{
- * \brief Default mock for clCreateContextFromType OpenCL function.
+ * \todo Write documentation
  */ // }}}
 class Newton_clCreateContextFromType
   : public T::Base_clCreateContextFromType
@@ -249,7 +245,7 @@ class Newton_clCreateContextFromType
 };
 
 /** // doc: Newton_clRetainContext {{{
- * \brief Default mock for clRetainContext OpenCL function.
+ * \todo Write documentation
  */ // }}}
 class Newton_clRetainContext
   : public T::Base_clRetainContext
@@ -258,58 +254,13 @@ class Newton_clRetainContext
 };
 
 /** // doc: Newton_clReleaseContext {{{
- * \brief Default mock for clReleaseContext OpenCL function.
+ * \todo Write documentation
  */ // }}}
 class Newton_clReleaseContext
   : public T::Base_clReleaseContext
 {
   cl_int clReleaseContext(cl_context);
 };
-
-//CXXTEST_MOCK_GLOBAL(cl_context, clCreateContext,
-//  ( const cl_context_properties *properties, cl_uint num_devices,
-//    const cl_device_id* devices,
-//    void (*pfn_notify)( const char* errinfo, const void* private_info,
-//                        size_t cb, void *user_data ),
-//    void *user_data,
-//    cl_int* errcode_ret ),
-//  ( properties, num_devices, devices, pfn_notify, user_data, errcode_ret)
-//);
-//
-//CXXTEST_MOCK_GLOBAL(cl_context, clCreateContextFromType,
-//  ( const cl_context_properties *properties, const cl_device_type device_type,
-//    void (*pfn_notify)( const char* errinfo, const void* private_info,
-//                        size_t cb, void *user_data ),
-//    void *user_data,
-//    cl_int* errcode_ret ),
-//  ( properties, device_type, pfn_notify, user_data, errcode_ret)
-//);
-//
-//CXXTEST_MOCK_GLOBAL(cl_int, clGetContextInfo,
-//  ( cl_context context, cl_context_info param_name,
-//    size_t param_value_size, void* param_value, size_t* param_value_size_ret),
-//  ( context, param_name, param_value_size, param_value, param_value_size_ret)
-//);
-//
-//CXXTEST_MOCK_GLOBAL(cl_int, clRetainContext,
-//  (cl_context context),
-//  (context)
-//);
-//
-//CXXTEST_MOCK_GLOBAL(cl_int, clReleaseContext,
-//  (cl_context context),
-//  (context)
-//);
-//
-//CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramInfo,
-//  ( cl_program program, cl_program_info param_name,
-//    size_t param_value_size, void* param_value, size_t* param_value_size_ret),
-//  ( program, param_name, param_value_size, param_value, param_value_size_ret)
-//);
-//
-//CXXTEST_MOCK_GLOBAL(cl_int, clRetainProgram, (cl_program program), (program));
-//CXXTEST_MOCK_GLOBAL(cl_int, clReleaseProgram, (cl_program program), (program));
-
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -1368,7 +1319,7 @@ clReleaseContext(cl_context context)
 
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
-
+/** \endcond */
 #endif /* CLXX_CL_MOCKS_NEWTON_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -56,7 +56,8 @@ context(cl_context ctx)
 /* ------------------------------------------------------------------------ */
 context::
 context(context_properties const& props, devices const& devs,
-        void(*pfn_notify)(const char*, const void*, size_t, void*),
+        void(*pfn_notify)(const char* errinfo, const void* private_info,
+                          size_t cb, void* user_data),
         void* user_data)
 {
   const size_t props_n = context_properties_array_size(props);
@@ -73,7 +74,8 @@ context(context_properties const& props, devices const& devs,
 context::
 context(const context_properties& props,
         device_type_t dev_type,
-        void(*pfn_notify)(const char*, const void*, size_t, void*),
+        void(*pfn_notify)(const char* errinfo, const void* private_info,
+                          size_t cb, void* user_data),
         void* user_data)
 {
   const size_t props_n = context_properties_array_size(props);

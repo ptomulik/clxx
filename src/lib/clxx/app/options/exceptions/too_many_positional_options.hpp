@@ -15,15 +15,20 @@
 #include <boost/program_options/errors.hpp>
 
 namespace clxx {
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg<
   boost::program_options::too_many_positional_options_error
 >
   { typedef boost::program_options::too_many_positional_options_error type; };
+/** \endcond */
 } /* namespace clxx */
 
 namespace clxx { namespace app { namespace options {
 
+/** // doc: too_many_positional_options_error {{{
+ * \todo Write documentation
+ */ // }}}
 class too_many_positional_options_error
   : public clxx::exception_base<
       clxx::app::options::exception
@@ -35,6 +40,9 @@ class too_many_positional_options_error
     , boost::program_options::too_many_positional_options_error
     > base_;
 public:
+  /** // doc: too_many_positional_options_error(boost::program_options::too_many_positional_options_error) {{{
+   * \todo Write documentation
+   */ // }}}
   too_many_positional_options_error(boost::program_options::too_many_positional_options_error const& e)
     : base_(e)
   { }

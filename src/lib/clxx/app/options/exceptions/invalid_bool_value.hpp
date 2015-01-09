@@ -15,13 +15,17 @@
 #include <boost/program_options/errors.hpp>
 
 namespace clxx {
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::invalid_bool_value>
   { typedef boost::program_options::invalid_bool_value type; };
+/** \endcond */
 } /* namespace clxx */
 
 namespace clxx { namespace app { namespace options {
-
+/** // doc: invalid_bool_option_value_error {{{
+ * \todo Write documentation
+ */ // }}}
 class invalid_bool_option_value_error
   : public clxx::exception_base<
       clxx::app::options::exception
@@ -33,6 +37,9 @@ class invalid_bool_option_value_error
     , boost::program_options::invalid_bool_value
     > base_;
 public:
+  /** // doc: invalid_bool_option_value_error(boost::program_options::invalid_bool_value const&) {{{
+   * \todo Write documentation
+   */ // }}}
   invalid_bool_option_value_error(boost::program_options::invalid_bool_value const& e)
     : base_(e)
   { }

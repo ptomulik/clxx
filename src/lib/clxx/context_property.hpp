@@ -35,6 +35,9 @@ namespace clxx {
  */ // }}}
 struct context_property
 {
+  /** // doc: class_version {{{
+   * \todo Write documentation
+   */ // }}}
   static constexpr unsigned int class_version = 0x000001;
   /** // doc: context_property() {{{
    * \brief Default constructor

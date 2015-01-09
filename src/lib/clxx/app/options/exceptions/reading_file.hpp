@@ -15,13 +15,17 @@
 #include <boost/program_options/errors.hpp>
 
 namespace clxx {
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::reading_file>
   { typedef boost::program_options::reading_file type; };
+/** \endcond */
 } // end namespace clxx
 
 namespace clxx { namespace app { namespace options {
-
+/** // doc: reading_options_file_error {{{
+ * \todo Write documentation
+ */ // }}}
 class reading_options_file_error
   : public clxx::exception_base<
       clxx::app::options::exception
@@ -33,6 +37,9 @@ class reading_options_file_error
     , boost::program_options::reading_file
     > base_;
 public:
+  /** // doc: reading_options_file_error(boost::program_options::reading_file) {{{
+   * \todo Write documentation
+   */ // }}}
   reading_options_file_error(boost::program_options::reading_file const& e)
     : base_(e)
   { }

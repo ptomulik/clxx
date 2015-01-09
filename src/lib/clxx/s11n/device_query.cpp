@@ -18,7 +18,7 @@
 //
 namespace boost {
 namespace serialization {
-
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template void serialize(boost::archive::text_iarchive&, clxx::device_query&, const unsigned int);
 template void serialize(boost::archive::xml_iarchive&, clxx::device_query&, const unsigned int);
 template void serialize(boost::archive::binary_iarchive&, clxx::device_query&, const unsigned int);
@@ -26,7 +26,7 @@ template void serialize(boost::archive::binary_iarchive&, clxx::device_query&, c
 template void serialize(boost::archive::text_oarchive&, clxx::device_query&, const unsigned int);
 template void serialize(boost::archive::xml_oarchive&, clxx::device_query&, const unsigned int);
 template void serialize(boost::archive::binary_oarchive&, clxx::device_query&, const unsigned int);
-
+/** \endcond */
 } /* namespace serialization */
 } /* namespace boost */
 

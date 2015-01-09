@@ -21,7 +21,7 @@ namespace clxx {
 
 /* ------------------------------------------------------------------------ */
 template<class Archive>
-void _serialize(Archive& ar, device_info& obj, const unsigned int)
+static void _serialize(Archive& ar, device_info& obj, const unsigned int)
 {
   using boost::serialization::make_nvp;
   ar  & make_nvp("id", obj._id)

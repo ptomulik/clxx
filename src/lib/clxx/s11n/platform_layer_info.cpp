@@ -20,7 +20,7 @@
 //
 namespace boost {
 namespace serialization {
-
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template void serialize(boost::archive::text_iarchive&, clxx::platform_layer_info&, const unsigned int);
 template void serialize(boost::archive::xml_iarchive&, clxx::platform_layer_info&, const unsigned int);
 template void serialize(boost::archive::binary_iarchive&, clxx::platform_layer_info&, const unsigned int);
@@ -28,7 +28,7 @@ template void serialize(boost::archive::binary_iarchive&, clxx::platform_layer_i
 template void serialize(boost::archive::text_oarchive&, clxx::platform_layer_info&, const unsigned int);
 template void serialize(boost::archive::xml_oarchive&, clxx::platform_layer_info&, const unsigned int);
 template void serialize(boost::archive::binary_oarchive&, clxx::platform_layer_info&, const unsigned int);
-
+/** \endcond */
 } /* namespace serialization */
 } /* namespace boost */
 

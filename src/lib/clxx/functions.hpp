@@ -644,7 +644,7 @@ void release_device(cl_device_id device);
  *    Must be a valid OpenCL context.
  * \param count
  *    Number of elements in \e strings and \e lengths.
- * \param string
+ * \param strings
  *    An array of \e count pointers to optionally null-terminated character
  *    strings that make up the source code.
  * \param lengths
@@ -712,6 +712,9 @@ cl_program create_program_with_source(cl_context context,
  *    A pointer to a list of devices that are in \e context. \c device_list
  *    must be a non-NULL value. The binaries are loaded for devices specified
  *    in this list.
+ * \param lengths
+ *    Lengths of the \e binaries arrays. For each \c i \e lengths[i] defines
+ *    length of \e binaries[i] array.
  * \param binaries
  *    An array of pointers to program binaries to be loaded for devices
  *    specified by \e device_list. For each device given by \e device_list[i],

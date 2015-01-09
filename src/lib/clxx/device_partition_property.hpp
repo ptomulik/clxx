@@ -30,6 +30,9 @@ typedef std::vector<unsigned int> device_partition_counts;
  */ // }}}
 struct device_partition_property
 {
+  /** // doc: class_version {{{
+   * \todo Write documentation
+   */ // }}}
   static constexpr unsigned int class_version = 0x000001;
   /** // doc: device_partition_property() {{{
    * \brief Default constructor
@@ -59,9 +62,9 @@ struct device_partition_property
   {}
   /** // doc: device_partition_property(device_partition_property_t, cl_device_partition_property) {{{
    * \brief Constructor
-   *
+   * \todo Refine documentation
    * \param name property name
-   * \param value property value
+   * \param values property values
    */ // }}}
   template <typename T, typename A>
   device_partition_property(device_partition_property_t name, std::vector<T,A> const& values)
@@ -71,9 +74,9 @@ struct device_partition_property
   }
   /** // doc: device_partition_property(device_partition_property_t, cl_device_partition_property) {{{
    * \brief Constructor
-   *
+   * \todo Refine documentation
    * \param name property name
-   * \param value property value
+   * \param values property value
    */ // }}}
   template <typename T, typename A>
   device_partition_property(cl_device_partition_property name, std::vector<T,A> const& values)
@@ -140,18 +143,18 @@ struct device_partition_property
   /** // doc: set_values() {{{
    * \todo Write documentation
    *
-   * \param value new value for this property
+   * \param values new value for this property
    */ // }}}
   template <typename T, typename A>
-  void set_values(std::vector<T,A> const& x)
+  void set_values(std::vector<T,A> const& values)
   {
     typedef typename std::vector<T,A>::const_iterator IterIn;
     typedef typename std::vector<cl_device_partition_property>::iterator IterOut;
     if(!is_list())
       throw value_access_error();
-    _values.resize(x.size());
+    _values.resize(values.size());
     IterOut j = _values.begin();
-    for(IterIn i = x.begin(); i != x.end(); ++i, ++j)
+    for(IterIn i = values.begin(); i != values.end(); ++i, ++j)
       {
         *j = (cl_device_partition_property)*i;
       }

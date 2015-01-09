@@ -16,6 +16,7 @@
 #include <clxx/io/platform_layer_info.hpp>
 #include <iostream>
 
+/// Main function
 int main(int, char const*[])
 {
   try {

@@ -15,13 +15,17 @@
 #include <boost/program_options/errors.hpp>
 
 namespace clxx {
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::ambiguous_option>
   { typedef boost::program_options::ambiguous_option type; };
+/** \endcond */
 } // end namespace clxx
 
 namespace clxx { namespace app { namespace options {
-
+/** // doc: ambiguous_option_error {{{
+ * \todo Write documentation
+ */ // }}}
 class ambiguous_option_error
   : public clxx::exception_base<
       clxx::app::options::exception
@@ -33,6 +37,9 @@ class ambiguous_option_error
     , boost::program_options::ambiguous_option
     > base_;
 public:
+  /** // doc: ambiguous_option_error(boost::program_options::ambiguous_option) {{{
+   * \todo Write documentation
+   */ // }}}
   ambiguous_option_error(boost::program_options::ambiguous_option const& e)
     : base_(e)
   { }
