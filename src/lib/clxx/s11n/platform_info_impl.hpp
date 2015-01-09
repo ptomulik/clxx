@@ -18,9 +18,11 @@
 
 namespace clxx {
 
-/* ------------------------------------------------------------------------ */
+/** // doc: _serialize(Archive, platform_info&, const unsigned int) {{{
+ * \todo Write documentation
+ */ // }}}
 template<class Archive>
-static void _serialize(Archive& ar, platform_info& obj, const unsigned int)
+void _serialize(Archive& ar, platform_info& obj, const unsigned int)
 {
   using boost::serialization::make_nvp;
   ar  & make_nvp("id",          obj._id)
@@ -30,7 +32,6 @@ static void _serialize(Archive& ar, platform_info& obj, const unsigned int)
       & make_nvp("vendor",      obj._vendor)
       & make_nvp("extensions",  obj._extensions);
 }
-/* ------------------------------------------------------------------------ */
 
 } // end namespace clxx
 

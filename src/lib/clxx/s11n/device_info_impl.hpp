@@ -19,9 +19,11 @@
 
 namespace clxx {
 
-/* ------------------------------------------------------------------------ */
+/** // doc: _serialize(Archive, device_info&, const unsigned int) {{{
+ * \todo Write documentation
+ */ // }}}
 template<class Archive>
-static void _serialize(Archive& ar, device_info& obj, const unsigned int)
+void _serialize(Archive& ar, device_info& obj, const unsigned int)
 {
   using boost::serialization::make_nvp;
   ar  & make_nvp("id", obj._id)
@@ -101,7 +103,6 @@ static void _serialize(Archive& ar, device_info& obj, const unsigned int)
       & make_nvp("image_pitch_alignment", obj._image_pitch_alignment)
       & make_nvp("image_base_address_alignment", obj._image_base_address_alignment);
 }
-/* ------------------------------------------------------------------------ */
 
 } // end namespace clxx
 

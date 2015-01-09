@@ -2,6 +2,9 @@ language: cpp
 compiler:
   - gcc
   - clang
+env:
+  - COMPILE=true APIDOC=false
+  - COMPILE=false APIDOC=true
 before_install:
   - lsb_release -c
   - lsb_release -r
@@ -12,43 +15,50 @@ before_install:
   - sudo apt-key update
   - sudo apt-get -y update
 install:
-  - sudo apt-get --no-install-recommends -y install g++
-  - sudo apt-get --no-install-recommends -y install clang
-  - if (clang --version | grep 'clang version 3\.3'); then
-      sudo apt-get --no-install-recommends -y install libclang-common-3.3-dev;
+  - if $COMPILE; then sudo apt-get --no-install-recommends -y install g++; fi
+  - if $COMPILE; then sudo apt-get --no-install-recommends -y install clang; fi
+  - if $COMPILE; then
+      if (clang --version | grep 'clang version 3\.3'); then
+        sudo apt-get --no-install-recommends -y install libclang-common-3.3-dev;
+      fi
     fi
-  - sudo apt-get --no-install-recommends -y install cxxtest
-  - sudo apt-get --no-install-recommends -y install scons
+  - sudo apt-get --no-install-recommends -y install cxxtest;
+  - sudo apt-get --no-install-recommends -y install scons;
 #  - sudo apt-get --no-install-recommends -y install swig
-  - sudo apt-get -y build-dep swig
-  - sudo apt-get -y install yodl
-  - (cd /tmp && git clone -b ptomulik-latest https://github.com/ptomulik/swig.git)
-  - (cd /tmp/swig/ && ./autogen.sh && ./configure && make && sudo make install)
-  - sudo apt-get --no-install-recommends -y install nvidia-opencl-dev
-  - sudo apt-get --no-install-recommends -y install libegl1-mesa-dev
-  - sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev
-#  - sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler
-  - sudo pip install cpp-coveralls;
+  - if $COMPILE; then sudo apt-get -y build-dep swig; fi
+  - if $COMPILE; then sudo apt-get -y install yodl; fi
+  - if $COMPILE; then (cd /tmp && git clone -b ptomulik-latest https://github.com/ptomulik/swig.git); fi
+  - if $COMPILE; then (cd /tmp/swig/ && ./autogen.sh && ./configure && make && sudo make install); fi
+  - if $COMPILE; then sudo apt-get --no-install-recommends -y install nvidia-opencl-dev; fi
+  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libegl1-mesa-dev; fi
+  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev; fi
+#  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler; fi
+  - if $COMPILE; then sudo pip install cpp-coveralls; fi
+  - if $APIDOC; then sudo apt-get --no-install-recommends -y install doxygen doxygen-latex; fi
+  - if $APIDOC; then sudo apt-get --no-install-recommends -y install swig; fi
 
 before_script:
-  - $CXX --version
-  - $CXX -dumpversion
+  - if $COMPILE; then $CXX --version; fi
+  - if $COMPILE; then $CXX -dumpversion; fi
 script:
-  - scons CLXX_ENABLE_GCOV=YES --without-cl-egl && scons CLXX_ENABLE_GCOV=YES --without-cl-egl check;
+  - if $COMPILE; then scons CLXX_ENABLE_GCOV=YES --without-cl-egl && scons CLXX_ENABLE_GCOV=YES --without-cl-egl check; fi
+  - if $APIDOC; then scons api-doc; fi
 after_success:
-    GCOV=gcov-`$CXX -dumpversion | sed -e 's/^\([0-9]\+\.[0-9]\+\).*$/\1/'`;
-    which $GCOV || GCOV="";
-    echo $GCOV;
-    if [ ! -z "$GCOV" ]; then
-      coveralls --gcov $GCOV --gcov-options '\-p \-l' -b . -r .
-                  -e .git -e HOWTO -e lib -e bin -e src/app -e build/app
-                  -e build/.sconf_temp -e build/lib/clxx/.sconf_temp
-                  -e src/doc -e src/test -e build/doc -e build/test
-                  -e src/lib/swig-clxx -e build/lib/swig-clxx
-                  -e src/lib/python-clxx -e build/lib/python-clxx
-                  -e src/lib/clxx/cl/mocks
-                  -e site_scons -e template -e valgrid -e /usr;
+    if $COMPILE; then
+      GCOV=gcov-`$CXX -dumpversion | sed -e 's/^\([0-9]\+\.[0-9]\+\).*$/\1/'`;
+      which $GCOV || GCOV="";
+      echo $GCOV;
+      if [ ! -z "$GCOV" ]; then
+        coveralls --gcov $GCOV --gcov-options '\-p \-l' -b . -r .
+                    -e .git -e HOWTO -e lib -e bin -e src/app -e build/app
+                    -e build/.sconf_temp -e build/lib/clxx/.sconf_temp
+                    -e src/doc -e src/test -e build/doc -e build/test
+                    -e src/lib/swig-clxx -e build/lib/swig-clxx
+                    -e src/lib/python-clxx -e build/lib/python-clxx
+                    -e src/lib/clxx/cl/mocks
+                    -e site_scons -e template -e valgrid -e /usr;
+      fi
     fi
 after_failure:
-  - test -f src/config.log && cat src/config.log
+  - if $COMPILE; then test -f src/config.log && cat src/config.log; fi
 #  - test -f src/lib/clxx/config.log && cat src/lib/clxx/config.log

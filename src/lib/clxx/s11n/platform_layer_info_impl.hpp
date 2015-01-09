@@ -19,14 +19,15 @@
 
 namespace clxx {
 
-/* ------------------------------------------------------------------------ */
+/** // doc: _serialize(Archive, platform_layer_info&, const unsigned int) {{{
+ * \todo Write documentation
+ */ // }}}
 template<class Archive>
-static void _serialize(Archive& ar, platform_layer_info& obj, const unsigned int)
+void _serialize(Archive& ar, platform_layer_info& obj, const unsigned int)
 {
   using boost::serialization::make_nvp;
   ar & make_nvp("bimap", obj._bimap);
 }
-/* ------------------------------------------------------------------------ */
 
 } // end namespace clxx
 
