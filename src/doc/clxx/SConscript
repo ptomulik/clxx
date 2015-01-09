@@ -25,8 +25,11 @@ doxyfile = env.Doxyfile(
     ENABLE_PREPROCESSING    = True,
     MACRO_EXPANSION         = True,
     EXPAND_ONLY_PREDEF      = True,
-    PREDEFINED              = [ 'DOXYGEN', 'CL_VERSION_1_0', 'CL_VERSION_1_1',
+    PREDEFINED              = [ 'DOXYGEN',
+                                'CL_VERSION_1_0',
+                                'CL_VERSION_1_1',
                                 'CL_VERSION_1_2',
+                                'CL_CALLBACK=\"\"',
                                 'BOOST_CLASS_VERSION(__klass,__ver)=',
                                 'cl_khr_gl_sharing',
                                 'cl_khr_dx9_media_sharing',
@@ -35,7 +38,9 @@ doxyfile = env.Doxyfile(
                                 'HAVE_OPENCL_clCreateSubDevices',
                                 'HAVE_OPENCL_clRetainDevice',
                                 'HAVE_OPENCL_clReleaseDevice',
-                                 'HAVE_OPENCL_clCreateProgramWithBuiltInKernels',
+                                'HAVE_OPENCL_clCreateProgramWithBuiltInKernels',
+                                'HAVE_OPENCL_clCompileProgram',
+                                'HAVE_OPENCL_clLinkProgram',
                                 '_WIN32' ]
 )
 

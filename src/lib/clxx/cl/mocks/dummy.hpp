@@ -435,6 +435,83 @@ public:
    */ // }}}
   Dummy_clReleaseProgram(cl_int err);
 };
+/** // doc: Dummy_clBuildProgram {{{
+ * \brief Default mock for clBuildProgram OpenCL function.
+ */ // }}}
+class Dummy_clBuildProgram
+  : public T::Base_clBuildProgram,
+    public T::Dummy_CallArgs<cl_program, cl_uint, const cl_device_id*, const char*,
+                              void (CL_CALLBACK*)(cl_program, void*), void*>
+{
+  cl_int _err;
+  cl_int clBuildProgram(cl_program program,
+                        cl_uint num_devices,
+                        const cl_device_id* device_list,
+                        const char* options,
+                        void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+                        void* user_data);
+public:
+  /** // doc: Dummy_clBuildProgram() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clBuildProgram(cl_int err);
+};
+#if HAVE_OPENCL_clCompileProgram
+/** // doc: Dummy_clCompileProgram {{{
+ * \brief Default mock for clCompileProgram OpenCL function.
+ */ // }}}
+class Dummy_clCompileProgram
+  : public T::Base_clCompileProgram,
+    public T::Dummy_CallArgs<cl_program, cl_uint, const cl_device_id*, const char*,
+                             cl_uint, const cl_program*, const char**,
+                             void (CL_CALLBACK*)(cl_program, void*), void*>
+{
+  cl_int _err;
+  cl_int clCompileProgram(cl_program program,
+                        cl_uint num_devices,
+                        const cl_device_id* device_list,
+                        const char* options,
+                        cl_uint num_input_headers,
+                        const cl_program* input_headers,
+                        const char** header_include_names,
+                        void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+                        void* user_data);
+public:
+  /** // doc: Dummy_clCompileProgram() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clCompileProgram(cl_int err);
+};
+#endif
+#if HAVE_OPENCL_clLinkProgram
+/** // doc: Dummy_clLinkProgram {{{
+ * \brief Default mock for clLinkProgram OpenCL function.
+ */ // }}}
+class Dummy_clLinkProgram
+  : public T::Base_clLinkProgram,
+    public T::Dummy_CallArgs<cl_context, cl_uint, const cl_device_id*,
+                             const char*, cl_uint, const cl_program*,
+                             void (CL_CALLBACK*)(cl_program, void*), void*,
+                             cl_int*>
+{
+  cl_program _program;
+  cl_int _err;
+  cl_program clLinkProgram(cl_context context,
+                           cl_uint num_devices,
+                           const cl_device_id* device_list,
+                           const char* options,
+                           cl_uint num_input_programs,
+                           const cl_program* input_programs,
+                           void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+                           void* user_data,
+                           cl_int* errcode_ret);
+public:
+  /** // doc: Dummy_clLinkProgram() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clLinkProgram(cl_program program, cl_int err);
+};
+#endif
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -718,6 +795,72 @@ Dummy_clReleaseProgram(cl_int err)
   : _err(err)
 {
 }
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clBuildProgram::
+clBuildProgram(cl_program program,
+               cl_uint num_devices,
+               const cl_device_id* device_list,
+               const char* options,
+               void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+               void* user_data)
+{
+  call_with(program, num_devices,device_list, options, pfn_notify, user_data);
+  return _err;
+}
+Dummy_clBuildProgram::
+Dummy_clBuildProgram(cl_int err)
+  :_err(err)
+{
+}
+#if HAVE_OPENCL_clCompileProgram
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clCompileProgram::
+clCompileProgram(cl_program program,
+                 cl_uint num_devices,
+                 const cl_device_id* device_list,
+                 const char* options,
+                 cl_uint num_input_headers,
+                 const cl_program* input_headers,
+                 const char** header_include_names,
+                 void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+                 void* user_data)
+{
+  call_with(program, num_devices, device_list, options, num_input_headers,
+            input_headers, header_include_names, pfn_notify, user_data);
+  return _err;
+}
+Dummy_clCompileProgram::
+Dummy_clCompileProgram(cl_int err)
+  :_err(err)
+{
+}
+#endif
+#if HAVE_OPENCL_clLinkProgram
+/* ------------------------------------------------------------------------- */
+cl_program Dummy_clLinkProgram::
+clLinkProgram(cl_context context,
+              cl_uint num_devices,
+              const cl_device_id* device_list,
+              const char* options,
+              cl_uint num_input_programs,
+              const cl_program* input_programs,
+              void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+              void* user_data,
+              cl_int* errcode_ret)
+{
+  call_with(context, num_devices, device_list, options, num_input_programs,
+            input_programs, pfn_notify, user_data, errcode_ret);
+  if(errcode_ret)
+    *errcode_ret = _err;
+  return _program;
+}
+Dummy_clLinkProgram::
+Dummy_clLinkProgram(cl_program program, cl_int err)
+  :_program(program), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
 

@@ -108,6 +108,35 @@ CXXTEST_MOCK_GLOBAL(cl_program, clCreateProgramWithBuiltInKernels,
 CXXTEST_MOCK_GLOBAL(cl_int, clRetainProgram, (cl_program program), (program));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseProgram, (cl_program program), (program));
 
+CXXTEST_MOCK_GLOBAL(cl_int, clBuildProgram,
+  ( cl_program program, cl_uint num_devices, const cl_device_id* device_list,
+    const char* options, void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+    void* user_data ),
+  ( program, num_devices, device_list, options, pfn_notify, user_data )
+);
+
+#if HAVE_OPENCL_clCompileProgram
+CXXTEST_MOCK_GLOBAL(cl_int, clCompileProgram,
+  ( cl_program program, cl_uint num_devices, const cl_device_id* device_list,
+    const char* options, cl_uint num_input_headers, const cl_program* input_headers,
+    const char** header_include_names, void (CL_CALLBACK* pfn_notify)(cl_program, void*),
+    void* user_data ),
+  ( program, num_devices, device_list, options, num_input_headers,
+    input_headers, header_include_names, pfn_notify, user_data )
+);
+#endif
+
+#if HAVE_OPENCL_clLinkProgram
+CXXTEST_MOCK_GLOBAL(cl_program, clLinkProgram,
+  ( cl_context context, cl_uint num_devices, const cl_device_id* device_list,
+    const char* options, cl_uint num_input_programs, const cl_program* input_programs,
+    void (CL_CALLBACK* pfn_notify)(cl_program, void*), void* user_data,
+    cl_int* errcode_ret ),
+  ( context, num_devices, device_list, options, num_input_programs,
+    input_programs, pfn_notify, user_data, errcode_ret )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramInfo,
   ( cl_program program, cl_program_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),

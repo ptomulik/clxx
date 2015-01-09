@@ -411,7 +411,7 @@ cl_program create_program_with_source(cl_context context,
 {
   cl_int s;
   cl_program p;
-  p = clCreateProgramWithSource(context, count, strings, lengths, &s);
+  p = T::clCreateProgramWithSource(context, count, strings, lengths, &s);
   if(is_error(static_cast<status_t>(s)))
     {
       switch(static_cast<status_t>(s))
@@ -439,9 +439,15 @@ cl_program create_program_with_binary(cl_context context,
                                       cl_int* binary_status)
 {
   cl_int s;
-  cl_program p = clCreateProgramWithBinary(context, num_devices, device_list,
-                                           lengths, binaries, binary_status,
-                                           &s);
+  cl_program p = T::clCreateProgramWithBinary(
+      context,
+      num_devices,
+      device_list,
+      lengths,
+      binaries,
+      binary_status,
+      &s
+  );
   if(is_error(static_cast<status_t>(s)))
     {
       switch(static_cast<status_t>(s))
@@ -472,9 +478,13 @@ cl_program create_program_with_built_in_kernels(cl_context context,
                                                 const char* kernel_names)
 {
   cl_int s;
-  cl_program p = clCreateProgramWithBuiltInKernels(context, num_devices,
-                                                   device_list, kernel_names,
-                                                   &s);
+  cl_program p = T::clCreateProgramWithBuiltInKernels(
+      context,
+      num_devices,
+      device_list,
+      kernel_names,
+      &s
+  );
   if(is_error(static_cast<status_t>(s)))
     {
       switch(static_cast<status_t>(s))
@@ -535,6 +545,155 @@ void release_program(cl_program program)
     }
 }
 /* ------------------------------------------------------------------------ */
+void build_program(cl_program program, cl_uint num_devices,
+                   const cl_device_id* device_list, const char* options,
+                   void (CL_CALLBACK* pfn_notify)(cl_program program,
+                                                 void* user_data),
+                   void* user_data)
+{
+  status_t s = static_cast<status_t>(
+    T::clBuildProgram(
+      program,
+      num_devices,
+      device_list,
+      options,
+      pfn_notify,
+      user_data
+    )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_program:
+            throw clerror_no<status_t::invalid_program>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_binary:
+            throw clerror_no<status_t::invalid_binary>();
+          case status_t::invalid_build_options:
+            throw clerror_no<status_t::invalid_build_options>();
+          case status_t::invalid_operation:
+            throw clerror_no<status_t::invalid_operation>();
+          case status_t::compiler_not_available:
+            throw clerror_no<status_t::compiler_not_available>();
+          case status_t::build_program_failure:
+            throw clerror_no<status_t::build_program_failure>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if HAVE_OPENCL_clCompileProgram
+void compile_program(cl_program program, cl_uint num_devices,
+                   const cl_device_id* device_list, const char* options,
+                   cl_uint num_input_headers, const cl_program* input_headers,
+                   const char** header_include_names,
+                   void (CL_CALLBACK* pfn_notify)(cl_program program,
+                                                 void* user_data),
+                   void* user_data)
+{
+  status_t s = static_cast<status_t>(
+    T::clCompileProgram(
+      program,
+      num_devices,
+      device_list,
+      options,
+      num_input_headers,
+      input_headers,
+      header_include_names,
+      pfn_notify,
+      user_data
+    )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_program:
+            throw clerror_no<status_t::invalid_program>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_compiler_options:
+            throw clerror_no<status_t::invalid_compiler_options>();
+          case status_t::invalid_operation:
+            throw clerror_no<status_t::invalid_operation>();
+          case status_t::compiler_not_available:
+            throw clerror_no<status_t::compiler_not_available>();
+          case status_t::compile_program_failure:
+            throw clerror_no<status_t::compile_program_failure>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if HAVE_OPENCL_clLinkProgram
+cl_program link_program(cl_context context, cl_uint num_devices,
+                        const cl_device_id* device_list, const char* options,
+                        cl_uint num_input_programs, const cl_program* input_programs,
+                        void (CL_CALLBACK* pfn_notify)(cl_program program,
+                                                       void* user_data),
+                        void* user_data)
+{
+
+  cl_int s;
+  cl_program p = T::clLinkProgram(
+      context,
+      num_devices,
+      device_list,
+      options,
+      num_input_programs,
+      input_programs,
+      pfn_notify,
+      user_data,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      switch(static_cast<status_t>(s))
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::invalid_program:
+            throw clerror_no<status_t::invalid_program>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_linker_options:
+            throw clerror_no<status_t::invalid_linker_options>();
+          case status_t::invalid_operation:
+            throw clerror_no<status_t::invalid_operation>();
+          case status_t::linker_not_available:
+            throw clerror_no<status_t::linker_not_available>();
+          case status_t::link_program_failure:
+            throw clerror_no<status_t::link_program_failure>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(static_cast<status_t>(s));
+        }
+    }
+  return p;
+}
+#endif
 } // end namespace clxx
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
