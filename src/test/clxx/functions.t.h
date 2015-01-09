@@ -667,6 +667,681 @@ public:
     TS_ASSERT_THROWS(release_device(NULL),unexpected_clerror);
 #endif // HAVE_OPENCL_clReleaseDevice
   }
+  /** // doc: test_create_program_with_source() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_source( )
+  {
+    //T::Dummy_clCreateProgramWithSource mock((cl_program)0x1234, CL_SUCCESS);
+    //create_program_with_source     ((cl_context)0x567, 3, (const char**)0x787, (const size_t*)0x235);
+    //TS_ASSERT(mock.called_once_with((cl_context)0x567, 3, (const char**)0x787, (const size_t*)0x235));
+  }
+  /** // doc: test_create_program_with_source__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_source__invalid_context( )
+  {
+    T::Dummy_clCreateProgramWithSource mock((cl_program)NULL, CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(create_program_with_source((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_create_program_with_source__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_source__invalid_value( )
+  {
+    T::Dummy_clCreateProgramWithSource mock((cl_program)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(create_program_with_source((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_create_program_with_source__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_source__out_of_resources( )
+  {
+    T::Dummy_clCreateProgramWithSource mock((cl_program)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(create_program_with_source((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_create_program_with_source__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_source__out_of_host_memory( )
+  {
+    T::Dummy_clCreateProgramWithSource mock((cl_program)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(create_program_with_source((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_create_program_with_source__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_source__unexpected_clerror( )
+  {
+    T::Dummy_clCreateProgramWithSource mock((cl_program)NULL, -0x1234567);
+    TS_ASSERT_THROWS(create_program_with_source((cl_context)NULL, 0, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_create_program_with_binary() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary( )
+  {
+    //T::Dummy_clCreateProgramWithBinary mock((cl_program)0x1234, CL_SUCCESS);
+    //create_program_with_binary     ((cl_context)0x567, 5, (const cl_device_id*)0x487, (const size_t*)0x634, (const unsigned char**)0x174, (cl_int*)0x757);
+    //TS_ASSERT(mock.called_once_with((cl_context)0x567, 5, (const cl_device_id*)0x487, (const size_t*)0x634, (const unsigned char**)0x174, (cl_int*)0x757));
+  }
+  /** // doc: test_create_program_with_binary__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary__invalid_context( )
+  {
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_create_program_with_binary__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary__invalid_value( )
+  {
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_create_program_with_binary__invalid_device() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary__invalid_device( )
+  {
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_create_program_with_binary__invalid_binary() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary__invalid_binary( )
+  {
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, CL_INVALID_BINARY);
+    TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_binary>);
+  }
+  /** // doc: test_create_program_with_binary__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary__out_of_resources( )
+  {
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_create_program_with_binary__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary__out_of_host_memory( )
+  {
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_create_program_with_binary__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_binary__unexpected_clerror( )
+  {
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, -0x1234567);
+    TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_create_program_with_built_in_kernels() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_built_in_kernels( )
+  {
+    // T::Dummy_clCreateProgramWithBuiltInKernels mock((cl_program)0x1234, CL_SUCCESS);
+    // create_program_with_built_in_kernels((cl_context)0x113, 8, (const cl_device_id*)0x654, (const size_t*)0x165, (const unsigned char**)0x938747, (cl_int*)0x214);
+    // TS_ASSERT(mock.called_once_with     ((cl_context)0x113, 8, (const cl_device_id*)0x654, (const size_t*)0x165, (const unsigned char**)0x938747, (cl_int*)0x214));
+  }
+  /** // doc: test_create_program_with_built_in_kernels__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_built_in_kernels__invalid_context( )
+  {
+    T::Dummy_clCreateProgramWithBuiltInKernels mock((cl_program)NULL, CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(create_program_with_built_in_kernels((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_create_program_with_built_in_kernels__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_built_in_kernels__invalid_value( )
+  {
+    T::Dummy_clCreateProgramWithBuiltInKernels mock((cl_program)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(create_program_with_built_in_kernels((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_create_program_with_built_in_kernels__invalid_device() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_built_in_kernels__invalid_device( )
+  {
+    T::Dummy_clCreateProgramWithBuiltInKernels mock((cl_program)NULL, CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(create_program_with_built_in_kernels((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_create_program_with_built_in_kernels__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_built_in_kernels__out_of_resources( )
+  {
+    T::Dummy_clCreateProgramWithBuiltInKernels mock((cl_program)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(create_program_with_built_in_kernels((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_create_program_with_built_in_kernels__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_built_in_kernels__out_of_host_memory( )
+  {
+    T::Dummy_clCreateProgramWithBuiltInKernels mock((cl_program)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(create_program_with_built_in_kernels((cl_context)NULL, 0, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_create_program_with_built_in_kernels__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_create_program_with_built_in_kernels__unexpected_clerror( )
+  {
+    T::Dummy_clCreateProgramWithBuiltInKernels mock((cl_program)NULL, -0x1234567);
+    TS_ASSERT_THROWS(create_program_with_built_in_kernels((cl_context)NULL, 0, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_retain_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_retain_program( )
+  {
+    T::Dummy_clRetainProgram mock(CL_SUCCESS);
+    retain_program                 ((cl_program)0x344);
+    TS_ASSERT(mock.called_once_with((cl_program)0x344));
+  }
+  /** // doc: test_retain_program__invalid_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_retain_program__invalid_program( )
+  {
+    T::Dummy_clRetainProgram mock(CL_INVALID_PROGRAM);
+    TS_ASSERT_THROWS(retain_program((cl_program)NULL),clerror_no<status_t::invalid_program>);
+  }
+  /** // doc: test_retain_program__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_retain_program__out_of_resources( )
+  {
+    T::Dummy_clRetainProgram mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(retain_program((cl_program)NULL),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_retain_program__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_retain_program__out_of_host_memory( )
+  {
+    T::Dummy_clRetainProgram mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(retain_program((cl_program)NULL),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_retain_program__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_retain_program__unexpected_clerror( )
+  {
+    T::Dummy_clRetainProgram mock(-0x1234567);
+    TS_ASSERT_THROWS(retain_program((cl_program)NULL), unexpected_clerror);
+  }
+  /** // doc: test_release_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_release_program( )
+  {
+    T::Dummy_clReleaseProgram mock(CL_SUCCESS);
+    release_program                ((cl_program)0x433);
+    TS_ASSERT(mock.called_once_with((cl_program)0x433));
+  }
+  /** // doc: test_release_program__invalid_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_release_program__invalid_program( )
+  {
+    T::Dummy_clReleaseProgram mock(CL_INVALID_PROGRAM);
+    TS_ASSERT_THROWS(release_program((cl_program)NULL),clerror_no<status_t::invalid_program>);
+  }
+  /** // doc: test_release_program__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_release_program__out_of_resources( )
+  {
+    T::Dummy_clReleaseProgram mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(release_program((cl_program)NULL),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_release_program__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_release_program__out_of_host_memory( )
+  {
+    T::Dummy_clReleaseProgram mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(release_program((cl_program)NULL),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_release_program__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_release_program__unexpected_clerror( )
+  {
+    T::Dummy_clReleaseProgram mock(-0x1234567);
+    TS_ASSERT_THROWS(release_program((cl_program)NULL), unexpected_clerror);
+  }
+  /** // doc: test_build_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program( )
+  {
+    T::Dummy_clBuildProgram mock(CL_SUCCESS);
+    build_program                  ((cl_program)0x634, 7, (const cl_device_id*)0x543, (const char*)0x5234, (void(*)(cl_program,void*))0x654, (void*)0x122);
+    TS_ASSERT(mock.called_once_with((cl_program)0x634, 7, (const cl_device_id*)0x543, (const char*)0x5234, (void(*)(cl_program,void*))0x654, (void*)0x122));
+  }
+  /** // doc: test_build_program__invalid_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__invalid_program( )
+  {
+    T::Dummy_clBuildProgram mock(CL_INVALID_PROGRAM);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_program>);
+  }
+  /** // doc: test_build_program__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__invalid_value( )
+  {
+    T::Dummy_clBuildProgram mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_build_program__invalid_device() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__invalid_device( )
+  {
+    T::Dummy_clBuildProgram mock(CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_build_program__invalid_binary() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__invalid_binary( )
+  {
+    T::Dummy_clBuildProgram mock(CL_INVALID_BINARY);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_binary>);
+  }
+  /** // doc: test_build_program__invalid_build_options() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__invalid_build_options( )
+  {
+    T::Dummy_clBuildProgram mock(CL_INVALID_BUILD_OPTIONS);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_build_options>);
+  }
+  /** // doc: test_build_program__invalid_operation() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__invalid_operation( )
+  {
+    T::Dummy_clBuildProgram mock(CL_INVALID_OPERATION);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_operation>);
+  }
+  /** // doc: test_build_program__compiler_not_available() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__compiler_not_available( )
+  {
+    T::Dummy_clBuildProgram mock(CL_COMPILER_NOT_AVAILABLE);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::compiler_not_available>);
+  }
+  /** // doc: test_build_program__build_program_failure() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__build_program_failure( )
+  {
+    T::Dummy_clBuildProgram mock(CL_BUILD_PROGRAM_FAILURE);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::build_program_failure>);
+  }
+  /** // doc: test_build_program__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__out_of_resources( )
+  {
+    T::Dummy_clBuildProgram mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_build_program__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__out_of_host_memory( )
+  {
+    T::Dummy_clBuildProgram mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_build_program__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_build_program__unexpected_clerror( )
+  {
+    T::Dummy_clBuildProgram mock(-0x1234567);
+    TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_compile_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program( )
+  {
+    T::Dummy_clCompileProgram mock(CL_SUCCESS);
+    compile_program                ((cl_program)0x344, 7, (const cl_device_id*)0x543, (const char*)0x937, 5, (const cl_program*)0x634, (const char**)0x834, (void(*)(cl_program,void*))0x936, (void*)0x234);
+    TS_ASSERT(mock.called_once_with((cl_program)0x344, 7, (const cl_device_id*)0x543, (const char*)0x937, 5, (const cl_program*)0x634, (const char**)0x834, (void(*)(cl_program,void*))0x936, (void*)0x234));
+  }
+  /** // doc: test_compile_program__invalid_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__invalid_program( )
+  {
+    T::Dummy_clCompileProgram mock(CL_INVALID_PROGRAM);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_program>);
+  }
+  /** // doc: test_compile_program__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__invalid_value( )
+  {
+    T::Dummy_clCompileProgram mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_compile_program__invalid_device() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__invalid_device( )
+  {
+    T::Dummy_clCompileProgram mock(CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_compile_program__invalid_compiler_options() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__invalid_compiler_options( )
+  {
+    T::Dummy_clCompileProgram mock(CL_INVALID_COMPILER_OPTIONS);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_compiler_options>);
+  }
+  /** // doc: test_compile_program__invalid_operation() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__invalid_operation( )
+  {
+    T::Dummy_clCompileProgram mock(CL_INVALID_OPERATION);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_operation>);
+  }
+  /** // doc: test_compile_program__compiler_not_available() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__compiler_not_available( )
+  {
+    T::Dummy_clCompileProgram mock(CL_COMPILER_NOT_AVAILABLE);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::compiler_not_available>);
+  }
+  /** // doc: test_compile_program__compile_program_failure() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__compile_program_failure( )
+  {
+    T::Dummy_clCompileProgram mock(CL_COMPILE_PROGRAM_FAILURE);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::compile_program_failure>);
+  }
+  /** // doc: test_compile_program__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__out_of_resources( )
+  {
+    T::Dummy_clCompileProgram mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_compile_program__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__out_of_host_memory( )
+  {
+    T::Dummy_clCompileProgram mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_compile_program__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_compile_program__unexpected_clerror( )
+  {
+    T::Dummy_clCompileProgram mock(-0x1234567);
+    TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_link_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program( )
+  {
+//    T::Dummy_clLinkProgram mock((cl_program)0x1234, CL_SUCCESS);
+//    link_program                   ((cl_context)0x539, 6, (cl_device_id*)0x195, (const char*)0x542, 9, (const cl_program*)0x532, (void(*)(cl_program, void*))0x253, (void*)0x837);
+//    TS_ASSERT(mock.called_once_with((cl_context)0x539, 6, (cl_device_id*)0x195, (const char*)0x542, 9, (const cl_program*)0x532, (void(*)(cl_program, void*))0x253, (void*)0x837));
+  }
+  /** // doc: test_link_program__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__invalid_context( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_link_program__invalid_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__invalid_program( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_INVALID_PROGRAM);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_program>);
+  }
+  /** // doc: test_link_program__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__invalid_value( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_link_program__invalid_device() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__invalid_device( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_link_program__invalid_linker_options() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__invalid_linker_options( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_INVALID_LINKER_OPTIONS);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_linker_options>);
+  }
+  /** // doc: test_link_program__invalid_operation() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__invalid_operation( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_INVALID_OPERATION);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::invalid_operation>);
+  }
+  /** // doc: test_link_program__linker_not_available() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__linker_not_available( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_LINKER_NOT_AVAILABLE);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::linker_not_available>);
+  }
+  /** // doc: test_link_program__link_program_failure() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__link_program_failure( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_LINK_PROGRAM_FAILURE);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::link_program_failure>);
+  }
+  /** // doc: test_link_program__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__out_of_resources( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_link_program__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__out_of_host_memory( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_link_program__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_link_program__unexpected_clerror( )
+  {
+    T::Dummy_clLinkProgram mock((cl_program)NULL, -0x1234567);
+    TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_unload_platform_compiler() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_unload_platform_compiler( )
+  {
+    T::Dummy_clUnloadPlatformCompiler mock(CL_SUCCESS);
+    unload_platform_compiler       ((cl_platform_id)0x937);
+    TS_ASSERT(mock.called_once_with((cl_platform_id)0x937));
+  }
+  /** // doc: test_unload_platform_compiler__invalid_platform() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_unload_platform_compiler__invalid_platform( )
+  {
+    T::Dummy_clUnloadPlatformCompiler mock(CL_INVALID_PLATFORM);
+    TS_ASSERT_THROWS(unload_platform_compiler((cl_platform_id)NULL),clerror_no<status_t::invalid_platform>);
+  }
+  /** // doc: test_unload_platform_compiler__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_unload_platform_compiler__unexpected_clerror( )
+  {
+    T::Dummy_clUnloadPlatformCompiler mock(-0x1234567);
+    TS_ASSERT_THROWS(unload_platform_compiler((cl_platform_id)NULL), unexpected_clerror);
+  }
+  /** // doc: test_get_program_info() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_info( )
+  {
+    T::Dummy_clGetProgramInfo mock(CL_SUCCESS);
+    get_program_info               ((cl_program)0x395, program_info_t::reference_count,             5, (void*)0x124, (size_t*)0x934);
+    TS_ASSERT(mock.called_once_with((cl_program)0x395, (cl_program_info)CL_PROGRAM_REFERENCE_COUNT, 5, (void*)0x124, (size_t*)0x934));
+  }
+  /** // doc: test_get_program_info__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_info__invalid_value( )
+  {
+    T::Dummy_clGetProgramInfo mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_program_info((cl_program)NULL, program_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_get_program_info__invalid_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_info__invalid_program( )
+  {
+    T::Dummy_clGetProgramInfo mock(CL_INVALID_PROGRAM);
+    TS_ASSERT_THROWS(get_program_info((cl_program)NULL, program_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::invalid_program>);
+  }
+  /** // doc: test_get_program_info__invalid_program_executable() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_info__invalid_program_executable( )
+  {
+    T::Dummy_clGetProgramInfo mock(CL_INVALID_PROGRAM_EXECUTABLE);
+    TS_ASSERT_THROWS(get_program_info((cl_program)NULL, program_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::invalid_program_executable>);
+  }
+  /** // doc: test_get_program_info__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_info__out_of_resources( )
+  {
+    T::Dummy_clGetProgramInfo mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(get_program_info((cl_program)NULL, program_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_get_program_info__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_info__out_of_host_memory( )
+  {
+    T::Dummy_clGetProgramInfo mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_program_info((cl_program)NULL, program_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_program_info__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_info__unexpected_clerror( )
+  {
+    T::Dummy_clGetProgramInfo mock(-0x1234567);
+    TS_ASSERT_THROWS(get_program_info((cl_program)NULL, program_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
+  }
+  /** // doc: test_get_program_build_info() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_build_info( )
+  {
+    T::Dummy_clGetProgramBuildInfo mock(CL_SUCCESS);
+    get_program_build_info         ((cl_program)0x253, (cl_device_id)0x563, program_build_info_t::status,                   4, (void*)0x973, (size_t*)0x938);
+    TS_ASSERT(mock.called_once_with((cl_program)0x253, (cl_device_id)0x563, (cl_program_build_info)CL_PROGRAM_BUILD_STATUS, 4, (void*)0x973, (size_t*)0x938));
+  }
+  /** // doc: test_get_program_build_info__invalid_device() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_build_info__invalid_device( )
+  {
+    T::Dummy_clGetProgramBuildInfo mock(CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(get_program_build_info((cl_program)NULL, (cl_device_id)NULL, program_build_info_t::status, 0, nullptr, nullptr),clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_get_program_build_info__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_build_info__invalid_value( )
+  {
+    T::Dummy_clGetProgramBuildInfo mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_program_build_info((cl_program)NULL, (cl_device_id)NULL, program_build_info_t::status, 0, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_get_program_build_info__invalid_program() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_build_info__invalid_program( )
+  {
+    T::Dummy_clGetProgramBuildInfo mock(CL_INVALID_PROGRAM);
+    TS_ASSERT_THROWS(get_program_build_info((cl_program)NULL, (cl_device_id)NULL, program_build_info_t::status, 0, nullptr, nullptr),clerror_no<status_t::invalid_program>);
+  }
+  /** // doc: test_get_program_build_info__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_build_info__out_of_resources( )
+  {
+    T::Dummy_clGetProgramBuildInfo mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(get_program_build_info((cl_program)NULL, (cl_device_id)NULL, program_build_info_t::status, 0, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_get_program_build_info__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_build_info__out_of_host_memory( )
+  {
+    T::Dummy_clGetProgramBuildInfo mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_program_build_info((cl_program)NULL, (cl_device_id)NULL, program_build_info_t::status, 0, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_program_build_info__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+void test_get_program_build_info__unexpected_clerror( )
+  {
+    T::Dummy_clGetProgramBuildInfo mock(-0x1234567);
+    TS_ASSERT_THROWS(get_program_build_info((cl_program)NULL, (cl_device_id)NULL, program_build_info_t::status, 0, nullptr, nullptr), unexpected_clerror);
+  }
 };
 
 #endif /* CLXX_FUNCTIONS_T_H_INCLUDED */

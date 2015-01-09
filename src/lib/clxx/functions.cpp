@@ -773,7 +773,7 @@ void get_program_build_info(cl_program program, cl_device_id device,
             throw clerror_no<status_t::invalid_value>();
           case status_t::invalid_program:
             throw clerror_no<status_t::invalid_program>();
-          case status_t::invalid_program_executable:
+          case status_t::out_of_resources:
             throw clerror_no<status_t::out_of_resources>();
           case status_t::out_of_host_memory:
             throw clerror_no<status_t::out_of_host_memory>();

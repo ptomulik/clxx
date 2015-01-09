@@ -983,7 +983,7 @@ void release_program(cl_program program);
  *    When \c clBuildProgram() returns CL_INVALID_OPERATION.
  * \throw clerror_no<status_t::compiler_not_available>
  *    When \c clBuildProgram() returns CL_COMPILER_NOT_AVAILABLE.
- * \throw clerror_no<status_t::build_program_failuer>
+ * \throw clerror_no<status_t::build_program_failure>
  *    When \c clBuildProgram() returns CL_BUILD_PROGRAM_FAILURE.
  * \throw clerror_no<status_t::out_of_resources>
  *    When \c clBuildProgram() returns CL_OUT_OF_RESOURCES.
@@ -1084,7 +1084,7 @@ void build_program(cl_program program, cl_uint num_devices,
  *    When \c clCompileProgram() returns CL_INVALID_OPERATION.
  * \throw clerror_no<status_t::compiler_not_available>
  *    When \c clCompileProgram() returns CL_COMPILER_NOT_AVAILABLE.
- * \throw clerror_no<status_t::compile_program_failuer>
+ * \throw clerror_no<status_t::compile_program_failure>
  *    When \c clCompileProgram() returns CL_COMPILE_PROGRAM_FAILURE.
  * \throw clerror_no<status_t::out_of_resources>
  *    When \c clCompileProgram() returns CL_OUT_OF_RESOURCES.
