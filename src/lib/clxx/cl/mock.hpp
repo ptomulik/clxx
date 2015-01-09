@@ -137,10 +137,20 @@ CXXTEST_MOCK_GLOBAL(cl_program, clLinkProgram,
 );
 #endif
 
+#if HAVE_OPENCL_clUnloadPlatformCompiler
+CXXTEST_MOCK_GLOBAL(cl_int, clUnloadPlatformCompiler, (cl_platform_id platform), (platform));
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramInfo,
   ( cl_program program, cl_program_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( program, param_name, param_value_size, param_value, param_value_size_ret)
+);
+
+CXXTEST_MOCK_GLOBAL(cl_int, clGetProgramBuildInfo,
+  ( cl_program program, cl_device_id device, cl_program_info param_name,
+    size_t param_value_size, void* param_value, size_t* param_value_size_ret),
+  ( program, device, param_name, param_value_size, param_value, param_value_size_ret)
 );
 /** \endcond */
 

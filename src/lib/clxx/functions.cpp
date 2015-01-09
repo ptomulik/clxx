@@ -139,7 +139,7 @@ create_context(const cl_context_properties* properties, cl_uint num_devices,
                                  size_t cb, void* user_data),
                void* user_data)
 {
-  cl_int s;
+  cl_int s = CL_SUCCESS;
   cl_context ctx;
   ctx = T::clCreateContext(properties, num_devices, devices, pfn_notify, user_data, &s);
   if(is_error(static_cast<status_t>(s)))
@@ -195,7 +195,7 @@ create_context_from_type(const cl_context_properties* properties,
                                  size_t cb, void* user_data),
                void* user_data)
 {
-  cl_int s;
+  cl_int s = CL_SUCCESS;
   cl_context ctx;
   ctx = T::clCreateContextFromType(
       properties,
@@ -409,7 +409,7 @@ cl_program create_program_with_source(cl_context context,
                                       const char** strings,
                                       const size_t* lengths)
 {
-  cl_int s;
+  cl_int s = CL_SUCCESS;
   cl_program p;
   p = T::clCreateProgramWithSource(context, count, strings, lengths, &s);
   if(is_error(static_cast<status_t>(s)))
@@ -438,7 +438,7 @@ cl_program create_program_with_binary(cl_context context,
                                       const unsigned char** binaries,
                                       cl_int* binary_status)
 {
-  cl_int s;
+  cl_int s = CL_SUCCESS;
   cl_program p = T::clCreateProgramWithBinary(
       context,
       num_devices,
@@ -477,7 +477,7 @@ cl_program create_program_with_built_in_kernels(cl_context context,
                                                 const cl_device_id* device_list,
                                                 const char* kernel_names)
 {
-  cl_int s;
+  cl_int s = CL_SUCCESS;
   cl_program p = T::clCreateProgramWithBuiltInKernels(
       context,
       num_devices,
@@ -651,7 +651,7 @@ cl_program link_program(cl_context context, cl_uint num_devices,
                         void* user_data)
 {
 
-  cl_int s;
+  cl_int s = CL_SUCCESS;
   cl_program p = T::clLinkProgram(
       context,
       num_devices,
@@ -694,6 +694,95 @@ cl_program link_program(cl_context context, cl_uint num_devices,
   return p;
 }
 #endif
+#if HAVE_OPENCL_clUnloadPlatformCompiler
+/* ------------------------------------------------------------------------ */
+void unload_platform_compiler(cl_platform_id platform)
+{
+  status_t s = static_cast<status_t>(T::clUnloadPlatformCompiler(platform));
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_platform:
+            throw clerror_no<status_t::invalid_platform>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+void
+get_program_info(cl_program program,
+                 program_info_t param_name,
+                 size_t param_value_size,
+                 void* param_value,
+                 size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetProgramInfo(
+        program,
+        static_cast<cl_program_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_program:
+            throw clerror_no<status_t::invalid_program>();
+          case status_t::invalid_program_executable:
+            throw clerror_no<status_t::invalid_program_executable>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
+void get_program_build_info(cl_program program, cl_device_id device,
+                            program_build_info_t param_name,
+                            size_t param_value_size, void* param_value,
+                            size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetProgramBuildInfo(
+        program,
+        device,
+        static_cast<cl_program_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      switch(s)
+        {
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_program:
+            throw clerror_no<status_t::invalid_program>();
+          case status_t::invalid_program_executable:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(s);
+        }
+    }
+}
+/* ------------------------------------------------------------------------ */
 } // end namespace clxx
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

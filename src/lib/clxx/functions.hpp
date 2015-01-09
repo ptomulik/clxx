@@ -1222,6 +1222,140 @@ cl_program link_program(cl_context context, cl_uint num_devices,
                                                        void* user_data),
                         void* user_data);
 #endif
+#if HAVE_OPENCL_clUnloadPlatformCompiler
+/** // doc: unload_platform_compiler(...) {{{
+ * \brief Allows the implementation to release the resources allocated by the
+ *    OpenCL compiler for \e platform.
+ *
+ * This function is a wrapper around \c clUnloadPlatformCompiler(). The call to
+ * this function has same effect as
+ *  - \c clUnloadPlatformCompiler(platform)
+ *
+ * The main difference between \ref unload_platform_compiler() and
+ * \c clUnloadPlatformCompiler() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * This is a hint from the application and does not guarantee that the compiler
+ * will not be used in the future or that the compiler will actually be
+ * unloaded by the implementation. Calls to build_program(), compile_program(),
+ * or link_program() after unload_compiler_platform() will reload the compiler,
+ * if necessary, to build the appropriate program executable. 
+ *
+ * \param platform
+ *    The platform whose compiler may be unloaded
+ *
+ * \throw clerror_no<status_t::invalid_platform>
+ *    When \c clUnloadPlatformCompiler() returns CL_INVALID_PLATFORM.
+ * \throw unexpected_clerror
+ *    When \c clUnloadPlatformCompiler() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * |         |         | &radic; |         |
+ */ // }}}
+void unload_platform_compiler(cl_platform_id platform);
+#endif
+/** // doc: get_program_info {{{
+ * \brief Returns information about the program object.
+ *
+ * This function is a wrapper around \c clGetProgramInfo(). The call to this
+ * function has same effect as
+ *  - \c clGetProgramInfo(program, param_name, param_value_size, param_value, param_value_size_ret)
+ *
+ * The main difference between \ref get_program_info() and
+ * \c clGetProgramInfo() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes and accepts \ref clxx::program_info_t
+ * "program_info_t" instead of \c cl_program_info as \e param_name.
+ *
+ * \param program
+ *    Specifies the program object being queried.
+ * \param param_name
+ *    Specifies the information to query. The list of supported \e param_name
+ *    types is documented in \ref clxx::program_info_t "program_info_t".
+ * \param param_value_size
+ *    Used to specify the size in bytes of memory pointed to by param_value.
+ *    This size must be >= size of return type as described in the table above.
+ * \param param_value
+ *    A pointer to memory where the appropriate result being queried is
+ *    returned. If param_value is \c NULL, it is ignored.
+ * \param param_value_size_ret
+ *    Returns the actual size in bytes of data copied to param_value. If
+ *    \e param_value_size_ret is \c NULL, it is ignored.
+ *
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetProgramInfo() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_program>
+ *    When \c clGetProgramInfo() returns CL_INVALID_PROGRAM.
+ * \throw clerror_no<status_t::invalid_program_executable>
+ *    When \c clGetProgramInfo() returns CL_INVALID_PROGRAM_EXECUTABLE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetProgramInfo() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetProgramInfo() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clGetProgramInfo() returns other error code.
+ */ // }}}
+void get_program_info(cl_program program, program_info_t param_name,
+                      size_t param_value_size, void* param_value,
+                      size_t* param_value_size_ret);
+/** // doc: get_program_build_info {{{
+ * \brief Returns build information for each device in the program object.
+ *
+ * This function is a wrapper around \c clGetProgramBuildInfo(). The call to this
+ * function has same effect as
+ *  - \c clGetProgramBuildInfo(program, device, param_name, param_value_size, param_value, param_value_size_ret)
+ *
+ * The main difference between \ref get_program_build_info() and
+ * \c clGetProgramBuildInfo() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes and accepts \ref clxx::program_build_info_t
+ * "program_build_info_t" instead of \c cl_program_build_info as \e param_name.
+ *
+ * A program binary (compiled binary, library binary or executable binary)
+ * built for a parent device can be used by all its sub-devices. If a program
+ * binary has not been built for a sub-device, the program binary associated
+ * with the parent device will be used.
+ *
+ * A program binary for a device specified with create_program_with_binary() or
+ * queried using get_program_info() can be used as the binary for the
+ * associated root device, and all sub-devices created from the root-level
+ * device or sub-devices thereof. 
+ *
+ * \param program
+ *    Specifies the program object being queried.
+ * \param device
+ *    Specifies the device for which build information is being queried. \e
+ *    device must be a valid device associated with \e program.
+ * \param param_name
+ *    Specifies the information to query. The list of supported \e param_name
+ *    types is documented in \ref clxx::program_build_info_t "program_build_info_t".
+ * \param param_value_size
+ *    Used to specify the size in bytes of memory pointed to by param_value.
+ *    This size must be >= size of return type as described in the table above.
+ * \param param_value
+ *    A pointer to memory where the appropriate result being queried is
+ *    returned. If param_value is \c NULL, it is ignored.
+ * \param param_value_size_ret
+ *    Returns the actual size in bytes of data copied to param_value. If
+ *    \e param_value_size_ret is \c NULL, it is ignored.
+ *
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clGetProgramBuildInfo() returns CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetProgramBuildInfo() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_program>
+ *    When \c clGetProgramBuildInfo() returns CL_INVALID_PROGRAM.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetProgramBuildInfo() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetProgramBuildInfo() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clGetProgramBuildInfo() returns other error code.
+ */ // }}}
+void get_program_build_info(cl_program program, cl_device_id device,
+                            program_build_info_t param_name,
+                            size_t param_value_size, void* param_value,
+                            size_t* param_value_size_ret);
 /** @} */
 } // end namespace clxx
 

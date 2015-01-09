@@ -512,6 +512,65 @@ public:
   Dummy_clLinkProgram(cl_program program, cl_int err);
 };
 #endif
+#if HAVE_OPENCL_clUnloadPlatformCompiler
+/** // doc: Dummy_clUnloadPlatformCompiler {{{
+ * \brief Default mock for clUnloadPlatformCompiler OpenCL function.
+ */ // }}}
+class Dummy_clUnloadPlatformCompiler
+  : public T::Base_clUnloadPlatformCompiler,
+    public T::Dummy_CallArgs<cl_platform_id>
+{
+  cl_int _err;
+  cl_int clUnloadPlatformCompiler(cl_platform_id);
+public:
+  /** // doc: Dummy_clUnloadPlatformCompiler() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clUnloadPlatformCompiler(cl_int err);
+};
+#endif
+/** // doc: Dummy_clGetProgramInfo {{{
+ * \brief Mock for clGetProgramInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetProgramInfo
+  : public T::Base_clGetProgramInfo,
+    public T::Dummy_CallArgs<cl_program, cl_program_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  cl_int clGetProgramInfo(cl_program program, cl_program_info param_name,
+                           size_t param_value_size, void* param_value,
+                           size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetProgramInfo() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clGetProgramInfo(cl_int err);
+};
+/** // doc: Dummy_clGetProgramBuildInfo {{{
+ * \brief Mock for clGetProgramBuildInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetProgramBuildInfo
+  : public T::Base_clGetProgramBuildInfo,
+    public T::Dummy_CallArgs<cl_program, cl_device_id, cl_program_build_info,
+                             size_t, void*, size_t*>
+{
+  cl_int _err;
+  cl_int clGetProgramBuildInfo(cl_program program,
+                               cl_device_id device,
+                               cl_program_build_info param_name,
+                               size_t param_value_size,
+                               void* param_value,
+                               size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetProgramBuildInfo() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clGetProgramBuildInfo(cl_int err);
+};
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -860,6 +919,50 @@ Dummy_clLinkProgram(cl_program program, cl_int err)
 {
 }
 #endif
+#if HAVE_OPENCL_clUnloadPlatformCompiler
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clUnloadPlatformCompiler::
+clUnloadPlatformCompiler(cl_platform_id platform)
+{
+  call_with(platform);
+  return _err;
+}
+Dummy_clUnloadPlatformCompiler::
+Dummy_clUnloadPlatformCompiler(cl_int err)
+  : _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetProgramInfo::
+clGetProgramInfo(cl_program program, cl_program_info param_name,
+                size_t param_value_size, void* param_value,
+                size_t* param_value_size_ret)
+{
+  call_with(program, param_name, param_value_size, param_value, param_value_size_ret);
+  return _err;
+}
+
+Dummy_clGetProgramInfo::
+Dummy_clGetProgramInfo(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetProgramBuildInfo::
+clGetProgramBuildInfo(cl_program program, cl_device_id device,
+                      cl_program_build_info param_name, size_t param_value_size,
+                      void* param_value, size_t* param_value_size_ret)
+{
+  call_with(program, device, param_name, param_value_size, param_value, param_value_size_ret);
+  return _err;
+}
+
+Dummy_clGetProgramBuildInfo::
+Dummy_clGetProgramBuildInfo(cl_int err)
+  : _err(err)
+{
+}
 /* ------------------------------------------------------------------------- */
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
