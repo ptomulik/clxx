@@ -1,5 +1,0 @@
-
-# @COPYRIGHT@
-# Licensed under MIT license (LICENSE.txt).
-
-from clxx_.s11n.platform_info_mod import *
