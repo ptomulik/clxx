@@ -401,9 +401,6 @@ void release_device(cl_device_id device)
     }
 }
 #endif // HAVE_OPENCL_clReleaseDevice
-/** // doc: create_program_with_source(...) {{{
- * \todo Write documentation
- */ // }}}
 cl_program create_program_with_source(cl_context context,
                                       cl_uint count,
                                       const char** strings,
