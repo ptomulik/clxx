@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/context.hpp
+// clxx/context.i.hpp
 
-/** // doc: clxx/context.hpp {{{
- * \file clxx/context.hpp
+/** // doc: clxx/context.i.hpp {{{
+ * \file clxx/context.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_CONTEXT_I_HPP_INCLUDED

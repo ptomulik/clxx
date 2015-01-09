@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/context_properties.hpp
+// clxx/context_properties.i.hpp
 
-/** // doc: clxx/context_properties.hpp {{{
- * \file clxx/context_properties.hpp
+/** // doc: clxx/context_properties.i.hpp {{{
+ * \file clxx/context_properties.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_CONTEXT_PROPERTIES_I_HPP_INCLUDED

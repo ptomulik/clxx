@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/device_partition_properties.hpp
+// clxx/device_partition_properties.i.hpp
 
-/** // doc: clxx/device_partition_properties.hpp {{{
- * \file clxx/device_partition_properties.hpp
+/** // doc: clxx/device_partition_properties.i.hpp {{{
+ * \file clxx/device_partition_properties.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_DEVICE_PARTITION_PROPERTIES_I_HPP_INCLUDED

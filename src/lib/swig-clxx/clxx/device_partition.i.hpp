@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/device_partition.hpp
+// clxx/device_partition.i.hpp
 
-/** // doc: clxx/device_partition.hpp {{{
- * \file clxx/device_partition.hpp
+/** // doc: clxx/device_partition.i.hpp {{{
+ * \file clxx/device_partition.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_DEVICE_PARTITION_I_HPP_INCLUDED

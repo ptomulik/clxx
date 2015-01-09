@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/device_query.hpp
+// clxx/device_query.i.hpp
 
-/** // doc: clxx/device_query.hpp {{{
- * \file clxx/device_query.hpp
+/** // doc: clxx/device_query.i.hpp {{{
+ * \file clxx/device_query.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_DEVICE_QUERY_I_HPP_INCLUDED

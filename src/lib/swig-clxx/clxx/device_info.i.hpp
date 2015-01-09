@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/device_info.hpp
+// clxx/device_info.i.hpp
 
-/** // doc: clxx/device_info.hpp {{{
- * \file clxx/device_info.hpp
+/** // doc: clxx/device_info.i.hpp {{{
+ * \file clxx/device_info.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_DEVICE_INFO_I_HPP_INCLUDED

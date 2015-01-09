@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/platform_query.hpp
+// clxx/platform_query.i.hpp
 
-/** // doc: clxx/platform_query.hpp {{{
- * \file clxx/platform_query.hpp
+/** // doc: clxx/platform_query.i.hpp {{{
+ * \file clxx/platform_query.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_PLATFORM_QUERY_I_HPP_INCLUDED

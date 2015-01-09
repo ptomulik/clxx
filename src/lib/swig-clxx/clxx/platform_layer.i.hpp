@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/platform_layer.hpp
+// clxx/platform_layer.i.hpp
 
-/** // doc: clxx/platform_layer.hpp {{{
- * \file clxx/platform_layer.hpp
+/** // doc: clxx/platform_layer.i.hpp {{{
+ * \file clxx/platform_layer.i.hpp
  * \todo Write documentation
  */ // }}}
 #ifndef CLXX_PLATFORM_LAYER_I_HPP_INCLUDED
