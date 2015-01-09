@@ -502,7 +502,7 @@ cl_program create_program_with_built_in_kernels(cl_context context,
     }
   return p;
 }
-#endif
+#endif // HAVE_OPENCL_clCreateProgramWithBuiltInKernels
 /* ------------------------------------------------------------------------ */
 void retain_program(cl_program program)
 {
@@ -637,7 +637,7 @@ void compile_program(cl_program program, cl_uint num_devices,
         }
     }
 }
-#endif
+#endif // HAVE_OPENCL_clCompileProgram
 /* ------------------------------------------------------------------------ */
 #if HAVE_OPENCL_clLinkProgram
 cl_program link_program(cl_context context, cl_uint num_devices,
@@ -690,7 +690,7 @@ cl_program link_program(cl_context context, cl_uint num_devices,
     }
   return p;
 }
-#endif
+#endif // HAVE_OPENCL_clLinkProgram
 #if HAVE_OPENCL_clUnloadPlatformCompiler
 /* ------------------------------------------------------------------------ */
 void unload_platform_compiler(cl_platform_id platform)
@@ -707,7 +707,7 @@ void unload_platform_compiler(cl_platform_id platform)
         }
     }
 }
-#endif
+#endif // HAVE_OPENCL_clUnloadPlatformCompiler
 /* ------------------------------------------------------------------------ */
 void
 get_program_info(cl_program program,
