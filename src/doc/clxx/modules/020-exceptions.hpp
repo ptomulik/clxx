@@ -115,7 +115,7 @@
  *
  * The output from above program will be the following
  * \verbatim
-   user\host:$ ./build/examples/clxx/exception3
+   user@host:$ ./build/examples/clxx/exception3
    A. caught clxx::exception3: exception3
    B. caught clxx::exception: exception3
    C. caught std::runtime_error: exception3
