@@ -139,7 +139,7 @@ public:
    *
    * \param load  decides whether to load OpenCL platform layer layout or not,
    * \param type  if \e load is \c true, then retrieve from OpenCL only devices
-   *  of this \e type 
+   *  of this \e type
    *
    * \throws clerror_no<status_t::invalid_device_type>
    *    propagated from clxx::get_device_ids()
@@ -173,7 +173,7 @@ public:
   /** // doc: get_devices() {{{
    * \fn get_devices() const
    * \brief Get devices
-   * 
+   *
    * Returns flat sequence of devices stored in container. The order of
    * elements in sequence is same as the order of their insertion to the
    * container.

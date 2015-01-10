@@ -3,9 +3,9 @@
 # Licensed under MIT license (LICENSE.txt).
 
 ## Import(['env'])
-## 
+##
 ## from SCons.Util import CLVar
-## 
+##
 
 ## tests = [
 ## ]
@@ -15,7 +15,7 @@
 ##            CXXTEST_CPPPATH = ['..'],
 ##            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
 ##            CXXTEST_TARGET = 'check-libclxx_io')
-## 
+##
 ## env.Alias('check', [ 'check-libclxx_io' ])
 ## env.AlwaysBuild('check-libclxx_io')
 

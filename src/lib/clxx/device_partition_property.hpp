@@ -96,7 +96,7 @@ struct device_partition_property
    * \returns The value of this property
    */ // }}}
   cl_device_partition_property value() const
-  { 
+  {
     if(is_list())
       throw value_access_error();
     return _values[0];
@@ -116,7 +116,7 @@ struct device_partition_property
    * \todo Write documentation
    */ // }}}
   std::vector<cl_device_partition_property> const& values() const
-  { 
+  {
     if(!is_list())
       throw value_access_error();
     return _values;

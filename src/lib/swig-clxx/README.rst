@@ -74,7 +74,7 @@ The inclusion order is the following:
 
 The ``.li.swg`` files are language-independent wrapper definitions. The
 ``.swg`` files are language dependent, and may be redefined under target
-language subdirectories to provide workarounds and language-specific features. 
+language subdirectories to provide workarounds and language-specific features.
 For example, the wrappers for ``#/src/lib/clxx/platform.hpp`` involve following
 files
 

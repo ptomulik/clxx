@@ -1,6 +1,6 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
-/** 
+/**
  * \defgroup clxx_platform_layer OpenCL platform layer
  *
  * This module documents object-oriented c++11 interface to *OpenCL platform
@@ -81,6 +81,6 @@
  * such as context reference count or context properties. It also internally
  * maintains reference count for context.
  *
- */ 
+ */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

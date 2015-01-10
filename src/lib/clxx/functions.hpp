@@ -697,7 +697,7 @@ cl_program create_program_with_source(cl_context context,
  * queried and cached by the application. Future instances of the application
  * launching will no longer need to compile and link the program executables.
  * The cached executables can be read and loaded by the application, which can
- * help significantly reduce the application initialization time. 
+ * help significantly reduce the application initialization time.
  *
  * \param context
  *    Must be a valid OpenCL context.
@@ -786,7 +786,7 @@ cl_program create_program_with_binary(cl_context context,
 #if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
 /** // doc: create_program_with_built_in_kernels(...) {{{
  * \brief  Creates a program object for a context, and loads the information
- * related to the built-in kernels into a program object. 
+ * related to the built-in kernels into a program object.
  *
  * This function is a wrapper around \c clCreateProgramWithBuiltInKernels().
  * The call to this function has same effect as
@@ -929,7 +929,7 @@ void release_program(cl_program program);
  *
  * The executable binary can be queried using get_program_info(program,
  * program_info_t::binaries, ...) and can be specified to
- * create_program_with_binary() to create a new program object. 
+ * create_program_with_binary() to create a new program object.
  *
  * \b Compiler Options
  *
@@ -948,7 +948,7 @@ void release_program(cl_program program);
  * \param options
  *    A pointer to a null-terminated string of characters that describes the
  *    build options to be used for building the program executable. The list of
- *    supported options is described below. 
+ *    supported options is described below.
  * \param pfn_notify
  *    A function pointer to a notification routine. The notification routine is
  *    a callback function that an application can register and which will be
@@ -1026,7 +1026,7 @@ void build_program(cl_program program, cl_uint num_devices,
  * See [clCompileProgram()](https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clCompileProgram.html).
  *
  * \param program
- *    The program object that is the compilation target. 
+ *    The program object that is the compilation target.
  * \param num_devices
  *    The number of devices listed in \e device_list.
  * \param device_list
@@ -1133,7 +1133,7 @@ void compile_program(cl_program program, cl_uint num_devices,
  *  programs and linker options specified are all valid and appropriate host
  *  and device resources needed to perform the link are available. If the
  *  linking operation can begin, link_program() returns a valid non-zero
- *  program object. 
+ *  program object.
  *
  * \b Linker Options
  *
@@ -1148,7 +1148,7 @@ void compile_program(cl_program program, cl_uint num_devices,
  *    NULL value, the link is performed for all devices associated with context
  *    for which a compiled object is available. If device_list is a non-NULL
  *    value, the compile is performed for devices specified in this list for
- *    which a source has been loaded. 
+ *    which a source has been loaded.
  * \param options
  *    A pointer to a null-terminated string of characters that describes the
  *    link options to be used for building the program executable.
@@ -1237,7 +1237,7 @@ cl_program link_program(cl_context context, cl_uint num_devices,
  * will not be used in the future or that the compiler will actually be
  * unloaded by the implementation. Calls to build_program(), compile_program(),
  * or link_program() after unload_compiler_platform() will reload the compiler,
- * if necessary, to build the appropriate program executable. 
+ * if necessary, to build the appropriate program executable.
  *
  * \param platform
  *    The platform whose compiler may be unloaded
@@ -1317,7 +1317,7 @@ void get_program_info(cl_program program, program_info_t param_name,
  * A program binary for a device specified with create_program_with_binary() or
  * queried using get_program_info() can be used as the binary for the
  * associated root device, and all sub-devices created from the root-level
- * device or sub-devices thereof. 
+ * device or sub-devices thereof.
  *
  * \param program
  *    Specifies the program object being queried.
