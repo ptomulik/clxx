@@ -1259,7 +1259,7 @@ void unload_platform_compiler(cl_platform_id platform);
  *
  * This function is a wrapper around \c clGetProgramInfo(). The call to this
  * function has same effect as
- *  - \c clGetProgramInfo(program, param_name, param_value_size, param_value, param_value_size_ret)
+ *  - \c clGetProgramInfo(program, static_cast<cl_program_info>(param_name), param_value_size, param_value, param_value_size_ret)
  *
  * The main difference between \ref get_program_info() and
  * \c clGetProgramInfo() is that it throws %clxx exceptions instead of
@@ -1302,7 +1302,7 @@ void get_program_info(cl_program program, program_info_t param_name,
  *
  * This function is a wrapper around \c clGetProgramBuildInfo(). The call to this
  * function has same effect as
- *  - \c clGetProgramBuildInfo(program, device, param_name, param_value_size, param_value, param_value_size_ret)
+ *  - \c clGetProgramBuildInfo(program, device, static_cast<cl_program_build_info>(param_name), param_value_size, param_value, param_value_size_ret)
  *
  * The main difference between \ref get_program_build_info() and
  * \c clGetProgramBuildInfo() is that it throws %clxx exceptions instead of
