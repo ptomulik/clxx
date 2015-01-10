@@ -52,9 +52,8 @@ namespace clxx {
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void get_platform_ids( cl_uint num_entries,
-                       cl_platform_id* platforms,
-                       cl_uint* num_platforms );
+void get_platform_ids(cl_uint num_entries, cl_platform_id* platforms,
+                      cl_uint* num_platforms );
 
 /** // doc: get_platform_info(...) {{{
  *
@@ -102,12 +101,9 @@ void get_platform_ids( cl_uint num_entries,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void
-get_platform_info(  cl_platform_id platform,
-                    platform_info_t param_name,
-                    size_t param_value_size,
-                    void* param_value,
-                    size_t* param_value_size_ret );
+void get_platform_info(cl_platform_id platform, platform_info_t param_name,
+                       size_t param_value_size, void* param_value,
+                       size_t* param_value_size_ret );
 
 /** // doc: get_device_ids() {{{
  * \brief Retrieve device identifiers of locally available OpenCL devices.
@@ -213,9 +209,8 @@ void get_device_ids(cl_platform_id platform, device_type_t device_type,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void
-get_device_info( cl_device_id device, device_info_t name, size_t value_size,
-                 void* value, size_t* value_size_ret);
+void get_device_info(cl_device_id device, device_info_t name, size_t value_size,
+                     void* value, size_t* value_size_ret);
 
 /** // doc: create_context(...) {{{
  * \brief Create OpenCL context
@@ -295,10 +290,11 @@ get_device_info( cl_device_id device, device_info_t name, size_t value_size,
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
 cl_context create_context(const cl_context_properties* properties,
-               cl_uint num_devices, const cl_device_id* devices,
-               void(*pfn_notify)(const char* errinfo, const void* private_info,
-                                 size_t cb, void* user_data),
-               void* user_data);
+                          cl_uint num_devices, const cl_device_id* devices,
+                          void(*pfn_notify)(const char* errinfo,
+                                            const void* private_info,
+                                            size_t cb, void* user_data),
+                          void* user_data);
 
 /** // doc: create_context_from_type_from_type(...) {{{
  * \brief Create OpenCL context
@@ -376,10 +372,12 @@ cl_context create_context(const cl_context_properties* properties,
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
 cl_context create_context_from_type(const cl_context_properties* properties,
-               device_type_t device_type,
-               void(*pfn_notify)(const char* errinfo, const void* private_info,
-                                 size_t cb, void* user_data),
-               void* user_data);
+                                    device_type_t device_type,
+                                    void(*pfn_notify)(const char* errinfo,
+                                                      const void* private_info,
+                                                      size_t cb,
+                                                      void* user_data),
+                                    void* user_data);
 
 /** // doc: retain_context(...) {{{
  * \brief Increment the context reference count
@@ -1000,7 +998,7 @@ void release_program(cl_program program);
 void build_program(cl_program program, cl_uint num_devices,
                    const cl_device_id* device_list, const char* options,
                    void (CL_CALLBACK* pfn_notify)(cl_program program,
-                                                 void* user_data),
+                                                  void* user_data),
                    void* user_data);
 #if HAVE_OPENCL_clCompileProgram
 /** // doc: compile_program(...) {{{

@@ -252,7 +252,8 @@ create_context_from_type(const cl_context_properties* properties,
   return ctx;
 }
 /* ------------------------------------------------------------------------ */
-void retain_context(cl_context context)
+void
+retain_context(cl_context context)
 {
   status_t s = static_cast<status_t>(T::clRetainContext(context));
   if(is_error(s))
@@ -271,7 +272,8 @@ void retain_context(cl_context context)
     }
 }
 /* ------------------------------------------------------------------------ */
-void release_context(cl_context context)
+void
+release_context(cl_context context)
 {
   status_t s = static_cast<status_t>(T::clReleaseContext(context));
   if(is_error(s))
@@ -290,9 +292,10 @@ void release_context(cl_context context)
     }
 }
 /* ------------------------------------------------------------------------ */
-void get_context_info(cl_context context, context_info_t param_name,
-                      size_t param_value_size, void* param_value,
-                      size_t* param_value_size_ret)
+void
+get_context_info(cl_context context, context_info_t param_name,
+                 size_t param_value_size, void* param_value,
+                 size_t* param_value_size_ret)
 {
   status_t s = static_cast<status_t>(
     T::clGetContextInfo(
@@ -322,11 +325,11 @@ void get_context_info(cl_context context, context_info_t param_name,
 }
 /* ------------------------------------------------------------------------ */
 #if HAVE_OPENCL_clCreateSubDevices
-void create_sub_devices(cl_device_id in_device,
-                        const cl_device_partition_property* properties,
-                        cl_uint num_devices,
-                        cl_device_id* out_devices,
-                        cl_uint *num_devices_ret)
+void
+create_sub_devices(cl_device_id in_device,
+                   const cl_device_partition_property* properties,
+                   cl_uint num_devices, cl_device_id* out_devices,
+                   cl_uint *num_devices_ret)
 {
   status_t s = static_cast<status_t>(
       T::clCreateSubDevices(
@@ -361,7 +364,8 @@ void create_sub_devices(cl_device_id in_device,
 #endif // HAVE_OPENCL_clCreateSubDevices
 /* ------------------------------------------------------------------------ */
 #if HAVE_OPENCL_clRetainDevice
-void retain_device(cl_device_id device)
+void
+retain_device(cl_device_id device)
 {
   status_t s = static_cast<status_t>(T::clRetainDevice(device));
   if(is_error(s))
@@ -382,7 +386,8 @@ void retain_device(cl_device_id device)
 #endif // HAVE_OPENCL_clRetainDevice
 /* ------------------------------------------------------------------------ */
 #if HAVE_OPENCL_clReleaseDevice
-void release_device(cl_device_id device)
+void
+release_device(cl_device_id device)
 {
   status_t s = static_cast<status_t>(T::clReleaseDevice(device));
   if(is_error(s))
@@ -401,10 +406,9 @@ void release_device(cl_device_id device)
     }
 }
 #endif // HAVE_OPENCL_clReleaseDevice
-cl_program create_program_with_source(cl_context context,
-                                      cl_uint count,
-                                      const char** strings,
-                                      const size_t* lengths)
+cl_program
+create_program_with_source(cl_context context, cl_uint count,
+                           const char** strings, const size_t* lengths)
 {
   cl_int s = CL_SUCCESS;
   cl_program p;
@@ -428,12 +432,12 @@ cl_program create_program_with_source(cl_context context,
   return p;
 }
 /* ------------------------------------------------------------------------ */
-cl_program create_program_with_binary(cl_context context,
-                                      cl_uint num_devices,
-                                      const cl_device_id* device_list,
-                                      const size_t* lengths,
-                                      const unsigned char** binaries,
-                                      cl_int* binary_status)
+cl_program
+create_program_with_binary(cl_context context, cl_uint num_devices,
+                           const cl_device_id* device_list,
+                           const size_t* lengths,
+                           const unsigned char** binaries,
+                           cl_int* binary_status)
 {
   cl_int s = CL_SUCCESS;
   cl_program p = T::clCreateProgramWithBinary(
@@ -469,10 +473,10 @@ cl_program create_program_with_binary(cl_context context,
 }
 #if HAVE_OPENCL_clCreateProgramWithBuiltInKernels
 /* ------------------------------------------------------------------------ */
-cl_program create_program_with_built_in_kernels(cl_context context,
-                                                cl_uint num_devices,
-                                                const cl_device_id* device_list,
-                                                const char* kernel_names)
+cl_program
+create_program_with_built_in_kernels(cl_context context, cl_uint num_devices,
+                                     const cl_device_id* device_list,
+                                     const char* kernel_names)
 {
   cl_int s = CL_SUCCESS;
   cl_program p = T::clCreateProgramWithBuiltInKernels(
@@ -504,7 +508,8 @@ cl_program create_program_with_built_in_kernels(cl_context context,
 }
 #endif // HAVE_OPENCL_clCreateProgramWithBuiltInKernels
 /* ------------------------------------------------------------------------ */
-void retain_program(cl_program program)
+void
+retain_program(cl_program program)
 {
   status_t s = static_cast<status_t>(T::clRetainProgram(program));
   if(is_error(s))
@@ -523,7 +528,8 @@ void retain_program(cl_program program)
     }
 }
 /* ------------------------------------------------------------------------ */
-void release_program(cl_program program)
+void
+release_program(cl_program program)
 {
   status_t s = static_cast<status_t>(T::clReleaseProgram(program));
   if(is_error(s))
@@ -542,11 +548,12 @@ void release_program(cl_program program)
     }
 }
 /* ------------------------------------------------------------------------ */
-void build_program(cl_program program, cl_uint num_devices,
-                   const cl_device_id* device_list, const char* options,
-                   void (CL_CALLBACK* pfn_notify)(cl_program program,
-                                                 void* user_data),
-                   void* user_data)
+void
+build_program(cl_program program, cl_uint num_devices,
+              const cl_device_id* device_list, const char* options,
+              void (CL_CALLBACK* pfn_notify)(cl_program program,
+                                             void* user_data),
+              void* user_data)
 {
   status_t s = static_cast<status_t>(
     T::clBuildProgram(
@@ -589,13 +596,14 @@ void build_program(cl_program program, cl_uint num_devices,
 }
 /* ------------------------------------------------------------------------ */
 #if HAVE_OPENCL_clCompileProgram
-void compile_program(cl_program program, cl_uint num_devices,
-                   const cl_device_id* device_list, const char* options,
-                   cl_uint num_input_headers, const cl_program* input_headers,
-                   const char** header_include_names,
-                   void (CL_CALLBACK* pfn_notify)(cl_program program,
-                                                 void* user_data),
-                   void* user_data)
+void
+compile_program(cl_program program, cl_uint num_devices,
+                const cl_device_id* device_list, const char* options,
+                cl_uint num_input_headers, const cl_program* input_headers,
+                const char** header_include_names,
+                void (CL_CALLBACK* pfn_notify)(cl_program program,
+                                               void* user_data),
+                void* user_data)
 {
   status_t s = static_cast<status_t>(
     T::clCompileProgram(
@@ -640,12 +648,13 @@ void compile_program(cl_program program, cl_uint num_devices,
 #endif // HAVE_OPENCL_clCompileProgram
 /* ------------------------------------------------------------------------ */
 #if HAVE_OPENCL_clLinkProgram
-cl_program link_program(cl_context context, cl_uint num_devices,
-                        const cl_device_id* device_list, const char* options,
-                        cl_uint num_input_programs, const cl_program* input_programs,
-                        void (CL_CALLBACK* pfn_notify)(cl_program program,
-                                                       void* user_data),
-                        void* user_data)
+cl_program
+link_program(cl_context context, cl_uint num_devices,
+             const cl_device_id* device_list, const char* options,
+             cl_uint num_input_programs, const cl_program* input_programs,
+             void (CL_CALLBACK* pfn_notify)(cl_program program,
+                                            void* user_data),
+             void* user_data)
 {
 
   cl_int s = CL_SUCCESS;
@@ -693,7 +702,8 @@ cl_program link_program(cl_context context, cl_uint num_devices,
 #endif // HAVE_OPENCL_clLinkProgram
 #if HAVE_OPENCL_clUnloadPlatformCompiler
 /* ------------------------------------------------------------------------ */
-void unload_platform_compiler(cl_platform_id platform)
+void
+unload_platform_compiler(cl_platform_id platform)
 {
   status_t s = static_cast<status_t>(T::clUnloadPlatformCompiler(platform));
   if(is_error(s))
@@ -710,10 +720,8 @@ void unload_platform_compiler(cl_platform_id platform)
 #endif // HAVE_OPENCL_clUnloadPlatformCompiler
 /* ------------------------------------------------------------------------ */
 void
-get_program_info(cl_program program,
-                 program_info_t param_name,
-                 size_t param_value_size,
-                 void* param_value,
+get_program_info(cl_program program, program_info_t param_name,
+                 size_t param_value_size, void* param_value,
                  size_t* param_value_size_ret)
 {
   status_t s = static_cast<status_t>(
@@ -745,10 +753,11 @@ get_program_info(cl_program program,
     }
 }
 /* ------------------------------------------------------------------------ */
-void get_program_build_info(cl_program program, cl_device_id device,
-                            program_build_info_t param_name,
-                            size_t param_value_size, void* param_value,
-                            size_t* param_value_size_ret)
+void
+get_program_build_info(cl_program program, cl_device_id device,
+                       program_build_info_t param_name,
+                       size_t param_value_size, void* param_value,
+                       size_t* param_value_size_ret)
 {
   status_t s = static_cast<status_t>(
       T::clGetProgramBuildInfo(
