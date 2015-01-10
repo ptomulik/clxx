@@ -23,11 +23,11 @@ namespace clxx {
  */ // }}}
 cl_uint get_num_sub_devices(device const& in_device,
                             device_partition_properties const& properties);
-/** // doc: get_sub_devices() {{{
+/** // doc: create_sub_devices() {{{
  * \todo Write documentation
  */ // }}}
-devices get_sub_devices(device const& in_device,
-                        device_partition_properties const& properties);
+devices create_sub_devices(device const& in_device,
+                           device_partition_properties const& properties);
 #endif
 /** @} */
 

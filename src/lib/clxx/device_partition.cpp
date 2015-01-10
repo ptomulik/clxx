@@ -36,7 +36,7 @@ get_num_sub_devices(device const& in_device, device_partition_properties const& 
 }
 /* ------------------------------------------------------------------------ */
 devices
-get_sub_devices(device const& in_device, device_partition_properties const& properties)
+create_sub_devices(device const& in_device,device_partition_properties const& properties)
 {
   std::vector<cl_device_id> ids(get_num_sub_devices(in_device, properties));
   if(ids.size() > 0)
