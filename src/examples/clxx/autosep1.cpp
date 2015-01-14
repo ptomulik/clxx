@@ -3,7 +3,7 @@
 
 /** // doc: clxx/autosep1.cpp {{{
  * \file clxx/autosep1.cpp
- * \todo Write documentation
+ * \brief Provides autosep1.cpp example.
  */ // }}}
 /** // example {{{
  * \example autosep1.cpp

@@ -25,7 +25,7 @@ struct std_except_ctor_arg< boost::program_options::invalid_command_line_style>
 namespace clxx { namespace app { namespace options {
 
 /** // doc: invalid_command_line_style_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when invalid command-line style is detected
  */ // }}}
 class invalid_command_line_style_error
   : public clxx::exception_base<
@@ -39,7 +39,7 @@ class invalid_command_line_style_error
     > base_;
 public:
   /** // doc: invalid_command_line_style_error(boost::program_options::invalid_command_line_style) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   invalid_command_line_style_error(boost::program_options::invalid_command_line_style const& e)
     : base_(e)

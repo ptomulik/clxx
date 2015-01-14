@@ -5,7 +5,8 @@
 
 /** // doc: clxx/s11n/device_info.hpp {{{
  * \file clxx/s11n/device_info.hpp
- * \todo Write documentation
+ * \brief Declares a specialization of boost::serialization::serialize function
+ *    for \ref clxx::device_info "device_info" class
  */ // }}}
 #ifndef CLXX_S11N_DEVICE_INFO_HPP_INCLUDED
 #define CLXX_S11N_DEVICE_INFO_HPP_INCLUDED
@@ -23,7 +24,14 @@ namespace serialization {
  * @{
  */
 /** // doc: serialize(ar,obj,ver) {{{
- * \todo Write documentation
+ * \brief Serialize or deserialize \ref clxx::device_info "device_info" object
+ *
+ * \param ar  Archive used to store or restore the object \e obj.
+ * \param obj The object to be serialized
+ * \param ver Version of the object \e obj being serialized or deserialized.
+ *
+ * \note When serializing, the \e ver argument shall receive the value of
+ *       \ref clxx::device_info::class_version "device_info::class_version".
  */ // }}}
 template<class Archive>
 void serialize(Archive& ar, clxx::device_info& obj, const unsigned int ver);

@@ -5,7 +5,7 @@
 
 /** // doc: clxx/s11n/platform_layer_info.hpp {{{
  * \file clxx/s11n/platform_layer_info.hpp
- * \todo Write documentation
+ * \brief Implements serialization of \ref clxx::platform_layer_info "platform_layer_info"
  */ // }}}
 #ifndef CLXX_S11N_PLATFORM_LAYER_INFO_IMPL_HPP_INCLUDED
 #define CLXX_S11N_PLATFORM_LAYER_INFO_IMPL_HPP_INCLUDED
@@ -20,11 +20,16 @@
 namespace clxx {
 
 /** // doc: _serialize(Archive, platform_layer_info&, const unsigned int) {{{
- * \todo Write documentation
+ * \brief Implements serialization of \ref clxx::platform_layer_info "platform_layer_info"
+ * 
+ * \param ar  Archive used for serialization.
+ * \param obj The object to be serialized.
+ * \param ver Class version
  */ // }}}
 template<class Archive>
-void _serialize(Archive& ar, platform_layer_info& obj, const unsigned int)
+void _serialize(Archive& ar, platform_layer_info& obj, const unsigned int ver)
 {
+  (void)ver;
   using boost::serialization::make_nvp;
   ar & make_nvp("bimap", obj._bimap);
 }

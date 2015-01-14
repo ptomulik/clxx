@@ -3,7 +3,8 @@
 
 /** // doc: clxx/s11n/device_query.cpp {{{
  * \file clxx/s11n/device_query.cpp
- * \todo Write documentation
+ * \brief Instantiates boost::serialization::serialize functions for
+ *        \ref clxx::device_query "device_query" objects
  */ // }}}
 #include <clxx/s11n/device_query_impl.hpp>
 #include <boost/archive/text_iarchive.hpp>

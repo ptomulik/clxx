@@ -5,7 +5,7 @@
 
 /** // doc: clxx/app/main.hpp {{{
  * \file clxx/app/main.hpp
- * \todo Write documentation
+ * \brief Defines clxx::app::main
  */ // }}}
 #ifndef CLXX_APP_MAIN_HPP_INCLUDED
 #define CLXX_APP_MAIN_HPP_INCLUDED
@@ -13,25 +13,33 @@
 namespace clxx { namespace app {
 
 /** // doc: class main {{{
- * \todo Write documentation
+ * \brief Base class for clxx program implementation classes
+ *
+ * The methodology for implementing clxx applications is to write one class
+ * per application. Any such class should derive from clxx::app::main. The
+ * class should implement at least its own methods init() and run().
  */ // }}}
 class main
 {
 public:
   /** // doc: ~main() {{{
-   * \todo Write documentation for class main
+   * \brief Destructor
    */ // }}}
   virtual ~main();
   /** // doc: main() {{{
-   * \todo Write documentation
+   * \brief Default constructor
    */ // }}}
   main();
   /** // doc: run() {{{
-   * \todo Write documentation
+   * \brief Initializes the object
+   *
+   * This method should be implemented in a derived class.
    */ // }}}
   virtual void init(int argc, char const* argv[]) = 0;
   /** // doc: run() {{{
-   * \todo Write documentation
+   * \brief Executes the program implemented by the class
+   *
+   * This method should be implemented in a derived class.
    */ // }}}
   virtual int run( ) = 0;
 };

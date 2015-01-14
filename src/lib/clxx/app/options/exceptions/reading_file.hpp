@@ -24,7 +24,8 @@ struct std_except_ctor_arg< boost::program_options::reading_file>
 
 namespace clxx { namespace app { namespace options {
 /** // doc: reading_options_file_error {{{
- * \todo Write documentation
+ * \brief Exception thrown in case there is an error when reading a
+ *    configuration file
  */ // }}}
 class reading_options_file_error
   : public clxx::exception_base<
@@ -38,7 +39,7 @@ class reading_options_file_error
     > base_;
 public:
   /** // doc: reading_options_file_error(boost::program_options::reading_file) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   reading_options_file_error(boost::program_options::reading_file const& e)
     : base_(e)

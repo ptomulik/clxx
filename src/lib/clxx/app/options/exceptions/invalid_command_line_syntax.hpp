@@ -24,7 +24,7 @@ struct std_except_ctor_arg< boost::program_options::invalid_command_line_syntax 
 
 namespace clxx { namespace app { namespace options {
 /** doc: invalid_command_line_syntax_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when invalid command line syntax is detected
  */ // }}}
 class invalid_command_line_syntax_error
   : public clxx::exception_base<
@@ -38,7 +38,7 @@ class invalid_command_line_syntax_error
     > base_;
 public:
   /** // doc: invalid_command_line_syntax_error(boost::program_options::invalid_command_line_syntax) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   invalid_command_line_syntax_error(boost::program_options::invalid_command_line_syntax const& e)
     : base_(e)

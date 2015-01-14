@@ -5,7 +5,8 @@
 
 /** // doc: clxx/s11n/platform_query.hpp {{{
  * \file clxx/s11n/platform_query.hpp
- * \todo Write documentation
+ * \brief Declares boos::serialization::serialize function for
+ *    \ref clxx::platform_query "platform_query" class
  */ // }}}
 #ifndef CLXX_S11N_PLATFORM_QUERY_HPP_INCLUDED
 #define CLXX_S11N_PLATFORM_QUERY_HPP_INCLUDED
@@ -23,7 +24,14 @@ namespace serialization {
  * @{
  */
 /** // doc: serialize(ar,obj,ver) {{{
- * \todo Write documentation
+ * \brief Serialize or deserialize \ref clxx::platform_query "platform_query" object
+ *
+ * \param ar  Archive used to store or restore \e obj.
+ * \param obj The object to be serialized
+ * \param ver Version of the object \e obj being serialized or deserialized.
+ *
+ * \note When serializing, the \e ver argument shall receive the value of
+ *       \ref clxx::platform_query::class_version "platform_query::class_version".
  */ // }}}
 template<class Archive>
 void serialize(Archive& ar, clxx::platform_query& obj, const unsigned int ver);

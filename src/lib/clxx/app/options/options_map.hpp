@@ -14,18 +14,23 @@
 
 namespace clxx { namespace app { namespace options {
 /** // doc: options_map {{{
- * \todo write documentation
+ * \brief Storage for option values
+ *
+ * This is just a direct descendant of
+ * <a href="www.boost.org/doc/html/boost/program_options/variables_map.html">boost::program_options::variables_map</a>.
+ * It's here in case we had to introduce any workarounds, fixes or our special
+ * features to the boost's variable map.
  */ // }}}
 class options_map
   : public boost::program_options::variables_map
 {
 public:
   /** // doc: ~options_map() {{{
-   * \todo write documentation
+   * \brief Destructor
    */ // }}}
   virtual ~options_map();
   /** // doc: options_map() {{{
-   * \todo write documentation
+   * \brief Constructor
    */ // }}}
   options_map();
 };

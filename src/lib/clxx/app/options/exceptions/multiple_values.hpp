@@ -24,7 +24,8 @@ struct std_except_ctor_arg< boost::program_options::multiple_values>
 
 namespace clxx { namespace app { namespace options {
 /** doc: multiple_option_values_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when multiple options values are provided to a
+ *    single-valued option
  */ // }}}
 class multiple_option_values_error
   : public clxx::exception_base<
@@ -38,7 +39,7 @@ class multiple_option_values_error
     > base_;
 public:
   /** // doc: multiple_option_values_error(boost::program_options::multiple_values) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   multiple_option_values_error(boost::program_options::multiple_values const& e)
     : base_(e)

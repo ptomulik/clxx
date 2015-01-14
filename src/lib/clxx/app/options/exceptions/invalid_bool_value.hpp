@@ -24,7 +24,8 @@ struct std_except_ctor_arg< boost::program_options::invalid_bool_value>
 
 namespace clxx { namespace app { namespace options {
 /** // doc: invalid_bool_option_value_error {{{
- * \todo Write documentation
+ * \brief An exception thrown when user provides wrong value for a boolean
+ *    (yes/no) CLI option
  */ // }}}
 class invalid_bool_option_value_error
   : public clxx::exception_base<
@@ -38,7 +39,7 @@ class invalid_bool_option_value_error
     > base_;
 public:
   /** // doc: invalid_bool_option_value_error(boost::program_options::invalid_bool_value const&) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   invalid_bool_option_value_error(boost::program_options::invalid_bool_value const& e)
     : base_(e)

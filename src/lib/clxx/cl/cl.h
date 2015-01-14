@@ -5,7 +5,18 @@
 
 /** // doc: clxx/cl/cl.h {{{
  * \file clxx/cl/cl.h
- * \todo Write documentation
+ * \brief Includes standard \c CL/cl.h header and additional extension headers
+ *        available at the compile time
+ *
+ *  The following additional headers are included if available
+ *
+ *    - \c CL/cl_ext.h
+ *    - \c CL/cl_gl.h
+ *    - \c CL/cl_gl_ext.h
+ *    - \c CL/cl_egl.h
+ *    - \c CL/cl_dx9_media_sharing.h
+ *    - \c CL/cl_d3d10.h
+ *    - \c CL/cl_d3d11.h
  */ // }}}
 #ifndef CLXX_CL_CL_H_INCLUDED
 #define CLXX_CL_CL_H_INCLUDED

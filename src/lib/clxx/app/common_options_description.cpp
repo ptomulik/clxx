@@ -10,10 +10,12 @@
 #include <clxx/app/common_options_description.hpp>
 
 namespace clxx { namespace app {
+/* ------------------------------------------------------------------------ */
 common_options_description::
 ~common_options_description()
 {
 }
+/* ------------------------------------------------------------------------ */
 common_options_description::
 common_options_description( unsigned line_length
                           , unsigned min_description_length )
@@ -21,6 +23,7 @@ common_options_description( unsigned line_length
 {
   this->_init_options_description();
 }
+/* ------------------------------------------------------------------------ */
 common_options_description::
 common_options_description( const std::string & caption, unsigned line_length
                    , unsigned min_description_length )
@@ -28,6 +31,7 @@ common_options_description( const std::string & caption, unsigned line_length
 {
   this->_init_options_description();
 }
+/* ------------------------------------------------------------------------ */
 void common_options_description::
 _init_options_description()
 {
@@ -36,6 +40,7 @@ _init_options_description()
     ("version,v","print program version")
   ;
 }
+/* ------------------------------------------------------------------------ */
 } } // end namespace clxx::app
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

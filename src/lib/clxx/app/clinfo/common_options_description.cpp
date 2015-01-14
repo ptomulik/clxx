@@ -13,12 +13,12 @@
 #include <string>
 
 namespace clxx { namespace app { namespace clinfo {
-
+/* ----------------------------------------------------------------------- */
 common_options_description::
 ~common_options_description()
-
-{ // {{{
-} // }}}
+{
+}
+/* ----------------------------------------------------------------------- */
 common_options_description::
 common_options_description( unsigned line_length
                           , unsigned min_description_length )
@@ -26,7 +26,7 @@ common_options_description( unsigned line_length
 {
   this->_init_options_description();
 }
-
+/* ----------------------------------------------------------------------- */
 common_options_description::
 common_options_description( const std::string & caption, unsigned line_length
                    , unsigned min_description_length )
@@ -35,7 +35,7 @@ common_options_description( const std::string & caption, unsigned line_length
 {
   this->_init_options_description();
 }
-
+/* ----------------------------------------------------------------------- */
 void common_options_description::
 _init_options_description()
 {
@@ -55,7 +55,7 @@ _init_options_description()
       "short listing (no details)")
   ;
 }
-
+/* ----------------------------------------------------------------------- */
 } } } // end namespace clxx::app::clinfo
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

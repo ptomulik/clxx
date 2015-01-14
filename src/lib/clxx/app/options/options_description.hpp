@@ -14,28 +14,44 @@
 
 namespace clxx { namespace app { namespace options {
 /** // doc: options_description {{{
- * \todo Write documentation
+ * \brief A set of option descriptions
+ *
+ * This is just a direct descendant of
+ * <a href="www.boost.org/doc/html/boost/program_options/options_description.html">boost::program_options::options_description</a>
+ * class. It's here in case we had to introduce any fixes/workarounds etc.
  */ // }}}
 class options_description
   : public boost::program_options::options_description
 {
 public:
   /** // doc: option_description {{{
-   * \todo write documentation
+   * \brief A type used to represent single option description
    */ // }}}
   typedef boost::program_options::option_description option_description;
 public:
   /** // doc: ~options_description() {{{
-   * \todo write documentation
+   * \brief Destructor
    */ // }}}
   ~options_description();
   /** // doc: options_description(...) {{{
-   * \todo write documentation
+   * \brief Constructor
+   *
+   * \param line_length Passed directly to the constructor of the base class
+   *    \c boost::program_options::options_description.
+   * \param min_description_length Passed directly to the constructor of the
+   *    base class \c boost::program_options::options_description.
    */ // }}}
   options_description( unsigned line_length = m_default_line_length
         , unsigned min_description_length = m_default_line_length/2);
   /** // doc: options_description(...) {{{
-   * \todo write documentation
+   * \brief Constructor
+   *
+   * \param caption Passed directly to the constructor of the base class
+   *    \c boost::program_options::options_description.
+   * \param line_length Passed directly to the constructor of the base class
+   *    \c boost::program_options::options_description.
+   * \param min_description_length Passed directly to the constructor of the
+   *    base class \c boost::program_options::options_description.
    */ // }}}
   options_description( const std::string & caption
         , unsigned line_length = m_default_line_length

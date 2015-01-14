@@ -59,7 +59,7 @@ _init_options_description()
   this->add_options()
     ("device-info"
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
-    ,"query for compute unit information")
+    ,"query for device information")
     ("compute-unit-info"
     , value<bool>()->value_name("yes/no")->implicit_value(true,"yes")
     ,"query for compute unit information")

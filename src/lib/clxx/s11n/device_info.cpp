@@ -3,7 +3,8 @@
 
 /** // doc: clxx/s11n/device_info.cpp {{{
  * \file clxx/s11n/device_info.cpp
- * \todo Write documentation
+ * \brief Instantiates boost::serialization::serialize functions for
+ *        \ref clxx::device_info "device_info" objects
  */ // }}}
 #include <clxx/s11n/device_info_impl.hpp>
 #include <boost/archive/text_iarchive.hpp>

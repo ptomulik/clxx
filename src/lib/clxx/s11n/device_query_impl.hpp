@@ -5,7 +5,7 @@
 
 /** // doc: clxx/s11n/device_query.hpp {{{
  * \file clxx/s11n/device_query.hpp
- * \todo Write documentation
+ * \brief Implements serialization of \ref clxx::device_query "device_query"
  */ // }}}
 #ifndef CLXX_S11N_DEVICE_QUERY_IMPL_HPP_INCLUDED
 #define CLXX_S11N_DEVICE_QUERY_IMPL_HPP_INCLUDED
@@ -20,11 +20,16 @@
 namespace clxx {
 
 /** // doc: _serialize(Archive, device_query&, const unsigned int) {{{
- * \todo Write documentation
+ * \brief Implements serialization of \ref clxx::device_query "device_query"
+ *
+ * \param ar  Archive used for serialization.
+ * \param obj Object to be serialized.
+ * \param ver Class version
  */ // }}}
 template<class Archive>
-void _serialize(Archive& ar, device_query& obj, const unsigned int)
+void _serialize(Archive& ar, device_query& obj, const unsigned int ver)
 {
+  (void)ver;
   using boost::serialization::make_nvp;
   ar  & make_nvp("id", obj._id)
       & make_nvp("type", obj._type)

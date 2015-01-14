@@ -24,7 +24,7 @@ struct std_except_ctor_arg< boost::program_options::required_option>
 
 namespace clxx { namespace app { namespace options {
 /** doc: required_option_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when a required CLI option is missing
  */ //}}}
 class required_option_error
   : public clxx::exception_base<
@@ -38,7 +38,7 @@ class required_option_error
     > base_;
 public:
   /** // doc: required_option_error(boost::program_options::required_option) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   required_option_error(boost::program_options::required_option const& e)
     : base_(e)

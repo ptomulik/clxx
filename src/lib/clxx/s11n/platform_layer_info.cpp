@@ -3,7 +3,8 @@
 
 /** // doc: clxx/s11n/platform_layer_info.cpp {{{
  * \file clxx/s11n/platform_layer_info.cpp
- * \todo Write documentation
+ * \brief Instantiates the boost::serialization::serialize template for
+ *    \ref clxx::platform_layer_info "platform_layer_info"
  */ // }}}
 #include <clxx/s11n/platform_layer_info_impl.hpp>
 #include <clxx/platform_info.hpp>

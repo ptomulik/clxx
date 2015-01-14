@@ -55,27 +55,28 @@ template < status_t Code
   };
 
 /** // doc: clerror_base<Code, StdExcept, std_except_no_ctor_arg_tag> {{{
- * \todo Write documentation
+ * \brief Partial specialization of the clerror_base template for exceptions
+ *    based on standard exceptions with immutable error messages
  */ // }}}
 template < status_t Code, class StdExcept>
   struct clerror_base<Code, StdExcept, std_except_no_ctor_arg_tag>
     : public exception_base<clerror, StdExcept, std_except_no_ctor_arg_tag>
   {
     /** // doc: static_code {{{
-     * \todo Write documentation
+     * \brief OpenCL error code represented by this exception
      */ // }}}
     static constexpr status_t static_code = Code;
     /** // doc: static_what {{{
-     * \todo Write documentation
+     * \brief Error message for the OpenCL error represented by this class
      */ // }}}
     static constexpr char const* static_what = enum2cstr(Code);
     static_assert(static_what != nullptr, "");
     /** // doc: code() {{{
-     * \todo Write documentation
+     * \brief Returns OpenCL error code represented by this exception
      */ // }}}
     status_t code() const noexcept { return Code; }
     /** // doc: what() {{{
-     * \todo Write documentation
+     * \brief Return the error message for this exception
      */ // }}}
     char const* what() const noexcept { return static_what; }
   };
@@ -88,11 +89,11 @@ template < status_t Code, class StdExcept>
     : public exception_base<clerror, StdExcept, char const*>
   {
     /** // doc: static_code {{{
-     * \todo Write documentation
+     * \brief OpenCL error code represented by this exception
      */ // }}}
     static constexpr status_t static_code = Code;
     /** // doc: static_what {{{
-     * \todo Write documentation
+     * \brief Error message for the OpenCL error represented by this class
      */ // }}}
     static constexpr char const* static_what = enum2cstr(Code);
     static_assert(static_what != nullptr, "");

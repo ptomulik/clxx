@@ -5,7 +5,7 @@
 
 /** // doc: clxx/s11n/platform_info.hpp {{{
  * \file clxx/s11n/platform_info.hpp
- * \todo Write documentation
+ * \brief Implements serialization for \ref clxx::platform_info "platform_info"
  */ // }}}
 #ifndef CLXX_S11N_PLATFORM_INFO_IMPL_HPP_INCLUDED
 #define CLXX_S11N_PLATFORM_INFO_IMPL_HPP_INCLUDED
@@ -19,11 +19,16 @@
 namespace clxx {
 
 /** // doc: _serialize(Archive, platform_info&, const unsigned int) {{{
- * \todo Write documentation
+ * \brief Implements serialization for \ref clxx::platform_info "platform_info"
+ *
+ * \param ar  Archive used for serialization.
+ * \param obj The object to be serialized.
+ * \param ver Class version
  */ // }}}
 template<class Archive>
-void _serialize(Archive& ar, platform_info& obj, const unsigned int)
+void _serialize(Archive& ar, platform_info& obj, const unsigned int ver)
 {
+  (void)ver;
   using boost::serialization::make_nvp;
   ar  & make_nvp("id",          obj._id)
       & make_nvp("profile",     obj._profile)

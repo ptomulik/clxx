@@ -5,7 +5,8 @@
 
 /** // doc: clxx/app/options/exceptions/ambiguous_option.hpp {{{
  * \file clxx/app/options/exceptions/ambiguous_option.hpp
- * \todo Write documentation
+ * \brief Defines the clxx::app::options::ambiguous_option_error exception
+ *        class
  */ // }}}
 #ifndef CLXX_APP_OPTIONS_EXCEPTIONS_AMBIGUOUS_OPTION_HPP_INCLUDED
 #define CLXX_APP_OPTIONS_EXCEPTIONS_AMBIGUOUS_OPTION_HPP_INCLUDED
@@ -24,7 +25,8 @@ struct std_except_ctor_arg< boost::program_options::ambiguous_option>
 
 namespace clxx { namespace app { namespace options {
 /** // doc: ambiguous_option_error {{{
- * \todo Write documentation
+ * \brief An exception thrown when there is ambiguity between several possible
+ *        options
  */ // }}}
 class ambiguous_option_error
   : public clxx::exception_base<
@@ -38,7 +40,7 @@ class ambiguous_option_error
     > base_;
 public:
   /** // doc: ambiguous_option_error(boost::program_options::ambiguous_option) {{{
-   * \todo Write documentation
+   * \brief Copy constructor
    */ // }}}
   ambiguous_option_error(boost::program_options::ambiguous_option const& e)
     : base_(e)

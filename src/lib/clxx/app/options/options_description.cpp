@@ -10,19 +10,19 @@
 #include <clxx/app/options/options_description.hpp>
 
 namespace clxx{ namespace app{ namespace options {
-
+/* ------------------------------------------------------------------------ */
 options_description::
 ~options_description()
 {
 }
-
+/* ------------------------------------------------------------------------ */
 options_description::
 options_description( unsigned line_length, unsigned min_description_length )
   : boost::program_options::options_description( line_length
                                                , min_description_length)
 {
 }
-
+/* ------------------------------------------------------------------------ */
 options_description::
 options_description( const std::string & caption, unsigned line_length
                    , unsigned min_description_length )
@@ -30,7 +30,7 @@ options_description( const std::string & caption, unsigned line_length
                                                , min_description_length)
 {
 }
-
+/* ------------------------------------------------------------------------ */
 } } } // end namespace clxx::app::options
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

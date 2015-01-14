@@ -24,7 +24,7 @@ struct std_except_ctor_arg< boost::program_options::invalid_option_value>
 
 namespace clxx { namespace app { namespace options {
 /** doc: invalid_option_value_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when invalid value for an option is provided
  */ // }}}
 class invalid_option_value_error
   : public clxx::exception_base<
@@ -38,7 +38,7 @@ class invalid_option_value_error
     > base_;
 public:
   /** // doc: invalid_option_value_error(boost::program_options::invalid_option_value) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   invalid_option_value_error(boost::program_options::invalid_option_value const& e)
     : base_(e)

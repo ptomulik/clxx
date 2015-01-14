@@ -13,7 +13,16 @@
 #include <boost/program_options/value_semantic.hpp>
 
 /** // doc: BOOST_PROGRAM_OPTIONS_NEED_VALUE_NAME_FIX {{{
- * \todo Write documentation
+ * \brief Whether to use a workaround for missing
+ *    boost::program_options::typed_value<T,CharT>::value_name()
+ *
+ * Older versions of Boost.Program_Options were missing the
+ * boost::program_options::typed_value<T,CharT>::name() and
+ * boost::program_options::typed_value<T,CharT>::value_name() methods.
+ * For those versions, we provide special workaround, that is we implement
+ * these methods in our subclass clxx::app::options::option_value.
+ *
+ * This constant decides, whether this workaround should be enabled or not.
  */ // }}}
 #define BOOST_PROGRAM_OPTIONS_NEED_VALUE_NAME_FIX 1
 // FIXME: I'm not sure, in which version of Boost.ProgramOptions the member
@@ -35,7 +44,9 @@ extern BOOST_PROGRAM_OPTIONS_DECL std::string arg;
 namespace clxx { namespace app { namespace options {
 
 /** // doc: class option_value {{{
- * \todo Write documentation
+ * \brief Single option value
+ *
+ * The option_value object encapsuates the actual value and also has a name.
  */ // }}}
 template <class T, class charT = char>
 class option_value
@@ -43,14 +54,14 @@ class option_value
 {
 public:
   /** // doc: ~option_value() {{{
-   * \todo Write documentation for class option_value
+   * \brief Destructor
    */ // }}}
   virtual ~option_value()
   {
   }
 
   /** // doc: option_value(...) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   option_value(T* store_to)
     : boost::program_options::typed_value<T,charT>(store_to)
@@ -59,12 +70,15 @@ public:
 
 #if BOOST_PROGRAM_OPTIONS_NEED_VALUE_NAME_FIX
   /** // doc: foo() {{{
-   * \todo Write documentation
+   * \brief Returns option value's name
    */ // }}}
   std::string name( ) const;
 
   /** // doc: value_name(n) {{{
-   * \todo Write documentation
+   * \brief Sets option value's name
+   *
+   * \param n The new name
+   * \returns Pointer to this object
    */ // }}}
   option_value* value_name(std::string const& n)
   {
@@ -80,7 +94,11 @@ private:
 };
 
 /** // doc: value(v) {{{
- * \todo Write documentation
+ * \brief Generate \ref option_value wrapper for value of type T
+ * \tparam T Type of the underlying value
+ * \param v Pointer to the variable being wrapped with the option_value object.
+ * \returns A pointer to newly allocated \ref option_value object. The returned
+ *    value is allocated with the \c new operator.
  */ // }}}
 template<class T>
 option_value<T>*
@@ -91,17 +109,27 @@ value(T* v)
 }
 
 /** // doc: value() {{{
- * \todo Write documentation
+ * \brief Generate \ref option_value object wrapping \c nullptr.
+ * \tparam T Type of the underlying value
+ * \returns A pointer to new \ref option_value object.
  */ // }}}
 template<class T>
 option_value<T>*
 value()
 {
-  return clxx::app::options::value<T>(0);
+  return clxx::app::options::value<T>(nullptr);
 }
 
 /** // doc: wvalue(v) {{{
- * \todo Write documentation
+ * \brief Generate \ref option_value wrapper for value of type T
+ * \tparam T Type of the underlying value
+ *
+ * The returned option_value object uses \c wchar_t string to represent its
+ * name.
+ *
+ * \param v Pointer to the variable being wrapped with the option_value object.
+ * \returns A pointer to newly allocated \ref option_value object. The returned
+ *    value is allocated with the \c new operator.
  */ // }}}
 template<class T>
 option_value<T, wchar_t>*
@@ -112,7 +140,13 @@ wvalue(T* v)
 }
 
 /** // doc: wvalue() {{{
- * \todo Write documentation
+ * \brief Generate \ref option_value object wrapping \c nullptr.
+ *
+ * The returned option_value object uses \c wchar_t string to represent its
+ * name.
+ *
+ * \tparam T Type of the underlying value
+ * \returns A pointer to new \ref option_value object.
  */ // }}}
 template<class T>
 option_value<T, wchar_t>*
@@ -122,7 +156,11 @@ wvalue()
 }
 
 /** // doc: bool_switch(v) {{{
- * \todo Write documentation
+ * \brief Generate \ref option_value object wrapping a boolean value
+ * \param v Pointer to the variable being wrapped with the new \ref
+ *    option_value object.
+ * \returns A pointer newly created option_value object. The object is
+ *    allocated with the operator \c new.
  */ // }}}
 BOOST_PROGRAM_OPTIONS_DECL inline option_value<bool>*
 bool_switch(bool* v)
@@ -135,7 +173,9 @@ bool_switch(bool* v)
 }
 
 /** // doc: bool_switch() {{{
- * \todo Write documentation
+ * \brief Generate \ref option_value object wrapping \c nullptr.
+ * \tparam T Type of the underlying value
+ * \returns A pointer to new \ref option_value object.
  */ // }}}
 BOOST_PROGRAM_OPTIONS_DECL inline option_value<bool>*
 bool_switch()

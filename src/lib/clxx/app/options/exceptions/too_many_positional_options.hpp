@@ -27,7 +27,8 @@ struct std_except_ctor_arg<
 namespace clxx { namespace app { namespace options {
 
 /** // doc: too_many_positional_options_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when there is too many positional options on command
+ *    line
  */ // }}}
 class too_many_positional_options_error
   : public clxx::exception_base<
@@ -41,7 +42,7 @@ class too_many_positional_options_error
     > base_;
 public:
   /** // doc: too_many_positional_options_error(boost::program_options::too_many_positional_options_error) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   too_many_positional_options_error(boost::program_options::too_many_positional_options_error const& e)
     : base_(e)

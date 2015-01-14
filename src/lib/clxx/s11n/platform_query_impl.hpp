@@ -5,7 +5,7 @@
 
 /** // doc: clxx/s11n/platform_query.hpp {{{
  * \file clxx/s11n/platform_query.hpp
- * \todo Write documentation
+ * \brief Implements serializiation of \ref clxx::platform_query "platform_query"
  */ // }}}
 #ifndef CLXX_S11N_PLATFORM_QUERY_IMPL_HPP_INCLUDED
 #define CLXX_S11N_PLATFORM_QUERY_IMPL_HPP_INCLUDED
@@ -17,11 +17,16 @@
 namespace clxx {
 
 /** // doc: _serialize(Archive, platform_query&, const unsigned int) {{{
- * \todo Write documentation
+ * \brief Implements serialization of \ref clxx::platform_query "platform_query"
+ *
+ * \param ar  Archive used for serialization.
+ * \param obj The object to be serialized.
+ * \param ver Class version
  */ // }}}
 template<class Archive>
-void _serialize(Archive& ar, platform_query& obj, const unsigned int)
+void _serialize(Archive& ar, platform_query& obj, const unsigned int ver)
 {
+  (void)ver;
   using boost::serialization::make_nvp;
   ar  & make_nvp("id", obj._id)
       & make_nvp("profile", obj._profile)

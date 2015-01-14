@@ -25,7 +25,7 @@ struct std_except_ctor_arg< boost::program_options::multiple_occurrences>
 namespace clxx { namespace app { namespace options {
 
 /** // doc: multiple_option_occurrences_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when a multiple occurrences of an option is detected
  */ // }}}
 class multiple_option_occurrences_error
   : public clxx::exception_base<
@@ -39,7 +39,7 @@ class multiple_option_occurrences_error
     > base_;
 public:
   /** // doc: multiple_option_occurrences_error(boost::program_options::multiple_occurrences) {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   multiple_option_occurrences_error(boost::program_options::multiple_occurrences const& e)
     : base_(e)

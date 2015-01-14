@@ -24,7 +24,7 @@ struct std_except_ctor_arg< boost::program_options::invalid_config_file_syntax>
 
 namespace clxx { namespace app { namespace options {
 /** doc: invalid_config_file_syntax_error {{{
- * \todo Write documentation
+ * \brief Exception thrown when syntax error is detected in a configuration file.
  */ // }}}
 class invalid_config_file_syntax_error
   : public clxx::exception_base<
@@ -38,7 +38,7 @@ class invalid_config_file_syntax_error
     > base_;
 public:
   /** // doc: invalid_config_file_syntax_error(boost::program_options::invalid_config_file_syntax {{{
-   * \todo Write documentation
+   * \brief Constructor
    */ // }}}
   invalid_config_file_syntax_error(boost::program_options::invalid_config_file_syntax const& e)
     : base_(e)

@@ -3,7 +3,8 @@
 
 /** // doc: clxx/s11n/platform_info.cpp {{{
  * \file clxx/s11n/platform_info.cpp
- * \todo Write documentation
+ * \brief Specializes the boost::serialization::serialize template for
+ * \ref clxx::platform_info "platform_info" class
  */ // }}}
 #include <clxx/s11n/platform_info_impl.hpp>
 #include <boost/archive/text_iarchive.hpp>
