@@ -1,15 +1,14 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: clxx/program.li.swg {{{
- * \file clxx/program.li.swg
+/** // doc: clxx/program.i {{{
+ * \file clxx/program.i
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/program.hpp>
-%}
-%include <clxx/program.hpp>
+%module(package="clxx") program
+%feature("autodoc","3");
+%include <clxx/program.li.i>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

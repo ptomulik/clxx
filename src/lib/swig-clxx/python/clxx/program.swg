@@ -1,15 +1,13 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: clxx/program.li.swg {{{
- * \file clxx/program.li.swg
+/** // doc: python/clxx/program.swg {{{
+ * \file python/clxx/program.swg
  * \todo Write documentation
  */ // }}}
 
-%{
-#include <clxx/program.hpp>
-%}
-%include <clxx/program.hpp>
+%ignore clxx::program::operator=;
+%include <clxx/program.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

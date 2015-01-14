@@ -539,6 +539,8 @@ class Dummy_clGetProgramInfo
     public T::Dummy_CallArgs<cl_program, cl_program_info, size_t, void*, size_t*>
 {
   cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
   cl_int clGetProgramInfo(cl_program program, cl_program_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -546,7 +548,7 @@ public:
   /** // doc: Dummy_clGetProgramInfo() {{{
    * \todo Write documentation
    */ // }}}
-  Dummy_clGetProgramInfo(cl_int err);
+  Dummy_clGetProgramInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clGetProgramBuildInfo {{{
  * \brief Mock for clGetProgramBuildInfo OpenCL function.
@@ -559,6 +561,8 @@ class Dummy_clGetProgramBuildInfo
                              size_t, void*, size_t*>
 {
   cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
   cl_int clGetProgramBuildInfo(cl_program program,
                                cl_device_id device,
                                cl_program_build_info param_name,
@@ -569,7 +573,7 @@ public:
   /** // doc: Dummy_clGetProgramBuildInfo() {{{
    * \todo Write documentation
    */ // }}}
-  Dummy_clGetProgramBuildInfo(cl_int err);
+  Dummy_clGetProgramBuildInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
 };
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
@@ -940,12 +944,20 @@ clGetProgramInfo(cl_program program, cl_program_info param_name,
                 size_t* param_value_size_ret)
 {
   call_with(program, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
   return _err;
 }
 
 Dummy_clGetProgramInfo::
-Dummy_clGetProgramInfo(cl_int err)
-  : _err(err)
+Dummy_clGetProgramInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
 /* ------------------------------------------------------------------------- */
@@ -955,12 +967,20 @@ clGetProgramBuildInfo(cl_program program, cl_device_id device,
                       void* param_value, size_t* param_value_size_ret)
 {
   call_with(program, device, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
   return _err;
 }
 
 Dummy_clGetProgramBuildInfo::
-Dummy_clGetProgramBuildInfo(cl_int err)
-  : _err(err)
+Dummy_clGetProgramBuildInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
 /* ------------------------------------------------------------------------- */

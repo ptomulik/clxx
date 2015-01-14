@@ -1,8 +1,8 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: swig/clxx/platforms.li.swg {{{
- * \file swig/clxx/platforms.li.swg
+/** // doc: clxx/platforms.li.swg {{{
+ * \file clxx/platforms.li.swg
  * \todo Write documentation
  */ // }}}
 

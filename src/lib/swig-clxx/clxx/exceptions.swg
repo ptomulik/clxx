@@ -1,8 +1,8 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: swig/clxx/exceptions.swg {{{
- * \file swig/clxx/exceptions.swg
+/** // doc: clxx/exceptions.swg {{{
+ * \file clxx/exceptions.swg
  * \todo Write documentation
  */ // }}}
 

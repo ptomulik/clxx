@@ -14,44 +14,44 @@ namespace clxx {
 
 /* ------------------------------------------------------------------------ */
 template<typename T> static T
-_get_pod_info(context const& ctx, context_info_t name)
+_get_pod_info(context const& p, context_info_t name)
 {
   T value;
-  ctx.get_info(name,sizeof(value),&value,NULL);
+  p.get_info(name,sizeof(value),&value,NULL);
   return value;
 }
 /* ------------------------------------------------------------------------ */
 template<typename T> static std::vector<T>
-_get_vec_info(context const& ctx, context_info_t name)
+_get_vec_info(context const& p, context_info_t name)
 {
   size_t size;
-  ctx.get_info(name,0,NULL,&size);
+  p.get_info(name,0,NULL,&size);
   std::vector<T> values(size/sizeof(T));
-  ctx.get_info(name,values.size()*sizeof(T),&values.front(),NULL);
+  p.get_info(name,values.size()*sizeof(T),&values.front(),NULL);
   return values;
 }
 /* ------------------------------------------------------------------------ */
 void context::
-_set_id(cl_context ctx, bool retain_new, bool release_old)
+_set_id(cl_context id, bool retain_new, bool release_old)
 {
-  if(ctx != this->_ctx) // Avoid unintended deletion by clReleaseContext()
+  if(id != this->_id) // Avoid unintended deletion by clReleaseContext()
     {
-      if(release_old)
+      if(release_old && this->is_initialized())
         {
-          release_context(this->get_valid_ctx());
+          release_context(this->_id);
         }
-      this->_ctx = ctx;
+      this->_id = id;
       if(retain_new)
         {
-          retain_context(this->_ctx);
+          retain_context(this->_id);
         }
     }
 }
 /* ------------------------------------------------------------------------ */
 context::
-context(cl_context ctx)
+context(cl_context id)
 {
-  this->_set_id(ctx, true, false);
+  this->_set_id(id, true, false);
 }
 /* ------------------------------------------------------------------------ */
 context::
@@ -66,9 +66,9 @@ context(context_properties const& props, devices const& devs,
   const size_t devs_n = devs.size();
   std::vector<cl_device_id> dev_ids(devs_n);
   for(size_t i = 0; i < devs_n; dev_ids[i] = devs[i].id(), ++i) { }
-  cl_context ctx = create_context(&props_v.front(), devs_n, &dev_ids.front(),
+  cl_context id = create_context(&props_v.front(), devs_n, &dev_ids.front(),
                                   pfn_notify, user_data);
-  this->_set_id(ctx, false, false);
+  this->_set_id(id, false, false);
 }
 /* ------------------------------------------------------------------------ */
 context::
@@ -81,27 +81,24 @@ context(const context_properties& props,
   const size_t props_n = context_properties_array_size(props);
   std::vector<cl_context_properties> props_v(props_n);
   context_properties_fill_array(props, &props_v.front(), props_n);
-  cl_context ctx = create_context_from_type(&props_v.front(), dev_type,
+  cl_context id = create_context_from_type(&props_v.front(), dev_type,
                                             pfn_notify, user_data);
-  this->_set_id(ctx, false, false);
+  this->_set_id(id, false, false);
 }
 /* ------------------------------------------------------------------------ */
 context::
 context(const context& rhs)
 {
-  this->_set_id(rhs.get_valid_ctx(), true, false);
+  this->_set_id(rhs.get_valid_id(), true, false);
 }
 /* ------------------------------------------------------------------------ */
 context::
-~context() noexcept
+~context()
 {
   if(this->is_initialized())
     {
       try { this->_set_id(NULL, false, true); }
-      catch(clerror_no<status_t::invalid_context> const& ){ }
-      // NOTE: _set_id() also throws uninitialized_context_error but it
-      // shouldn't happen here (we have checked, that context is initialized);
-      // if it happens anyway, then there is a bug somewhere.
+      catch(clerror_no<status_t::invalid_context> const&){ }
     }
 }
 /* ------------------------------------------------------------------------ */
@@ -109,51 +106,22 @@ void context::
 get_info(context_info_t name, size_t value_size, void* value,
          size_t* value_size_ret) const
 {
-  get_context_info(this->get_valid_ctx(), name, value_size, value, value_size_ret);
+  get_context_info(this->get_valid_id(), name, value_size, value, value_size_ret);
 }
 /* ------------------------------------------------------------------------ */
 cl_context context::
-ctx() const noexcept
-{
-  return this->_ctx;
-}
-/* ------------------------------------------------------------------------ */
-cl_context context::
-get_valid_ctx() const
+get_valid_id() const
 {
   if(!this->is_initialized())
-    {
-      throw uninitialized_context_error();
-    }
-  return this->_ctx;
-}
-/* ------------------------------------------------------------------------ */
-context& context::
-operator=(context const& rhs)
-{
-  this->assign(rhs);
-  return *this;
-}
-/* ------------------------------------------------------------------------ */
-bool context::
-operator == (context const& rhs) const noexcept
-{
-  return this->_ctx == rhs._ctx;
-}
-/* ------------------------------------------------------------------------ */
-bool context::
-operator != (context const& rhs) const noexcept
-{
-  return ! (*this == rhs);
+    throw uninitialized_context_error();
+  return this->_id;
 }
 /* ------------------------------------------------------------------------ */
 void context::
 assign(context const& rhs)
 {
   if(&rhs != this)
-    {
-      this->_set_id(rhs.get_valid_ctx(), true, true);
-    }
+    this->_set_id(rhs.get_valid_id(), true, true);
 }
 /* ------------------------------------------------------------------------ */
 cl_uint context::

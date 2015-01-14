@@ -24,6 +24,17 @@
 %throws_clerror(clxx::create_sub_devices(cl_device_id, const cl_device_partition_property *, cl_uint, cl_device_id *, cl_uint *));
 %throws_clerror(clxx::retain_device(cl_device_id));
 %throws_clerror(clxx::release_device(cl_device_id));
+%throws_clerror(clxx::create_program_with_source(cl_context, cl_uint, const char **, const size_t *))
+%throws_clerror(clxx::create_program_with_binary(cl_context, cl_uint, const cl_device_id *, const size_t *, const unsigned char **, cl_int *))
+%throws_clerror(clxx::create_program_with_built_in_kernels(cl_context, cl_uint, const cl_device_id *, const char *))
+%throws_clerror(clxx::retain_program(cl_program))
+%throws_clerror(clxx::release_program(cl_program))
+%throws_clerror(clxx::build_program(cl_program, cl_uint, const cl_device_id *, const char *, void(*pfn_notify)(cl_program, void *), void *))
+%throws_clerror(clxx::compile_program(cl_program, cl_uint, const cl_device_id *, const char *, cl_uint, const cl_program *, const char **, void(*)(cl_program, void *), void *))
+%throws_clerror(clxx::link_program(cl_context, cl_uint, const cl_device_id *, const char *, cl_uint, const cl_program *, void(*)(cl_program, void *), void *))
+%throws_clerror(clxx::unload_platform_compiler(cl_platform_id))
+%throws_clerror(clxx::get_program_info(cl_program, program_info_t, size_t, void *, size_t *))
+%throws_clerror(clxx::get_program_build_info(cl_program, cl_device_id, program_build_info_t, size_t, void *, size_t *))
 
 %include <clxx/functions.hpp>
 

@@ -33,7 +33,7 @@ namespace clxx {
  *
  * Although \ref context maintains internally reference count for its
  * \c cl_context handle, it doesn't prevent one from stealing the
- * \c cl_context handle (ctx(), get_valid_ctx()). This gives rise to manipulate
+ * \c cl_context handle (id(), get_valid_id()). This gives rise to manipulate
  * the reference count outside of object. If you need to steal, use the
  * retrieved handle with care. If you retrieve the handle from \ref context
  * object, increase its reference count with \ref retain_context() as soon as
@@ -56,55 +56,39 @@ namespace clxx {
 class context
 {
 private:
-  cl_context  _ctx;
+  cl_context  _id;
   context();
 protected:
-  /** // doc: ctx() {{{
-   * \brief   Get \c cl_context handle held by \c this object.
-   *
-   * \return  The \c cl_context handle held by \c this object.
-   */ // }}}
-  cl_context ctx() const noexcept;
-  /** // doc: get_valid_ctx() {{{
-   * \brief   Check if \c this object is initialized and return \c cl_context
-   *          handle held by this object.
-   *
-   * \return  The \c cl_context handle to OpenCL context encapsulated within
-   *          this object.
-   *
-   * \throw uninitialized_context_error when the object was not properly
-   *        initialized (see is_initialized()).
-   */ // }}}
-  cl_context get_valid_ctx() const;
   /** // doc: _sdoc: _set_id() {{{
    * \brief Set new \c cl_context handle to this object
    *
-   * \param ctx
+   * \param id
    *    A \c cl_context handle to OpenCL context. It must be a valid handle if
    *    \c retain_new is true.
    * \param retain_new
-   *    If \c true, the reference count for \c ctx gets increased,
+   *    If \c true, the reference count for \c id gets increased,
    * \param release_old
    *    If \c true, the reference count for old identifier encapsulated to this
    *    end by the object gets decreased,
    *
    * \throw clerror_no<status_t::invalid_context>
-   *    when the \c retain_new is true and \c ctx is not a valid \c cl_context
+   *    when the \c retain_new is true and \c id is not a valid \c cl_context
    *    handle or when \c release_old is \c true and \c this object holds an
    *    invalid \c cl_context handle.
+   * \throw unexpected_clerror
    */ // }}}
-  void _set_id(cl_context ctx, bool retain_new, bool release_old);
+  void _set_id(cl_context id, bool retain_new, bool release_old);
 public:
   /** // doc: context(cl_context) {{{
    * \brief Constructor
    *
    * Initializes new \ref context object with OpenCL context handle.
    *
-   * \param ctx OpenCL context handle
+   * \param id OpenCL context handle
    *
    * It may throw exceptions described in \ref retain_context().
    */ // }}}
-  explicit context(cl_context ctx);
+  explicit context(cl_context id);
   /** // doc: context(props, devs, pfn_notify, user_data) {{{
    * \brief Constructor - create new OpenCL context (costly).
    *
@@ -192,8 +176,8 @@ public:
    * \brief Copy constructor (reference copy).
    *
    * This constructor creates context object referring to the same OpenCL
-   * context as \c rhs does. After that, the newly created (this) object and
-   * the \c rhs hold \c cl_context handle to the same OpenCL context. The
+   * context as \e rhs does. After that, the newly created (this) object and
+   * the \e rhs hold \c cl_context handle to the same OpenCL context. The
    * reference count for this handle is increased by one during
    * copy-construction by performing an internal call to \ref retain_context().
    *
@@ -201,9 +185,10 @@ public:
    *    Another context object to be assigned to this object.
    *
    * \throw uninitialized_context_error
-   *    thrown when \c rhs is uninitialized.
+   *    thrown when \e rhs is uninitialized.
    * \throw clerror_no<status_t::invalid_context>
-   *    thrown when \c rhs holds a \c cl_context handle that is invalid.
+   *    thrown when \e rhs holds a \c cl_context handle that is invalid.
+   * \throw unexpected_clerror
    */ // }}}
   context(context const& rhs);
   /** // doc: ~context() {{{
@@ -211,15 +196,33 @@ public:
    *
    * Internally decreases reference count for this context.
    */ // }}}
-  virtual ~context() noexcept;
-  /** // {{{
+  virtual ~context();
+  /** // doc: id() {{{
+   * \brief   Get \c cl_context handle held by \c this object.
+   *
+   * \return  The \c cl_context handle held by \c this object.
+   */ // }}}
+  cl_context id() const noexcept
+  { return this->_id; }
+  /** // doc: get_valid_id() {{{
+   * \brief   Check if \c this object is initialized and return \c cl_context
+   *          handle held by this object.
+   *
+   * \return  The \c cl_context handle to OpenCL context encapsulated within
+   *          this object.
+   *
+   * \throw uninitialized_context_error when the object was not properly
+   *        initialized (see is_initialized()).
+   */ // }}}
+  cl_context get_valid_id() const;
+  /** // doc: operator= {{{
    * \brief Assignment operator
    *
    * \param rhs Another context object to be assigned to this object
    *
-   *  This operation copies the \c cl_context handle held by \c rhs
+   *  This operation copies the \c cl_context handle held by \e rhs
    *  to \c this object and maintains reference counts appropriately. The
-   *  reference count for handle originating from \c rhs gets increased by
+   *  reference count for handle originating from \e rhs gets increased by
    *  one, as it acquires new user (\c this object). The reference count for
    *  identifier held up to now by \c this object is decreased by one, as it is
    *  forgotten by one user (namely, by \c this object).
@@ -227,58 +230,99 @@ public:
    * \return Reference to this object
    *
    * \throw uninitialized_context_error
-   *    when the \c rhs object is in uninitialized state
+   *    when the \e rhs object is in uninitialized state
    * \throw clerror_no<status_t::invalid_context>
-   *    when the \c rhs holds invalid \c cl_context handle
+   *    when the \e rhs holds invalid \c cl_context handle
+   * \throw unexpected_clerror
    */ // }}}
-  context& operator=(context const& rhs);
-  /** // {{{
+  context& operator=(context const& rhs)
+  { this->assign(rhs); return *this; }
+  /** // doc: operator== {{{
    * \brief Compare this context with another one
    *
    * \param rhs
    *    Another context object to be compared to \c this object.
    *
    * \return
-   *    Returns \c true if both, \c this and \c rhs, refer to the same OpenCL
-   *    context, or \c false otherwise.
+   *    Returns <tt>this->id() == rhs.id()</tt>
    */ // }}}
-  bool operator == (context const& rhs) const noexcept;
-  /** // {{{
+  bool operator == (context const& rhs) const noexcept
+  { return this->id() == rhs.id(); }
+  /** // doc: operator!= {{{
    * \brief Compare this context with another one
    *
    * \param rhs
    *    Another context object to be compared to \c this object.
    *
-   * \return <tt>!(*this == rhs)</tt>
+   * \returns <tt>this->id() != rhs.id()</tt>
    */ // }}}
-  bool operator != (context const& rhs) const noexcept;
+  bool operator != (context const& rhs) const noexcept
+  { return this->id() != rhs.id(); }
+  /** // doc: operator< {{{
+   * \brief Compare this context with another one
+   *
+   * \param rhs
+   *    Another context object to be compared to \c this object.
+   *
+   * \return <tt>this->id() < rhs.id())</tt>
+   */ // }}}
+  bool operator < (context const& rhs) const noexcept
+  { return this->id() < rhs.id(); }
+  /** // doc: operator> {{{
+   * \brief Compare this context with another one
+   *
+   * \param rhs
+   *    Another context object to be compared to \c this object.
+   *
+   * \return <tt>this->id() > rhs.id()</tt>
+   */ // }}}
+  bool operator > (context const& rhs) const noexcept
+  { return this->id() > rhs.id(); }
+  /** // doc: operator<= {{{
+   * \brief Compare this context with another one
+   *
+   * \param rhs
+   *    Another context object to be compared to \c this object.
+   *
+   * \return <tt>this->id() <= rhs.id()</tt>
+   */ // }}}
+  bool operator <= (context const& rhs) const noexcept
+  { return this->id() <= rhs.id(); }
+  /** // doc: operator>= {{{
+   * \brief Compare this context with another one
+   *
+   * \param rhs
+   *    Another context object to be compared to \c this object.
+   *
+   * \return <tt>this->id() >= rhs.id()</tt>
+   */ // }}}
+  bool operator >= (context const& rhs) const noexcept
+  { return this->id() >= rhs.id(); }
   /** // {{{
    * \brief Assignment
    *
-   *  This operation copies the \c cl_context handle held by \c rhs
+   *  This operation copies the \c cl_context handle held by \e rhs
    *  to \c this object and maintains reference count appropriately. The
-   *  reference count for handle originating from \c rhs gets increased by
+   *  reference count for handle originating from \e rhs gets increased by
    *  one, as it acquires new user (\c this object). The reference count for
    *  handle held up to now by \c this object is decreased by one, as it is
    *  forgotten by one user (namely, by \c this object).
    *
    * \throw uninitialized_context_error
-   *    when \c rhs is an uninitialized context object.
+   *    when \e rhs is an uninitialized context object.
    * \throw clerror_no<status_t::invalid_context>
-   *    when \c rhs holds a \c cl_context handle that is invalid.
-   *
+   *    when \e rhs holds a \c cl_context handle that is invalid.
+   * \throw unexpected_clerror
    */ // }}}
   void assign(context const& rhs);
   /** // {{{
    * \brief   Is this object properly initialized?
    *
-   * \return  Returns \c true if \c this object is initialized or false
+   * \return  Returns \c true if \c this object is initialized or \c false
    *          otherwise.
    */ // }}}
   bool is_initialized() const noexcept
-  {
-    return (this->_ctx != NULL);
-  }
+  { return (this->_id != NULL); }
   /** // doc: get_info() {{{
    * \brief Get certain context information from OpenCL platform layer.
    *
@@ -312,7 +356,7 @@ public:
    *
    * \return  The reference count for the OpenCL context referred to by
    *          \c this object as returned by
-   *          get_context_info(this->_ctx, context_info_t::reference_count, ...)
+   *          get_context_info(this->_id, context_info_t::reference_count, ...)
    *
    * In case of errors, the method throws one of the exceptions defined
    * by \ref get_context_info().
@@ -322,7 +366,7 @@ public:
    * \brief   Get the number of devices in context.
    *
    * \return  The number of devices in context, as returned by
-   *          get_context_info(this->_ctx, context_info_t::num_devices, ...)
+   *          get_context_info(this->_id, context_info_t::num_devices, ...)
    *
    * In case of errors, the method throws one of the exceptions defined
    * by \ref get_context_info().
@@ -334,7 +378,7 @@ public:
    * \return A clxx::devices object with all devices in this context.
    *
    * The returned result contains devices as returned by the call
-   * get_context_info(this->_ctx, context_info_t::devices, ...).
+   * get_context_info(this->_id, context_info_t::devices, ...).
    *
    * In case of errors, this method throws one of the exceptions defined by
    * \ref get_context_info().

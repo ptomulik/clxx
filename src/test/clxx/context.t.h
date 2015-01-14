@@ -12,6 +12,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/context.hpp>
+#include <clxx/exceptions.hpp>
 #include <clxx/cl/mock.hpp>
 
 namespace clxx { class context_test_suite; }
@@ -30,6 +31,7 @@ public:
     T::Dummy_clRetainContext mock1(CL_SUCCESS);
     T::Dummy_clReleaseContext mock2(CL_SUCCESS);
     context c((cl_context)0x1234);
+    TS_ASSERT(c.is_initialized());
     TS_ASSERT(mock1.called_once_with((cl_context)0x1234));
     TS_ASSERT(mock2.never_called());
   }
@@ -174,6 +176,17 @@ public:
     TS_ASSERT(mock1.last_called_with((cl_context)0x1234));
     TS_ASSERT(mock2.called_once_with((cl_context)0x5678));
     TS_ASSERT_EQUALS(c1,c2);
+  }
+  /** // doc: test_assign__uninitialized_context_error() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_assign__uninitialized_context_error( )
+  {
+    T::Dummy_clRetainContext mock1(CL_SUCCESS);
+    T::Dummy_clReleaseContext mock2(CL_SUCCESS);
+    context c1((cl_context)NULL);
+    context c2((cl_context)0x5678);
+    TS_ASSERT_THROWS(c2.assign(c1), uninitialized_context_error);
   }
   /** // doc: test_is_initialized() {{{
    * \todo Write documentation

@@ -16,7 +16,7 @@ namespace clxx {
 
 /* ------------------------------------------------------------------------ */
 static std::string
-_get_string_info(platform const& p, platform_info_t name)
+_get_str_info(platform const& p, platform_info_t name)
 {
   size_t size;
   p.get_info(name, 0, NULL, &size);
@@ -45,31 +45,31 @@ get_info( platform_info_t name, size_t value_size, void* value,
 std::string platform::
 get_profile() const
 {
-  return _get_string_info(*this, platform_info_t::profile);
+  return _get_str_info(*this, platform_info_t::profile);
 }
 /* ------------------------------------------------------------------------ */
 std::string platform::
 get_version() const
 {
-  return _get_string_info(*this, platform_info_t::version);
+  return _get_str_info(*this, platform_info_t::version);
 }
 /* ------------------------------------------------------------------------ */
 std::string platform::
 get_name() const
 {
-  return _get_string_info(*this, platform_info_t::name);
+  return _get_str_info(*this, platform_info_t::name);
 }
 /* ------------------------------------------------------------------------ */
 std::string platform::
 get_vendor() const
 {
-  return _get_string_info(*this, platform_info_t::vendor);
+  return _get_str_info(*this, platform_info_t::vendor);
 }
 /* ------------------------------------------------------------------------ */
 std::string platform::
 get_extensions() const
 {
-  return _get_string_info(*this, platform_info_t::extensions);
+  return _get_str_info(*this, platform_info_t::extensions);
 }
 } // end namespace clxx
 

@@ -17,7 +17,7 @@
 namespace clxx {
 
 static std::string
-_get_string_info(device const& dev, device_info_t name)
+_get_str_info(device const& dev, device_info_t name)
 {
   size_t size;
   dev.get_info(name, 0, NULL, &size);
@@ -323,37 +323,37 @@ get_queue_properties() const
 std::string device::
 get_name() const
 {
-  return _get_string_info(*this, device_info_t::name);
+  return _get_str_info(*this, device_info_t::name);
 }
 /* ------------------------------------------------------------------------ */
 std::string device::
 get_vendor() const
 {
-  return _get_string_info(*this, device_info_t::vendor);
+  return _get_str_info(*this, device_info_t::vendor);
 }
 /* ------------------------------------------------------------------------ */
 std::string device::
 get_driver_version() const
 {
-  return _get_string_info(*this, device_info_t::driver_version);
+  return _get_str_info(*this, device_info_t::driver_version);
 }
 /* ------------------------------------------------------------------------ */
 std::string device::
 get_profile() const
 {
-  return _get_string_info(*this, device_info_t::profile);
+  return _get_str_info(*this, device_info_t::profile);
 }
 /* ------------------------------------------------------------------------ */
 std::string device::
 get_version() const
 {
-  return _get_string_info(*this, device_info_t::version);
+  return _get_str_info(*this, device_info_t::version);
 }
 /* ------------------------------------------------------------------------ */
 std::string device::
 get_extensions() const
 {
-  return _get_string_info(*this, device_info_t::extensions);
+  return _get_str_info(*this, device_info_t::extensions);
 }
 /* ------------------------------------------------------------------------ */
 cl_platform_id device::
@@ -428,7 +428,7 @@ get_native_vector_width_half() const
 std::string device::
 get_opencl_c_version() const
 {
-  return _get_string_info(*this, device_info_t::opencl_c_version);
+  return _get_str_info(*this, device_info_t::opencl_c_version);
 }
 #endif
 #if CL_VERSION_1_2
@@ -442,7 +442,7 @@ get_linker_available() const
 std::string device::
 get_built_in_kernels() const
 {
-  return _get_string_info(*this, device_info_t::built_in_kernels);
+  return _get_str_info(*this, device_info_t::built_in_kernels);
 }
 /* ------------------------------------------------------------------------ */
 size_t device::

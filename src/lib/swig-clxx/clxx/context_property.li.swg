@@ -1,8 +1,8 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: swig/clxx/context_property.li.swg {{{
- * \file swig/clxx/context_property.li.swg
+/** // doc: clxx/context_property.li.swg {{{
+ * \file clxx/context_property.li.swg
  * \todo Write documentation
  */ // }}}
 

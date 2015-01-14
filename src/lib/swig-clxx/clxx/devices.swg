@@ -2,7 +2,7 @@
 // Licensed under MIT license (LICENSE.txt)
 
 /** // doc: clxx/devices.swg {{{
- * \file swig/clxx/devices.swg
+ * \file clxx/devices.swg
  * \todo Write documentation
  */ // }}}
 

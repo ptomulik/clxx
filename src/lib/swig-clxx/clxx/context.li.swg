@@ -1,8 +1,8 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: swig/clxx/context.li.swg {{{
- * \file swig/clxx/context.li.swg
+/** // doc: clxx/context.li.swg {{{
+ * \file clxx/context.li.swg
  * \todo Write documentation
  */ // }}}
 
@@ -53,7 +53,7 @@
 %throws_as_context_ctor1(clxx::context::context(clxx::context_properties const&, clxx::device_type_t, void(*)(const char *, const void*, size_t, void *), void *));
 %throws_uninitialized_context(clxx::context::context(clxx::context const&));
 %throws_as_context_get_pod_info(clxx::context::get_info(clxx::context_info_t, size_t, void *, size_t *) const);
-%throws_uninitialized_context(clxx::context::get_valid_ctx() const);
+%throws_uninitialized_context(clxx::context::get_valid_id() const);
 %throws_uninitialized_context(clxx::context::operator=(clxx::context const&));
 %throws_uninitialized_context(clxx::context::assign(context const&));
 %throws_as_context_get_pod_info(clxx::context::get_reference_count() const);

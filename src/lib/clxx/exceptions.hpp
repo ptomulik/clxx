@@ -119,6 +119,23 @@ struct uninitialized_context_error
       : Base("attempted to use uninitialized clxx::context object")
     { }
   };
+/** // doc: uninitialized_program_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct uninitialized_program_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: uninitialized_program_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    uninitialized_program_error() noexcept
+      : Base("attempted to use uninitialized clxx::program object")
+    { }
+  };
 /** // doc: uninitialized_value_error {{{
  * \todo Write documentation
  */ // }}}

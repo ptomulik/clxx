@@ -17,6 +17,8 @@ sources =  [
     'platform.cpp',
     'platform_layer.cpp',
     'platforms.cpp',
+    'program.cpp',
+    'program_observer.cpp',
 ]
 
 headers = [
@@ -32,6 +34,12 @@ headers = [
     'platform.hpp',
     'platform_layer.hpp',
     'platforms.hpp',
+    'program.hpp',
+    'program_source.hpp',
+    'program_sources.hpp',
+    'program_binary.hpp',
+    'program_binaries.hpp',
+    'program_observer.hpp',
 ]
 
 objects = env.SharedObject(sources)
