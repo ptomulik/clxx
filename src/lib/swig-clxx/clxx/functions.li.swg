@@ -24,6 +24,10 @@
 %throws_clerror(clxx::create_sub_devices(cl_device_id, const cl_device_partition_property *, cl_uint, cl_device_id *, cl_uint *));
 %throws_clerror(clxx::retain_device(cl_device_id));
 %throws_clerror(clxx::release_device(cl_device_id));
+%throws_clerror(clxx::create_command_queue(cl_context, cl_device_id, command_queue_properties_t));
+%throws_clerror(clxx::retain_command_queue(cl_command_queue));
+%throws_clerror(clxx::release_command_queue(cl_command_queue));
+%throws_clerror(clxx::get_command_queue_info(cl_command_queue, command_queue_info_t, size_t, void *, size_t *));
 %throws_clerror(clxx::create_program_with_source(cl_context, cl_uint, const char **, const size_t *))
 %throws_clerror(clxx::create_program_with_binary(cl_context, cl_uint, const cl_device_id *, const size_t *, const unsigned char **, cl_int *))
 %throws_clerror(clxx::create_program_with_built_in_kernels(cl_context, cl_uint, const cl_device_id *, const char *))
