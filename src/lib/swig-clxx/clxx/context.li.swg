@@ -39,6 +39,15 @@
 }
 %enddef
 
+%define %throws_uninitialized_context_clerror(decl)
+%exception decl {
+  try { $action }
+  %catch_uninitialized_context_error
+  %catch_clerror
+  %catch_exception
+}
+%enddef
+
 %define %throws_as_context_ctor1(decl)
 %exception decl {
   try { $action }
@@ -49,13 +58,13 @@
 }
 %enddef
 
-%throws_as_context_ctor1(clxx::context::context(clxx::context_properties const&, clxx::devices const&, void(*)(const char *, const void*, size_t, void *), void *));
-%throws_as_context_ctor1(clxx::context::context(clxx::context_properties const&, clxx::device_type_t, void(*)(const char *, const void*, size_t, void *), void *));
-%throws_uninitialized_context(clxx::context::context(clxx::context const&));
-%throws_as_context_get_pod_info(clxx::context::get_info(clxx::context_info_t, size_t, void *, size_t *) const);
+%throws_as_context_ctor1(clxx::context::context(context_properties const&, devices const&, void(*)(const char *, const void*, size_t, void *), void *));
+%throws_as_context_ctor1(clxx::context::context(context_properties const&, device_type_t, void(*)(const char *, const void*, size_t, void *), void *));
+%throws_uninitialized_context(clxx::context::context(context const&));
+%throws_as_context_get_pod_info(clxx::context::get_info(context_info_t, size_t, void *, size_t *) const);
 %throws_uninitialized_context(clxx::context::get_valid_id() const);
-%throws_uninitialized_context(clxx::context::operator=(clxx::context const&));
-%throws_uninitialized_context(clxx::context::assign(context const&));
+%throws_uninitialized_context_clerror(clxx::context::operator=(context const&));
+%throws_uninitialized_context_clerror(clxx::context::assign(context const&));
 %throws_as_context_get_pod_info(clxx::context::get_reference_count() const);
 %throws_as_context_get_pod_info(clxx::context::get_num_devices() const);
 %throws_as_context_get_vec_info(clxx::context::get_devices() const);

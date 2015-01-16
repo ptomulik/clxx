@@ -7,6 +7,7 @@ Import('env')
 from SCons.Util import CLVar
 
 sources =  [
+    'command_queue.cpp',
     'context.cpp',
     'context_properties.cpp',
     'device.cpp',
@@ -22,6 +23,7 @@ sources =  [
 ]
 
 headers = [
+    'command_queue.hpp',
     'context.hpp',
     'context_properties.hpp',
     'context_property.hpp',
@@ -35,11 +37,11 @@ headers = [
     'platform_layer.hpp',
     'platforms.hpp',
     'program.hpp',
+    'program_binaries.hpp',
+    'program_binary.hpp',
+    'program_observer.hpp',
     'program_source.hpp',
     'program_sources.hpp',
-    'program_binary.hpp',
-    'program_binaries.hpp',
-    'program_observer.hpp',
 ]
 
 objects = env.SharedObject(sources)

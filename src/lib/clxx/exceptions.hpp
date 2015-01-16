@@ -119,6 +119,23 @@ struct uninitialized_context_error
       : Base("attempted to use uninitialized clxx::context object")
     { }
   };
+/** // doc: uninitialized_command_queue_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct uninitialized_command_queue_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: uninitialized_command_queue_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    uninitialized_command_queue_error() noexcept
+      : Base("attempted to use uninitialized clxx::command_queue object")
+    { }
+  };
 /** // doc: uninitialized_program_error {{{
  * \todo Write documentation
  */ // }}}

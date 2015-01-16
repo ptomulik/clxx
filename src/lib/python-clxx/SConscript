@@ -39,6 +39,7 @@ out += env.SwigPyModule('clxx.context_properties', SWIGPY_LIBS = libs + ['clxx_c
 out += env.SwigPyModule('clxx.context', SWIGPY_LIBS = libs + ['clxx_cl'])
 out += env.SwigPyModule('clxx.device_partition_properties', SWIGPY_LIBS = libs + ['clxx_cl'])
 out += env.SwigPyModule('clxx.device_partition', SWIGPY_LIBS = libs + ['clxx_cl'])
+out += env.SwigPyModule('clxx.command_queue', SWIGPY_LIBS = libs + ['clxx_cl'])
 out += env.SwigPyModule('clxx.program_sources', SWIGPY_LIBS = libs)
 out += env.SwigPyModule('clxx.program_binaries', SWIGPY_LIBS = libs)
 out += env.SwigPyModule('clxx.program', SWIGPY_LIBS = libs + ['clxx_cl'])
