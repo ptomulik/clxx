@@ -81,6 +81,52 @@ template < status_t Code, class StdExcept>
     char const* what() const noexcept { return static_what; }
   };
 
+/** // doc: clerror_base<Code, StdExcept, std_except_xstring_ctor_arg_tag> {{{
+ * \brief Partial specialization for exceptions with mutable messages.
+ */ // }}}
+template < status_t Code, class StdExcept>
+  struct clerror_base<Code, StdExcept, std_except_xstring_ctor_arg_tag>
+    : public exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>
+  {
+    /** // doc: static_code {{{
+     * \brief OpenCL error code represented by this exception
+     */ // }}}
+    static constexpr status_t static_code = Code;
+    /** // doc: static_what {{{
+     * \brief Error message for the OpenCL error represented by this class
+     */ // }}}
+    static constexpr char const* static_what = enum2cstr(Code);
+    static_assert(static_what != nullptr, "");
+    /** // doc: clerror_base() {{{
+     * \brief Default constructor
+     *
+     * Passes the default message string to the underlying standard exception.
+     */ // }}}
+    clerror_base()
+      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(static_what)
+    { }
+    /** // doc: clerror_base(std::string const&) {{{
+     * \brief Constructor
+     *
+     * Passes the default message string to the underlying standard exception.
+     */ // }}}
+    clerror_base(std::string const& what_arg)
+      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(what_arg)
+    { }
+    /** // doc: clerror_base(std::string const&) {{{
+     * \brief Constructor
+     *
+     * Passes the default message string to the underlying standard exception.
+     */ // }}}
+    clerror_base(char const* what_arg)
+      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(what_arg)
+    { }
+    /** // doc: code() {{{
+     * \todo Write documentation
+     */ // }}}
+    status_t code() const noexcept { return Code; }
+  };
+
 /** // doc: clerror_base<Code, StdExcept, char const*> {{{
  * \brief Partial specialization for exceptions with mutable messages.
  */ // }}}
@@ -104,6 +150,14 @@ template < status_t Code, class StdExcept>
      */ // }}}
     clerror_base()
       : exception_base<clerror, StdExcept, char const*>(static_what)
+    { }
+    /** // doc: clerror_base(std::string const&) {{{
+     * \brief Constructor
+     *
+     * Passes the default message string to the underlying standard exception.
+     */ // }}}
+    clerror_base(char const* what_arg)
+      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(what_arg)
     { }
     /** // doc: code() {{{
      * \todo Write documentation

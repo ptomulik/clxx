@@ -18,6 +18,7 @@
 %throws_invalid_key_error(clxx::platform_layer::get_platform);
 %throws_badalloc(clxx::platform_layer::add);
 %throws_invalid_key_error_badalloc(clxx::platform_layer::erase(device const&));
+%throws_invalid_key_error_badalloc(clxx::platform_layer::erase(platform const&));
 %throws_clerror_badalloc(clxx::platform_layer::load_opencl(device_type_t));
 
 %throws_clerror_badalloc(clxx::query_platform_layer_info);

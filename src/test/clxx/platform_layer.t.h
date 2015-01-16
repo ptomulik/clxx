@@ -243,6 +243,17 @@ public:
 
     TS_ASSERT_EQUALS(d.id(), T::Newton_clGetDeviceIDs::devices[2]);
   }
+  /** // doc: test_get_devices__invalid_key_error() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_get_devices__invalid_key_error( )
+  {
+    platform_layer pl;
+    TS_ASSERT_THROWS(pl.get_devices(platform((cl_platform_id)0x1234)), invalid_key_error);
+    pl.add({device((cl_device_id)0x1000), device((cl_device_id)0x2000)}, platform((cl_platform_id)0x1234));
+    TS_ASSERT_THROWS_NOTHING(pl.get_devices(platform((cl_platform_id)0x1234)));
+    TS_ASSERT_THROWS(pl.get_devices(platform((cl_platform_id)0x5678)), invalid_key_error);
+  }
   /** // doc: test_has_platform_1() {{{
    * \todo Write documentation
    */ // }}}
@@ -348,6 +359,24 @@ public:
     TS_ASSERT_EQUALS(pl.get_platforms().size(), 0);
 
     TS_ASSERT_THROWS(pl.erase(device((cl_device_id)0x1234)), invalid_key_error);
+  }
+  /** // doc: test_erase_2() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test_erase_2( )
+  {
+    platform_layer pl;
+    TS_ASSERT_EQUALS(pl.add(make_devices({ (cl_device_id)0x1000, (cl_device_id)0x2000, (cl_device_id)0x3000 }), platform((cl_platform_id)0x1234)), 3);
+    TS_ASSERT_EQUALS(pl.add(make_devices({ (cl_device_id)0x4000, (cl_device_id)0x5000 }), platform((cl_platform_id)0x5678)), 2);
+
+    pl.erase(platform((cl_platform_id)0x1234));
+    TS_ASSERT_EQUALS(pl.get_devices().size(), 2);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(), 1);
+
+    pl.erase(platform((cl_platform_id)0x5678));
+    TS_ASSERT_EQUALS(pl.get_devices().size(),0);
+    TS_ASSERT_EQUALS(pl.get_platforms().size(),0);
+    TS_ASSERT_THROWS(pl.erase(platform((cl_platform_id)0x1234)), invalid_key_error);
   }
   /** // doc: test_clear_1() {{{
    * \todo Write documentation

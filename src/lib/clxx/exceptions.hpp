@@ -33,6 +33,18 @@ struct invalid_argument_error
     invalid_argument_error() noexcept
       : Base("invalid argument")
     { }
+    /** // doc: invalid_argument_error() {{{
+     * \brief Constructor
+     */ // }}}
+    invalid_argument_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: invalid_argument_error() {{{
+     * \brief Constructor
+     */ // }}}
+    invalid_argument_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
   };
 /** // doc: length_error {{{
  * \todo Write documentation
@@ -49,6 +61,47 @@ struct length_error
      */ // }}}
     length_error() noexcept
       : Base("length error")
+    { }
+    /** // doc: length_error() {{{
+     * \brief Constructor
+     */ // }}}
+    length_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: length_error() {{{
+     * \brief Constructor
+     */ // }}}
+    length_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
+  };
+/** // doc: out_of_range_error {{{
+ * \todo Write documentation
+ */ // }}}
+struct out_of_range_error
+    : public exception_base<clxx::exception, std::out_of_range>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::out_of_range> Base;
+    /** // doc: out_of_range_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    out_of_range_error() noexcept
+      : Base("out_of_range error")
+    { }
+    /** // doc: out_of_range_error() {{{
+     * \brief Constructor
+     */ // }}}
+    out_of_range_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: out_of_range_error() {{{
+     * \brief Constructor
+     */ // }}}
+    out_of_range_error(char const* what_arg) noexcept
+      : Base(what_arg)
     { }
   };
 /** // doc: not_enough_space_error {{{
@@ -67,6 +120,18 @@ struct not_enough_space_error
     not_enough_space_error() noexcept
       : Base("not enough space")
     { }
+    /** // doc: not_enough_space_error() {{{
+     * \brief Constructor
+     */ // }}}
+    not_enough_space_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: not_enough_space_error() {{{
+     * \brief Constructor
+     */ // }}}
+    not_enough_space_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
   };
 /** // doc: uninitialized_platform_error {{{
  * \todo Write documentation
@@ -83,6 +148,18 @@ struct uninitialized_platform_error
      */ // }}}
     uninitialized_platform_error() noexcept
       : Base("attempted to use uninitialized clxx::platform object")
+    { }
+    /** // doc: uninitialized_platform_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_platform_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_platform_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_platform_error(char const* what_arg) noexcept
+      : Base(what_arg)
     { }
   };
 /** // doc: uninitialized_device_error {{{
@@ -101,6 +178,18 @@ struct uninitialized_device_error
     uninitialized_device_error() noexcept
       : Base("attempted to use uninitialized clxx::device object")
     { }
+    /** // doc: uninitialized_device_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_device_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_device_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_device_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
   };
 /** // doc: uninitialized_context_error {{{
  * \todo Write documentation
@@ -117,6 +206,18 @@ struct uninitialized_context_error
      */ // }}}
     uninitialized_context_error() noexcept
       : Base("attempted to use uninitialized clxx::context object")
+    { }
+    /** // doc: uninitialized_context_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_context_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_context_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_context_error(char const* what_arg) noexcept
+      : Base(what_arg)
     { }
   };
 /** // doc: uninitialized_command_queue_error {{{
@@ -135,6 +236,18 @@ struct uninitialized_command_queue_error
     uninitialized_command_queue_error() noexcept
       : Base("attempted to use uninitialized clxx::command_queue object")
     { }
+    /** // doc: uninitialized_command_queue_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_command_queue_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_command_queue_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_command_queue_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
   };
 /** // doc: uninitialized_program_error {{{
  * \todo Write documentation
@@ -151,6 +264,18 @@ struct uninitialized_program_error
      */ // }}}
     uninitialized_program_error() noexcept
       : Base("attempted to use uninitialized clxx::program object")
+    { }
+    /** // doc: uninitialized_program_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_program_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_program_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_program_error(char const* what_arg) noexcept
+      : Base(what_arg)
     { }
   };
 /** // doc: uninitialized_value_error {{{
@@ -169,6 +294,18 @@ struct uninitialized_value_error
     uninitialized_value_error() noexcept
       : Base("attempted to access uninitialized value")
     { }
+    /** // doc: uninitialized_value_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_value_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_value_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_value_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
   };
 /** // doc: value_access_error {{{
  * \todo Write documentation
@@ -185,6 +322,18 @@ struct value_access_error
      */ // }}}
     value_access_error() noexcept
       : Base("attempted to access value in a wrong way")
+    { }
+    /** // doc: value_access_error() {{{
+     * \brief Constructor
+     */ // }}}
+    value_access_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: value_access_error() {{{
+     * \brief Constructor
+     */ // }}}
+    value_access_error(char const* what_arg) noexcept
+      : Base(what_arg)
     { }
   };
 /** // doc: invalid_key_error {{{
@@ -203,8 +352,14 @@ struct invalid_key_error
     invalid_key_error() noexcept
       : Base("invalid key")
     { }
-    /** // doc: invalid_key_error(char const*) {{{
-     * \brief Default constructor
+    /** // doc: invalid_key_error() {{{
+     * \brief Constructor
+     */ // }}}
+    invalid_key_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: invalid_key_error() {{{
+     * \brief Constructor
      */ // }}}
     invalid_key_error(char const* what_arg) noexcept
       : Base(what_arg)
@@ -224,8 +379,22 @@ struct unexpected_clerror
      * \brief Default constructor
      */ // }}}
     unexpected_clerror(status_t c) noexcept
-      : Base((std::string("unexpected OpenCL error: ") + std::to_string(c)).c_str())
+      : Base(std::string("unexpected OpenCL error: ") + std::to_string(c))
       , _code(c)
+    { }
+    /** // doc: unexpected_clerror() {{{
+     * \brief Constructor
+     */ // }}}
+    unexpected_clerror(status_t c, std::string const& what_arg) noexcept
+      : Base(what_arg),
+        _code(c)
+    { }
+    /** // doc: unexpected_clerror() {{{
+     * \brief Constructor
+     */ // }}}
+    unexpected_clerror(status_t c, char const* what_arg) noexcept
+      : Base(what_arg),
+        _code(c)
     { }
     /** // doc: code() {{{
      * \todo Write documentation

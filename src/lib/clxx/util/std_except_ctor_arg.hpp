@@ -19,6 +19,11 @@ namespace clxx {
  *        accepting an argument other than the copy constructor.
  */ // }}}
 struct std_except_no_ctor_arg_tag {};
+/** // doc: std_except_xstring_ctor_arg_tag {{{
+ * \brief A tag denoting that certain standard exception has constructors
+ *        accepting <tt>std::string const&</tt> and <tt>const char*</tt>.
+ */ // }}}
+struct std_except_xstring_ctor_arg_tag {};
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< std::exception >
@@ -28,31 +33,31 @@ struct std_except_ctor_arg< std::bad_exception >
   { typedef std_except_no_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::logic_error >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::domain_error >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::invalid_argument >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::length_error >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::out_of_range >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::runtime_error >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::range_error >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::overflow_error >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::underflow_error >
-  { typedef char const* type; };
+  { typedef std_except_xstring_ctor_arg_tag type; };
 template<>
 struct std_except_ctor_arg< std::bad_alloc>
   { typedef std_except_no_ctor_arg_tag type; };

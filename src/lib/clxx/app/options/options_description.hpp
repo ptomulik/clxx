@@ -13,6 +13,14 @@
 #include <boost/program_options/options_description.hpp>
 
 namespace clxx { namespace app { namespace options {
+/** // doc: option_description {{{
+ * \todo Write documentation
+ */ // }}}
+using option_description = boost::program_options::option_description;
+/** // doc: options_description_easy_init {{{
+ * \todo Write documentation
+ */ // }}}
+using options_description_easy_init = boost::program_options::options_description_easy_init;
 /** // doc: options_description {{{
  * \brief A set of option descriptions
  *

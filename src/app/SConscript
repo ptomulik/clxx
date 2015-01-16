@@ -4,6 +4,7 @@
 
 Import('env')
 SConscript( 'clinfo/SConscript', exports = ['env'] )
+SConscript( 'clcc/SConscript', exports = ['env'] )
 
 # Local Variables:
 # # tab-width:4

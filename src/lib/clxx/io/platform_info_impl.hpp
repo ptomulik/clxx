@@ -18,16 +18,23 @@
 
 namespace clxx { namespace io {
 
+template <typename T>
+static std::string
+to_hex(T const& x)
+{
+  std::ostringstream oss;
+  oss << "0x" << std::hex << x;
+  return oss.str();
+}
+
 template <class Ostream> Ostream&
 write(Ostream& os, clxx::platform_info const& info, int ind)
 {
   autosep_<const char*>  as("\n");
   std::string pre(ind, ' ');
-  std::ostringstream id;
-  id << "0x" << std::hex << info.id();
 
   if(info.has_id())
-    os << as << pre << "Id (within current process) ....: " << id.str();
+    os << as << pre << "Id (within current process) ....: " << to_hex(info.id());
   if(info.has_profile())
     os << as << pre << "Profile ........................: " << info.profile();
   if(info.has_version())

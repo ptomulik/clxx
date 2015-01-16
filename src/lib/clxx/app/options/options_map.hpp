@@ -34,6 +34,14 @@ public:
    */ // }}}
   options_map();
 };
+/** // doc: store() {{{
+ * \todo Write documentation
+ */ // }}}
+using boost::program_options::store;
+/** // doc: notify() {{{
+ * \todo Write documentation
+ */ // }}}
+using boost::program_options::notify;
 } } } // end namespace clxx::app::options
 
 #endif /* CLXX_APP_OPTIONS_OPTIONS_MAP_HPP_INCLUDED */

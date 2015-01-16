@@ -234,6 +234,13 @@ public:
    * \throws std::bad_alloc may be raised occasionally
    */ // }}}
   void erase(device const& d);
+  /** // doc: erase(device const&) {{{
+   * \brief Remove from container all devices of a given platform
+   * \param p the platform whose devices are to be removed from container
+   * \throws invalid_key_error if \e p does not exist in the container
+   * \throws std::bad_alloc may be raised occasionally
+   */ // }}}
+  void erase(platform const& p);
   /** // doc: clear() {{{
    * \brief Clear the container entirelly
    * \throws std::bad_alloc may be raised occasionally

@@ -85,6 +85,8 @@ get_devices(platform const& p) const
       if(cur->second == p)
         ds.push_back(cur->first);
     }
+  if(ds.empty())
+    throw invalid_key_error();
   return ds;
 }
 /* ------------------------------------------------------------------------ */
@@ -176,6 +178,13 @@ erase(device const& d)
   dp.erase(it);
   remove_if_unref(ps, p, dp);
   remove_value(ds, d);
+}
+/* ------------------------------------------------------------------------ */
+void platform_layer::
+erase(platform const& p)
+{
+  devices ds(get_devices(p));
+  for(devices::const_iterator d = ds.begin(); d != ds.end(); erase(*d), ++d);
 }
 /* ------------------------------------------------------------------------ */
 void platform_layer::

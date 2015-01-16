@@ -397,6 +397,14 @@ public:
 
 } // end namespace clxx
 
+#include <vector>
+namespace clxx {
+/** // doc: contexts {{{
+ * \todo Write documentation
+ */ // }}}
+typedef std::vector<context> contexts;
+} // end namespace clxx
+
 #endif /* CLXX_CONTEXT_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

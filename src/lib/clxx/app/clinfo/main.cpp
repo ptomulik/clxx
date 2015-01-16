@@ -30,9 +30,7 @@
 #include <fstream>
 #include <vector>
 
-namespace clxx {
-namespace app {
-namespace clinfo {
+namespace clxx { namespace app { namespace clinfo {
 
 /** doc: io_format {{{
  * \todo Write documentation
@@ -361,8 +359,7 @@ run(int argc, char const* argv[])
 }
 /* \endcond */
 
-} /* namespace clinfo */
-} /* namespace app */
-} /* namespace clxx */
+} } } // end namespace clxx::app::clinfo
+
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
