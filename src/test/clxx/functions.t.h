@@ -667,6 +667,186 @@ public:
     TS_ASSERT_THROWS(release_device(NULL),unexpected_clerror);
 #endif // HAVE_OPENCL_clReleaseDevice
   }
+  /** // doc: test_create_command_queue__success() {{{
+   * \brief Test create_command_queue() in a normal situation.
+   */ // }}}
+  void test_create_command_queue__success( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)0x1234, CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(create_command_queue((cl_context)NULL,(cl_device_id)NULL, command_queue_properties_t::profiling_enable));
+    //TS_ASSERT(mock.called_once_with((cl_context)NULL,0,nullptr,nullptr,nullptr,??? - local variable within create_command_queue(...){...}));
+  }
+  /** // doc: test_create_command_queue__invalid_context() {{{
+   * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_INVALID_CONTEXT.
+   */ // }}}
+  void test_create_command_queue__invalid_context( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test_create_command_queue__invalid_device() {{{
+   * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_INVALID_DEVICE.
+   */ // }}}
+  void test_create_command_queue__invalid_device( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::invalid_device>);
+  }
+  /** // doc: test_create_command_queue__invalid_value() {{{
+   * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_INVALID_VALUE.
+   */ // }}}
+  void test_create_command_queue__invalid_value( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_create_command_queue__invalid_command_queue() {{{
+   * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_DEVICE_NOT_AVAILABLE.
+   */ // }}}
+  void test_create_command_queue__invalid_command_queue( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_QUEUE_PROPERTIES);
+    TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::none), clerror_no<status_t::invalid_queue_properties>);
+  }
+  /** // doc: test_create_command_queue__out_of_resources() {{{
+   * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_OUT_OF_RESOURCES.
+   */ // }}}
+  void test_create_command_queue__out_of_resources( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_create_command_queue__out_of_host_memory() {{{
+   * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_OUT_OF_HOST_MEMORY.
+   */ // }}}
+  void test_create_command_queue__out_of_host_memory( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_create_command_queue__other_error() {{{
+   * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns an unexpected error code.
+   */ // }}}
+  void test_create_command_queue__other_error( )
+  {
+    T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, -0x3456);
+    TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), unexpected_clerror);
+  }
+  /** // doc: test_retain_command_queue__success() {{{
+   * \brief Test retain_command_queue() in a normal situation
+   */ // }}}
+  void test_retain_command_queue__success( )
+  {
+    T::Dummy_clRetainCommandQueue mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(retain_command_queue((cl_command_queue)NULL));
+    TS_ASSERT(mock.called_once_with((cl_command_queue)NULL));
+  }
+  /** // doc: test_retain_command_queue__invalid_command_queue() {{{
+   * \brief Test retain_command_queue() in a situation when clRetainCommandQueue() returns CL_INVALID_CONTEXT
+   */ // }}}
+  void test_retain_command_queue__invalid_command_queue( )
+  {
+    T::Dummy_clRetainCommandQueue mock(CL_INVALID_COMMAND_QUEUE);
+    TS_ASSERT_THROWS(retain_command_queue((cl_command_queue)NULL), clerror_no<status_t::invalid_command_queue>);
+  }
+  /** // doc: test_retain_command_queue__out_of_resources() {{{
+   * \brief Test retain_command_queue() in a situation when clRetainCommandQueue() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_retain_command_queue__out_of_resources( )
+  {
+    T::Dummy_clRetainCommandQueue mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(retain_command_queue((cl_command_queue)NULL), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_retain_command_queue__out_of_host_memory() {{{
+   * \brief Test retain_command_queue() in a situation when clRetainCommandQueue() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_retain_command_queue__out_of_host_memory( )
+  {
+    T::Dummy_clRetainCommandQueue mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(retain_command_queue((cl_command_queue)NULL), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_release_command_queue__success() {{{
+   * \brief Test release_command_queue() in a normal situation
+   */ // }}}
+  void test_release_command_queue__success( )
+  {
+    T::Dummy_clReleaseCommandQueue mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(release_command_queue((cl_command_queue)NULL));
+    TS_ASSERT(mock.called_once_with((cl_command_queue)NULL));
+  }
+  /** // doc: test_release_command_queue__invalid_command_queue() {{{
+   * \brief Test release_command_queue() in a situation when clReleaseCommandQueue() returns CL_INVALID_CONTEXT
+   */ // }}}
+  void test_release_command_queue__invalid_command_queue( )
+  {
+    T::Dummy_clReleaseCommandQueue mock(CL_INVALID_COMMAND_QUEUE);
+    TS_ASSERT_THROWS(release_command_queue((cl_command_queue)NULL), clerror_no<status_t::invalid_command_queue>);
+  }
+  /** // doc: test_release_command_queue__out_of_resources() {{{
+   * \brief Test release_command_queue() in a situation when clReleaseCommandQueue() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_release_command_queue__out_of_resources( )
+  {
+    T::Dummy_clReleaseCommandQueue mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(release_command_queue((cl_command_queue)NULL), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_release_command_queue__out_of_host_memory() {{{
+   * \brief Test release_command_queue() in a situation when clReleaseCommandQueue() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_release_command_queue__out_of_host_memory( )
+  {
+    T::Dummy_clReleaseCommandQueue mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(release_command_queue((cl_command_queue)NULL), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_command_queue_info__success() {{{
+   * \brief Test get_command_queue_info() in a normal situation
+   */ // }}}
+  void test_get_command_queue_info__success( )
+  {
+    T::Dummy_clGetCommandQueueInfo mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr));
+    TS_ASSERT(mock.called_once_with((cl_command_queue)NULL, CL_QUEUE_REFERENCE_COUNT, 0, nullptr, nullptr));
+  }
+  /** // doc: test_get_command_queue_info__invalid_command_queue() {{{
+   * \brief Test get_command_queue_info() in a situation when clGetCommandQueueInfo() returns CL_INVALID_CONTEXT
+   */ // }}}
+  void test_get_command_queue_info__invalid_command_queue( )
+  {
+    T::Dummy_clGetCommandQueueInfo mock(CL_INVALID_COMMAND_QUEUE);
+    TS_ASSERT_THROWS(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::invalid_command_queue>);
+  }
+  /** // doc: test_get_command_queue_info__invalid_value() {{{
+   * \brief Test get_command_queue_info() in a situation when clGetCommandQueueInfo() returns CL_INVALID_VALUE
+   */ // }}}
+  void test_get_command_queue_info__invalid_value( )
+  {
+    T::Dummy_clGetCommandQueueInfo mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test_get_command_queue_info__out_of_resources() {{{
+   * \brief Test get_command_queue_info() in a situation when clGetCommandQueueInfo() returns CL_OUT_OF_RESOURCES
+   */ // }}}
+  void test_get_command_queue_info__out_of_resources( )
+  {
+    T::Dummy_clGetCommandQueueInfo mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test_get_command_queue_info__out_of_host_memory() {{{
+   * \brief Test get_command_queue_info() in a situation when clGetCommandQueueInfo() returns CL_OUT_OF_HOST_MEMORY
+   */ // }}}
+  void test_get_command_queue_info__out_of_host_memory( )
+  {
+    T::Dummy_clGetCommandQueueInfo mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test_get_command_queue_info__other_error() {{{
+   * \brief Test get_command_queue_info() in a situation when clGetCommandQueueInfo() returns an unexpected error code.
+   */ // }}}
+  void test_get_command_queue_info__other_error( )
+  {
+    T::Dummy_clGetCommandQueueInfo mock(-0x3456);
+    TS_ASSERT_THROWS(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
+  }
   /** // doc: test_create_program_with_source() {{{
    * \todo Write documentation
    */ // }}}

@@ -338,6 +338,79 @@ public:
   Dummy_clReleaseDevice(cl_int err);
 };
 #endif
+/** // doc: Dummy_clCreateCommandQueue {{{
+ * \brief Default mock for clCreateCommandQueue OpenCL function.
+ */ // }}}
+class Dummy_clCreateCommandQueue
+  : public T::Base_clCreateCommandQueue,
+    public T::Dummy_CallArgs<cl_context, cl_device_id,
+                             cl_command_queue_properties, cl_int*>
+{
+  cl_command_queue _ctx;
+  cl_int _err;
+  cl_command_queue clCreateCommandQueue(
+      cl_context context,
+      cl_device_id device,
+      cl_command_queue_properties properties,
+      cl_int* errcode_ret
+  );
+public:
+  /** // doc: Dummy_clCreateCommandQueue() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clCreateCommandQueue(cl_command_queue ctx, cl_int err);
+};
+/** // doc: Dummy_clRetainCommandQueue {{{
+ * \brief Default mock for clRetainCommandQueue OpenCL function.
+ */ // }}}
+class Dummy_clRetainCommandQueue
+  : public T::Base_clRetainCommandQueue,
+    public T::Dummy_CallArgs<cl_command_queue>
+{
+  cl_int _err;
+  cl_int clRetainCommandQueue(cl_command_queue);
+public:
+  /** // doc: Dummy_clRetainCommandQueue() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clRetainCommandQueue(cl_int err);
+};
+
+/** // doc: Dummy_clReleaseCommandQueue {{{
+ * \brief Default mock for clReleaseCommandQueue OpenCL function.
+ */ // }}}
+class Dummy_clReleaseCommandQueue
+  : public T::Base_clReleaseCommandQueue,
+    public T::Dummy_CallArgs<cl_command_queue>
+{
+  cl_int _err;
+  cl_int clReleaseCommandQueue(cl_command_queue);
+public:
+  /** // doc: Dummy_clReleaseCommandQueue() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clReleaseCommandQueue(cl_int err);
+};
+/** // doc: Dummy_clGetCommandQueueInfo {{{
+ * \brief Default mock for clGetCommandQueueInfo OpenCL function.
+ */ // }}}
+class Dummy_clGetCommandQueueInfo
+  : public T::Base_clGetCommandQueueInfo,
+    public T::Dummy_CallArgs<cl_command_queue,cl_command_queue_info,size_t,void*,size_t*>
+{
+  cl_int _err;
+  void* _param_value;
+  size_t _param_value_size_ret;
+  cl_int clGetCommandQueueInfo(cl_command_queue command_queue,
+                               cl_command_queue_info param_name,
+                               size_t param_value_size, void* param_value,
+                               size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetCommandQueueInfo() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clGetCommandQueueInfo(cl_int err, void* pv = nullptr, size_t pvs = 0);
+};
 /** // doc: Dummy_clCreateProgramWithSource {{{
  * \brief Default mock for clCreateProgramWithSource OpenCL function.
  */ // }}}
@@ -776,6 +849,68 @@ Dummy_clReleaseDevice(cl_int err)
 {
 }
 #endif
+/* ------------------------------------------------------------------------- */
+cl_command_queue Dummy_clCreateCommandQueue::
+clCreateCommandQueue(cl_context context, cl_device_id device,
+                     cl_command_queue_properties properties,
+                     cl_int* errcode_ret)
+{
+  call_with(context, device, properties, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return this->_ctx;
+}
+Dummy_clCreateCommandQueue::
+Dummy_clCreateCommandQueue(cl_command_queue ctx, cl_int err)
+  : _ctx(ctx), _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clRetainCommandQueue::
+clRetainCommandQueue(cl_command_queue command_queue)
+{
+  call_with(command_queue);
+  return _err;
+}
+Dummy_clRetainCommandQueue::
+Dummy_clRetainCommandQueue(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clReleaseCommandQueue::
+clReleaseCommandQueue(cl_command_queue command_queue)
+{
+  call_with(command_queue);
+  return _err;
+}
+Dummy_clReleaseCommandQueue::
+Dummy_clReleaseCommandQueue(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetCommandQueueInfo::
+clGetCommandQueueInfo(cl_command_queue command_queue, cl_command_queue_info param_name,
+                 size_t param_value_size, void* param_value,
+                 size_t* param_value_size_ret)
+{
+  call_with(command_queue, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value_size_ret) {
+    *param_value_size_ret = _param_value_size_ret;
+  }
+  if(param_value && _param_value) {
+    std::memcpy(param_value, _param_value, std::min(param_value_size, _param_value_size_ret));
+  }
+  return _err;
+}
+Dummy_clGetCommandQueueInfo::
+Dummy_clGetCommandQueueInfo(cl_int err, void* pv, size_t pvs)
+  : _err(err), _param_value(pv), _param_value_size_ret(pvs)
+{
+}
 /* ------------------------------------------------------------------------- */
 cl_program Dummy_clCreateProgramWithSource::
 clCreateProgramWithSource(cl_context context,

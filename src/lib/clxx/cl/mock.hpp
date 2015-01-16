@@ -83,6 +83,23 @@ CXXTEST_MOCK_GLOBAL(cl_int, clRetainDevice, (cl_device_id device), (device));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseDevice, (cl_device_id device), (device));
 #endif
 
+CXXTEST_MOCK_GLOBAL(cl_command_queue, clCreateCommandQueue,
+  ( cl_context context, cl_device_id device,
+    cl_command_queue_properties properties, cl_int* errcode_ret ),
+  ( context, device, properties, errcode_ret )
+);
+
+CXXTEST_MOCK_GLOBAL(cl_int, clRetainCommandQueue,
+                    (cl_command_queue command_queue), (command_queue));
+CXXTEST_MOCK_GLOBAL(cl_int, clReleaseCommandQueue,
+                    (cl_command_queue command_queue), (command_queue));
+
+CXXTEST_MOCK_GLOBAL(cl_int, clGetCommandQueueInfo,
+  ( cl_command_queue command_queue, cl_command_queue_info param_name,
+    size_t param_value_size, void* param_value, size_t* param_value_size_ret),
+  ( command_queue, param_name, param_value_size, param_value, param_value_size_ret)
+);
+
 CXXTEST_MOCK_GLOBAL(cl_program, clCreateProgramWithSource,
   ( cl_context context, cl_uint count, const char** strings,
     const size_t* lengths, cl_int* errcode_ret),

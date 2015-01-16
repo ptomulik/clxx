@@ -52,9 +52,10 @@ namespace clxx {
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void get_platform_ids(cl_uint num_entries, cl_platform_id* platforms,
-                      cl_uint* num_platforms );
-
+void
+get_platform_ids(cl_uint num_entries,
+                 cl_platform_id* platforms,
+                 cl_uint* num_platforms);
 /** // doc: get_platform_info(...) {{{
  *
  * \brief Query OpenCL platform layer for platform information.
@@ -101,10 +102,12 @@ void get_platform_ids(cl_uint num_entries, cl_platform_id* platforms,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void get_platform_info(cl_platform_id platform, platform_info_t param_name,
-                       size_t param_value_size, void* param_value,
-                       size_t* param_value_size_ret );
-
+void
+get_platform_info(cl_platform_id platform,
+                  platform_info_t param_name,
+                  size_t param_value_size,
+                  void* param_value,
+                  size_t* param_value_size_ret);
 /** // doc: get_device_ids() {{{
  * \brief Retrieve device identifiers of locally available OpenCL devices.
  *
@@ -160,10 +163,12 @@ void get_platform_info(cl_platform_id platform, platform_info_t param_name,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void get_device_ids(cl_platform_id platform, device_type_t device_type,
-                    cl_uint num_entries, cl_device_id* devices,
-                    cl_uint* num_devices);
-
+void
+get_device_ids(cl_platform_id platform,
+               device_type_t device_type,
+               cl_uint num_entries,
+               cl_device_id* devices,
+               cl_uint* num_devices);
 /** // doc: get_device_info(...) {{{
  * \brief Get certain information from device.
  *
@@ -209,9 +214,12 @@ void get_device_ids(cl_platform_id platform, device_type_t device_type,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void get_device_info(cl_device_id device, device_info_t name, size_t value_size,
-                     void* value, size_t* value_size_ret);
-
+void
+get_device_info(cl_device_id device,
+                device_info_t name,
+                size_t value_size,
+                void* value,
+                size_t* value_size_ret);
 /** // doc: create_context(...) {{{
  * \brief Create OpenCL context
  *
@@ -289,13 +297,13 @@ void get_device_info(cl_device_id device, device_info_t name, size_t value_size,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-cl_context create_context(const cl_context_properties* properties,
-                          cl_uint num_devices, const cl_device_id* devices,
-                          void(*pfn_notify)(const char* errinfo,
-                                            const void* private_info,
-                                            size_t cb, void* user_data),
-                          void* user_data);
-
+cl_context
+create_context(const cl_context_properties* properties,
+               cl_uint num_devices, const cl_device_id* devices,
+               void(*pfn_notify)(const char* errinfo,
+                                 const void* private_info,
+                                 size_t cb, void* user_data),
+               void* user_data);
 /** // doc: create_context_from_type_from_type(...) {{{
  * \brief Create OpenCL context
  *
@@ -371,14 +379,14 @@ cl_context create_context(const cl_context_properties* properties,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-cl_context create_context_from_type(const cl_context_properties* properties,
-                                    device_type_t device_type,
-                                    void(*pfn_notify)(const char* errinfo,
-                                                      const void* private_info,
-                                                      size_t cb,
-                                                      void* user_data),
-                                    void* user_data);
-
+cl_context
+create_context_from_type(const cl_context_properties* properties,
+                         device_type_t device_type,
+                         void(*pfn_notify)(const char* errinfo,
+                                           const void* private_info,
+                                           size_t cb,
+                                           void* user_data),
+                         void* user_data);
 /** // doc: retain_context(...) {{{
  * \brief Increment the context reference count
  *
@@ -409,8 +417,8 @@ cl_context create_context_from_type(const cl_context_properties* properties,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void retain_context(cl_context context);
-
+void
+retain_context(cl_context context);
 /** // doc: release_context(...) {{{
  * \brief Decrement the context reference count
  *
@@ -438,8 +446,8 @@ void retain_context(cl_context context);
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void release_context(cl_context context);
-
+void
+release_context(cl_context context);
 /** // doc: get_context_info(...) {{{
  * \brief Query information about a context.
  *
@@ -482,9 +490,12 @@ void release_context(cl_context context);
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void get_context_info(cl_context context, context_info_t param_name,
-                      size_t param_value_size, void* param_value,
-                      size_t* param_value_size_ret);
+void
+get_context_info(cl_context context,
+                 context_info_t param_name,
+                 size_t param_value_size,
+                 void* param_value,
+                 size_t* param_value_size_ret);
 #if HAVE_OPENCL_clCreateSubDevices
 /** // doc: create_sub_devices(...) {{{
  * \brief Creates an array of sub-devices that each reference
@@ -537,11 +548,12 @@ void get_context_info(cl_context context, context_info_t param_name,
  * | ------- | ------- | ------- | ------- |
  * |         |         | &radic; |         |
  */ // }}}
-void create_sub_devices(cl_device_id in_device,
-                        const cl_device_partition_property* properties,
-                        cl_uint num_devices,
-                        cl_device_id* out_devices,
-                        cl_uint *num_devices_ret);
+void
+create_sub_devices(cl_device_id in_device,
+                   const cl_device_partition_property* properties,
+                   cl_uint num_devices,
+                   cl_device_id* out_devices,
+                   cl_uint *num_devices_ret);
 #endif
 #if HAVE_OPENCL_clRetainDevice
 /** // doc: retain_device(...) {{{
@@ -578,7 +590,8 @@ void create_sub_devices(cl_device_id in_device,
  * | ------- | ------- | ------- | ------- |
  * |         |         | &radic; |         |
  */ // }}}
-void retain_device(cl_device_id device);
+void
+retain_device(cl_device_id device);
 #endif
 #if HAVE_OPENCL_clReleaseDevice
 /** // doc: release_device(...) {{{
@@ -615,8 +628,183 @@ void retain_device(cl_device_id device);
  * | ------- | ------- | ------- | ------- |
  * |         |         | &radic; |         |
  */ // }}}
-void release_device(cl_device_id device);
+void
+release_device(cl_device_id device);
 #endif
+/** // doc: create_command_queue(...) {{{
+ * \brief Create a command-queue on a specific device
+ *
+ * This is a wrapper around \c clCreateCommandQueue(). The call to this function has
+ * same effect as call to
+ *   - \c clCreateCommandQueue(context,device,static_cast<cl_command_queue_properties>(properties),errcode_ret)
+ *
+ * with \e errcode_ret being defined internaly in the create_command_queue().
+ *
+ * The main difference between clxx::create_command_queue() and
+ * \c clCreateCommandQueue() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes and accepts
+ * \ref clxx::command_queue_properties_t "command_queue_properties_t"
+ * instead of \c cl_command_queue_properties as the \e properties argument.
+ *
+ * OpenCL objects such as memory, program and kernel objects are created using
+ * a context. Operations on these objects are performed using a command-queue.
+ * The command-queue can be used to queue a set of operations (referred to as
+ * commands) in order. Having multiple command-queues allows applications to
+ * queue multiple independent commands without requiring synchronization. Note
+ * that this should work as long as these objects are not being shared. Sharing
+ * of objects across multiple command-queues will require the application to
+ * perform appropriate synchronization. For more informations see the
+ * <a href="https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clCreateCommandQueue.html">documentation of the clCreateCommandQueue()</a>.
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param device
+ *    Must be a device associated with \e context. It can either be in the list
+ *    of devices specified when \e context is created using
+ *    \ref clxx::create_context() "create_context()" or have the same device
+ *    type as the device type specified when the context is created using
+ *    \ref clxx::create_context_from_type() "create_context_from_type()".
+ * \param properties
+ *    Specifies a list of properties for the command-queue. This is a
+ *    bit-field. For bits definitions see documentation of
+ *    \ref clxx::command_queue_properties_t "command_queue_properties_t".
+ *
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateCommandQueue() returns error \c CL_INVALID_CONTEXT
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clCreateCommandQueue() returns error \c CL_INVALID_DEVICE
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateCommandQueue() returns error \c CL_INVALID_VALUE
+ * \throw clerror_no<status_t::invalid_queue_properties>
+ *    When \c clCreateCommandQueue() returns error \c CL_INVALID_QUEUE_PROPERTIES
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateCommandQueue() returns error \c CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateCommandQueue() returns error \c CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clCreateCommandQueue() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+cl_command_queue
+create_command_queue(cl_context context,
+                     cl_device_id device,
+                     command_queue_properties_t properties);
+/** // doc: retain_command_queue(...) {{{
+ * \brief Increment the \e command_queue reference count
+ *
+ * This is a wrapper around \c clRetainCommandQueue(). The call to this
+ * function has same effect as call to
+ *  - \c clRetainCommandQueue(command_queue)
+ *
+ * The difference between \ref retain_command_queue() and
+ * \c clRetainCommandQueue() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    The OpenCL command-queue to retain.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clRetainCommandQueue() returns CL_INVALID_COMMAND_QUEUE
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clRetainCommandQueue() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clRetainCommandQueue() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpeced_clerror
+ *    When \c clRetainCommandQueue() returns other error code.
+ *
+ * \note \ref create_command_queue() performs an implicit retain.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+void
+retain_command_queue(cl_command_queue command_queue);
+/** // doc: release_command_queue(...) {{{
+ * \brief Decrement the \e command_queue reference count
+ *
+ * This is a wrapper around \c clReleaseCommandQueue(). The call to this
+ * function has same effect as call to
+ *  - \c clReleaseCommandQueue(command_queue)
+ *
+ * The difference between \ref release_command_queue() and
+ * \c clReleaseCommandQueue() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    The OpenCL command-queue to release.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clReleaseCommandQueue() returns CL_INVALID_CONTEXT
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clReleaseCommandQueue() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clReleaseCommandQueue() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpeced_clerror
+ *    When \c clReleaseCommandQueue() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+void
+release_command_queue(cl_command_queue command_queue);
+/** // doc: get_command_queue_info(...) {{{
+ * \brief Query information about a command-queue.
+ *
+ * This is a wrapper for \c clGetCommandQueueInfo(). The call to \ref
+ * get_command_queue_info() has same effect as a call to
+ *    - \c clGetCommandQueueinfo(command_queue,static_cast<cl_command_queue_info>(param_name),param_value_size,param_value,param_value_size_ret)
+ *
+ *  The main difference between get_command_queue_info() and
+ *  \c clGetCommandQueueInfo() is that it throws %clxx exceptions instead of
+ *  returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Specifies the OpenCl command-queue being queried.
+ * \param param_name
+ *    An enumeration constant that specifies the information to query. See
+ *    \ref command_queue_info_t.
+ * \param param_value_size
+ *    Specifies the size in bytes of memory pointed to by \e param_value. This
+ *    size must be grater than or equal to the size of return type for
+ *    \e param_name as described in the OpenCL standard.
+ * \param param_value
+ *    A pointer to memory where the appropriate result being queried is
+ *    returned. If \e param_value is \c NULL, it is ignored.
+ * \param param_value_size_ret
+ *    Returns the actual size in bytes of data being queried by
+ *    \e param_value. If \e param_value_size_ret is \c NULL, it is ignored.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clGetCommandQueueInfo() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetCommandQueueInfo() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetCommandQueueInfo() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetCommandQueueInfo() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clGetCommandQueueInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * | &radic; | &radic; | &radic; |         |
+ */ // }}}
+void
+get_command_queue_info(cl_command_queue command_queue,
+                            command_queue_info_t param_name,
+                            size_t param_value_size,
+                            void* param_value,
+                            size_t* param_value_size_ret);
 /** // doc: create_program_with_source(...) {{{
  * \brief Creates a program object for a context, and loads the source
  *    code specified by the text strings in the \e strings array into the program
@@ -672,10 +860,11 @@ void release_device(cl_device_id device);
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-cl_program create_program_with_source(cl_context context,
-                                      cl_uint count,
-                                      const char** strings,
-                                      const size_t* lengths);
+cl_program
+create_program_with_source(cl_context context,
+                           cl_uint count,
+                           const char** strings,
+                           const size_t* lengths);
 /** // doc: create_program_with_binary(...) {{{
  * \brief Creates a program object for a context, and loads the binary bits
  *    specified by binary into the program object
@@ -777,7 +966,8 @@ cl_program create_program_with_source(cl_context context,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-cl_program create_program_with_binary(cl_context context,
+cl_program
+create_program_with_binary(cl_context context,
                                       cl_uint num_devices,
                                       const cl_device_id* device_list,
                                       const size_t* lengths,
@@ -835,10 +1025,11 @@ cl_program create_program_with_binary(cl_context context,
  * | ------- | ------- | ------- | ------- |
  * |         |         | &radic; |         |
  */ // }}}
-cl_program create_program_with_built_in_kernels(cl_context context,
-                                                cl_uint num_devices,
-                                                const cl_device_id* device_list,
-                                                const char* kernel_names);
+cl_program
+create_program_with_built_in_kernels(cl_context context,
+                                     cl_uint num_devices,
+                                     const cl_device_id* device_list,
+                                     const char* kernel_names);
 #endif
 /** // doc: retain_program(...) {{{
  * \brief Increments the \e program reference count
@@ -872,7 +1063,8 @@ cl_program create_program_with_built_in_kernels(cl_context context,
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void retain_program(cl_program program);
+void
+retain_program(cl_program program);
 /** // doc: release_program(...) {{{
  * \brief Decrements the \e program reference count
  *
@@ -904,7 +1096,8 @@ void retain_program(cl_program program);
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void release_program(cl_program program);
+void
+release_program(cl_program program);
 /** // doc: build_program(...) {{{
  * \brief Builds (compiles and links) a program executable from the program
  *    source or binary
@@ -995,11 +1188,13 @@ void release_program(cl_program program);
  * | ------- | ------- | ------- | ------- |
  * | &radic; | &radic; | &radic; |         |
  */ // }}}
-void build_program(cl_program program, cl_uint num_devices,
-                   const cl_device_id* device_list, const char* options,
-                   void (CL_CALLBACK* pfn_notify)(cl_program program,
-                                                  void* user_data),
-                   void* user_data);
+void
+build_program(cl_program program,
+              cl_uint num_devices,
+              const cl_device_id* device_list,
+              const char* options,
+              void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+              void* user_data);
 #if HAVE_OPENCL_clCompileProgram
 /** // doc: compile_program(...) {{{
  * \brief Compiles a program’s source for all the devices or a specific
@@ -1096,13 +1291,16 @@ void build_program(cl_program program, cl_uint num_devices,
  * | ------- | ------- | ------- | ------- |
  * |         |         | &radic; |         |
  */ // }}}
-void compile_program(cl_program program, cl_uint num_devices,
-                     const cl_device_id* device_list, const char* options,
-                     cl_uint num_input_headers, const cl_program* input_headers,
-                     const char** header_include_names,
-                     void (CL_CALLBACK* pfn_notify)(cl_program program,
-                                                    void* user_data),
-                     void* user_data);
+void
+compile_program(cl_program program,
+                cl_uint num_devices,
+                const cl_device_id* device_list,
+                const char* options,
+                cl_uint num_input_headers,
+                const cl_program* input_headers,
+                const char** header_include_names,
+                void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+                void* user_data);
 #endif
 #if HAVE_OPENCL_clLinkProgram
 /** // doc: link_program(...) {{{
@@ -1212,13 +1410,15 @@ void compile_program(cl_program program, cl_uint num_devices,
  * | ------- | ------- | ------- | ------- |
  * |         |         | &radic; |         |
  */ // }}}
-cl_program link_program(cl_context context, cl_uint num_devices,
-                        const cl_device_id* device_list, const char* options,
-                        cl_uint num_input_programs,
-                        const cl_program* input_programs,
-                        void (CL_CALLBACK* pfn_notify)(cl_program program,
-                                                       void* user_data),
-                        void* user_data);
+cl_program
+link_program(cl_context context,
+             cl_uint num_devices,
+             const cl_device_id* device_list,
+             const char* options,
+              cl_uint num_input_programs,
+              const cl_program* input_programs,
+              void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+              void* user_data);
 #endif
 #if HAVE_OPENCL_clUnloadPlatformCompiler
 /** // doc: unload_platform_compiler(...) {{{
@@ -1252,7 +1452,8 @@ cl_program link_program(cl_context context, cl_uint num_devices,
  * | ------- | ------- | ------- | ------- |
  * |         |         | &radic; |         |
  */ // }}}
-void unload_platform_compiler(cl_platform_id platform);
+void
+unload_platform_compiler(cl_platform_id platform);
 #endif
 /** // doc: get_program_info {{{
  * \brief Returns information about the program object.
@@ -1294,9 +1495,12 @@ void unload_platform_compiler(cl_platform_id platform);
  * \throw unexpected_clerror
  *    When \c clGetProgramInfo() returns other error code.
  */ // }}}
-void get_program_info(cl_program program, program_info_t param_name,
-                      size_t param_value_size, void* param_value,
-                      size_t* param_value_size_ret);
+void
+get_program_info(cl_program program,
+                 program_info_t param_name,
+                 size_t param_value_size,
+                 void* param_value,
+                 size_t* param_value_size_ret);
 /** // doc: get_program_build_info {{{
  * \brief Returns build information for each device in the program object.
  *
@@ -1350,10 +1554,12 @@ void get_program_info(cl_program program, program_info_t param_name,
  * \throw unexpected_clerror
  *    When \c clGetProgramBuildInfo() returns other error code.
  */ // }}}
-void get_program_build_info(cl_program program, cl_device_id device,
-                            program_build_info_t param_name,
-                            size_t param_value_size, void* param_value,
-                            size_t* param_value_size_ret);
+void
+get_program_build_info(cl_program program,
+                       cl_device_id device,
+                       program_build_info_t param_name,
+                       size_t param_value_size, void* param_value,
+                       size_t* param_value_size_ret);
 /** @} */
 } // end namespace clxx
 
