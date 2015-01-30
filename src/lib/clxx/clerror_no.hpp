@@ -11,6 +11,9 @@
 #define CLXX_CLERROR_NO_HPP_INCLUDED
 
 #include <clxx/clerror_base.hpp>
+#include <clxx/util/std_except_ctor_arg.hpp>
+#include <clxx/util/clerror_stdexcept.hpp>
+#include <string>
 
 namespace clxx {
 
@@ -25,6 +28,9 @@ namespace clxx {
  * actually).
  *
  * \tparam Code error code as returned by an OpenCL function.
+ * \tparam StdExcept standard exception base class
+ * \tparam StdCtorArg determines what (extra) constructors the standard
+ *         exception base class has
  *
  * **Example**:
  * \code
@@ -44,11 +50,28 @@ namespace clxx {
  *     }
  * \endcode
  */ // }}}
-template <status_t Code>
-  struct clerror_no
-    : public clerror_base<Code>
+template < status_t Code
+         , class StdExcept = typename clerror_stdexcept<Code>::type
+         , class StdCtorArg = typename std_except_ctor_arg<StdExcept>::type >
+  struct clerror_no;
+/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
+template <status_t Code, class StdExcept>
+  struct clerror_no<Code, StdExcept, std_except_no_ctor_arg_tag>
+    : public clerror_base<Code,StdExcept, std_except_no_ctor_arg_tag>
   {
+    typedef clerror_base<Code,StdExcept, std_except_no_ctor_arg_tag> Base;
+    clerror_no() : Base() { }
   };
+template <status_t Code, class StdExcept>
+  struct clerror_no<Code, StdExcept, std_except_xstring_ctor_arg_tag>
+    : public clerror_base<Code, StdExcept, std_except_xstring_ctor_arg_tag>
+  {
+    typedef clerror_base<Code,StdExcept, std_except_xstring_ctor_arg_tag> Base;
+    clerror_no() : Base() { }
+    explicit clerror_no(std::string const& what_arg) : Base(what_arg) { }
+    explicit clerror_no(char const* what_arg) : Base(what_arg) { }
+  };
+/** \endcond **/
 
 } // end namespace clxx
 

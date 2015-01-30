@@ -19,5 +19,5 @@ int main(int argc, char const* argv[])
     {
       std::cerr << "error: caught unhandled exception" << std::endl;
     }
-  return 1;
+  return EXIT_FAILURE;
 }
