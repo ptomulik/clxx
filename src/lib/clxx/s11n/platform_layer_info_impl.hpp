@@ -21,7 +21,7 @@ namespace clxx {
 
 /** // doc: _serialize(Archive, platform_layer_info&, const unsigned int) {{{
  * \brief Implements serialization of \ref clxx::platform_layer_info "platform_layer_info"
- * 
+ *
  * \param ar  Archive used for serialization.
  * \param obj The object to be serialized.
  * \param ver Class version

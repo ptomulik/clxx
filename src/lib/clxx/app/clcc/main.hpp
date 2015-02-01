@@ -5,7 +5,7 @@
 
 /** // doc: clxx/app/clcc/main.hpp {{{
  * \file clxx/app/clcc/main.hpp
- * \brief Defines clxx::app::clcc::main 
+ * \brief Defines clxx::app::clcc::main
  */ // }}}
 #ifndef CLXX_APP_CLCC_MAIN_HPP_INCLUDED
 #define CLXX_APP_CLCC_MAIN_HPP_INCLUDED
@@ -109,7 +109,7 @@ private:
   bool            _match(device const& d) const;
   platforms       _filter(platforms const& ds) const;
   devices         _filter(devices const& ds) const;
-  
+
   clxx::app::clcc::options _options;
 };
 

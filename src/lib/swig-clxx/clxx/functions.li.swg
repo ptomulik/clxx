@@ -25,6 +25,7 @@
 %throws_clerror(clxx::retain_device(cl_device_id));
 %throws_clerror(clxx::release_device(cl_device_id));
 %throws_clerror(clxx::create_command_queue(cl_context, cl_device_id, command_queue_properties_t));
+%throws_clerror(clxx::create_command_queue_with_properties(cl_context, cl_device_id, const cl_queue_properties*));
 %throws_clerror(clxx::retain_command_queue(cl_command_queue));
 %throws_clerror(clxx::release_command_queue(cl_command_queue));
 %throws_clerror(clxx::get_command_queue_info(cl_command_queue, command_queue_info_t, size_t, void *, size_t *));

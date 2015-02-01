@@ -21,10 +21,10 @@ namespace clxx { class unit_test_suite; }
 class clxx::unit_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test_foo() {{{
+  /** // doc: test__foo() {{{
    * \todo Write documentation
    */ // }}}
-  void test_foo( )
+  void test__foo( )
   {
     TS_ASSERT(true);
   }

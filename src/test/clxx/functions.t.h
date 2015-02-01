@@ -672,65 +672,162 @@ public:
    */ // }}}
   void test_create_command_queue__success( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)0x1234, CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(create_command_queue((cl_context)NULL,(cl_device_id)NULL, command_queue_properties_t::profiling_enable));
     //TS_ASSERT(mock.called_once_with((cl_context)NULL,0,nullptr,nullptr,nullptr,??? - local variable within create_command_queue(...){...}));
+#endif
   }
   /** // doc: test_create_command_queue__invalid_context() {{{
    * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_INVALID_CONTEXT.
    */ // }}}
   void test_create_command_queue__invalid_context( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_CONTEXT);
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::invalid_context>);
+#endif
   }
   /** // doc: test_create_command_queue__invalid_device() {{{
    * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_INVALID_DEVICE.
    */ // }}}
   void test_create_command_queue__invalid_device( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_DEVICE);
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::invalid_device>);
+#endif
   }
   /** // doc: test_create_command_queue__invalid_value() {{{
    * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_INVALID_VALUE.
    */ // }}}
   void test_create_command_queue__invalid_value( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_VALUE);
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::invalid_value>);
+#endif
   }
   /** // doc: test_create_command_queue__invalid_command_queue() {{{
    * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_DEVICE_NOT_AVAILABLE.
    */ // }}}
   void test_create_command_queue__invalid_command_queue( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_INVALID_QUEUE_PROPERTIES);
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::none), clerror_no<status_t::invalid_queue_properties>);
+#endif
   }
   /** // doc: test_create_command_queue__out_of_resources() {{{
    * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_OUT_OF_RESOURCES.
    */ // }}}
   void test_create_command_queue__out_of_resources( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::out_of_resources>);
+#endif
   }
   /** // doc: test_create_command_queue__out_of_host_memory() {{{
    * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns CL_OUT_OF_HOST_MEMORY.
    */ // }}}
   void test_create_command_queue__out_of_host_memory( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), clerror_no<status_t::out_of_host_memory>);
+#endif
   }
   /** // doc: test_create_command_queue__other_error() {{{
    * \brief Test create_command_queue() in a situation when clCreateCommandQueue() returns an unexpected error code.
    */ // }}}
   void test_create_command_queue__other_error( )
   {
+#if HAVE_OPENCL_clCreateCommandQueue
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)NULL, -0x3456);
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), unexpected_clerror);
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__success() {{{
+   * \brief Test create_command_queue_with_properties() in a normal situation.
+   */ // }}}
+  void test_create_command_queue_with_properties__success( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)0x1234, CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL, (const cl_queue_properties*)NULL));
+    //TS_ASSERT(mock.called_once_with((cl_context)NULL,0,nullptr,nullptr,nullptr,??? - local variable within create_command_queue_with_properties(...){...}));
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__invalid_context() {{{
+   * \brief Test create_command_queue_with_properties() in a situation when clCreateCommandQueueWithProperties() returns CL_INVALID_CONTEXT.
+   */ // }}}
+  void test_create_command_queue_with_properties__invalid_context( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)NULL, CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), clerror_no<status_t::invalid_context>);
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__invalid_device() {{{
+   * \brief Test create_command_queue_with_properties() in a situation when clCreateCommandQueueWithProperties() returns CL_INVALID_DEVICE.
+   */ // }}}
+  void test_create_command_queue_with_properties__invalid_device( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)NULL, CL_INVALID_DEVICE);
+    TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), clerror_no<status_t::invalid_device>);
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__invalid_value() {{{
+   * \brief Test create_command_queue_with_properties() in a situation when clCreateCommandQueueWithProperties() returns CL_INVALID_VALUE.
+   */ // }}}
+  void test_create_command_queue_with_properties__invalid_value( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)NULL, CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), clerror_no<status_t::invalid_value>);
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__invalid_command_queue() {{{
+   * \brief Test create_command_queue_with_properties() in a situation when clCreateCommandQueueWithProperties() returns CL_DEVICE_NOT_AVAILABLE.
+   */ // }}}
+  void test_create_command_queue_with_properties__invalid_command_queue( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)NULL, CL_INVALID_QUEUE_PROPERTIES);
+    TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), clerror_no<status_t::invalid_queue_properties>);
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__out_of_resources() {{{
+   * \brief Test create_command_queue_with_properties() in a situation when clCreateCommandQueueWithProperties() returns CL_OUT_OF_RESOURCES.
+   */ // }}}
+  void test_create_command_queue_with_properties__out_of_resources( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)NULL, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), clerror_no<status_t::out_of_resources>);
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__out_of_host_memory() {{{
+   * \brief Test create_command_queue_with_properties() in a situation when clCreateCommandQueueWithProperties() returns CL_OUT_OF_HOST_MEMORY.
+   */ // }}}
+  void test_create_command_queue_with_properties__out_of_host_memory( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)NULL, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), clerror_no<status_t::out_of_host_memory>);
+#endif
+  }
+  /** // doc: test_create_command_queue_with_properties__other_error() {{{
+   * \brief Test create_command_queue_with_properties() in a situation when clCreateCommandQueue() returns an unexpected error code.
+   */ // }}}
+  void test_create_command_queue_with_properties__other_error( )
+  {
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+    T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)NULL, -0x3456);
+    TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), unexpected_clerror);
+#endif
   }
   /** // doc: test_retain_command_queue__success() {{{
    * \brief Test retain_command_queue() in a normal situation

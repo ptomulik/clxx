@@ -98,7 +98,7 @@ _execute_build()
     {
       program p(*c, sources);
       devices ds(c->get_devices());
-      try 
+      try
         {
           build_program(p, options().cloptions());
         }

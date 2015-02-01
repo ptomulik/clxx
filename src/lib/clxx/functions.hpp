@@ -631,6 +631,7 @@ retain_device(cl_device_id device);
 void
 release_device(cl_device_id device);
 #endif
+#if HAVE_OPENCL_clCreateCommandQueue
 /** // doc: create_command_queue(...) {{{
  * \brief Create a command-queue on a specific device
  *
@@ -641,8 +642,8 @@ release_device(cl_device_id device);
  * with \e errcode_ret being defined internaly in the create_command_queue().
  *
  * The main difference between clxx::create_command_queue() and
- * \c clCreateCommandQueue() is that it throws %clxx exceptions instead of
- * returning OpenCL error codes and accepts
+ * \c clCreateCommandQueue() is that it throws %clxx exceptions
+ * instead of returning OpenCL error codes and accepts
  * \ref clxx::command_queue_properties_t "command_queue_properties_t"
  * instead of \c cl_command_queue_properties as the \e properties argument.
  *
@@ -694,6 +695,75 @@ cl_command_queue
 create_command_queue(cl_context context,
                      cl_device_id device,
                      command_queue_properties_t properties);
+#endif
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+/** // doc: create_command_queue_with_properties(...) {{{
+ * \brief Create a host or device command-queue on a specific device
+ *
+ * This is a wrapper around \c clCreateCommandQueueWithProperties(). The call
+ * to this function has same effect as call to
+ *   - \c clCreateCommandQueueWithProperties(context,device,properties,errcode_ret)
+ *
+ * with \e errcode_ret being defined internaly in the
+ * create_command_queue_with_properties().
+ *
+ * The main difference between clxx::create_command_queue_with_properties() and
+ * \c clCreateCommandQueueWithProperties() is that it throws %clxx exceptions
+ * instead of returning OpenCL error codes.
+ *
+ * OpenCL objects such as memory, program and kernel objects are created using
+ * a context. Operations on these objects are performed using a command-queue.
+ * The command-queue can be used to queue a set of operations (referred to as
+ * commands) in order. Having multiple command-queues allows applications to
+ * queue multiple independent commands without requiring synchronization. Note
+ * that this should work as long as these objects are not being shared. Sharing
+ * of objects across multiple command-queues will require the application to
+ * perform appropriate synchronization. For more informations see the
+ * <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueueWithProperties.html">documentation of the clCreateCommandQueueWithProperties()</a>.
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param device
+ *    Must be a device associated with \e context. It can either be in the list
+ *    of devices specified when \e context is created using
+ *    \ref clxx::create_context() "create_context()" or have the same device
+ *    type as the device type specified when the context is created using
+ *    \ref clxx::create_context_from_type() "create_context_from_type()".
+ * \param properties
+ *    Specifies a list of properties for the command-queue and their
+ *    corresponding values. Each property name is immediately followed by the
+ *    corresponding desired value. This list is terminated with 0. The list of
+ *    supported properties is defined in the OpenCL standard. If a supported
+ *    property and its value is not specified in \e properties, its default
+ *    value will be used. \e properties can be \c NULL in which case the
+ *    default values for supported command-queue properties will be used.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateCommandQueueWithProperties() returns error \c CL_INVALID_CONTEXT
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clCreateCommandQueueWithProperties() returns error \c CL_INVALID_DEVICE
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateCommandQueueWithProperties() returns error \c CL_INVALID_VALUE
+ * \throw clerror_no<status_t::invalid_queue_properties>
+ *    When \c clCreateCommandQueueWithProperties() returns error \c CL_INVALID_QUEUE_PROPERTIES
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateCommandQueueWithProperties() returns error \c CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateCommandQueueWithProperties() returns error \c CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clCreateCommandQueueWithProperties() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |   1.0   |   1.1   |   1.2   |   2.0   |
+ * | ------- | ------- | ------- | ------- |
+ * |         |         |         | &radic; |
+ */ // }}}
+cl_command_queue
+create_command_queue_with_properties(cl_context context,
+                                     cl_device_id device,
+                                     const cl_queue_properties* properties);
+#endif
 /** // doc: retain_command_queue(...) {{{
  * \brief Increment the \e command_queue reference count
  *

@@ -338,6 +338,7 @@ public:
   Dummy_clReleaseDevice(cl_int err);
 };
 #endif
+#if HAVE_OPENCL_clCreateCommandQueue
 /** // doc: Dummy_clCreateCommandQueue {{{
  * \brief Default mock for clCreateCommandQueue OpenCL function.
  */ // }}}
@@ -360,6 +361,31 @@ public:
    */ // }}}
   Dummy_clCreateCommandQueue(cl_command_queue ctx, cl_int err);
 };
+#endif
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+/** // doc: Dummy_clCreateCommandQueueWithProperties {{{
+ * \brief Default mock for clCreateCommandQueueWithProperties OpenCL function.
+ */ // }}}
+class Dummy_clCreateCommandQueueWithProperties
+  : public T::Base_clCreateCommandQueueWithProperties,
+    public T::Dummy_CallArgs<cl_context, cl_device_id,
+                             const cl_queue_properties*, cl_int*>
+{
+  cl_command_queue _ctx;
+  cl_int _err;
+  cl_command_queue clCreateCommandQueueWithProperties(
+      cl_context context,
+      cl_device_id device,
+      const cl_queue_properties* properties,
+      cl_int* errcode_ret
+  );
+public:
+  /** // doc: Dummy_clCreateCommandQueueWithProperties() {{{
+   * \todo Write documentation
+   */ // }}}
+  Dummy_clCreateCommandQueueWithProperties(cl_command_queue ctx, cl_int err);
+};
+#endif
 /** // doc: Dummy_clRetainCommandQueue {{{
  * \brief Default mock for clRetainCommandQueue OpenCL function.
  */ // }}}
@@ -850,6 +876,7 @@ Dummy_clReleaseDevice(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if HAVE_OPENCL_clCreateCommandQueue
 cl_command_queue Dummy_clCreateCommandQueue::
 clCreateCommandQueue(cl_context context, cl_device_id device,
                      cl_command_queue_properties properties,
@@ -867,6 +894,27 @@ Dummy_clCreateCommandQueue(cl_command_queue ctx, cl_int err)
   : _ctx(ctx), _err(err)
 {
 }
+#endif
+/* ------------------------------------------------------------------------- */
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+cl_command_queue Dummy_clCreateCommandQueueWithProperties::
+clCreateCommandQueueWithProperties(cl_context context, cl_device_id device,
+                                   const cl_queue_properties* properties,
+                                   cl_int* errcode_ret)
+{
+  call_with(context, device, properties, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return this->_ctx;
+}
+Dummy_clCreateCommandQueueWithProperties::
+Dummy_clCreateCommandQueueWithProperties(cl_command_queue ctx, cl_int err)
+  : _ctx(ctx), _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clRetainCommandQueue::
 clRetainCommandQueue(cl_command_queue command_queue)

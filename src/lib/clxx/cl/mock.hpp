@@ -83,11 +83,21 @@ CXXTEST_MOCK_GLOBAL(cl_int, clRetainDevice, (cl_device_id device), (device));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseDevice, (cl_device_id device), (device));
 #endif
 
+#if HAVE_OPENCL_clCreateCommandQueue
 CXXTEST_MOCK_GLOBAL(cl_command_queue, clCreateCommandQueue,
   ( cl_context context, cl_device_id device,
     cl_command_queue_properties properties, cl_int* errcode_ret ),
   ( context, device, properties, errcode_ret )
 );
+#endif
+
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+CXXTEST_MOCK_GLOBAL(cl_command_queue, clCreateCommandQueueWithProperties,
+  ( cl_context context, cl_device_id device,
+    const cl_queue_properties* properties, cl_int* errcode_ret ),
+  ( context, device, properties, errcode_ret )
+);
+#endif
 
 CXXTEST_MOCK_GLOBAL(cl_int, clRetainCommandQueue,
                     (cl_command_queue command_queue), (command_queue));

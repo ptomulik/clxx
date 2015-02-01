@@ -19,7 +19,7 @@ namespace clxx { namespace app { namespace clinfo {
  *
  * The class defines the following options
  *
- *  - <tt>--platform-profile</tt> - query (or not) for platform profile, 
+ *  - <tt>--platform-profile</tt> - query (or not) for platform profile,
  *  - <tt>--platform-version</tt> - query (or not) for platform version,
  *  - <tt>--platform-name</tt> - query for platform name,
  *  - <tt>--platform-vendor</tt> - query for platform vendor,

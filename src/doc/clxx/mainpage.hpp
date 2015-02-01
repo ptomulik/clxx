@@ -60,7 +60,7 @@
  * platforms, devices, contexts, etc.. OpenCL functions are then used to
  * access these resources. Clxx encapsulates these identifiers with C++
  * objects, such that the programmers mostly uses object's interface instead
- * of raw OpenCL calls. For example, the clxx::cl::platform class wraps the \c
+ * of raw OpenCL calls. For example, the clxx::platform class wraps the \c
  * cl_platform_id identifier and implements methods which provide same
  * functionality as the \c clGetPlatformInfo(). A short code snippet
  * illustrates this interface:

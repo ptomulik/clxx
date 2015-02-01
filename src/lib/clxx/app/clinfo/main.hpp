@@ -5,7 +5,7 @@
 
 /** // doc: clxx/app/clinfo/main.hpp {{{
  * \file clxx/app/clinfo/main.hpp
- * \brief Defines clxx::app::clinfo::main 
+ * \brief Defines clxx::app::clinfo::main
  */ // }}}
 #ifndef CLXX_APP_CLINFO_MAIN_HPP_INCLUDED
 #define CLXX_APP_CLINFO_MAIN_HPP_INCLUDED

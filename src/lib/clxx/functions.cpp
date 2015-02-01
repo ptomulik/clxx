@@ -418,6 +418,7 @@ release_device(cl_device_id device)
 }
 #endif // HAVE_OPENCL_clReleaseDevice
 /* ------------------------------------------------------------------------ */
+#if HAVE_OPENCL_clCreateCommandQueue
 cl_command_queue
 create_command_queue(cl_context context,
                      cl_device_id device,
@@ -449,6 +450,41 @@ create_command_queue(cl_context context,
 
   return queue;
 }
+#endif
+/* ------------------------------------------------------------------------ */
+#if HAVE_OPENCL_clCreateCommandQueueWithProperties
+cl_command_queue
+create_command_queue_with_properties(cl_context context,
+                                     cl_device_id device,
+                                     const cl_queue_properties* properties)
+{
+  cl_int s = CL_SUCCESS;
+  cl_command_queue queue;
+  queue = T::clCreateCommandQueueWithProperties(context, device, properties, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      switch(static_cast<status_t>(s))
+        {
+          case status_t::invalid_context:
+            throw clerror_no<status_t::invalid_context>();
+          case status_t::invalid_device:
+            throw clerror_no<status_t::invalid_device>();
+          case status_t::invalid_value:
+            throw clerror_no<status_t::invalid_value>();
+          case status_t::invalid_queue_properties:
+            throw clerror_no<status_t::invalid_queue_properties>();
+          case status_t::out_of_resources:
+            throw clerror_no<status_t::out_of_resources>();
+          case status_t::out_of_host_memory:
+            throw clerror_no<status_t::out_of_host_memory>();
+          default:
+            throw unexpected_clerror(static_cast<status_t>(s));
+        }
+    }
+
+  return queue;
+}
+#endif
 /* ------------------------------------------------------------------------ */
 void
 retain_command_queue(cl_command_queue command_queue)
