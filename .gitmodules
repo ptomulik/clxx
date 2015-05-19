@@ -16,3 +16,6 @@
 [submodule "site_scons/site_tools/swigpy"]
 	path = site_scons/site_tools/swigpy
 	url = git://github.com/ptomulik/scons-tool-swigpy.git
+[submodule "lib/yaul-tml"]
+	path = lib/yaul-tml
+	url = ../yaul-tml

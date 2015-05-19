@@ -16,11 +16,11 @@
 #include <string>
 #include <type_traits>
 
-#include <tml/string.hpp>
-#include <tml/num_to_string.hpp>
-#include <tml/join.hpp>
-#include <tml/c_str.hpp>
-#include <tml/sequence.hpp>
+#include <yaul/tml/string.hpp>
+#include <yaul/tml/num_to_string.hpp>
+#include <yaul/tml/join.hpp>
+#include <yaul/tml/c_str.hpp>
+#include <yaul/tml/sequence.hpp>
 
 namespace clxx { namespace detail {
 
@@ -40,9 +40,9 @@ namespace clxx { namespace detail {
  */ // }}}
 template<typename T>
   struct enum_hex_fmt_prec
-    : tml::join<
-        tml::string<'.'>
-      , typename tml::num_to_string_c<std::size_t,sizeof(T)*2>::type
+    : yaul::tml::join<
+        yaul::tml::string<'.'>
+      , typename yaul::tml::num_to_string_c<std::size_t,sizeof(T)*2>::type
       >
   { };
 
@@ -53,30 +53,30 @@ template<typename T>
 template<typename T>
   struct enum_hex_fmt_argt
   {
-    typedef typename tml::string<> type; ///< The resultant type
+    typedef typename yaul::tml::string<> type; ///< The resultant type
   };
 
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 /// Specialization of the enum_hex_fmt_argt for <tt>signed char</tt>
 template<>
   struct enum_hex_fmt_argt<signed char>
-  { typedef typename tml::string<'h','h'> type; };
+  { typedef typename yaul::tml::string<'h','h'> type; };
 /// Specialization of the enum_hex_fmt_argt for <tt>signed short</tt>
 template<>
   struct enum_hex_fmt_argt<signed short>
-  { typedef typename tml::string<'h'> type; };
+  { typedef typename yaul::tml::string<'h'> type; };
 /// Specialization of the enum_hex_fmt_argt for <tt>signed long</tt>
 template<>
   struct enum_hex_fmt_argt<signed long>
-  { typedef typename tml::string<'l'> type; };
+  { typedef typename yaul::tml::string<'l'> type; };
 /// Specialization of the enum_hex_fmt_argt for <tt>signed long long</tt>
 template<>
   struct enum_hex_fmt_argt<signed long long>
-  { typedef typename tml::string<'l','l'> type; };
+  { typedef typename yaul::tml::string<'l','l'> type; };
 /// Specialization of the enum_hex_fmt_argt for <tt>size_t</tt>
 template<>
   struct enum_hex_fmt_argt<size_t>
-  { typedef typename tml::string<'z'> type; };
+  { typedef typename yaul::tml::string<'z'> type; };
 /** \endcond */
 
 /** // doc: enum_hex_fmt {{{
@@ -88,28 +88,28 @@ template<typename T, bool Negative>
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<typename T>
   struct enum_hex_fmt<T,false>
-    : tml::join<
-        typename tml::join<
-          tml::string<'0','x','%'>
+    : yaul::tml::join<
+        typename yaul::tml::join<
+          yaul::tml::string<'0','x','%'>
         , typename enum_hex_fmt_prec<T>::type
         >::type
-      , typename tml::join<
+      , typename yaul::tml::join<
           typename enum_hex_fmt_argt<T>::type
-        , tml::string<'x'>
+        , yaul::tml::string<'x'>
         >::type
       >
   { };
 /// Specialization of the enum_hex_fmt for <tt>lt;T, true&gt;</tt>
 template<typename T>
   struct enum_hex_fmt<T,true>
-    : tml::join<
-        typename tml::join<
-          tml::string<'-','0','x','%'>
+    : yaul::tml::join<
+        typename yaul::tml::join<
+          yaul::tml::string<'-','0','x','%'>
         , typename enum_hex_fmt_prec<T>::type
         >::type
-      , typename tml::join<
+      , typename yaul::tml::join<
           typename enum_hex_fmt_argt<T>::type
-        , tml::string<'x'>
+        , yaul::tml::string<'x'>
         >::type
       >
   { };
@@ -132,12 +132,12 @@ std::string enum2hex(E x)
   char const *fmt;
   if (t < 0)
     {
-      fmt = tml::c_str<typename detail::enum_hex_fmt<T,true>::type>::value;
+      fmt = yaul::tml::c_str<typename detail::enum_hex_fmt<T,true>::type>::value;
       t = -t;
     }
   else
     {
-      fmt = tml::c_str<typename detail::enum_hex_fmt<T,false>::type>::value;
+      fmt = yaul::tml::c_str<typename detail::enum_hex_fmt<T,false>::type>::value;
     }
   std::snprintf(buf, size, fmt, t);
   return std::string(buf);
