@@ -44,18 +44,26 @@ headers = [
     'program_sources.hpp',
 ]
 
+env['CLXX_PACKAGES']['libclxx_cl'] = {
+    'version' : '0.1.0',
+    'libdeps' : CLVar('OpenCL clxx_info')
+}
+
 objects = env.SharedObject(sources)
 
-libs = CLVar('OpenCL clxx_info')
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_cl']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_cl']['libdeps']
+}
 
 # rlib - "real" libarary
-rlib = env.SharedLibrary('../clxx_cl', objects + ['cl/real.cpp'], LIBS = libs)
+rlib = env.SharedLibrary('../clxx_cl', objects + ['cl/real.cpp'], **overrides)
 
 # tlib - library for testing (OpenCL functions replaced with mocks)
-tlib = env.SharedLibrary('../clxx_cl_test', objects + ['cl/mock.cpp'], LIBS = libs)
+tlib = env.SharedLibrary('../clxx_cl_test', objects + ['cl/mock.cpp'], **overrides)
 env.Ignore('../..', tlib)
 
-ilib = env.Install('${libdir}', rlib)
+ilib = env.InstallVersionedLib('${libdir}', rlib, **overrides)
 env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
 iheaders = env.Install("${includedir}/clxx", headers)

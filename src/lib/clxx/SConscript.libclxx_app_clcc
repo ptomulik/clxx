@@ -16,11 +16,19 @@ headers = [
     'app/clcc/options.hpp',
 ]
 
-libs = CLVar('clxx_app clxx_io clxx_cl clxx_info')
+env['CLXX_PACKAGES']['libclxx_app_clcc'] = {
+    'version' : '0.1.0',
+    'libdeps' : CLVar('clxx_app clxx_io clxx_cl clxx_info')
+}
 
-lib = env.SharedLibrary('../clxx_app_clcc', sources, LIBS = libs)
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_app_clcc']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_app_clcc']['libdeps']
+}
 
-ilib = env.Install('${libdir}', lib)
+lib = env.SharedLibrary('../clxx_app_clcc', sources, **overrides)
+
+ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
 env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
 iheaders = env.Install("${includedir}/clxx/app_clcc", headers)

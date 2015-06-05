@@ -30,12 +30,20 @@ headers = [
     'io/types_impl.hpp',
 ]
 
-libs =  CLVar('clxx_info boost_serialization')
+env['CLXX_PACKAGES']['libclxx_io'] = {
+    'version' : '0.1.0',
+    'libdeps' : CLVar('clxx_info boost_serialization')
+}
+
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_io']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_io']['libdeps']
+}
 
 # rlib - "real" library
-lib = env.SharedLibrary('../clxx_io', sources, LIBS = libs)
+lib = env.SharedLibrary('../clxx_io', sources, **overrides)
 
-ilib = env.Install('${libdir}', lib)
+ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
 env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
 iheaders = env.Install("${includedir}/clxx/io", headers)

@@ -4,6 +4,8 @@
 
 Import(['env'])
 
+env['CLXX_PACKAGES'] = {}
+
 SConscript('SConscript.tools', exports = ['env'])
 SConscript('SConscript.defaults', exports = ['env'])
 SConscript('SConscript.cli', exports = ['env'])

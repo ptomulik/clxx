@@ -30,12 +30,21 @@ headers = [
     's11n/shared_ptr.hpp',
 ]
 
-libs =  CLVar('clxx_info boost_serialization')
+
+env['CLXX_PACKAGES']['libclxx_s11n'] = {
+    'version' : '0.1.0',
+    'libdeps' : CLVar('clxx_info boost_serialization')
+}
+
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_s11n']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_s11n']['libdeps']
+}
 
 # rlib - "real" library
-lib = env.SharedLibrary('../clxx_s11n', sources, LIBS = libs)
+lib = env.SharedLibrary('../clxx_s11n', sources, **overrides)
 
-ilib = env.Install('${libdir}', lib)
+ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
 env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
 iheaders = env.Install("${includedir}/clxx/s11n", headers)

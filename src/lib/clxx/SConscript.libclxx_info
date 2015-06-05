@@ -26,11 +26,21 @@ headers = [
     'platform_query.hpp',
 ]
 
+env['CLXX_PACKAGES']['libclxx_info'] = {
+    'version' : '0.1.0',
+    'libdeps' : CLVar()
+}
+
 objects = env.SharedObject(sources)
 
-lib = env.SharedLibrary('../clxx_info', objects)
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_info']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_info']['libdeps']
+}
 
-ilib = env.Install('${libdir}', lib)
+lib = env.SharedLibrary('../clxx_info', objects, **overrides)
+
+ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
 env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
 iheaders = env.Install("${includedir}/clxx", headers)
