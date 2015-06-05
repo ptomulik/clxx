@@ -5,6 +5,7 @@
 Import('env')
 
 from SCons.Util import CLVar, NodeList
+import os.path
 
 headers = [
     'app/common_options_description.hpp',
@@ -59,11 +60,13 @@ ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
 env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 
 iheaders = NodeList()
+for header in headers:
+    [head, tail] = os.path.split(header)
+    idir = os.path.join(env.subst("${includedir}"), "clxx", head);
+    iheader = env.Install(idir, header)
+    env.Ignore(idir, iheader)
+    iheaders += iheader
 
-for h in headers:
-    iheaders += env.InstallAs("${includedir}/clxx/" + h, h)
-
-env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/app", iheaders)
 
 env.Alias('install-libclxx_app-headers', iheaders)
 env.Alias('install-libclxx_app-lib', ilib)
