@@ -8,10 +8,9 @@ env:
 before_install:
   - lsb_release -c
   - lsb_release -r
-  - wget -O - http://ptomulik.meil.pw.edu.pl/apt/ptomulik@meil.pw.edu.pl.gpg.key | sudo apt-key add -
+  - (mkdir -p lib/yaul-tml && cd lib/yaul-tml && wget -O - https://github.com/ptomulik/yaul-tml/archive/yaul-0.1.1.tar.gz | tar --strip-components 1 -zxf -)
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu utopic main universe multiverse restricted'
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu trusty main universe multiverse restricted'
-  - sudo apt-add-repository 'deb http://ptomulik.meil.pw.edu.pl/apt/ubuntu vivid main'
   - sudo apt-key update
   - sudo apt-get -y update
 install:
@@ -22,7 +21,6 @@ install:
         sudo apt-get --no-install-recommends -y install libclang-common-3.3-dev;
       fi
     fi
-  - sudo apt-get install libyaul0.1-dev
   - sudo apt-get --no-install-recommends -y install cxxtest;
   - sudo apt-get --no-install-recommends -y install scons;
 #  - sudo apt-get --no-install-recommends -y install swig
@@ -42,7 +40,7 @@ before_script:
   - if $COMPILE; then $CXX --version; fi
   - if $COMPILE; then $CXX -dumpversion; fi
 script:
-  - if $COMPILE; then scons CLXX_ENABLE_GCOV=YES --without-cl-egl && scons CLXX_ENABLE_GCOV=YES --without-cl-egl check; fi
+  - if $COMPILE; then scons CLXX_ENABLE_GCOV=YES --without-cl-egl --with-yaul-tml='#lib/yaul-tml/include' && scons CLXX_ENABLE_GCOV=YES --without-cl-egl --with-yaul-tml='#lib/yaul-tml/include' check; fi
   - if $APIDOC; then scons api-doc; fi
 after_success:
     if $COMPILE; then
