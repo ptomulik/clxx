@@ -8,11 +8,10 @@ env:
 before_install:
   - lsb_release -c
   - lsb_release -r
-    #  - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu quantal main universe multiverse restricted'
-    # - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu raring main universe multiverse restricted'
+  - wget -O - http://ptomulik.meil.pw.edu.pl/apt/ptomulik@meil.pw.edu.pl.gpg.key | sudo apt-key add -
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu utopic main universe multiverse restricted'
-    #- sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu saucy main universe multiverse restricted'
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu trusty main universe multiverse restricted'
+  - sudo apt-add-repository 'deb http://ptomulik.meil.pw.edu.pl/apt/ubuntu vivid main'
   - sudo apt-key update
   - sudo apt-get -y update
 install:
@@ -23,6 +22,7 @@ install:
         sudo apt-get --no-install-recommends -y install libclang-common-3.3-dev;
       fi
     fi
+  - sudo apt-get install libyaul0.1-dev
   - sudo apt-get --no-install-recommends -y install cxxtest;
   - sudo apt-get --no-install-recommends -y install scons;
 #  - sudo apt-get --no-install-recommends -y install swig
