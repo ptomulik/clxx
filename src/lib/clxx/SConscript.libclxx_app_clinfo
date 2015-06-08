@@ -32,7 +32,7 @@ headers = [
 
 env['CLXX_PACKAGES']['libclxx_app_clinfo'] = {
     'version' : '0.1.0',
-    'libdeps' : CLVar('clxx_app clxx_io clxx_cl clxx_s11n clxx_info')
+    'libdeps' : CLVar('clxx_app clxx_io clxx_cl clxx_s11n clxx_info boost_serialization boost_wserialization boost_program_options')
 }
 
 overrides = {
