@@ -69,10 +69,10 @@ env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
 iheaders = env.Install("${includedir}/clxx", headers)
 env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx", iheaders)
 
-env.Alias('install-libclxx-headers', iheaders)
-env.Alias('install-libclxx-lib', ilib)
-env.Alias('install-libclxx-dev', ['install-libclxx-headers', 'install-libclxx-lib' ])
-env.Alias('install','install-libclxx-dev')
+env.Alias('install-libclxx_cl-headers', iheaders)
+env.Alias('install-libclxx_cl-lib', ilib)
+env.Alias('install-libclxx_cl-dev', ['install-libclxx_cl-headers', 'install-libclxx_cl-lib' ])
+env.Alias('install','install-libclxx_cl-dev')
 
 # Local Variables:
 # # tab-width:4
