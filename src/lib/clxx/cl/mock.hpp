@@ -85,7 +85,7 @@ CXXTEST_MOCK_GLOBAL(cl_int, clReleaseDevice, (cl_device_id device), (device));
 
 #if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
 CLXX_DIAGNOSTIC_PUSH
-CLXX_UNDEPRECATE
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 CXXTEST_MOCK_GLOBAL(cl_command_queue, clCreateCommandQueue,
   ( cl_context context, cl_device_id device,
     cl_command_queue_properties properties, cl_int* errcode_ret ),
