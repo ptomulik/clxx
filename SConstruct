@@ -21,6 +21,7 @@
 import os
 
 env = Environment()
+env['CLXX_VERSION'] = '0.1.1'
 
 #############################################################################
 # Define variant directory
