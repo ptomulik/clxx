@@ -14,7 +14,7 @@
 
 namespace clxx {
 
-/** \ingroup clxx_cl_functions
+/** \addtogroup clxx_cl_functions
  *  @{ */
 /** // {{{ doc: get_platform_ids(...)
  * \brief Retrieve platform identifiers of locally available OpenCL platforms.
@@ -48,9 +48,9 @@ namespace clxx {
  * CLXX, or when get_platform_ids() has a bug.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |  \check   |  \check   |  \check   |  \check   |    ???    |
  */ // }}}
 void
 get_platform_ids(cl_uint num_entries,
@@ -98,9 +98,9 @@ get_platform_ids(cl_uint num_entries,
  * CLXX, or when get_platform_info() has a bug.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 get_platform_info(cl_platform_id platform,
@@ -159,9 +159,9 @@ get_platform_info(cl_platform_id platform,
  * %clxx, or when get_platform_ids() has a bug.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 get_device_ids(cl_platform_id platform,
@@ -210,9 +210,9 @@ get_device_ids(cl_platform_id platform,
  *    when \c clGetDeviceInfo() returns any other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 get_device_info(cl_device_id device,
@@ -293,9 +293,9 @@ get_device_info(cl_device_id device,
  *    When \c clCreateContext() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 cl_context
 create_context(const cl_context_properties* properties,
@@ -375,9 +375,9 @@ create_context(const cl_context_properties* properties,
  *    When \c clCreateContextFromType() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 cl_context
 create_context_from_type(const cl_context_properties* properties,
@@ -413,9 +413,9 @@ create_context_from_type(const cl_context_properties* properties,
  *    implicit retain.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 retain_context(cl_context context);
@@ -442,9 +442,9 @@ retain_context(cl_context context);
  *    When \c clReleaseContext() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 release_context(cl_context context);
@@ -486,9 +486,9 @@ release_context(cl_context context);
  *    When \c clGetContextInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 get_context_info(cl_context context,
@@ -544,9 +544,9 @@ get_context_info(cl_context context,
  *    When \c clCreateSubDevices() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
  */ // }}}
 void
 create_sub_devices(cl_device_id in_device,
@@ -586,9 +586,9 @@ create_sub_devices(cl_device_id in_device,
  *    When \c clRetainDevice() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
  */ // }}}
 void
 retain_device(cl_device_id device);
@@ -624,9 +624,9 @@ retain_device(cl_device_id device);
  *    When \c clReleaseDevice() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
  */ // }}}
 void
 release_device(cl_device_id device);
@@ -687,9 +687,15 @@ release_device(cl_device_id device);
  *    When \c clCreateCommandQueue() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \cross  |    ???    |
+ *
+ * \cross - \c clCreateCommandQueue() has been removed from OpenCL in the
+ * version 2.0, however <tt>CL/cl.h</tt> header still declares it (but
+ * marks it as deprecated); as long as \c clCreateCommandQueue() is
+ * physically available at the library built time (in both, CL/cl.h and
+ * libOpenCL.so), the create_command_queue() will also be present.
  */ // }}}
 cl_command_queue
 create_command_queue(cl_context context,
@@ -755,9 +761,9 @@ create_command_queue(cl_context context,
  *    When \c clCreateCommandQueueWithProperties() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         |         | &radic; |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |    ???    |
  */ // }}}
 cl_command_queue
 create_command_queue_with_properties(cl_context context,
@@ -790,9 +796,9 @@ create_command_queue_with_properties(cl_context context,
  * \note \ref create_command_queue() performs an implicit retain.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 retain_command_queue(cl_command_queue command_queue);
@@ -820,9 +826,9 @@ retain_command_queue(cl_command_queue command_queue);
  *    When \c clReleaseCommandQueue() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 release_command_queue(cl_command_queue command_queue);
@@ -865,9 +871,9 @@ release_command_queue(cl_command_queue command_queue);
  *    When \c clGetCommandQueueInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 get_command_queue_info(cl_command_queue command_queue,
@@ -926,9 +932,9 @@ get_command_queue_info(cl_command_queue command_queue,
  *    When \c clCreateProgramWithSource() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 cl_program
 create_program_with_source(cl_context context,
@@ -1032,9 +1038,9 @@ create_program_with_source(cl_context context,
  *    \endcode
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 cl_program
 create_program_with_binary(cl_context context,
@@ -1091,9 +1097,9 @@ create_program_with_binary(cl_context context,
  *    When \c clCreateProgramWithBuiltInKernels() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
  */ // }}}
 cl_program
 create_program_with_built_in_kernels(cl_context context,
@@ -1129,9 +1135,9 @@ create_program_with_built_in_kernels(cl_context context,
  *    When \c clRetainProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 retain_program(cl_program program);
@@ -1162,9 +1168,9 @@ retain_program(cl_program program);
  *    When \c clReleaseProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 release_program(cl_program program);
@@ -1211,7 +1217,7 @@ release_program(cl_program program);
  * \param options
  *    A pointer to a null-terminated string of characters that describes the
  *    build options to be used for building the program executable. The list of
- *    supported options is described below.
+ *    supported options is described in the OpenCL standard.
  * \param pfn_notify
  *    A function pointer to a notification routine. The notification routine is
  *    a callback function that an application can register and which will be
@@ -1254,9 +1260,9 @@ release_program(cl_program program);
  *    When \c clBuildProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * | &radic; | &radic; | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 build_program(cl_program program,
@@ -1357,9 +1363,9 @@ build_program(cl_program program,
  *    When \c clCompileProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
  */ // }}}
 void
 compile_program(cl_program program,
@@ -1476,9 +1482,9 @@ compile_program(cl_program program,
  *    When \c clLinkProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
  */ // }}}
 cl_program
 link_program(cl_context context,
@@ -1518,9 +1524,9 @@ link_program(cl_context context,
  *    When \c clUnloadPlatformCompiler() returns other error code.
  *
  * \par Available in OpenCL versions
- * |   1.0   |   1.1   |   1.2   |   2.0   |
- * | ------- | ------- | ------- | ------- |
- * |         |         | &radic; |         |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
  */ // }}}
 void
 unload_platform_compiler(cl_platform_id platform);
@@ -1564,6 +1570,11 @@ unload_platform_compiler(cl_platform_id platform);
  *    When \c clGetProgramInfo() returns CL_OUT_OF_HOST_MEMORY.
  * \throw unexpected_clerror
  *    When \c clGetProgramInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 get_program_info(cl_program program,
@@ -1623,6 +1634,11 @@ get_program_info(cl_program program,
  *    When \c clGetProgramBuildInfo() returns CL_OUT_OF_HOST_MEMORY.
  * \throw unexpected_clerror
  *    When \c clGetProgramBuildInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
  */ // }}}
 void
 get_program_build_info(cl_program program,

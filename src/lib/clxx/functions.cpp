@@ -3,7 +3,7 @@
 
 /** // doc: clxx/functions.cpp {{{
  * \file clxx/functions.cpp
- * \todo Write documentation
+ * \brief Implements thin wrappers for OpenCL functions
  */ // }}}
 #include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>

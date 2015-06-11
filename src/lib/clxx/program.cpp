@@ -3,7 +3,7 @@
 
 /** // doc: clxx/program.cpp {{{
  * \file clxx/program.cpp
- * \todo Write documentation
+ * \brief Implements the \ref clxx::program "program" class and related functions
  */ // }}}
 #include <clxx/program.hpp>
 #include <clxx/functions.hpp>
