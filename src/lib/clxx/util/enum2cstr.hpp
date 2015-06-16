@@ -91,6 +91,10 @@ enum2cstr(status_t x, char const* dflt = nullptr) noexcept
           (x == status_t::invalid_linker_options) ? "invalid linker options" :
           (x == status_t::invalid_device_partition_count) ? "invalid device partition count" :
 #endif
+#if CL_VERSION_2_0
+          (x == status_t::invalid_pipe_size) ? "invalid pipe size" :
+          (x == status_t::invalid_device_queue) ? "invalid device queue" :
+#endif
 #if cl_khr_icd
           (x == status_t::platform_not_found_khr) ? "platform not found khr" :
 #endif

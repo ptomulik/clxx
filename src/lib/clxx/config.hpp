@@ -24,6 +24,9 @@
 // #define CLXX_USE_DEPRECATED_clReleaseDevice
 // #define CLXX_USE_DEPRECATED_clRetainDevice
 // #define CLXX_USE_DEPRECATED_clUnloadPlatformCompiler
+// #define CLXX_USE_DEPRECATED_clGetKernelArgInfo
+// #define CLXX_USE_DEPRECATED_clSetKernelArgSVMPointer
+// #define CLXX_USE_DEPRECATED_clSetKernelExecInfo
 
 /** // doc: CLXX_OPENCL_PROVIDES {{{
  * \todo Write documentation

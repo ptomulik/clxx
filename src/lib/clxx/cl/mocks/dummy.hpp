@@ -804,6 +804,230 @@ public:
    */ // }}}
   Dummy_clGetProgramBuildInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
 };
+/** // doc: Dummy_clCreateKernel {{{
+ * \brief Default mock for clCreateKernel OpenCL function.
+ */ // }}}
+class Dummy_clCreateKernel
+  : public T::Base_clCreateKernel,
+    public T::Dummy_CallArgs< cl_program, const char*, cl_int*>
+{
+  cl_kernel _kern;
+  cl_int _err;
+  cl_kernel clCreateKernel(
+      cl_program program,
+      const char* kernel_name,
+      cl_int* errcode_ret
+  );
+public:
+  /** // doc: Dummy_clCreateKernel() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param kern OpenCL kernel to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateKernel(cl_kernel kern, cl_int err);
+};
+/** // doc: Dummy_clCreateKernelsInProgram {{{
+ * \brief Default mock for clCreateKernelsInProgram OpenCL function.
+ */ // }}}
+class Dummy_clCreateKernelsInProgram
+  : public T::Base_clCreateKernelsInProgram,
+    public T::Dummy_CallArgs< cl_program, cl_uint, cl_kernel*, cl_uint*>
+{
+  cl_int _err;
+  cl_kernel* _kernels;
+  cl_uint* _num_kernels_ret;
+  cl_int clCreateKernelsInProgram(
+      cl_program program,
+      cl_uint num_kernels,
+      cl_kernel* kernels,
+      cl_uint* num_kernels_ret 
+  );
+public:
+  /** // doc: Dummy_clCreateKernelsInProgram() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param kernels Keernels to be returned by the mock
+   * \param num_kernels_ret Number of kernels to be returned by the mock
+   */ // }}}
+  Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels = nullptr, cl_uint* num_kernels_ret = nullptr);
+};
+/** // doc: Dummy_clGetKernelInfo {{{
+ * \brief Mock for clGetKernelInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetKernelInfo
+  : public T::Base_clGetKernelInfo,
+    public T::Dummy_CallArgs<cl_kernel, cl_kernel_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
+  cl_int clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name,
+                         size_t param_value_size, void* param_value,
+                         size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetKernelInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetKernelInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+};
+#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
+/** // doc: Dummy_clGetKernelArgInfo {{{
+ * \brief Mock for clGetKernelArgInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetKernelArgInfo
+  : public T::Base_clGetKernelArgInfo,
+    public T::Dummy_CallArgs<cl_kernel, cl_uint, cl_kernel_arg_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
+  cl_int clGetKernelArgInfo(cl_kernel kernel, cl_uint arg_index,
+                            cl_kernel_arg_info param_name,
+                            size_t param_value_size, void* param_value,
+                            size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetKernelArgInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetKernelArgInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+};
+#endif
+/** // doc: Dummy_clGetKernelWorkGroupInfo {{{
+ * \brief Mock for clGetKernelWorkGroupInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetKernelWorkGroupInfo
+  : public T::Base_clGetKernelWorkGroupInfo,
+    public T::Dummy_CallArgs<cl_kernel, cl_device_id, cl_kernel_work_group_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
+  cl_int clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device,
+                                  cl_kernel_work_group_info param_name,
+                                  size_t param_value_size, void* param_value,
+                                  size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetKernelWorkGroupInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetKernelWorkGroupInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+};
+/** // doc: Dummy_clRetainKernel {{{
+ * \brief Default mock for clRetainKernel OpenCL function.
+ */ // }}}
+class Dummy_clRetainKernel
+  : public T::Base_clRetainKernel,
+    public T::Dummy_CallArgs<cl_kernel>
+{
+  cl_int _err;
+  cl_int clRetainKernel(cl_kernel kernel);
+public:
+  /** // doc: Dummy_clRetainKernel() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clRetainKernel(cl_int err);
+};
+/** // doc: Dummy_clReleaseKernel {{{
+ * \brief Default mock for clReleaseKernel OpenCL function.
+ */ // }}}
+class Dummy_clReleaseKernel
+  : public T::Base_clReleaseKernel,
+    public T::Dummy_CallArgs<cl_kernel>
+{
+  cl_int _err;
+  cl_int clReleaseKernel(cl_kernel kernel);
+public:
+  /** // doc: Dummy_clReleaseKernel() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clReleaseKernel(cl_int err);
+};
+/** // doc: Dummy_clSetKernelArg {{{
+ * \brief Mock for clSetKernelArg OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetKernelArg
+  : public T::Base_clSetKernelArg,
+    public T::Dummy_CallArgs<cl_kernel, cl_uint, size_t, const void*>
+{
+  cl_int _err;
+  cl_int clSetKernelArg(cl_kernel kernel, cl_uint arg_index, size_t arg_size,
+                        const void* arg_value);
+public:
+  /** // doc: Dummy_clSetKernelArg() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetKernelArg(cl_int err);
+};
+#if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)
+/** // doc: Dummy_clSetKernelArgSVMPointer {{{
+ * \brief Mock for clSetKernelArgSVMPointer OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetKernelArgSVMPointer
+  : public T::Base_clSetKernelArgSVMPointer,
+    public T::Dummy_CallArgs<cl_kernel, cl_uint, const void*>
+{
+  cl_int _err;
+  cl_int clSetKernelArgSVMPointer(cl_kernel kernel, cl_uint arg_index, const void* arg_value);
+public:
+  /** // doc: Dummy_clSetKernelArgSVMPointer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetKernelArgSVMPointer(cl_int err);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clSetKernelExecInfo)
+/** // doc: Dummy_clSetKernelExecInfo {{{
+ * \brief Mock for clSetKernelExecInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetKernelExecInfo
+  : public T::Base_clSetKernelExecInfo,
+    public T::Dummy_CallArgs<cl_kernel, cl_kernel_exec_info, size_t, const void*>
+{
+  cl_int _err;
+  cl_int clSetKernelExecInfo(cl_kernel kernel, cl_kernel_exec_info param_name, size_t param_value_size, const void* arg_value);
+public:
+  /** // doc: Dummy_clSetKernelExecInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetKernelExecInfo(cl_int err);
+};
+#endif
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -1267,7 +1491,6 @@ clGetProgramInfo(cl_program program, cl_program_info param_name,
     }
   return _err;
 }
-
 Dummy_clGetProgramInfo::
 Dummy_clGetProgramInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
@@ -1290,12 +1513,180 @@ clGetProgramBuildInfo(cl_program program, cl_device_id device,
     }
   return _err;
 }
-
 Dummy_clGetProgramBuildInfo::
 Dummy_clGetProgramBuildInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+/* ------------------------------------------------------------------------- */
+cl_kernel Dummy_clCreateKernel::
+clCreateKernel(cl_program program, const char* kernel_name, cl_int* errcode_ret)
+{
+  call_with(program, kernel_name, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return this->_kern;
+}
+Dummy_clCreateKernel::
+Dummy_clCreateKernel(cl_kernel kern, cl_int err)
+  : _kern(kern), _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clCreateKernelsInProgram::
+clCreateKernelsInProgram(cl_program program, cl_uint num_kernels, cl_kernel* kernels,
+                         cl_uint* num_kernels_ret)
+{
+  call_with(program, num_kernels, kernels, num_kernels_ret);
+  if(_kernels && kernels && _num_kernels_ret)
+    {
+      std::memcpy(kernels, _kernels, std::min(*_num_kernels_ret, num_kernels) * sizeof(cl_kernel));
+    }
+  if(_num_kernels_ret && num_kernels_ret)
+    {
+      *num_kernels_ret = *_num_kernels_ret;
+    }
+  return _err;
+}
+Dummy_clCreateKernelsInProgram::
+Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels, cl_uint* num_kernels_ret)
+  : _err(err), _kernels(kernels), _num_kernels_ret(num_kernels_ret)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetKernelInfo::
+clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name,
+                size_t param_value_size, void* param_value,
+                size_t* param_value_size_ret)
+{
+  call_with(kernel, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
+  return _err;
+}
+Dummy_clGetKernelInfo::
+Dummy_clGetKernelInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
+cl_int Dummy_clGetKernelArgInfo::
+clGetKernelArgInfo(cl_kernel kernel, cl_uint arg_index, cl_kernel_arg_info param_name,
+                   size_t param_value_size, void* param_value,
+                   size_t* param_value_size_ret)
+{
+  call_with(kernel, arg_index, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
+  return _err;
+}
+Dummy_clGetKernelArgInfo::
+Dummy_clGetKernelArgInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetKernelWorkGroupInfo::
+clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_group_info param_name,
+                         size_t param_value_size, void* param_value,
+                         size_t* param_value_size_ret)
+{
+  call_with(kernel, device, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
+  return _err;
+}
+Dummy_clGetKernelWorkGroupInfo::
+Dummy_clGetKernelWorkGroupInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clRetainKernel::
+clRetainKernel(cl_kernel kernel)
+{
+  call_with(kernel);
+  return _err;
+}
+Dummy_clRetainKernel::
+Dummy_clRetainKernel(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clReleaseKernel::
+clReleaseKernel(cl_kernel kernel)
+{
+  call_with(kernel);
+  return _err;
+}
+Dummy_clReleaseKernel::
+Dummy_clReleaseKernel(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clSetKernelArg::
+clSetKernelArg(cl_kernel kernel, cl_uint arg_index, size_t arg_size, const void* arg_value)
+{
+  call_with(kernel, arg_index, arg_size, arg_value);
+  return _err;
+}
+Dummy_clSetKernelArg::
+Dummy_clSetKernelArg(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)
+cl_int Dummy_clSetKernelArgSVMPointer::
+clSetKernelArgSVMPointer(cl_kernel kernel, cl_uint arg_index, const void* arg_value)
+{
+  call_with(kernel, arg_index, arg_value);
+  return _err;
+}
+Dummy_clSetKernelArgSVMPointer::
+Dummy_clSetKernelArgSVMPointer(cl_int err)
+  : _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clSetKernelExecInfo)
+cl_int Dummy_clSetKernelExecInfo::
+clSetKernelExecInfo(cl_kernel kernel, cl_kernel_info param_name, size_t param_value_size, const void* param_value)
+{
+  call_with(kernel, param_name, param_value_size, param_value);
+  return _err;
+}
+Dummy_clSetKernelExecInfo::
+Dummy_clSetKernelExecInfo(cl_int err)
+  : _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */

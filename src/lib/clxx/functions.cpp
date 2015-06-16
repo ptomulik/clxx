@@ -138,6 +138,12 @@ static void _throw_clerror_no(status_t s)
       case status_t::invalid_device_partition_count:
         throw clerror_no<status_t::invalid_device_partition_count>();
 #endif
+#if CL_VERSION_2_0
+      case status_t::invalid_pipe_size:
+        throw clerror_no<status_t::invalid_pipe_size>();
+      case status_t::invalid_device_queue:
+        throw clerror_no<status_t::invalid_device_queue>();
+#endif
     //
     // codes defined by OpenCL extensions
     //
@@ -715,6 +721,190 @@ get_program_build_info(cl_program program,
     }
 }
 /* ------------------------------------------------------------------------ */
+cl_kernel
+create_kernel(cl_program program,
+              const char* kernel_name)
+{
+  cl_int s = CL_SUCCESS;
+  cl_kernel kern;
+  kern = T::clCreateKernel(program, kernel_name, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return kern;
+}
+/* ------------------------------------------------------------------------ */
+void
+create_kernels_in_program(cl_program program,
+                          cl_uint num_kernels,
+                          cl_kernel* kernels,
+                          cl_uint* num_kernels_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clCreateKernelsInProgram(
+        program,
+        num_kernels,
+        kernels,
+        num_kernels_ret
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_kernel_info(cl_kernel kernel,
+                kernel_info_t param_name,
+                size_t param_value_size, void* param_value,
+                size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetKernelInfo(
+        kernel,
+        static_cast<cl_kernel_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
+void
+get_kernel_arg_info(cl_kernel kernel,
+                    cl_uint arg_index,
+                    kernel_arg_info_t param_name,
+                    size_t param_value_size, void* param_value,
+                    size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetKernelArgInfo(
+        kernel,
+        arg_index,
+        static_cast<cl_kernel_arg_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+void
+get_kernel_work_group_info(cl_kernel kernel,
+                           cl_device_id device,
+                           kernel_work_group_info_t param_name,
+                           size_t param_value_size, void* param_value,
+                           size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetKernelWorkGroupInfo(
+        kernel,
+        device,
+        static_cast<cl_kernel_work_group_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+retain_kernel(cl_kernel kernel)
+{
+  status_t s = static_cast<status_t>(T::clRetainKernel(kernel));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+release_kernel(cl_kernel kernel)
+{
+  status_t s = static_cast<status_t>(T::clReleaseKernel(kernel));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+set_kernel_arg(cl_kernel kernel,
+               cl_uint arg_index,
+               size_t arg_size,
+               const void* arg_value)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetKernelArg(
+        kernel,
+        arg_index,
+        arg_size,
+        arg_value
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)
+void
+set_kernel_arg_svm_pointer(cl_kernel kernel,
+                           cl_uint arg_index,
+                           const void* arg_value)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetKernelArgSVMPointer(
+        kernel,
+        arg_index,
+        arg_value
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetKernelExecInfo)
+void
+set_kernel_exec_info(cl_kernel kernel,
+                     kernel_exec_info_t param_name,
+                     size_t param_value_size,
+                     const void* param_value)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetKernelExecInfo(
+        kernel,
+        static_cast<cl_kernel_exec_info>(param_name),
+        param_value_size,
+        param_value
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
 } // end namespace clxx
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

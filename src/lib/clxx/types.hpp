@@ -163,6 +163,13 @@ enum class status_t : cl_int {
   /// Corresponds to \c CL_INVALID_DEVICE_PARTITION_COUNT
   invalid_device_partition_count  = CL_INVALID_DEVICE_PARTITION_COUNT
 #endif
+#if CL_VERSION_2_0
+  ,
+  /// Corresponds to \c CL_INVALID_PIPE_SIZE
+  invalid_pipe_size               = CL_INVALID_PIPE_SIZE,
+  /// Corresponds to \c CL_INVALID_DEVICE_QUEUE
+  invalid_device_queue            = CL_INVALID_DEVICE_QUEUE
+#endif
 //
 // codes defined by OpenCL extensions
 //
@@ -1452,6 +1459,30 @@ enum class kernel_arg_info_t : cl_kernel_arg_info {
 };
 
 CLXX_MAKE_INTEGER_ENUM(kernel_arg_info_t, cl_kernel_arg_info)
+#endif
+
+#if CL_VERSION_2_0
+/** // doc: kernel_exec_info_t {{{
+ * \brief Corresponds to \c cl_kernel_exec_info
+ *
+ * The OpenCL's \c cl_kernel_exec_info is used by \c clSetKernelExecInfo(). The
+ * \ref kernel_exec_info_t is a C++ equivalent of the \c cl_kernel_exec_info.
+ * It's used by set_kernel_exec_info() for the same purpose.
+ *
+ * \par Supported OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |    ???    |
+ *
+ */ // }}}
+enum class kernel_exec_info_t : cl_kernel_exec_info {
+  /// Corresponds to \c CL_KERNEL_EXEC_INFO_SVM_PTRS
+  svm_ptrs              = CL_KERNEL_EXEC_INFO_SVM_PTRS,
+  /// Corresponds to \c CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM
+  svm_fine_grain_system = CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM
+};
+
+CLXX_MAKE_INTEGER_ENUM(kernel_exec_info_t, cl_kernel_exec_info)
 #endif
 
 #if CL_VERSION_1_2
