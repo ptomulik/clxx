@@ -138,7 +138,7 @@ JB :
 devel_progress:
   platform_layer: 85
   runtime: 0
-  functions: 10
+  functions: 29
   types: 100
   libclxx_info: 70
   libclxx_s11n: 54
