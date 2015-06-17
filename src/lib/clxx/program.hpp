@@ -53,7 +53,8 @@ namespace clxx {
  * clxx::retain_program() "retain_program()" as soon as possible, and decrease
  * the reference count with \ref clxx::release_program() "release_program()"
  * once you don't need the handle. If you don't retain the program, it may be
- * unexpectedly released by \ref clxx::program "program's"  destructor.
+ * unexpectedly released by \ref clxx::program "program's"  destructor,
+ * assignment operator or the #assign() method.
  *
  * There are constructors which create new OpenCL program (a costly operation).
  * However, assignment operator and copy constructors just copy over the \c
@@ -66,7 +67,9 @@ namespace clxx {
  * encapsulating its handle. On the other hand - the program may get released
  * by OpenCL when last \ref clxx::program "program" object gets deleted (the
  * ~program() destructor decreases reference count for its \c cl_program
- * handle with \ref clxx::release_program() "release_program()").
+ * handle with \ref clxx::release_program() "release_program()") or when the
+ * last object gets assigned another OpenCL program (assignment operator or the
+ * #assign() method).
  */ // }}}
 class program
 {
@@ -384,8 +387,6 @@ public:
    * \brief Get reference count for the program
    *
    * \returns reference count for the program.
-   *
-   * \par Exceptions
    *
    * \throws uninitialized_program_error if the object was not initialized
    *      properly (see \ref is_initialized()).

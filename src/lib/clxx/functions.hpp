@@ -1759,7 +1759,7 @@ create_kernels_in_program(cl_program program,
  *    This size must be \c >= size of return type.
  * \param param_value
  *    A pointer to memory where the appropriate result being queried is
- *    returned. If \em param_value is \c NULL, it is ignored. 
+ *    returned. If \em param_value is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    The actual size in bytes of data copied to \em param_value. If
  *    \em param_value_size_ret is \c NULL, it is ignored.
@@ -1813,7 +1813,7 @@ get_kernel_info(cl_kernel kernel,
  *    standard.
  * \param param_value
  *    A pointer to memory where the appropriate result being queried is
- *    returned. If \em param_value is \c NULL, it is ignored. 
+ *    returned. If \em param_value is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data copied to \em param_value. If
  *    \em param_value_size_ret is \c NULL, it is ignored.
@@ -1870,7 +1870,7 @@ get_kernel_arg_info(cl_kernel kernel,
  *    standard.
  * \param param_value
  *    A pointer to memory where the appropriate result being queried is
- *    returned. If \em param_value is \c NULL, it is ignored. 
+ *    returned. If \em param_value is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data copied to \em param_value. If
  *    \em param_value_size_ret is \c NULL, it is ignored.
@@ -1981,7 +1981,7 @@ release_kernel(cl_kernel kernel);
  * \param arg_index
  *    The argument index. Arguments to the kernel are referred by indices that
  *    go from \c 0 for the leftmost argument to <tt>n - 1</tt>, where \c n is
- *    the total number of arguments declared by a kernel. 
+ *    the total number of arguments declared by a kernel.
  * \param arg_size
  *    Specifies the size of the argument value. If the argument is a memory
  *    object, the size is the size of the memory object. For arguments declared
@@ -1998,7 +1998,7 @@ release_kernel(cl_kernel kernel);
  *    application after #set_kernel_arg() returns. The argument value specified
  *    is the value used by all API calls that enqueue kernel
  *    (#enqueue_nd_range_kernel()) until the argument value is changed by a
- *    call to #set_kernel_arg() for kernel. 
+ *    call to #set_kernel_arg() for kernel.
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArg.html">clSetKernelArg()</a>
  *
@@ -2037,7 +2037,7 @@ set_kernel_arg(cl_kernel kernel,
 /** // doc: set_kernel_arg_svm_pointer() {{{
  * \brief Used to set a SVM pointer as the argument value for a specific
  *        argument of a kernel
- * 
+ *
  * This function is a wrapper around \c clSetKernelArgSVMPointer(). The call to this
  * function has same effect as
  *  - \c clSetKernelArgSVMPointer(kernel, arg_index, arg_value)
@@ -2056,14 +2056,14 @@ set_kernel_arg(cl_kernel kernel,
  *    A pointer to the SVM pointer that should be used as the argument value
  *    for argument specified by \em arg_index. The SVM pointer specified is the
  *    value used by all API calls that enqueue kernel (#enqueue_nd_range_kernel())
- *    until the argument value is changed by a call to set_kernel_arg_svm_pointer() 
+ *    until the argument value is changed by a call to set_kernel_arg_svm_pointer()
  *    for kernel. The SVM pointer can only be used for arguments that are
  *    declared to be a pointer to global or constant memory. The SVM pointer
  *    value must be aligned according to the argument's type. For example, if
  *    the argument is declared to be global <tt>float4 *p</tt>, the SVM pointer
  *    value passed for \c p must be at a minimum aligned to a \c float4. The
  *    SVM pointer value specified as the argument value can be the pointer
- *    returned by clSVMAlloc or can be a pointer + offset into the SVM region. 
+ *    returned by clSVMAlloc or can be a pointer + offset into the SVM region.
  *
  * \throw clerror_no<status_t::invalid_kernel>
  *    When \c clSetKernelArgSVMPointer() returns \c CL_INVALID_KERNEL.

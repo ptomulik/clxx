@@ -294,6 +294,37 @@ struct uninitialized_program_error
       : Base(what_arg)
     { }
   };
+/** // doc: uninitialized_kernel_error {{{
+ * \ingroup clxx_exceptions
+ * \brief An exception being thrown when a user tries to operate on an
+ *        uninitialized \ref clxx::kernel "kernel" object
+ */ // }}}
+struct uninitialized_kernel_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: uninitialized_kernel_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    uninitialized_kernel_error() noexcept
+      : Base("attempted to use uninitialized clxx::kernel object")
+    { }
+    /** // doc: uninitialized_kernel_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_kernel_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_kernel_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_kernel_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
+  };
 /** // doc: uninitialized_value_error {{{
  * \ingroup clxx_exceptions
  * \brief An exception begin thrown when a user tries to access a value which

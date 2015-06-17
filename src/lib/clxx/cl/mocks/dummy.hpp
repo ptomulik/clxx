@@ -841,7 +841,7 @@ class Dummy_clCreateKernelsInProgram
       cl_program program,
       cl_uint num_kernels,
       cl_kernel* kernels,
-      cl_uint* num_kernels_ret 
+      cl_uint* num_kernels_ret
   );
 public:
   /** // doc: Dummy_clCreateKernelsInProgram() {{{
