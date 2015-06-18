@@ -615,7 +615,7 @@ public:
    * Returns the preferred multiple of workgroup size for launch. This is a
    * performance hint. Specifying a workgroup size that is not a multiple of
    * the value returned by this query as the value of the local work size
-   * argument to #enqueue_nd_range_kernel() will not fail to enqueue the kernel
+   * argument to #enqueue_ndrange_kernel() will not fail to enqueue the kernel
    * for execution unless the work-group size specified is larger than the
    * device maximum.
    *
@@ -665,7 +665,7 @@ public:
    *
    *  This provides a mechanism for the application to query the maximum global
    *  size that can be used to execute a kernel (i.e. global_work_size argument
-   *  to enqueue_nd_range_kernel()) on a custom device given by device or a
+   *  to enqueue_ndrange_kernel()) on a custom device given by device or a
    *  built-in kernel on an OpenCL device given by device.
    *
    *  If device is not a custom device or kernel is not a built-in kernel,
@@ -712,7 +712,7 @@ public:
    *    \em arg_value is copied and the \em arg_value pointer can therefore be
    *    reused by the application after #set_arg() returns. The argument
    *    value specified is the value used by all API calls that enqueue kernel
-   *    (#enqueue_nd_range_kernel()) until the argument value is changed by a
+   *    (#enqueue_ndrange_kernel()) until the argument value is changed by a
    *    call to #set_arg() for kernel.
    *
    * \throw uninitialized_kernel_error
@@ -733,7 +733,7 @@ public:
    *    A pointer to the SVM pointer that should be used as the argument value
    *    for argument specified by \em arg_index. The SVM pointer specified is
    *    the value used by all API calls that enqueue kernel
-   *    (#enqueue_nd_range_kernel()) until the argument value is changed by a
+   *    (#enqueue_ndrange_kernel()) until the argument value is changed by a
    *    call to #set_arg_svm_pointer() for kernel. The SVM pointer can
    *    only be used for arguments that are declared to be a pointer to global
    *    or constant memory. The SVM pointer value must be aligned according to

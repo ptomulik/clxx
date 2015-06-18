@@ -16,12 +16,15 @@ tests = [
     'device_partition_properties.t.h',
     'device_partition_property.t.h',
     'devices.t.h',
+    'event.t.h',
     'functions.t.h',
     'platform.t.h',
     'platform_layer.t.h',
     'platforms.t.h',
     'program.t.h',
     'kernel.t.h',
+    'kernel_exec.t.h',
+    'ndrange.t.h',
 ]
 
 env.CxxTest('../check-libclxx_cl', tests,

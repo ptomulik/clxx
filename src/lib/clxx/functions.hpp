@@ -36,11 +36,11 @@ namespace clxx {
  *    \c NULL, this argument is ignored
  * \return void
  *
- * \throws clerror_no<status_t::invalid_value>
+ * \throw clerror_no<status_t::invalid_value>
  *         when \c clGetPlatformIDs() returns \c CL_INVALID_VALUE,
- * \throws clerror_no<status_t::out_of_host_memory>
+ * \throw clerror_no<status_t::out_of_host_memory>
  *         when \c clGetPlatformIDs() returns \c CL_OUT_OF_HOST_MEMORY,
- * \throws unexpected_clerror
+ * \throw unexpected_clerror
  *         when \c clGetPlatformIDs() returns other error code.
  *
  * The unexpected_clerror is thrown only when the \c clGetPlatformIDs()
@@ -51,6 +51,8 @@ namespace clxx {
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |  \check   |  \check   |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformIDs.html">clGetPlatformIDs()</a>
  */ // }}}
 void
 get_platform_ids(cl_uint num_entries,
@@ -84,13 +86,13 @@ get_platform_ids(cl_uint num_entries,
  *
  * \return void
  *
- * \throws clerror_no<status_t::invalid_platform>
+ * \throw clerror_no<status_t::invalid_platform>
  *         when \c clGetPlatformInfo() returns \c CL_INVALID_PLATFORM,
- * \throws clerror_no<status_t::invalid_value>
+ * \throw clerror_no<status_t::invalid_value>
  *         when \c clGetPlatformInfo() returns \c CL_INVALID_VALUE,
- * \throws clerror_no<status_t::out_of_host_memory>
+ * \throw clerror_no<status_t::out_of_host_memory>
  *         when \c clGetPlatformInfo() returns \c CL_OUT_OF_HOST_MEMORY,
- * \throws unexpected_clerror
+ * \throw unexpected_clerror
  *         when \c clGetPlatformInfo() returns other status code.
  *
  * The unexpected_clerror is thrown only when the \c clGetPlatformInfo()
@@ -101,6 +103,8 @@ get_platform_ids(cl_uint num_entries,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformInfo.html">clGetPlatformInfo()</a>
  */ // }}}
 void
 get_platform_info(cl_platform_id platform,
@@ -141,17 +145,17 @@ get_platform_info(cl_platform_id platform,
  *
  * \return The number of available OpenCL devices
  *
- * \throws clerror_no<status_t::invalid_platform>
+ * \throw clerror_no<status_t::invalid_platform>
  *         when \c clGetDeviceIDs() returns \c CL_INVALID_PLATFORM,
- * \throws clerror_no<status_t::invalid_device_type>
+ * \throw clerror_no<status_t::invalid_device_type>
  *         when \c clGetDeviceIDs() returns \c CL_INVALID_DEVICE_TYPE,
- * \throws clerror_no<status_t::invalid_value>
+ * \throw clerror_no<status_t::invalid_value>
  *         when \c clGetDeviceIDs() returns \c CL_INVALID_VALUE,
- * \throws clerror_no<status_t::out_of_resources>
+ * \throw clerror_no<status_t::out_of_resources>
  *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_RESOURCES,
- * \throws clerror_no<status_t::out_of_host_memory>
+ * \throw clerror_no<status_t::out_of_host_memory>
  *         when \c clGetDeviceIDs() returns \c CL_OUT_OF_HOST_MEMORY,
- * \throws unexpected_clerror
+ * \throw unexpected_clerror
  *         when \c clGetDeviceIDs() returns other error code.
  *
  * The unexpected_clerror is thrown only when the \c clGetDeviceIDs()
@@ -162,6 +166,8 @@ get_platform_info(cl_platform_id platform,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceIDs.html">clGetDeviceIDs()</a>
  */ // }}}
 void
 get_device_ids(cl_platform_id platform,
@@ -198,21 +204,23 @@ get_device_ids(cl_platform_id platform,
  *    Returns the actual size in bytes of data being queried by \c
  *    param_value. If \c param_value_size_ret is \c NULL, it is ignored
  *
- * \throws  clxx::clerror_no<clxx::status_t::invalid_device>
+ * \throw  clxx::clerror_no<clxx::status_t::invalid_device>
  *    when \c clGetDeviceInfo() returns \c CL_INVALID_DEVICE,
- * \throws  clxx::clerror_no<clxx::status_t::invalid_value>
+ * \throw  clxx::clerror_no<clxx::status_t::invalid_value>
  *    when \c clGetDeviceInfo() returns \c CL_INVALID_VALUE,
- * \throws  clxx::clerror_no<clxx::status_t::out_of_resources>
+ * \throw  clxx::clerror_no<clxx::status_t::out_of_resources>
  *    when \c clGetDeviceInfo() returns \c CL_OUT_OF_RESOURCES,
- * \throws  clxx::clerror_no<clxx::status_t::out_of_host_memory>
+ * \throw  clxx::clerror_no<clxx::status_t::out_of_host_memory>
  *    when \c clGetDeviceInfo() returns \c CL_OUT_OF_HOST_MEMORY.
- * \throws  clxx::unexpected_clerror
+ * \throw  clxx::unexpected_clerror
  *    when \c clGetDeviceInfo() returns any other error code.
  *
  * \par Available in OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceInfo.html">clGetDeviceInfo()</a>
  */ // }}}
 void
 get_device_info(cl_device_id device,
@@ -296,6 +304,8 @@ get_device_info(cl_device_id device,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContext.html">clCreateContext()</a>
  */ // }}}
 cl_context
 create_context(const cl_context_properties* properties,
@@ -378,6 +388,8 @@ create_context(const cl_context_properties* properties,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContextFromType.html">clCreateContextFromType()</a>
  */ // }}}
 cl_context
 create_context_from_type(const cl_context_properties* properties,
@@ -416,6 +428,8 @@ create_context_from_type(const cl_context_properties* properties,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainContext.html">clRetainContext()</a>
  */ // }}}
 void
 retain_context(cl_context context);
@@ -445,6 +459,8 @@ retain_context(cl_context context);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseContext.html">clReleaseContext()</a>
  */ // }}}
 void
 release_context(cl_context context);
@@ -489,6 +505,8 @@ release_context(cl_context context);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetContextInfo.html">clGetContextInfo()</a>
  */ // }}}
 void
 get_context_info(cl_context context,
@@ -547,6 +565,8 @@ get_context_info(cl_context context,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSubDevices.html">clCreateSubDevices()</a>
  */ // }}}
 void
 create_sub_devices(cl_device_id in_device,
@@ -589,6 +609,8 @@ create_sub_devices(cl_device_id in_device,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainDevice.html">clRetainDevice()</a>
  */ // }}}
 void
 retain_device(cl_device_id device);
@@ -627,6 +649,8 @@ retain_device(cl_device_id device);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseDevice.html">clReleaseDevice()</a>
  */ // }}}
 void
 release_device(cl_device_id device);
@@ -655,7 +679,7 @@ release_device(cl_device_id device);
  * that this should work as long as these objects are not being shared. Sharing
  * of objects across multiple command-queues will require the application to
  * perform appropriate synchronization. For more informations see the
- * <a href="https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clCreateCommandQueue.html">documentation of the clCreateCommandQueue()</a>.
+ * <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueue.html">documentation of the clCreateCommandQueue()</a>.
  *
  * \param context
  *    Must be a valid OpenCL context.
@@ -696,6 +720,8 @@ release_device(cl_device_id device);
  * marks it as deprecated); as long as \c clCreateCommandQueue() is
  * physically available at the library built time (in both, CL/cl.h and
  * libOpenCL.so), the create_command_queue() will also be present.
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueue.html">clCreateCommandQueue()</a>
  */ // }}}
 cl_command_queue
 create_command_queue(cl_context context,
@@ -764,6 +790,8 @@ create_command_queue(cl_context context,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueueWithProperties.html">clCreateCommandQueueWithProperties()</a>
  */ // }}}
 cl_command_queue
 create_command_queue_with_properties(cl_context context,
@@ -799,6 +827,8 @@ create_command_queue_with_properties(cl_context context,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainCommandQueue.html">clRetainCommandQueue()</a>
  */ // }}}
 void
 retain_command_queue(cl_command_queue command_queue);
@@ -829,6 +859,8 @@ retain_command_queue(cl_command_queue command_queue);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseCommandQueue.html">clReleaseCommandQueue()</a>
  */ // }}}
 void
 release_command_queue(cl_command_queue command_queue);
@@ -874,6 +906,8 @@ release_command_queue(cl_command_queue command_queue);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetCommandQueueInfo.html">clGetCommandQueueInfo()</a>
  */ // }}}
 void
 get_command_queue_info(cl_command_queue command_queue,
@@ -935,6 +969,8 @@ get_command_queue_info(cl_command_queue command_queue,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithSource.html">clCreateProgramWithSource()</a>
  */ // }}}
 cl_program
 create_program_with_source(cl_context context,
@@ -1041,6 +1077,8 @@ create_program_with_source(cl_context context,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBinary.html">clCreateProgramWithBinary()</a>
  */ // }}}
 cl_program
 create_program_with_binary(cl_context context,
@@ -1100,6 +1138,8 @@ create_program_with_binary(cl_context context,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBuiltInKernels.html">clCreateProgramWithBuiltInKernels()</a>
  */ // }}}
 cl_program
 create_program_with_built_in_kernels(cl_context context,
@@ -1138,6 +1178,8 @@ create_program_with_built_in_kernels(cl_context context,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainProgram.html">clRetainProgram()</a>
  */ // }}}
 void
 retain_program(cl_program program);
@@ -1171,6 +1213,8 @@ retain_program(cl_program program);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseProgram.html">clReleaseProgram()</a>
  */ // }}}
 void
 release_program(cl_program program);
@@ -1200,9 +1244,9 @@ release_program(cl_program program);
  * program_info_t::binaries, ...) and can be specified to
  * create_program_with_binary() to create a new program object.
  *
- * \b Compiler Options
+ * \par Compiler Options
  *
- * See [clBuildProgram()](https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clBuildProgram.html).
+ * See [clBuildProgram()](https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clBuildProgram.html).
  *
  * \param program
  *    The program object.
@@ -1263,6 +1307,8 @@ release_program(cl_program program);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clBuildProgram.html">clBuildProgram()</a>
  */ // }}}
 void
 build_program(cl_program program,
@@ -1292,9 +1338,9 @@ build_program(cl_program program,
  * program_info_t::binaries, ...) and can be specified to
  * create_program_with_binary() to create a new program object.
  *
- * \b Compiler Options
+ * \par Compiler Options
  *
- * See [clCompileProgram()](https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clCompileProgram.html).
+ * See [clCompileProgram()](https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCompileProgram.html).
  *
  * \param program
  *    The program object that is the compilation target.
@@ -1366,6 +1412,8 @@ build_program(cl_program program,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCompileProgram.html">clCompileProgram()</a>
  */ // }}}
 void
 compile_program(cl_program program,
@@ -1411,7 +1459,7 @@ compile_program(cl_program program,
  *
  * \b Linker Options
  *
- * See [clLinkProgram()](https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clLinkProgram.html).
+ * See [clLinkProgram()](https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clLinkProgram.html).
  *
  * \param context
  *    Must be a valid OpenCL context.
@@ -1485,6 +1533,8 @@ compile_program(cl_program program,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clLinkProgram.html">clLinkProgram()</a>
  */ // }}}
 cl_program
 link_program(cl_context context,
@@ -1527,6 +1577,8 @@ link_program(cl_context context,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clUnloadPlatformCompiler.html">clUnloadPlatformCompiler()</a>
  */ // }}}
 void
 unload_platform_compiler(cl_platform_id platform);
@@ -1575,6 +1627,8 @@ unload_platform_compiler(cl_platform_id platform);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramInfo.html">clGetProgramInfo()</a>
  */ // }}}
 void
 get_program_info(cl_program program,
@@ -1639,6 +1693,8 @@ get_program_info(cl_program program,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramBuildInfo.html">clGetProgramBuildInfo()</a>
  */ // }}}
 void
 get_program_build_info(cl_program program,
@@ -1687,6 +1743,8 @@ get_program_build_info(cl_program program,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clXxx.html">clXxx()</a>
  */ // }}}
 cl_kernel
 create_kernel(cl_program program,
@@ -1733,6 +1791,8 @@ create_kernel(cl_program program,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateKernelsInProgram.html">clCreateKernelsInProgram()</a>
  */ // }}}
 void
 create_kernels_in_program(cl_program program,
@@ -1779,6 +1839,8 @@ create_kernels_in_program(cl_program program,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelInfo.html">clGetKernelInfo()</a>
  */ // }}}
 void
 get_kernel_info(cl_kernel kernel,
@@ -1833,6 +1895,8 @@ get_kernel_info(cl_kernel kernel,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelArgInfo.html">clGetKernelArgInfo()</a>
  */ // }}}
 void
 get_kernel_arg_info(cl_kernel kernel,
@@ -1893,6 +1957,7 @@ get_kernel_arg_info(cl_kernel kernel,
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
  *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelWorkGroupInfo.html">clGetKernelWorkGroupInfo()</a>
  */ // }}}
 void
 get_kernel_work_group_info(cl_kernel kernel,
@@ -1928,6 +1993,8 @@ get_kernel_work_group_info(cl_kernel kernel,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainKernel.html">clRetainKernel()</a>
  */ // }}}
 void
 retain_kernel(cl_kernel kernel);
@@ -1962,6 +2029,8 @@ retain_kernel(cl_kernel kernel);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseKernel.html">clReleaseKernel()</a>
  */ // }}}
 void
 release_kernel(cl_kernel kernel);
@@ -1997,7 +2066,7 @@ release_kernel(cl_kernel kernel);
  *    is copied and the \em arg_value pointer can therefore be reused by the
  *    application after #set_kernel_arg() returns. The argument value specified
  *    is the value used by all API calls that enqueue kernel
- *    (#enqueue_nd_range_kernel()) until the argument value is changed by a
+ *    (#enqueue_ndrange_kernel()) until the argument value is changed by a
  *    call to #set_kernel_arg() for kernel.
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArg.html">clSetKernelArg()</a>
@@ -2027,6 +2096,8 @@ release_kernel(cl_kernel kernel);
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArg.html">clSetKernelArg()</a>
  */ // }}}
 void
 set_kernel_arg(cl_kernel kernel,
@@ -2055,7 +2126,7 @@ set_kernel_arg(cl_kernel kernel,
  * \param arg_value
  *    A pointer to the SVM pointer that should be used as the argument value
  *    for argument specified by \em arg_index. The SVM pointer specified is the
- *    value used by all API calls that enqueue kernel (#enqueue_nd_range_kernel())
+ *    value used by all API calls that enqueue kernel (#enqueue_ndrange_kernel())
  *    until the argument value is changed by a call to set_kernel_arg_svm_pointer()
  *    for kernel. The SVM pointer can only be used for arguments that are
  *    declared to be a pointer to global or constant memory. The SVM pointer
@@ -2082,6 +2153,8 @@ set_kernel_arg(cl_kernel kernel,
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArgSVMPointer.html">clSetKernelArgSVMPointer()</a>
  */ // }}}
 void
 set_kernel_arg_svm_pointer(cl_kernel kernel,
@@ -2139,6 +2212,491 @@ set_kernel_exec_info(cl_kernel kernel,
                      size_t param_value_size,
                      const void* param_value);
 #endif
+/** // doc: enqueue_ndrange_kernel() {{{
+ * \brief Enqueues a command to execute a kernel on a device
+ *
+ * This function is a wrapper around \c clEnqueueNDRangeKernel(). The call to this
+ * function has same effect as
+ *  - \c clEnqueueNDRangeKernel(command_queue, kernel, work_dim, global_work_offset, global_work_size, local_work_size, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between \ref enqueue_ndrange_kernel() and
+ * \c clEnqueueNDRangeKernel() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    A valid host command-queue. The kernel will be queued for execution on
+ *    the device associated with \em %command_queue.
+ * \param kernel
+ *    A valid kernel object. The OpenCL context associated with \em kernel and
+ *    \em %command_queue must be the same.
+ * \param work_dim
+ *    The number of dimensions used to specify the global work-items and
+ *    work-items in the work-group. \em work_dim must be greater than zero and
+ *    less than or equal to \c CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS.
+ * \param global_work_offset
+ *    \em global_work_offset can be used to specify an array of work_dim
+ *    unsigned values that describe the offset used to calculate the global ID
+ *    of a work-item. If \em global_work_offset is \c NULL, the global IDs
+ *    start at offset <tt>(0, 0, ... 0)</tt>.
+ * \param global_work_size
+ *    Points to an array of \em work_dim unsigned values that describe the
+ *    number of global work-items in work_dim dimensions that will execute the
+ *    kernel function. The total number of global work-items is computed as
+ *    <tt>global_work_size[0] *...* global_work_size[work_dim - 1]</tt>.
+ * \param local_work_size
+ *    Points to an array of \em work_dim unsigned values that describe the
+ *    number of work-items that make up a work-group (also referred to as the
+ *    size of the work-group) that will execute the kernel specified by kernel.
+ *    See <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNDRangeKernel.html">clEnqueueNDRangeKernel()</a>
+ *    for more details.
+ * \param num_events_in_wait_list
+ *    Number of events in \em event_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed. If \em event_wait_list is \c NULL, then this particular
+ *    command does not wait on any event to complete. If event_wait_list is
+ *    \c NULL, \em num_events_in_wait_list must be \c 0. If event_wait_list is
+ *    not \c NULL, the list of events pointed to by \em event_wait_list must be
+ *    valid and \em num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \em event_wait_list act as synchronization points.
+ *    The context associated with events in \em event_wait_list and
+ *    \em %command_queue must be the same. The memory associated with
+ *    \em event_wait_list can be reused or freed after the function returns. 
+ * \param event
+ *    Returns an event object that identifies this particular kernel execution
+ *    instance. Event objects are unique and can be used to identify a
+ *    particular kernel execution instance later on. If event is \c NULL, no
+ *    event will be created for this kernel execution instance and therefore it
+ *    will not be possible for the application to query or queue a wait for
+ *    this particular kernel execution instance. If the event_wait_list and the
+ *    event arguments are not \c NULL, the event argument should not refer to
+ *    an element of the \em event_wait_list array.
+ *
+ * \throw clerror_no<status_t::invalid_program_executable>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_PROGRAM_EXECUTABLE
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_COMMAND_QUEUE
+ * \throw clerror_no<status_t::invalid_kenel>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_KERNEL
+ * \throw clerror_no<status_t::invalid_context>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_CONTEXT
+ * \throw clerror_no<status_t::invalid_kernel_args>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_KERNEL_ARGS
+ * \throw clerror_no<status_t::invalid_work_dimension>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_WORK_DIMENSION
+ * \throw clerror_no<status_t::invalid_global_work_size>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_GLOBAL_WORK_SIZE
+ * \throw clerror_no<status_t::invalid_global_offset>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_GLOBAL_OFFSET
+ * \throw clerror_no<status_t::invalid_work_group_size>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_WORK_GROUP_SIZE
+ * \throw clerror_no<status_t::invalid_work_item_size>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_WORK_ITEM_SIZE
+ * \throw clerror_no<status_t::misaligned_sub_buffer_offset>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_MISALIGNED_SUB_BUSSER_OFFSET
+ * \throw clerror_no<status_t::invalid_image_size>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_IMAGE_SIZE
+ * \throw clerror_no<status_t::image_format_not_supported>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_IMAGE_FORMAT_NOT_SUPPORTED
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_MEM_OBJECT_ALLOCATION_FAILURE
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_EVENT_WAIT_LIST
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_INVALID_OPERATION
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When the \c clEnqueueNDRangeKernel() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When other error code is returned
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNDRangeKernel.html">clEnqueueNDRangeKernel()</a>
+ */ // }}}
+void
+enqueue_ndrange_kernel(cl_command_queue command_queue,
+                        cl_kernel kernel,
+                        cl_uint work_dim,
+                        const size_t* global_work_offset,
+                        const size_t* global_work_size,
+                        const size_t* local_work_size,
+                        cl_uint num_events_in_wait_list,
+                        const cl_event* event_wait_list,
+                        cl_event* event);
+/** // doc: enqueue_native_kernel() {{{
+ * \brief Enqueues a command to execute a native C/C++ function
+ *
+ * Enqueues a command to execute a native C/C++ function not compiled using the
+ * OpenCL compiler.
+ *
+ * This function is a wrapper around \c clEnqueueNativeKernel(). The call to this
+ * function has same effect as
+ *  - \c clEnqueueNativeKernel(command_queue, user_func, args, cb_args, num_mem_objects, mem_list, args_mem_loc, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between \ref enqueue_native_kernel() and
+ * \c clEnqueueNativeKernel() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    A valid host command-queue. A native user function can only be executed
+ *    on a command-queue created on a device that has \c CL_EXEC_NATIVE_KERNEL
+ *    capability set in \c CL_DEVICE_EXECUTION_CAPABILITIES as specified in the
+ *    table of OpenCL Device Queries for \c clGetDeviceInfo. 
+ * \param user_func
+ *    A pointer to a host-callable user function.
+ * \param args
+ *    A pointer to the args list that \em user_func should be called with.
+ * \param cb_args
+ *    The size in bytes of the \em args list that args points to.
+ * \param num_mem_objects
+ *    The number of buffer objects that are passed in \em args.
+ * \param mem_list
+ *    A list of valid buffer objects, if \em num_mem_objects > 0. The buffer
+ *    object values specified in \em mem_list are memory object handles
+ *    (\c cl_mem values) returned by #create_buffer() or \c NULL.
+ * \param args_mem_loc
+ *    A pointer to appropriate locations that \em args points to where memory
+ *    object handles (\c cl_mem values) are stored. Before the user function is
+ *    executed, the memory object handles are replaced by pointers to global
+ *    memory. 
+ * \param num_events_in_wait_list
+ *    Number of events in \em event_wait_list 
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed. If \em event_wait_list is \c NULL, then this particular
+ *    command does not wait on any event to complete. If \em event_wait_list is
+ *    \c NULL, \em num_events_in_wait_list must be \c 0. If \em event_wait_list
+ *    is not \c NULL, the list of events pointed to by \em event_wait_list must
+ *    be valid and \em num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \em event_wait_list act as synchronization points.
+ *    The context associated with events in \em event_wait_list and
+ *    \em %command_queue must be the same. The memory associated with
+ *    \em event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular kernel execution
+ *    instance. Event objects are unique and can be used to identify a
+ *    particular kernel execution instance later on. If event is \c NULL, no
+ *    event will be created for this kernel execution instance and therefore it
+ *    will not be possible for the application to query or queue a wait for
+ *    this particular kernel execution instance. If the \em event_wait_list and
+ *    the event arguments are not \c NULL, the event argument should not refer
+ *    to an element of the \em event_wait_list array. 
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueNativeKernel returns CL_INVALID_COMMAND_QUEUE
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueNativeKernel returns CL_INVALID_CONTEXT
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueNativeKernel returns CL_INVALID_VALUE
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clEnqueueNativeKernel returns CL_INVALID_OPERATION
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When \c clEnqueueNativeKernel returns CL_INVALID_MEM_OBJECT
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueNativeKernel returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clEnqueueNativeKernel returns CL_MEM_OBJECT_ALLOCATION_FAILURE
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueNativeKernel returns CL_INVALID_EVENT_WAIT_LIST
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueNativeKernel returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clEnqueueNativeKernel returns other error code
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNativeKernel.html">clEnqueueNativeKernel()</a>
+ */ // }}}
+void
+enqueue_native_kernel(cl_command_queue command_queue,
+                      void (CL_CALLBACK* user_func)(void*),
+                      void* args,
+                      size_t cb_args,
+                      cl_uint num_mem_objects,
+                      const cl_mem* mem_list,
+                      const void** args_mem_loc,
+                      cl_uint num_events_in_wait_list,
+                      const cl_event* event_wait_list,
+                      cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+/** // doc: create_user_event() {{{
+ * \brief Creates an OpenCL user event object 
+ *
+ * This function is a wrapper around \c clCreateUserEvent(). The call to this
+ * function has same effect as
+ * - \c clCreateUserEvent(context, &errcode_ret),
+ * with \c errcode_ret being defined internally in #create_user_event().
+ *
+ * The main difference between #create_user_event() and \c clCreateUserEvent() is that
+ * it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * User events allow applications to enqueue commands that wait on a user event
+ * to finish before the command is executed by the device
+ *
+ * \param context A valid OpenCL context
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateUserEvent() returns CL_INVALID_CONTEXT
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateUserEvent() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateUserEvent() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clCreateUserEvent() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateUserEvent.html">clCreateUserEvent()</a>
+ */ // }}}
+cl_event
+create_user_event(cl_context context);
+#endif
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+/** // doc: set_user_event_status() {{{
+ * \brief Sets the execution status of a user event object
+ *
+ * This function is a wrapper around \c clSetUserEventStatus(). The call to this
+ * function has same effect as
+ * - \c clSetUserEventStatus(event, execution_status),
+ *
+ * The main difference between #set_user_event_status() and
+ * \c clSetUserEventStatus() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param event
+ *    A user event object created using #create_user_event. 
+ * \param execution_status 
+ *    Specifies the new execution status to be set and can be \c CL_COMPLETE or
+ *    a negative integer value to indicate an error. A negative integer value
+ *    causes all enqueued commands that wait on this user event to be
+ *    terminated. #set_user_event_status() can only be called once to change the
+ *    execution status of event.
+ *
+ * \throw clerror_no<status_t::invalid_event>
+ *    When \c clSetUserEventStatus() returns CL_INVALID_EVENT
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clSetUserEventStatus() returns CL_INVALID_VALUE
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clSetUserEventStatus() returns CL_INVALID_OPERATION
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clSetUserEventStatus() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clSetUserEventStatus() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clSetUserEventStatus() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetUserEventStatus.html">clSetUserEventStatus()</a>
+ */ // }}}
+void
+set_user_event_status(cl_event event, cl_int execution_status);
+#endif
+/** // doc: wait_for_events() {{{
+ * \brief Waits on the host thread for commands identified by event objects to complete
+ *
+ * This function is a wrapper around \c clWaitForEvents(). The call to this
+ * function has same effect as
+ * - \c clWaitForEvents(num_events, event_list),
+ *
+ * The main difference between #set_user_event_status() and
+ * \c clWaitForEvents() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param num_events
+ *    Number of events in \p event_list
+ * \param event_list
+ *    The events specified in \p event_list act as synchronization points
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clWaitForEvents.html">clWaitForEvents()</a>
+ */ // }}}
+void
+wait_for_events(cl_uint num_events, const cl_event* event_list);
+/** // doc: get_event_info() {{{
+ * \brief Returns information about the event object
+ *
+ * This function is a wrapper around \c clGetEventInfo(). The call to
+ * this function has same effect as
+ * - \c clGetEventInfo(event, static_cast<cl_event_info>(param_name), param_value_size, param_value, param_value_size_ret).
+ *
+ * The main difference between #get_event_info() and
+ * \c clGetEventInfo() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param event
+ *    Specifies the event object being queried.
+ * \param param_name
+ *    Specifies the information to query.
+ * \param param_value_size
+ *    Used to specify the size in bytes of memory pointed to by \em param_value.
+ *    This size must be \c >= size of return type.
+ * \param param_value
+ *    A pointer to memory where the appropriate result being queried is
+ *    returned. If \em param_value is \c NULL, it is ignored.
+ * \param param_value_size_ret
+ *    The actual size in bytes of data copied to \em param_value. If
+ *    \em param_value_size_ret is \c NULL, it is ignored.
+ *
+ * \throw clerror_no<status_t::invalid_value>
+ *    When the \c clGetEventInfo() returns CL_INVALID_VALUE
+ * \throw clerror_no<status_t::invalid_event>
+ *    When the \c clGetEventInfo() returns CL_INVALID_EVENT
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When the \c clGetEventInfo() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When the \c clGetEventInfo() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clGetEventInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetEventInfo.html">clGetEventInfo()</a>
+ */ // }}}
+void
+get_event_info(cl_event event, event_info_t param_name,
+               size_t param_value_size, void* param_value,
+               size_t* param_value_size_ret);
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+/** // doc: set_event_callback() {{{
+ * \brief Registers a user callback function for a specific command execution status
+ *
+ * This function is a wrapper around \c clSetEventCallback(). The call to
+ * this function has same effect as
+ * - \c clSetEventCallback(event, command_exec_callback_type, pfn_event_notify, user_data)
+ *
+ * The main difference between #set_event_callback() and
+ * \c clSetEventCallback() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param event
+ *    A valid event object
+ * \param command_exec_callback_type
+ *    Specifies the command execution status for which the callback is
+ *    registered. The command execution callback values for which a callback
+ *    can be registered are \c CL_SUBMITTED, \c CL_RUNNING, or \c CL_COMPLETE.
+ * \param pfn_event_notify
+ *    The event callback function that can be registered by the application.
+ *    This callback function may be called asynchronously by the OpenCL
+ *    implementation. It is the application's responsibility to ensure that the
+ *    callback function is thread-safe.
+ * \param user_data
+ *    Will be passed as the user_data argument when \p pfn_notify is called.
+ *    \p user_data can be \c NULL.
+ *
+ * \throw clerror_no<status_t::invalid_event>
+ *    When the \c clGetEventInfo() returns CL_INVALID_EVENT
+ * \throw clerror_no<status_t::invalid_value>
+ *    When the \c clGetEventInfo() returns CL_INVALID_VALUE
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When the \c clGetEventInfo() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When the \c clGetEventInfo() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clGetEventInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetEventCallback.html">clSetEventCallback()</a>
+ */ // }}}
+void
+set_event_callback(cl_event event, cl_int command_exec_callback_type,
+                   void(CL_CALLBACK* pfn_event_notify)(cl_event, cl_int, void*),
+                   void* user_data);
+#endif
+/** // doc: retain_event() {{{
+ * \brief Increments the event object reference count.
+ *
+ * This function is a wrapper around \c clRetainEvent(). The call to this
+ * function has same effect as
+ *  - \c clRetainEvent(event)
+ *
+ * The main difference between #retain_event() and \c clRetainEvent() is that
+ * it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \note create_user_event() performs an implicit retain.
+ *
+ * \param event
+ *    The event to be retained
+ *
+ * \throw clerror_no<status_t::invalid_event>
+ *    When \c clRetainEvent() returns CL_INVALID_EVENT
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clRetainEvent() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clRetainEvent() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clRetainEvent() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainEvent.html">clRetainEvent()</a>
+ */ // }}}
+void
+retain_event(cl_event event);
+/** // doc: release_event() {{{
+ * \brief Decrements the \e event reference count
+ *
+ * This function is a wrapper around \c clReleaseEvent(). The call to this
+ * function has same effect as
+ *  - \c clReleaseEvent(event)
+ *
+ * The main difference between \ref release_event() and
+ * \c clReleaseEvent() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \note The event object is deleted once the number of instances that are
+ *       retained to event become zero and the event object is no longer
+ *       needed by any enqueued commands that use event.
+ *
+ * \param event
+ *    The event to be released
+ *
+ * \throw clerror_no<status_t::invalid_event>
+ *    When \c clReleaseEvent() returns CL_INVALID_EVENT.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clReleaseEvent() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clReleaseEvent() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clReleaseEvent() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ *
+ *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseEvent.html">clReleaseEvent()</a>
+ */ // }}}
+void
+release_event(cl_event event);
 /** @} */
 } // end namespace clxx
 

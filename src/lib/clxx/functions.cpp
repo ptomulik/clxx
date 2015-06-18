@@ -905,6 +905,164 @@ set_kernel_exec_info(cl_kernel kernel,
     }
 }
 #endif
+/* ------------------------------------------------------------------------ */
+void
+enqueue_ndrange_kernel( cl_command_queue command_queue,
+                         cl_kernel kernel,
+                         cl_uint work_dim,
+                         const size_t* global_work_offset,
+                         const size_t* global_work_size,
+                         const size_t* local_work_size,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueNDRangeKernel(
+        command_queue,
+        kernel,
+        work_dim,
+        global_work_offset,
+        global_work_size,
+        local_work_size,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_native_kernel( cl_command_queue command_queue,
+                       void (CL_CALLBACK* user_func)(void*),
+                       void* args,
+                       size_t cb_args,
+                       cl_uint num_mem_objects,
+                       const cl_mem* mem_list,
+                       const void** args_mem_loc,
+                       cl_uint num_events_in_wait_list,
+                       const cl_event* event_wait_list,
+                       cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueNativeKernel(
+        command_queue,
+        user_func,
+        args,
+        cb_args,
+        num_mem_objects,
+        mem_list,
+        args_mem_loc,
+        num_events_in_wait_list,
+        event_wait_list, event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+cl_event
+create_user_event(cl_context context)
+{
+  cl_int s;
+  cl_event event = T::clCreateUserEvent(context, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return event;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+void
+set_user_event_status(cl_event event, cl_int execution_status)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetUserEventStatus(event, execution_status)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+void
+wait_for_events(cl_uint num_events, const cl_event* event_list)
+{
+  status_t s = static_cast<status_t>(
+      T::clWaitForEvents(num_events, event_list)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_event_info(cl_event event, event_info_t param_name,
+               size_t param_value_size, void* param_value,
+               size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetEventInfo(event,
+                        static_cast<cl_event_info>(param_name),
+                        param_value_size,
+                        param_value,
+                        param_value_size_ret)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+void
+set_event_callback(cl_event event, cl_int command_exec_callback_type,
+                   void(CL_CALLBACK*pfn_event_notify)(cl_event, cl_int, void*),
+                   void* user_data)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetEventCallback(event,
+                            command_exec_callback_type,
+                            pfn_event_notify,
+                            user_data)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+void
+retain_event(cl_event event)
+{
+  status_t s = static_cast<status_t>(T::clRetainEvent(event));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+release_event(cl_event event)
+{
+  status_t s = static_cast<status_t>(T::clReleaseEvent(event));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
 } // end namespace clxx
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

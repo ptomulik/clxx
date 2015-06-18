@@ -23,6 +23,7 @@
 #include <clxx/std/string.i.hpp>
 %}
 
+%include <clxx/ndrange.swg>
 %include <clxx/kernel.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

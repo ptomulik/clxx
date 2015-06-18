@@ -23,10 +23,15 @@ namespace clxx { class functions_test_suite; }
 class clxx::functions_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test__get_platform_ids__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  // get_platform_ids()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__get_platform_ids() {{{
    * \brief Test get_platform_ids() in a normal situation
    */ // }}}
-  void test__get_platform_ids__success( )
+  void test__get_platform_ids( )
   {
     T::Dummy_clGetPlatformIDs mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(get_platform_ids(0,nullptr,NULL));
@@ -56,10 +61,15 @@ public:
     T::Dummy_clGetPlatformIDs mock(-0x3456);
     TS_ASSERT_THROWS(get_platform_ids(0,NULL,NULL), unexpected_clerror);
   }
-  /** // doc: test__get_platform_info__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_platform_info()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__get_platform_info() {{{
    * \brief Test get_platform_info()
    */ // }}}
-  void test__get_platform_info__success( )
+  void test__get_platform_info( )
   {
     T::Dummy_clGetPlatformInfo mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(get_platform_info((cl_platform_id)NULL, static_cast<platform_info_t>(0), 0, nullptr, nullptr));
@@ -97,10 +107,15 @@ public:
     T::Dummy_clGetPlatformInfo mock(-0x3456);
     TS_ASSERT_THROWS(get_platform_info((cl_platform_id)NULL, static_cast<platform_info_t>(0), 0, nullptr, nullptr), unexpected_clerror);
   }
-  /** // doc: test__get_device_ids__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_device_ids()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__get_device_ids() {{{
    * \brief Test get_device_ids()
    */ // }}}
-  void test__get_device_ids__success( )
+  void test__get_device_ids( )
   {
     T::Dummy_clGetDeviceIDs mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr));
@@ -163,10 +178,16 @@ public:
     T::Dummy_clGetDeviceIDs mock(-0x3456);
     TS_ASSERT_THROWS(get_device_ids((cl_platform_id)NULL, device_type_t::all, 0, nullptr, nullptr), unexpected_clerror);
   }
-  /** // doc: test__get_device_info__success() {{{
+
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_device_info()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__get_device_info() {{{
    * \brief Test get_device_info() in a normal situation
    */ // }}}
-  void test__get_device_info__success()
+  void test__get_device_info()
   {
     T::Dummy_clGetDeviceInfo mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr));
@@ -212,10 +233,15 @@ public:
     T::Dummy_clGetDeviceInfo mock(-0x3456);
     TS_ASSERT_THROWS(get_device_info((cl_device_id)NULL, device_info_t::vendor_id, 0, nullptr, nullptr), unexpected_clerror);
   }
-  /** // doc: test__create_context__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  create_context()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__create_context() {{{
    * \brief Test create_context() in a normal situation.
    */ // }}}
-  void test__create_context__success( )
+  void test__create_context( )
   {
     T::Dummy_clCreateContext mock((cl_context)0x1234, CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr));
@@ -297,10 +323,10 @@ public:
     T::Dummy_clCreateContext mock((cl_context)NULL, -0x3456);
     TS_ASSERT_THROWS(clxx::create_context(nullptr,0,nullptr,nullptr,nullptr), unexpected_clerror);
   }
-  /** // doc: test__create_context_from_type__success() {{{
+  /** // doc: test__create_context_from_type() {{{
    * \brief Test create_context_from_type().
    */ // }}}
-  void test__create_context_from_type__success( )
+  void test__create_context_from_type( )
   {
     T::Dummy_clCreateContextFromType mock((cl_context)0x1234, CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr));
@@ -369,10 +395,15 @@ public:
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, -0x3456);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), unexpected_clerror);
   }
-  /** // doc: test__retain_context__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  retain_context()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__retain_context() {{{
    * \brief Test retain_context() in a normal situation
    */ // }}}
-  void test__retain_context__success( )
+  void test__retain_context( )
   {
     T::Dummy_clRetainContext mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(retain_context((cl_context)NULL));
@@ -402,10 +433,15 @@ public:
     T::Dummy_clRetainContext mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(retain_context((cl_context)NULL), clerror_no<status_t::out_of_host_memory>);
   }
-  /** // doc: test__release_context__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  release_context()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__release_context() {{{
    * \brief Test release_context() in a normal situation
    */ // }}}
-  void test__release_context__success( )
+  void test__release_context( )
   {
     T::Dummy_clReleaseContext mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(release_context((cl_context)NULL));
@@ -435,10 +471,15 @@ public:
     T::Dummy_clReleaseContext mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(release_context((cl_context)NULL), clerror_no<status_t::out_of_host_memory>);
   }
-  /** // doc: test__get_context_info__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_context_info()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__get_context_info() {{{
    * \brief Test get_context_info() in a normal situation
    */ // }}}
-  void test__get_context_info__success( )
+  void test__get_context_info( )
   {
     T::Dummy_clGetContextInfo mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr));
@@ -484,6 +525,11 @@ public:
     T::Dummy_clGetContextInfo mock(-0x3456);
     TS_ASSERT_THROWS(get_context_info((cl_context)NULL, context_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  create_sub_devices()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__create_sub_devices() {{{
    * \brief Test \ref create_sub_devices()() in normal situation.
    */ // }}}
@@ -565,6 +611,11 @@ public:
     TS_ASSERT_THROWS(create_sub_devices(NULL, nullptr, 0, nullptr, nullptr), unexpected_clerror);
 #endif // CLXX_OPENCL_ALLOWED(clCreateSubDevices)
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  retain_device()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__retain_device() {{{
    * Test \ref retain_device() in normal situation
    */ // }}}
@@ -616,6 +667,11 @@ public:
     TS_ASSERT_THROWS(retain_device(NULL),unexpected_clerror);
 #endif // CLXX_OPENCL_ALLOWED(clRetainDevice)
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  release_device()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__release_device() {{{
    * \brief Test \ref release_device() in normal situation
    */ // }}}
@@ -667,10 +723,15 @@ public:
     TS_ASSERT_THROWS(release_device(NULL),unexpected_clerror);
 #endif // CLXX_OPENCL_ALLOWED(clReleaseDevice)
   }
-  /** // doc: test__create_command_queue__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  create_command_queue()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__create_command_queue() {{{
    * \brief Test create_command_queue() in a normal situation.
    */ // }}}
-  void test__create_command_queue__success( )
+  void test__create_command_queue( )
   {
 #if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
     T::Dummy_clCreateCommandQueue mock((cl_command_queue)0x1234, CL_SUCCESS);
@@ -748,10 +809,10 @@ public:
     TS_ASSERT_THROWS(create_command_queue((cl_context)NULL,(cl_device_id)NULL,command_queue_properties_t::profiling_enable), unexpected_clerror);
 #endif
   }
-  /** // doc: test__create_command_queue_with_properties__success() {{{
+  /** // doc: test__create_command_queue_with_properties() {{{
    * \brief Test create_command_queue_with_properties() in a normal situation.
    */ // }}}
-  void test__create_command_queue_with_properties__success( )
+  void test__create_command_queue_with_properties( )
   {
 #if CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
     T::Dummy_clCreateCommandQueueWithProperties mock((cl_command_queue)0x1234, CL_SUCCESS);
@@ -829,10 +890,15 @@ public:
     TS_ASSERT_THROWS(create_command_queue_with_properties((cl_context)NULL,(cl_device_id)NULL,(const cl_queue_properties*)NULL), unexpected_clerror);
 #endif
   }
-  /** // doc: test__retain_command_queue__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  retain_command_queue()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__retain_command_queue() {{{
    * \brief Test retain_command_queue() in a normal situation
    */ // }}}
-  void test__retain_command_queue__success( )
+  void test__retain_command_queue( )
   {
     T::Dummy_clRetainCommandQueue mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(retain_command_queue((cl_command_queue)NULL));
@@ -862,10 +928,15 @@ public:
     T::Dummy_clRetainCommandQueue mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(retain_command_queue((cl_command_queue)NULL), clerror_no<status_t::out_of_host_memory>);
   }
-  /** // doc: test__release_command_queue__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  release_command_queue()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__release_command_queue() {{{
    * \brief Test release_command_queue() in a normal situation
    */ // }}}
-  void test__release_command_queue__success( )
+  void test__release_command_queue( )
   {
     T::Dummy_clReleaseCommandQueue mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(release_command_queue((cl_command_queue)NULL));
@@ -895,10 +966,15 @@ public:
     T::Dummy_clReleaseCommandQueue mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(release_command_queue((cl_command_queue)NULL), clerror_no<status_t::out_of_host_memory>);
   }
-  /** // doc: test__get_command_queue_info__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_command_queue_info()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__get_command_queue_info() {{{
    * \brief Test get_command_queue_info() in a normal situation
    */ // }}}
-  void test__get_command_queue_info__success( )
+  void test__get_command_queue_info( )
   {
     T::Dummy_clGetCommandQueueInfo mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr));
@@ -944,6 +1020,11 @@ public:
     T::Dummy_clGetCommandQueueInfo mock(-0x3456);
     TS_ASSERT_THROWS(get_command_queue_info((cl_command_queue)NULL, command_queue_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  create_program_with_source()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__create_program_with_source() {{{
    * \todo Write documentation
    */ // }}}
@@ -993,6 +1074,11 @@ public:
     T::Dummy_clCreateProgramWithSource mock((cl_program)NULL, -0x1234567);
     TS_ASSERT_THROWS(create_program_with_source((cl_context)NULL, 0, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  creat_program_with_binary()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__create_program_with_binary() {{{
    * \todo Write documentation
    */ // }}}
@@ -1058,6 +1144,11 @@ public:
     T::Dummy_clCreateProgramWithBinary mock((cl_program)NULL, -0x1234567);
     TS_ASSERT_THROWS(create_program_with_binary((cl_context)NULL, 0, nullptr, nullptr, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  create_program_with_built_in_kernels()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__create_program_with_built_in_kernels() {{{
    * \todo Write documentation
    */ // }}}
@@ -1129,6 +1220,11 @@ public:
     TS_ASSERT_THROWS(create_program_with_built_in_kernels((cl_context)NULL, 0, nullptr, nullptr), unexpected_clerror);
 #endif //  CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  retain_program()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__retain_program() {{{
    * \todo Write documentation
    */ // }}}
@@ -1170,6 +1266,11 @@ public:
     T::Dummy_clRetainProgram mock(-0x1234567);
     TS_ASSERT_THROWS(retain_program((cl_program)NULL), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  release_program()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__release_program() {{{
    * \todo Write documentation
    */ // }}}
@@ -1211,6 +1312,11 @@ public:
     T::Dummy_clReleaseProgram mock(-0x1234567);
     TS_ASSERT_THROWS(release_program((cl_program)NULL), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  build_program()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__build_program() {{{
    * \todo Write documentation
    */ // }}}
@@ -1308,6 +1414,11 @@ public:
     T::Dummy_clBuildProgram mock(-0x1234567);
     TS_ASSERT_THROWS(build_program((cl_program)NULL, 0, nullptr, nullptr, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  compile_program()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__compile_program() {{{
    * \todo Write documentation
    */ // }}}
@@ -1419,6 +1530,11 @@ public:
     TS_ASSERT_THROWS(compile_program((cl_program)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr, nullptr), unexpected_clerror);
 #endif //  CLXX_OPENCL_ALLOWED(clCompileProgram)
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  link_program()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__link_program() {{{
    * \todo Write documentation
    */ // }}}
@@ -1540,6 +1656,11 @@ public:
     TS_ASSERT_THROWS(link_program((cl_context)NULL, 0, nullptr, nullptr, 0, nullptr, nullptr, nullptr), unexpected_clerror);
 #endif //  CLXX_OPENCL_ALLOWED(clLinkProgram)
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  unload_platform_compiler()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__unload_platform_compiler() {{{
    * \todo Write documentation
    */ // }}}
@@ -1571,6 +1692,11 @@ public:
     TS_ASSERT_THROWS(unload_platform_compiler((cl_platform_id)NULL), unexpected_clerror);
 #endif // CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_program_info()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__get_program_info() {{{
    * \todo Write documentation
    */ // }}}
@@ -1628,6 +1754,11 @@ public:
     T::Dummy_clGetProgramInfo mock(-0x1234567);
     TS_ASSERT_THROWS(get_program_info((cl_program)NULL, program_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_program_build_info()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__get_program_build_info() {{{
    * \todo Write documentation
    */ // }}}
@@ -1685,10 +1816,15 @@ public:
     T::Dummy_clGetProgramBuildInfo mock(-0x1234567);
     TS_ASSERT_THROWS(get_program_build_info((cl_program)NULL, (cl_device_id)NULL, program_build_info_t::status, 0, nullptr, nullptr), unexpected_clerror);
   }
-  /** // doc: test__create_kernel__success() {{{
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  create_kernel()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__create_kernel() {{{
    * \brief Test create_kernel() in a normal situation.
    */ // }}}
-  void test__create_kernel__success( )
+  void test__create_kernel( )
   {
     T::Dummy_clCreateKernel mock((cl_kernel)0x1234, CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(clxx::create_kernel(nullptr,"mykernel"));
@@ -1751,10 +1887,10 @@ public:
     T::Dummy_clCreateKernel mock((cl_kernel)NULL, CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(clxx::create_kernel(nullptr,"mykernel"), clerror_no<status_t::out_of_host_memory>);
   }
-  /** // doc: test__create_kernels_in_program__success() {{{
+  /** // doc: test__create_kernels_in_program() {{{
    * \brief Test create_kernels_in_program() in a normal situation.
    */ // }}}
-  void test__create_kernels_in_program__success( )
+  void test__create_kernels_in_program( )
   {
     T::Dummy_clCreateKernelsInProgram mock(CL_SUCCESS, nullptr, nullptr);
     TS_ASSERT_THROWS_NOTHING(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr));
@@ -1800,6 +1936,11 @@ public:
     T::Dummy_clCreateKernelsInProgram mock(CL_OUT_OF_HOST_MEMORY, nullptr, nullptr);
     TS_ASSERT_THROWS(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr), clerror_no<status_t::out_of_host_memory>);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_kernel_info()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__get_kernel_info() {{{
    * \todo Write documentation
    */ // }}}
@@ -1849,6 +1990,11 @@ public:
     T::Dummy_clGetKernelInfo mock(-0x1234567);
     TS_ASSERT_THROWS(get_kernel_info((cl_kernel)NULL, kernel_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_kernel_arg_info()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__get_kernel_arg_info() {{{
    * \todo Write documentation
    */ // }}}
@@ -1910,6 +2056,11 @@ public:
     TS_ASSERT_THROWS(get_kernel_arg_info((cl_kernel)NULL, 0, kernel_arg_info_t::name, 0, nullptr, nullptr), unexpected_clerror);
 #endif
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_kernel_work_group_info()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__get_kernel_work_group_info() {{{
    * \todo Write documentation
    */ // }}}
@@ -1967,6 +2118,11 @@ public:
     T::Dummy_clGetKernelWorkGroupInfo mock(-0x1234567);
     TS_ASSERT_THROWS(get_kernel_work_group_info((cl_kernel)NULL, (cl_device_id)NULL, kernel_work_group_info_t::work_group_size, 0, nullptr, nullptr), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  retain_kernel()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__retain_kernel() {{{
    * \todo Write documentation
    */ // }}}
@@ -2008,6 +2164,11 @@ public:
     T::Dummy_clRetainKernel mock(-0x1234567);
     TS_ASSERT_THROWS(retain_kernel((cl_kernel)NULL), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  release_kernel()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__release_kernel() {{{
    * \todo Write documentation
    */ // }}}
@@ -2049,6 +2210,11 @@ public:
     T::Dummy_clReleaseKernel mock(-0x1234567);
     TS_ASSERT_THROWS(release_kernel((cl_kernel)NULL), unexpected_clerror);
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  set_kernel_arg()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__set_kernel_arg() {{{
    * \todo Write documentation
    */ // }}}
@@ -2201,6 +2367,11 @@ public:
     TS_ASSERT_THROWS(set_kernel_arg_svm_pointer((cl_kernel)NULL, 0x123, (const void*)0x9876), clerror_no<status_t::out_of_host_memory>);
 #endif
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  set_kernel_exec_info()
+  ////////////////////////////////////////////////////////////////////////////
+
   /** // doc: test__set_kernel_exec_info() {{{
    * \todo Write documentation
    */ // }}}
@@ -2272,6 +2443,712 @@ public:
     TS_ASSERT_THROWS(set_kernel_exec_info((cl_kernel)NULL, kernel_exec_info_t::svm_ptrs, 0x123, (const void*)0x9876), unexpected_clerror);
 #endif
   }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  enqueue_ndrange_kernel()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__enqueue_ndrange_kernel() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_SUCCESS);
+
+    TS_ASSERT_THROWS_NOTHING(enqueue_ndrange_kernel(
+                                      (cl_command_queue)0x123,
+                                      (cl_kernel)0x234,
+                                      0x345,
+                                      (const size_t*)0x456,
+                                      (const size_t*)0x567,
+                                      (const size_t*)0x678,
+                                      0x789,
+                                      (const cl_event*)0x890,
+                                      (cl_event*)0x901) );
+
+    TS_ASSERT(mock.called_once_with(  (cl_command_queue)0x123,
+                                      (cl_kernel)0x234,
+                                      0x345,
+                                      (const size_t*)0x456,
+                                      (const size_t*)0x567,
+                                      (const size_t*)0x678,
+                                      0x789,
+                                      (const cl_event*)0x890,
+                                      (cl_event*)0x901) );
+  }
+  /** // doc: test__enqueue_ndrange_kernel__image_format_not_supported() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__image_format_not_supported( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_IMAGE_FORMAT_NOT_SUPPORTED);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::image_format_not_supported>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_command_queue() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_command_queue( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_COMMAND_QUEUE);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_command_queue>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_context( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_event_wait_list() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_event_wait_list( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_EVENT_WAIT_LIST);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_event_wait_list>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_global_offset() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_global_offset( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_GLOBAL_OFFSET);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_global_offset>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_global_work_size() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_global_work_size( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_GLOBAL_WORK_SIZE);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_global_work_size>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_image_size() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_image_size( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_IMAGE_SIZE);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_image_size>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_kernel() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_kernel( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_KERNEL);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_kernel>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_kernel_args() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_kernel_args( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_KERNEL_ARGS);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_kernel_args>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_operation() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_operation( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_OPERATION);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_operation>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_program_executable() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_program_executable( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_PROGRAM_EXECUTABLE);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_program_executable>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_work_dimension() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_work_dimension( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_WORK_DIMENSION);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_work_dimension>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_work_group_size() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_work_group_size( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_WORK_GROUP_SIZE);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_work_group_size>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__invalid_work_item_size() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__invalid_work_item_size( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_INVALID_WORK_ITEM_SIZE);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_work_item_size>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__mem_object_allocation_failure() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__mem_object_allocation_failure( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_MEM_OBJECT_ALLOCATION_FAILURE);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::mem_object_allocation_failure>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__misaligned_sub_buffer_offset() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__misaligned_sub_buffer_offset( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_MISALIGNED_SUB_BUFFER_OFFSET);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::misaligned_sub_buffer_offset>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__out_of_host_memory( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test__enqueue_ndrange_kernel__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_ndrange_kernel__out_of_resources( )
+  {
+    T::Dummy_clEnqueueNDRangeKernel mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  enqueue_native_kernel()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__enqueue_native_kernel() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_SUCCESS);
+
+    TS_ASSERT_THROWS_NOTHING(enqueue_native_kernel(
+                                      (cl_command_queue)0x123,
+                                      (void(CL_CALLBACK*)(void*))0x234,
+                                      (void*)0x345,
+                                      0x456,
+                                      0x567,
+                                      (const cl_mem*)0x678,
+                                      (const void**)0x789,
+                                      0x890,
+                                      (const cl_event*)0x901,
+                                      (cl_event*)0x134) );
+
+    TS_ASSERT(mock.called_once_with(  (cl_command_queue)0x123,
+                                      (void(CL_CALLBACK*)(void*))0x234,
+                                      (void*)0x345,
+                                      0x456,
+                                      0x567,
+                                      (const cl_mem*)0x678,
+                                      (const void**)0x789,
+                                      0x890,
+                                      (const cl_event*)0x901,
+                                      (cl_event*)0x134) );
+  }
+  /** // doc: test__enqueue_native_kernel__invalid_command_queue() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__invalid_command_queue( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_INVALID_COMMAND_QUEUE);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_command_queue>);
+  }
+  /** // doc: test__enqueue_native_kernel__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__invalid_context( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test__enqueue_native_kernel__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__invalid_value( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test__enqueue_native_kernel__invalid_operation() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__invalid_operation( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_INVALID_OPERATION);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_operation>);
+  }
+  /** // doc: test__enqueue_native_kernel__invalid_mem_object() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__invalid_mem_object( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_INVALID_MEM_OBJECT);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_mem_object>);
+  }
+  /** // doc: test__enqueue_native_kernel__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__out_of_resources( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test__enqueue_native_kernel__mem_object_allocation_failure() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__mem_object_allocation_failure( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_MEM_OBJECT_ALLOCATION_FAILURE);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::mem_object_allocation_failure>);
+  }
+  /** // doc: test__enqueue_native_kernel__invalid_event_wait_list() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__invalid_event_wait_list( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_INVALID_EVENT_WAIT_LIST);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::invalid_event_wait_list>);
+  }
+  /** // doc: test__enqueue_native_kernel__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__enqueue_native_kernel__out_of_host_memory( )
+  {
+    T::Dummy_clEnqueueNativeKernel mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(enqueue_native_kernel((cl_command_queue)NULL, nullptr, nullptr, 0, 0, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  create_user_event()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__create_user_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__create_user_event( )
+  {
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+    T::Dummy_clCreateUserEvent mock((cl_event)0x1234, CL_SUCCESS);
+    TS_ASSERT(create_user_event((cl_context)0x7654) == (cl_event)0x1234);
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT(std::get<0>(mock.calls().back()) == (cl_context)0x7654);
+#endif
+  }
+  /** // doc: test__create_user_event__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__create_user_event__invalid_context( )
+  {
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+    T::Dummy_clCreateUserEvent mock((cl_event)0x1234, CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(create_user_event((cl_context)0), clerror_no<status_t::invalid_context>);
+#endif
+  }
+  /** // doc: test__create_user_event__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__create_user_event__out_of_resources( )
+  {
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+    T::Dummy_clCreateUserEvent mock((cl_event)0x1234, CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(create_user_event((cl_context)0), clerror_no<status_t::out_of_resources>);
+#endif
+  }
+  /** // doc: test__create_user_event__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__create_user_event__out_of_host_memory( )
+  {
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+    T::Dummy_clCreateUserEvent mock((cl_event)0x1234, CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(create_user_event((cl_context)0), clerror_no<status_t::out_of_host_memory>);
+#endif
+  }
+  /** // doc: test__create_user_event__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__create_user_event__unexpected_clerror( )
+  {
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+    T::Dummy_clCreateUserEvent mock((cl_event)0x1234, -0x1234567);
+    TS_ASSERT_THROWS(create_user_event((cl_context)0), unexpected_clerror);
+#endif
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  set_user_event_status()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__set_user_event_status() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_user_event_status( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+    T::Dummy_clSetUserEventStatus mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(set_user_event_status((cl_event)0x123, CL_COMPLETE));
+    TS_ASSERT(mock.called_once_with((cl_event)0x123, CL_COMPLETE));
+#endif
+  }
+  /** // doc: test__set_user_event_status__invalid_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_user_event_status__invalid_event( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+    T::Dummy_clSetUserEventStatus mock(CL_INVALID_EVENT);
+    TS_ASSERT_THROWS(set_user_event_status((cl_event)0, CL_COMPLETE), clerror_no<status_t::invalid_event>);
+#endif
+  }
+  /** // doc: test__set_user_event_status__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_user_event_status__invalid_value( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+    T::Dummy_clSetUserEventStatus mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(set_user_event_status((cl_event)0, CL_COMPLETE), clerror_no<status_t::invalid_value>);
+#endif
+  }
+  /** // doc: test__set_user_event_status__invalid_operation() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_user_event_status__invalid_operation( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+    T::Dummy_clSetUserEventStatus mock(CL_INVALID_OPERATION);
+    TS_ASSERT_THROWS(set_user_event_status((cl_event)0, CL_COMPLETE), clerror_no<status_t::invalid_operation>);
+#endif
+  }
+  /** // doc: test__set_user_event_status__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_user_event_status__out_of_resources( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+    T::Dummy_clSetUserEventStatus mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(set_user_event_status((cl_event)0, CL_COMPLETE), clerror_no<status_t::out_of_resources>);
+#endif
+  }
+  /** // doc: test__set_user_event_status__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_user_event_status__out_of_host_memory( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+    T::Dummy_clSetUserEventStatus mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(set_user_event_status((cl_event)0, CL_COMPLETE), clerror_no<status_t::out_of_host_memory>);
+#endif
+  }
+  /** // doc: test__set_user_event_status__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_user_event_status__unexpected_clerror( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+    T::Dummy_clSetUserEventStatus mock(-0x1234567);
+    TS_ASSERT_THROWS(set_user_event_status((cl_event)0, CL_COMPLETE), unexpected_clerror);
+#endif
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  set_user_event_status()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__wait_for_events() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events( )
+  {
+    T::Dummy_clWaitForEvents mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(wait_for_events(0x123, (cl_event const*)0x7654));
+    TS_ASSERT(mock.called_once_with(0x123, (cl_event const*)0x7654));
+  }
+  /** // doc: test__wait_for_events__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events__invalid_value( )
+  {
+    T::Dummy_clWaitForEvents mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test__wait_for_events__invalid_context() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events__invalid_context( )
+  {
+    T::Dummy_clWaitForEvents mock(CL_INVALID_CONTEXT);
+    TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), clerror_no<status_t::invalid_context>);
+  }
+  /** // doc: test__wait_for_events__invalid_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events__invalid_event( )
+  {
+    T::Dummy_clWaitForEvents mock(CL_INVALID_EVENT);
+    TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), clerror_no<status_t::invalid_event>);
+  }
+  /** // doc: test__wait_for_events__exec_status_error_for_events_in_wait_list() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events__exec_status_error_for_events_in_wait_list( )
+  {
+    T::Dummy_clWaitForEvents mock(CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST);
+    TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), clerror_no<status_t::exec_status_error_for_events_in_wait_list>);
+  }
+  /** // doc: test__wait_for_events__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events__out_of_resources( )
+  {
+    T::Dummy_clWaitForEvents mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test__wait_for_events__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events__out_of_host_memory( )
+  {
+    T::Dummy_clWaitForEvents mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test__wait_for_events__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__wait_for_events__unexpected_clerror( )
+  {
+    T::Dummy_clWaitForEvents mock(-0x1234567);
+    TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), unexpected_clerror);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  get_event_info()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__get_event_info() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__get_event_info( )
+  {
+    T::Dummy_clGetEventInfo mock(CL_SUCCESS);
+    get_event_info                ((cl_event)0x395, event_info_t::reference_count,            5, (void*)0x124, (size_t*)0x934);
+    TS_ASSERT(mock.called_once_with((cl_event)0x395, (cl_event_info)CL_EVENT_REFERENCE_COUNT, 5, (void*)0x124, (size_t*)0x934));
+  }
+  /** // doc: test__get_event_info__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__get_event_info__invalid_value( )
+  {
+    T::Dummy_clGetEventInfo mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(get_event_info((cl_event)NULL, event_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::invalid_value>);
+  }
+  /** // doc: test__get_event_info__invalid_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__get_event_info__invalid_event( )
+  {
+    T::Dummy_clGetEventInfo mock(CL_INVALID_EVENT);
+    TS_ASSERT_THROWS(get_event_info((cl_event)NULL, event_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::invalid_event>);
+  }
+  /** // doc: test__get_event_info__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__get_event_info__out_of_resources( )
+  {
+    T::Dummy_clGetEventInfo mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(get_event_info((cl_event)NULL, event_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test__get_event_info__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__get_event_info__out_of_host_memory( )
+  {
+    T::Dummy_clGetEventInfo mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(get_event_info((cl_event)NULL, event_info_t::reference_count, 0, nullptr, nullptr),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test__get_event_info__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__get_event_info__unexpected_clerror( )
+  {
+    T::Dummy_clGetEventInfo mock(-0x1234567);
+    TS_ASSERT_THROWS(get_event_info((cl_event)NULL, event_info_t::reference_count, 0, nullptr, nullptr), unexpected_clerror);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  set_event_callback()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__set_event_callback() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_event_callback( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+    typedef void (CL_CALLBACK* callback_t)(cl_event, cl_int, void*);
+    T::Dummy_clSetEventCallback mock(CL_SUCCESS);
+    TS_ASSERT_THROWS_NOTHING(set_event_callback((cl_event)0x123, CL_SUBMITTED, (callback_t)0x7654, (void*)0x9876));
+    TS_ASSERT(mock.called_once_with            ((cl_event)0x123, CL_SUBMITTED, (callback_t)0x7654, (void*)0x9876));
+#endif
+  }
+  /** // doc: test__set_event_callback__invalid_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_event_callback__invalid_event( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+    typedef void (CL_CALLBACK* callback_t)(cl_event, cl_int, void*);
+    T::Dummy_clSetEventCallback mock(CL_INVALID_EVENT);
+    TS_ASSERT_THROWS(set_event_callback((cl_event)0x123, CL_SUBMITTED, (callback_t)0x7654, (void*)0x9876), clerror_no<status_t::invalid_event>);
+#endif
+  }
+  /** // doc: test__set_event_callback__invalid_value() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_event_callback__invalid_value( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+    typedef void (CL_CALLBACK* callback_t)(cl_event, cl_int, void*);
+    T::Dummy_clSetEventCallback mock(CL_INVALID_VALUE);
+    TS_ASSERT_THROWS(set_event_callback((cl_event)0x123, CL_SUBMITTED, (callback_t)0x7654, (void*)0x9876), clerror_no<status_t::invalid_value>);
+#endif
+  }
+  /** // doc: test__set_event_callback__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_event_callback__out_of_resources( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+    typedef void (CL_CALLBACK* callback_t)(cl_event, cl_int, void*);
+    T::Dummy_clSetEventCallback mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(set_event_callback((cl_event)0x123, CL_SUBMITTED, (callback_t)0x7654, (void*)0x9876), clerror_no<status_t::out_of_resources>);
+#endif
+  }
+  /** // doc: test__set_event_callback__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_event_callback__out_of_host_memory( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+    typedef void (CL_CALLBACK* callback_t)(cl_event, cl_int, void*);
+    T::Dummy_clSetEventCallback mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(set_event_callback((cl_event)0x123, CL_SUBMITTED, (callback_t)0x7654, (void*)0x9876), clerror_no<status_t::out_of_host_memory>);
+#endif
+  }
+  /** // doc: test__set_event_callback__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__set_event_callback__unexpected_clerror( )
+  {
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+    typedef void (CL_CALLBACK* callback_t)(cl_event, cl_int, void*);
+    T::Dummy_clSetEventCallback mock(-0x1234567);
+    TS_ASSERT_THROWS(set_event_callback((cl_event)0x123, CL_SUBMITTED, (callback_t)0x7654, (void*)0x9876), unexpected_clerror);
+#endif
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  retain_event()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__retain_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__retain_event( )
+  {
+    T::Dummy_clRetainEvent mock(CL_SUCCESS);
+    retain_event                   ((cl_event)0x344);
+    TS_ASSERT(mock.called_once_with((cl_event)0x344));
+  }
+  /** // doc: test__retain_event__invalid_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__retain_event__invalid_event( )
+  {
+    T::Dummy_clRetainEvent mock(CL_INVALID_EVENT);
+    TS_ASSERT_THROWS(retain_event((cl_event)NULL),clerror_no<status_t::invalid_event>);
+  }
+  /** // doc: test__retain_event__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__retain_event__out_of_resources( )
+  {
+    T::Dummy_clRetainEvent mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(retain_event((cl_event)NULL),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test__retain_event__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__retain_event__out_of_host_memory( )
+  {
+    T::Dummy_clRetainEvent mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(retain_event((cl_event)NULL),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test__retain_event__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__retain_event__unexpected_clerror( )
+  {
+    T::Dummy_clRetainEvent mock(-0x1234567);
+    TS_ASSERT_THROWS(retain_event((cl_event)NULL), unexpected_clerror);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////
+  //  release_event()
+  ////////////////////////////////////////////////////////////////////////////
+
+  /** // doc: test__release_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__release_event( )
+  {
+    T::Dummy_clReleaseEvent mock(CL_SUCCESS);
+    release_event                  ((cl_event)0x433);
+    TS_ASSERT(mock.called_once_with((cl_event)0x433));
+  }
+  /** // doc: test__release_event__invalid_event() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__release_event__invalid_event( )
+  {
+    T::Dummy_clReleaseEvent mock(CL_INVALID_EVENT);
+    TS_ASSERT_THROWS(release_event((cl_event)NULL),clerror_no<status_t::invalid_event>);
+  }
+  /** // doc: test__release_event__out_of_resources() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__release_event__out_of_resources( )
+  {
+    T::Dummy_clReleaseEvent mock(CL_OUT_OF_RESOURCES);
+    TS_ASSERT_THROWS(release_event((cl_event)NULL),clerror_no<status_t::out_of_resources>);
+  }
+  /** // doc: test__release_event__out_of_host_memory() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__release_event__out_of_host_memory( )
+  {
+    T::Dummy_clReleaseEvent mock(CL_OUT_OF_HOST_MEMORY);
+    TS_ASSERT_THROWS(release_event((cl_event)NULL),clerror_no<status_t::out_of_host_memory>);
+  }
+  /** // doc: test__release_event__unexpected_clerror() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__release_event__unexpected_clerror( )
+  {
+    T::Dummy_clReleaseEvent mock(-0x1234567);
+    TS_ASSERT_THROWS(release_event((cl_event)NULL), unexpected_clerror);
+  }
+
 };
 
 #endif /* CLXX_FUNCTIONS_T_H_INCLUDED */

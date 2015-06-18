@@ -232,6 +232,52 @@ CXXTEST_MOCK_GLOBAL(cl_int, clSetKernelExecInfo,
   ( kernel, param_name, param_value_size, param_value )
 );
 #endif
+CXXTEST_MOCK_GLOBAL(cl_int, clEnqueueNDRangeKernel,
+  ( cl_command_queue command_queue, cl_kernel kernel, cl_uint work_dim,
+    const size_t* global_work_offset, const size_t* global_work_size,
+    const size_t* local_work_size, cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list, cl_event* event),
+  ( command_queue, kernel, work_dim, global_work_offset, global_work_size,
+    local_work_size, num_events_in_wait_list, event_wait_list, event)
+);
+CXXTEST_MOCK_GLOBAL(cl_int, clEnqueueNativeKernel,
+  ( cl_command_queue command_queue, void (CL_CALLBACK* user_func)(void*),
+    void* args, size_t cb_args, cl_uint num_mem_objects, const cl_mem* mem_list,
+    const void** args_mem_loc, cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list, cl_event* event),
+  ( command_queue, user_func, args, cb_args, num_mem_objects, mem_list,
+    args_mem_loc, num_events_in_wait_list, event_wait_list, event )
+);
+
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+CXXTEST_MOCK_GLOBAL(cl_event, clCreateUserEvent,
+  ( cl_context context, cl_int* errcode_ret ),
+  ( context, errcode_ret )
+);
+#endif
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+CXXTEST_MOCK_GLOBAL(cl_int, clSetUserEventStatus,
+  ( cl_event event, cl_int execution_status ),
+  ( event, execution_status )
+);
+#endif
+CXXTEST_MOCK_GLOBAL(cl_int, clWaitForEvents,
+  ( cl_uint num_events, const cl_event *event_list),
+  ( num_events, event_list )
+);
+CXXTEST_MOCK_GLOBAL(cl_int, clGetEventInfo,
+  ( cl_event event, cl_event_info param_name, size_t param_value_size,
+    void* param_value, size_t* param_value_size_ret),
+  ( event, param_name, param_value_size, param_value, param_value_size_ret )
+);
+CXXTEST_MOCK_GLOBAL(cl_int, clSetEventCallback,
+  ( cl_event event, cl_int command_exec_callback_type,
+    void(CL_CALLBACK *pfn_event_notify)(cl_event, cl_int, void*),
+    void* user_data ),
+  ( event, command_exec_callback_type, pfn_event_notify, user_data )
+);
+CXXTEST_MOCK_GLOBAL(cl_int, clRetainEvent, (cl_event event), (event));
+CXXTEST_MOCK_GLOBAL(cl_int, clReleaseEvent, (cl_event event), (event));
 /** \endcond */
 
 #include <clxx/cl/mocks/newton.hpp>

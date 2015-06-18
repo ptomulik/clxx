@@ -1028,6 +1028,215 @@ public:
   Dummy_clSetKernelExecInfo(cl_int err);
 };
 #endif
+/** // doc: Dummy_clEnqueueNDRangeKernel {{{
+ * \brief Mock for clEnqueueNDRangeKernel OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clEnqueueNDRangeKernel
+  : public T::Base_clEnqueueNDRangeKernel,
+    public T::Dummy_CallArgs< cl_command_queue, cl_kernel, cl_uint, const
+                              size_t*, const size_t*, const size_t*, cl_uint,
+                              const cl_event*, cl_event*>
+{
+  cl_int _err;
+  cl_event* _event;
+  cl_int clEnqueueNDRangeKernel( cl_command_queue command_queue,
+                                 cl_kernel kernel,
+                                 cl_uint work_dim,
+                                 const size_t* global_work_offset,
+                                 const size_t* global_work_size,
+                                 const size_t* local_work_size,
+                                 cl_uint num_events_in_wait_list,
+                                 const cl_event* event_wait_list,
+                                 cl_event* event);
+public:
+  /** // doc: Dummy_clEnqueueNDRangeKernel() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueNDRangeKernel(cl_int err, cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueNativeKernel {{{
+ * \brief Mock for clEnqueueNativeKernel OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clEnqueueNativeKernel
+  : public T::Base_clEnqueueNativeKernel,
+    public T::Dummy_CallArgs<cl_command_queue, void (CL_CALLBACK*)(void*),
+                             void*, size_t, cl_uint, const cl_mem*,
+                             const void**, cl_uint, const cl_event*, cl_event*> 
+{
+  cl_int _err;
+  cl_event* _event;
+  cl_int clEnqueueNativeKernel( cl_command_queue command_queue,
+                                void (CL_CALLBACK* user_func)(void*),
+                                void* args,
+                                size_t cb_args,
+                                cl_uint num_mem_objects,
+                                const cl_mem* mem_list,
+                                const void** args_mem_loc,
+                                cl_uint num_events_in_wait_list,
+                                const cl_event* event_wait_list,
+                                cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueNativeKernel() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueNativeKernel(cl_int err, cl_event* event = nullptr);
+};
+
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+/** // doc: Dummy_clCreateUserEvent {{{
+ * \brief Mock for clCreateUserEvent OpenCL function.
+ *
+ * Does nothing except it returns a custom event handle predefined by user.
+ */ // }}}
+class Dummy_clCreateUserEvent
+  : public T::Base_clCreateUserEvent,
+    public T::Dummy_CallArgs<cl_context, cl_int*>
+{
+  cl_event _event;
+  cl_int _err;
+  cl_event clCreateUserEvent( cl_context context, cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreateUserEvent() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param event An event to be returned by the mock
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateUserEvent(cl_event event, cl_int err);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+/** // doc: Dummy_clCreateUserEvent {{{
+ * \brief Mock for clCreateUserEvent OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetUserEventStatus
+  : public T::Base_clSetUserEventStatus,
+    public T::Dummy_CallArgs<cl_event, cl_int>
+{
+  cl_int _err;
+  cl_int clSetUserEventStatus( cl_event event , cl_int execution_status );
+public:
+  /** // doc: Dummy_clSetUserEventStatus() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetUserEventStatus(cl_int err);
+};
+#endif
+/** // doc: Dummy_clWaitForEvents {{{
+ * \brief Mock for clWaitForEvents OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clWaitForEvents
+  : public T::Base_clWaitForEvents,
+    public T::Dummy_CallArgs<cl_uint, const cl_event*>
+{
+  cl_int _err;
+  cl_int clWaitForEvents(cl_uint num_events, const cl_event* event_list);
+public:
+  /** // doc: Dummy_clWaitForEvents() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clWaitForEvents(cl_int err);
+};
+/** // doc: Dummy_clGetEventInfo {{{
+ * \brief Mock for clGetEventInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetEventInfo
+  : public T::Base_clGetEventInfo,
+    public T::Dummy_CallArgs<cl_event, cl_event_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
+  cl_int clGetEventInfo(cl_event event, cl_event_info param_name,
+                         size_t param_value_size, void* param_value,
+                         size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetEventInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetEventInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+};
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+/** // doc: Dummy_clSetEventCallback {{{
+ * \brief Mock for clSetEventCallback OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetEventCallback
+  : public T::Base_clSetEventCallback,
+    public T::Dummy_CallArgs<cl_event, cl_int, void(CL_CALLBACK*)(cl_event, cl_int, void*), void*>
+{
+  cl_int _err;
+  cl_int clSetEventCallback(cl_event event, cl_int command_exec_callback_type,
+                            void(CL_CALLBACK *pfn_event_notify)(cl_event, cl_int, void*),
+                            void* user_data);
+public:
+  /** // doc: Dummy_clSetEventCallback() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetEventCallback(cl_int err);
+};
+#endif
+/** // doc: Dummy_clRetainEvent {{{
+ * \brief Default mock for clRetainEvent OpenCL function.
+ */ // }}}
+class Dummy_clRetainEvent
+  : public T::Base_clRetainEvent,
+    public T::Dummy_CallArgs<cl_event>
+{
+  cl_int _err;
+  cl_int clRetainEvent(cl_event);
+public:
+  /** // doc: Dummy_clRetainEvent() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clRetainEvent(cl_int err);
+};
+/** // doc: Dummy_clReleaseEvent {{{
+ * \brief Default mock for clReleaseEvent OpenCL function.
+ */ // }}}
+class Dummy_clReleaseEvent
+  : public T::Base_clReleaseEvent,
+    public T::Dummy_CallArgs<cl_event>
+{
+  cl_int _err;
+  cl_int clReleaseEvent(cl_event);
+public:
+  /** // doc: Dummy_clReleaseEvent() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clReleaseEvent(cl_int err);
+};
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -1687,6 +1896,166 @@ Dummy_clSetKernelExecInfo(cl_int err)
 {
 }
 #endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueNDRangeKernel::
+clEnqueueNDRangeKernel( cl_command_queue command_queue,
+                        cl_kernel kernel,
+                        cl_uint work_dim,
+                        const size_t* global_work_offset,
+                        const size_t* global_work_size,
+                        const size_t* local_work_size,
+                        cl_uint num_events_in_wait_list,
+                        const cl_event* event_wait_list,
+                        cl_event* event)
+{
+  call_with(command_queue, kernel, work_dim, global_work_offset,
+            global_work_size, local_work_size, num_events_in_wait_list,
+            event_wait_list, event);
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueNDRangeKernel::
+Dummy_clEnqueueNDRangeKernel(cl_int err, cl_event* event)
+  : _err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueNativeKernel::
+clEnqueueNativeKernel( cl_command_queue command_queue,
+                       void (CL_CALLBACK* user_func)(void*),
+                       void* args,
+                       size_t cb_args,
+                       cl_uint num_mem_objects,
+                       const cl_mem* mem_list,
+                       const void** args_mem_loc,
+                       cl_uint num_events_in_wait_list,
+                       const cl_event* event_wait_list,
+                       cl_event* event )
+{
+  call_with( command_queue, user_func, args, cb_args, num_mem_objects,
+             mem_list, args_mem_loc, num_events_in_wait_list, event_wait_list,
+             event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueNativeKernel::
+Dummy_clEnqueueNativeKernel(cl_int err, cl_event* event)
+  : _err(err), _event(event)
+{
+}
+
+
+
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+cl_event Dummy_clCreateUserEvent::
+clCreateUserEvent( cl_context context, cl_int* errcode_ret )
+{
+  call_with(context, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _event;
+}
+Dummy_clCreateUserEvent::
+Dummy_clCreateUserEvent(cl_event event, cl_int err)
+  :_event(event), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+cl_int Dummy_clSetUserEventStatus::
+clSetUserEventStatus( cl_event event , cl_int execution_status )
+{
+  call_with(event, execution_status);
+  return _err;
+}
+Dummy_clSetUserEventStatus::
+Dummy_clSetUserEventStatus(cl_int err)
+  :_err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clWaitForEvents::
+clWaitForEvents(cl_uint num_events, const cl_event* event_list)
+{
+  call_with(num_events, event_list);
+  return _err;
+}
+Dummy_clWaitForEvents::
+Dummy_clWaitForEvents(cl_int err)
+  :_err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetEventInfo::
+clGetEventInfo(cl_event event, cl_event_info param_name,
+                size_t param_value_size, void* param_value,
+                size_t* param_value_size_ret)
+{
+  call_with(event, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
+  return _err;
+}
+Dummy_clGetEventInfo::
+Dummy_clGetEventInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clSetEventCallback::
+clSetEventCallback(cl_event event, cl_int command_exec_callback_type,
+                   void(CL_CALLBACK *pfn_event_notify)(cl_event, cl_int, void*),
+                   void* user_data)
+{
+  call_with(event, command_exec_callback_type, pfn_event_notify, user_data);
+  return _err;
+}
+Dummy_clSetEventCallback::
+Dummy_clSetEventCallback(cl_int err)
+  :_err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clRetainEvent::
+clRetainEvent(cl_event event)
+{
+  call_with(event);
+  return _err;
+}
+Dummy_clRetainEvent::
+Dummy_clRetainEvent(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clReleaseEvent::
+clReleaseEvent(cl_event event)
+{
+  call_with(event);
+  return _err;
+}
+Dummy_clReleaseEvent::
+Dummy_clReleaseEvent(cl_int err)
+  : _err(err)
+{
+}
 /* ------------------------------------------------------------------------- */
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
