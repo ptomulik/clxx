@@ -911,10 +911,221 @@ release_command_queue(cl_command_queue command_queue);
  */ // }}}
 void
 get_command_queue_info(cl_command_queue command_queue,
-                            command_queue_info_t param_name,
-                            size_t param_value_size,
-                            void* param_value,
-                            size_t* param_value_size_ret);
+                       command_queue_info_t param_name,
+                       size_t param_value_size,
+                       void* param_value,
+                       size_t* param_value_size_ret);
+/** // doc: create_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+cl_mem
+create_buffer(cl_context context,
+              mem_flags_t flags,
+              size_t size,
+              void* host_ptr);
+#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+/** // doc: create_sub_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+cl_mem
+create_sub_buffer(cl_mem buffer,
+                  mem_flags_t flags,
+                  buffer_create_type_t buffer_create_type,
+                  const void* buffer_create_info);
+#endif
+/** // doc: enqueue_read_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_read_buffer(cl_command_queue command_queue,
+                    cl_mem buffer,
+                    cl_bool blocking_read,
+                    size_t offset,
+                    size_t size,
+                    void* ptr,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event);
+/** // doc: enqueue_write_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_write_buffer(cl_command_queue command_queue,
+                     cl_mem buffer,
+                     cl_bool blocking_write,
+                     size_t offset,
+                     size_t size,
+                     const void* ptr,
+                     cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list,
+                     cl_event* event);
+/** // doc: enqueue_copy_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_copy_buffer(cl_command_queue command_queue,
+                    cl_mem src_buffer,
+                    cl_mem dst_buffer,
+                    size_t src_offset,
+                    size_t dst_offset,
+                    size_t size,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event);
+/** // doc: enqueue_map_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void*
+enqueue_map_buffer(cl_command_queue command_queue,
+                   cl_mem buffer,
+                   cl_bool blocking_map,
+                   map_flags_t map_flags,
+                   size_t offset,
+                   size_t size,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event);
+/** // doc: get_supported_image_formats() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+get_supported_image_formats(cl_context context,
+                            mem_flags_t flags,
+                            mem_object_type_t image_type,
+                            cl_uint num_entries,
+                            cl_image_format* image_formats,
+                            cl_uint* num_image_formats);
+/** // doc: enqueue_read_image() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_read_image(cl_command_queue command_queue,
+                   cl_mem image,
+                   cl_bool blocking_read,
+                   const size_t* origin,
+                   const size_t* region,
+                   size_t row_pitch,
+                   size_t slice_pitch,
+                   void* ptr,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event);
+/** // doc: enqueue_write_image() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_write_image(cl_command_queue command_queue,
+                    cl_mem image,
+                    cl_bool blocking_write,
+                    const size_t* origin,
+                    const size_t* region,
+                    size_t input_row_pitch,
+                    size_t input_slice_pitch,
+                    const void* ptr,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event);
+/** // doc: enqueue_copy_image() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_copy_image(cl_command_queue command_queue,
+                   cl_mem src_image,
+                   cl_mem dst_image,
+                   const size_t* src_origin,
+                   const size_t* dst_origin,
+                   const size_t* region,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event);
+/** // doc: enqueue_copy_image_to_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_copy_image_to_buffer(cl_command_queue command_queue,
+                             cl_mem src_image,
+                             cl_mem dst_buffer,
+                             const size_t* src_origin,
+                             const size_t* region,
+                             size_t dst_offset,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event);
+/** // doc: enqueue_copy_buffer_to_image() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_copy_buffer_to_image(cl_command_queue command_queue,
+                             cl_mem src_buffer,
+                             cl_mem dst_image,
+                             size_t src_offset,
+                             const size_t* dst_origin,
+                             const size_t* region,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event);
+/** // doc: enqueue_map_image() {{{
+ * \todo Write documentation
+ */ // }}}
+void*
+enqueue_map_image(cl_command_queue command_queue,
+                  cl_mem image,
+                  cl_bool blocking_map,
+                  map_flags_t map_flags,
+                  const size_t* origin,
+                  const size_t* region,
+                  size_t* image_row_pitch,
+                  size_t* image_slice_pitch,
+                  cl_uint num_events_in_wait_list,
+                  const cl_event* event_wait_list,
+                  cl_event* event);
+/** // doc: enqueue_unmap_mem_object() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_unmap_mem_object(cl_command_queue command_queue,
+                         cl_mem memobj,
+                         void* mapped_ptr,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event);
+/** // doc: enqueue_migrate_mem_objects() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_migrate_mem_objects(cl_command_queue command_queue,
+                            cl_uint num_mem_objects,
+                            const cl_mem* mem_objects,
+                            mem_migration_flags_t flags,
+                            cl_uint num_events_in_wait_list,
+                            const cl_event* event_wait_list,
+                            cl_event* event);
+/** // doc: get_image_info() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+get_image_info(cl_mem image,
+               image_info_t param_name,
+               size_t param_value_size, void* param_value,
+               size_t* param_value_size_ret);
+/** // doc: get_mem_object_info() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+get_mem_object_info(cl_mem memobj,
+                    mem_info_t param_name,
+                    size_t param_value_size, void* param_value,
+                    size_t* param_value_size_ret);
+/** // doc: retain_mem_object() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+retain_mem_object(cl_mem memobj);
+/** // doc: release_mem_object() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+release_mem_object(cl_mem memobj);
 /** // doc: create_program_with_source(...) {{{
  * \brief Creates a program object for a context, and loads the source
  *    code specified by the text strings in the \e strings array into the program
@@ -1082,11 +1293,11 @@ create_program_with_source(cl_context context,
  */ // }}}
 cl_program
 create_program_with_binary(cl_context context,
-                                      cl_uint num_devices,
-                                      const cl_device_id* device_list,
-                                      const size_t* lengths,
-                                      const unsigned char** binaries,
-                                      cl_int* binary_status);
+                           cl_uint num_devices,
+                           const cl_device_id* device_list,
+                           const size_t* lengths,
+                           const unsigned char** binaries,
+                           cl_int* binary_status);
 #if CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
 /** // doc: create_program_with_built_in_kernels(...) {{{
  * \brief  Creates a program object for a context, and loads the information
@@ -1562,7 +1773,7 @@ link_program(cl_context context,
  * This is a hint from the application and does not guarantee that the compiler
  * will not be used in the future or that the compiler will actually be
  * unloaded by the implementation. Calls to build_program(), compile_program(),
- * or link_program() after unload_compiler_platform() will reload the compiler,
+ * or link_program() after unload_platform_compiler() will reload the compiler,
  * if necessary, to build the appropriate program executable.
  *
  * \param platform

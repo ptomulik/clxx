@@ -491,6 +491,479 @@ get_command_queue_info(cl_command_queue command_queue,
     }
 }
 /* ------------------------------------------------------------------------ */
+cl_mem
+create_buffer(cl_context context,
+              mem_flags_t flags,
+              size_t size,
+              void* host_ptr)
+{
+  cl_int s = CL_SUCCESS;
+  cl_mem m = T::clCreateBuffer(
+      context,
+      static_cast<cl_mem_flags>(flags),
+      size,
+      host_ptr,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return m;
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+cl_mem
+create_sub_buffer(cl_mem buffer, mem_flags_t flags,
+                  buffer_create_type_t buffer_create_type,
+                  const void* buffer_create_info)
+{
+  cl_int s = CL_SUCCESS;
+  cl_mem m = T::clCreateSubBuffer(
+      buffer,
+      static_cast<cl_mem_flags>(flags),
+      static_cast<cl_buffer_create_type>(buffer_create_type),
+      buffer_create_info,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return m;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+void
+enqueue_read_buffer( cl_command_queue command_queue, cl_mem buffer,
+                     cl_bool blocking_read, size_t offset, size_t size,
+                     void* ptr, cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list, cl_event* event )
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueReadBuffer(
+        command_queue,
+        buffer,
+        blocking_read,
+        offset,
+        size,
+        ptr,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_write_buffer( cl_command_queue command_queue, cl_mem buffer,
+                      cl_bool blocking_write, size_t offset, size_t size,
+                      const void* ptr, cl_uint num_events_in_wait_list,
+                      const cl_event* event_wait_list, cl_event* event )
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueWriteBuffer(
+        command_queue,
+        buffer,
+        blocking_write,
+        offset,
+        size,
+        ptr,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_copy_buffer( cl_command_queue command_queue, cl_mem src_buffer,
+                     cl_mem dst_buffer, size_t src_offset, size_t dst_offset,
+                     size_t size, cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list, cl_event* event )
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueCopyBuffer(
+        command_queue,
+        src_buffer,
+        dst_buffer,
+        src_offset,
+        dst_offset,
+        size,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void*
+enqueue_map_buffer( cl_command_queue command_queue, cl_mem buffer,
+                    cl_bool blocking_map, map_flags_t map_flags,
+                    size_t offset, size_t size, cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list, cl_event* event)
+{
+  cl_int s = CL_SUCCESS;
+  void* result = T::clEnqueueMapBuffer(
+      command_queue,
+      buffer,
+      blocking_map,
+      static_cast<cl_map_flags>(map_flags),
+      offset,
+      size,
+      num_events_in_wait_list,
+      event_wait_list,
+      event,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return result;
+}
+/* ------------------------------------------------------------------------ */
+void
+get_supported_image_formats(cl_context context,
+                            mem_flags_t flags,
+                            mem_object_type_t image_type,
+                            cl_uint num_entries,
+                            cl_image_format* image_formats,
+                            cl_uint* num_image_formats)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetSupportedImageFormats(
+      context,
+      static_cast<cl_mem_flags>(flags),
+      static_cast<cl_mem_object_type>(image_type),
+      num_entries,
+      image_formats,
+      num_image_formats
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_read_image(cl_command_queue command_queue,
+                   cl_mem image,
+                   cl_bool blocking_read,
+                   const size_t* origin,
+                   const size_t* region,
+                   size_t row_pitch,
+                   size_t slice_pitch,
+                   void* ptr,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueReadImage(
+      command_queue,
+      image,
+      blocking_read,
+      origin,
+      region,
+      row_pitch,
+      slice_pitch,
+      ptr,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_write_image(cl_command_queue command_queue,
+                    cl_mem image,
+                    cl_bool blocking_write,
+                    const size_t* origin,
+                    const size_t* region,
+                    size_t input_row_pitch,
+                    size_t input_slice_pitch,
+                    const void* ptr,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueWriteImage(
+      command_queue,
+      image,
+      blocking_write,
+      origin,
+      region,
+      input_row_pitch,
+      input_slice_pitch,
+      ptr,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_copy_image(cl_command_queue command_queue,
+                   cl_mem src_image,
+                   cl_mem dst_image,
+                   const size_t* src_origin,
+                   const size_t* dst_origin,
+                   const size_t* region,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueCopyImage(
+      command_queue,
+      src_image,
+      dst_image,
+      src_origin,
+      dst_origin,
+      region,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_copy_image_to_buffer(cl_command_queue command_queue,
+                             cl_mem src_image,
+                             cl_mem dst_buffer,
+                             const size_t* src_origin,
+                             const size_t* region,
+                             size_t dst_offset,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueCopyImageToBuffer(
+      command_queue,
+      src_image,
+      dst_buffer,
+      src_origin,
+      region,
+      dst_offset,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_copy_buffer_to_image(cl_command_queue command_queue,
+                             cl_mem src_image,
+                             cl_mem dst_buffer,
+                             size_t src_offset,
+                             const size_t* src_origin,
+                             const size_t* region,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueCopyBufferToImage(
+      command_queue,
+      src_image,
+      dst_buffer,
+      src_offset,
+      src_origin,
+      region,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void*
+enqueue_map_image(cl_command_queue command_queue,
+                  cl_mem image,
+                  cl_bool blocking_map,
+                  map_flags_t map_flags,
+                  const size_t* origin,
+                  const size_t* region,
+                  size_t* image_row_pitch,
+                  size_t* image_slice_pitch,
+                  cl_uint num_events_in_wait_list,
+                  const cl_event* event_wait_list,
+                  cl_event* event)
+{
+  cl_int s = CL_SUCCESS;
+  void* result = T::clEnqueueMapImage(
+      command_queue,
+      image,
+      blocking_map,
+      static_cast<cl_map_flags>(map_flags),
+      origin, 
+      region,
+      image_row_pitch,
+      image_slice_pitch,
+      num_events_in_wait_list,
+      event_wait_list,
+      event,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return result;
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_unmap_mem_object(cl_command_queue command_queue,
+                         cl_mem memobj,
+                         void* mapped_ptr,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueUnmapMemObject(
+      command_queue,
+      memobj,
+      mapped_ptr,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_migrate_mem_objects(cl_command_queue command_queue,
+                            cl_uint num_mem_objects,
+                            const cl_mem* mem_objects,
+                            mem_migration_flags_t flags,
+                            cl_uint num_events_in_wait_list,
+                            const cl_event* event_wait_list,
+                            cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueMigrateMemObjects(
+      command_queue,
+      num_mem_objects,
+      mem_objects,
+      static_cast<cl_mem_migration_flags>(flags),
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_image_info(cl_mem image,
+               image_info_t param_name,
+               size_t param_value_size, void* param_value,
+               size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetImageInfo(
+        image,
+        static_cast<cl_image_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_mem_object_info(cl_mem memobj,
+                    mem_info_t param_name,
+                    size_t param_value_size, void* param_value,
+                    size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetMemObjectInfo(
+        memobj,
+        static_cast<cl_mem_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+retain_mem_object(cl_mem memobj)
+{
+  status_t s = static_cast<status_t>(T::clRetainMemObject(memobj));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+release_mem_object(cl_mem memobj)
+{
+  status_t s = static_cast<status_t>(T::clReleaseMemObject(memobj));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
 cl_program
 create_program_with_source(cl_context context,
                            cl_uint count,
@@ -971,7 +1444,7 @@ enqueue_native_kernel( cl_command_queue command_queue,
 cl_event
 create_user_event(cl_context context)
 {
-  cl_int s;
+  cl_int s = CL_SUCCESS;
   cl_event event = T::clCreateUserEvent(context, &s);
   if(is_error(static_cast<status_t>(s)))
     {

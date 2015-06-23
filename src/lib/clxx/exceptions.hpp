@@ -263,6 +263,37 @@ struct uninitialized_command_queue_error
       : Base(what_arg)
     { }
   };
+/** // doc: uninitialized_mem_error {{{
+ * \ingroup clxx_exceptions
+ * \brief An exception being thrown when a user tries to operate on an
+ *        uninitialized \ref clxx::mem "mem" object
+ */ // }}}
+struct uninitialized_mem_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: uninitialized_mem_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    uninitialized_mem_error() noexcept
+      : Base("attempted to use uninitialized clxx::mem object")
+    { }
+    /** // doc: uninitialized_mem_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_mem_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: uninitialized_mem_error() {{{
+     * \brief Constructor
+     */ // }}}
+    uninitialized_mem_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
+  };
 /** // doc: uninitialized_program_error {{{
  * \ingroup clxx_exceptions
  * \brief An exception being thrown when a user tries to operate on an

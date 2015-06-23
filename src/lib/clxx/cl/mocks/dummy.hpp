@@ -537,6 +537,709 @@ public:
    */ // }}}
   Dummy_clGetCommandQueueInfo(cl_int err, void* pv = nullptr, size_t pvs = 0);
 };
+/** // doc: Dummy_clCreateBuffer {{{
+ * \brief Default mock for clCreateBuffer OpenCL function.
+ */ // }}}
+class Dummy_clCreateBuffer
+  : public T::Base_clCreateBuffer,
+    public T::Dummy_CallArgs<cl_context, cl_mem_flags, size_t, void*, cl_int*>
+{
+  cl_mem _mem;
+  cl_int _err;
+  cl_mem clCreateBuffer( cl_context context, cl_mem_flags flags,
+                         size_t size, void* host_ptr, cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreateBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param mem Memory object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateBuffer(cl_mem mem, cl_int err);
+};
+#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+/** // doc: Dummy_clCreateSubBuffer {{{
+ * \brief Default mock for clCreateSubBuffer OpenCL function.
+ */ // }}}
+class Dummy_clCreateSubBuffer
+  : public T::Base_clCreateSubBuffer,
+    public T::Dummy_CallArgs<cl_mem, cl_mem_flags, cl_buffer_create_type, const void*, cl_int*>
+{
+  cl_mem _mem;
+  cl_int _err;
+  cl_mem clCreateSubBuffer( cl_mem buffer, cl_mem_flags flags,
+                            cl_buffer_create_type buffer_create_type,
+                            const void* buffer_create_info,
+                            cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreateSubBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param mem Memory object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateSubBuffer(cl_mem mem, cl_int err);
+};
+#endif
+/** // doc: Dummy_clEnqueueReadBuffer {{{
+ * \brief Default mock for clEnqueueReadBuffer OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueReadBuffer
+  : public T::Base_clEnqueueReadBuffer,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, size_t, size_t,
+                             void*, cl_uint, const cl_event*, cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueReadBuffer( cl_command_queue command_queue,
+                              cl_mem buffer, cl_bool blocking_read,
+                              size_t offset, size_t size, void* ptr,
+                              cl_uint num_events_in_wait_list,
+                              const cl_event* event_wait_list,
+                              cl_event* event);
+public:
+  /** // doc: Dummy_clCreateSubBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param data Data to be copied (one byte) to \em ptr when invoking the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueReadBuffer(cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueWriteBuffer {{{
+ * \brief Default mock for clEnqueueWriteBuffer OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueWriteBuffer
+  : public T::Base_clEnqueueWriteBuffer,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, size_t, size_t,
+                             const void*, cl_uint, const cl_event*, cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueWriteBuffer( cl_command_queue command_queue,
+                               cl_mem buffer, cl_bool blocking_read,
+                               size_t offset, size_t size, const void* ptr,
+                               cl_uint num_events_in_wait_list,
+                               const cl_event* event_wait_list,
+                               cl_event* event);
+public:
+  /** // doc: Dummy_clCreateSubBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueWriteBuffer(cl_int err, const cl_event* event = nullptr);
+};
+#if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
+/** // doc: Dummy_clEnqueueReadBufferRect {{{
+ * \brief Default mock for clEnqueueReadBufferRect OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueReadBufferRect
+  : public T::Base_clEnqueueReadBufferRect,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, const size_t*,
+                             const size_t*, const size_t*, size_t, size_t,
+                             size_t, size_t, void*, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueReadBufferRectRect( cl_command_queue command_queue,
+                                      cl_mem buffer, cl_bool blocking_read,
+                                      const size_t* buffer_origin,
+                                      const size_t* host_origin,
+                                      const size_t* region,
+                                      size_t buffer_row_pitch,
+                                      size_t buffer_splice_pitch,
+                                      size_t host_row_pitch,
+                                      size_t host_slice_pitch,
+                                      void* ptr,
+                                      cl_uint num_events_in_wait_list,
+                                      const cl_event* event_wait_list,
+                                      cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueReadBufferRect() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueReadBufferRect(cl_int err, const cl_event* event = nullptr);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+/** // doc: Dummy_clEnqueueWriteBufferRect {{{
+ * \brief Default mock for clEnqueueWriteBufferRect OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueWriteBufferRect
+  : public T::Base_clEnqueueWriteBufferRect,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, const size_t*,
+                             const size_t*, const size_t*, size_t, size_t,
+                             size_t, size_t, void*, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueWriteBufferRectRect( cl_command_queue command_queue,
+                                      cl_mem buffer, cl_bool blocking_read,
+                                      const size_t* buffer_origin,
+                                      const size_t* host_origin,
+                                      const size_t* region,
+                                      size_t buffer_row_pitch,
+                                      size_t buffer_splice_pitch,
+                                      size_t host_row_pitch,
+                                      size_t host_slice_pitch,
+                                      void* ptr,
+                                      cl_uint num_events_in_wait_list,
+                                      const cl_event* event_wait_list,
+                                      cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueWriteBufferRect() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueWriteBufferRect(cl_int err, const cl_event* event = nullptr);
+};
+#endif
+/** // doc: Dummy_clEnqueueCopyBuffer {{{
+ * \brief Default mock for clEnqueueCopyBuffer OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueCopyBuffer
+  : public T::Base_clEnqueueCopyBuffer,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_mem, size_t, size_t,
+                             size_t, cl_uint, const cl_event*, cl_event*> 
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueCopyBuffer( cl_command_queue command_queue,
+                              cl_mem src_buffer, cl_mem dst_buffer,
+                              size_t src_offset, size_t dst_offset,
+                              size_t size, cl_uint num_events_in_wait_list,
+                              const cl_event* event_wait_list,
+                              cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueCopyBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueCopyBuffer(cl_int err, const cl_event* event = nullptr);
+};
+#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+/** // doc: Dummy_clEnqueueCopyBuffer {{{
+ * \brief Default mock for clEnqueueCopyBuffer OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueCopyBufferRect
+  : public T::Base_clEnqueueCopyBufferRect,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_mem, const size_t*,
+                             const size_t*, const size_t*, size_t, size_t,
+                             size_t, size_t, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueCopyBufferRect( cl_command_queue command_queue,
+                                  cl_mem src_buffer,
+                                  cl_mem dst_buffer,
+                                  const size_t* src_origin,
+                                  const size_t* dst_origin,
+                                  const size_t* region,
+                                  size_t src_row_pitch,
+                                  size_t src_slice_pitch,
+                                  size_t dst_row_pitch, 
+                                  size_t dst_slice_pitch,
+                                  cl_uint num_events_in_wait_list,
+                                  const cl_event* event_wait_list,
+                                  cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueCopyBufferRect() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueCopyBufferRect(cl_int err, const cl_event* event = nullptr);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+/** // doc: Dummy_clEnqueueCopyBuffer {{{
+ * \brief Default mock for clEnqueueCopyBuffer OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueFillBuffer
+  : public T::Base_clEnqueueFillBuffer,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, const void *, size_t,
+                             size_t, size_t, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueFillBuffer( cl_command_queue command_queue, cl_mem buffer,
+                              const void *pattern, size_t pattern_size,
+                              size_t offset, size_t size,
+                              cl_uint num_events_in_wait_list,
+                              const cl_event* event_wait_list,
+                              cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueFillBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueFillBuffer(cl_int err, const cl_event* event = nullptr);
+};
+#endif
+/** // doc: Dummy_clEnqueueMapBuffer {{{
+ * \brief Default mock for clEnqueueMapBuffer OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueMapBuffer
+  : public T::Base_clEnqueueMapBuffer,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, cl_map_flags,
+                             size_t, size_t, cl_uint, const cl_event*,
+                             cl_event*, cl_int*>
+{
+  void* _result;
+  cl_int _err;
+  const cl_event* _event;
+  void* clEnqueueMapBuffer( cl_command_queue command_queue, cl_mem buffer,
+                            cl_bool blocking_map, cl_map_flags map_flags,
+                            size_t offset, size_t size,
+                            cl_uint num_events_in_wait_list,
+                            const cl_event* event_wait_list,
+                            cl_event* event, cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clEnqueueMapBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueMapBuffer(void* result, cl_int err, const cl_event* event = nullptr);
+};
+//
+#if CLXX_OPENCL_ALLOWED(clCreateImage)
+/** // doc: Dummy_clCreateImage {{{
+ * \brief Default mock for clCreateImage OpenCL function.
+ */ // }}}
+class Dummy_clCreateImage
+  : public T::Base_clCreateImage,
+    public T::Dummy_CallArgs<cl_context, cl_mem_flags, const cl_image_format*,
+                             const cl_image_desc*, void*, cl_int*>
+{
+  cl_mem _mem;
+  cl_int _err;
+  cl_mem clCreateImage( cl_context context, cl_mem_flags flags,
+                        const cl_image_format* image_format,
+                        const cl_image_desc* image_desc, void* host_ptr,
+                        cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreateImage() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param mem Memory object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateImage(cl_mem mem, cl_int err);
+};
+#endif
+/** // doc: Dummy_clGetSupportedImageFormats {{{
+ * \brief Default mock for clGetSupportedImageFormats OpenCL function.
+ */ // }}}
+class Dummy_clGetSupportedImageFormats
+  : public T::Base_clGetSupportedImageFormats,
+    public T::Dummy_CallArgs<cl_context, cl_mem_flags, cl_mem_object_type,
+                             cl_uint, cl_image_format*, cl_uint*>
+{
+  cl_int _err;
+  const cl_image_format* _image_formats;
+  const cl_uint* _num_image_formats;
+  cl_int clGetSupportedImageFormats( cl_context context, cl_mem_flags flags,
+                                     cl_mem_object_type image_type,
+                                     cl_uint num_entries,
+                                     cl_image_format* image_formats,
+                                     cl_uint* num_image_formats);
+public:
+  /** // doc: Dummy_clGetSupportedImageFormats() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param image_formats To be returned as image_formats list
+   * \param image_formats_num Pointer to unsigned integer with the size of \image_formats list
+   */ // }}}
+  Dummy_clGetSupportedImageFormats(cl_int err,
+                                   const cl_image_format* image_formats = nullptr,
+                                   const cl_uint* num_image_formats = nullptr);
+};
+/** // doc: Dummy_clEnqueueReadImage {{{
+ * \brief Default mock for clEnqueueReadImage OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueReadImage
+  : public T::Base_clEnqueueReadImage,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, const size_t*,
+                             const size_t*, size_t, size_t, void*, cl_uint,
+                             const cl_event*, cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueReadImage( cl_command_queue command_queue,
+                             cl_mem image,
+                             cl_bool blocking_read,
+                             const size_t* origin,
+                             const size_t* region,
+                             size_t row_pitch,
+                             size_t slice_pitch,
+                             void* ptr,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueReadImage() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueReadImage(cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueWriteImage {{{
+ * \brief Default mock for clEnqueueWriteImage OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueWriteImage
+  : public T::Base_clEnqueueWriteImage,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, const size_t*,
+                             const size_t*, size_t, size_t, const void*, cl_uint,
+                             const cl_event*, cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueWriteImage( cl_command_queue command_queue,
+                              cl_mem image,
+                              cl_bool blocking_read,
+                              const size_t* origin,
+                              const size_t* region,
+                              size_t input_row_pitch,
+                              size_t input_slice_pitch,
+                              const void* ptr,
+                              cl_uint num_events_in_wait_list,
+                              const cl_event* event_wait_list,
+                              cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueWriteImage() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueWriteImage(cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueCopyImage {{{
+ * \brief Default mock for clEnqueueCopyImage OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueCopyImage
+  : public T::Base_clEnqueueCopyImage,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_mem, const size_t*,
+                             const size_t*, const size_t*, cl_uint,
+                             const cl_event*, cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueCopyImage( cl_command_queue command_queue, cl_mem src_image,
+                             cl_mem dst_image, const size_t* src_origin,
+                             const size_t* dst_origin, const size_t* region,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueCopyImage() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueCopyImage(cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueCopyImageToBuffer {{{
+ * \brief Default mock for clEnqueueCopyImageToBuffer OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueCopyImageToBuffer
+  : public T::Base_clEnqueueCopyImageToBuffer,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_mem, const size_t*,
+                             const size_t*, size_t, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueCopyImageToBuffer( cl_command_queue command_queue,
+                                     cl_mem src_image,
+                                     cl_mem dst_buffer,
+                                     const size_t* src_origin,
+                                     const size_t* region,
+                                     size_t dst_offset,
+                                     cl_uint num_events_in_wait_list,
+                                     const cl_event* event_wait_list,
+                                     cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueCopyImageToBuffer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueCopyImageToBuffer(cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueCopyBufferToImage {{{
+ * \brief Default mock for clEnqueueCopyBufferToImage OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueCopyBufferToImage
+  : public T::Base_clEnqueueCopyBufferToImage,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_mem, size_t,
+                             const size_t*, const size_t*, cl_uint,
+                             const cl_event*, cl_event*> 
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueCopyBufferToImage( cl_command_queue command_queue,
+                                     cl_mem src_buffer,
+                                     cl_mem dst_image,
+                                     size_t src_offset,
+                                     const size_t* dst_origin,
+                                     const size_t* region,
+                                     cl_uint num_events_in_wait_list,
+                                     const cl_event* event_wait_list,
+                                     cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueCopyBufferToImage() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueCopyBufferToImage(cl_int err, const cl_event* event = nullptr);
+};
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+/** // doc: Dummy_clEnqueueFillImage {{{
+ * \brief Default mock for clEnqueueFillImage OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueFillImage
+  : public T::Base_clEnqueueFillImage,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, const void*, const
+                             size_t*, const size_t*, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueFillImage( cl_command_queue command_queue,
+                             cl_mem image,
+                             const void *fill_color,
+                             const size_t* origin,
+                             const size_t* region,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event);
+public:
+  /** // doc: Dummy_clEnqueueFillImage() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueFillImage(cl_int err, const cl_event* event = nullptr);
+};
+#endif
+/** // doc: Dummy_clEnqueueMapImage {{{
+ * \brief Default mock for clEnqueueMapImage OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueMapImage
+  : public T::Base_clEnqueueMapImage,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, cl_map_flags,
+                             const size_t*, const size_t*, size_t*, size_t*,
+                             cl_uint, const cl_event*, cl_event*, cl_int*>
+{
+  void* _result;
+  cl_int _err;
+  const cl_event* _event;
+  void* clEnqueueMapImage( cl_command_queue command_queue,
+                           cl_mem image,
+                           cl_bool blocking_map,
+                           cl_map_flags map_flags,
+                           const size_t* origin,
+                           const size_t* region,
+                           size_t* image_row_pitch,
+                           size_t* image_slice_pitch,
+                           cl_uint num_events_in_wait_list,
+                           const cl_event* event_wait_list,
+                           cl_event* event,
+                           cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clEnqueueMapImage() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueMapImage(void* result, cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueUnmapMemObject {{{
+ * \brief Default mock for clEnqueueUnmapMemObject OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueUnmapMemObject
+  : public T::Base_clEnqueueUnmapMemObject,
+    public T::Dummy_CallArgs<cl_command_queue, cl_mem, void*, cl_uint,
+                             const cl_event*, cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueUnmapMemObject( cl_command_queue command_queue,
+                                  cl_mem memobj,
+                                  void* mapped_ptr,
+                                  cl_uint num_events_in_wait_list,
+                                  const cl_event* event_wait_list,
+                                  cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueUnmapMemObject() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clEnqueueMigrateMemObjects {{{
+ * \brief Default mock for clEnqueueMigrateMemObjects OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueMigrateMemObjects
+  : public T::Base_clEnqueueMigrateMemObjects,
+    public T::Dummy_CallArgs<cl_command_queue, cl_uint, const cl_mem*,
+                             cl_mem_migration_flags, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  const cl_event* _event;
+  cl_int clEnqueueMigrateMemObjects( cl_command_queue command_queue,
+                                     cl_uint num_mem_objects, 
+                                     const cl_mem* mem_objects,
+                                     cl_mem_migration_flags flags,
+                                     cl_uint num_events_in_wait_list,
+                                     const cl_event* event_wait_list,
+                                     cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueMigrateMemObjects() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueMigrateMemObjects(cl_int err, const cl_event* event = nullptr);
+};
+/** // doc: Dummy_clGetImageInfo {{{
+ * \brief Mock for clGetImageInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetImageInfo
+  : public T::Base_clGetImageInfo,
+    public T::Dummy_CallArgs<cl_mem, cl_image_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
+  cl_int clGetImageInfo(cl_mem image, cl_image_info param_name,
+                        size_t param_value_size, void* param_value,
+                        size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetImageInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetImageInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+};
+/** // doc: Dummy_clGetMemObjectInfo {{{
+ * \brief Mock for clGetMemObjectInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetMemObjectInfo
+  : public T::Base_clGetMemObjectInfo,
+    public T::Dummy_CallArgs<cl_mem, cl_mem_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  void* _param_value;
+  size_t* _param_value_size_ret;
+  cl_int clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,
+                           size_t param_value_size, void* param_value,
+                           size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetMemObjectInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetMemObjectInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+};
+/** // doc: Dummy_clRetainMemObject {{{
+ * \brief Default mock for clRetainMemObject OpenCL function.
+ */ // }}}
+class Dummy_clRetainMemObject
+  : public T::Base_clRetainMemObject,
+    public T::Dummy_CallArgs<cl_mem>
+{
+  cl_int _err;
+  cl_int clRetainMemObject(cl_mem memobj);
+public:
+  /** // doc: Dummy_clRetainMemObject() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clRetainMemObject(cl_int err);
+};
+/** // doc: Dummy_clReleaseMemObject {{{
+ * \brief Default mock for clReleaseMemObject OpenCL function.
+ */ // }}}
+class Dummy_clReleaseMemObject
+  : public T::Base_clReleaseMemObject,
+    public T::Dummy_CallArgs<cl_mem>
+{
+  cl_int _err;
+  cl_int clReleaseMemObject(cl_mem memobj);
+public:
+  /** // doc: Dummy_clReleaseMemObject() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clReleaseMemObject(cl_int err);
+};
+/** // doc: Dummy_clSetMemObjectDestructorCallback {{{
+ * \brief Mock for clSetMemObjectDestructorCallback OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetMemObjectDestructorCallback
+  : public T::Base_clSetMemObjectDestructorCallback,
+    public T::Dummy_CallArgs<cl_mem, void(CL_CALLBACK*)(cl_mem, void*), void*>
+{
+  cl_int _err;
+  cl_int clSetMemObjectDestructorCallback(cl_mem memobj,
+                                          void(CL_CALLBACK* pfn_notify)(cl_mem, void*),
+                                          void* user_data);
+public:
+  /** // doc: Dummy_clSetMemObjectDestructorCallback() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetMemObjectDestructorCallback(cl_int err);
+};
 /** // doc: Dummy_clCreateProgramWithSource {{{
  * \brief Default mock for clCreateProgramWithSource OpenCL function.
  */ // }}}
@@ -1520,6 +2223,618 @@ clGetCommandQueueInfo(cl_command_queue command_queue, cl_command_queue_info para
 Dummy_clGetCommandQueueInfo::
 Dummy_clGetCommandQueueInfo(cl_int err, void* pv, size_t pvs)
   : _err(err), _param_value(pv), _param_value_size_ret(pvs)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_mem Dummy_clCreateBuffer::
+clCreateBuffer( cl_context context, cl_mem_flags flags, size_t size,
+                void* host_ptr, cl_int* errcode_ret )
+{
+  call_with(context, flags, size, host_ptr, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _mem;
+}
+Dummy_clCreateBuffer::
+Dummy_clCreateBuffer(cl_mem mem, cl_int err)
+  :_mem(mem), _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+cl_mem Dummy_clCreateSubBuffer::
+clCreateSubBuffer( cl_mem buffer, cl_mem_flags flags,
+                   cl_buffer_create_type buffer_create_type,
+                   const void* buffer_create_info, cl_int* errcode_ret )
+{
+  call_with(buffer, flags, buffer_create_type, buffer_create_info, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _mem;
+}
+Dummy_clCreateSubBuffer::
+Dummy_clCreateSubBuffer(cl_mem mem, cl_int err)
+  : _mem(mem), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueReadBuffer::
+clEnqueueReadBuffer( cl_command_queue command_queue,
+                     cl_mem buffer, cl_bool blocking_read,
+                     size_t offset, size_t size, void* ptr,
+                     cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list,
+                     cl_event* event)
+{
+  call_with( command_queue, buffer, blocking_read, offset, size, ptr, 
+             num_events_in_wait_list, event_wait_list, event );
+  if(_event && event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueReadBuffer::
+Dummy_clEnqueueReadBuffer(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueWriteBuffer::
+clEnqueueWriteBuffer( cl_command_queue command_queue,
+                      cl_mem buffer, cl_bool blocking_write,
+                      size_t offset, size_t size, const void* ptr,
+                      cl_uint num_events_in_wait_list,
+                      const cl_event* event_wait_list,
+                      cl_event* event )
+{
+  call_with( command_queue, buffer, blocking_write, offset, size, ptr, 
+             num_events_in_wait_list, event_wait_list, event );
+  if(_event && event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueWriteBuffer::
+Dummy_clEnqueueWriteBuffer(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
+cl_int Dummy_clEnqueueReadBufferRect::
+clEnqueueReadBufferRectRect( cl_command_queue command_queue,
+                             cl_mem buffer, cl_bool blocking_read,
+                             const size_t* buffer_origin,
+                             const size_t* host_origin,
+                             const size_t* region,
+                             size_t buffer_row_pitch,
+                             size_t buffer_splice_pitch,
+                             size_t host_row_pitch,
+                             size_t host_slice_pitch,
+                             void* ptr,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event )
+{
+  call_with( command_queue, buffer, blocking_read, buffer_origin, host_origin,
+             region, buffer_row_pitch, buffer_splice_pitch, host_row_pitch,
+             host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
+             event);
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueReadBufferRect::
+Dummy_clEnqueueReadBufferRect(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+cl_int Dummy_clEnqueueWriteBufferRect::
+clEnqueueWriteBufferRectRect( cl_command_queue command_queue,
+                             cl_mem buffer, cl_bool blocking_read,
+                             const size_t* buffer_origin,
+                             const size_t* host_origin,
+                             const size_t* region,
+                             size_t buffer_row_pitch,
+                             size_t buffer_splice_pitch,
+                             size_t host_row_pitch,
+                             size_t host_slice_pitch,
+                             void* ptr,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event )
+{
+  call_with( command_queue, buffer, blocking_read, buffer_origin, host_origin,
+             region, buffer_row_pitch, buffer_splice_pitch, host_row_pitch,
+             host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
+             event);
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueWriteBufferRect::
+Dummy_clEnqueueWriteBufferRect(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueCopyBuffer::
+clEnqueueCopyBuffer( cl_command_queue command_queue,
+                     cl_mem src_buffer, cl_mem dst_buffer,
+                     size_t src_offset, size_t dst_offset,
+                     size_t size, cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list,
+                     cl_event* event )
+{
+  call_with( command_queue, src_buffer, dst_buffer, src_offset, dst_offset,
+             size, num_events_in_wait_list, event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueCopyBuffer::
+Dummy_clEnqueueCopyBuffer(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+cl_int Dummy_clEnqueueCopyBufferRect::
+clEnqueueCopyBufferRect( cl_command_queue command_queue,
+                         cl_mem src_buffer,
+                         cl_mem dst_buffer,
+                         const size_t* src_origin,
+                         const size_t* dst_origin,
+                         const size_t* region,
+                         size_t src_row_pitch,
+                         size_t src_slice_pitch,
+                         size_t dst_row_pitch, 
+                         size_t dst_slice_pitch,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event )
+{
+  call_with( command_queue, src_buffer, dst_buffer, src_origin, dst_origin,
+             region, src_row_pitch, src_slice_pitch, dst_row_pitch,
+             dst_slice_pitch, num_events_in_wait_list, event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueCopyBufferRect::
+Dummy_clEnqueueCopyBufferRect(cl_int err, const cl_event* event)
+  : _err(err), _event(event)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+cl_int Dummy_clEnqueueFillBuffer::
+clEnqueueFillBuffer( cl_command_queue command_queue, cl_mem buffer,
+                     const void *pattern, size_t pattern_size,
+                     size_t offset, size_t size,
+                     cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list,
+                     cl_event* event )
+{
+  call_with( command_queue, buffer, pattern, pattern_size, offset, size,
+             num_events_in_wait_list, event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueFillBuffer::
+Dummy_clEnqueueFillBuffer(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+void* Dummy_clEnqueueMapBuffer::
+clEnqueueMapBuffer( cl_command_queue command_queue, cl_mem buffer,
+                    cl_bool blocking_map, cl_map_flags map_flags,
+                    size_t offset, size_t size,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event, cl_int* errcode_ret )
+{
+  call_with( command_queue, buffer, blocking_map, map_flags, offset, size,
+             num_events_in_wait_list, event_wait_list, event, errcode_ret );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _result;
+}
+Dummy_clEnqueueMapBuffer::
+Dummy_clEnqueueMapBuffer(void* result, cl_int err, const cl_event* event)
+  : _result(result), _err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateImage)
+cl_mem Dummy_clCreateImage::
+clCreateImage( cl_context context, cl_mem_flags flags,
+               const cl_image_format* image_format,
+               const cl_image_desc* image_desc, void* host_ptr,
+               cl_int* errcode_ret )
+{
+  call_with( context, flags, image_format, image_desc, host_ptr, errcode_ret );
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _mem;
+}
+Dummy_clCreateImage::
+Dummy_clCreateImage(cl_mem mem, cl_int err)
+  :_mem(mem), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetSupportedImageFormats::
+clGetSupportedImageFormats( cl_context context, cl_mem_flags flags,
+                            cl_mem_object_type image_type,
+                            cl_uint num_entries,
+                            cl_image_format* image_formats,
+                            cl_uint* num_image_formats)
+{
+  call_with( context, flags, image_type, num_entries, image_formats, num_image_formats);
+  if(num_image_formats && _num_image_formats)
+    {
+      *num_image_formats = std::min(*_num_image_formats, num_entries);
+    }
+  if(image_formats && _image_formats && _num_image_formats)
+    {
+      std::memcpy(image_formats, _image_formats, std::min(num_entries, *_num_image_formats) * sizeof(cl_image_format));
+    }
+  return _err;
+}
+Dummy_clGetSupportedImageFormats::
+Dummy_clGetSupportedImageFormats(cl_int err,
+                                 const cl_image_format* image_formats,
+                                 const cl_uint* num_image_formats)
+  : _err(err), _image_formats(image_formats), _num_image_formats(num_image_formats)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueReadImage::
+clEnqueueReadImage( cl_command_queue command_queue,
+                    cl_mem image,
+                    cl_bool blocking_read,
+                    const size_t* origin,
+                    const size_t* region,
+                    size_t row_pitch,
+                    size_t slice_pitch,
+                    void* ptr,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event )
+{
+  call_with( command_queue, image, blocking_read, origin, region, row_pitch,
+             slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
+             event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueReadImage::
+Dummy_clEnqueueReadImage(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueWriteImage::
+clEnqueueWriteImage( cl_command_queue command_queue,
+                    cl_mem image,
+                    cl_bool blocking_read,
+                    const size_t* origin,
+                    const size_t* region,
+                    size_t input_row_pitch,
+                    size_t input_slice_pitch,
+                    const void* ptr,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event )
+{
+  call_with( command_queue, image, blocking_read, origin, region,
+             input_row_pitch, input_slice_pitch, ptr, num_events_in_wait_list,
+             event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueWriteImage::
+Dummy_clEnqueueWriteImage(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueCopyImage::
+clEnqueueCopyImage( cl_command_queue command_queue, cl_mem src_image,
+                    cl_mem dst_image, const size_t* src_origin,
+                    const size_t* dst_origin, const size_t* region,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event )
+{
+  call_with( command_queue, src_image, dst_image, src_origin, dst_origin,
+             region, num_events_in_wait_list, event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueCopyImage::
+Dummy_clEnqueueCopyImage(cl_int err, const cl_event* event)
+  :_err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueCopyImageToBuffer::
+clEnqueueCopyImageToBuffer( cl_command_queue command_queue,
+                            cl_mem src_image,
+                            cl_mem dst_buffer,
+                            const size_t* src_origin,
+                            const size_t* region,
+                            size_t dst_offset,
+                            cl_uint num_events_in_wait_list,
+                            const cl_event* event_wait_list,
+                            cl_event* event )
+{
+  call_with( command_queue, src_image, dst_buffer, src_origin, region,
+             dst_offset, num_events_in_wait_list, event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueCopyImageToBuffer::
+Dummy_clEnqueueCopyImageToBuffer(cl_int err, const cl_event* event)
+  : _err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueCopyBufferToImage::
+clEnqueueCopyBufferToImage( cl_command_queue command_queue,
+                            cl_mem src_buffer,
+                            cl_mem dst_image,
+                            size_t src_offset,
+                            const size_t* dst_origin,
+                            const size_t* region,
+                            cl_uint num_events_in_wait_list,
+                            const cl_event* event_wait_list,
+                            cl_event* event )
+{
+  call_with( command_queue, src_buffer, dst_image, src_offset, dst_origin,
+             region, num_events_in_wait_list, event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueCopyBufferToImage::
+Dummy_clEnqueueCopyBufferToImage(cl_int err, const cl_event* event)
+  : _err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+cl_int Dummy_clEnqueueFillImage::
+clEnqueueFillImage( cl_command_queue command_queue,
+                    cl_mem image,
+                    const void *fill_color,
+                    const size_t* origin,
+                    const size_t* region,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event)
+{
+  call_with( command_queue, image, fill_color, origin, region,
+             num_events_in_wait_list, event_wait_list, event);
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueFillImage::
+Dummy_clEnqueueFillImage(cl_int err, const cl_event* event)
+  : _err(err), _event(event)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+void* Dummy_clEnqueueMapImage::
+clEnqueueMapImage( cl_command_queue command_queue,
+                   cl_mem image,
+                   cl_bool blocking_map,
+                   cl_map_flags map_flags,
+                   const size_t* origin,
+                   const size_t* region,
+                   size_t* image_row_pitch,
+                   size_t* image_slice_pitch,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event,
+                   cl_int* errcode_ret )
+{
+  call_with( command_queue, image, blocking_map, map_flags, origin, region,
+             image_row_pitch, image_slice_pitch, num_events_in_wait_list, 
+             event_wait_list, event, errcode_ret );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _result;
+}
+Dummy_clEnqueueMapImage::
+Dummy_clEnqueueMapImage(void* result, cl_int err, const cl_event* event)
+  : _result(result), _err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueUnmapMemObject::
+clEnqueueUnmapMemObject( cl_command_queue command_queue,
+                         cl_mem memobj,
+                         void* mapped_ptr,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event )
+{
+  call_with( command_queue, memobj, mapped_ptr, num_events_in_wait_list,
+             event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueUnmapMemObject::
+Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event)
+  : _err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clEnqueueMigrateMemObjects::
+clEnqueueMigrateMemObjects( cl_command_queue command_queue,
+                            cl_uint num_mem_objects, 
+                            const cl_mem* mem_objects,
+                            cl_mem_migration_flags flags,
+                            cl_uint num_events_in_wait_list,
+                            const cl_event* event_wait_list,
+                            cl_event* event )
+{
+  call_with( command_queue, num_mem_objects, mem_objects, flags,
+             num_events_in_wait_list, event_wait_list, event );
+  if(event && _event)
+    {
+      *event = *_event;
+    }
+  return _err;
+}
+Dummy_clEnqueueMigrateMemObjects::
+Dummy_clEnqueueMigrateMemObjects(cl_int err, const cl_event* event)
+  : _err(err), _event(event)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetImageInfo::
+clGetImageInfo(cl_mem image, cl_image_info param_name,
+               size_t param_value_size, void* param_value,
+               size_t* param_value_size_ret)
+{
+  call_with(image, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
+  return _err;
+}
+Dummy_clGetImageInfo::
+Dummy_clGetImageInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetMemObjectInfo::
+clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,
+                   size_t param_value_size, void* param_value,
+                   size_t* param_value_size_ret)
+{
+  call_with(memobj, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
+  return _err;
+}
+Dummy_clGetMemObjectInfo::
+Dummy_clGetMemObjectInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clRetainMemObject::
+clRetainMemObject(cl_mem memobj)
+{
+  call_with(memobj);
+  return _err;
+}
+Dummy_clRetainMemObject::
+Dummy_clRetainMemObject(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clReleaseMemObject::
+clReleaseMemObject(cl_mem memobj)
+{
+  call_with(memobj);
+  return _err;
+}
+Dummy_clReleaseMemObject::
+Dummy_clReleaseMemObject(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clSetMemObjectDestructorCallback::
+clSetMemObjectDestructorCallback(cl_mem memobj,
+                                 void(CL_CALLBACK* pfn_notify)(cl_mem, void*),
+                                 void* user_data)
+{
+  call_with(memobj, pfn_notify, user_data);
+  return _err;
+}
+Dummy_clSetMemObjectDestructorCallback::
+Dummy_clSetMemObjectDestructorCallback(cl_int err)
+  : _err(err)
 {
 }
 /* ------------------------------------------------------------------------- */

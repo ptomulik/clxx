@@ -62,7 +62,6 @@ class event
 {
 private:
   cl_event _id;
-  event();
 protected:
   /** // doc: _set_id(cl_event, bool, bool) {{{
    * \brief Set the \c cl_event handle to this object
@@ -78,6 +77,14 @@ protected:
    */ // }}}
   void _set_id(cl_event prog, bool retain_new, bool release_old);
 public:
+  /** // doc: event() {{{
+   * \brief Default constructor
+   *
+   * Sets the internal \c cl_event identifier to \c NULL. The
+   * default-constructed \ref clxx::event "event" object is considered to be
+   * uninitialized.
+   */ // }}}
+  event();
   /** // doc: event(cl_event) {{{
    * \brief Creates \ref clxx::event "event" object from explicitly given
    *        OpenCL \c cl_event handle.

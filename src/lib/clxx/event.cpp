@@ -37,6 +37,12 @@ _set_id(cl_event p, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 event::
+event()
+  : _id((cl_event)NULL)
+{
+}
+/* ----------------------------------------------------------------------- */
+event::
 event(cl_event id)
   :_id((cl_event)NULL) // because it's read by _set_id()
 {

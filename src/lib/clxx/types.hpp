@@ -1083,6 +1083,11 @@ enum class mem_info_t : cl_mem_info {
   /// Corresponds to \c CL_MEM_OFFSET
   offset                = CL_MEM_OFFSET
 #endif
+#if CL_VERSION_2_0
+  ,
+  /// Corresponds to \c CL_MEM_USES_SVM_POINTER
+  uses_svm_pointer      = CL_MEM_USES_SVM_POINTER
+#endif
 };
 
 CLXX_MAKE_INTEGER_ENUM(mem_info_t, cl_mem_info)

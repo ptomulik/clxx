@@ -23,6 +23,19 @@ namespace clxx { class event_test_suite; }
 class clxx::event_test_suite : public CxxTest::TestSuite
 {
 public:
+  /** // doc: test__default_ctor() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__default_ctor( )
+  {
+    T::Dummy_clRetainEvent mock1(CL_SUCCESS);
+    T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
+    event e;
+    TS_ASSERT(!e.is_initialized());
+    TS_ASSERT_EQUALS(e.id(), (cl_event)NULL);
+    TS_ASSERT(mock1.never_called());
+    TS_ASSERT(mock2.never_called());
+  }
   /** // doc: test__ctor_1() {{{
    * \todo Write documentation
    */ // }}}
