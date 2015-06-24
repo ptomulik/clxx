@@ -7,26 +7,9 @@
  */ // }}}
 #include <clxx/mem_fcn.hpp>
 #include <clxx/functions.hpp>
-#include <boost/shared_array.hpp>
+#include <clxx/util/obj2cl.hpp>
 
 namespace clxx {
-/* ------------------------------------------------------------------------ */
-template<typename T, class X>
-static boost::shared_array<T>
-_identifiers_impl(X const& x)
-{
-  typedef boost::shared_array<T> array;
-  array a(new T[x.size()]);
-  auto op =  [](typename X::const_reference d) -> T { return d.id(); };
-  std::transform(x.begin(), x.end(), a.get(), op);
-  return a;
-}
-/* ------------------------------------------------------------------------ */
-static boost::shared_array<cl_event>
-_identifiers(events const& x)
-{
-  return _identifiers_impl<cl_event, events>(x);
-}
 /* ------------------------------------------------------------------------ */
 clxx::event
 enqueue_read_buffer(clxx::command_queue const& command_queue,
@@ -45,7 +28,7 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
                       size,
                       ptr,
                       static_cast<cl_uint>(event_wait_list.size()),
-                      _identifiers(event_wait_list).get(),
+                      obj2cl(event_wait_list),
                       &_event);
   return clxx::event(_event);
   // release_event(_event) ???
@@ -90,7 +73,7 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
                        size,
                        ptr,
                        static_cast<cl_uint>(event_wait_list.size()),
-                       _identifiers(event_wait_list).get(),
+                       obj2cl(event_wait_list),
                        &_event);
   return clxx::event(_event);
   // release_event(_event) ???
@@ -135,7 +118,7 @@ enqueue_copy_buffer(clxx::command_queue const& command_queue,
                       dst_offset,
                       size,
                       static_cast<cl_uint>(event_wait_list.size()),
-                      _identifiers(event_wait_list).get(),
+                      obj2cl(event_wait_list),
                       &_event);
   return clxx::event(_event);
   // release_event(_event); ???
@@ -181,7 +164,7 @@ enqueue_map_buffer(clxx::command_queue const& command_queue,
                                     offset,
                                     size,
                                     static_cast<cl_uint>(event_wait_list.size()),
-                                    _identifiers(event_wait_list).get(),
+                                    obj2cl(event_wait_list),
                                     &_event);
   event = clxx::event(_event);
   // release_event(_event); ???
@@ -223,7 +206,7 @@ enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
                            memobj.get_valid_id(),
                            mapped_ptr,
                            static_cast<cl_uint>(event_wait_list.size()),
-                           _identifiers(event_wait_list).get(),
+                           obj2cl(event_wait_list),
                            &_event);
   return clxx::event(_event);
   // release_event(_event) ???

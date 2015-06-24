@@ -710,7 +710,7 @@ public:
 class Dummy_clEnqueueCopyBuffer
   : public T::Base_clEnqueueCopyBuffer,
     public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_mem, size_t, size_t,
-                             size_t, cl_uint, const cl_event*, cl_event*> 
+                             size_t, cl_uint, const cl_event*, cl_event*>
 {
   cl_int _err;
   const cl_event* _event;
@@ -750,7 +750,7 @@ class Dummy_clEnqueueCopyBufferRect
                                   const size_t* region,
                                   size_t src_row_pitch,
                                   size_t src_slice_pitch,
-                                  size_t dst_row_pitch, 
+                                  size_t dst_row_pitch,
                                   size_t dst_slice_pitch,
                                   cl_uint num_events_in_wait_list,
                                   const cl_event* event_wait_list,
@@ -998,7 +998,7 @@ class Dummy_clEnqueueCopyBufferToImage
   : public T::Base_clEnqueueCopyBufferToImage,
     public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_mem, size_t,
                              const size_t*, const size_t*, cl_uint,
-                             const cl_event*, cl_event*> 
+                             const cl_event*, cl_event*>
 {
   cl_int _err;
   const cl_event* _event;
@@ -1120,7 +1120,7 @@ class Dummy_clEnqueueMigrateMemObjects
   cl_int _err;
   const cl_event* _event;
   cl_int clEnqueueMigrateMemObjects( cl_command_queue command_queue,
-                                     cl_uint num_mem_objects, 
+                                     cl_uint num_mem_objects,
                                      const cl_mem* mem_objects,
                                      cl_mem_migration_flags flags,
                                      cl_uint num_events_in_wait_list,
@@ -1771,7 +1771,7 @@ class Dummy_clEnqueueNativeKernel
   : public T::Base_clEnqueueNativeKernel,
     public T::Dummy_CallArgs<cl_command_queue, void (CL_CALLBACK*)(void*),
                              void*, size_t, cl_uint, const cl_mem*,
-                             const void**, cl_uint, const cl_event*, cl_event*> 
+                             const void**, cl_uint, const cl_event*, cl_event*>
 {
   cl_int _err;
   cl_event* _event;
@@ -2271,7 +2271,7 @@ clEnqueueReadBuffer( cl_command_queue command_queue,
                      const cl_event* event_wait_list,
                      cl_event* event)
 {
-  call_with( command_queue, buffer, blocking_read, offset, size, ptr, 
+  call_with( command_queue, buffer, blocking_read, offset, size, ptr,
              num_events_in_wait_list, event_wait_list, event );
   if(_event && event)
     {
@@ -2293,7 +2293,7 @@ clEnqueueWriteBuffer( cl_command_queue command_queue,
                       const cl_event* event_wait_list,
                       cl_event* event )
 {
-  call_with( command_queue, buffer, blocking_write, offset, size, ptr, 
+  call_with( command_queue, buffer, blocking_write, offset, size, ptr,
              num_events_in_wait_list, event_wait_list, event );
   if(_event && event)
     {
@@ -2405,7 +2405,7 @@ clEnqueueCopyBufferRect( cl_command_queue command_queue,
                          const size_t* region,
                          size_t src_row_pitch,
                          size_t src_slice_pitch,
-                         size_t dst_row_pitch, 
+                         size_t dst_row_pitch,
                          size_t dst_slice_pitch,
                          cl_uint num_events_in_wait_list,
                          const cl_event* event_wait_list,
@@ -2693,7 +2693,7 @@ clEnqueueMapImage( cl_command_queue command_queue,
                    cl_int* errcode_ret )
 {
   call_with( command_queue, image, blocking_map, map_flags, origin, region,
-             image_row_pitch, image_slice_pitch, num_events_in_wait_list, 
+             image_row_pitch, image_slice_pitch, num_events_in_wait_list,
              event_wait_list, event, errcode_ret );
   if(event && _event)
     {
@@ -2735,7 +2735,7 @@ Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event)
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clEnqueueMigrateMemObjects::
 clEnqueueMigrateMemObjects( cl_command_queue command_queue,
-                            cl_uint num_mem_objects, 
+                            cl_uint num_mem_objects,
                             const cl_mem* mem_objects,
                             cl_mem_migration_flags flags,
                             cl_uint num_events_in_wait_list,

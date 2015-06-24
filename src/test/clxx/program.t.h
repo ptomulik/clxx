@@ -727,7 +727,7 @@ public:
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), nullptr);
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 0ul);
-    TS_ASSERT(std::get<5>(mock3.calls().back()) != nullptr);
+    TS_ASSERT(std::get<5>(mock3.calls().back()) == nullptr);
     TS_ASSERT(std::get<6>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), nullptr);
     TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), nullptr);
@@ -758,7 +758,7 @@ public:
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), nullptr);
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 0ul);
-    TS_ASSERT(std::get<5>(mock3.calls().back()) != nullptr);
+    TS_ASSERT(std::get<5>(mock3.calls().back()) == nullptr);
     TS_ASSERT(std::get<6>(mock3.calls().back()) != nullptr);
     TS_ASSERT(std::get<7>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), (void*)&po);
@@ -786,7 +786,7 @@ public:
     TS_ASSERT(std::get<2>(mock3.calls().back()) != nullptr);
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 0ul);
-    TS_ASSERT(std::get<5>(mock3.calls().back()) != nullptr);
+    TS_ASSERT(std::get<5>(mock3.calls().back()) == nullptr);
     TS_ASSERT(std::get<6>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), nullptr);
     TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), nullptr);
@@ -818,7 +818,7 @@ public:
     TS_ASSERT(std::get<2>(mock3.calls().back()) != nullptr);
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 0ul);
-    TS_ASSERT(std::get<5>(mock3.calls().back()) != nullptr);
+    TS_ASSERT(std::get<5>(mock3.calls().back()) == nullptr);
     TS_ASSERT(std::get<6>(mock3.calls().back()) != nullptr);
     TS_ASSERT(std::get<7>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), (void*)&po);

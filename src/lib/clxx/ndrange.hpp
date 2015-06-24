@@ -131,7 +131,7 @@ struct ndrange
    *
    * \throw invalid_argument_error
    *    if \p dimension is greater than CLXX_MAX_NDRANGE_DIMENSIONS,
-   * \throw length_error 
+   * \throw length_error
    *    if any of \p global_offset, \p global_size or \p local_size
    *    has non-zero size which is not equal to \p dimension.
    */ // }}}
@@ -184,7 +184,7 @@ struct ndrange
    *
    * \throw invalid_argument_error
    *    if \p dimension is greater than CLXX_MAX_NDRANGE_DIMENSIONS,
-   * \throw length_error 
+   * \throw length_error
    *    if any of \p global_offset, \p global_size or \p local_size
    *    has non-zero size which is not equal to \p dimension.
    */ // }}}

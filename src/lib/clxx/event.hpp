@@ -274,7 +274,7 @@ public:
    *
    * \throw uninitialized_event_error
    *    If this object is not initialized (see #is_initialized())
-   * 
+   *
    * Also throws exceptions originating from #get_event_info()
    */ // }}}
   command_queue get_command_queue() const;
@@ -285,7 +285,7 @@ public:
    *
    * \throw uninitialized_event_error
    *    If this object is not initialized (see #is_initialized())
-   * 
+   *
    * Also throws exceptions originating from #get_event_info()
    */ // }}}
   context get_context() const;
@@ -296,7 +296,7 @@ public:
    *
    * \throw uninitialized_event_error
    *    If this object is not initialized (see #is_initialized())
-   * 
+   *
    * Also throws exceptions originating from #get_event_info()
    */ // }}}
   command_type_t get_command_type() const;
@@ -307,7 +307,7 @@ public:
    *
    * \throw uninitialized_event_error
    *    If this object is not initialized (see #is_initialized())
-   * 
+   *
    * Also throws exceptions originating from #get_event_info()
    */ // }}}
   command_exec_status_t get_command_exec_status() const;

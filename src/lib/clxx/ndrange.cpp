@@ -15,7 +15,7 @@ ndrange(size_t dimension,
                    const size_t* global_offset,
                    const size_t* global_size,
                    const size_t* local_size)
-{ 
+{
   setup(dimension, global_offset, global_size, local_size);
 }
 ndrange::
@@ -31,7 +31,7 @@ setup(size_t dimension,
       const size_t* global_offset,
       const size_t* global_size,
       const size_t* local_size)
-{ 
+{
   set_dimension(dimension);
 
   if(global_offset)

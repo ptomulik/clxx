@@ -9,6 +9,7 @@
 #include <clxx/context.hpp>
 #include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>
+#include <clxx/util/obj2cl.hpp>
 #include <boost/shared_array.hpp>
 #include <algorithm>
 
@@ -24,31 +25,6 @@ _lengths(X const& x)
   std::transform(x.begin(), x.end(), a.get(), op);
   return a;
 }
-/* ------------------------------------------------------------------------ */
-template<typename T, class X>
-static boost::shared_array<T>
-_identifiers_impl(X const& x)
-{
-  typedef boost::shared_array<T> array;
-  array a(new T[x.size()]);
-  auto op =  [](typename X::const_reference d) -> T { return d.id(); };
-  std::transform(x.begin(), x.end(), a.get(), op);
-  return a;
-}
-/* ------------------------------------------------------------------------ */
-static boost::shared_array<cl_device_id>
-_identifiers(devices const& x)
-{
-  return _identifiers_impl<cl_device_id, devices>(x);
-}
-#if CLXX_OPENCL_ALLOWED(clCompileProgram)
-/* ------------------------------------------------------------------------ */
-static boost::shared_array<cl_program>
-_identifiers(programs const& x)
-{
-  return _identifiers_impl<cl_program, programs>(x);
-}
-#endif
 /* ------------------------------------------------------------------------ */
 template<typename Ptr, typename Ref, class X>
 static boost::shared_array<Ptr>
@@ -207,7 +183,7 @@ program(context const& ctx, devices const& device_list,
   cl_program id = create_program_with_binary(
       ctx.get_valid_id(),
       device_list.size(),
-      _identifiers(device_list).get(),
+      obj2cl(device_list),
       _lengths(binaries).get(),
       _pointers(binaries).get(),
       (cl_int*)binary_status.data()
@@ -228,7 +204,7 @@ program(context const& ctx, devices const& device_list,
   cl_program id = create_program_with_binary(
       ctx.get_valid_id(),
       device_list.size(),
-      _identifiers(device_list).get(),
+      obj2cl(device_list),
       _lengths(binaries).get(),
       _pointers(binaries).get(),
       NULL
@@ -247,7 +223,7 @@ program(context const& ctx, devices const& device_list,
   cl_program id = create_program_with_built_in_kernels(
       ctx.get_valid_id(),
       device_list.size(),
-      _identifiers(device_list).get(),
+      obj2cl(device_list),
       kernel_names.data()
   );
   // create_program_with_built_in_kernels() performs implicit retain, so we
@@ -420,7 +396,7 @@ build_program(program const& prog, devices const& devs,
   build_program(
       prog.get_valid_id(),
       devs.size(),
-      _identifiers(devs).get(),
+      obj2cl(devs),
       options.data(),
       NULL,
       NULL
@@ -448,7 +424,7 @@ build_program(program const& prog, devices const& devs, std::string const& optio
   build_program(
       prog.get_valid_id(),
       devs.size(),
-      _identifiers(devs).get(),
+      obj2cl(devs),
       options.data(),
       observer.fcn_ptr(),
       observer.fcn_arg()
@@ -470,7 +446,7 @@ compile_program(program const& prog, std::string const& options,
       NULL,
       options.data(),
       input_headers.size(),
-      _identifiers(input_headers).get(),
+      obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       NULL,
       NULL
@@ -492,7 +468,7 @@ compile_program(program const& prog, std::string const& options,
       NULL,
       options.data(),
       input_headers.size(),
-      _identifiers(input_headers).get(),
+      obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       observer.fcn_ptr(),
       observer.fcn_arg()
@@ -510,10 +486,10 @@ compile_program(program const& prog, devices const& devs,
   compile_program(
       prog.get_valid_id(),
       devs.size(),
-      _identifiers(devs).get(),
+      obj2cl(devs),
       options.data(),
       input_headers.size(),
-      _identifiers(input_headers).get(),
+      obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       NULL,
       NULL
@@ -532,10 +508,10 @@ compile_program(program const& prog, devices const& devs,
   compile_program(
       prog.get_valid_id(),
       devs.size(),
-      _identifiers(devs).get(),
+      obj2cl(devs),
       options.data(),
       input_headers.size(),
-      _identifiers(input_headers).get(),
+      obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       observer.fcn_ptr(),
       observer.fcn_arg()
@@ -553,10 +529,10 @@ link_program(context const& ctx, devices const& device_list,
     link_program(
       ctx.get_valid_id(),
       device_list.size(),
-      _identifiers(device_list).get(),
+      obj2cl(device_list),
       options.data(),
       input_programs.size(),
-      _identifiers(input_programs).get(),
+      obj2cl(input_programs),
       nullptr,
       nullptr
     )
@@ -572,10 +548,10 @@ link_program(context const& ctx, devices const& device_list,
     link_program(
       ctx.get_valid_id(),
       device_list.size(),
-      _identifiers(device_list).get(),
+      obj2cl(device_list),
       options.data(),
       input_programs.size(),
-      _identifiers(input_programs).get(),
+      obj2cl(input_programs),
       observer.fcn_ptr(),
       observer.fcn_arg()
     )

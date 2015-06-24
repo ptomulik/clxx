@@ -2472,7 +2472,7 @@ set_kernel_exec_info(cl_kernel kernel,
  *    events specified in \em event_wait_list act as synchronization points.
  *    The context associated with events in \em event_wait_list and
  *    \em %command_queue must be the same. The memory associated with
- *    \em event_wait_list can be reused or freed after the function returns. 
+ *    \em event_wait_list can be reused or freed after the function returns.
  * \param event
  *    Returns an event object that identifies this particular kernel execution
  *    instance. Event objects are unique and can be used to identify a
@@ -2557,7 +2557,7 @@ enqueue_ndrange_kernel(cl_command_queue command_queue,
  *    A valid host command-queue. A native user function can only be executed
  *    on a command-queue created on a device that has \c CL_EXEC_NATIVE_KERNEL
  *    capability set in \c CL_DEVICE_EXECUTION_CAPABILITIES as specified in the
- *    table of OpenCL Device Queries for \c clGetDeviceInfo. 
+ *    table of OpenCL Device Queries for \c clGetDeviceInfo.
  * \param user_func
  *    A pointer to a host-callable user function.
  * \param args
@@ -2574,9 +2574,9 @@ enqueue_ndrange_kernel(cl_command_queue command_queue,
  *    A pointer to appropriate locations that \em args points to where memory
  *    object handles (\c cl_mem values) are stored. Before the user function is
  *    executed, the memory object handles are replaced by pointers to global
- *    memory. 
+ *    memory.
  * \param num_events_in_wait_list
- *    Number of events in \em event_wait_list 
+ *    Number of events in \em event_wait_list
  * \param event_wait_list
  *    Specify events that need to complete before this particular command can
  *    be executed. If \em event_wait_list is \c NULL, then this particular
@@ -2596,7 +2596,7 @@ enqueue_ndrange_kernel(cl_command_queue command_queue,
  *    will not be possible for the application to query or queue a wait for
  *    this particular kernel execution instance. If the \em event_wait_list and
  *    the event arguments are not \c NULL, the event argument should not refer
- *    to an element of the \em event_wait_list array. 
+ *    to an element of the \em event_wait_list array.
  *
  * \throw clerror_no<status_t::invalid_command_queue>
  *    When \c clEnqueueNativeKernel returns CL_INVALID_COMMAND_QUEUE
@@ -2639,7 +2639,7 @@ enqueue_native_kernel(cl_command_queue command_queue,
                       cl_event* event);
 #if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
 /** // doc: create_user_event() {{{
- * \brief Creates an OpenCL user event object 
+ * \brief Creates an OpenCL user event object
  *
  * This function is a wrapper around \c clCreateUserEvent(). The call to this
  * function has same effect as
@@ -2686,8 +2686,8 @@ create_user_event(cl_context context);
  * returning OpenCL error codes.
  *
  * \param event
- *    A user event object created using #create_user_event. 
- * \param execution_status 
+ *    A user event object created using #create_user_event.
+ * \param execution_status
  *    Specifies the new execution status to be set and can be \c CL_COMPLETE or
  *    a negative integer value to indicate an error. A negative integer value
  *    causes all enqueued commands that wait on this user event to be

@@ -287,7 +287,7 @@ CXXTEST_MOCK_GLOBAL(void*, clEnqueueMapImage,
     cl_uint num_events_in_wait_list, const cl_event* event_wait_list,
     cl_event* event, cl_int* errcode_ret ),
   ( command_queue, image, blocking_map, map_flags, origin, region,
-    image_row_pitch, image_slice_pitch, num_events_in_wait_list, 
+    image_row_pitch, image_slice_pitch, num_events_in_wait_list,
     event_wait_list, event, errcode_ret )
 );
 
