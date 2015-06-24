@@ -562,7 +562,7 @@ public:
    *
    * Also throws exceptions originating from #get_kernel_work_group_info()
    */ // }}}
-  size_t get_work_group_size(device const& dev = device((cl_device_id)NULL)) const;
+  size_t get_work_group_size(device const& dev = device()) const;
   /** // doc: get_compile_work_group_size() {{{
    * \brief Returns reqd_work_group_size
    *
@@ -586,7 +586,7 @@ public:
    *
    * Also throws exceptions originating from #get_kernel_work_group_info()
    */ // }}}
-  void get_compile_work_group_size(size_t* result, device const& dev = device((cl_device_id)NULL)) const;
+  void get_compile_work_group_size(size_t* result, device const& dev = device()) const;
   /** // doc: get_local_mem_size() {{{
    * \brief Returns the amount of local memory being used by kernel
    *
@@ -615,7 +615,7 @@ public:
    *
    * Also throws exceptions originating from #get_kernel_work_group_info()
    */ // }}}
-  cl_ulong get_local_mem_size(device const& dev = device((cl_device_id)NULL)) const;
+  cl_ulong get_local_mem_size(device const& dev = device()) const;
 #if CL_VERSION_1_1
   /** // doc: get_preferred_work_group_size_multiple() {{{
    * \brief Returns the preferred multiple of workgroup size for launch
@@ -641,7 +641,7 @@ public:
    *
    * Also throws exceptions originating from #get_kernel_work_group_info()
    */ // }}}
-  size_t get_preferred_work_group_size_multiple(device const& dev = device((cl_device_id)NULL)) const;
+  size_t get_preferred_work_group_size_multiple(device const& dev = device()) const;
   /** // doc: get_private_mem_size() {{{
    * \brief Returns the minimum amount of private memory used by workitems
    *
@@ -665,7 +665,7 @@ public:
    *
    * Also throws exceptions originating from #get_kernel_work_group_info()
    */ // }}}
-  cl_ulong get_private_mem_size(device const& dev = device((cl_device_id)NULL)) const;
+  cl_ulong get_private_mem_size(device const& dev = device()) const;
 #endif
 #if CL_VERSION_1_2
   /** // doc: get_global_work_size() {{{
@@ -695,7 +695,7 @@ public:
    *
    * Also throws exceptions originating from #get_kernel_work_group_info()
    */ // }}}
-  void get_global_work_size(size_t* result, device const& dev = device((cl_device_id)NULL)) const;
+  void get_global_work_size(size_t* result, device const& dev = device()) const;
 #endif
   /** // doc: set_arg() {{{
    * \brief Used to set the argument value to a specific argument of the kernel
