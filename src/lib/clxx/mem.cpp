@@ -149,7 +149,7 @@ get_offset() const
   return _get_pod_info<size_t>(*this, mem_info_t::offset);
 }
 /* ----------------------------------------------------------------------- */
-#if CL_VERSION_2_0
+#if CLXX_CL_H_VERSION_2_0
 cl_bool mem::
 get_uses_svm_pointer() const
 {

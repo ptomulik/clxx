@@ -588,14 +588,14 @@ public:
    * \return ID of the platform associated with this device.
    */ // }}}
   cl_platform_id get_platform_id() const;
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
   /** // {{{
    * \brief Get \c CL_DEVICE_PLATFORM information.
    * \return ID of the platform associated with this device.
    */ // }}}
   device_fp_config_t get_double_fp_config() const;
 #endif
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
   /** // {{{
    * \brief Get \c CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF information.
    * \return Preferred native vector width size for built-in \c half scalar
@@ -663,7 +663,7 @@ public:
    */ // }}}
   std::string get_opencl_c_version() const;
 #endif
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
   /** // {{{
    * \brief Get \c CL_DEVICE_LINKER_AVAILABLE information.
    * \return \c CL_FALSE if the implementation does not have a linker available.

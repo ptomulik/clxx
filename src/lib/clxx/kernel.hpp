@@ -348,7 +348,7 @@ public:
    * Also throws exceptions originating from #get_kernel_info()
    */ // }}}
   program get_program() const;
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
   /** // doc: get_attributes()  {{{
    * \brief Returns any attributes specified with the kernel function declaration
    *
@@ -616,7 +616,7 @@ public:
    * Also throws exceptions originating from #get_kernel_work_group_info()
    */ // }}}
   cl_ulong get_local_mem_size(device const& dev = device()) const;
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
   /** // doc: get_preferred_work_group_size_multiple() {{{
    * \brief Returns the preferred multiple of workgroup size for launch
    *
@@ -667,7 +667,7 @@ public:
    */ // }}}
   cl_ulong get_private_mem_size(device const& dev = device()) const;
 #endif
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
   /** // doc: get_global_work_size() {{{
    * \brief Query the maximum global size that can be used to execute a kernel
    *

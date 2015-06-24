@@ -38,13 +38,13 @@ static void _throw_clerror_no(status_t s)
         throw clerror_no<status_t::build_program_failure>();
       case status_t::map_failure:
         throw clerror_no<status_t::map_failure>();
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
       case status_t::misaligned_sub_buffer_offset:
         throw clerror_no<status_t::misaligned_sub_buffer_offset>();
       case status_t::exec_status_error_for_events_in_wait_list:
         throw clerror_no<status_t::exec_status_error_for_events_in_wait_list>();
 #endif
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
       case status_t::compile_program_failure:
         throw clerror_no<status_t::compile_program_failure>();
       case status_t::linker_not_available:
@@ -124,11 +124,11 @@ static void _throw_clerror_no(status_t s)
         throw clerror_no<status_t::invalid_mip_level>();
       case status_t::invalid_global_work_size:
         throw clerror_no<status_t::invalid_global_work_size>();
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
       case status_t::invalid_property:
         throw clerror_no<status_t::invalid_property>();
 #endif
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
       case status_t::invalid_image_descriptor:
         throw clerror_no<status_t::invalid_image_descriptor>();
       case status_t::invalid_compiler_options:
@@ -138,7 +138,7 @@ static void _throw_clerror_no(status_t s)
       case status_t::invalid_device_partition_count:
         throw clerror_no<status_t::invalid_device_partition_count>();
 #endif
-#if CL_VERSION_2_0
+#if CLXX_CL_H_VERSION_2_0
       case status_t::invalid_pipe_size:
         throw clerror_no<status_t::invalid_pipe_size>();
       case status_t::invalid_device_queue:

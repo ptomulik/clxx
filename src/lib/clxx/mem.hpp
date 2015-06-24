@@ -297,7 +297,7 @@ public:
    * \todo Write documentation
    */ // }}}
   context get_context() const;
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
   /** // doc: get_associated_memobject() {{{
    * \todo Write documentation
    */ // }}}
@@ -307,7 +307,7 @@ public:
    */ // }}}
   size_t get_offset() const;
 #endif
-#if CL_VERSION_2_0
+#if CLXX_CL_H_VERSION_2_0
   /** // doc: get_uses_svm_pointer() {{{
    * \todo Write documentation
    */ // }}}
