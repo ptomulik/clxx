@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/context_fwd.hpp.hpp
+// clxx/context_fwd.hpp
 
-/** // doc: clxx/context_fwd.hpp.hpp {{{
- * \file clxx/context_fwd.hpp.hpp
+/** // doc: clxx/context_fwd.hpp {{{
+ * \file clxx/context_fwd.hpp
  * \brief Forward declaration of the \ref clxx::context "context" class
  */ // }}}
 #ifndef CLXX_CONTEXT_FWD_HPP_INCLUDED

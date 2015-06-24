@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/program_fwd.hpp.hpp
+// clxx/program_fwd.hpp
 
-/** // doc: clxx/program_fwd.hpp.hpp {{{
- * \file clxx/program_fwd.hpp.hpp
+/** // doc: clxx/program_fwd.hpp {{{
+ * \file clxx/program_fwd.hpp
  * \brief Forward declaration of the \ref clxx::program "program" class
  */ // }}}
 #ifndef CLXX_PROGRAM_FWD_HPP_INCLUDED

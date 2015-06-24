@@ -17,13 +17,15 @@
 #include <clxx/io/types.hpp>
 #include <iostream>
 
-#define ARRAY_ELEMENTS 16
+/// Size of array
+#define ARRAY_SIZE 16
+/// Main function
 int main() 
 {
   clxx::platforms platforms(clxx::get_platforms());
   clxx::context   context(clxx::make_context_properties(platforms[0]),
                           clxx::device_type_t::all);
-  float           array[ARRAY_ELEMENTS];
+  float           array[ARRAY_SIZE];
   clxx::mem       buffer(context, clxx::mem_flags_t::read_write, sizeof(array), array);
 
   std::cout << "buffer.get_type():            " << buffer.get_type() << std::endl;

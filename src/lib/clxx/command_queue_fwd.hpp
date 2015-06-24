@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/command_queue_fwd.hpp.hpp
+// clxx/command_queue_fwd.hpp
 
-/** // doc: clxx/command_queue_fwd.hpp.hpp {{{
- * \file clxx/command_queue_fwd.hpp.hpp
+/** // doc: clxx/command_queue_fwd.hpp {{{
+ * \file clxx/command_queue_fwd.hpp
  * \brief Forward declaration of the \ref clxx::command_queue "command_queue" class
  */ // }}}
 #ifndef CLXX_COMMAND_QUEUE_FWD_HPP_INCLUDED

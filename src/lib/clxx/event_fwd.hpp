@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/event_fwd.hpp.hpp
+// clxx/event_fwd.hpp
 
-/** // doc: clxx/event_fwd.hpp.hpp {{{
- * \file clxx/event_fwd.hpp.hpp
+/** // doc: clxx/event_fwd.hpp {{{
+ * \file clxx/event_fwd.hpp
  * \brief Forward declaration of the \ref clxx::event "event" class
  */ // }}}
 #ifndef CLXX_EVENT_FWD_HPP_INCLUDED

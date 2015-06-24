@@ -1,12 +1,11 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/obj2cl.hpp
+// clxx/util/obj2cl.hpp
 
-/** // doc: clxx/obj2cl.hpp {{{
- * \file clxx/obj2cl.hpp
- * \brief Internal utilities used to convert several clxx objects to
- *        corresponding OpenCL objects
+/** // doc: clxx/util/obj2cl.hpp {{{
+ * \file clxx/util/obj2cl.hpp
+ * \brief Convert clxx objects to corresponding OpenCL objects
  */ // }}}
 #ifndef CLXX_OBJ2CL_HPP_INCLUDED
 #define CLXX_OBJ2CL_HPP_INCLUDED

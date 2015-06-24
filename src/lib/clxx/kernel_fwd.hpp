@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/kernel_fwd.hpp.hpp
+// clxx/kernel_fwd.hpp
 
-/** // doc: clxx/kernel_fwd.hpp.hpp {{{
- * \file clxx/kernel_fwd.hpp.hpp
+/** // doc: clxx/kernel_fwd.hpp {{{
+ * \file clxx/kernel_fwd.hpp
  * \brief Forward declaration of the \ref clxx::kernel "kernel" class
  */ // }}}
 #ifndef CLXX_KERNEL_FWD_HPP_INCLUDED

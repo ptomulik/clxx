@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/platform_fwd.hpp.hpp
+// clxx/platform_fwd.hpp
 
-/** // doc: clxx/platform_fwd.hpp.hpp {{{
- * \file clxx/platform_fwd.hpp.hpp
+/** // doc: clxx/platform_fwd.hpp {{{
+ * \file clxx/platform_fwd.hpp
  * \brief Forward declaration of the \ref clxx::platform "platform" class
  */ // }}}
 #ifndef CLXX_PLATFORM_FWD_HPP_INCLUDED

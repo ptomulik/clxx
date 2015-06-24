@@ -602,7 +602,6 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
-   * \param data Data to be copied (one byte) to \em ptr when invoking the mock
    * \param event An event to be returned
    */ // }}}
   Dummy_clEnqueueReadBuffer(cl_int err, const cl_event* event = nullptr);
@@ -815,6 +814,7 @@ public:
   /** // doc: Dummy_clEnqueueMapBuffer() {{{
    * \brief Constructor, initializes the mock object.
    *
+   * \param result A value to be returned by the mock
    * \param err Error code to be returned by the mock
    * \param event An event to be returned
    */ // }}}
@@ -868,7 +868,7 @@ public:
    *
    * \param err Error code to be returned by the mock
    * \param image_formats To be returned as image_formats list
-   * \param image_formats_num Pointer to unsigned integer with the size of \image_formats list
+   * \param num_image_formats Pointer to unsigned integer with the size of \p image_formats list
    */ // }}}
   Dummy_clGetSupportedImageFormats(cl_int err,
                                    const cl_image_format* image_formats = nullptr,
@@ -1078,6 +1078,7 @@ public:
   /** // doc: Dummy_clEnqueueMapImage() {{{
    * \brief Constructor, initializes the mock object.
    *
+   * \param result A value to be returned by the mock
    * \param err Error code to be returned by the mock
    * \param event An event to be returned
    */ // }}}

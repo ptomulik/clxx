@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/mem_fwd.hpp.hpp
+// clxx/mem_fwd.hpp
 
-/** // doc: clxx/mem_fwd.hpp.hpp {{{
- * \file clxx/mem_fwd.hpp.hpp
+/** // doc: clxx/mem_fwd.hpp {{{
+ * \file clxx/mem_fwd.hpp
  * \brief Forward declaration of the \ref clxx::mem "mem" class
  */ // }}}
 #ifndef CLXX_MEM_FWD_HPP_INCLUDED
