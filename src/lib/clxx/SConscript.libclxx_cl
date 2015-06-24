@@ -57,6 +57,10 @@ headers = [
     'program_sources.hpp',
 ]
 
+headers += [
+    'clxx.hpp'
+]
+
 env['CLXX_PACKAGES']['libclxx_cl'] = {
     'version' : env.subst('$CLXX_VERSION'),
     'libdeps' : CLVar('OpenCL clxx_info')
