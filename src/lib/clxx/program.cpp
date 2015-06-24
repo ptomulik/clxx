@@ -6,6 +6,7 @@
  * \brief Implements the \ref clxx::program "program" class and related functions
  */ // }}}
 #include <clxx/program.hpp>
+#include <clxx/context.hpp>
 #include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>
 #include <boost/shared_array.hpp>

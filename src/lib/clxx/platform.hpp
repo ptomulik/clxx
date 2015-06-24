@@ -14,6 +14,7 @@
 #ifndef CLXX_PLATFORM_HPP_INCLUDED
 #define CLXX_PLATFORM_HPP_INCLUDED
 
+#include <clxx/platform_fwd.hpp>
 #include <clxx/types.hpp>
 #include <string>
 

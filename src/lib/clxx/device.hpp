@@ -13,6 +13,7 @@
 #ifndef CLXX_DEVICE_HPP_INCLUDED
 #define CLXX_DEVICE_HPP_INCLUDED
 
+#include <clxx/device_fwd.hpp>
 #include <clxx/types.hpp>
 #include <vector>
 #include <string>

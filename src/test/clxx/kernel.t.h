@@ -12,6 +12,9 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/kernel.hpp>
+#include <clxx/device.hpp>
+#include <clxx/context.hpp>
+#include <clxx/program.hpp>
 #include <clxx/exceptions.hpp>
 #include <clxx/cl/mock.hpp>
 

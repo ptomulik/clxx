@@ -10,6 +10,7 @@
 #ifndef CLXX_CONTEXT_HPP_INCLUDED
 #define CLXX_CONTEXT_HPP_INCLUDED
 
+#include <clxx/context_fwd.hpp>
 #include <clxx/context_properties.hpp>
 #include <clxx/devices.hpp>
 #include <clxx/types.hpp>

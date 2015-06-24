@@ -6,6 +6,9 @@
  * \brief Implements the \ref clxx::kernel "kernel" class
  */ // }}}
 #include <clxx/kernel.hpp>
+#include <clxx/program.hpp>
+#include <clxx/context.hpp>
+#include <clxx/device.hpp>
 #include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>
 #include <boost/shared_array.hpp>

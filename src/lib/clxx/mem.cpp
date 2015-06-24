@@ -6,6 +6,7 @@
  * \todo Write documentation
  */ // }}}
 #include <clxx/mem.hpp>
+#include <clxx/context.hpp>
 #include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>
 

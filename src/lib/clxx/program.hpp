@@ -10,12 +10,13 @@
 #ifndef CLXX_PROGRAM_HPP_INCLUDED
 #define CLXX_PROGRAM_HPP_INCLUDED
 
-#include <clxx/types.hpp>
+#include <clxx/program_fwd.hpp>
 #include <clxx/devices.hpp>
-#include <clxx/context.hpp>
+#include <clxx/context_fwd.hpp>
 #include <clxx/program_sources.hpp>
 #include <clxx/program_binaries.hpp>
 #include <clxx/program_observer.hpp>
+#include <clxx/types.hpp>
 #include <vector>
 #include <string>
 

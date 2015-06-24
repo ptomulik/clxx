@@ -10,9 +10,10 @@
 #ifndef CLXX_MEM_HPP_INCLUDED
 #define CLXX_MEM_HPP_INCLUDED
 
-#include <clxx/cl/cl.h>
-#include <clxx/context.hpp>
+#include <clxx/mem_fwd.hpp>
+#include <clxx/context_fwd.hpp>
 #include <clxx/types.hpp>
+#include <clxx/cl/cl.h>
 
 namespace clxx {
 /** // doc: mem {{{

@@ -13,6 +13,7 @@
 // [Program]
 #include <clxx/platforms.hpp>
 #include <clxx/mem.hpp>
+#include <clxx/context.hpp>
 #include <clxx/io/types.hpp>
 #include <iostream>
 

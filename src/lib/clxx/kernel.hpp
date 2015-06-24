@@ -10,10 +10,11 @@
 #ifndef CLXX_KERNEL_HPP_INCLUDED
 #define CLXX_KERNEL_HPP_INCLUDED
 
-#include <clxx/types.hpp>
-#include <clxx/program.hpp>
-#include <clxx/context.hpp>
+#include <clxx/kernel_fwd.hpp>
+#include <clxx/program_fwd.hpp>
+#include <clxx/context_fwd.hpp>
 #include <clxx/device.hpp>
+#include <clxx/types.hpp>
 #include <clxx/config.hpp>
 #include <string>
 

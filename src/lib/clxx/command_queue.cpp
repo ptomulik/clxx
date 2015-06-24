@@ -6,6 +6,8 @@
  * \brief Implements the \ref clxx::command_queue "command_queue" class
  */ // }}}
 #include <clxx/command_queue.hpp>
+#include <clxx/context.hpp>
+#include <clxx/device.hpp>
 #include <clxx/functions.hpp>
 #include <clxx/exceptions.hpp>
 #include <vector>

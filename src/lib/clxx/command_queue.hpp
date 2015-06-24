@@ -10,8 +10,9 @@
 #ifndef CLXX_COMMAND_QUEUE_HPP_INCLUDED
 #define CLXX_COMMAND_QUEUE_HPP_INCLUDED
 
-#include <clxx/context.hpp>
-#include <clxx/device.hpp>
+#include <clxx/command_queue_fwd.hpp>
+#include <clxx/context_fwd.hpp>
+#include <clxx/device_fwd.hpp>
 #include <clxx/types.hpp>
 
 namespace clxx {

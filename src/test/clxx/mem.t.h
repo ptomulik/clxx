@@ -12,6 +12,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/mem.hpp>
+#include <clxx/context.hpp>
 #include <clxx/exceptions.hpp>
 #include <clxx/cl/mock.hpp>
 

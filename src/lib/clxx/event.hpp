@@ -10,6 +10,7 @@
 #ifndef CLXX_EVENT_HPP_INCLUDED
 #define CLXX_EVENT_HPP_INCLUDED
 
+#include <clxx/event_fwd.hpp>
 #include <clxx/cl/cl.h>
 #include <clxx/command_queue.hpp>
 #include <clxx/context.hpp>

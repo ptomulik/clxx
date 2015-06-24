@@ -12,6 +12,8 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/command_queue.hpp>
+#include <clxx/context.hpp>
+#include <clxx/device.hpp>
 #include <clxx/exceptions.hpp>
 #include <clxx/cl/mock.hpp>
 
