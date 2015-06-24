@@ -71,7 +71,7 @@ namespace clxx {
  * last object gets assigned another OpenCL program (assignment operator or the
  * #assign() method).
  */ // }}}
-class program
+class alignas(cl_program) program
 {
 private:
   cl_program _id;

@@ -57,7 +57,7 @@ namespace clxx {
  * the last object gets assigned another OpenCL memory object (assignment
  * operator or the #assign() method).
  */ // }}}
-class mem
+class alignas(cl_mem) mem
 {
 private:
   cl_mem _id;

@@ -58,7 +58,7 @@ namespace clxx {
  * last object gets assigned another OpenCL event (assignment operator or the
  * #assign() method).
  */ // }}}
-class event
+class alignas(cl_event) event
 {
 private:
   cl_event _id;

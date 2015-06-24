@@ -53,7 +53,7 @@ namespace clxx {
  * gets deleted (the ~context() destructor decreases reference count for its
  * \c cl_context handle with \ref release_context()).
  */ // }}}
-class context
+class alignas(cl_context) context
 {
 private:
   cl_context  _id;

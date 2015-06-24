@@ -125,7 +125,7 @@ namespace clxx {
  * | get_image_pitch_alignment()             | CL_DEVICE_IMAGE_PITCH_ALIGNMENT         |         |         |  \check |
  * | get_image_base_address_alignment()      | CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT  |         |         |  \check |
  */ // }}}
-class device
+class alignas(cl_device_id) device
 {
 private:
   cl_device_id _device_id;

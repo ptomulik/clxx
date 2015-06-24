@@ -42,7 +42,7 @@ namespace clxx {
  * \snippet platform1.cpp DumpPlatform
  *
  */ // }}}
-class platform
+class alignas(cl_platform_id) platform
 {
 private:
   cl_platform_id _platform_id;

@@ -66,7 +66,7 @@ namespace clxx {
  * object gets assigned another OpenCL kernel (via assignment operator or the
  * #assign() method).
  */ // }}}
-class kernel
+class alignas(cl_kernel) kernel
 {
 private:
   cl_kernel _id;

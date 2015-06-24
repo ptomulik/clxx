@@ -52,7 +52,7 @@ namespace clxx {
  * gets deleted (the ~command_queue() destructor decreases reference count for its
  * \c cl_command_queue handle with \ref release_command_queue()).
  */ // }}}
-class command_queue
+class alignas(cl_command_queue) command_queue
 {
 private:
   cl_command_queue  _id;
