@@ -37,7 +37,7 @@ _set_id(cl_event p, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 event::
-event()
+event() noexcept
   : _id((cl_event)NULL)
 {
 }

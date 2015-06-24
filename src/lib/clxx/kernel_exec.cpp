@@ -7,17 +7,20 @@
  */ // }}}
 #include <clxx/kernel_exec.hpp>
 #include <clxx/functions.hpp>
+#include <clxx/command_queue.hpp>
+#include <clxx/kernel.hpp>
 #include <clxx/util/obj2cl.hpp>
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */
-event
+void
 enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
                        clxx::kernel const& kernel,
                        clxx::ndrange const& ndrange,
-                       clxx::events const& event_wait_list)
+                       clxx::events const& event_wait_list,
+                       clxx::event& event)
 {
-  cl_event id;
+  clxx::event tmp;
   enqueue_ndrange_kernel(command_queue.get_valid_id(),
                          kernel.get_valid_id(),
                          static_cast<cl_uint>(ndrange.dimension()),
@@ -26,16 +29,17 @@ enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
                          ndrange.local_size_ptr(),
                          event_wait_list.size(),
                          obj2cl(event_wait_list),
-                         &id);
-  return event(id);
+                         obj2cl(&tmp));
+  event = tmp; // this maintains reference count appropriately
 }
 /* ------------------------------------------------------------------------ */
-event
+void
 enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
                        clxx::kernel const& kernel,
-                       clxx::ndrange const& ndrange)
+                       clxx::ndrange const& ndrange,
+                       clxx::event& event)
 {
-  cl_event id;
+  clxx::event tmp;
   enqueue_ndrange_kernel(command_queue.get_valid_id(),
                          kernel.get_valid_id(),
                          static_cast<cl_uint>(ndrange.dimension()),
@@ -44,8 +48,41 @@ enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
                          ndrange.local_size_ptr(),
                          0,
                          nullptr,
-                         &id);
-  return event(id);
+                         obj2cl(&tmp));
+  event = tmp; // this maintains reference count appropriately
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
+                       clxx::kernel const& kernel,
+                       clxx::ndrange const& ndrange,
+                       clxx::events const& event_wait_list)
+{
+  enqueue_ndrange_kernel(command_queue.get_valid_id(),
+                         kernel.get_valid_id(),
+                         static_cast<cl_uint>(ndrange.dimension()),
+                         ndrange.global_offset_ptr(),
+                         ndrange.global_size_ptr(),
+                         ndrange.local_size_ptr(),
+                         event_wait_list.size(),
+                         obj2cl(event_wait_list),
+                         nullptr);
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
+                       clxx::kernel const& kernel,
+                       clxx::ndrange const& ndrange)
+{
+  enqueue_ndrange_kernel(command_queue.get_valid_id(),
+                         kernel.get_valid_id(),
+                         static_cast<cl_uint>(ndrange.dimension()),
+                         ndrange.global_offset_ptr(),
+                         ndrange.global_size_ptr(),
+                         ndrange.local_size_ptr(),
+                         0,
+                         nullptr,
+                         nullptr);
 }
 /* ------------------------------------------------------------------------ */
 } // end namespace clxx

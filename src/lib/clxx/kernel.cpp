@@ -81,7 +81,7 @@ _set_id(cl_kernel k, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 kernel::
-kernel()
+kernel() noexcept
   :_id((cl_kernel)NULL)
 {
 }

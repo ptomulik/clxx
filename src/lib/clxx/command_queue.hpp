@@ -85,7 +85,7 @@ public:
    * default-constructed \ref clxx::command_queue "command_queue" object is
    * considered to be uninitialized (see #is_initialized()).
    */ // }}}
-  command_queue();
+  command_queue() noexcept;
   /** // doc: command_queue(cl_command_queue) {{{
    * \brief Constructor
    *
@@ -149,7 +149,7 @@ public:
    *
    * Internally decreases reference count for this command_queue.
    */ // }}}
-  virtual ~command_queue();
+  ~command_queue();
   /** // doc: id() {{{
    * \brief   Get \c cl_command_queue handle held by \c this object.
    *

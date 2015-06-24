@@ -21,7 +21,30 @@ namespace clxx {
 /** // doc: enqueue_read_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void
+enqueue_read_buffer(clxx::command_queue const& command_queue,
+                    clxx::mem const& buffer,
+                    bool blocking_read,
+                    size_t offset,
+                    size_t size,
+                    void* ptr,
+                    clxx::events const& event_wait_list,
+                    clxx::event& event);
+/** // doc: enqueue_read_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_read_buffer(clxx::command_queue const& command_queue,
+                    clxx::mem const& buffer,
+                    bool blocking_read,
+                    size_t offset,
+                    size_t size,
+                    void* ptr,
+                    clxx::event& event);
+/** // doc: enqueue_read_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
 enqueue_read_buffer(clxx::command_queue const& command_queue,
                     clxx::mem const& buffer,
                     bool blocking_read,
@@ -32,7 +55,7 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
 /** // doc: enqueue_read_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void
 enqueue_read_buffer(clxx::command_queue const& command_queue,
                     clxx::mem const& buffer,
                     bool blocking_read,
@@ -42,7 +65,30 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
 /** // doc: enqueue_write_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void
+enqueue_write_buffer(clxx::command_queue const& command_queue,
+                     clxx::mem const& buffer,
+                     bool blocking_write,
+                     size_t offset,
+                     size_t size,
+                     const void* ptr,
+                     clxx::events const& event_wait_list,
+                     clxx::event& event);
+/** // doc: enqueue_write_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_write_buffer(clxx::command_queue const& command_queue,
+                     clxx::mem const& buffer,
+                     bool blocking_write,
+                     size_t offset,
+                     size_t size,
+                     const void* ptr,
+                     clxx::event& event);
+/** // doc: enqueue_write_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
 enqueue_write_buffer(clxx::command_queue const& command_queue,
                      clxx::mem const& buffer,
                      bool blocking_write,
@@ -53,7 +99,7 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
 /** // doc: enqueue_write_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void
 enqueue_write_buffer(clxx::command_queue const& command_queue,
                      clxx::mem const& buffer,
                      bool blocking_write,
@@ -63,7 +109,30 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
 /** // doc: enqueue_copy_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void
+enqueue_copy_buffer(clxx::command_queue const& command_queue,
+                    clxx::mem const& src_buffer,
+                    clxx::mem const& dst_buffer,
+                    size_t src_offset,
+                    size_t dst_offset,
+                    size_t size,
+                    clxx::events const& event_wait_list,
+                    clxx::event& event);
+/** // doc: enqueue_copy_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_copy_buffer(clxx::command_queue const& command_queue,
+                    clxx::mem const& src_buffer,
+                    clxx::mem const& dst_buffer,
+                    size_t src_offset,
+                    size_t dst_offset,
+                    size_t size,
+                    clxx::event& event);
+/** // doc: enqueue_copy_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
 enqueue_copy_buffer(clxx::command_queue const& command_queue,
                     clxx::mem const& src_buffer,
                     clxx::mem const& dst_buffer,
@@ -74,7 +143,7 @@ enqueue_copy_buffer(clxx::command_queue const& command_queue,
 /** // doc: enqueue_copy_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void
 enqueue_copy_buffer(clxx::command_queue const& command_queue,
                     clxx::mem const& src_buffer,
                     clxx::mem const& dst_buffer,
@@ -107,7 +176,45 @@ enqueue_map_buffer(clxx::command_queue const& command_queue,
 /** // doc: enqueue_map_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void*
+enqueue_map_buffer(clxx::command_queue const& command_queue,
+                   clxx::mem const& buffer,
+                   bool blocking_map,
+                   map_flags_t map_flags,
+                   size_t offset,
+                   size_t size,
+                   clxx::events const& event_wait_list);
+/** // doc: enqueue_map_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void*
+enqueue_map_buffer(clxx::command_queue const& command_queue,
+                   clxx::mem const& buffer,
+                   bool blocking_map,
+                   map_flags_t map_flags,
+                   size_t offset,
+                   size_t size);
+/** // doc: enqueue_map_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
+                         clxx::mem const& memobj,
+                         void* mapped_ptr,
+                         clxx::events const& event_wait_list,
+                         clxx::event& event);
+/** // doc: enqueue_map_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
+                         clxx::mem const& memobj,
+                         void* mapped_ptr,
+                         clxx::event& event);
+/** // doc: enqueue_map_buffer() {{{
+ * \todo Write documentation
+ */ // }}}
+void
 enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
                          clxx::mem const& memobj,
                          void* mapped_ptr,
@@ -115,7 +222,7 @@ enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
 /** // doc: enqueue_map_buffer() {{{
  * \todo Write documentation
  */ // }}}
-clxx::event
+void
 enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
                          clxx::mem const& memobj,
                          void* mapped_ptr);

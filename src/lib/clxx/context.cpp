@@ -49,7 +49,7 @@ _set_id(cl_context id, bool retain_new, bool release_old)
 }
 /* ------------------------------------------------------------------------ */
 context::
-context()
+context() noexcept
   : _id((cl_context)NULL)
 {
 }

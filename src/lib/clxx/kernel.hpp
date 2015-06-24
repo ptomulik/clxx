@@ -93,7 +93,7 @@ public:
    * \ref clxx::kernel "kernel" object is considered to be uninitialized (see
    * #is_initialized()).
    */ // }}}
-  kernel();
+  kernel() noexcept;
   /** // doc: kernel(cl_kernel) {{{
    * \brief Creates \ref clxx::kernel "kernel" object from explicitly given
    *        OpenCL \c cl_kernel handle.
@@ -143,7 +143,7 @@ public:
    * If the kernel was initialized properly, then it internally releases the
    * kernel by \ref release_kernel().
    */ // }}}
-  virtual ~kernel();
+  ~kernel();
   /** // doc: id() {{{
    * \brief Get the \c cl_kernel handle held by this object
    *

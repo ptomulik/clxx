@@ -84,7 +84,7 @@ public:
    * \ref clxx::mem "mem" object is considered to be uninitialized (see
    * #is_initialized()).
    */ // }}}
-  mem();
+  mem() noexcept;
   /** // doc: mem(cl_mem) {{{
    * \brief Creates \ref clxx::mem "mem" object from explicitly given
    *        OpenCL \c cl_mem handle.
@@ -124,7 +124,7 @@ public:
    * If the mem was initialized properly, then it internally releases the
    * mem by \ref release_mem_object().
    */ // }}}
-  virtual ~mem();
+  ~mem();
   /** // doc: id() {{{
    * \brief Get the \c cl_mem handle held by this object
    *

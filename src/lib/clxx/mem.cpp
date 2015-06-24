@@ -38,7 +38,7 @@ _set_id(cl_mem p, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 mem::
-mem()
+mem() noexcept
   :_id((cl_mem)NULL)
 {
 }

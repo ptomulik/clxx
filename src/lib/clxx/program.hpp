@@ -98,7 +98,7 @@ public:
    * \ref clxx::program "program" object is considered to be uninitialized (see
    * #is_initialized()).
    */ // }}}
-  program();
+  program() noexcept;
   /** // doc: program(cl_program) {{{
    * \brief Creates \ref clxx::program "program" object from explicitly given
    *        OpenCL \c cl_program handle.
@@ -226,7 +226,7 @@ public:
    * If the program was initialized properly, then it internally releases the
    * program by \ref release_program().
    */ // }}}
-  virtual ~program();
+  ~program();
   /** // doc: id() {{{
    * \brief Get the \c cl_program handle held by this object
    *

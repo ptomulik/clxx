@@ -133,7 +133,7 @@ _set_id(cl_program p, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 program::
-program()
+program() noexcept
   :_id((cl_program)NULL)
 {
 }

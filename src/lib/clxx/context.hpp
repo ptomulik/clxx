@@ -86,7 +86,7 @@ public:
    * \ref clxx::context "context" object is considered to be uninitialized
    * (see #is_initialized()).
    */ // }}}
-  context();
+  context() noexcept;
   /** // doc: context(cl_context) {{{
    * \brief Constructor
    *
@@ -204,7 +204,7 @@ public:
    *
    * Internally decreases reference count for this context.
    */ // }}}
-  virtual ~context();
+  ~context();
   /** // doc: id() {{{
    * \brief   Get \c cl_context handle held by \c this object.
    *

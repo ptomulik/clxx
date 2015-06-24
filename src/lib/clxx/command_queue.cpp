@@ -41,7 +41,7 @@ _set_id(cl_command_queue id, bool retain_new, bool release_old)
 }
 /* ------------------------------------------------------------------------ */
 command_queue::
-command_queue()
+command_queue() noexcept
   : _id((cl_command_queue)NULL)
 {
 }

@@ -85,7 +85,7 @@ public:
    * default-constructed \ref clxx::event "event" object is considered to be
    * uninitialized.
    */ // }}}
-  event();
+  event() noexcept;
   /** // doc: event(cl_event) {{{
    * \brief Creates \ref clxx::event "event" object from explicitly given
    *        OpenCL \c cl_event handle.
@@ -129,7 +129,7 @@ public:
    * If the event was initialized properly, then it internally releases the
    * event by \ref release_event().
    */ // }}}
-  virtual ~event();
+  ~event();
   /** // doc: id() {{{
    * \brief Get the \c cl_event handle held by this object
    *
