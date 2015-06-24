@@ -156,6 +156,12 @@ _set_id(cl_program p, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 program::
+program()
+  :_id((cl_program)NULL)
+{
+}
+/* ----------------------------------------------------------------------- */
+program::
 program(cl_program id)
   :_id((cl_program)NULL) // because it's read by _set_id()
 {

@@ -23,6 +23,19 @@ namespace clxx { class command_queue_test_suite; }
 class clxx::command_queue_test_suite : public CxxTest::TestSuite
 {
 public:
+  /** // doc: test__default_ctor() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__default_ctor( )
+  {
+    T::Dummy_clRetainCommandQueue mock1(CL_SUCCESS);
+    T::Dummy_clReleaseCommandQueue mock2(CL_SUCCESS);
+    command_queue q;
+    TS_ASSERT(!q.is_initialized());
+    TS_ASSERT_EQUALS(q.id(), (cl_command_queue)NULL);
+    TS_ASSERT(mock1.never_called());
+    TS_ASSERT(mock2.never_called());
+  }
   /** // doc: test_ctor_1() {{{
    * \todo Write documentation
    */ // }}}

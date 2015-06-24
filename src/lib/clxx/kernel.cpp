@@ -78,6 +78,12 @@ _set_id(cl_kernel k, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 kernel::
+kernel()
+  :_id((cl_kernel)NULL)
+{
+}
+/* ----------------------------------------------------------------------- */
+kernel::
 kernel(cl_kernel id)
   :_id((cl_kernel)NULL) // because it's read by _set_id()
 {

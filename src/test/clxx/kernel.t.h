@@ -23,6 +23,19 @@ namespace clxx { class kernel_test_suite; }
 class clxx::kernel_test_suite : public CxxTest::TestSuite
 {
 public:
+  /** // doc: test__default_ctor() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__default_ctor( )
+  {
+    T::Dummy_clRetainKernel mock1(CL_SUCCESS);
+    T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
+    kernel k;
+    TS_ASSERT(!k.is_initialized());
+    TS_ASSERT_EQUALS(k.id(), (cl_kernel)NULL);
+    TS_ASSERT(mock1.never_called());
+    TS_ASSERT(mock2.never_called());
+  }
   /** // doc: test__ctor_1() {{{
    * \todo Write documentation
    */ // }}}

@@ -39,7 +39,14 @@ _set_id(cl_command_queue id, bool retain_new, bool release_old)
 }
 /* ------------------------------------------------------------------------ */
 command_queue::
+command_queue()
+  : _id((cl_command_queue)NULL)
+{
+}
+/* ------------------------------------------------------------------------ */
+command_queue::
 command_queue(cl_command_queue id)
+  : _id((cl_command_queue)NULL) // because it's read by _set_id()
 {
   this->_set_id(id, true, false);
 }
@@ -63,6 +70,7 @@ command_queue(context const& ctx, device const& dev, command_queue_properties_t 
 /* ------------------------------------------------------------------------ */
 command_queue::
 command_queue(const command_queue& rhs)
+  : _id((cl_command_queue)NULL) // because it's read by _set_id()
 {
   this->_set_id(rhs.get_valid_id(), true, false);
 }

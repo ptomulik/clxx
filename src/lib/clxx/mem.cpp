@@ -37,6 +37,12 @@ _set_id(cl_mem p, bool retain_new, bool release_old)
 }
 /* ----------------------------------------------------------------------- */
 mem::
+mem()
+  :_id((cl_mem)NULL)
+{
+}
+/* ----------------------------------------------------------------------- */
+mem::
 mem(cl_mem id)
   :_id((cl_mem)NULL) // because it's read by _set_id()
 {

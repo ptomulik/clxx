@@ -70,7 +70,6 @@ class kernel
 {
 private:
   cl_kernel _id;
-  kernel();
 protected:
   /** // doc: _set_id(cl_kernel, bool, bool) {{{
    * \brief Set the \c cl_kernel handle to this object
@@ -86,6 +85,14 @@ protected:
    */ // }}}
   void _set_id(cl_kernel kern, bool retain_new, bool release_old);
 public:
+  /** // doc: kernel() {{{
+   * \brief Default constructor
+   *
+   * Sets the internal \c cl_kernel handle to NULL. A default-constructed
+   * \ref clxx::kernel "kernel" object is considered to be uninitialized (see
+   * #is_initialized()).
+   */ // }}}
+  kernel();
   /** // doc: kernel(cl_kernel) {{{
    * \brief Creates \ref clxx::kernel "kernel" object from explicitly given
    *        OpenCL \c cl_kernel handle.

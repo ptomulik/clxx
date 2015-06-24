@@ -56,7 +56,6 @@ class command_queue
 {
 private:
   cl_command_queue  _id;
-  command_queue();
 protected:
   /** // doc: _sdoc: _set_id() {{{
    * \brief Set new \c cl_command_queue handle to this object
@@ -78,6 +77,14 @@ protected:
    */ // }}}
   void _set_id(cl_command_queue id, bool retain_new, bool release_old);
 public:
+  /** // doc: command_queue() {{{
+   * \brief Default constructor
+   *
+   * Sets the internal \c cl_command_queue handle to \c NULL. The
+   * default-constructed \ref clxx::command_queue "command_queue" object is
+   * considered to be uninitialized (see #is_initialized()).
+   */ // }}}
+  command_queue();
   /** // doc: command_queue(cl_command_queue) {{{
    * \brief Constructor
    *

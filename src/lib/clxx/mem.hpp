@@ -61,7 +61,6 @@ class mem
 {
 private:
   cl_mem _id;
-  mem();
 protected:
   /** // doc: _set_id(cl_mem, bool, bool) {{{
    * \brief Set the \c cl_mem handle to this object
@@ -77,6 +76,14 @@ protected:
    */ // }}}
   void _set_id(cl_mem prog, bool retain_new, bool release_old);
 public:
+  /** // doc: mem() {{{
+   * \brief Default constructor
+   *
+   * Sets the internal \c cl_mem handle to \c NULL. A default-constructed
+   * \ref clxx::mem "mem" object is considered to be uninitialized (see
+   * #is_initialized()).
+   */ // }}}
+  mem();
   /** // doc: mem(cl_mem) {{{
    * \brief Creates \ref clxx::mem "mem" object from explicitly given
    *        OpenCL \c cl_mem handle.

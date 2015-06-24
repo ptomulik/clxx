@@ -57,7 +57,6 @@ class context
 {
 private:
   cl_context  _id;
-  context();
 protected:
   /** // doc: _sdoc: _set_id() {{{
    * \brief Set new \c cl_context handle to this object
@@ -79,6 +78,14 @@ protected:
    */ // }}}
   void _set_id(cl_context id, bool retain_new, bool release_old);
 public:
+  /** // doc: context() {{{
+   * \brief Default constructor
+   *
+   * Sets the internal \c cl_context handle to \c NULL. A default-constructed
+   * \ref clxx::context "context" object is considered to be uninitialized
+   * (see #is_initialized()).
+   */ // }}}
+  context();
   /** // doc: context(cl_context) {{{
    * \brief Constructor
    *

@@ -23,6 +23,19 @@ namespace clxx { class mem_test_suite; }
 class clxx::mem_test_suite : public CxxTest::TestSuite
 {
 public:
+  /** // doc: test__default_ctor() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__default_ctor( )
+  {
+    T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
+    T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
+    mem m;
+    TS_ASSERT(!m.is_initialized());
+    TS_ASSERT_EQUALS(m.id(), (cl_mem)NULL);
+    TS_ASSERT(mock1.never_called());
+    TS_ASSERT(mock2.never_called());
+  }
   /** // doc: test__ctor_1() {{{
    * \todo Write documentation
    */ // }}}
