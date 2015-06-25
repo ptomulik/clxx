@@ -58,7 +58,7 @@ headers = [
 ]
 
 headers += [
-    'clxx.hpp'
+    'cl.hpp'
 ]
 
 env['CLXX_PACKAGES']['libclxx_cl'] = {
