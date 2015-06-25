@@ -46,6 +46,8 @@ tests = [
     'functions/enqueue_unmap_mem_object.t.h',
     'functions/enqueue_write_buffer.t.h',
     'functions/enqueue_write_image.t.h',
+    'functions/finish.t.h',
+    'functions/flush.t.h',
     'functions/get_command_queue_info.t.h',
     'functions/get_context_info.t.h',
     'functions/get_device_ids.t.h',

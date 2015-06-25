@@ -1536,6 +1536,26 @@ release_event(cl_event event)
       _throw_clerror_no(s);
     }
 }
+/* ------------------------------------------------------------------------ */
+void
+flush(cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(T::clFlush(command_queue));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+finish(cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(T::clFinish(command_queue));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
 } // end namespace clxx
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

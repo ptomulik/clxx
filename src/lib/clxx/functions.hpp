@@ -2908,6 +2908,16 @@ retain_event(cl_event event);
  */ // }}}
 void
 release_event(cl_event event);
+/** // doc: flush() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+flush(cl_command_queue command_queue);
+/** // doc: finish() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+finish(cl_command_queue command_queue);
 /** @} */
 } // end namespace clxx
 

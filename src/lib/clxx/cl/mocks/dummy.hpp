@@ -1941,6 +1941,40 @@ public:
    */ // }}}
   Dummy_clReleaseEvent(cl_int err);
 };
+/** // doc: Dummy_clFlush {{{
+ * \brief Default mock for clFlush OpenCL function.
+ */ // }}}
+class Dummy_clFlush
+  : public T::Base_clFlush,
+    public T::Dummy_CallArgs<cl_command_queue>
+{
+  cl_int _err;
+  cl_int clFlush(cl_command_queue);
+public:
+  /** // doc: Dummy_clFlush() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clFlush(cl_int err);
+};
+/** // doc: Dummy_clFinish {{{
+ * \brief Default mock for clFinish OpenCL function.
+ */ // }}}
+class Dummy_clFinish
+  : public T::Base_clFinish,
+    public T::Dummy_CallArgs<cl_command_queue>
+{
+  cl_int _err;
+  cl_int clFinish(cl_command_queue);
+public:
+  /** // doc: Dummy_clFinish() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clFinish(cl_int err);
+};
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -3369,6 +3403,30 @@ clReleaseEvent(cl_event event)
 }
 Dummy_clReleaseEvent::
 Dummy_clReleaseEvent(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clFlush::
+clFlush(cl_command_queue command_queue)
+{
+  call_with(command_queue);
+  return _err;
+}
+Dummy_clFlush::
+Dummy_clFlush(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clFinish::
+clFinish(cl_command_queue command_queue)
+{
+  call_with(command_queue);
+  return _err;
+}
+Dummy_clFinish::
+Dummy_clFinish(cl_int err)
   : _err(err)
 {
 }

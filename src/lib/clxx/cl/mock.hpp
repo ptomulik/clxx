@@ -493,6 +493,9 @@ CXXTEST_MOCK_GLOBAL(cl_int, clSetEventCallback,
 );
 CXXTEST_MOCK_GLOBAL(cl_int, clRetainEvent, (cl_event event), (event));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseEvent, (cl_event event), (event));
+
+CXXTEST_MOCK_GLOBAL(cl_int, clFlush, (cl_command_queue command_queue), (command_queue));
+CXXTEST_MOCK_GLOBAL(cl_int, clFinish, (cl_command_queue command_queue), (command_queue));
 /** \endcond */
 
 #include <clxx/cl/mocks/newton.hpp>

@@ -358,6 +358,14 @@ public:
    * \ref get_command_queue_info().
    */ // }}}
   command_queue_properties_t get_properties() const;
+  /** // doc: flush() {{{
+   * \todo Write documentation
+   */ // }}}
+  void flush() const;
+  /** // doc: finish() {{{
+   * \todo Write documentation
+   */ // }}}
+  void finish() const;
 };
 } // end namespace clxx
 
