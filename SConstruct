@@ -33,7 +33,7 @@ env = Environment()
 #   
 #   1.2.3
 #
-# You may add optinal alhanumeric suffix to version, for example:
+# You may add optional alhanumeric suffix to version, for example:
 #
 #   1.2.3alpha
 #   1.2.3alpha2
