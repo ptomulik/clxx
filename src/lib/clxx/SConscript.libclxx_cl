@@ -43,6 +43,7 @@ headers = [
     'devices.hpp',
     'event.hpp',
     'event_fwd.hpp',
+    'events.hpp',
     'functions.hpp',
     'kernel.hpp',
     'kernel_exec.hpp',
