@@ -13,7 +13,7 @@
    height="460"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.5 r10040"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="clxx-architecture.svg">
   <defs
      id="defs4">
@@ -30,7 +30,7 @@
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="262.47318"
+     inkscape:cx="26.097484"
      inkscape:cy="222.5457"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -286,7 +286,7 @@
          id="tspan3021">platform layer</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:14.60000038px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:117%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none;font-family:Nimbus Sans L;-inkscape-font-specification:Nimbus Sans L Bold"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.60000038px;line-height:116.99999571%;font-family:'Nimbus Sans L';-inkscape-font-specification:'Nimbus Sans L Bold';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#faf8f8;fill-opacity:1;stroke:none"
        x="212.45801"
        y="767.97498"
        id="text3242"
@@ -294,7 +294,7 @@
          sodipodi:role="line"
          id="tspan3244"
          x="212.45801"
-         y="767.97498">libclxx</tspan></text>
+         y="767.97498">libclxx_cl</tspan></text>
     <rect
        y="751.90021"
        x="409.46609"

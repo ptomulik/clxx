@@ -13,7 +13,7 @@
 <area shape="rect" coords="705,159,851,305" alt="libclxx_io" target="_self" href="#libclxx_io" />
 <area shape="rect" coords="545,159,690,305" alt="libclxx_s11n" target="_self" href="#libclxx_s11n" />
 <area shape="rect" coords="410,160,531,306" alt="libclxx_info" target="_self" href="#libclxx_info" >
-<area shape="rect" coords="26,159,398,308" alt="libclxx" target="_self" href="#libclxx" />
+<area shape="rect" coords="26,159,398,308" alt="libclxx_cl" target="_self" href="#libclxx_cl" />
 <area shape="poly" coords="27,335,245,335,247,406,399,406,400,317,26,317" alt="cl-mocks" target="_self" href="#cl-mocks" >
 <area shape="rect" coords="27,119,178,148" alt="libclxx_app_clinfo" target="_self" href="#libclxx_app_clinfo" />
 <area shape="rect" coords="202,120,350,147" alt="libclxx_app_clcc" target="_self" href="#libclxx_app_clcc" >
