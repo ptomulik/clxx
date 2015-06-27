@@ -33,7 +33,7 @@ languages (Python currently), which are also part of clxx.</p>
 <area shape="rect" coords="705,159,851,305" alt="libclxx_io" target="_self" href="#libclxx_io" />
 <area shape="rect" coords="545,159,690,305" alt="libclxx_s11n" target="_self" href="#libclxx_s11n" />
 <area shape="rect" coords="410,160,531,306" alt="libclxx_info" target="_self" href="#libclxx_info" >
-<area shape="rect" coords="26,159,398,308" alt="libclxx" target="_self" href="#libclxx" />
+<area shape="rect" coords="26,159,398,308" alt="libclxx_cl" target="_self" href="#libclxx_cl" />
 <area shape="poly" coords="27,335,245,335,247,406,399,406,400,317,26,317" alt="cl-mocks" target="_self" href="#cl-mocks" >
 <area shape="rect" coords="27,119,178,148" alt="libclxx_app_clinfo" target="_self" href="#libclxx_app_clinfo" />
 <area shape="rect" coords="202,120,350,147" alt="libclxx_app_clcc" target="_self" href="#libclxx_app_clcc" >
@@ -46,7 +46,7 @@ languages (Python currently), which are also part of clxx.</p>
 <h3 id="libraries">Libraries</h3>
 
 <ul>
-  <li><a href="#libclxx">libclxx</a> &mdash; core library,</li>
+  <li><a href="#libclxx_cl">libclxx_cl</a> &mdash; core library,</li>
   <li><a href="#libclxx_info">libclxx_info</a> &mdash; encapsulates data
     retrieved from OpenCL,</li>
   <li><a href="#libclxx_s11n">libclxx_s11n</a> &mdash; provides data
@@ -70,28 +70,28 @@ languages (Python currently), which are also part of clxx.</p>
 </ul>
 
 
-<h3 id="libclxx">The libclxx library</h3>
+<h3 id="libclxx_cl">The libclxx_cl library</h3>
 
-<p>In the heart of the clxx project is the libclxx library. Internal structure
-of the libclxx library is shown on <a href="#fig2">Fig. 2</a>.</p>
+<p>In the heart of the clxx project is the libclxx_cl library. Internal structure
+of the libclxx_cl library is shown on <a href="#fig2">Fig. 2</a>.</p>
 
 <p><figure id="fig2">
-<img src="{{BASE_PATH}}/img/libclxx-architecture.svg" border="0" usemap="#libclxx-architecture.map" />
-<figcaption>Fig. 2: The <b>libclxx</b> library.</figcaption>
+<img src="{{BASE_PATH}}/img/libclxx_cl-architecture.svg" border="0" usemap="#libclxx_cl-architecture.map" />
+<figcaption>Fig. 2: The <b>libclxx_cl</b> library.</figcaption>
 </figure></p>
 
-<map name="libclxx-architecture.map">
+<map name="libclxx_cl-architecture.map">
 <!-- #$-:Image map file created by GIMP Image Map plug-in -->
 <!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
 <!-- #$-:Please do not edit lines starting with "#$" -->
 <!-- #$VERSION:2.3 -->
 <!-- #$AUTHOR:Paweł Tomulik -->
-<area shape="rect" coords="46,45,172,102" alt="libclxx-platform_layer" target="_self" href="#libclxx-platform_layer" />
-<area shape="rect" coords="178,44,383,103" alt="libclxx_runtime" target="_self" href="#libclxx-runtime" />
-<area shape="rect" coords="44,116,383,159" alt="clxx functions + clxx types &amp; enums" target="_self" href="#libclxx-functions_types" />
+<area shape="rect" coords="46,45,172,102" alt="libclxx_cl-platform_layer" target="_self" href="#libclxx_cl-platform_layer" />
+<area shape="rect" coords="178,44,383,103" alt="libclxx_runtime" target="_self" href="#libclxx_cl-runtime" />
+<area shape="rect" coords="44,116,383,159" alt="clxx functions + clxx types &amp; enums" target="_self" href="#libclxx_cl-functions_types" />
 </map>
 
-<p>The sole purpose of <a href="#libclxx">libclxx</a> is to expose the
+<p>The sole purpose of <a href="#libclxx_cl">libclxx_cl</a> is to expose the
 functionality of the <a href="https://www.khronos.org/opencl/">OpenCL</a> API
 in an object-oriented way to C++ programmers. The library is split into two
 sub-layers:</p>
@@ -99,18 +99,18 @@ sub-layers:</p>
   <li>the upper layer, which consists of two pieces:
     <ul>
       <li>
-        <a href="#libclxx-platform_layer">platform layer</a> &ndash; covers
+        <a href="#libclxx_cl-platform_layer">platform layer</a> &ndash; covers
         the chapter 4 of the OpenCL standard (The OpenCL Platform Layer), and
       </li>
       <li>
-        <a href="#libclxx-runtime">runtime</a> &ndash; covers the chapter 5 of
+        <a href="#libclxx_cl-runtime">runtime</a> &ndash; covers the chapter 5 of
         the OpenCL standard (The OpenCL Runtime).
       </li>
     </ul>
     The OpenCL functionality is exposed in an object-oriented, easy to use way.
   </li>
   <li>
-    the lower layer &ndash; <a href="#libclxx-functions_types"> clxx functions
+    the lower layer &ndash; <a href="#libclxx_cl-functions_types"> clxx functions
     + clxx types & enums</a> &ndash; contains basic C++ types, enums and
     functions corresponding to bare OpenCL types, constants and functions. The
     functions defined here have three purposes:
@@ -125,22 +125,22 @@ sub-layers:</p>
   </li>
 </ul>
 
-<h4 id="libclxx-platform_layer">libclxx - platform_layer</h4>
+<h4 id="libclxx_cl-platform_layer">libclxx_cl - platform_layer</h4>
 
-<p>The <b>platform layer</b> piece of the libclxx library provides objects and
+<p>The <b>platform layer</b> piece of the libclxx_cl library provides objects and
 methods for accessing the OpenCL API described in chapter 4 of the standard
 (<i>The OpenCL Platform Layer</i>). It consists of several C++ "proxy
 classes" used to access OpenCL objects such as platforms, devices, contexts,
 etc.. It also contains other objects, such as collections, to facilitate
 typical programming tasks.</p>
 
-<h4 id="libclxx-runtime">libclxx - runtime</h4>
+<h4 id="libclxx_cl-runtime">libclxx_cl - runtime</h4>
 
-<p>The <b>runtime</b> piece of the libclxx library provides objects and methods
+<p>The <b>runtime</b> piece of the libclxx_cl library provides objects and methods
 for accessing the OpenCL API described in chapter 5 of the standard
 (<i>The OpenCL Runtime</i>).</p>
 
-<h4 id="libclxx-functions_types">libclxx - functions + types &amp; enums</h4>
+<h4 id="libclxx_cl-functions_types">libclxx_cl - functions + types &amp; enums</h4>
 
 <p>Basically, this sublayer provides two elements</p>
 <ul>
@@ -148,9 +148,9 @@ for accessing the OpenCL API described in chapter 5 of the standard
   <li>a set of C++ functions, that map 1-to-1 to functions of the OpenCL API.</li>
 </ul>
 
-<p>The <a href="{{BASE_PATH}}/devel/arch/libclxx/types.hpp.html">types</a> page lists the OpenCL constants and their corresponding clxx enums.</p>
+<p>The <a href="{{BASE_PATH}}/devel/arch/libclxx_cl/types.hpp.html">types</a> page lists the OpenCL constants and their corresponding clxx enums.</p>
 
-<p>The <a href="{{BASE_PATH}}/devel/arch/libclxx/functions.hpp.html">functions</a> page lists the OpenCL functions and their corresponding clxx functions.</p>
+<p>The <a href="{{BASE_PATH}}/devel/arch/libclxx_cl/functions.hpp.html">functions</a> page lists the OpenCL functions and their corresponding clxx functions.</p>
 
 <h4 id="cl-mocks">OpenCL mocks</h4>
 
@@ -161,7 +161,7 @@ the original OpenCL functions are replaced with appropriate
 
 <p>The <b>OpenCL mocks</b> contain "replacements" for the original OpenCL
 functions. They're used for unit-testing. When the
-<a href=#libclxx">libclxx</a> is unit-tested, specially crafted mocks are
+<a href=#libclxx_cl">libclxx_cl</a> is unit-tested, specially crafted mocks are
 invoked internally instead of OpenCL functions. The mocks are preconfigured
 to yield a prescribed response (return value/exception) to caller, which is
 then checked by unit-test. This way tests may be performed even on platforms
@@ -170,7 +170,7 @@ having no OpenCL devices configured.</p>
 <h3 id="libclxx_info">The libclxx_info library</h3>
 
 <p>The <b>libclxx_info</b> library implements several C++ classes to encapsulate
-OpenCL information gathered by <a href="#libclxx">libclxx</a> methods. For
+OpenCL information gathered by <a href="#libclxx_cl">libclxx_cl</a> methods. For
 example, all the information retrievable by methods of <tt>clxx::platform</tt>
 object may be encapsulated with <tt>clxx::platform_info</tt> object. The
 purpose of <tt>clxx::*_info</tt> objects is to facilitate passing OpenCL
