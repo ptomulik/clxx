@@ -29,7 +29,7 @@ public:
   void test_ctor_default( )
   {
     platform p;
-    TS_ASSERT_EQUALS(p.id(), reinterpret_cast<cl_platform_id>(NULL));
+    TS_ASSERT_EQUALS(p.handle(), reinterpret_cast<cl_platform_id>(NULL));
   }
   /** // doc: test_ctor_assign() {{{
    * \brief Ensure that assigining constructor works as expected.
@@ -37,7 +37,7 @@ public:
   void test_ctor_assign( )
   {
     platform p1(reinterpret_cast<cl_platform_id>(0x1234ul));
-    TS_ASSERT_EQUALS(p1.id(), reinterpret_cast<cl_platform_id>(0x1234ul));
+    TS_ASSERT_EQUALS(p1.handle(), reinterpret_cast<cl_platform_id>(0x1234ul));
   }
   /** // doc: test_ctor_copy() {{{
    * \brief Ensure that copy constructor works as expected.
@@ -46,7 +46,7 @@ public:
   {
     platform p1(reinterpret_cast<cl_platform_id>(0x1234ul));
     platform p2(p1);
-    TS_ASSERT_EQUALS(p2.id(), p1.id());
+    TS_ASSERT_EQUALS(p2.handle(), p1.handle());
   }
   /** // doc: test_op_assign() {{{
    * \brief Ensure that assignment operator works.
@@ -56,15 +56,7 @@ public:
     platform p1(reinterpret_cast<cl_platform_id>(0x1234ul));
     platform p2;
     TS_ASSERT_EQUALS(&(p2 = p1), &p2);
-    TS_ASSERT_EQUALS(p2.id(), p1.id());
-  }
-  /** // doc: test_op_cast() {{{
-   * \brief Ensure that conversion operator works.
-   */ // }}}
-  void test_op_cast( )
-  {
-    platform p1(reinterpret_cast<cl_platform_id>(0x1234ul));
-    TS_ASSERT_EQUALS((cl_platform_id)p1, reinterpret_cast<cl_platform_id>(0x1234ul));
+    TS_ASSERT_EQUALS(p2.handle(), p1.handle());
   }
   /** // doc: test_assign() {{{
    * \brief Ensure that assign() method works.
@@ -74,7 +66,7 @@ public:
     platform p1(reinterpret_cast<cl_platform_id>(0x1234ul));
     platform p2;
     p2.assign(p1);
-    TS_ASSERT_EQUALS(p2.id(), p1.id());
+    TS_ASSERT_EQUALS(p2.handle(), p1.handle());
   }
   /** // doc: test_is_initialized_1() {{{
    * \brief Ensure that is_initialized() method works.
@@ -106,7 +98,7 @@ public:
   void test_id_1( )
   {
     platform p(reinterpret_cast<cl_platform_id>(NULL));
-    TS_ASSERT_EQUALS(p.id(), reinterpret_cast<cl_platform_id>(NULL));
+    TS_ASSERT_EQUALS(p.handle(), reinterpret_cast<cl_platform_id>(NULL));
   }
   /** // doc: test_id_2() {{{
    * \brief Ensure that id() method works.
@@ -114,23 +106,23 @@ public:
   void test_id_2( )
   {
     platform p(reinterpret_cast<cl_platform_id>(0x1234ul));
-    TS_ASSERT_EQUALS(p.id(), reinterpret_cast<cl_platform_id>(0x1234ul));
+    TS_ASSERT_EQUALS(p.handle(), reinterpret_cast<cl_platform_id>(0x1234ul));
   }
-  /** // doc: test_get_valid_id_1() {{{
-   * \brief Ensure that get_valid_id() method works.
+  /** // doc: test_get_valid_handle_1() {{{
+   * \brief Ensure that get_valid_handle() method works.
    */ // }}}
-  void test_get_valid_id_1( )
+  void test_get_valid_handle_1( )
   {
     platform p(reinterpret_cast<cl_platform_id>(NULL));
-    TS_ASSERT_THROWS(p.get_valid_id(), uninitialized_platform_error);
+    TS_ASSERT_THROWS(p.get_valid_handle(), uninitialized_platform_error);
   }
-  /** // doc: test_get_valid_id_2() {{{
-   * \brief Ensure that get_valid_id() method works.
+  /** // doc: test_get_valid_handle_2() {{{
+   * \brief Ensure that get_valid_handle() method works.
    */ // }}}
-  void test_get_valid_id_2( )
+  void test_get_valid_handle_2( )
   {
     platform p(reinterpret_cast<cl_platform_id>(0x1234ul));
-    TS_ASSERT_EQUALS(p.get_valid_id(), reinterpret_cast<cl_platform_id>(0x1234ul));
+    TS_ASSERT_EQUALS(p.get_valid_handle(), reinterpret_cast<cl_platform_id>(0x1234ul));
   }
   /** // doc: test_get_info_wrong_id() {{{
    * \brief Test get_info(platform_info_t::profile, ...) on platform object having wrong id.
@@ -376,28 +368,6 @@ public:
     TS_ASSERT(  platform((cl_platform_id)0x1234) >= platform((cl_platform_id)0x0000));
     TS_ASSERT(!(platform((cl_platform_id)0x0000) >= platform((cl_platform_id)0x1234)));
   }
-//  /** // doc: test_bool_op_1() {{{
-//   * \brief Test operator bool
-//   */ // }}}
-  void test_bool_op_1( )
-  {
-    TS_ASSERT((bool)platform((cl_platform_id)0x1234));
-    TS_ASSERT(!(bool)platform((cl_platform_id)0x000));
-  }
-// sorry, but this may irritate OOM instead of throwing bad_alloc
-//  /** // doc: test_negsize() {{{
-//   * \brief Test get_xxx() methods in a situation when clGetPlatformInfo returns negative string size.
-//   */ // }}}
-//  void test_negsize( )
-//  {
-//    T::SizeRet_clGetPlatformInfo mock(-64);
-//    platform p(reinterpret_cast<cl_platform_id>(0x34556ul));
-//    TS_ASSERT_THROWS(p.get_profile(), CLXX_EXCEPTION(Bad_Alloc));
-//    TS_ASSERT_THROWS(p.get_version(), CLXX_EXCEPTION(Bad_Alloc));
-//    TS_ASSERT_THROWS(p.get_name(), CLXX_EXCEPTION(Bad_Alloc));
-//    TS_ASSERT_THROWS(p.get_vendor(), CLXX_EXCEPTION(Bad_Alloc));
-//    TS_ASSERT_THROWS(p.get_extensions(), CLXX_EXCEPTION(Bad_Alloc));
-//  }
   /** // doc: test_out_of_host_memory() {{{
    * \brief Test get_xxx() methods in a situation when clGetPlatformInfo returns status_t::out_of_host_memory.
    */ // }}}

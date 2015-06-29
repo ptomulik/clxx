@@ -190,6 +190,8 @@ class Dummy_clGetPlatformInfo
     public T::Dummy_CallArgs<cl_platform_id, cl_platform_info, size_t, void*, size_t*>
 {
   cl_int _err;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetPlatformInfo(cl_platform_id platform, cl_platform_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -199,7 +201,7 @@ public:
    *
    * \param err Error code to be returned by the mock
    */ // }}}
-  Dummy_clGetPlatformInfo(cl_int err);
+  Dummy_clGetPlatformInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clGetDeviceIDs {{{
  * \brief Mock for clGetDeviceIDs OpenCL function.
@@ -234,6 +236,8 @@ class Dummy_clGetDeviceInfo
     public T::Dummy_CallArgs<cl_device_id, cl_device_info, size_t, void*, size_t*>
 {
   cl_int _err;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -243,7 +247,7 @@ public:
    *
    * \param err Error code to be returned by the mock
    */ // }}}
-  Dummy_clGetDeviceInfo(cl_int err);
+  Dummy_clGetDeviceInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clCreateContext {{{
  * \brief Default mock for clCreateContext OpenCL function.
@@ -344,8 +348,8 @@ class Dummy_clGetContextInfo
     public T::Dummy_CallArgs<cl_context,cl_context_info,size_t,void*,size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetContextInfo(cl_context context, cl_context_info param_name,
                           size_t param_value_size, void* param_value,
                           size_t* param_value_size_ret);
@@ -357,7 +361,7 @@ public:
    * \param pv Pointer to parameter value that is to be returned
    * \param pvs Size of the parameter value (\em pv) to be returned
    */ // }}}
-  Dummy_clGetContextInfo(cl_int err, void* pv = nullptr, size_t pvs = 0);
+  Dummy_clGetContextInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 #if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
 /** // doc: Dummy_clCreateSubDevices {{{
@@ -521,8 +525,8 @@ class Dummy_clGetCommandQueueInfo
     public T::Dummy_CallArgs<cl_command_queue,cl_command_queue_info,size_t,void*,size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetCommandQueueInfo(cl_command_queue command_queue,
                                cl_command_queue_info param_name,
                                size_t param_value_size, void* param_value,
@@ -535,7 +539,7 @@ public:
    * \param pv Pointer to the parameter value to be returned by a mock
    * \param pvs Size of the parameter value \em pv
    */ // }}}
-  Dummy_clGetCommandQueueInfo(cl_int err, void* pv = nullptr, size_t pvs = 0);
+  Dummy_clGetCommandQueueInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clCreateBuffer {{{
  * \brief Default mock for clCreateBuffer OpenCL function.
@@ -1146,8 +1150,8 @@ class Dummy_clGetImageInfo
     public T::Dummy_CallArgs<cl_mem, cl_image_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetImageInfo(cl_mem image, cl_image_info param_name,
                         size_t param_value_size, void* param_value,
                         size_t* param_value_size_ret);
@@ -1159,7 +1163,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetImageInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetImageInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clGetMemObjectInfo {{{
  * \brief Mock for clGetMemObjectInfo OpenCL function.
@@ -1171,8 +1175,8 @@ class Dummy_clGetMemObjectInfo
     public T::Dummy_CallArgs<cl_mem, cl_mem_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -1184,7 +1188,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetMemObjectInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetMemObjectInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clRetainMemObject {{{
  * \brief Default mock for clRetainMemObject OpenCL function.
@@ -1464,8 +1468,8 @@ class Dummy_clGetProgramInfo
     public T::Dummy_CallArgs<cl_program, cl_program_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetProgramInfo(cl_program program, cl_program_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -1477,7 +1481,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetProgramInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetProgramInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clGetProgramBuildInfo {{{
  * \brief Mock for clGetProgramBuildInfo OpenCL function.
@@ -1490,8 +1494,8 @@ class Dummy_clGetProgramBuildInfo
                              size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetProgramBuildInfo(cl_program program,
                                cl_device_id device,
                                cl_program_build_info param_name,
@@ -1506,7 +1510,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetProgramBuildInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetProgramBuildInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clCreateKernel {{{
  * \brief Default mock for clCreateKernel OpenCL function.
@@ -1567,8 +1571,8 @@ class Dummy_clGetKernelInfo
     public T::Dummy_CallArgs<cl_kernel, cl_kernel_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name,
                          size_t param_value_size, void* param_value,
                          size_t* param_value_size_ret);
@@ -1580,7 +1584,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetKernelInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetKernelInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 #if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
 /** // doc: Dummy_clGetKernelArgInfo {{{
@@ -1593,8 +1597,8 @@ class Dummy_clGetKernelArgInfo
     public T::Dummy_CallArgs<cl_kernel, cl_uint, cl_kernel_arg_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetKernelArgInfo(cl_kernel kernel, cl_uint arg_index,
                             cl_kernel_arg_info param_name,
                             size_t param_value_size, void* param_value,
@@ -1607,7 +1611,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetKernelArgInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetKernelArgInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 #endif
 /** // doc: Dummy_clGetKernelWorkGroupInfo {{{
@@ -1620,8 +1624,8 @@ class Dummy_clGetKernelWorkGroupInfo
     public T::Dummy_CallArgs<cl_kernel, cl_device_id, cl_kernel_work_group_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device,
                                   cl_kernel_work_group_info param_name,
                                   size_t param_value_size, void* param_value,
@@ -1634,7 +1638,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetKernelWorkGroupInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetKernelWorkGroupInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clRetainKernel {{{
  * \brief Default mock for clRetainKernel OpenCL function.
@@ -1869,8 +1873,8 @@ class Dummy_clGetEventInfo
     public T::Dummy_CallArgs<cl_event, cl_event_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetEventInfo(cl_event event, cl_event_info param_name,
                          size_t param_value_size, void* param_value,
                          size_t* param_value_size_ret);
@@ -1882,7 +1886,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetEventInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetEventInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /** // doc: Dummy_clSetEventCallback {{{
@@ -1951,8 +1955,8 @@ class Dummy_clGetEventProfilingInfo
     public T::Dummy_CallArgs<cl_event, cl_profiling_info, size_t, void*, size_t*>
 {
   cl_int _err;
-  void* _param_value;
-  size_t* _param_value_size_ret;
+  void const* _param_value;
+  size_t const* _param_value_size_ret;
   cl_int clGetEventProfilingInfo(cl_event kernel, cl_profiling_info param_name,
                                  size_t param_value_size, void* param_value,
                                  size_t* param_value_size_ret);
@@ -1964,7 +1968,7 @@ public:
    * \param param_value A parameter value to be returned by the mock
    * \param param_value_size_ret A parameter value size to be returned by the mock
    */ // }}}
-  Dummy_clGetEventProfilingInfo(cl_int err, void* param_value = nullptr, size_t* param_value_size_ret = nullptr);
+  Dummy_clGetEventProfilingInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 /** // doc: Dummy_clFlush {{{
  * \brief Default mock for clFlush OpenCL function.
@@ -2026,11 +2030,19 @@ clGetPlatformInfo(cl_platform_id platform, cl_platform_info param_name,
                   size_t* param_value_size_ret)
 {
   call_with(platform, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
   return _err;
 }
 Dummy_clGetPlatformInfo::
-Dummy_clGetPlatformInfo(cl_int err)
-  : _err(err)
+Dummy_clGetPlatformInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
 /* ------------------------------------------------------------------------- */
@@ -2054,12 +2066,20 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
                 size_t* param_value_size_ret)
 {
   call_with(device, param_name, param_value_size, param_value, param_value_size_ret);
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
   return _err;
 }
 
 Dummy_clGetDeviceInfo::
-Dummy_clGetDeviceInfo(cl_int err)
-  : _err(err)
+Dummy_clGetDeviceInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
 /* ------------------------------------------------------------------------- */
@@ -2134,17 +2154,19 @@ clGetContextInfo(cl_context context, cl_context_info param_name,
                  size_t* param_value_size_ret)
 {
   call_with(context, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value_size_ret) {
-    *param_value_size_ret = _param_value_size_ret;
-  }
-  if(param_value && _param_value) {
-    std::memcpy(param_value, _param_value, std::min(param_value_size, _param_value_size_ret));
-  }
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
   return _err;
 }
 Dummy_clGetContextInfo::
-Dummy_clGetContextInfo(cl_int err, void* pv, size_t pvs)
-  : _err(err), _param_value(pv), _param_value_size_ret(pvs)
+Dummy_clGetContextInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
 /* ------------------------------------------------------------------------- */
@@ -2272,17 +2294,19 @@ clGetCommandQueueInfo(cl_command_queue command_queue, cl_command_queue_info para
                  size_t* param_value_size_ret)
 {
   call_with(command_queue, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value_size_ret) {
-    *param_value_size_ret = _param_value_size_ret;
-  }
-  if(param_value && _param_value) {
-    std::memcpy(param_value, _param_value, std::min(param_value_size, _param_value_size_ret));
-  }
+  if(param_value && _param_value && _param_value_size_ret)
+    {
+      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
+    }
+  if(_param_value_size_ret && param_value_size_ret)
+    {
+      *param_value_size_ret = *_param_value_size_ret;
+    }
   return _err;
 }
 Dummy_clGetCommandQueueInfo::
-Dummy_clGetCommandQueueInfo(cl_int err, void* pv, size_t pvs)
-  : _err(err), _param_value(pv), _param_value_size_ret(pvs)
+Dummy_clGetCommandQueueInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
+  : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
 /* ------------------------------------------------------------------------- */
@@ -2833,7 +2857,7 @@ clGetImageInfo(cl_mem image, cl_image_info param_name,
   return _err;
 }
 Dummy_clGetImageInfo::
-Dummy_clGetImageInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetImageInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -2855,7 +2879,7 @@ clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,
   return _err;
 }
 Dummy_clGetMemObjectInfo::
-Dummy_clGetMemObjectInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetMemObjectInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -3076,7 +3100,7 @@ clGetProgramInfo(cl_program program, cl_program_info param_name,
   return _err;
 }
 Dummy_clGetProgramInfo::
-Dummy_clGetProgramInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetProgramInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -3098,7 +3122,7 @@ clGetProgramBuildInfo(cl_program program, cl_device_id device,
   return _err;
 }
 Dummy_clGetProgramBuildInfo::
-Dummy_clGetProgramBuildInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetProgramBuildInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -3157,7 +3181,7 @@ clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name,
   return _err;
 }
 Dummy_clGetKernelInfo::
-Dummy_clGetKernelInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetKernelInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -3180,7 +3204,7 @@ clGetKernelArgInfo(cl_kernel kernel, cl_uint arg_index, cl_kernel_arg_info param
   return _err;
 }
 Dummy_clGetKernelArgInfo::
-Dummy_clGetKernelArgInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetKernelArgInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -3203,7 +3227,7 @@ clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_g
   return _err;
 }
 Dummy_clGetKernelWorkGroupInfo::
-Dummy_clGetKernelWorkGroupInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetKernelWorkGroupInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -3389,7 +3413,7 @@ clGetEventInfo(cl_event event, cl_event_info param_name,
   return _err;
 }
 Dummy_clGetEventInfo::
-Dummy_clGetEventInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetEventInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
@@ -3449,7 +3473,7 @@ clGetEventProfilingInfo(cl_event event, cl_profiling_info param_name,
   return _err;
 }
 Dummy_clGetEventProfilingInfo::
-Dummy_clGetEventProfilingInfo(cl_int err, void* param_value, size_t* param_value_size_ret)
+Dummy_clGetEventProfilingInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }

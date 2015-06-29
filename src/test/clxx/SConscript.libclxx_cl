@@ -86,6 +86,8 @@ tests = [
     'functions/set_user_event_status.t.h',
     'functions/unload_platform_compiler.t.h',
     'functions/wait_for_events.t.h',
+    'clobj.t.h',
+    'clobj_fcn.t.h',
     'kernel.t.h',
     'kernel_exec.t.h',
     'mem.t.h',

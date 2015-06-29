@@ -50,8 +50,8 @@ public:
     T::Newton_clGetPlatformIDs mock;
     platforms p(get_platforms());
     TS_ASSERT_EQUALS(p.size(), 2);
-    TS_ASSERT_EQUALS(static_cast<platform>(p[0]).id(), T::Newton_clGetPlatformIDs::platforms[0]);
-    TS_ASSERT_EQUALS(static_cast<platform>(p[1]).id(), T::Newton_clGetPlatformIDs::platforms[1]);
+    TS_ASSERT_EQUALS(static_cast<platform>(p[0]).handle(), T::Newton_clGetPlatformIDs::platforms[0]);
+    TS_ASSERT_EQUALS(static_cast<platform>(p[1]).handle(), T::Newton_clGetPlatformIDs::platforms[1]);
   }
 // sorry, but this may irritate OOM instead of throw bad_alloc
 //  /** // doc: test_get_platform_ids_negsize() {{{

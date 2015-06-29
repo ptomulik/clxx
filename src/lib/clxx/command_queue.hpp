@@ -13,7 +13,7 @@
 #include <clxx/command_queue_fwd.hpp>
 #include <clxx/context_fwd.hpp>
 #include <clxx/device_fwd.hpp>
-#include <clxx/types.hpp>
+#include <clxx/clobj.hpp>
 
 namespace clxx {
 /** // doc: command_queue {{{
@@ -33,7 +33,7 @@ namespace clxx {
  *
  * Although \ref command_queue maintains internally reference count for its
  * \c cl_command_queue handle, it doesn't prevent one from stealing the
- * \c cl_command_queue handle (id(), get_valid_id()). This gives rise to manipulate
+ * \c cl_command_queue handle (id(), get_valid_handle()). This gives rise to manipulate
  * the reference count outside of object. If you need to steal, use the
  * retrieved handle with care. If you retrieve the handle from \ref command_queue
  * object, increase its reference count with \ref retain_command_queue() as soon as
@@ -54,48 +54,13 @@ namespace clxx {
  * \c cl_command_queue handle with \ref release_command_queue()).
  */ // }}}
 class alignas(cl_command_queue) command_queue
+  : public clobj<cl_command_queue>
 {
-private:
-  cl_command_queue  _id;
-protected:
-  /** // doc: _sdoc: _set_id() {{{
-   * \brief Set new \c cl_command_queue handle to this object
-   *
-   * \param id
-   *    A \c cl_command_queue handle to OpenCL command_queue. It must be a valid handle if
-   *    \e retain_new is true.
-   * \param retain_new
-   *    If \c true, the reference count for \e id gets increased,
-   * \param release_old
-   *    If \c true, the reference count for old identifier encapsulated to this
-   *    end by the object gets decreased,
-   *
-   * \throw clerror_no<status_t::invalid_command_queue>
-   *    when the \e retain_new is true and \e id is not a valid \c cl_command_queue
-   *    handle or when \e release_old is \c true and \c this object holds an
-   *    invalid \c cl_command_queue handle.
-   * \throw unexpected_clerror
-   */ // }}}
-  void _set_id(cl_command_queue id, bool retain_new, bool release_old);
 public:
-  /** // doc: command_queue() {{{
-   * \brief Default constructor
-   *
-   * Sets the internal \c cl_command_queue handle to \c NULL. The
-   * default-constructed \ref clxx::command_queue "command_queue" object is
-   * considered to be uninitialized (see #is_initialized()).
-   */ // }}}
-  command_queue() noexcept;
-  /** // doc: command_queue(cl_command_queue) {{{
-   * \brief Constructor
-   *
-   * Initializes new \ref command_queue object with OpenCL command_queue handle.
-   *
-   * \param id OpenCL command_queue handle
-   *
-   * It may throw exceptions described in \ref retain_command_queue().
-   */ // }}}
-  explicit command_queue(cl_command_queue id);
+  typedef clobj<cl_command_queue> Base;
+  using Base::Base;
+  command_queue() = default;
+  command_queue(command_queue const&) = default;
   /** // doc: command_queue(context, device, properties) {{{
    * \brief Constructor - create new OpenCL command-queue (costly).
    *
@@ -119,200 +84,6 @@ public:
    */ // }}}
   command_queue(context const& ctx, device const& dev,
                 command_queue_properties_t props);
-  /** // doc: command_queue(rhs) {{{
-   * \brief Copy constructor (reference copy).
-   *
-   * This constructor creates command_queue object referring to the same OpenCL
-   * command_queue as \e rhs does. After that, the newly created (this) object
-   * and the \e rhs hold \c cl_command_queue handle to the same OpenCL
-   * command-queue. The reference count for this handle is increased by one
-   * during copy-construction by performing an internal call to
-   * \ref retain_command_queue().
-   *
-   * \param rhs
-   *    Another command_queue object to be assigned to this object.
-   *
-   * \throw uninitialized_command_queue_error
-   *    thrown when \e rhs is uninitialized.
-   * \throw clerror_no<status_t::invalid_command_queue>
-   *    propagated from retain_command_queue()
-   * \throw clerror_no<status_t::out_of_resources>
-   *    propagated from retain_command_queue()
-   * \throw clerror_no<status_t::out_of_host_memory>
-   *    propagated from retain_command_queue()
-   * \throw unexpected_clerror
-   *    propagated from retain_command_queue()
-   */ // }}}
-  command_queue(command_queue const& rhs);
-  /** // doc: ~command_queue() {{{
-   * \brief Destructor
-   *
-   * Internally decreases reference count for this command_queue.
-   */ // }}}
-  ~command_queue();
-  /** // doc: id() {{{
-   * \brief   Get \c cl_command_queue handle held by \c this object.
-   *
-   * \return  The \c cl_command_queue handle held by \c this object.
-   */ // }}}
-  cl_command_queue id() const noexcept
-  { return this->_id; }
-  /** // doc: get_valid_id() {{{
-   * \brief   Check if \c this object is initialized and return \c cl_command_queue
-   *          handle held by this object.
-   *
-   * \return  The \c cl_command_queue handle to OpenCL command_queue encapsulated within
-   *          this object.
-   *
-   * \throw uninitialized_command_queue_error when the object was not properly
-   *        initialized (see is_initialized()).
-   */ // }}}
-  cl_command_queue get_valid_id() const;
-  /** // doc: operator= {{{
-   * \brief Assignment operator
-   *
-   * \param rhs Another command_queue object to be assigned to this object
-   *
-   *  This operation copies the \c cl_command_queue handle held by \e rhs
-   *  to \c this object and maintains reference counts appropriately. The
-   *  reference count for handle originating from \e rhs gets increased by
-   *  one, as it acquires new user (\c this object). The reference count for
-   *  identifier held up to now by \c this object is decreased by one, as it is
-   *  forgotten by one user (namely, by \c this object).
-   *
-   * \return Reference to this object
-   *
-   * \throw uninitialized_command_queue_error
-   *    when the \e rhs object is in uninitialized state
-   * \throw clerror_no<status_t::invalid_command_queue>
-   *    propagated from retain_command_queue() and release_command_queue()
-   * \throw clerror_no<status_t::out_of_resources>
-   *    propagated from retain_command_queue() and release_command_queue()
-   * \throw clerror_no<status_t::out_of_host_memory>
-   *    propagated from retain_command_queue() and release_command_queue()
-   * \throw unexpected_clerror
-   *    propagated from retain_command_queue() and release_command_queue()
-   */ // }}}
-  command_queue& operator=(command_queue const& rhs)
-  { this->assign(rhs); return *this; }
-  /** // doc: operator== {{{
-   * \brief Compare this command_queue with another one
-   *
-   * \param rhs
-   *    Another command_queue object to be compared to \c this object.
-   *
-   * \return
-   *    Returns <tt>this->id() == rhs.id()</tt>
-   */ // }}}
-  bool operator == (command_queue const& rhs) const noexcept
-  { return this->id() == rhs.id(); }
-  /** // doc: operator!= {{{
-   * \brief Compare this command_queue with another one
-   *
-   * \param rhs
-   *    Another command_queue object to be compared to \c this object.
-   *
-   * \returns <tt>this->id() != rhs.id()</tt>
-   */ // }}}
-  bool operator != (command_queue const& rhs) const noexcept
-  { return this->id() != rhs.id(); }
-  /** // doc: operator< {{{
-   * \brief Compare this command_queue with another one
-   *
-   * \param rhs
-   *    Another command_queue object to be compared to \c this object.
-   *
-   * \return <tt>this->id() < rhs.id())</tt>
-   */ // }}}
-  bool operator < (command_queue const& rhs) const noexcept
-  { return this->id() < rhs.id(); }
-  /** // doc: operator> {{{
-   * \brief Compare this command_queue with another one
-   *
-   * \param rhs
-   *    Another command_queue object to be compared to \c this object.
-   *
-   * \return <tt>this->id() > rhs.id()</tt>
-   */ // }}}
-  bool operator > (command_queue const& rhs) const noexcept
-  { return this->id() > rhs.id(); }
-  /** // doc: operator<= {{{
-   * \brief Compare this command_queue with another one
-   *
-   * \param rhs
-   *    Another command_queue object to be compared to \c this object.
-   *
-   * \return <tt>this->id() <= rhs.id()</tt>
-   */ // }}}
-  bool operator <= (command_queue const& rhs) const noexcept
-  { return this->id() <= rhs.id(); }
-  /** // doc: operator>= {{{
-   * \brief Compare this command_queue with another one
-   *
-   * \param rhs
-   *    Another command_queue object to be compared to \c this object.
-   *
-   * \return <tt>this->id() >= rhs.id()</tt>
-   */ // }}}
-  bool operator >= (command_queue const& rhs) const noexcept
-  { return this->id() >= rhs.id(); }
-  /** // {{{
-   * \brief Assignment
-   *
-   *  This operation copies the \c cl_command_queue handle held by \e rhs
-   *  to \c this object and maintains reference count appropriately. The
-   *  reference count for handle originating from \e rhs gets increased by
-   *  one, as it acquires new user (\c this object). The reference count for
-   *  handle held up to now by \c this object is decreased by one, as it is
-   *  forgotten by one user (namely, by \c this object).
-   *
-   * \throw uninitialized_command_queue_error
-   *    when \e rhs is an uninitialized command_queue object.
-   * \throw clerror_no<status_t::invalid_command_queue>
-   *    when \e rhs holds a \c cl_command_queue handle that is invalid.
-   * \throw clerror_no<status_t::out_of_resources>
-   *    propagated from retain_command_queue() and release_command_queue()
-   * \throw clerror_no<status_t::out_of_host_memory>
-   *    propagated from retain_command_queue() and release_command_queue()
-   * \throw unexpected_clerror
-   *    propagated from retain_command_queue() and release_command_queue()
-   */ // }}}
-  void assign(command_queue const& rhs);
-  /** // {{{
-   * \brief   Is this object properly initialized?
-   *
-   * \return  Returns \c true if \c this object is initialized or \c false
-   *          otherwise.
-   */ // }}}
-  bool is_initialized() const noexcept
-  { return (this->_id != NULL); }
-  /** // doc: get_info() {{{
-   * \brief Get certain command_queue information from OpenCL platform layer.
-   *
-   * This function calls internally \c get_command_queue_info().
-   *
-   * \param name
-   *     An enumeration constant that specifies the information to query,
-   *     for example \ref command_queue_info_t::reference_count. The complete
-   *     list of allowed parameter names may be found in
-   *     \ref command_queue_info_t.
-   * \param value_size
-   *    Specifies the size in bytes of memory pointed to by \c value. This size
-   *    must be greater than or equal to the size of return type as described
-   *    in appropriate table in the OpenCL specification (see documentation of
-   *    \ref get_command_queue_info()).
-   * \param value
-   *    A pointer to memory where the appropriate result being queried is
-   *    returned. If \e value is \c NULL, it is ignored.
-   * \param value_size_ret
-   *    Returns the actual size in bytes of data being queried by \e value. If
-   *    \e value_size_ret is \c NULL, it is ignored.
-   *
-   * In case of errors, this function throws one of the exceptions defined by
-   * \ref get_command_queue_info().
-   */ // }}}
-  void get_info(command_queue_info_t name, size_t value_size, void* value,
-                size_t* value_size_ret) const;
   /** // doc: get_context() {{{
    * \brief Get the context associated with command-queue.
    *
