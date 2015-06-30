@@ -3,19 +3,24 @@
 
 /** // doc: clxx/mem.cpp {{{
  * \file clxx/mem.cpp
- * \todo Write documentation
+ * \brief Implements the \ref clxx::mem "mem" class
  */ // }}}
 #include <clxx/mem.hpp>
 #include <clxx/context.hpp>
-//#include <clxx/functions.hpp>
-//#include <clxx/exceptions.hpp>
 #include <clxx/clobj_impl.hpp>
 
 namespace clxx {
+/* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_mem>;
+static_assert(
+    sizeof(clobj<cl_mem>) == sizeof(cl_mem),
+    "sizeof(clobj<cl_mem>) differs from sizeof(cl_mem)"
+);
 /* ----------------------------------------------------------------------- */
 mem::
 mem(context const& ctx, mem_flags_t flags, size_t size, void* host_ptr)
-  :Base((cl_mem)NULL) // because it's read by _set_handle()
+  :Base((cl_mem)NULL)
 {
   this->_set_handle(create_buffer(ctx.get_valid_handle(), flags, size, host_ptr), false, false);
 }
@@ -48,12 +53,6 @@ cl_uint mem::
 get_map_count() const
 {
   return _get_pod_info<cl_uint>(*this, mem_info_t::map_count);
-}
-/* ----------------------------------------------------------------------- */
-cl_uint mem::
-get_reference_count() const
-{
-  return _get_pod_info<cl_uint>(*this, mem_info_t::reference_count);
 }
 /* ----------------------------------------------------------------------- */
 context mem::

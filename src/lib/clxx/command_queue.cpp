@@ -13,6 +13,13 @@
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_command_queue>;
+static_assert(
+    sizeof(clobj<cl_command_queue>) == sizeof(cl_command_queue),
+    "sizeof(clobj<cl_command_queue>) differs from sizeof(cl_command_queue)"
+);
+/* ------------------------------------------------------------------------ */
 command_queue::
 command_queue(context const& ctx, device const& dev, command_queue_properties_t props)
 {
@@ -42,12 +49,6 @@ device command_queue::
 get_device() const
 {
   return device(_get_pod_info<cl_device_id>(*this, command_queue_info_t::device));
-}
-/* ------------------------------------------------------------------------ */
-cl_uint command_queue::
-get_reference_count() const
-{
-  return _get_pod_info<cl_uint>(*this, command_queue_info_t::reference_count);
 }
 /* ------------------------------------------------------------------------ */
 command_queue_properties_t command_queue::

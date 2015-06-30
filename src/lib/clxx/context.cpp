@@ -11,6 +11,13 @@
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_context>;
+static_assert(
+    sizeof(clobj<cl_context>) == sizeof(cl_context),
+    "sizeof(clobj<cl_context>) differs from sizeof(cl_context)"
+);
+/* ------------------------------------------------------------------------ */
 context::
 context(context_properties const& props, devices const& devs,
         void(*pfn_notify)(const char* errinfo, const void* private_info,
@@ -43,12 +50,6 @@ context(const context_properties& props,
   cl_context handle = create_context_from_type(&props_v.front(), dev_type,
                                                pfn_notify, user_data);
   this->_set_handle(handle, false, false);
-}
-/* ------------------------------------------------------------------------ */
-cl_uint context::
-get_reference_count() const
-{
-  return _get_pod_info<cl_uint>(*this, context_info_t::reference_count);
 }
 /* ------------------------------------------------------------------------ */
 cl_uint context::

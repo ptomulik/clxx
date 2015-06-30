@@ -48,9 +48,18 @@ class alignas(cl_platform_id) platform
   : public clobj<cl_platform_id>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_platform_id> Base;
   using Base::Base;
+  /** // doc: platform() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   platform() = default;
+  /** // doc: platform(platform const&) {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   platform(platform const&) = default;
   /** // {{{
    * \brief Query the OpenCL for platform profile string.

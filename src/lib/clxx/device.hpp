@@ -131,9 +131,18 @@ class alignas(cl_device_id) device
   : public clobj<cl_device_id>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_device_id> Base;
   using Base::Base;
+  /** // doc: device() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   device() = default;
+  /** // doc: device() {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   device(device const&) = default;
   /** // {{{
    *  \brief Get \c CL_DEVICE_TYPE information.
@@ -627,14 +636,6 @@ public:
    * points to.
    */ // }}}
   std::vector<device_partition_property_t> get_partition_type() const;
-  /** // {{{
-   * \brief Get \c CL_DEVICE_REFERENCE_COUNT information.
-   * \return The *device* reference count.
-   *
-   * If the device is a root-level device, a reference count of one is
-   * returned.
-   */ // }}}
-  cl_uint get_reference_count() const;
   /** // {{{
    * \brief Get \c CL_DEVICE_PREFERRED_INTEROP_USER_SYNC information.
    * \return \c CL_TRUE if the device's preference is for the user to be

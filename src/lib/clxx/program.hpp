@@ -47,7 +47,7 @@ namespace clxx {
  *
  * Although \ref clxx::program "program" maintains internally reference count
  * for its \c cl_program handle, it doesn't prevent one from stealing the \c
- * cl_program handle (\ref id(), \ref get_valid_handle()). This gives rise to
+ * cl_program handle (\ref handle(), \ref get_valid_handle()). This gives rise to
  * manipulate the reference count outside of the \ref clxx::program object for
  * the given OpenCL program object. If you need to steal, use the retrieved
  * handle with care. If you retrieve the handle from \ref clxx::program
@@ -77,9 +77,18 @@ class alignas(cl_program) program
   : public clobj<cl_program>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_program> Base;
   using Base::Base;
+  /** // doc: program() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   program() = default;
+  /** // doc: program() {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   program(program const&) = default;
   /** // doc: program(context const&, program_sources const&) {{{
    * \brief Create program with sources
@@ -200,17 +209,6 @@ public:
   void get_build_info(device const& dev, program_build_info_t name,
                       size_t value_size, void* value,
                       size_t* value_size_ret) const;
-  /** // doc: get_reference_count() {{{
-   * \brief Get reference count for the program
-   *
-   * \returns reference count for the program.
-   *
-   * \throws uninitialized_program_error if the object was not initialized
-   *      properly (see \ref is_initialized()).
-   *
-   * It also throws exceptions originating fro \ref get_program_info().
-   */ // }}}
-  cl_uint get_reference_count() const;
   /** // doc: get_context() {{{
    * \brief Get context associated with this program
    *

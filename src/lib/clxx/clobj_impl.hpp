@@ -17,6 +17,7 @@
 #include <memory>
 
 namespace clxx {
+/** \cond SHOW_IGNORED_COMPOUNDS */
 /* ----------------------------------------------------------------------- */
 template< typename Handle > std::string
 _get_str_info(clobj<Handle> const& obj, typename clobj<Handle>::info_t name)
@@ -48,21 +49,22 @@ _get_vec_info(clobj<Handle> const& obj, typename clobj<Handle>::info_t name)
   obj.get_info(name, values.size() * sizeof(T), &values.front(), nullptr);
   return values;
 }
+/** \endcond */
 } // end namespace clxx
 
 namespace clxx {
 /* ----------------------------------------------------------------------- */
 template< typename Handle >
 void clobj<Handle>::
-_set_handle(handle_t h, bool retain_new, bool release_old)
+_set_handle(handle_t handle, bool retain_new, bool release_old)
 {
-  if(h != this->_handle) // Avoid unintended deletion by release_clobj()
+  if(handle != this->_handle) // Avoid unintended deletion by release_clobj()
     {
       if(release_old && this->is_initialized())
         {
           release_clobj(this->_handle);
         }
-      this->_handle = h;
+      this->_handle = handle;
       if(retain_new)
         {
           retain_clobj(this->_handle);
@@ -135,6 +137,21 @@ get_info(info_t name, size_t value_size, void* value, size_t* value_size_ret) co
 }
 /* ----------------------------------------------------------------------- */
 template< typename Handle >
+cl_uint clobj<Handle>::
+get_reference_count() const
+{
+  return _get_pod_info<cl_uint>(*this, info_t::reference_count);
+}
+/* ----------------------------------------------------------------------- */
+template< typename Handle >
+void clobj<Handle>::
+assign(clobj const& rhs)
+{
+  if(&rhs != this)
+    this->_set_handle(rhs.get_valid_handle(), true, true);
+}
+/* ----------------------------------------------------------------------- */
+template< typename Handle >
 clobj<Handle>& clobj<Handle>::
 operator=(clobj const& rhs)
 { this->assign(rhs); return *this; }
@@ -168,14 +185,6 @@ template< typename Handle >
 bool clobj<Handle>::
 operator >= (clobj const& rhs) const noexcept
 { return this->handle() >= rhs.handle(); }
-/* ----------------------------------------------------------------------- */
-template< typename Handle >
-void clobj<Handle>::
-assign(clobj const& rhs)
-{
-  if(&rhs != this)
-    this->_set_handle(rhs.get_valid_handle(), true, true);
-}
 /* ----------------------------------------------------------------------- */
 } // end namespace clxx
 

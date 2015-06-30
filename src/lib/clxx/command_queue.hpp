@@ -18,28 +18,29 @@
 namespace clxx {
 /** // doc: command_queue {{{
  * \ingroup clxx_command_queues
- * \brief Proxy to OpenCL command_queue.
+ * \brief OpenCL Command Queue.
  *
- * This class represents OpenCL command_queue and forwards basic operations on
- * command_queues to OpenCL platform layer. It encapsulates a \c cl_command_queue handle
- * and supports following operations:
+ * Represents OpenCL Command Queue and forwards basic operations on a Command
+ * Queue to OpenCL API.
+ *
+ * The \ref command_queue encapsulates a \c cl_command_queue handle and
+ * supports the following operations (in addition to operations supported
+ * by \ref clxx::clobj "clobj<cl_command_queue>":
  *
  * - command_queue creation (constructors), by calling internally
  *   \ref create_command_queue() and \ref create_command_queue_with_properties(),
- * - automatic reference count management by using internally
- *   \ref retain_command_queue() and \ref release_command_queue(),
- * - retrieving command_queue information from OpenCL (via class methods),
- *   by invoking internally \ref get_command_queue_info().
+ * - retrieving command_queue properties from OpenCL (\ref get_properties()).
  *
  * Although \ref command_queue maintains internally reference count for its
  * \c cl_command_queue handle, it doesn't prevent one from stealing the
- * \c cl_command_queue handle (id(), get_valid_handle()). This gives rise to manipulate
- * the reference count outside of object. If you need to steal, use the
- * retrieved handle with care. If you retrieve the handle from \ref command_queue
- * object, increase its reference count with \ref retain_command_queue() as soon as
- * possible, and decrease the reference count with \ref release_command_queue() once
- * you don't need the handle. If you don't retain the command_queue, it may be
- * unexpectedly released by \ref command_queue's destructor.
+ * \c cl_command_queue handle (handle(), get_valid_handle()). This gives rise
+ * to manipulate the reference count outside of object. If you need to steal
+ * the handle, use the retrieved handle with care. If you retrieve the handle
+ * from \ref command_queue object, increase its reference count with
+ * \ref retain_command_queue() as soon as possible, and decrease the reference
+ * count with \ref release_command_queue() once you don't need the handle. If
+ * you don't retain the command_queue, it may be unexpectedly released by
+ * \ref command_queue's destructor.
  *
  * There are constructors which create new OpenCL command_queue (a costly operation).
  * However, assignment operator and copy constructors just copy over the
@@ -57,9 +58,18 @@ class alignas(cl_command_queue) command_queue
   : public clobj<cl_command_queue>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_command_queue> Base;
   using Base::Base;
+  /** // doc: command_queue() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   command_queue() = default;
+  /** // doc: command_queue() {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   command_queue(command_queue const&) = default;
   /** // doc: command_queue(context, device, properties) {{{
    * \brief Constructor - create new OpenCL command-queue (costly).
@@ -108,18 +118,6 @@ public:
    * \ref get_command_queue_info().
    */ // }}}
   device get_device() const;
-  /** // doc: get_reference_count() {{{
-   * \brief   Get reference count for the OpenCL command_queue referred to by
-   *          \c this object.
-   *
-   * \return  The reference count for the OpenCL command_queue referred to by
-   *          \c this object as returned by
-   *          get_command_queue_info(this->_id, command_queue_info_t::reference_count, ...)
-   *
-   * In case of errors, the method throws one of the exceptions defined
-   * by \ref get_command_queue_info().
-   */ // }}}
-  cl_uint get_reference_count() const;
   /** // doc: get_properties() {{{
    * \brief Get command-queue properties specified at command-queue creation.
    *
@@ -130,11 +128,23 @@ public:
    */ // }}}
   command_queue_properties_t get_properties() const;
   /** // doc: flush() {{{
-   * \todo Write documentation
+   * \brief Issues all previously queued OpenCL commands in the command_queue
+   *        to the device associated with the command_queue
+   *
+   * \throw uninitialized_command_queue_error
+   *    when the command_queue object is uninitialized (see #is_initialized())
+   *
+   *  Also may throw exceptions originating from \ref clxx::flush() "flush()"
    */ // }}}
   void flush() const;
   /** // doc: finish() {{{
-   * \todo Write documentation
+   * \brief Blocks until all previously queued OpenCL commands in the
+   *        command_queue are issued to the associated device and have completed
+   *
+   * \throw uninitialized_command_queue_error
+   *    when the command_queue object is uninitialized (see #is_initialized())
+   *
+   *  Also may throw exceptions originating from \ref clxx::finish() "finish()"
    */ // }}}
   void finish() const;
 };

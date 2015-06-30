@@ -9,6 +9,7 @@
 #include <clxx/clobj_impl.hpp>
 
 namespace clxx {
+#if 0
 template class clobj<cl_command_queue>;
 template class clobj<cl_context>;
 template class clobj<cl_device_id>;
@@ -17,6 +18,7 @@ template class clobj<cl_kernel>;
 template class clobj<cl_mem>;
 template class clobj<cl_platform_id>;
 template class clobj<cl_program>;
+#endif
 #if 0
 template class clobj<cl_sampler>;
 #endif

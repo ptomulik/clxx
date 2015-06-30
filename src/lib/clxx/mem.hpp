@@ -5,7 +5,7 @@
 
 /** // doc: clxx/mem.hpp {{{
  * \file clxx/mem.hpp
- * \todo Write documentation
+ * \brief Declares the \ref clxx::mem "mem" class
  */ // }}}
 #ifndef CLXX_MEM_HPP_INCLUDED
 #define CLXX_MEM_HPP_INCLUDED
@@ -33,7 +33,7 @@ namespace clxx {
  *
  * Although \ref clxx::mem "mem" maintains internally reference count
  * for its \c cl_mem handle, it doesn't prevent one from stealing the
- * \c cl_mem handle (#id(), #get_valid_handle()). This gives rise to manipulate the
+ * \c cl_mem handle (#handle(), #get_valid_handle()). This gives rise to manipulate the
  * reference count outside of the \ref clxx::mem object for the given OpenCL
  * memory object. If you need to steal, use the retrieved handle with care. If
  * you retrieve the handle from \ref clxx::mem "mem" object, increase its
@@ -63,62 +63,171 @@ class alignas(cl_mem) mem
   : public clobj<cl_mem>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_mem> Base;
   using Base::Base;
+  /** // doc: mem() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   mem() = default;
+  /** // doc: mem() {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   mem(mem const&) = default;
   /** // doc: mem(context const&, mem_flags_t, size_t, void*) {{{
-   * \todo Write documentation
+   * \brief Constructor
+   *
+   * Creates new OpenCL buffer via #create_buffer().
+   *
+   * \param ctx
+   *    A valid #context object used to create the buffer object. 
+   * \param flags
+   *    A bit-field that is used to specify allocation and usage information
+   *    such as the memory arena that should be used to allocate the buffer
+   *    object and how it will be used.
+   * \param size
+   *    The size in bytes of the buffer memory object to be allocated.
+   * \param host_ptr
+   *    A pointer to the buffer data that may already be allocated by the
+   *    application. The size of the buffer that \p host_ptr points to must be
+   *    >= \p size bytes.
+   *
+   * \throw uninitialized_context_error
+   *    If the \p ctx is uninitialized
+   *
+   * Also throws exceptions originating from #create_buffer().
    */ // }}}
   explicit mem(context const& ctx, mem_flags_t flags, size_t size, void* host_ptr);
   /** // doc: get_type() {{{
-   * \todo Write documentation
+   * \brief Returns the memory object type
+   *
+   * \returns An enum value indicating the type of the memory object, may it
+   *          be, for example, mem_object_type_t::buffer or
+   *          mem_object_type_t::image2d.
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   mem_object_type_t get_type() const;
   /** // doc: get_flags() {{{
-   * \todo Write documentation
+   * \brief Returns the \e flags argument value specified when this #mem object
+   *        is created
+   *
+   * \returns An bit-field indicating the flags used at creation time
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   mem_flags_t get_flags() const;
   /** // doc: get_size() {{{
-   * \todo Write documentation
+   * \brief Return actual size of the data store associated with this memory
+   *        object in bytes
+   * \returns actual size of the data store associated with this memory object
+   *          in bytes
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   size_t get_size() const;
   /** // doc: get_host_ptr() {{{
-   * \todo Write documentation
+   * \brief Return host pointer
+   *
+   *  If the underlying memory object is created with #create_buffer() or
+   *  #create_image() and \c mem_flags_t::use_host_ptr is specified in
+   *  \e mem_flags, return the \e host_ptr argument value specified when memobj
+   *  is created. Otherwise a \c NULL value is returned.
+   *
+   *  If memobj is created with #create_sub_buffer(), return the \e host_ptr +
+   *  \e origin value specified when memobj is created. \e host_ptr is the
+   *  argument value specified to #create_buffer() and
+   *  mem_flags_t::use_host_ptr is specified in \e mem_flags for memory object
+   *  from which memobj is created. Otherwise a \c NULL value is returned
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   void* get_host_ptr() const;
   /** // doc: get_map_count() {{{
-   * \todo Write documentation
+   * \brief Returns map count
+   *
+   * The map count returned should be considered immediately stale. It is
+   * unsuitable for general use in applications. This feature is provided for
+   * debugging.
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   cl_uint get_map_count() const;
-  /** // doc: get_reference_count() {{{
-   * \brief Get reference count for the memory object
-   *
-   * \returns reference count for the memory object.
-   *
-   * \throws uninitialized_mem_error if the object was not initialized
-   *      properly (see \ref is_initialized()).
-   *
-   * It also throws exceptions originating fro \ref get_mem_object_info().
-   */ // }}}
-  cl_uint get_reference_count() const;
   /** // doc: get_context() {{{
-   * \todo Write documentation
+   * \brief Return context specified when memory object is created
+   *
+   * If the #mem object is created with #create_sub_buffer(), the context
+   * associated with the memory object specified as the \e buffer argument to
+   * create_sub_buffer() is returned. 
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   context get_context() const;
 #if CLXX_CL_H_VERSION_1_1
   /** // doc: get_associated_memobject() {{{
-   * \todo Write documentation
+   * \brief Return memory object from which this #mem object is created
+   *
+   * This returns the memory object specified as buffer argument to
+   * #create_buffer() if memobj is a sub-buffer object created using
+   * #create_sub_buffer().
+   *
+   * This returns the \e mem_object specified in \c cl_image_desc if #mem
+   * object is an image object.
+   *
+   * Otherwise a \c NULL value is returned
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   mem get_associated_memobject() const;
   /** // doc: get_offset() {{{
-   * \todo Write documentation
+   * \brief Return offset if the #mem object is a sub-buffer created using #create_sub_buffer() 
+   *
+   * This returns 0 if memobj is not a subbuffer object
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   size_t get_offset() const;
 #endif
 #if CLXX_CL_H_VERSION_2_0
   /** // doc: get_uses_svm_pointer() {{{
-   * \todo Write documentation
+   * \brief Whether the #mem object was created with mem_flags_t::use_host_ptr
+   *
+   * Return \c CL_TRUE if #mem object is a buffer object that was created with
+   * mem_flags_t::use_host_ptr or is a sub-buffer object of a buffer object
+   * that was created with mem_flags_t::use_host_ptr and the \e host_ptr
+   * specified when the \e buffer object was created is a SVM pointer;
+   * otherwise returns \c CL_FALSE. 
+   *
+   * \throw uninitialized_mem_error
+   *    If the #mem object (this) is uninitialized
+   *
+   * Also throws exceptions originating from #get_mem_object_info()
    */ // }}}
   cl_bool get_uses_svm_pointer() const;
 #endif

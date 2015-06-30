@@ -34,7 +34,7 @@ namespace clxx {
  *
  * Although \ref clxx::event "event" maintains internally reference count
  * for its \c cl_event handle, it doesn't prevent one from stealing the
- * \c cl_event handle (\ref id(), \ref get_valid_handle()). This gives rise to
+ * \c cl_event handle (\ref handle(), \ref get_valid_handle()). This gives rise to
  * manipulate the reference count outside of the \ref clxx::event object for
  * the given OpenCL event object. If you need to steal, use the retrieved
  * handle with care. If you retrieve the handle from \ref clxx::event
@@ -64,9 +64,18 @@ class alignas(cl_event) event
   : public clobj<cl_event>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_event> Base;
   using Base::Base;
+  /** // doc: event() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   event() = default;
+  /** // doc: event() {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   event(event const&) = default;
   /** // doc: event(context) {{{
    * \brief Create user event with #create_user_event()
@@ -149,36 +158,57 @@ public:
    * Also throws exceptions originating from #get_event_info()
    */ // }}}
   command_exec_status_t get_command_exec_status() const;
-  /** // doc: get_reference_count() {{{
-   * \brief Get reference count for the event
-   *
-   * \returns reference count for the event.
-   *
-   * \throws uninitialized_event_error if the object was not initialized
-   *      properly (see \ref is_initialized()).
-   *
-   * It also throws exceptions originating fro \ref get_event_info().
-   */ // }}}
-  cl_uint get_reference_count() const;
   /** // doc: get_profiling_command_queued() {{{
-   * \todo Write documentation
+   * \brief Returns a 64-bit value that describes the current device time
+   *        counter in nanoseconds when the command identified by event is
+   *        enqueued in a command-queue by the host
+   * \throw uninitialized_event_error
+   *    If the \ref clxx::event "event" object is uninitialized
+   *
+   * Also may throw exceptions originating from #get_event_profiling_info()
    */ // }}}
   cl_ulong get_profiling_command_queued() const;
   /** // doc: get_profiling_command_submit() {{{
-   * \todo Write documentation
+   * \brief Returns 64-bit value that describes the current device time counter
+   *        in nanoseconds when the command identified by event that has been
+   *        enqueued is submitted by the host to the device associated with the
+   *        command-queue
+   * \throw uninitialized_event_error
+   *    If the \ref clxx::event "event" object is uninitialized
+   *
+   * Also may throw exceptions originating from #get_event_profiling_info()
    */ // }}}
   cl_ulong get_profiling_command_submit() const;
   /** // doc: get_profiling_command_start() {{{
-   * \todo Write documentation
+   * \brief Returns 64-bit value that describes the current device time counter
+   *        in nanoseconds when the command identified by event starts
+   *        execution on the device
+   * \throw uninitialized_event_error
+   *    If the \ref clxx::event "event" object is uninitialized
+   *
+   * Also may throw exceptions originating from #get_event_profiling_info()
    */ // }}}
   cl_ulong get_profiling_command_start() const;
   /** // doc: get_profiling_command_end() {{{
-   * \todo Write documentation
+   * \brief Returns 64-bit value that describes the current device time counter
+   *        in nanoseconds when the command identified by event has finished
+   *        execution on the device
+   * \throw uninitialized_event_error
+   *    If the \ref clxx::event "event" object is uninitialized
+   *
+   * Also may throw exceptions originating from #get_event_profiling_info()
    */ // }}}
   cl_ulong get_profiling_command_end() const;
 #if CLXX_CL_H_VERSION_2_0
   /** // doc: get_profiling_command_complete() {{{
-   * \todo Write documentation
+   * \brief Returns 64-bit value that describes the current device time counter
+   *        in nanoseconds when the command identified by event and any child
+   *        commands enqueued by this command on the device have finished
+   *        execution
+   * \throw uninitialized_event_error
+   *    If the \ref clxx::event "event" object is uninitialized
+   *
+   * Also may throw exceptions originating from #get_event_profiling_info()
    */ // }}}
   cl_ulong get_profiling_command_complete() const;
 #endif

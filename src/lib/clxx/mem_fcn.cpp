@@ -3,7 +3,7 @@
 
 /** // doc: clxx/mem_fcn.cpp {{{
  * \file clxx/mem_fcn.cpp
- * \todo Write documentation
+ * \brief Implements mem object functions
  */ // }}}
 #include <clxx/mem_fcn.hpp>
 #include <clxx/functions.hpp>

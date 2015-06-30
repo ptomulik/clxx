@@ -12,7 +12,31 @@
 #include <string>
 #include <cstdio>
 
+/* ----------------------------------------------------------------------- */
 namespace clxx {
+/** \cond SHOW_IGNORED_COMPOUNDS */
+template<>
+cl_uint clobj<cl_device_id>::
+get_reference_count() const
+{
+#if CLXX_CL_H_VERSION_1_2
+  return _get_pod_info<cl_uint>(*this, info_t::reference_count);
+#else
+  // FIXME: elaborate how to generate a compile-time error here.
+  return 0u;
+#endif
+}
+/** \endcond */
+} // end namespace clxx
+
+namespace clxx {
+/* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_device_id>;
+static_assert(
+    sizeof(clobj<cl_device_id>) == sizeof(cl_device_id),
+    "sizeof(clobj<cl_device_id>) differs from sizeof(cl_device_id)"
+);
 /* ------------------------------------------------------------------------ */
 device_type_t device::
 get_type() const
@@ -441,12 +465,6 @@ std::vector<device_partition_property_t> device::
 get_partition_type() const
 {
   return _get_vec_info<device_partition_property_t>(*this, device_info_t::partition_type);
-}
-/* ------------------------------------------------------------------------ */
-cl_uint device::
-get_reference_count() const
-{
-  return _get_pod_info<cl_uint>(*this, device_info_t::reference_count);
 }
 /* ------------------------------------------------------------------------ */
 cl_bool device::

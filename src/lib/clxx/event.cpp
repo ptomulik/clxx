@@ -10,6 +10,13 @@
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_event>;
+static_assert(
+    sizeof(clobj<cl_event>) == sizeof(cl_event),
+    "sizeof(clobj<cl_event>) differs from sizeof(cl_event)"
+);
+/* ------------------------------------------------------------------------ */
 template<typename T> static T
 _get_pod_profiling_info(event const& p, profiling_info_t name)
 {
@@ -36,12 +43,6 @@ get_profiling_info(profiling_info_t name, size_t value_size, void* value,
       value,
       value_size_ret
   );
-}
-/* ----------------------------------------------------------------------- */
-cl_uint event::
-get_reference_count() const
-{
-  return _get_pod_info<cl_uint>(*this, event_info_t::reference_count);
 }
 /* ----------------------------------------------------------------------- */
 context event::

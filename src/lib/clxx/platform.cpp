@@ -11,6 +11,27 @@
 #include <clxx/clobj_impl.hpp>
 
 namespace clxx {
+/* ----------------------------------------------------------------------- */
+/** \cond SHOW_IGNORED_COMPOUNDS */
+template<>
+cl_uint clobj<cl_platform_id>::
+get_reference_count() const
+{
+  // FIXME: elaborate how to generate a compile-time error here.
+  return 0u;
+}
+/** \endcond */
+/* ----------------------------------------------------------------------- */
+}
+
+namespace clxx {
+/* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_platform_id>;
+static_assert(
+    sizeof(clobj<cl_platform_id>) == sizeof(cl_platform_id),
+    "sizeof(clobj<cl_platform_id>) differs from sizeof(cl_platform_id)"
+);
 /* ------------------------------------------------------------------------ */
 std::string platform::
 get_profile() const

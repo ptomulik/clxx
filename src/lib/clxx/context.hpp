@@ -34,7 +34,7 @@ namespace clxx {
  *
  * Although \ref context maintains internally reference count for its
  * \c cl_context handle, it doesn't prevent one from stealing the
- * \c cl_context handle (id(), get_valid_handle()). This gives rise to manipulate
+ * \c cl_context handle (handle(), get_valid_handle()). This gives rise to manipulate
  * the reference count outside of object. If you need to steal, use the
  * retrieved handle with care. If you retrieve the handle from \ref context
  * object, increase its reference count with \ref retain_context() as soon as
@@ -58,10 +58,53 @@ class alignas(cl_context) context
   : public clobj<cl_context>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_context> Base;
   using Base::Base;
+  /** // doc: context() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   context() = default;
+  /** // doc: context() {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   context(context const&) = default;
+  /** // doc: context(props, devs, pfn_notify, user_data) {{{
+   * \brief Constructor - create new OpenCL context (costly).
+   *
+   * This constructor calls \ref create_context() to create new OpenCL context
+   * and stores the returned \c cl_context handle to the newly created context
+   * object. It does not increment the reference count internally, as it
+   * obtains from OpenCL a new context with reference count set to 1.
+   *
+   * \param props
+   *    A context_properties object which defines properties of newly created
+   *    context.
+   * \param devs
+   *    A \ref clxx::devices object which provides a list of (unique) devices
+   *    or sub-devices for use with this context.
+   * \param pfn_notify
+   *    A callback function that can be registered by the application. This
+   *    callback function will be used by the OpenCL implementation to report
+   *    information on errors during context creation as well as errors that
+   *    occur at runtime in this context. This callback function may be called
+   *    asynchronously by the OpenCL implementation. It is the application’s
+   *    responsibility to ensure that the callback function is thread-safe. The
+   *    parameters to this callback function are:
+   *      - \c errinfo is a pointer to an error string,
+   *      - \c private_info and \c cb represent a pointer to binary data that
+   *        is returned by the OpenCL implementation that can be used to log
+   *        additional information helpful in debugging the error,
+   *      - \c user_data is a pointer to user supplied data.
+   * \param user_data
+   *    Will be passed as the \c user_data argument when \c pfn_notify is
+   *    called. \c user_data can be \c nullptr.
+   *
+   * In case of errors, this constructor may throw one of the exceptions
+   * defined by \ref context_properties_fill_array() and \ref create_context().
+   */ // }}}
   context(context_properties const& props, devices const& devs,
           void(*pfn_notify)(const char* errinfo,
                             const void* private_info, size_t cb,
@@ -111,18 +154,6 @@ public:
                             size_t cb,
                             void* user_data) = nullptr,
           void* user_data = nullptr);
-  /** // doc: get_reference_count() {{{
-   * \brief   Get reference count for the OpenCL context referred to by
-   *          \c this object.
-   *
-   * \return  The reference count for the OpenCL context referred to by
-   *          \c this object as returned by
-   *          get_context_info(this->_id, context_info_t::reference_count, ...)
-   *
-   * In case of errors, the method throws one of the exceptions defined
-   * by \ref get_context_info().
-   */ // }}}
-  cl_uint get_reference_count() const;
   /** // doc: get_reference_count() {{{
    * \brief   Get the number of devices in context.
    *

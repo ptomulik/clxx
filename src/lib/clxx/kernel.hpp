@@ -43,7 +43,7 @@ namespace clxx {
  *
  * Although \ref clxx::kernel "kernel" maintains internally reference count
  * for its \c cl_kernel handle, it doesn't prevent one from stealing the \c
- * cl_kernel handle (#id(), #get_valid_handle()). This gives rise to
+ * cl_kernel handle (#handle(), #get_valid_handle()). This gives rise to
  * manipulate the reference count outside of the \ref clxx::kernel "kernel"
  * object for the given OpenCL kernel object. If you need to steal, use the
  * retrieved handle with care. If you retrieve the handle from
@@ -73,9 +73,18 @@ class alignas(cl_kernel) kernel
   : public clobj<cl_kernel>
 {
 public:
+  /** // doc: Base {{{
+   * \brief Typedef for the base class type
+   */ // }}}
   typedef clobj<cl_kernel> Base;
   using Base::Base;
+  /** // doc: kernel() {{{
+   * \brief Default constructor, see \ref clobj::clobj()
+   */ // }}}
   kernel() = default;
+  /** // doc: kernel() {{{
+   * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
+   */ // }}}
   kernel(kernel const&) = default;
   /** // doc: kernel(prog, name) {{{
    * \brief Constructor
@@ -91,17 +100,6 @@ public:
    * Also throws exceptions originating from #create_kernel().
    */ // }}}
   kernel(program const& prog, std::string const& name);
-  /** // doc: get_reference_count() {{{
-   * \brief Get reference count for the kernel
-   *
-   * \returns reference count for the kernel.
-   *
-   * \throws uninitialized_kernel_error if the object was not initialized
-   *      properly (see \ref is_initialized()).
-   *
-   * It also throws exceptions originating fro \ref get_kernel_info().
-   */ // }}}
-  cl_uint get_reference_count() const;
   /** // doc: get_function_name() {{{
    * \brief Return the kernel function name
    * \returns A string with kernel function's name

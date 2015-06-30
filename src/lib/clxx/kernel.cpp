@@ -15,6 +15,13 @@
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_kernel>;
+static_assert(
+    sizeof(clobj<cl_kernel>) == sizeof(cl_kernel),
+    "sizeof(clobj<cl_kernel>) differs from sizeof(cl_kernel)"
+);
+/* ------------------------------------------------------------------------ */
 template<typename T> static T
 _get_arg_pod_info(kernel const& p, cl_uint arg_index, kernel_arg_info_t name)
 {
@@ -51,12 +58,6 @@ kernel(program const& prog, std::string const& name)
   // create_kernel() performs implicit retain, so we
   // don't have to retain it again here (thus 2 x false below)
   this->_set_handle(id, false, false);
-}
-/* ----------------------------------------------------------------------- */
-cl_uint kernel::
-get_reference_count() const
-{
-  return _get_pod_info<cl_uint>(*this, kernel_info_t::reference_count);
 }
 /* ----------------------------------------------------------------------- */
 std::string kernel::

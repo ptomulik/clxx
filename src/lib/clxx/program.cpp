@@ -16,6 +16,13 @@
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */
+// Instantiate the base class
+template class clobj<cl_program>;
+static_assert(
+    sizeof(clobj<cl_program>) == sizeof(cl_program),
+    "sizeof(clobj<cl_program>) differs from sizeof(cl_program)"
+);
+/* ------------------------------------------------------------------------ */
 template<class X>
 static boost::shared_array<size_t>
 _lengths(X const& x)
@@ -178,12 +185,6 @@ get_build_info(device const& dev, program_build_info_t name,
       value,
       value_size_ret
   );
-}
-/* ----------------------------------------------------------------------- */
-cl_uint program::
-get_reference_count() const
-{
-  return _get_pod_info<cl_uint>(*this, program_info_t::reference_count);
 }
 /* ----------------------------------------------------------------------- */
 context program::

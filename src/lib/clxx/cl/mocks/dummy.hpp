@@ -205,6 +205,8 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
+   * \param param_value Pointer to parameter value that is to be returned
+   * \param param_value_size_ret Size of the parameter value (\p param_value) to be returned
    */ // }}}
   Dummy_clGetPlatformInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
@@ -256,6 +258,8 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
+   * \param param_value Pointer to parameter value that is to be returned
+   * \param param_value_size_ret Size of the parameter value (\p param_value) to be returned
    */ // }}}
   Dummy_clGetDeviceInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
@@ -368,8 +372,8 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
-   * \param pv Pointer to parameter value that is to be returned
-   * \param pvs Size of the parameter value (\em pv) to be returned
+   * \param param_value Pointer to parameter value that is to be returned
+   * \param param_value_size_ret Size of the parameter value (\p param_value) to be returned
    */ // }}}
   Dummy_clGetContextInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
@@ -546,8 +550,8 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
-   * \param pv Pointer to the parameter value to be returned by a mock
-   * \param pvs Size of the parameter value \em pv
+   * \param param_value Pointer to the parameter value to be returned by a mock
+   * \param param_value_size_ret Size of the parameter value \p param_value
    */ // }}}
   Dummy_clGetCommandQueueInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
