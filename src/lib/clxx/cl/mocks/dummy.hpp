@@ -170,6 +170,8 @@ class Dummy_clGetPlatformIDs
     public T::Dummy_CallArgs<cl_uint, cl_platform_id*, cl_uint*>
 {
   cl_int _err;
+  cl_platform_id const* _platforms;
+  cl_uint const* _num_platforms;
   cl_int clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,
                           cl_uint* num_platforms);
 public:
@@ -177,8 +179,11 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
+   * \param platforms Pointer to the array of platform IDs to be returned
+   * \param num_platforms Pointer to an integer variable where the size of \p
+   *        platforms array is stored
    */ // }}}
-  Dummy_clGetPlatformIDs(cl_int err);
+  Dummy_clGetPlatformIDs(cl_int err, cl_platform_id const* platforms = nullptr, cl_uint const* num_platforms = nullptr);
 };
 /** // doc: Dummy_clGetPlatformInfo {{{
  * \brief Mock for clGetPlatformInfo OpenCL function.
@@ -215,6 +220,8 @@ class Dummy_clGetDeviceIDs
     public T::Dummy_CallArgs<cl_platform_id, cl_device_type, cl_uint, cl_device_id*, cl_uint*>
 {
   cl_int _err;
+  cl_device_id const* _devices;
+  cl_uint const* _num_devices;
   cl_int clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,
                         cl_uint num_entries, cl_device_id* devices,
                         cl_uint* num_devices);
@@ -223,8 +230,11 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
+   * \param devices Pointer to the array of device IDs to be returned
+   * \param num_devices Pointer to an integer variable where the size of
+   *        \p devices array is stored
    */ // }}}
-  Dummy_clGetDeviceIDs(cl_int err);
+  Dummy_clGetDeviceIDs(cl_int err, cl_device_id const* devices = nullptr, cl_uint const* num_devices = nullptr);
 };
 /** // doc: Dummy_clGetDeviceInfo {{{
  * \brief Mock for clGetDeviceInfo OpenCL function.
@@ -2016,11 +2026,19 @@ clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,
                  cl_uint* num_platforms)
 {
   call_with(num_entries, platforms, num_platforms);
+  if(platforms && _platforms && _num_platforms)
+    {
+      std::memcpy(platforms, _platforms, std::min(num_entries, *_num_platforms)*sizeof(cl_platform_id));
+    }
+  if(num_platforms && _num_platforms)
+    {
+      *num_platforms = *_num_platforms;
+    }
   return _err;
 }
 Dummy_clGetPlatformIDs::
-Dummy_clGetPlatformIDs(cl_int err)
-  : _err(err)
+Dummy_clGetPlatformIDs(cl_int err, cl_platform_id const* platforms, cl_uint const* num_platforms)
+  : _err(err), _platforms(platforms), _num_platforms(num_platforms)
 {
 }
 /* ------------------------------------------------------------------------- */
@@ -2052,11 +2070,19 @@ clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,
                cl_uint* num_devices)
 {
   call_with(platform, device_type, num_entries, devices, num_devices);
+  if(devices && _devices && _num_devices)
+    {
+      std::memcpy(devices, _devices, std::min(num_entries, *_num_devices)*sizeof(cl_device_id));
+    }
+  if(num_devices && _num_devices)
+    {
+      *num_devices = *_num_devices;
+    }
   return _err;
 }
 Dummy_clGetDeviceIDs::
-Dummy_clGetDeviceIDs(cl_int err)
-  : _err(err)
+Dummy_clGetDeviceIDs(cl_int err, cl_device_id const* devices, cl_uint const* num_devices)
+  : _err(err), _devices(devices), _num_devices(num_devices)
 {
 }
 /* ------------------------------------------------------------------------- */

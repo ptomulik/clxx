@@ -28,17 +28,6 @@ public:
    */ // }}}
   void test__ctor_0( )
   {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetPlatformIDs mock1;
-    T::Newton_clGetPlatformInfo mock2;
-    T::Newton_clGetDeviceIDs mock3;
-    T::Newton_clGetDeviceInfo mock4;
-
     TS_ASSERT_EQUALS(platform_layer().get_platforms().size(), 0);
     TS_ASSERT_EQUALS(platform_layer().get_devices().size(), 0);
   }

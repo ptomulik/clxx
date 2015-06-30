@@ -14,6 +14,7 @@
 #include <clxx/device.hpp>
 #include <clxx/exceptions.hpp>
 #include <clxx/cl/mock.hpp>
+#include <cstring>
 
 namespace clxx { class device_test__suite; }
 
@@ -34,8 +35,7 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    device d;
-    TS_ASSERT_EQUALS(d.handle(), reinterpret_cast<cl_device_id>(NULL));
+    TS_ASSERT_EQUALS(device().handle(), (cl_device_id)NULL);
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     TS_ASSERT(mockRetainDevice.never_called());
 #endif
@@ -55,8 +55,8 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     {
-      device d1(reinterpret_cast<cl_device_id>(0x1234ul));
-      TS_ASSERT_EQUALS(d1.handle(), reinterpret_cast<cl_device_id>(0x1234ul));
+      device d1((cl_device_id)0x1234ul);
+      TS_ASSERT_EQUALS(d1.handle(), (cl_device_id)0x1234ul);
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
       TS_ASSERT(mockRetainDevice.called_once_with((cl_device_id)0x1234ul));
 #endif
@@ -80,7 +80,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     {
-      device d1(reinterpret_cast<cl_device_id>(0x1234ul));
+      device d1((cl_device_id)0x1234ul);
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
       TS_ASSERT(mockRetainDevice.called_once_with((cl_device_id)0x1234ul));
 #endif
@@ -113,7 +113,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     {
-      device d1(reinterpret_cast<cl_device_id>(0x1234ul));
+      device d1((cl_device_id)0x1234ul);
       device d2;
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
       TS_ASSERT(mockRetainDevice.called_once_with((cl_device_id)0x1234ul));
@@ -147,7 +147,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     {
-      device d1(reinterpret_cast<cl_device_id>(0x1234ul));
+      device d1((cl_device_id)0x1234ul);
       device d2;
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
       TS_ASSERT(mockRetainDevice.called_once_with((cl_device_id)0x1234ul));
@@ -182,7 +182,7 @@ public:
    */ // }}}
   void test__is_initialized_2( )
   {
-    device d(reinterpret_cast<cl_device_id>(NULL));
+    device d((cl_device_id)NULL);
     TS_ASSERT(!d.is_initialized());
   }
   /** // doc: test__is_initialized_3() {{{
@@ -196,7 +196,7 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    device d(reinterpret_cast<cl_device_id>(0x1234ul));
+    device d((cl_device_id)0x1234ul);
     TS_ASSERT(d.is_initialized());
   }
   /** // doc: test__handle_1() {{{
@@ -210,8 +210,8 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    device d(reinterpret_cast<cl_device_id>(NULL));
-    TS_ASSERT_EQUALS(d.handle(),reinterpret_cast<cl_device_id>(NULL));
+    device d((cl_device_id)NULL);
+    TS_ASSERT_EQUALS(d.handle(),(cl_device_id)NULL);
   }
   /** // doc: test__handle_2() {{{
    * \brief Ensure that id() method works.
@@ -224,15 +224,15 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    device d(reinterpret_cast<cl_device_id>(0x1234ul));
-    TS_ASSERT_EQUALS(d.handle(),reinterpret_cast<cl_device_id>(0x1234ul));
+    device d((cl_device_id)0x1234ul);
+    TS_ASSERT_EQUALS(d.handle(),(cl_device_id)0x1234ul);
   }
   /** // doc: test__get_valid_handle_1() {{{
    * \brief Ensure that get_valid_handle() method works.
    */ // }}}
   void test__get_valid_handle_1( )
   {
-    device d(reinterpret_cast<cl_device_id>(NULL));
+    device d((cl_device_id)NULL);
     TS_ASSERT_THROWS(d.get_valid_handle(), uninitialized_device_error);
   }
   /** // doc: test__get_valid_handle_2() {{{
@@ -246,13 +246,13 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    device d(reinterpret_cast<cl_device_id>(0x1234ul));
-    TS_ASSERT_EQUALS(d.get_valid_handle(),reinterpret_cast<cl_device_id>(0x1234ul));
+    device d((cl_device_id)0x1234ul);
+    TS_ASSERT_EQUALS(d.get_valid_handle(),(cl_device_id)0x1234ul);
   }
-  /** // doc: test__get_info_wrong_id() {{{
-   * \brief Test get_info(device_info_t::profile, ...) on device object having wrong id.
+  /** // doc: test__get_info__1() {{{
+   * \brief Test device::get_info().
    */ // }}}
-  void test__get_info_wrong_id( )
+  void test__get_info__1( )
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -260,14 +260,70 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(reinterpret_cast<cl_device_id>(0x34556ul));
+    cl_device_type _type = CL_DEVICE_TYPE_GPU;
+    size_t _type_size = sizeof(_type);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_type, &_type_size);
+    device d((cl_device_id)0x1234);
+    size_t size;
+    d.get_info(device_info_t::type, 0, nullptr, &size);
+
+    TS_ASSERT_EQUALS(size, sizeof(device_type_t));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_TYPE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), 0u);
+    TS_ASSERT(std::get<3>(mock.calls().back()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == &size);
+  }
+  /** // doc: test__get_info__2() {{{
+   * \brief Test device::get_info().
+   */ // }}}
+  void test__get_info__2( )
+  {
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
+#endif
+    cl_device_type _type = CL_DEVICE_TYPE_GPU;
+    size_t _type_size = sizeof(_type);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_type, &_type_size);
+    device d((cl_device_id)0x1234);
+    device_type_t type;
+    size_t size;
+    d.get_info(device_info_t::type, sizeof(type), &type, &size);
+
+    TS_ASSERT_EQUALS(type, device_type_t::gpu);
+    TS_ASSERT_EQUALS(size, sizeof(device_type_t));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_TYPE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(type));
+    TS_ASSERT(std::get<3>(mock.calls().back()) == &type);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == &size);
+  }
+  /** // doc: test__get_info__invalid_device() {{{
+   * \brief Test device::get_info()
+   */ // }}}
+  void test__get_info__invalid_device( )
+  {
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
+#endif
+    T::Dummy_clGetDeviceInfo mock(CL_INVALID_DEVICE);
+    device d((cl_device_id)0x34556ul);
     TS_ASSERT_THROWS(d.get_info(device_info_t::profile, 0, NULL, NULL), clerror_no<status_t::invalid_device>);
   }
-  /** // doc: test__get_info_0() {{{
+  /** // doc: test__get_info__invalid_value() {{{
    * \brief Test get_info(0, ...).
    */ // }}}
-  void test__get_info_0( )
+  void test__get_info__invalid_value( )
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -275,15 +331,14 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(static_cast<device_info_t>(0), 0, NULL, &size), clerror_no<status_t::invalid_value>);
+    T::Dummy_clGetDeviceInfo mock(CL_INVALID_VALUE);
+    device d((cl_device_id)0x34556ul);
+    TS_ASSERT_THROWS(d.get_info(device_info_t::profile, 0, nullptr, nullptr), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_info_1() {{{
-   * \brief Test get_info(device_info_t::profile, 1, &value, NULL).
+  /** // doc: test__get_info__out_of_resources() {{{
+   * \brief Test get_info(0, ...).
    */ // }}}
-  void test__get_info_1( )
+  void test__get_info__out_of_resources( )
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -291,15 +346,14 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[1];
-    TS_ASSERT_THROWS(d.get_info(device_info_t::profile, 1, &value, NULL), clerror_no<status_t::invalid_value>);
+    T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_RESOURCES);
+    device d((cl_device_id)0x34556ul);
+    TS_ASSERT_THROWS(d.get_info(device_info_t::profile, 0, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
   }
-  /** // doc: test__get_info_type_0() {{{
-   * \brief Test get_info(device_info_t::type, 0, NULL, &size).
+  /** // doc: test__get_info__out_of_host_memory() {{{
+   * \brief Test get_info(0, ...).
    */ // }}}
-  void test__get_info_type_0( )
+  void test__get_info__out_of_host_memory( )
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -307,16 +361,14 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::type, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(device_type_t));
+    T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_HOST_MEMORY);
+    device d((cl_device_id)0x34556ul);
+    TS_ASSERT_THROWS(d.get_info(device_info_t::profile, 0, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
   }
-  /** // doc: test__get_info_type_1() {{{
-   * \brief Test get_info(device_info_t::type, ...).
+  /** // doc: test__get_info__unexpected_clerror() {{{
+   * \brief Test get_info(0, ...).
    */ // }}}
-  void test__get_info_type_1( )
+  void test__get_info__unexpected_clerror( )
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -324,4033 +376,14 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_type_t value;
-    d.get_info(device_info_t::type, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_type_t::cpu);
+    T::Dummy_clGetDeviceInfo mock((cl_int)-0x1234567);
+    device d((cl_device_id)0x34556ul);
+    TS_ASSERT_THROWS(d.get_info(device_info_t::profile, 0, nullptr, nullptr), unexpected_clerror);
   }
-  /** // doc: test__get_info_vendor_id_0() {{{
-   * \brief Test get_info(device_info_t::vendor_id, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_vendor_id_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::vendor_id, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_vendor_id_1() {{{
-   * \brief Test get_info(device_info_t::vendor_id, ...).
-   */ // }}}
-  void test__get_info_vendor_id_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::vendor_id, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0x1002);
-  }
-  /** // doc: test__get_info_vendor_id_2() {{{
-   * \brief Test get_info(device_info_t::vendor_id, ...).
-   */ // }}}
-  void test__get_info_vendor_id_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::vendor_id, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0x10de);
-  }
-  /** // doc: test__get_info_max_compute_units_0() {{{
-   * \brief Test get_info(device_info_t::max_compute_units, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_max_compute_units_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_compute_units, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_max_compute_units_1() {{{
-   * \brief Test get_info(device_info_t::max_compute_units, ...).
-   */ // }}}
-  void test__get_info_max_compute_units_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::max_compute_units, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16);
-  }
-  /** // doc: test__get_info_max_compute_units_2() {{{
-   * \brief Test get_info(device_info_t::max_compute_units, ...).
-   */ // }}}
-  void test__get_info_max_compute_units_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::max_compute_units, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 30);
-  }
-  /** // doc: test__get_info_max_work_item_dimensions_0() {{{
-   * \brief Test get_info(device_info_t::max_work_item_dimensions, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_max_work_item_dimensions_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_work_item_dimensions, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_max_work_item_dimensions_1() {{{
-   * \brief Test get_info(device_info_t::max_work_item_dimensions, ...).
-   */ // }}}
-  void test__get_info_max_work_item_dimensions_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::max_work_item_dimensions, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 3);
-  }
-  /** // doc: test__get_info_max_work_item_dimensions_2() {{{
-   * \brief Test get_info(device_info_t::max_work_item_dimensions, ...).
-   */ // }}}
-  void test__get_info_max_work_item_dimensions_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::max_work_item_dimensions, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 3);
-  }
-  /** // doc: test__get_info_max_work_item_sizes_0() {{{
-   * \brief Test get_info(device_info_t::max_work_item_sizes, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_max_work_item_sizes_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_work_item_sizes, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 3 * sizeof(size_t));
-  }
-  /** // doc: test__get_info_max_work_item_sizes_1() {{{
-   * \brief Test get_info(device_info_t::max_work_item_sizes, ...).
-   */ // }}}
-  void test__get_info_max_work_item_sizes_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value[3];
-    d.get_info(device_info_t::max_work_item_sizes, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value[0], 1024);
-    TS_ASSERT_EQUALS(value[1], 1024);
-    TS_ASSERT_EQUALS(value[2], 1024);
-  }
-  /** // doc: test__get_info_max_work_item_sizes_2() {{{
-   * \brief Test get_info(device_info_t::max_work_item_sizes, ...).
-   */ // }}}
-  void test__get_info_max_work_item_sizes_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value[3];
-    d.get_info(device_info_t::max_work_item_sizes, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value[0], 512);
-    TS_ASSERT_EQUALS(value[1], 512);
-    TS_ASSERT_EQUALS(value[2], 64);
-  }
-  /** // doc: test__get_info_max_work_group_size_0() {{{
-   * \brief Test get_info(device_info_t::max_work_group_size, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_max_work_group_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_work_group_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_max_work_group_size_1() {{{
-   * \brief Test get_info(device_info_t::max_work_group_size, ...).
-   */ // }}}
-  void test__get_info_max_work_group_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::max_work_group_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1024);
-  }
-  /** // doc: test__get_info_max_work_group_size_2() {{{
-   * \brief Test get_info(device_info_t::max_work_group_size, ...).
-   */ // }}}
-  void test__get_info_max_work_group_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::max_work_group_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 512);
-  }
-  /** // doc: test__get_info_preferred_vector_width_char_0() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_char, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_vector_width_char_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_vector_width_char, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_preferred_vector_width_char_1() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_char, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_char_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_char, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16);
-  }
-  /** // doc: test__get_info_preferred_vector_width_char_2() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_char, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_char_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_char, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_preferred_vector_width_short_0() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_short, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_vector_width_short_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_vector_width_short, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_preferred_vector_width_short_1() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_short, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_short_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_short, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 8);
-  }
-  /** // doc: test__get_info_preferred_vector_width_short_2() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_short, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_short_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_short, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_preferred_vector_width_int_0() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_int, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_vector_width_int_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_vector_width_int, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_preferred_vector_width_int_1() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_int, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_int_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_int, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4);
-  }
-  /** // doc: test__get_info_preferred_vector_width_int_2() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_int, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_int_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_int, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_preferred_vector_width_long_0() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_long, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_vector_width_long_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_vector_width_long, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_preferred_vector_width_long_1() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_long, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_long_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_long, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2);
-  }
-  /** // doc: test__get_info_preferred_vector_width_long_2() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_long, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_long_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_long, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_preferred_vector_width_float_0() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_float, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_vector_width_float_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_vector_width_float, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_preferred_vector_width_float_1() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_float, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_float_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_float, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4);
-  }
-  /** // doc: test__get_info_preferred_vector_width_float_2() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_float, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_float_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_float, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_preferred_vector_width_double_0() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_double, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_vector_width_double_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_vector_width_double, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_preferred_vector_width_double_1() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_double, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_double_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_double, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2);
-  }
-  /** // doc: test__get_info_preferred_vector_width_double_2() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_double, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_double_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_double, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_max_clock_frequency_0() {{{ * \brief Test get_info(device_info_t::max_clock_frequency, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_clock_frequency_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_clock_frequency, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_max_clock_frequency_1() {{{
-   * \brief Test get_info(device_info_t::max_clock_frequency, ...).
-   */ // }}}
-  void test__get_info_max_clock_frequency_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::max_clock_frequency, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2401);
-  }
-  /** // doc: test__get_info_max_clock_frequency_2() {{{
-   * \brief Test get_info(device_info_t::max_clock_frequency, ...).
-   */ // }}}
-  void test__get_info_max_clock_frequency_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::max_clock_frequency, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1296);
-  }
-  /** // doc: test__get_info_address_bits_0() {{{ * \brief Test get_info(device_info_t::address_bits, 0, NULL, &size).  */ // }}}
-  void test__get_info_address_bits_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::address_bits, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_address_bits_1() {{{
-   * \brief Test get_info(device_info_t::address_bits, ...).
-   */ // }}}
-  void test__get_info_address_bits_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::address_bits, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 64);
-  }
-  /** // doc: test__get_info_address_bits_2() {{{
-   * \brief Test get_info(device_info_t::address_bits, ...).
-   */ // }}}
-  void test__get_info_address_bits_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::address_bits, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 32);
-  }
-  /** // doc: test__get_info_max_mem_alloc_size_0() {{{ * \brief Test get_info(device_info_t::max_mem_alloc_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_mem_alloc_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_mem_alloc_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_ulong));
-  }
-  /** // doc: test__get_info_max_mem_alloc_size_1() {{{
-   * \brief Test get_info(device_info_t::max_mem_alloc_size, ...).
-   */ // }}}
-  void test__get_info_max_mem_alloc_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_ulong value;
-    d.get_info(device_info_t::max_mem_alloc_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4214191104ul);
-  }
-  /** // doc: test__get_info_max_mem_alloc_size_2() {{{
-   * \brief Test get_info(device_info_t::max_mem_alloc_size, ...).
-   */ // }}}
-  void test__get_info_max_mem_alloc_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_ulong value;
-    d.get_info(device_info_t::max_mem_alloc_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1073692672ul);
-  }
-  /** // doc: test__get_info_image_support_0() {{{ * \brief Test get_info(device_info_t::image_support, 0, NULL, &size).  */ // }}}
-  void test__get_info_image_support_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image_support, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_image_support_1() {{{
-   * \brief Test get_info(device_info_t::image_support, ...).
-   */ // }}}
-  void test__get_info_image_support_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::image_support, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_image_support_2() {{{
-   * \brief Test get_info(device_info_t::image_support, ...).
-   */ // }}}
-  void test__get_info_image_support_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    d.get_info(device_info_t::image_support, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_max_read_image_args_0() {{{ * \brief Test get_info(device_info_t::max_read_image_args, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_read_image_args_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_read_image_args, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_max_read_image_args_1() {{{
-   * \brief Test get_info(device_info_t::max_read_image_args, ...).
-   */ // }}}
-  void test__get_info_max_read_image_args_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::max_read_image_args, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 128);
-  }
-  /** // doc: test__get_info_max_read_image_args_2() {{{
-   * \brief Test get_info(device_info_t::max_read_image_args, ...).
-   */ // }}}
-  void test__get_info_max_read_image_args_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::max_read_image_args, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 128);
-  }
-  /** // doc: test__get_info_max_write_image_args_0() {{{ * \brief Test get_info(device_info_t::max_write_image_args, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_write_image_args_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_write_image_args, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_max_write_image_args_1() {{{
-   * \brief Test get_info(device_info_t::max_write_image_args, ...).
-   */ // }}}
-  void test__get_info_max_write_image_args_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::max_write_image_args, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 8);
-  }
-  /** // doc: test__get_info_max_write_image_args_2() {{{
-   * \brief Test get_info(device_info_t::max_write_image_args, ...).
-   */ // }}}
-  void test__get_info_max_write_image_args_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::max_write_image_args, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 8);
-  }
-  /** // doc: test__get_info_image2d_max_width_0() {{{ * \brief Test get_info(device_info_t::image2d_max_width, 0, NULL, &size).  */ // }}}
-  void test__get_info_image2d_max_width_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image2d_max_width, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_image2d_max_width_1() {{{
-   * \brief Test get_info(device_info_t::image2d_max_width, ...).
-   */ // }}}
-  void test__get_info_image2d_max_width_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::image2d_max_width, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 8192);
-  }
-  /** // doc: test__get_info_image2d_max_width_2() {{{
-   * \brief Test get_info(device_info_t::image2d_max_width, ...).
-   */ // }}}
-  void test__get_info_image2d_max_width_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::image2d_max_width, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4096);
-  }
-  /** // doc: test__get_info_image2d_max_height_0() {{{ * \brief Test get_info(device_info_t::image2d_max_height, 0, NULL, &size).  */ // }}}
-  void test__get_info_image2d_max_height_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image2d_max_height, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_image2d_max_height_1() {{{
-   * \brief Test get_info(device_info_t::image2d_max_height, ...).
-   */ // }}}
-  void test__get_info_image2d_max_height_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::image2d_max_height, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 8192);
-  }
-  /** // doc: test__get_info_image2d_max_height_2() {{{
-   * \brief Test get_info(device_info_t::image2d_max_height, ...).
-   */ // }}}
-  void test__get_info_image2d_max_height_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::image2d_max_height, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16383);
-  }
-  /** // doc: test__get_info_image3d_max_width_0() {{{ * \brief Test get_info(device_info_t::image3d_max_width, 0, NULL, &size).  */ // }}}
-  void test__get_info_image3d_max_width_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image3d_max_width, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_image3d_max_width_1() {{{
-   * \brief Test get_info(device_info_t::image3d_max_width, ...).
-   */ // }}}
-  void test__get_info_image3d_max_width_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::image3d_max_width, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_image3d_max_width_2() {{{
-   * \brief Test get_info(device_info_t::image3d_max_width, ...).
-   */ // }}}
-  void test__get_info_image3d_max_width_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::image3d_max_width, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_image3d_max_height_0() {{{ * \brief Test get_info(device_info_t::image3d_max_height, 0, NULL, &size).  */ // }}}
-  void test__get_info_image3d_max_height_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image3d_max_height, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_image3d_max_height_1() {{{
-   * \brief Test get_info(device_info_t::image3d_max_height, ...).
-   */ // }}}
-  void test__get_info_image3d_max_height_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::image3d_max_height, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_image3d_max_height_2() {{{
-   * \brief Test get_info(device_info_t::image3d_max_height, ...).
-   */ // }}}
-  void test__get_info_image3d_max_height_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::image3d_max_height, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_image3d_max_depth_0() {{{ * \brief Test get_info(device_info_t::image3d_max_depth, 0, NULL, &size).  */ // }}}
-  void test__get_info_image3d_max_depth_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image3d_max_depth, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_image3d_max_depth_1() {{{
-   * \brief Test get_info(device_info_t::image3d_max_depth, ...).
-   */ // }}}
-  void test__get_info_image3d_max_depth_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::image3d_max_depth, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_image3d_max_depth_2() {{{
-   * \brief Test get_info(device_info_t::image3d_max_depth, ...).
-   */ // }}}
-  void test__get_info_image3d_max_depth_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::image3d_max_depth, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_max_samplers_0() {{{ * \brief Test get_info(device_info_t::max_samplers, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_samplers_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_samplers, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_max_samplers_1() {{{
-   * \brief Test get_info(device_info_t::max_samplers, ...).
-   */ // }}}
-  void test__get_info_max_samplers_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::max_samplers, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16);
-  }
-  /** // doc: test__get_info_max_samplers_2() {{{
-   * \brief Test get_info(device_info_t::max_samplers, ...).
-   */ // }}}
-  void test__get_info_max_samplers_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::max_samplers, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16);
-  }
-  /** // doc: test__get_info_max_parameter_size_0() {{{ * \brief Test get_info(device_info_t::max_parameter_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_parameter_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_parameter_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_max_parameter_size_1() {{{
-   * \brief Test get_info(device_info_t::max_parameter_size, ...).
-   */ // }}}
-  void test__get_info_max_parameter_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::max_parameter_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4096);
-  }
-  /** // doc: test__get_info_max_parameter_size_2() {{{
-   * \brief Test get_info(device_info_t::max_parameter_size, ...).
-   */ // }}}
-  void test__get_info_max_parameter_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::max_parameter_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4352);
-  }
-  /** // doc: test__get_info_mem_base_addr_align_0() {{{ * \brief Test get_info(device_info_t::mem_base_addr_align, 0, NULL, &size).  */ // }}}
-  void test__get_info_mem_base_addr_align_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::mem_base_addr_align, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_mem_base_addr_align_1() {{{
-   * \brief Test get_info(device_info_t::mem_base_addr_align, ...).
-   */ // }}}
-  void test__get_info_mem_base_addr_align_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::mem_base_addr_align, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1024);
-  }
-  /** // doc: test__get_info_mem_base_addr_align_2() {{{
-   * \brief Test get_info(device_info_t::mem_base_addr_align, ...).
-   */ // }}}
-  void test__get_info_mem_base_addr_align_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::mem_base_addr_align, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_min_data_type_align_size_0() {{{ * \brief Test get_info(device_info_t::min_data_type_align_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_min_data_type_align_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::min_data_type_align_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_min_data_type_align_size_1() {{{
-   * \brief Test get_info(device_info_t::min_data_type_align_size, ...).
-   */ // }}}
-  void test__get_info_min_data_type_align_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::min_data_type_align_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 128);
-  }
-  /** // doc: test__get_info_min_data_type_align_size_2() {{{
-   * \brief Test get_info(device_info_t::min_data_type_align_size, ...).
-   */ // }}}
-  void test__get_info_min_data_type_align_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::min_data_type_align_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 128);
-  }
-  /** // doc: test__get_info_single_fp_config_0() {{{ * \brief Test get_info(device_info_t::single_fp_config, 0, NULL, &size).  */ // }}}
-  void test__get_info_single_fp_config_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::single_fp_config, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(device_fp_config_t));
-  }
-  /** // doc: test__get_info_single_fp_config_1() {{{
-   * \brief Test get_info(device_info_t::single_fp_config, ...).
-   */ // }}}
-  void test__get_info_single_fp_config_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_fp_config_t value;
-    d.get_info(device_info_t::single_fp_config, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_fp_config_t::denorm
-                          | device_fp_config_t::inf_nan
-                          | device_fp_config_t::round_to_nearest
-                          | device_fp_config_t::round_to_zero
-                          | device_fp_config_t::round_to_inf
-                          | device_fp_config_t::fma);
-  }
-  /** // doc: test__get_info_single_fp_config_2() {{{
-   * \brief Test get_info(device_info_t::single_fp_config, ...).
-   */ // }}}
-  void test__get_info_single_fp_config_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_fp_config_t value;
-    d.get_info(device_info_t::single_fp_config, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_fp_config_t::inf_nan
-                          | device_fp_config_t::round_to_nearest
-                          | device_fp_config_t::round_to_zero
-                          | device_fp_config_t::round_to_inf
-                          | device_fp_config_t::fma);
-  }
-  /** // doc: test__get_info_global_mem_cache_type_0() {{{ * \brief Test get_info(device_info_t::global_mem_cache_type, 0, NULL, &size).  */ // }}}
-  void test__get_info_global_mem_cache_type_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::global_mem_cache_type, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(device_mem_cache_type_t));
-  }
-  /** // doc: test__get_info_global_mem_cache_type_1() {{{
-   * \brief Test get_info(device_info_t::global_mem_cache_type, ...).
-   */ // }}}
-  void test__get_info_global_mem_cache_type_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_mem_cache_type_t value;
-    d.get_info(device_info_t::global_mem_cache_type, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_mem_cache_type_t::read_write_cache);
-  }
-  /** // doc: test__get_info_global_mem_cache_type_2() {{{
-   * \brief Test get_info(device_info_t::global_mem_cache_type, ...).
-   */ // }}}
-  void test__get_info_global_mem_cache_type_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_mem_cache_type_t value;
-    d.get_info(device_info_t::global_mem_cache_type, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_mem_cache_type_t::none);
-  }
-  /** // doc: test__get_info_global_mem_cacheline_size_0() {{{ * \brief Test get_info(device_info_t::global_mem_cacheline_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_global_mem_cacheline_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::global_mem_cacheline_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_global_mem_cacheline_size_1() {{{
-   * \brief Test get_info(device_info_t::global_mem_cacheline_size, ...).
-   */ // }}}
-  void test__get_info_global_mem_cacheline_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::global_mem_cacheline_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 64);
-  }
-  /** // doc: test__get_info_global_mem_cacheline_size_2() {{{
-   * \brief Test get_info(device_info_t::global_mem_cacheline_size, ...).
-   */ // }}}
-  void test__get_info_global_mem_cacheline_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::global_mem_cacheline_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_global_mem_cache_size_0() {{{ * \brief Test get_info(device_info_t::global_mem_cache_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_global_mem_cache_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::global_mem_cache_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_ulong));
-  }
-  /** // doc: test__get_info_global_mem_cache_size_1() {{{
-   * \brief Test get_info(device_info_t::global_mem_cache_size, ...).
-   */ // }}}
-  void test__get_info_global_mem_cache_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_ulong value;
-    d.get_info(device_info_t::global_mem_cache_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 32768ul);
-  }
-  /** // doc: test__get_info_global_mem_cache_size_2() {{{
-   * \brief Test get_info(device_info_t::global_mem_cache_size, ...).
-   */ // }}}
-  void test__get_info_global_mem_cache_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_ulong value;
-    d.get_info(device_info_t::global_mem_cache_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_global_mem_size_0() {{{ * \brief Test get_info(device_info_t::global_mem_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_global_mem_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::global_mem_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_ulong));
-  }
-  /** // doc: test__get_info_global_mem_size_1() {{{
-   * \brief Test get_info(device_info_t::global_mem_size, ...).
-   */ // }}}
-  void test__get_info_global_mem_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_ulong value;
-    d.get_info(device_info_t::global_mem_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16856764416ul);
-  }
-  /** // doc: test__get_info_global_mem_size_2() {{{
-   * \brief Test get_info(device_info_t::global_mem_size, ...).
-   */ // }}}
-  void test__get_info_global_mem_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_ulong value;
-    d.get_info(device_info_t::global_mem_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4294770688ul);
-  }
-  /** // doc: test__get_info_max_constant_buffer_size_0() {{{ * \brief Test get_info(device_info_t::max_constant_buffer_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_constant_buffer_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_constant_buffer_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_ulong));
-  }
-  /** // doc: test__get_info_max_constant_buffer_size_1() {{{
-   * \brief Test get_info(device_info_t::max_constant_buffer_size, ...).
-   */ // }}}
-  void test__get_info_max_constant_buffer_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_ulong value;
-    d.get_info(device_info_t::max_constant_buffer_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 65536);
-  }
-  /** // doc: test__get_info_max_constant_buffer_size_2() {{{
-   * \brief Test get_info(device_info_t::max_constant_buffer_size, ...).
-   */ // }}}
-  void test__get_info_max_constant_buffer_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_ulong value;
-    d.get_info(device_info_t::max_constant_buffer_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 65536);
-  }
-  /** // doc: test__get_info_max_constant_args_0() {{{ * \brief Test get_info(device_info_t::max_constant_args, 0, NULL, &size).  */ // }}}
-  void test__get_info_max_constant_args_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::max_constant_args, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_max_constant_args_1() {{{
-   * \brief Test get_info(device_info_t::max_constant_args, ...).
-   */ // }}}
-  void test__get_info_max_constant_args_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::max_constant_args, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 8);
-  }
-  /** // doc: test__get_info_max_constant_args_2() {{{
-   * \brief Test get_info(device_info_t::max_constant_args, ...).
-   */ // }}}
-  void test__get_info_max_constant_args_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::max_constant_args, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 9);
-  }
-  /** // doc: test__get_info_local_mem_type_0() {{{ * \brief Test get_info(device_info_t::local_mem_type, 0, NULL, &size).  */ // }}}
-  void test__get_info_local_mem_type_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::local_mem_type, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(device_local_mem_type_t));
-  }
-  /** // doc: test__get_info_local_mem_type_1() {{{
-   * \brief Test get_info(device_info_t::local_mem_type, ...).
-   */ // }}}
-  void test__get_info_local_mem_type_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_local_mem_type_t value;
-    d.get_info(device_info_t::local_mem_type, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_local_mem_type_t::global);
-  }
-  /** // doc: test__get_info_local_mem_type_2() {{{
-   * \brief Test get_info(device_info_t::local_mem_type, ...).
-   */ // }}}
-  void test__get_info_local_mem_type_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_local_mem_type_t value;
-    d.get_info(device_info_t::local_mem_type, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_local_mem_type_t::local);
-  }
-  /** // doc: test__get_info_local_mem_size_0() {{{ * \brief Test get_info(device_info_t::local_mem_size, 0, NULL, &size).  */ // }}}
-  void test__get_info_local_mem_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::local_mem_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_ulong));
-  }
-  /** // doc: test__get_info_local_mem_size_1() {{{
-   * \brief Test get_info(device_info_t::local_mem_size, ...).
-   */ // }}}
-  void test__get_info_local_mem_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_ulong value;
-    d.get_info(device_info_t::local_mem_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 32768);
-  }
-  /** // doc: test__get_info_local_mem_size_2() {{{
-   * \brief Test get_info(device_info_t::local_mem_size, ...).
-   */ // }}}
-  void test__get_info_local_mem_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_ulong value;
-    d.get_info(device_info_t::local_mem_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16384);
-  }
-  /** // doc: test__get_info_error_correction_support_0() {{{ * \brief Test get_info(device_info_t::error_correction_support, 0, NULL, &size).  */ // }}}
-  void test__get_info_error_correction_support_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::error_correction_support, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_error_correction_support_1() {{{
-   * \brief Test get_info(device_info_t::error_correction_support, ...).
-   */ // }}}
-  void test__get_info_error_correction_support_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::error_correction_support, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_error_correction_support_2() {{{
-   * \brief Test get_info(device_info_t::error_correction_support, ...).
-   */ // }}}
-  void test__get_info_error_correction_support_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    d.get_info(device_info_t::error_correction_support, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_profiling_timer_resolution_0() {{{ * \brief Test get_info(device_info_t::profiling_timer_resolution, 0, NULL, &size).  */ // }}}
-  void test__get_info_profiling_timer_resolution_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::profiling_timer_resolution, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_profiling_timer_resolution_1() {{{
-   * \brief Test get_info(device_info_t::profiling_timer_resolution, ...).
-   */ // }}}
-  void test__get_info_profiling_timer_resolution_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::profiling_timer_resolution, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_profiling_timer_resolution_2() {{{
-   * \brief Test get_info(device_info_t::profiling_timer_resolution, ...).
-   */ // }}}
-  void test__get_info_profiling_timer_resolution_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    d.get_info(device_info_t::profiling_timer_resolution, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1000);
-  }
-  /** // doc: test__get_info_endian_little_0() {{{ * \brief Test get_info(device_info_t::endian_little, 0, NULL, &size).  */ // }}}
-  void test__get_info_endian_little_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::endian_little, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_endian_little_1() {{{
-   * \brief Test get_info(device_info_t::endian_little, ...).
-   */ // }}}
-  void test__get_info_endian_little_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::endian_little, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_endian_little_2() {{{
-   * \brief Test get_info(device_info_t::endian_little, ...).
-   */ // }}}
-  void test__get_info_endian_little_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    d.get_info(device_info_t::endian_little, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_available_0() {{{ * \brief Test get_info(device_info_t::available, 0, NULL, &size).  */ // }}}
-  void test__get_info_available_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::available, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_available_1() {{{
-   * \brief Test get_info(device_info_t::available, ...).
-   */ // }}}
-  void test__get_info_available_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::available, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_available_2() {{{
-   * \brief Test get_info(device_info_t::available, ...).
-   */ // }}}
-  void test__get_info_available_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    d.get_info(device_info_t::available, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_compiler_available_0() {{{ * \brief Test get_info(device_info_t::compiler_available, 0, NULL, &size).  */ // }}}
-  void test__get_info_compiler_available_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::compiler_available, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_compiler_available_1() {{{
-   * \brief Test get_info(device_info_t::compiler_available, ...).
-   */ // }}}
-  void test__get_info_compiler_available_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::compiler_available, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_compiler_available_2() {{{
-   * \brief Test get_info(device_info_t::compiler_available, ...).
-   */ // }}}
-  void test__get_info_compiler_available_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    d.get_info(device_info_t::compiler_available, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_execution_capabilities_0() {{{
-   *  \brief Test get_info(device_info_t::execution_capabilities, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_execution_capabilities_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::execution_capabilities, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(device_exec_capabilities_t));
-  }
-  /** // doc: test__get_info_execution_capabilities_1() {{{
-   * \brief Test get_info(device_info_t::execution_capabilities, ...).
-   */ // }}}
-  void test__get_info_execution_capabilities_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_exec_capabilities_t value;
-    d.get_info(device_info_t::execution_capabilities, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_exec_capabilities_t::kernel | device_exec_capabilities_t::native_kernel);
-  }
-  /** // doc: test__get_info_execution_capabilities_2() {{{
-   * \brief Test get_info(device_info_t::execution_capabilities, ...).
-   */ // }}}
-  void test__get_info_execution_capabilities_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_exec_capabilities_t value;
-    d.get_info(device_info_t::execution_capabilities, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_exec_capabilities_t::kernel);
-  }
-  /** // doc: test__get_info_queue_properties_0() {{{ * \brief Test get_info(device_info_t::queue_properties, 0, NULL, &size).  */ // }}}
-  void test__get_info_queue_properties_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::queue_properties, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(command_queue_properties_t));
-  }
-  /** // doc: test__get_info_queue_properties_1() {{{
-   * \brief Test get_info(device_info_t::queue_properties, ...).
-   */ // }}}
-  void test__get_info_queue_properties_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    command_queue_properties_t value;
-    d.get_info(device_info_t::queue_properties, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, command_queue_properties_t::profiling_enable);
-  }
-  /** // doc: test__get_info_queue_properties_2() {{{
-   * \brief Test get_info(device_info_t::queue_properties, ...).
-   */ // }}}
-  void test__get_info_queue_properties_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    command_queue_properties_t value;
-    d.get_info(device_info_t::queue_properties, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, command_queue_properties_t::out_of_order_exec_mode_enable | command_queue_properties_t::profiling_enable);
-  }
-  /** // doc: test__get_info_platform_0() {{{ * \brief Test get_info(device_info_t::platform, 0, NULL, &size).  */ // }}}
-  void test__get_info_platform_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::platform, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_platform_id));
-  }
-  /** // doc: test__get_info_platform_1() {{{
-   * \brief Test get_info(device_info_t::platform, ...).
-   */ // }}}
-  void test__get_info_platform_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_platform_id value;
-    d.get_info(device_info_t::platform, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, T::Newton_clGetPlatformIDs::platforms[0]);
-  }
-  /** // doc: test__get_info_platform_2() {{{
-   * \brief Test get_info(device_info_t::platform, ...).
-   */ // }}}
-  void test__get_info_platform_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_platform_id value;
-    d.get_info(device_info_t::platform, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, T::Newton_clGetPlatformIDs::platforms[1]);
-  }
-  /** // doc: test__get_info_name_0() {{{
-   * \brief Test get_info(device_info_t::name, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_name_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    p.get_info(device_info_t::name, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 48);
-  }
-  /** // doc: test__get_info_name_1() {{{
-   * \brief Test get_info(device_info_t::name, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_name_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    p.get_info(device_info_t::name, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 12);
-  }
-//  /** // doc: test__get_info_name_2() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_name_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[48];
-    p.get_info(device_info_t::name, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "Intel(R) Xeon(R) CPU           E5620  @ 2.40GHz");
-  }
-//  /** // doc: test__get_info_name_3() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_name_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    char value[12];
-    p.get_info(device_info_t::name, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "Tesla C1060");
-  }
-  /** // doc: test__get_info_vendor_0() {{{
-   * \brief Test get_info(device_info_t::vendor, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_vendor_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    p.get_info(device_info_t::vendor, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 13);
-  }
-  /** // doc: test__get_info_vendor_1() {{{
-   * \brief Test get_info(device_info_t::vendor, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_vendor_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    p.get_info(device_info_t::vendor, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 19);
-  }
-//  /** // doc: test__get_info_vendor_2() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_vendor_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[13];
-    p.get_info(device_info_t::vendor, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "GenuineIntel");
-  }
-//  /** // doc: test__get_info_vendor_3() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_vendor_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    char value[20];
-    p.get_info(device_info_t::vendor, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "NVIDIA Corporation");
-  }
-  /** // doc: test__get_info_driver_version_0() {{{
-   * \brief Test get_info(device_info_t::driver_version, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_driver_version_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    p.get_info(device_info_t::driver_version, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 14);
-  }
-  /** // doc: test__get_info_driver_version_1() {{{
-   * \brief Test get_info(device_info_t::driver_version, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_driver_version_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    p.get_info(device_info_t::driver_version, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 7);
-  }
-//  /** // doc: test__get_info_driver_version_2() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_driver_version_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[14];
-    p.get_info(device_info_t::driver_version, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "1348.4 (sse2)");
-  }
-//  /** // doc: test__get_info_driver_version_3() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_driver_version_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    char value[7];
-    p.get_info(device_info_t::driver_version, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "319.76");
-  }
-  /** // doc: test__get_info_driver_profile_0() {{{
-   * \brief Test get_info(device_info_t::device_profile, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_driver_profile_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    p.get_info(device_info_t::profile, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 13);
-  }
-  /** // doc: test__get_info_device_profile_1() {{{
-   * \brief Test get_info(device_info_t::device_profile, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_device_profile_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    p.get_info(device_info_t::profile, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 13);
-  }
-//  /** // doc: test__get_info_device_profile_2() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_device_profile_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[13];
-    p.get_info(device_info_t::profile, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "FULL_PROFILE");
-  }
-//  /** // doc: test__get_info_device_profile_3() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_device_profile_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    char value[13];
-    p.get_info(device_info_t::profile, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "FULL_PROFILE");
-  }
-  /** // doc: test__get_info_version_0() {{{
-   * \brief Test get_info(device_info_t::device_version, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_version_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    p.get_info(device_info_t::version, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 28);
-  }
-  /** // doc: test__get_info_version_1() {{{
-   * \brief Test get_info(device_info_t::device_version, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_version_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    p.get_info(device_info_t::version, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 16);
-  }
-//  /** // doc: test__get_info_version_2() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_version_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[28];
-    p.get_info(device_info_t::version, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "OpenCL 1.2 AMD-APP (1348.4)");
-  }
-//  /** // doc: test__get_info_version_3() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_version_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    char value[16];
-    p.get_info(device_info_t::version, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "OpenCL 1.0 CUDA");
-  }
-  /** // doc: test__get_info_extensions_0() {{{
-   * \brief Test get_info(device_info_t::device_extensions, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_extensions_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    p.get_info(device_info_t::extensions, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 416);
-  }
-  /** // doc: test__get_info_extensions_1() {{{
-   * \brief Test get_info(device_info_t::device_extensions, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_extensions_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    p.get_info(device_info_t::extensions, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 281);
-  }
-//  /** // doc: test__get_info_extensions_2() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_extensions_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[416];
-    p.get_info(device_info_t::extensions, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "cl_khr_fp64 cl_amd_fp64 cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_int64_base_atomics cl_khr_int64_extended_atomics cl_khr_3d_image_writes cl_khr_byte_addressable_store cl_khr_gl_sharing cl_ext_device_fission cl_amd_device_attribute_query cl_amd_vec3 cl_amd_printf cl_amd_media_ops cl_amd_media_ops2 cl_amd_popcnt");
-  }
-//  /** // doc: test__get_info_extensions_3() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_extensions_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    char value[281];
-    p.get_info(device_info_t::extensions, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll  cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp6");
-  }
-#if CL_VERSION_1_2
-  /** // doc: test__get_info_double_fp_config_0() {{{
-   *  \brief Test get_info(device_info_t::double_fp_config, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_double_fp_config_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::double_fp_config, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(device_fp_config_t));
-  }
-  /** // doc: test__get_info_double_fp_config_1() {{{
-   *  \brief Test get_info(device_info_t::double_fp_config, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_double_fp_config_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::double_fp_config, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_double_fp_config_2() {{{
-   * \brief Test get_info(device_info_t::double_fp_config, ...).
-   */ // }}}
-  void test__get_info_double_fp_config_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_fp_config_t value;
-    d.get_info(device_info_t::double_fp_config, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_fp_config_t::denorm
-                          | device_fp_config_t::inf_nan
-                          | device_fp_config_t::round_to_nearest
-                          | device_fp_config_t::round_to_zero
-                          | device_fp_config_t::round_to_inf
-                          | device_fp_config_t::fma);
-  }
-  /** // doc: test__get_info_double_fp_config_3() {{{
-   * \brief Test get_info(device_info_t::double_fp_config, ...).
-   */ // }}}
-  void test__get_info_double_fp_config_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_fp_config_t value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::double_fp_config, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-#endif
-#if CL_VERSION_1_1
-  /** // doc: test__get_info_preferred_vector_width_half_0() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_half, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_vector_width_half_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_vector_width_half, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_preferred_vector_width_half_1() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_half, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_half_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_half, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2);
-  }
-  /** // doc: test__get_info_preferred_vector_width_half_2() {{{
-   * \brief Test get_info(device_info_t::preferred_vector_width_half, ...).
-   */ // }}}
-  void test__get_info_preferred_vector_width_half_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::preferred_vector_width_half, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_host_unified_memory_0() {{{
-   * \brief Test get_info(device_info_t::host_unified_memory, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_host_unified_memory_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::host_unified_memory, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_host_unified_memory_1() {{{
-   * \brief Test get_info(device_info_t::host_unified_memory, ...).
-   */ // }}}
-  void test__get_info_host_unified_memory_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::host_unified_memory, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_host_unified_memory_2() {{{
-   * \brief Test get_info(device_info_t::host_unified_memory, ...).
-   */ // }}}
-  void test__get_info_host_unified_memory_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    d.get_info(device_info_t::host_unified_memory, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_native_vector_width_char_0() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_char, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_native_vector_width_char_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::native_vector_width_char, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_native_vector_width_char_1() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_char, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_char_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_char, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16);
-  }
-  /** // doc: test__get_info_native_vector_width_char_2() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_char, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_char_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_char, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_native_vector_width_short_0() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_short, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_native_vector_width_short_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::native_vector_width_short, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_native_vector_width_short_1() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_short, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_short_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_short, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 8);
-  }
-  /** // doc: test__get_info_native_vector_width_short_2() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_short, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_short_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_short, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_native_vector_width_int_0() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_int, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_native_vector_width_int_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::native_vector_width_int, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_native_vector_width_int_1() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_int, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_int_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_int, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4);
-  }
-  /** // doc: test__get_info_native_vector_width_int_2() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_int, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_int_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_int, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_native_vector_width_long_0() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_long, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_native_vector_width_long_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::native_vector_width_long, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_native_vector_width_long_1() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_long, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_long_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_long, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2);
-  }
-  /** // doc: test__get_info_native_vector_width_long_2() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_long, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_long_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_long, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_native_vector_width_float_0() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_float, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_native_vector_width_float_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::native_vector_width_float, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_native_vector_width_float_1() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_float, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_float_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_float, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 4);
-  }
-  /** // doc: test__get_info_native_vector_width_float_2() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_float, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_float_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_float, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_native_vector_width_double_0() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_double, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_native_vector_width_double_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::native_vector_width_double, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_native_vector_width_double_1() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_double, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_double_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_double, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2);
-  }
-  /** // doc: test__get_info_native_vector_width_double_2() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_double, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_double_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_double, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_native_vector_width_half_0() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_half, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_native_vector_width_half_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::native_vector_width_half, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_native_vector_width_half_1() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_half, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_half_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_half, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2);
-  }
-  /** // doc: test__get_info_native_vector_width_half_2() {{{
-   * \brief Test get_info(device_info_t::native_vector_width_half, ...).
-   */ // }}}
-  void test__get_info_native_vector_width_half_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    d.get_info(device_info_t::native_vector_width_half, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-#endif
-#if CL_VERSION_1_2
-  /** // doc: test__get_info_linker_available_0() {{{
-   *  \brief Test get_info(device_info_t::linker_available, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_linker_available_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::linker_available, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_linker_available_1() {{{
-   *  \brief Test get_info(device_info_t::linker_available, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_linker_available_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::linker_available, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_linker_available_2() {{{
-   * \brief Test get_info(device_info_t::linker_available, ...).
-   */ // }}}
-  void test__get_info_linker_available_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::linker_available, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, CL_FALSE);
-  }
-  /** // doc: test__get_info_linker_available_3() {{{
-   * \brief Test get_info(device_info_t::linker_available, ...).
-   */ // }}}
-  void test__get_info_linker_available_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::linker_available, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_built_in_kernels_0() {{{
-   * \brief Test get_info(device_info_t::device_built_in_kernels, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_built_in_kernels_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    p.get_info(device_info_t::built_in_kernels, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 1);
-  }
-  /** // doc: test__get_info_built_in_kernels_1() {{{
-   * \brief Test get_info(device_info_t::device_built_in_kernels, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_built_in_kernels_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(p.get_info(device_info_t::built_in_kernels, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-//  /** // doc: test__get_info_built_in_kernels_2() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_built_in_kernels_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[0]);
-    char value[1];
-    p.get_info(device_info_t::built_in_kernels, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value, "");
-  }
-//  /** // doc: test__get_info_built_in_kernels_3() {{{
-//   * \brief Test get_info(device_info_t::profile, ...).
-//   */ // }}}
-  void test__get_info_built_in_kernels_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device p(T::Newton_clGetDeviceIDs::devices[1]);
-    char value[1];
-    TS_ASSERT_THROWS(p.get_info(device_info_t::built_in_kernels, sizeof(value), value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_max_buffer_size_0() {{{
-   *  \brief Test get_info(device_info_t::image_max_buffer_size, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_max_buffer_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image_max_buffer_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_image_max_buffer_size_1() {{{
-   *  \brief Test get_info(device_info_t::image_max_buffer_size, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_max_buffer_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_max_buffer_size, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_max_buffer_size_2() {{{
-   * \brief Test get_info(device_info_t::image_max_buffer_size, ...).
-   */ // }}}
-  void test__get_info_image_max_buffer_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::image_max_buffer_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 65536);
-  }
-  /** // doc: test__get_info_image_max_buffer_size_3() {{{
-   * \brief Test get_info(device_info_t::image_max_buffer_size, ...).
-   */ // }}}
-  void test__get_info_image_max_buffer_size_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_max_buffer_size, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_max_array_size_0() {{{
-   *  \brief Test get_info(device_info_t::image_max_array_size, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_max_array_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image_max_array_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_image_max_array_size_1() {{{
-   *  \brief Test get_info(device_info_t::image_max_array_size, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_max_array_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_max_array_size, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_max_array_size_2() {{{
-   * \brief Test get_info(device_info_t::image_max_array_size, ...).
-   */ // }}}
-  void test__get_info_image_max_array_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::image_max_array_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 2048);
-  }
-  /** // doc: test__get_info_image_max_array_size_3() {{{
-   * \brief Test get_info(device_info_t::image_max_array_size, ...).
-   */ // }}}
-  void test__get_info_image_max_array_size_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_max_array_size, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_parent_device_id_0() {{{
-   *  \brief Test get_info(device_info_t::parent_device, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_parent_device_id_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::parent_device, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_device_id));
-  }
-  /** // doc: test__get_info_parent_device_id_1() {{{
-   *  \brief Test get_info(device_info_t::parent_device, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_parent_device_id_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::parent_device, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_parent_device_id_2() {{{
-   * \brief Test get_info(device_info_t::parent_device, ...).
-   */ // }}}
-  void test__get_info_parent_device_id_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_device_id value;
-    d.get_info(device_info_t::parent_device, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, reinterpret_cast<cl_device_id>(NULL));
-  }
-  /** // doc: test__get_info_parent_device_id_3() {{{
-   * \brief Test get_info(device_info_t::parent_device, ...).
-   */ // }}}
-  void test__get_info_parent_device_id_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_device_id value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::parent_device, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_max_sub_devices_0() {{{
-   *  \brief Test get_info(device_info_t::partition_max_sub_devices, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_max_sub_devices_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::partition_max_sub_devices, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_partition_max_sub_devices_1() {{{
-   *  \brief Test get_info(device_info_t::partition_max_sub_devices, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_max_sub_devices_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_max_sub_devices, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_max_sub_devices_2() {{{
-   * \brief Test get_info(device_info_t::partition_max_sub_devices, ...).
-   */ // }}}
-  void test__get_info_partition_max_sub_devices_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::partition_max_sub_devices, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 16);
-  }
-  /** // doc: test__get_info_partition_max_sub_devices_3() {{{
-   * \brief Test get_info(device_info_t::partition_max_sub_devices, ...).
-   */ // }}}
-  void test__get_info_partition_max_sub_devices_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_max_sub_devices, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_properties_0() {{{
-   *  \brief Test get_info(device_info_t::partition_properties, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_properties_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::partition_properties, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 3 * sizeof(device_partition_property_t));
-  }
-  /** // doc: test__get_info_partition_properties_1() {{{
-   *  \brief Test get_info(device_info_t::partition_properties, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_properties_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_properties, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_properties_2() {{{
-   * \brief Test get_info(device_info_t::partition_properties, ...).
-   */ // }}}
-  void test__get_info_partition_properties_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_partition_property_t value[3];
-    d.get_info(device_info_t::partition_properties, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value[0], device_partition_property_t::equally);
-    TS_ASSERT_EQUALS(value[1], device_partition_property_t::by_counts);
-    TS_ASSERT_EQUALS(value[2], device_partition_property_t::by_affinity_domain);
-  }
-  /** // doc: test__get_info_partition_properties_3() {{{
-   * \brief Test get_info(device_info_t::partition_properties, ...).
-   */ // }}}
-  void test__get_info_partition_properties_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_partition_property_t value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_properties, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_affinity_domain_0() {{{
-   *  \brief Test get_info(device_info_t::partition_affinity_domain, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_affinity_domain_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::partition_affinity_domain, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(device_affinity_domain_t));
-  }
-  /** // doc: test__get_info_partition_affinity_domain_1() {{{
-   *  \brief Test get_info(device_info_t::partition_affinity_domain, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_affinity_domain_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_affinity_domain, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_affinity_domain_2() {{{
-   * \brief Test get_info(device_info_t::partition_affinity_domain, ...).
-   */ // }}}
-  void test__get_info_partition_affinity_domain_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_affinity_domain_t value;
-    d.get_info(device_info_t::partition_affinity_domain, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, device_affinity_domain_t::l3_cache
-                          | device_affinity_domain_t::l2_cache
-                          | device_affinity_domain_t::l1_cache
-                          | device_affinity_domain_t::next_partitionable);
-  }
-  /** // doc: test__get_info_partition_affinity_domain_3() {{{
-   * \brief Test get_info(device_info_t::partition_affinity_domain, ...).
-   */ // }}}
-  void test__get_info_partition_affinity_domain_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_affinity_domain_t value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_affinity_domain, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_type_0() {{{
-   *  \brief Test get_info(device_info_t::partition_type, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_type_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::partition_type, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, 0 * sizeof(device_partition_property_t));
-  }
-  /** // doc: test__get_info_partition_type_1() {{{
-   *  \brief Test get_info(device_info_t::partition_type, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_partition_type_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_type, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_partition_type_2() {{{
-   * \brief Test get_info(device_info_t::partition_type, ...).
-   */ // }}}
-  void test__get_info_partition_type_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_partition_property_t value[1] = { static_cast<device_partition_property_t>(0x1234) };
-    d.get_info(device_info_t::partition_type, sizeof(value), value, NULL);
-    TS_ASSERT_EQUALS(value[0], static_cast<device_partition_property_t>(0x1234) ); // unchanged
-  }
-  /** // doc: test__get_info_partition_type_3() {{{
-   * \brief Test get_info(device_info_t::partition_type, ...).
-   */ // }}}
-  void test__get_info_partition_type_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    device_partition_property_t value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::partition_type, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_reference_count_0() {{{
-   *  \brief Test get_info(device_info_t::reference_count, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_reference_count_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::reference_count, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_reference_count_1() {{{
-   *  \brief Test get_info(device_info_t::reference_count, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_reference_count_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::reference_count, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_reference_count_2() {{{
-   * \brief Test get_info(device_info_t::reference_count, ...).
-   */ // }}}
-  void test__get_info_reference_count_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::reference_count, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 1);
-  }
-  /** // doc: test__get_info_reference_count_3() {{{
-   * \brief Test get_info(device_info_t::reference_count, ...).
-   */ // }}}
-  void test__get_info_reference_count_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::reference_count, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_preferred_interop_user_sync_0() {{{
-   *  \brief Test get_info(device_info_t::preferred_interop_user_sync, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_interop_user_sync_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::preferred_interop_user_sync, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_bool));
-  }
-  /** // doc: test__get_info_preferred_interop_user_sync_1() {{{
-   *  \brief Test get_info(device_info_t::preferred_interop_user_sync, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_preferred_interop_user_sync_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::preferred_interop_user_sync, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_preferred_interop_user_sync_2() {{{
-   * \brief Test get_info(device_info_t::preferred_interop_user_sync, ...).
-   */ // }}}
-  void test__get_info_preferred_interop_user_sync_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_bool value;
-    d.get_info(device_info_t::preferred_interop_user_sync, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, CL_TRUE);
-  }
-  /** // doc: test__get_info_preferred_interop_user_sync_3() {{{
-   * \brief Test get_info(device_info_t::preferred_interop_user_sync, ...).
-   */ // }}}
-  void test__get_info_preferred_interop_user_sync_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_bool value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::preferred_interop_user_sync, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_printf_buffer_size_0() {{{
-   *  \brief Test get_info(device_info_t::printf_buffer_size, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_printf_buffer_size_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::printf_buffer_size, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(size_t));
-  }
-  /** // doc: test__get_info_printf_buffer_size_1() {{{
-   *  \brief Test get_info(device_info_t::printf_buffer_size, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_printf_buffer_size_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::printf_buffer_size, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_printf_buffer_size_2() {{{
-   * \brief Test get_info(device_info_t::printf_buffer_size, ...).
-   */ // }}}
-  void test__get_info_printf_buffer_size_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t value;
-    d.get_info(device_info_t::printf_buffer_size, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 65536);
-  }
-  /** // doc: test__get_info_printf_buffer_size_3() {{{
-   * \brief Test get_info(device_info_t::printf_buffer_size, ...).
-   */ // }}}
-  void test__get_info_printf_buffer_size_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::printf_buffer_size, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_pitch_alignment_0() {{{
-   *  \brief Test get_info(device_info_t::image_pitch_alignment, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_pitch_alignment_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image_pitch_alignment, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_image_pitch_alignment_1() {{{
-   *  \brief Test get_info(device_info_t::image_pitch_alignment, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_pitch_alignment_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_pitch_alignment, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_pitch_alignment_2() {{{
-   * \brief Test get_info(device_info_t::image_pitch_alignment, ...).
-   */ // }}}
-  void test__get_info_image_pitch_alignment_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::image_pitch_alignment, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_image_pitch_alignment_3() {{{
-   * \brief Test get_info(device_info_t::image_pitch_alignment, ...).
-   */ // }}}
-  void test__get_info_image_pitch_alignment_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_pitch_alignment, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_base_address_alignment_0() {{{
-   *  \brief Test get_info(device_info_t::image_base_address_alignment, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_base_address_alignment_0( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t size;
-    d.get_info(device_info_t::image_base_address_alignment, 0, NULL, &size);
-    TS_ASSERT_EQUALS(size, sizeof(cl_uint));
-  }
-  /** // doc: test__get_info_image_base_address_alignment_1() {{{
-   *  \brief Test get_info(device_info_t::image_base_address_alignment, 0, NULL, &size).
-   */ // }}}
-  void test__get_info_image_base_address_alignment_1( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t size;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_base_address_alignment, 0, NULL, &size), clerror_no<status_t::invalid_value>);
-  }
-  /** // doc: test__get_info_image_base_address_alignment_2() {{{
-   * \brief Test get_info(device_info_t::image_base_address_alignment, ...).
-   */ // }}}
-  void test__get_info_image_base_address_alignment_2( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    cl_uint value;
-    d.get_info(device_info_t::image_base_address_alignment, sizeof(value), &value, NULL);
-    TS_ASSERT_EQUALS(value, 0);
-  }
-  /** // doc: test__get_info_image_base_address_alignment_3() {{{
-   * \brief Test get_info(device_info_t::image_base_address_alignment, ...).
-   */ // }}}
-  void test__get_info_image_base_address_alignment_3( )
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    cl_uint value;
-    TS_ASSERT_THROWS(d.get_info(device_info_t::image_base_address_alignment, sizeof(value), &value, NULL), clerror_no<status_t::invalid_value>);
-  }
-#endif
-  /** // doc: test__get_type_1() {{{
+  /** // doc: test__get_type() {{{
    * \brief Test get_type()
    */ // }}}
-  void test__get_type_1()
+  void test__get_type()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4358,29 +391,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_type(), device_type_t::cpu);
+    cl_device_type _value = CL_DEVICE_TYPE_GPU;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_type(), device_type_t::gpu);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_TYPE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(device_type_t));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_type_2() {{{
-   * \brief Test get_type()
-   */ // }}}
-  void test__get_type_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_type(), device_type_t::gpu);
-  }
-  /** // doc: test__get_vendor_id_1() {{{
+  /** // doc: test__get_vendor_id() {{{
    * \brief Test get_vendor_id()
    */ // }}}
-  void test__get_vendor_id_1()
+  void test__get_vendor_id()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4388,29 +415,24 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_vendor_id(), 0x1002);
+
+    cl_uint _value = 0x102;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_vendor_id(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_VENDOR_ID);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_vendor_id_2() {{{
-   * \brief Test get_vendor_id()
-   */ // }}}
-  void test__get_vendor_id_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_vendor_id(), 0x10de);
-  }
-  /** // doc: test__get_max_compute_units_1() {{{
+  /** // doc: test__get_max_compute_units() {{{
    * \brief Test get_max_compute_units()
    */ // }}}
-  void test__get_max_compute_units_1()
+  void test__get_max_compute_units()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4418,29 +440,24 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_compute_units(), 16);
+
+    cl_uint _value = 16u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_compute_units(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_COMPUTE_UNITS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_compute_units_2() {{{
-   * \brief Test get_max_compute_units()
-   */ // }}}
-  void test__get_max_compute_units_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_compute_units(), 30);
-  }
-  /** // doc: test__get_max_work_item_dimensions_1() {{{
+  /** // doc: test__get_max_work_item_dimensions() {{{
    * \brief Test get_max_work_item_dimensions()
    */ // }}}
-  void test__get_max_work_item_dimensions_1()
+  void test__get_max_work_item_dimensions()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4448,29 +465,24 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_work_item_dimensions(), 3);
+
+    cl_uint _value = 3u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_work_item_dimensions(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_work_item_dimensions_2() {{{
-   * \brief Test get_max_work_item_dimensions()
-   */ // }}}
-  void test__get_max_work_item_dimensions_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_work_item_dimensions(), 3);
-  }
-  /** // doc: test__get_max_work_item_sizes_1() {{{
+  /** // doc: test__get_max_work_item_sizes() {{{
    * \brief Test get_max_work_item_sizes()
    */ // }}}
-  void test__get_max_work_item_sizes_1()
+  void test__get_max_work_item_sizes()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4478,31 +490,30 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    size_t sizes[3] = {1024, 1024, 1024};
-    TS_ASSERT_EQUALS(d.get_max_work_item_sizes(), std::vector<size_t>(sizes,sizes+3));
+    size_t _value[] = { 512ul, 512ul, 64ul }; 
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_work_item_sizes(),
+                     std::vector<size_t>(_value, _value+3ul));
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_MAX_WORK_ITEM_SIZES);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_WORK_ITEM_SIZES);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_work_item_sizes_2() {{{
-   * \brief Test get_max_work_item_sizes()
-   */ // }}}
-  void test__get_max_work_item_sizes_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    size_t sizes[3] = {512, 512, 64};
-    TS_ASSERT_EQUALS(d.get_max_work_item_sizes(), std::vector<size_t>(sizes,sizes+3));
-  }
-  /** // doc: test__get_max_work_group_size_1() {{{
+  /** // doc: test__get_max_work_group_size() {{{
    * \brief Test get_max_work_group_size()
    */ // }}}
-  void test__get_max_work_group_size_1()
+  void test__get_max_work_group_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4510,29 +521,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_work_group_size(), 1024);
+    size_t _value = 1024u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_work_group_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_WORK_GROUP_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_work_group_size_2() {{{
-   * \brief Test get_max_work_group_size()
-   */ // }}}
-  void test__get_max_work_group_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_work_group_size(), 512);
-  }
-  /** // doc: test__get_preferred_vector_width_char_1() {{{
+  /** // doc: test__get_preferred_vector_width_char() {{{
    * \brief Test get_preferred_vector_width_char()
    */ // }}}
-  void test__get_preferred_vector_width_char_1()
+  void test__get_preferred_vector_width_char()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4540,29 +545,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_char(), 16);
+    cl_uint _value = 1u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_vector_width_char(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_VECTOR_WIDTH_CHAR);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_preferred_vector_width_char_2() {{{
-   * \brief Test get_preferred_vector_width_char()
-   */ // }}}
-  void test__get_preferred_vector_width_char_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_char(), 1);
-  }
-  /** // doc: test__get_preferred_vector_width_short_1() {{{
+  /** // doc: test__get_preferred_vector_width_short() {{{
    * \brief Test get_preferred_vector_width_short()
    */ // }}}
-  void test__get_preferred_vector_width_short_1()
+  void test__get_preferred_vector_width_short()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4570,24 +569,18 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_short(), 8);
-  }
-  /** // doc: test__get_preferred_vector_width_short_2() {{{
-   * \brief Test get_preferred_vector_width_short()
-   */ // }}}
-  void test__get_preferred_vector_width_short_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_short(), 1);
+    cl_uint _value = 1u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_vector_width_short(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_VECTOR_WIDTH_SHORT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
   /** // doc: test__get_preferred_vector_width_int_1() {{{
    * \brief Test get_preferred_vector_width_int()
@@ -4600,29 +593,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_int(), 4);
+    cl_uint _value = 1u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_vector_width_int(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_VECTOR_WIDTH_INT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_preferred_vector_width_int_2() {{{
-   * \brief Test get_preferred_vector_width_int()
-   */ // }}}
-  void test__get_preferred_vector_width_int_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_int(), 1);
-  }
-  /** // doc: test__get_preferred_vector_width_long_1() {{{
+  /** // doc: test__get_preferred_vector_width_long() {{{
    * \brief Test get_preferred_vector_width_long()
    */ // }}}
-  void test__get_preferred_vector_width_long_1()
+  void test__get_preferred_vector_width_long()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4630,29 +617,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_long(), 2);
+    cl_uint _value = 1u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_vector_width_long(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_VECTOR_WIDTH_LONG);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_preferred_vector_width_long_2() {{{
-   * \brief Test get_preferred_vector_width_long()
-   */ // }}}
-  void test__get_preferred_vector_width_long_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_long(), 1);
-  }
-  /** // doc: test__get_preferred_vector_width_float_1() {{{
+  /** // doc: test__get_preferred_vector_width_float() {{{
    * \brief Test get_preferred_vector_width_float()
    */ // }}}
-  void test__get_preferred_vector_width_float_1()
+  void test__get_preferred_vector_width_float()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4660,29 +641,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_float(), 4);
+    cl_uint _value = 1u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_vector_width_float(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_preferred_vector_width_float_2() {{{
-   * \brief Test get_preferred_vector_width_float()
-   */ // }}}
-  void test__get_preferred_vector_width_float_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_float(), 1);
-  }
-  /** // doc: test__get_preferred_vector_width_double_1() {{{
+  /** // doc: test__get_preferred_vector_width_double() {{{
    * \brief Test get_preferred_vector_width_double()
    */ // }}}
-  void test__get_preferred_vector_width_double_1()
+  void test__get_preferred_vector_width_double()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4690,29 +665,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_double(), 2);
+    cl_uint _value = 1u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_vector_width_double(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_preferred_vector_width_double_2() {{{
-   * \brief Test get_preferred_vector_width_double()
-   */ // }}}
-  void test__get_preferred_vector_width_double_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_double(), 1);
-  }
-  /** // doc: test__get_max_clock_frequency_1() {{{
+  /** // doc: test__get_max_clock_frequency() {{{
    * \brief Test get_max_clock_frequency()
    */ // }}}
-  void test__get_max_clock_frequency_1()
+  void test__get_max_clock_frequency()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4720,29 +689,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_clock_frequency(), 2401);
+    cl_uint _value = 1000000000ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_clock_frequency(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_CLOCK_FREQUENCY);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_clock_frequency_2() {{{
-   * \brief Test get_max_clock_frequency()
-   */ // }}}
-  void test__get_max_clock_frequency_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_clock_frequency(), 1296);
-  }
-  /** // doc: test__get_address_bits_1() {{{
+  /** // doc: test__get_address_bits() {{{
    * \brief Test get_address_bits()
    */ // }}}
-  void test__get_address_bits_1()
+  void test__get_address_bits()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4750,29 +713,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_address_bits(), 64);
+    cl_uint _value = 32u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_address_bits(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_ADDRESS_BITS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_address_bits_2() {{{
-   * \brief Test get_address_bits()
-   */ // }}}
-  void test__get_address_bits_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_address_bits(), 32);
-  }
-  /** // doc: test__get_max_mem_alloc_size_1() {{{
+  /** // doc: test__get_max_mem_alloc_size() {{{
    * \brief Test get_max_mem_alloc_size()
    */ // }}}
-  void test__get_max_mem_alloc_size_1()
+  void test__get_max_mem_alloc_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4780,29 +737,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_mem_alloc_size(), 4214191104ul);
+    cl_ulong _value = 4214191104ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_mem_alloc_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_MEM_ALLOC_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_mem_alloc_size_2() {{{
-   * \brief Test get_max_mem_alloc_size()
-   */ // }}}
-  void test__get_max_mem_alloc_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_mem_alloc_size(), 1073692672ul);
-  }
-  /** // doc: test__get_image_support_1() {{{
+  /** // doc: test__get_image_support() {{{
    * \brief Test get_image_support()
    */ // }}}
-  void test__get_image_support_1()
+  void test__get_image_support()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4810,29 +761,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image_support(), CL_TRUE);
+    cl_bool _value = CL_TRUE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image_support(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE_SUPPORT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_image_support_2() {{{
-   * \brief Test get_image_support()
-   */ // }}}
-  void test__get_image_support_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_image_support(), CL_TRUE);
-  }
-  /** // doc: test__get_max_read_image_args_1() {{{
+  /** // doc: test__get_max_read_image_args() {{{
    * \brief Test get_max_read_image_args()
    */ // }}}
-  void test__get_max_read_image_args_1()
+  void test__get_max_read_image_args()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4840,29 +785,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_read_image_args(), 128);
+    cl_uint _value = 128u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_read_image_args(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_READ_IMAGE_ARGS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_read_image_args_2() {{{
-   * \brief Test get_max_read_image_args()
-   */ // }}}
-  void test__get_max_read_image_args_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_read_image_args(), 128);
-  }
-  /** // doc: test__get_max_write_image_args_1() {{{
+  /** // doc: test__get_max_write_image_args() {{{
    * \brief Test get_max_write_image_args()
    */ // }}}
-  void test__get_max_write_image_args_1()
+  void test__get_max_write_image_args()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4870,29 +809,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_write_image_args(), 8);
+    cl_uint _value = 8u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_write_image_args(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_WRITE_IMAGE_ARGS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_write_image_args_2() {{{
-   * \brief Test get_max_write_image_args()
-   */ // }}}
-  void test__get_max_write_image_args_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_write_image_args(), 8);
-  }
-  /** // doc: test__get_image2d_max_width_1() {{{
+  /** // doc: test__get_image2d_max_width() {{{
    * \brief Test get_image2d_max_width()
    */ // }}}
-  void test__get_image2d_max_width_1()
+  void test__get_image2d_max_width()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4900,29 +833,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image2d_max_width(), 8192);
+    size_t _value = 8192ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image2d_max_width(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE2D_MAX_WIDTH);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_image2d_max_width_2() {{{
-   * \brief Test get_image2d_max_width()
-   */ // }}}
-  void test__get_image2d_max_width_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_image2d_max_width(), 4096);
-  }
-  /** // doc: test__get_image2d_max_height_1() {{{
+  /** // doc: test__get_image2d_max_height() {{{
    * \brief Test get_image2d_max_height()
    */ // }}}
-  void test__get_image2d_max_height_1()
+  void test__get_image2d_max_height()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4930,29 +857,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image2d_max_height(), 8192);
+    size_t _value = 8192ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image2d_max_height(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE2D_MAX_HEIGHT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_image2d_max_height_2() {{{
-   * \brief Test get_image2d_max_height()
-   */ // }}}
-  void test__get_image2d_max_height_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_image2d_max_height(), 16383);
-  }
-  /** // doc: test__get_image3d_max_width_1() {{{
+  /** // doc: test__get_image3d_max_width() {{{
    * \brief Test get_image3d_max_width()
    */ // }}}
-  void test__get_image3d_max_width_1()
+  void test__get_image3d_max_width()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4960,29 +881,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image3d_max_width(), 2048);
+    size_t _value = 2048ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image3d_max_width(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE3D_MAX_WIDTH);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_image3d_max_width_2() {{{
-   * \brief Test get_image3d_max_width()
-   */ // }}}
-  void test__get_image3d_max_width_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_image3d_max_width(), 2048);
-  }
-  /** // doc: test__get_image3d_max_height_1() {{{
+  /** // doc: test__get_image3d_max_height() {{{
    * \brief Test get_image3d_max_height()
    */ // }}}
-  void test__get_image3d_max_height_1()
+  void test__get_image3d_max_height()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -4990,29 +905,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image3d_max_height(), 2048);
+    size_t _value = 2048ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image3d_max_height(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE3D_MAX_HEIGHT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_image3d_max_height_2() {{{
-   * \brief Test get_image3d_max_height()
-   */ // }}}
-  void test__get_image3d_max_height_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_image3d_max_height(), 2048);
-  }
-  /** // doc: test__get_image3d_max_depth_1() {{{
+  /** // doc: test__get_image3d_max_depth() {{{
    * \brief Test get_image3d_max_depth()
    */ // }}}
-  void test__get_image3d_max_depth_1()
+  void test__get_image3d_max_depth()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5020,29 +929,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image3d_max_depth(), 2048);
+    size_t _value = 2048ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image3d_max_depth(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE3D_MAX_DEPTH);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_image3d_max_depth_2() {{{
-   * \brief Test get_image3d_max_depth()
-   */ // }}}
-  void test__get_image3d_max_depth_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_image3d_max_depth(), 2048);
-  }
-  /** // doc: test__get_max_samplers_1() {{{
+  /** // doc: test__get_max_samplers() {{{
    * \brief Test get_max_samplers()
    */ // }}}
-  void test__get_max_samplers_1()
+  void test__get_max_samplers()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5050,29 +953,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_samplers(), 16);
+    cl_uint _value = 16u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_samplers(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_SAMPLERS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_samplers_2() {{{
-   * \brief Test get_max_samplers()
-   */ // }}}
-  void test__get_max_samplers_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_samplers(), 16);
-  }
-  /** // doc: test__get_max_parameter_size_1() {{{
+  /** // doc: test__get_max_parameter_size() {{{
    * \brief Test get_max_parameter_size()
    */ // }}}
-  void test__get_max_parameter_size_1()
+  void test__get_max_parameter_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5080,29 +977,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_parameter_size(), 4096);
+    size_t _value = 4096ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_parameter_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_PARAMETER_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_parameter_size_2() {{{
-   * \brief Test get_max_parameter_size()
-   */ // }}}
-  void test__get_max_parameter_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_parameter_size(), 4352);
-  }
-  /** // doc: test__get_mem_base_addr_align_1() {{{
+  /** // doc: test__get_mem_base_addr_align() {{{
    * \brief Test get_mem_base_addr_align()
    */ // }}}
-  void test__get_mem_base_addr_align_1()
+  void test__get_mem_base_addr_align()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5110,29 +1001,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_mem_base_addr_align(), 1024);
+    cl_uint _value = 1024u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_mem_base_addr_align(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MEM_BASE_ADDR_ALIGN);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_mem_base_addr_align_2() {{{
-   * \brief Test get_mem_base_addr_align()
-   */ // }}}
-  void test__get_mem_base_addr_align_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_mem_base_addr_align(), 2048);
-  }
-  /** // doc: test__get_min_data_type_align_size_1() {{{
+  /** // doc: test__get_min_data_type_align_size() {{{
    * \brief Test get_min_data_type_align_size()
    */ // }}}
-  void test__get_min_data_type_align_size_1()
+  void test__get_min_data_type_align_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5140,29 +1025,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_min_data_type_align_size(), 128);
+    cl_uint _value = 128u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_min_data_type_align_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MIN_DATA_TYPE_ALIGN_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_min_data_type_align_size_2() {{{
-   * \brief Test get_min_data_type_align_size()
-   */ // }}}
-  void test__get_min_data_type_align_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_min_data_type_align_size(), 128);
-  }
-  /** // doc: test__get_single_fp_config_1() {{{
+  /** // doc: test__get_single_fp_config() {{{
    * \brief Test get_single_fp_config()
    */ // }}}
-  void test__get_single_fp_config_1()
+  void test__get_single_fp_config()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5170,38 +1049,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_single_fp_config(), device_fp_config_t::denorm
-                                             | device_fp_config_t::inf_nan
-                                             | device_fp_config_t::round_to_nearest
-                                             | device_fp_config_t::round_to_zero
-                                             | device_fp_config_t::round_to_inf
-                                             | device_fp_config_t::fma);
+    cl_device_fp_config _value = CL_FP_DENORM | CL_FP_INF_NAN | CL_FP_FMA;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_single_fp_config(), static_cast<device_fp_config_t>(_value));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_SINGLE_FP_CONFIG);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_single_fp_config_2() {{{
-   * \brief Test get_single_fp_config()
-   */ // }}}
-  void test__get_single_fp_config_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_single_fp_config(), device_fp_config_t::inf_nan
-                                             | device_fp_config_t::round_to_nearest
-                                             | device_fp_config_t::round_to_zero
-                                             | device_fp_config_t::round_to_inf
-                                             | device_fp_config_t::fma);
-  }
-  /** // doc: test__get_global_mem_cache_type_1() {{{
+  /** // doc: test__get_global_mem_cache_type() {{{
    * \brief Test get_global_mem_cache_type()
    */ // }}}
-  void test__get_global_mem_cache_type_1()
+  void test__get_global_mem_cache_type()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5209,29 +1073,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_global_mem_cache_type(), device_mem_cache_type_t::read_write_cache);
+    cl_device_mem_cache_type _value = CL_READ_WRITE_CACHE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_global_mem_cache_type(), static_cast<device_mem_cache_type_t>(_value));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_GLOBAL_MEM_CACHE_TYPE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_global_mem_cache_type_2() {{{
-   * \brief Test get_global_mem_cache_type()
-   */ // }}}
-  void test__get_global_mem_cache_type_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_global_mem_cache_type(), device_mem_cache_type_t::none);
-  }
-  /** // doc: test__get_global_mem_cacheline_size_1() {{{
+  /** // doc: test__get_global_mem_cacheline_size() {{{
    * \brief Test get_global_mem_cacheline_size()
    */ // }}}
-  void test__get_global_mem_cacheline_size_1()
+  void test__get_global_mem_cacheline_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5239,29 +1097,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_global_mem_cacheline_size(), 64);
+    cl_uint _value = 64;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_global_mem_cacheline_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_GLOBAL_MEM_CACHELINE_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_global_mem_cacheline_size_2() {{{
-   * \brief Test get_global_mem_cacheline_size()
-   */ // }}}
-  void test__get_global_mem_cacheline_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_global_mem_cacheline_size(), 0);
-  }
-  /** // doc: test__get_global_mem_cache_size_1() {{{
+  /** // doc: test__get_global_mem_cache_size() {{{
    * \brief Test get_global_mem_cache_size()
    */ // }}}
-  void test__get_global_mem_cache_size_1()
+  void test__get_global_mem_cache_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5269,29 +1121,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_global_mem_cache_size(), 32768ul);
+    cl_ulong _value = 32768ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_global_mem_cache_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_GLOBAL_MEM_CACHE_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_global_mem_cache_size_2() {{{
-   * \brief Test get_global_mem_cache_size()
-   */ // }}}
-  void test__get_global_mem_cache_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_global_mem_cache_size(), 0);
-  }
-  /** // doc: test__get_global_mem_size_1() {{{
+  /** // doc: test__get_global_mem_size() {{{
    * \brief Test get_global_mem_size()
    */ // }}}
-  void test__get_global_mem_size_1()
+  void test__get_global_mem_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5299,24 +1145,18 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_global_mem_size(), 16856764416ul);
-  }
-  /** // doc: test__get_global_mem_size_2() {{{
-   * \brief Test get_global_mem_size()
-   */ // }}}
-  void test__get_global_mem_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_global_mem_size(), 4294770688ul);
+    cl_ulong _value = 16856764416ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_global_mem_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_GLOBAL_MEM_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
   /** // doc: test__get_max_constant_buffer_size_1() {{{
    * \brief Test get_max_constant_buffer_size()
@@ -5329,29 +1169,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_constant_buffer_size(), 65536);
+    cl_ulong _value = 65536ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_constant_buffer_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_constant_buffer_size_2() {{{
-   * \brief Test get_max_constant_buffer_size()
-   */ // }}}
-  void test__get_max_constant_buffer_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_constant_buffer_size(), 65536);
-  }
-  /** // doc: test__get_max_constant_args_1() {{{
+  /** // doc: test__get_max_constant_args() {{{
    * \brief Test get_max_constant_args()
    */ // }}}
-  void test__get_max_constant_args_1()
+  void test__get_max_constant_args()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5359,29 +1193,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_max_constant_args(), 8);
+    cl_uint _value = 8u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_max_constant_args(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_MAX_CONSTANT_ARGS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_max_constant_args_2() {{{
-   * \brief Test get_max_constant_args()
-   */ // }}}
-  void test__get_max_constant_args_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_max_constant_args(), 9);
-  }
-  /** // doc: test__get_local_mem_type_1() {{{
+  /** // doc: test__get_local_mem_type() {{{
    * \brief Test get_local_mem_type()
    */ // }}}
-  void test__get_local_mem_type_1()
+  void test__get_local_mem_type()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5389,29 +1217,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_local_mem_type(), device_local_mem_type_t::global);
+    cl_device_local_mem_type _value = CL_GLOBAL;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_local_mem_type(), static_cast<device_local_mem_type_t>(_value));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_LOCAL_MEM_TYPE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_local_mem_type_2() {{{
-   * \brief Test get_local_mem_type()
-   */ // }}}
-  void test__get_local_mem_type_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_local_mem_type(), device_local_mem_type_t::local);
-  }
-  /** // doc: test__get_local_mem_size_1() {{{
+  /** // doc: test__get_local_mem_size() {{{
    * \brief Test get_local_mem_size()
    */ // }}}
-  void test__get_local_mem_size_1()
+  void test__get_local_mem_size()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5419,29 +1241,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_local_mem_size(), 32768);
+    cl_ulong _value = 32768ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_local_mem_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_LOCAL_MEM_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_local_mem_size_2() {{{
-   * \brief Test get_local_mem_size()
-   */ // }}}
-  void test__get_local_mem_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_local_mem_size(), 16384);
-  }
-  /** // doc: test__get_error_correction_support_1() {{{
+  /** // doc: test__get_error_correction_support() {{{
    * \brief Test get_error_correction_support()
    */ // }}}
-  void test__get_error_correction_support_1()
+  void test__get_error_correction_support()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5449,29 +1265,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_error_correction_support(), CL_FALSE);
+    cl_bool _value = CL_FALSE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_error_correction_support(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_ERROR_CORRECTION_SUPPORT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_error_correction_support_2() {{{
-   * \brief Test get_error_correction_support()
-   */ // }}}
-  void test__get_error_correction_support_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_error_correction_support(), CL_FALSE);
-  }
-  /** // doc: test__get_profiling_timer_resolution_1() {{{
+  /** // doc: test__get_profiling_timer_resolution() {{{
    * \brief Test get_profiling_timer_resolution()
    */ // }}}
-  void test__get_profiling_timer_resolution_1()
+  void test__get_profiling_timer_resolution()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5479,29 +1289,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_profiling_timer_resolution(), 1);
+    size_t _value = 1000ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_profiling_timer_resolution(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PROFILING_TIMER_RESOLUTION);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_profiling_timer_resolution_2() {{{
-   * \brief Test get_profiling_timer_resolution()
-   */ // }}}
-  void test__get_profiling_timer_resolution_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_profiling_timer_resolution(), 1000);
-  }
-  /** // doc: test__get_endian_little_1() {{{
+  /** // doc: test__get_endian_little() {{{
    * \brief Test get_endian_little()
    */ // }}}
-  void test__get_endian_little_1()
+  void test__get_endian_little()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5509,29 +1313,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_endian_little(), CL_TRUE);
+    cl_bool _value = CL_TRUE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_endian_little(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_ENDIAN_LITTLE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_endian_little_2() {{{
-   * \brief Test get_endian_little()
-   */ // }}}
-  void test__get_endian_little_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_endian_little(), CL_TRUE);
-  }
-  /** // doc: test__get_available_1() {{{
+  /** // doc: test__get_available() {{{
    * \brief Test get_available()
    */ // }}}
-  void test__get_available_1()
+  void test__get_available()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5539,29 +1337,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_available(), CL_TRUE);
+    cl_bool _value = CL_TRUE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_available(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_AVAILABLE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_available_2() {{{
-   * \brief Test get_available()
-   */ // }}}
-  void test__get_available_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_available(), CL_TRUE);
-  }
-  /** // doc: test__get_compiler_available_1() {{{
+  /** // doc: test__get_compiler_available() {{{
    * \brief Test get_compiler_available()
    */ // }}}
-  void test__get_compiler_available_1()
+  void test__get_compiler_available()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5569,29 +1361,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_compiler_available(), CL_TRUE);
+    cl_bool _value = CL_TRUE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_compiler_available(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_COMPILER_AVAILABLE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_compiler_available_2() {{{
-   * \brief Test get_compiler_available()
-   */ // }}}
-  void test__get_compiler_available_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_compiler_available(), CL_TRUE);
-  }
-  /** // doc: test__get_execution_capabilities_1() {{{
+  /** // doc: test__get_execution_capabilities() {{{
    * \brief Test get_execution_capabilities()
    */ // }}}
-  void test__get_execution_capabilities_1()
+  void test__get_execution_capabilities()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5599,30 +1385,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_execution_capabilities(), device_exec_capabilities_t::kernel
-                                                   | device_exec_capabilities_t::native_kernel);
+    cl_device_exec_capabilities _value = CL_EXEC_KERNEL | CL_EXEC_NATIVE_KERNEL;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_execution_capabilities(), static_cast<device_exec_capabilities_t>(_value));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_EXECUTION_CAPABILITIES);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_execution_capabilities_2() {{{
-   * \brief Test get_execution_capabilities()
-   */ // }}}
-  void test__get_execution_capabilities_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_execution_capabilities(), device_exec_capabilities_t::kernel);
-  }
-  /** // doc: test__get_queue_properties_1() {{{
+  /** // doc: test__get_queue_properties() {{{
    * \brief Test get_queue_properties()
    */ // }}}
-  void test__get_queue_properties_1()
+  void test__get_queue_properties()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5630,30 +1409,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_queue_properties(), command_queue_properties_t::profiling_enable);
+    cl_command_queue_properties _value = CL_QUEUE_PROFILING_ENABLE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_queue_properties(), static_cast<command_queue_properties_t>(_value));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_QUEUE_PROPERTIES);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_queue_properties_2() {{{
-   * \brief Test get_queue_properties()
-   */ // }}}
-  void test__get_queue_properties_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_queue_properties(), command_queue_properties_t::out_of_order_exec_mode_enable
-                                             | command_queue_properties_t::profiling_enable);
-  }
-  /** // doc: test__get_platform_id_1() {{{
+  /** // doc: test__get_platform_id() {{{
    * \brief Test get_platform_id()
    */ // }}}
-  void test__get_platform_id_1()
+  void test__get_platform_id()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5661,29 +1433,23 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_platform_id(), T::Newton_clGetPlatformIDs::platforms[0]);
+    cl_platform_id _value = (cl_platform_id)0x5678;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_platform_id(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PLATFORM);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_platform_id_2() {{{
-   * \brief Test get_platform_id()
-   */ // }}}
-  void test__get_platform_id_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_platform_id(), T::Newton_clGetPlatformIDs::platforms[1]);
-  }
-  /** // doc: test__get_name_1() {{{
+  /** // doc: test__get_name() {{{
    * \brief Test get_name()
    */ // }}}
-  void test__get_name_1()
+  void test__get_name()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5691,29 +1457,28 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_name(), "Intel(R) Xeon(R) CPU           E5620  @ 2.40GHz");
+    const char* _value = "Intel(R) Xeon(R) CPU E5620 @ 2.40GHz";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_name(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_NAME);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NAME);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_name_2() {{{
-   * \brief Test get_name()
-   */ // }}}
-  void test__get_name_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_name(), "Tesla C1060");
-  }
-  /** // doc: test__get_vendor_1() {{{
+  /** // doc: test__get_vendor() {{{
    * \brief Test get_vendor()
    */ // }}}
-  void test__get_vendor_1()
+  void test__get_vendor()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5721,29 +1486,28 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_vendor(), "GenuineIntel");
+    const char* _value = "GenuineIntel";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_vendor(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_VENDOR);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_VENDOR);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_vendor_2() {{{
-   * \brief Test get_vendor()
-   */ // }}}
-  void test__get_vendor_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_vendor(), "NVIDIA Corporation");
-  }
-  /** // doc: test__get_driver_version_1() {{{
+  /** // doc: test__get_driver_version() {{{
    * \brief Test get_driver_version()
    */ // }}}
-  void test__get_driver_version_1()
+  void test__get_driver_version()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5751,29 +1515,28 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_driver_version(), "1348.4 (sse2)");
+    const char* _value = "1348.4 (sse2)";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_driver_version(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DRIVER_VERSION);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DRIVER_VERSION);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_driver_version_2() {{{
-   * \brief Test get_driver_version()
-   */ // }}}
-  void test__get_driver_version_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_driver_version(), "319.76");
-  }
-  /** // doc: test__get_profile_1() {{{
+  /** // doc: test__get_profile() {{{
    * \brief Test get_profile()
    */ // }}}
-  void test__get_profile_1()
+  void test__get_profile()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5781,29 +1544,28 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_profile(), "FULL_PROFILE");
+    const char* _value = "FULL_PROFILE";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_profile(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_PROFILE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PROFILE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_profile_2() {{{
-   * \brief Test get_profile()
-   */ // }}}
-  void test__get_profile_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_profile(), "FULL_PROFILE");
-  }
-  /** // doc: test__get_version_1() {{{
+  /** // doc: test__get_version() {{{
    * \brief Test get_version()
    */ // }}}
-  void test__get_version_1()
+  void test__get_version()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5811,29 +1573,28 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_version(), "OpenCL 1.2 AMD-APP (1348.4)");
+    const char* _value = "OpenCL 1.2 AMD-APP (1348.4)";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_version(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_VERSION);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_VERSION);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_version_2() {{{
-   * \brief Test get_version()
-   */ // }}}
-  void test__get_version_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_version(), "OpenCL 1.0 CUDA");
-  }
-  /** // doc: test__get_extensions_1() {{{
+  /** // doc: test__get_extensions() {{{
    * \brief Test get_extensions()
    */ // }}}
-  void test__get_extensions_1()
+  void test__get_extensions()
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -5841,815 +1602,720 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_extensions(), "cl_khr_fp64 cl_amd_fp64 cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_int64_base_atomics cl_khr_int64_extended_atomics cl_khr_3d_image_writes cl_khr_byte_addressable_store cl_khr_gl_sharing cl_ext_device_fission cl_amd_device_attribute_query cl_amd_vec3 cl_amd_printf cl_amd_media_ops cl_amd_media_ops2 cl_amd_popcnt");
+    const char* _value = "cl_khr_fp64 cl_amd_fp64 cl_khr_global_int32_base_atomics";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_extensions(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_EXTENSIONS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_EXTENSIONS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
   }
-  /** // doc: test__get_extensions_2() {{{
-   * \brief Test get_extensions()
+  /** // doc: test__get_double_fp_config() {{{
+   * \brief Test get_double_fp_config()
    */ // }}}
-  void test__get_extensions_2()
+  void test__get_double_fp_config()
   {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_extensions(), "cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll  cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp6");
-  }
 #if CL_VERSION_1_2
-  /** // doc: test__get_double_fp_config_1() {{{
-   * \brief Test get_double_fp_config()
-   */ // }}}
-  void test__get_double_fp_config_1()
-  {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_double_fp_config(), device_fp_config_t::denorm
-                                             | device_fp_config_t::inf_nan
-                                             | device_fp_config_t::round_to_nearest
-                                             | device_fp_config_t::round_to_zero
-                                             | device_fp_config_t::round_to_inf
-                                             | device_fp_config_t::fma);
+    cl_device_fp_config _value = CL_FP_DENORM | CL_FP_INF_NAN | CL_FP_FMA;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_double_fp_config(), static_cast<device_fp_config_t>(_value));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_DOUBLE_FP_CONFIG);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
+#endif
   }
-  /** // doc: test__get_double_fp_config_2() {{{
-   * \brief Test get_double_fp_config()
+  /** // doc: test__get_preferred_vector_width_half() {{{
+   * \brief Test get_preferred_vector_width_half()
    */ // }}}
-  void test__get_double_fp_config_2()
+  void test__get_preferred_vector_width_half()
   {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_double_fp_config(), clerror_no<status_t::invalid_value>);
-  }
-#endif
 #if CL_VERSION_1_1
-  /** // doc: test__get_preferred_vector_width_half_1() {{{
-   * \brief Test get_preferred_vector_width_half()
-   */ // }}}
-  void test__get_preferred_vector_width_half_1()
-  {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_half(), 2);
-  }
-  /** // doc: test__get_preferred_vector_width_half_2() {{{
-   * \brief Test get_preferred_vector_width_half()
-   */ // }}}
-  void test__get_preferred_vector_width_half_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 2u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_vector_width_half(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_preferred_vector_width_half(), 0);
   }
   /** // doc: test__get_host_unified_memory_1() {{{
    * \brief Test get_host_unified_memory()
    */ // }}}
   void test__get_host_unified_memory_1()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_host_unified_memory(), CL_TRUE);
-  }
-  /** // doc: test__get_host_unified_memory_2() {{{
-   * \brief Test get_host_unified_memory()
-   */ // }}}
-  void test__get_host_unified_memory_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_bool _value = CL_TRUE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_host_unified_memory(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_HOST_UNIFIED_MEMORY);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_host_unified_memory(), CL_FALSE);
   }
   /** // doc: test__get_native_vector_width_char_1() {{{
    * \brief Test get_native_vector_width_char()
    */ // }}}
   void test__get_native_vector_width_char_1()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_char(), 16);
-  }
-  /** // doc: test__get_native_vector_width_char_2() {{{
-   * \brief Test get_native_vector_width_char()
-   */ // }}}
-  void test__get_native_vector_width_char_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 16u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_native_vector_width_char(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NATIVE_VECTOR_WIDTH_CHAR);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_char(), 1);
   }
-  /** // doc: test__get_native_vector_width_short_1() {{{
+  /** // doc: test__get_native_vector_width_short() {{{
    * \brief Test get_native_vector_width_short()
    */ // }}}
-  void test__get_native_vector_width_short_1()
+  void test__get_native_vector_width_short()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_short(), 8);
-  }
-  /** // doc: test__get_native_vector_width_short_2() {{{
-   * \brief Test get_native_vector_width_short()
-   */ // }}}
-  void test__get_native_vector_width_short_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 8u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_native_vector_width_short(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NATIVE_VECTOR_WIDTH_SHORT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_short(), 1);
   }
-  /** // doc: test__get_native_vector_width_int_1() {{{
+  /** // doc: test__get_native_vector_width_int() {{{
    * \brief Test get_native_vector_width_int()
    */ // }}}
-  void test__get_native_vector_width_int_1()
+  void test__get_native_vector_width_int()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_int(), 4);
-  }
-  /** // doc: test__get_native_vector_width_int_2() {{{
-   * \brief Test get_native_vector_width_int()
-   */ // }}}
-  void test__get_native_vector_width_int_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 4u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_native_vector_width_int(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NATIVE_VECTOR_WIDTH_INT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_int(), 1);
   }
-  /** // doc: test__get_native_vector_width_long_1() {{{
+  /** // doc: test__get_native_vector_width_long() {{{
    * \brief Test get_native_vector_width_long()
    */ // }}}
-  void test__get_native_vector_width_long_1()
+  void test__get_native_vector_width_long()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_long(), 2);
-  }
-  /** // doc: test__get_native_vector_width_long_2() {{{
-   * \brief Test get_native_vector_width_long()
-   */ // }}}
-  void test__get_native_vector_width_long_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 2u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_native_vector_width_long(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NATIVE_VECTOR_WIDTH_LONG);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_long(), 1);
   }
-  /** // doc: test__get_native_vector_width_float_1() {{{
+  /** // doc: test__get_native_vector_width_float() {{{
    * \brief Test get_native_vector_width_float()
    */ // }}}
-  void test__get_native_vector_width_float_1()
+  void test__get_native_vector_width_float()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_float(), 4);
-  }
-  /** // doc: test__get_native_vector_width_float_2() {{{
-   * \brief Test get_native_vector_width_float()
-   */ // }}}
-  void test__get_native_vector_width_float_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 4u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_native_vector_width_float(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NATIVE_VECTOR_WIDTH_FLOAT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_float(), 1);
   }
-  /** // doc: test__get_native_vector_width_double_1() {{{
+  /** // doc: test__get_native_vector_width_double() {{{
    * \brief Test get_native_vector_width_double()
    */ // }}}
-  void test__get_native_vector_width_double_1()
+  void test__get_native_vector_width_double()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_double(), 2);
-  }
-  /** // doc: test__get_native_vector_width_double_2() {{{
-   * \brief Test get_native_vector_width_double()
-   */ // }}}
-  void test__get_native_vector_width_double_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 2u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_native_vector_width_double(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_double(), 1);
   }
-  /** // doc: test__get_native_vector_width_half_1() {{{
+  /** // doc: test__get_native_vector_width_half() {{{
    * \brief Test get_native_vector_width_half()
    */ // }}}
-  void test__get_native_vector_width_half_1()
+  void test__get_native_vector_width_half()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_half(), 2);
-  }
-  /** // doc: test__get_native_vector_width_half_2() {{{
-   * \brief Test get_native_vector_width_half()
-   */ // }}}
-  void test__get_native_vector_width_half_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 2u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_native_vector_width_half(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_NATIVE_VECTOR_WIDTH_HALF);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_native_vector_width_half(), 0);
   }
-  /** // doc: test__get_opencl_c_version_1() {{{
+  /** // doc: test__get_opencl_c_version() {{{
    * \brief Test get_opencl_c_version()
    */ // }}}
-  void test__get_opencl_c_version_1()
+  void test__get_opencl_c_version()
   {
+#if CL_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_opencl_c_version(), "OpenCL C 1.2");
+    const char* _value = "OpenCL C 1.2";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_opencl_c_version(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_OPENCL_C_VERSION);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_OPENCL_C_VERSION);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
+#endif
   }
-  /** // doc: test__get_opencl_c_version_2() {{{
-   * \brief Test get_opencl_c_version()
+  /** // doc: test__get_linker_available() {{{
+   * \brief Test get_linker_available()
    */ // }}}
-  void test__get_opencl_c_version_2()
+  void test__get_linker_available()
   {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_EQUALS(d.get_opencl_c_version(), "OpenCL C 1.1");
-  }
-#endif
 #if CL_VERSION_1_2
-  /** // doc: test__get_linker_available_1() {{{
-   * \brief Test get_linker_available()
-   */ // }}}
-  void test__get_linker_available_1()
-  {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_linker_available(), CL_FALSE);
-  }
-  /** // doc: test__get_linker_available_2() {{{
-   * \brief Test get_linker_available()
-   */ // }}}
-  void test__get_linker_available_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_bool _value = CL_TRUE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_linker_available(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_LINKER_AVAILABLE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_linker_available(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_built_in_kernels_1() {{{
+  /** // doc: test__get_built_in_kernels() {{{
    * \brief Test get_built_in_kernels()
    */ // }}}
-  void test__get_built_in_kernels_1()
+  void test__get_built_in_kernels()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_built_in_kernels(), "");
-  }
-  /** // doc: test__get_built_in_kernels_2() {{{
-   * \brief Test get_built_in_kernels()
-   */ // }}}
-  void test__get_built_in_kernels_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    const char* _value = "kernel1 kernel2";
+    size_t _value_size = std::strlen(_value) + 1;
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_built_in_kernels(), _value);
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_BUILT_IN_KERNELS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_BUILT_IN_KERNELS);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), _value_size);
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_built_in_kernels(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_image_max_buffer_size_1() {{{
+  /** // doc: test__get_image_max_buffer_size() {{{
    * \brief Test get_image_max_buffer_size()
    */ // }}}
-  void test__get_image_max_buffer_size_1()
+  void test__get_image_max_buffer_size()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image_max_buffer_size(), 65536);
-  }
-  /** // doc: test__get_image_max_buffer_size_2() {{{
-   * \brief Test get_image_max_buffer_size()
-   */ // }}}
-  void test__get_image_max_buffer_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    size_t _value = 65536ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image_max_buffer_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE_MAX_BUFFER_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_image_max_buffer_size(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_image_max_array_size_1() {{{
+  /** // doc: test__get_image_max_array_size() {{{
    * \brief Test get_image_max_array_size()
    */ // }}}
-  void test__get_image_max_array_size_1()
+  void test__get_image_max_array_size()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image_max_array_size(), 2048);
-  }
-  /** // doc: test__get_image_max_array_size_2() {{{
-   * \brief Test get_image_max_array_size()
-   */ // }}}
-  void test__get_image_max_array_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    size_t _value = 2048ul;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image_max_array_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE_MAX_ARRAY_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_image_max_array_size(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_parent_device_id_1() {{{
+  /** // doc: test__get_parent_device_id() {{{
    * \brief Test get_parent_device_id()
    */ // }}}
-  void test__get_parent_device_id_1()
+  void test__get_parent_device_id()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_parent_device_id(), reinterpret_cast<cl_device_id>(NULL));
-  }
-  /** // doc: test__get_parent_device_id_2() {{{
-   * \brief Test get_parent_device_id()
-   */ // }}}
-  void test__get_parent_device_id_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_device_id _value = (cl_device_id)0x5678;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_parent_device_id(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PARENT_DEVICE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_parent_device_id(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_partition_max_sub_devices_1() {{{
+  /** // doc: test__get_partition_max_sub_devices() {{{
    * \brief Test get_partition_max_sub_devices()
    */ // }}}
-  void test__get_partition_max_sub_devices_1()
+  void test__get_partition_max_sub_devices()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_partition_max_sub_devices(), 16);
-  }
-  /** // doc: test__get_partition_max_sub_devices_2() {{{
-   * \brief Test get_partition_max_sub_devices()
-   */ // }}}
-  void test__get_partition_max_sub_devices_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 16u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_partition_max_sub_devices(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PARTITION_MAX_SUB_DEVICES);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_partition_max_sub_devices(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_partition_properties_1() {{{
+  /** // doc: test__get_partition_properties() {{{
    * \brief Test get_partition_properties()
    */ // }}}
-  void test__get_partition_properties_1()
+  void test__get_partition_properties()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    device_partition_property_t const props[3] = {
+    device_partition_property_t const _props[3] = {
       device_partition_property_t::equally,
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
     };
-    TS_ASSERT_EQUALS(d.get_partition_properties(), std::vector<device_partition_property_t>(props,props+3));
-  }
-  /** // doc: test__get_partition_properties_2() {{{
-   * \brief Test get_partition_properties()
-   */ // }}}
-  void test__get_partition_properties_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+
+    cl_device_partition_property _value[] = { CL_DEVICE_PARTITION_EQUALLY,
+                                              CL_DEVICE_PARTITION_BY_COUNTS,
+                                              CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN }; 
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_partition_properties(),
+                     std::vector<device_partition_property_t>(_props, _props+3ul));
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_PARTITION_PROPERTIES);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PARTITION_PROPERTIES);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_partition_properties(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_partition_affinity_domain_1() {{{
+  /** // doc: test__get_partition_affinity_domain() {{{
    * \brief Test get_partition_affinity_domain()
    */ // }}}
-  void test__get_partition_affinity_domain_1()
+  void test__get_partition_affinity_domain()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_partition_affinity_domain(),
-                      device_affinity_domain_t::l3_cache
-                    | device_affinity_domain_t::l2_cache
-                    | device_affinity_domain_t::l1_cache
-                    | device_affinity_domain_t::next_partitionable);
-  }
-  /** // doc: test__get_partition_affinity_domain_2() {{{
-   * \brief Test get_partition_affinity_domain()
-   */ // }}}
-  void test__get_partition_affinity_domain_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_device_affinity_domain _value = CL_DEVICE_AFFINITY_DOMAIN_L3_CACHE |
+                                       CL_DEVICE_AFFINITY_DOMAIN_L4_CACHE |
+                                       CL_DEVICE_AFFINITY_DOMAIN_L1_CACHE |
+                                       CL_DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE;
+
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_partition_affinity_domain(), static_cast<device_affinity_domain_t>(_value));
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PARTITION_AFFINITY_DOMAIN);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_partition_affinity_domain(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_partition_type_1() {{{
+  /** // doc: test__get_partition_type() {{{
    * \brief Test get_partition_type()
    */ // }}}
-  void test__get_partition_type_1()
+  void test__get_partition_type()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_partition_type(), std::vector<device_partition_property_t>());
-  }
-  /** // doc: test__get_partition_type_2() {{{
-   * \brief Test get_partition_type()
-   */ // }}}
-  void test__get_partition_type_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    device_partition_property_t const _props[] = {
+      device_partition_property_t::equally,
+      device_partition_property_t::by_counts,
+      device_partition_property_t::by_affinity_domain,
+      static_cast<device_partition_property_t>(0)
+    };
+
+    cl_device_partition_property _value[] = { CL_DEVICE_PARTITION_EQUALLY,
+                                              CL_DEVICE_PARTITION_BY_COUNTS,
+                                              CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN,
+                                              0}; 
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_partition_type(),
+                     std::vector<device_partition_property_t>(_props, _props+4ul));
+
+    TS_ASSERT(mock.called_twice());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_PARTITION_TYPE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0ul);
+    TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
+
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PARTITION_TYPE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_partition_type(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_reference_count_1() {{{
+  /** // doc: test__get_reference_count() {{{
    * \brief Test get_reference_count()
    */ // }}}
-  void test__get_reference_count_1()
+  void test__get_reference_count()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_reference_count(), 1);
-  }
-  /** // doc: test__get_reference_count_2() {{{
-   * \brief Test get_reference_count()
-   */ // }}}
-  void test__get_reference_count_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 3u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_reference_count(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_REFERENCE_COUNT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_reference_count(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_preferred_interop_user_sync_1() {{{
+  /** // doc: test__get_preferred_interop_user_sync() {{{
    * \brief Test get_preferred_interop_user_sync()
    */ // }}}
-  void test__get_preferred_interop_user_sync_1()
+  void test__get_preferred_interop_user_sync()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_preferred_interop_user_sync(), CL_TRUE);
-  }
-  /** // doc: test__get_preferred_interop_user_sync_2() {{{
-   * \brief Test get_preferred_interop_user_sync()
-   */ // }}}
-  void test__get_preferred_interop_user_sync_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_bool _value = CL_TRUE;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_preferred_interop_user_sync(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PREFERRED_INTEROP_USER_SYNC);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_preferred_interop_user_sync(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_printf_buffer_size_1() {{{
+  /** // doc: test__get_printf_buffer_size() {{{
    * \brief Test get_printf_buffer_size()
    */ // }}}
-  void test__get_printf_buffer_size_1()
+  void test__get_printf_buffer_size()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_printf_buffer_size(), 65536);
-  }
-  /** // doc: test__get_printf_buffer_size_2() {{{
-   * \brief Test get_printf_buffer_size()
-   */ // }}}
-  void test__get_printf_buffer_size_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    size_t _value = 65536u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_printf_buffer_size(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_PRINTF_BUFFER_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_printf_buffer_size(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_image_pitch_alignment_1() {{{
+  /** // doc: test__get_image_pitch_alignment() {{{
    * \brief Test get_image_pitch_alignment()
    */ // }}}
-  void test__get_image_pitch_alignment_1()
+  void test__get_image_pitch_alignment()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image_pitch_alignment(), 0);
-  }
-  /** // doc: test__get_image_pitch_alignment_2() {{{
-   * \brief Test get_image_pitch_alignment()
-   */ // }}}
-  void test__get_image_pitch_alignment_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+    cl_uint _value = 32u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image_pitch_alignment(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE_PITCH_ALIGNMENT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 #endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_image_pitch_alignment(), clerror_no<status_t::invalid_value>);
   }
-  /** // doc: test__get_image_base_address_alignment_1() {{{
+  /** // doc: test__get_image_base_address_alignment() {{{
    * \brief Test get_image_base_address_alignment()
    */ // }}}
-  void test__get_image_base_address_alignment_1()
+  void test__get_image_base_address_alignment()
   {
+#if CL_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[0]);
-    TS_ASSERT_EQUALS(d.get_image_base_address_alignment(), 0);
+    cl_uint _value = 32u;
+    size_t _value_size = sizeof(_value);
+    T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, &_value, &_value_size);
+
+    TS_ASSERT_EQUALS(device((cl_device_id)0x1234).get_image_base_address_alignment(), _value);
+
+    TS_ASSERT(mock.called_once());
+    TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT);
+    TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), sizeof(_value));
+    TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
+#endif
   }
-  /** // doc: test__get_image_base_address_alignment_2() {{{
-   * \brief Test get_image_base_address_alignment()
-   */ // }}}
-  void test__get_image_base_address_alignment_2()
-  {
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
-#endif
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
-#endif
-    T::Newton_clGetDeviceInfo mock;
-    device d(T::Newton_clGetDeviceIDs::devices[1]);
-    TS_ASSERT_THROWS(d.get_image_base_address_alignment(), clerror_no<status_t::invalid_value>);
-  }
-#endif
-// sorry, but this may irritate OOM instead of throwing bad_alloc
-//  /** // doc: test__get_name_negsize() {{{
-//   * \brief Test get_name(device_info_t::profile, ...) in a situation when clGetDeviceInfo returns negative string size.
-//   */ // }}}
-//  void test__get_name_negsize( )
-//  {
-//    T::SizeRet_clGetDeviceInfo mock(-1);
-//    device d(reinterpret_cast<cl_device_id>(0x34556ul));
-//    TS_ASSERT_THROWS(d.get_name(), CLXX_EXCEPTION(Bad_Alloc));
-//  }
-// sorry, but this may irritate OOM instead of throwing bad_alloc
-//  /** // doc: test__get_name_negsize() {{{
-//   * \brief Test get_name(device_info_t::profile, ...) in a situation when clGetDeviceInfo returns negative string size.
-//   */ // }}}
-//  void test__get_max_work_item_sizes_negsize( )
-//  {
-//    T::SizeRet_clGetDeviceInfo mock(-64);
-//    device d(reinterpret_cast<cl_device_id>(0x34556ul));
-//    TS_ASSERT_THROWS(d.get_max_work_item_sizes(), CLXX_EXCEPTION(Bad_Alloc));
-//  }
   /** // doc: test__out_of_resources() {{{
    * \brief Test get_xxx() methods in a situation when clGetDeviceInfo returns CL_OUT_OF_RESOURCES.
    */ // }}}
@@ -6662,7 +2328,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_RESOURCES);
-    device d(reinterpret_cast<cl_device_id>(0x34556ul));
+    device d((cl_device_id)0x34556ul);
     TS_ASSERT_THROWS(d.get_type(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_vendor_id(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_max_compute_units(), clerror_no<status_t::out_of_resources>);
@@ -6752,7 +2418,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     T::Dummy_clGetDeviceInfo mock(CL_OUT_OF_HOST_MEMORY);
-    device d(reinterpret_cast<cl_device_id>(0x34556ul));
+    device d((cl_device_id)0x34556ul);
     TS_ASSERT_THROWS(d.get_type(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_vendor_id(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_max_compute_units(), clerror_no<status_t::out_of_host_memory>);
@@ -6842,7 +2508,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     T::Dummy_clGetDeviceInfo mock(-0x432534);
-    device d(reinterpret_cast<cl_device_id>(0x34556ul));
+    device d((cl_device_id)0x34556ul);
     TS_ASSERT_THROWS(d.get_type(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_vendor_id(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_max_compute_units(), unexpected_clerror);

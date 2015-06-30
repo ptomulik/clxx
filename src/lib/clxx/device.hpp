@@ -580,7 +580,7 @@ public:
    */ // }}}
   cl_device_id get_parent_device_id() const;
   /** // {{{
-   * \brief Get \c CL_DEVICE_PARTITION_MAX_SUBDEVICES information.
+   * \brief Get \c CL_DEVICE_PARTITION_MAX_SUB_DEVICES information.
    */ // }}}
   cl_uint get_partition_max_sub_devices() const;
   /** // {{{

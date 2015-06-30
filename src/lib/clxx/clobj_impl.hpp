@@ -22,10 +22,10 @@ template< typename Handle > std::string
 _get_str_info(clobj<Handle> const& obj, typename clobj<Handle>::info_t name)
 {
   size_t size;
-  obj.get_info(name, 0, NULL, &size);
+  obj.get_info(name, 0ul, nullptr, &size);
 
   std::unique_ptr<char[]> str(new char[size]);
-  obj.get_info(name, size, str.get(), &size);
+  obj.get_info(name, size, str.get(), nullptr);
   return std::string(str.get());
 }
 
@@ -34,7 +34,7 @@ template<typename T, typename Handle> T
 _get_pod_info(clobj<Handle> const& obj, typename clobj<Handle>::info_t name)
 {
   T value;
-  obj.get_info(name, sizeof(value), &value, NULL);
+  obj.get_info(name, sizeof(value), &value, nullptr);
   return value;
 }
 
@@ -43,9 +43,9 @@ template<typename T, typename Handle> std::vector<T>
 _get_vec_info(clobj<Handle> const& obj, typename clobj<Handle>::info_t name)
 {
   size_t size;
-  obj.get_info(name, 0, NULL, &size);
+  obj.get_info(name, 0ul, nullptr, &size);
   std::vector<T> values(size/sizeof(T));
-  obj.get_info(name, values.size() * sizeof(T), &values.front(), NULL);
+  obj.get_info(name, values.size() * sizeof(T), &values.front(), nullptr);
   return values;
 }
 } // end namespace clxx
