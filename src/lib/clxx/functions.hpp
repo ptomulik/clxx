@@ -1439,6 +1439,81 @@ enqueue_map_buffer(cl_command_queue command_queue,
                    cl_uint num_events_in_wait_list,
                    const cl_event* event_wait_list,
                    cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clCreateImage)
+/** // doc: create_image() {{{
+ * \brief Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D
+ *        image array or 3D image object
+ *
+ * This is a wrapper for \c clCreateImage(). The call to
+ * #create_image() has same effect as a call to
+ *    - \c clCreateImage(context, static_cast<cl_mem_flags>(flags), image_format, image_desc, host_ptr, &errcode)
+ *
+ * with \c errcode being defined internally by #create_image().
+ *
+ * The main difference between #create_image() and \c clCreateImage()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param context
+ *    A valid OpenCL context on which the image object is to be created.
+ * \param flags
+ *    A bit-field that is used to specify allocation and usage information
+ *    about the image memory object being created. See the documentation
+ *    of #mem_flags_t for the list of predefined bit values.
+ * \param image_format
+ *    A pointer to a structure that describes format properties of the image to
+ *    be allocated.
+ *    See <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/cl_image_format.html">cl_image_format</a>
+ *    for a detailed description of the image format descriptor.
+ * \param image_desc
+ *    A pointer to a structure that describes type and dimensions of the image
+ *    to be allocated. See <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/cl_image_desc.html">imageDescriptor</a> for more information
+ * \param host_ptr
+ *    A pointer to the image data that may already be allocated by the
+ *    application.
+ *
+ * \returns A handle to the newly created OpenCL image object
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateImage() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateImage() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_image_format_descriptor>
+ *    When \c clCreateImage() returns \c CL_INVALID_IMAGE_FORMAT_DESCRIPTOR.
+ * \throw clerror_no<status_t::invalid_image_descriptor>
+ *    When \c clCreateImage() returns \c CL_INVALID_IMAGE_DESCRIPTOR.
+ * \throw clerror_no<status_t::invalid_image_size>
+ *    When \c clCreateImage() returns \c CL_INVALID_IMAGE_SIZE.
+ * \throw clerror_no<status_t::invalid_host_ptr>
+ *    When \c clCreateImage() returns \c CL_INVALID_HOST_PTR.
+ * \throw clerror_no<status_t::image_format_not_supported>
+ *    When \c clCreateImage() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clCreateImage() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clCreateImage() returns \c CL_INVALID_OPERATION.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateImage() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateImage() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateImage() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateImage.html">clCreateImage()</a>
+ *
+ */ // }}}
+cl_mem
+create_image(cl_context context,
+             mem_flags_t flags,
+             const cl_image_format *image_format,
+             const cl_image_desc *image_desc,
+             void *host_ptr);
+#endif
 /** // doc: get_supported_image_formats() {{{
  * \brief Get the list of image formats supported by an OpenCL implementation
  *
