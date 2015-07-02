@@ -16,7 +16,6 @@ sources =  [
     'devices.cpp',
     'event.cpp',
     'functions.cpp',
-    'clobj.cpp',
     'kernel.cpp',
     'kernel_exec.cpp',
     'mem.cpp',
