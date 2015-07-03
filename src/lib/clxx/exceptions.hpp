@@ -604,7 +604,7 @@ struct unexpected_clerror
  *
  * \par Example
  * \code
- *    typedef uninitialized_cl_object_error<cl_device_id> E;
+ *    typedef uninitialized_cl_object_error<cl_device_id>::type E;
  * \endcode
  */ // }}}
 template< typename Handle >
