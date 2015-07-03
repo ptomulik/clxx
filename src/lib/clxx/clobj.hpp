@@ -95,7 +95,7 @@ protected:
    * \throw unexpected_clerror
    *
    * Also may throw other exceptions originating from the corresponding
-   * overload of the \ref clxx::retain_clobj() "retain_clobj()" function.
+   * overload of the \ref clxx::retain_cl_object() "retain_cl_object()" function.
    */ // }}}
   void _set_handle(handle_t handle, bool retain_new, bool release_old);
 public:
@@ -125,7 +125,7 @@ public:
    * object as the \p other #clobj. After that, the newly created (this) object
    * and the \p other hold the same OpenCL handle. The reference count for this
    * handle is increased by one during copy-construction by performing an
-   * internal call to #retain_clobj().
+   * internal call to #retain_cl_object().
    *
    * \param other
    *    Another #clobj object to be assigned to this object.
@@ -137,7 +137,7 @@ public:
    * \throw unexpected_clerror
    *
    * Also may throw other exceptions originating from the corresponding
-   * overload of the \ref clxx::retain_clobj() "retain_clobj()" function.
+   * overload of the \ref clxx::retain_cl_object() "retain_cl_object()" function.
    */ // }}}
   clobj(clobj const& other);
   /** // doc: ~clobj() {{{
@@ -176,7 +176,7 @@ public:
   /** // doc: get_info() {{{
    * \brief Get certain information from OpenCL platform layer.
    *
-   * This function calls internally \c get_clobj_info().
+   * This function calls internally \c get_cl_object_info().
    *
    * \param name
    *     An enumeration constant that specifies the information to query.
@@ -191,10 +191,10 @@ public:
    *    Returns the actual size in bytes of data being queried by \p value. If
    *    \p value_size_ret is \c NULL, it is ignored.
    *
-   * \par Exceptions
+   * \throw uninitialized_cl_object_error<handle_t>::type
+   *    If the \ref clxx::clobj "clobj" object is uninitialized (see #is_initialized())
    *
-   * In case of errors, this function throws one of the exceptions defined by
-   * corresponding overload of the #get_clobj_info() function.
+   * Also throws exceptions originating from #get_cl_object_info() function.
    */ // }}}
   void get_info(info_t name, size_t value_size, void* value, size_t* value_size_ret) const;
   /** // doc: get_reference_count() {{{
@@ -204,13 +204,13 @@ public:
    * \return The reference count for the OpenCL object referred to by \c this
    *         object.
    *
-   * \par Exceptions
+   * \throw uninitialized_cl_object_error<handle_t>::type
+   *    If the \ref clxx::clobj "clobj" object is uninitialized (see #is_initialized())
    *
-   * In case of errors, the method throws one of the exceptions defined
-   * by corresponding overload of the #get_clobj_info() function.
+   * Also throws exceptions originating from #get_cl_object_info() function.
    */ // }}}
   cl_uint get_reference_count() const;
-  /** // {{{
+  /** // doc: assign() {{{
    * \brief Assignment
    *
    *  This operation copies the \c handle_t handle held by \e rhs
@@ -225,11 +225,11 @@ public:
    * \throw clerror_no<status_t::invalid_clobj>
    *    when \e rhs holds a \c handle_t handle that is invalid.
    * \throw clerror_no<status_t::out_of_resources>
-   *    propagated from retain_clobj() and release_clobj()
+   *    propagated from retain_cl_object() and release_cl_object()
    * \throw clerror_no<status_t::out_of_host_memory>
-   *    propagated from retain_clobj() and release_clobj()
+   *    propagated from retain_cl_object() and release_cl_object()
    * \throw unexpected_clerror
-   *    propagated from retain_clobj() and release_clobj()
+   *    propagated from retain_cl_object() and release_cl_object()
    */ // }}}
   void assign(clobj const& rhs);
   /** // doc: operator= {{{
@@ -249,13 +249,13 @@ public:
    * \throw uninitialized_cl_object_error<handle_t>::type
    *    when the \e rhs object is in uninitialized state
    * \throw clerror_no<status_t::invalid_clobj>
-   *    propagated from retain_clobj() and release_clobj()
+   *    propagated from retain_cl_object() and release_cl_object()
    * \throw clerror_no<status_t::out_of_resources>
-   *    propagated from retain_clobj() and release_clobj()
+   *    propagated from retain_cl_object() and release_cl_object()
    * \throw clerror_no<status_t::out_of_host_memory>
-   *    propagated from retain_clobj() and release_clobj()
+   *    propagated from retain_cl_object() and release_cl_object()
    * \throw unexpected_clerror
-   *    propagated from retain_clobj() and release_clobj()
+   *    propagated from retain_cl_object() and release_cl_object()
    */ // }}}
   clobj& operator=(clobj const& rhs);
   /** // doc: operator== {{{

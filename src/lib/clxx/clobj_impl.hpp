@@ -58,16 +58,16 @@ template< typename Handle >
 void clobj<Handle>::
 _set_handle(handle_t handle, bool retain_new, bool release_old)
 {
-  if(handle != this->_handle) // Avoid unintended deletion by release_clobj()
+  if(handle != this->_handle) // Avoid unintended deletion by release_cl_object()
     {
       if(release_old && this->is_initialized())
         {
-          release_clobj(this->_handle);
+          release_cl_object(this->_handle);
         }
       this->_handle = handle;
       if(retain_new)
         {
-          retain_clobj(this->_handle);
+          retain_cl_object(this->_handle);
         }
     }
 }
@@ -133,7 +133,7 @@ template< typename Handle >
 void clobj<Handle>::
 get_info(info_t name, size_t value_size, void* value, size_t* value_size_ret) const
 {
-  get_clobj_info(this->chk_get(), name, value_size, value, value_size_ret);
+  get_cl_object_info(this->chk_get(), name, value_size, value, value_size_ret);
 }
 /* ----------------------------------------------------------------------- */
 template< typename Handle >
