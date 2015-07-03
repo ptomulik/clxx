@@ -43,8 +43,8 @@ namespace clxx {
  * - reference count management,
  * - object info retrieval.
  *
- * That way it reduces a boilerplate that would otherwise go to the particular
- * clxx classes.
+ * That way it reduces a boilerplate that would otherwise go to particular
+ * clxx classes such as #clxx::device or #clxx::event.
  *
  * The reference count is maintained automatically. A newly created instance 
  * of #clobj increments a reference count for its underlying handle
