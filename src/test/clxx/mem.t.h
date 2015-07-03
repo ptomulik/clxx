@@ -413,7 +413,7 @@ public:
    */ // }}}
   void test__get_associated_memobject( )
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
 
@@ -434,7 +434,7 @@ public:
    */ // }}}
   void test__get_offset( )
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
 
@@ -455,7 +455,7 @@ public:
    */ // }}}
   void test__get_uses_svm_pointer( )
   {
-#if CL_VERSION_2_0
+#if CLXX_CL_H_VERSION_2_0
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
 

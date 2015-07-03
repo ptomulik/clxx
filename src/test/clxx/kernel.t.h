@@ -382,7 +382,7 @@ public:
    */ // }}}
   void test__get_attributes( )
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
 
@@ -660,7 +660,7 @@ public:
    */ // }}}
   void test__get_preferred_work_group_size_multiple( )
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
 
@@ -689,7 +689,7 @@ public:
    */ // }}}
   void test__get_private_mem_size( )
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
 
@@ -718,7 +718,7 @@ public:
    */ // }}}
   void test__get_global_work_size( )
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
 

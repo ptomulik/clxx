@@ -1625,7 +1625,7 @@ public:
    */ // }}}
   void test__get_double_fp_config()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1651,7 +1651,7 @@ public:
    */ // }}}
   void test__get_preferred_vector_width_half()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1677,7 +1677,7 @@ public:
    */ // }}}
   void test__get_host_unified_memory_1()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1703,7 +1703,7 @@ public:
    */ // }}}
   void test__get_native_vector_width_char_1()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1729,7 +1729,7 @@ public:
    */ // }}}
   void test__get_native_vector_width_short()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1755,7 +1755,7 @@ public:
    */ // }}}
   void test__get_native_vector_width_int()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1781,7 +1781,7 @@ public:
    */ // }}}
   void test__get_native_vector_width_long()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1807,7 +1807,7 @@ public:
    */ // }}}
   void test__get_native_vector_width_float()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1833,7 +1833,7 @@ public:
    */ // }}}
   void test__get_native_vector_width_double()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1859,7 +1859,7 @@ public:
    */ // }}}
   void test__get_native_vector_width_half()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1885,7 +1885,7 @@ public:
    */ // }}}
   void test__get_opencl_c_version()
   {
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1916,7 +1916,7 @@ public:
    */ // }}}
   void test__get_linker_available()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1942,7 +1942,7 @@ public:
    */ // }}}
   void test__get_built_in_kernels()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1973,7 +1973,7 @@ public:
    */ // }}}
   void test__get_image_max_buffer_size()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -1999,7 +1999,7 @@ public:
    */ // }}}
   void test__get_image_max_array_size()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2025,7 +2025,7 @@ public:
    */ // }}}
   void test__get_parent_device_id()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2051,7 +2051,7 @@ public:
    */ // }}}
   void test__get_partition_max_sub_devices()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2077,7 +2077,7 @@ public:
    */ // }}}
   void test__get_partition_properties()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2118,7 +2118,7 @@ public:
    */ // }}}
   void test__get_partition_affinity_domain()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2148,7 +2148,7 @@ public:
    */ // }}}
   void test__get_partition_type()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2191,7 +2191,7 @@ public:
    */ // }}}
   void test__get_reference_count()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2217,7 +2217,7 @@ public:
    */ // }}}
   void test__get_preferred_interop_user_sync()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2243,7 +2243,7 @@ public:
    */ // }}}
   void test__get_printf_buffer_size()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2269,7 +2269,7 @@ public:
    */ // }}}
   void test__get_image_pitch_alignment()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2295,7 +2295,7 @@ public:
    */ // }}}
   void test__get_image_base_address_alignment()
   {
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -2374,10 +2374,10 @@ public:
     TS_ASSERT_THROWS(d.get_version(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_extensions(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_platform_id(), clerror_no<status_t::out_of_resources>);
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(d.get_double_fp_config(), clerror_no<status_t::out_of_resources>);
 #endif
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT_THROWS(d.get_preferred_vector_width_half(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_host_unified_memory(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_native_vector_width_char(), clerror_no<status_t::out_of_resources>);
@@ -2389,7 +2389,7 @@ public:
     TS_ASSERT_THROWS(d.get_native_vector_width_half(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_opencl_c_version(), clerror_no<status_t::out_of_resources>);
 #endif
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(d.get_linker_available(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_built_in_kernels(), clerror_no<status_t::out_of_resources>);
     TS_ASSERT_THROWS(d.get_image_max_buffer_size(), clerror_no<status_t::out_of_resources>);
@@ -2464,10 +2464,10 @@ public:
     TS_ASSERT_THROWS(d.get_version(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_extensions(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_platform_id(), clerror_no<status_t::out_of_host_memory>);
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(d.get_double_fp_config(), clerror_no<status_t::out_of_host_memory>);
 #endif
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT_THROWS(d.get_preferred_vector_width_half(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_host_unified_memory(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_native_vector_width_char(), clerror_no<status_t::out_of_host_memory>);
@@ -2479,7 +2479,7 @@ public:
     TS_ASSERT_THROWS(d.get_native_vector_width_half(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_opencl_c_version(), clerror_no<status_t::out_of_host_memory>);
 #endif
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(d.get_linker_available(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_built_in_kernels(), clerror_no<status_t::out_of_host_memory>);
     TS_ASSERT_THROWS(d.get_image_max_buffer_size(), clerror_no<status_t::out_of_host_memory>);
@@ -2554,10 +2554,10 @@ public:
     TS_ASSERT_THROWS(d.get_version(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_extensions(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_platform_id(), unexpected_clerror);
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(d.get_double_fp_config(), unexpected_clerror);
 #endif
-#if CL_VERSION_1_1
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT_THROWS(d.get_preferred_vector_width_half(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_host_unified_memory(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_native_vector_width_char(), unexpected_clerror);
@@ -2569,7 +2569,7 @@ public:
     TS_ASSERT_THROWS(d.get_native_vector_width_half(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_opencl_c_version(), unexpected_clerror);
 #endif
-#if CL_VERSION_1_2
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(d.get_linker_available(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_built_in_kernels(), unexpected_clerror);
     TS_ASSERT_THROWS(d.get_image_max_buffer_size(), unexpected_clerror);
