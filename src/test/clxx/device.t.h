@@ -35,7 +35,7 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    TS_ASSERT_EQUALS(device().handle(), (cl_device_id)NULL);
+    TS_ASSERT_EQUALS(device().get(), (cl_device_id)NULL);
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     TS_ASSERT(mockRetainDevice.never_called());
 #endif
@@ -56,7 +56,7 @@ public:
 #endif
     {
       device d1((cl_device_id)0x1234ul);
-      TS_ASSERT_EQUALS(d1.handle(), (cl_device_id)0x1234ul);
+      TS_ASSERT_EQUALS(d1.get(), (cl_device_id)0x1234ul);
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
       TS_ASSERT(mockRetainDevice.called_once_with((cl_device_id)0x1234ul));
 #endif
@@ -85,7 +85,7 @@ public:
       TS_ASSERT(mockRetainDevice.called_once_with((cl_device_id)0x1234ul));
 #endif
       device d2(d1);
-      TS_ASSERT_EQUALS(d2.handle(), d1.handle());
+      TS_ASSERT_EQUALS(d2.get(), d1.get());
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
       TS_ASSERT(mockRetainDevice.called_twice());
       TS_ASSERT_EQUALS(std::get<0>(mockRetainDevice.calls().front()), (cl_device_id)0x1234ul);
@@ -127,7 +127,7 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
       TS_ASSERT(mockReleaseDevice.never_called());
 #endif
-      TS_ASSERT_EQUALS(d2.handle(), d1.handle());
+      TS_ASSERT_EQUALS(d2.get(), d1.get());
     }
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     TS_ASSERT(mockReleaseDevice.called_twice());
@@ -161,7 +161,7 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
       TS_ASSERT(mockReleaseDevice.never_called());
 #endif
-      TS_ASSERT_EQUALS(d2.handle(), d1.handle());
+      TS_ASSERT_EQUALS(d2.get(), d1.get());
     }
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     TS_ASSERT(mockReleaseDevice.called_twice());
@@ -211,7 +211,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     device d((cl_device_id)NULL);
-    TS_ASSERT_EQUALS(d.handle(),(cl_device_id)NULL);
+    TS_ASSERT_EQUALS(d.get(),(cl_device_id)NULL);
   }
   /** // doc: test__handle_2() {{{
    * \brief Ensure that id() method works.
@@ -225,20 +225,20 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     device d((cl_device_id)0x1234ul);
-    TS_ASSERT_EQUALS(d.handle(),(cl_device_id)0x1234ul);
+    TS_ASSERT_EQUALS(d.get(),(cl_device_id)0x1234ul);
   }
-  /** // doc: test__get_valid_handle_1() {{{
-   * \brief Ensure that get_valid_handle() method works.
+  /** // doc: test__chk_get_1() {{{
+   * \brief Ensure that chk_get() method works.
    */ // }}}
-  void test__get_valid_handle_1( )
+  void test__chk_get_1( )
   {
     device d((cl_device_id)NULL);
-    TS_ASSERT_THROWS(d.get_valid_handle(), uninitialized_device_error);
+    TS_ASSERT_THROWS(d.chk_get(), uninitialized_device_error);
   }
-  /** // doc: test__get_valid_handle_2() {{{
-   * \brief Ensure that get_valid_handle() method works.
+  /** // doc: test__chk_get_2() {{{
+   * \brief Ensure that chk_get() method works.
    */ // }}}
-  void test__get_valid_handle_2( )
+  void test__chk_get_2( )
   {
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
@@ -247,7 +247,7 @@ public:
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
     device d((cl_device_id)0x1234ul);
-    TS_ASSERT_EQUALS(d.get_valid_handle(),(cl_device_id)0x1234ul);
+    TS_ASSERT_EQUALS(d.chk_get(),(cl_device_id)0x1234ul);
   }
   /** // doc: test__get_info__1() {{{
    * \brief Test device::get_info().

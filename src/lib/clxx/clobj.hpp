@@ -14,129 +14,6 @@
 #include <clxx/exceptions.hpp>
 
 namespace clxx {
-/** // doc: clobj_info_type {{{
- * \brief Return the info name type for a particular OpenCL object
- *
- * This meta-function is used by \ref clxx::clobj "clobj" to determine the type
- * of the first argument to \ref clxx::clobj::get_info() "clobj::get_info()".
- */ // }}}
-template< typename Handle >
-  struct clobj_info_type;
-/** // doc: invalid_clobj_error {{{
- * \brief Return the numeric value that represents invalid info name error
- *
- * The returned value is #status_t::invalid_command_queue for
- * \c cl_command_queue, #status_t::invalid_context for \c cl_context etc.
- *
- * The meta-function is used by \ref clxx::clobj "clobj's" destructor. It is
- * also referred to by documentation.
- */ // }}}
-template< typename Handle >
-  struct invalid_clobj_error;
-/** // doc: uninitialized_clobj_error {{{
- * \brief Return the exception type for uninitialized \ref clxx::clobj "clobj"
- *
- * The returned type is \ref clxx::uninitialized_command_queue_error
- * "clxx::uninitialized_command_queue_error" for \c cl_command_queue,
- * \ref clxx::uninitialized_context_error "uninitialized_context_error" for
- * \c cl_context, and so forth.
- *
- * This is used by several methods of the \ref clxx::clobj "clobj" and is
- * referred to by documentation.
- */ // }}}
-template< typename Handle >
-  struct uninitialized_clobj_error;
-
-/** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
-template< >
-  struct clobj_info_type<cl_command_queue>
-  { typedef command_queue_info_t type; };
-template< >
-  struct clobj_info_type<cl_context>
-  { typedef context_info_t type; };
-template< >
-  struct clobj_info_type<cl_device_id>
-  { typedef device_info_t type; };
-template< >
-  struct clobj_info_type<cl_event>
-  { typedef event_info_t type; };
-template< >
-  struct clobj_info_type<cl_kernel>
-  { typedef kernel_info_t type; };
-template< >
-  struct clobj_info_type<cl_mem>
-  { typedef mem_info_t type; };
-template< >
-  struct clobj_info_type<cl_platform_id>
-  { typedef platform_info_t type; };
-template< >
-  struct clobj_info_type<cl_program>
-  { typedef program_info_t type; };
-template< >
-  struct clobj_info_type<cl_sampler>
-  { typedef sampler_info_t type; };
-
-template< >
-  struct invalid_clobj_error<cl_command_queue>
-  { static constexpr status_t value = status_t::invalid_command_queue; };
-template< >
-  struct invalid_clobj_error<cl_context>
-  { static constexpr status_t value = status_t::invalid_context; };
-template< >
-  struct invalid_clobj_error<cl_device_id>
-  { static constexpr status_t value = status_t::invalid_device; };
-template< >
-  struct invalid_clobj_error<cl_event>
-  { static constexpr status_t value = status_t::invalid_event; };
-template< >
-  struct invalid_clobj_error<cl_kernel>
-  { static constexpr status_t value = status_t::invalid_kernel; };
-template< >
-  struct invalid_clobj_error<cl_mem>
-  { static constexpr status_t value = status_t::invalid_mem_object; };
-template< >
-  struct invalid_clobj_error<cl_platform_id>
-  { static constexpr status_t value = status_t::invalid_platform; };
-template< >
-  struct invalid_clobj_error<cl_program>
-  { static constexpr status_t value = status_t::invalid_program; };
-template< >
-  struct invalid_clobj_error<cl_sampler>
-  { static constexpr status_t value = status_t::invalid_sampler; };
-
-template<>
-  struct uninitialized_clobj_error<cl_command_queue>
-  { typedef uninitialized_command_queue_error type; };
-template<>
-  struct uninitialized_clobj_error<cl_context>
-  { typedef uninitialized_context_error type; };
-template<>
-  struct uninitialized_clobj_error<cl_device_id>
-  { typedef uninitialized_device_error type; };
-template<>
-  struct uninitialized_clobj_error<cl_event>
-  { typedef uninitialized_event_error type; };
-template<>
-  struct uninitialized_clobj_error<cl_kernel>
-  { typedef uninitialized_kernel_error type; };
-template<>
-  struct uninitialized_clobj_error<cl_mem>
-  { typedef uninitialized_mem_error type; };
-template<>
-  struct uninitialized_clobj_error<cl_platform_id>
-  { typedef uninitialized_platform_error type; };
-template<>
-  struct uninitialized_clobj_error<cl_program>
-  { typedef uninitialized_program_error type; };
-#if 0
-template<>
-  struct uninitialized_clobj_error<cl_sampler>
-  { typedef uninitialized_sampler_error type; };
-#endif
-/** \endcond */
-} // end namespace clxx
-
-namespace clxx {
 /** // doc: clobj {{{
  * \brief Represents a generic OpenCL object.
  *
@@ -192,7 +69,7 @@ public:
   /** // doc: info_t {{{
    * \brief A type used to represent object's info name (the first argument to #get_info())
    */ // }}}
-  typedef typename clobj_info_type<Handle>::type info_t;
+  typedef typename cl_object_info_type<Handle>::type info_t;
 protected:
   /** // doc: _set_handle() {{{
    * \brief Encapsulate new OpenCL object 
@@ -211,7 +88,7 @@ protected:
    *    If \c true, the reference count for old identifier encapsulated to this
    *    end by the object gets decreased,
    *
-   * \throw clerror_no<invalid_clobj_error<handle_t>::value>
+   * \throw clerror_no<invalid_cl_object_errcode<handle_t>::value>
    *    when the \p retain_new is true and \p handle is not a valid OpenCL
    *    object handle or when \p release_old is \c true and \c this object
    *    holds an invalid handle.
@@ -236,7 +113,7 @@ public:
    *
    * \param handle An OpenCL object handle
    *
-   * \throw clerror_no<invalid_clobj_error<handle_t>::value>
+   * \throw clerror_no<invalid_cl_object_errcode<handle_t>::value>
    *    when the \p handle is not \c NULL but it is not a valid OpenCL
    *    object handle.
    */ // }}}
@@ -253,9 +130,9 @@ public:
    * \param other
    *    Another #clobj object to be assigned to this object.
    *
-   * \throw uninitialized_clobj_error<handle_t>::type
+   * \throw uninitialized_cl_object_error<handle_t>::type
    *    thrown when \p other is uninitialized (see #is_initialized()).
-   * \throw clerror_no<invalid_clobj_error<handle_t>::value>
+   * \throw clerror_no<invalid_cl_object_errcode<handle_t>::value>
    *    thrown when \p other holds an invalid (but not-null) handle.
    * \throw unexpected_clerror
    *
@@ -279,21 +156,23 @@ public:
    *          otherwise.
    */ // }}}
   bool is_initialized() const noexcept;
-  /** // doc: handle() {{{
+  /** // doc: get() {{{
    * \brief Get the OpenCL object handle held by \c this object.
    * \return The OpenCL object handle held by \c this object.
    */ // }}}
-  handle_t handle() const noexcept;
-  /** // doc: get_valid_handle() {{{
-   * \brief Check if \c this object is initialized and return the OpenCL
-   *        object handle held by \c this object.
+  handle_t get() const noexcept;
+  /** // doc: chk_get() {{{
+   * \brief Returns the OpenCL object handle if it's not \c NULL
+   *
+   * If the OpenCL object handle held by this object is \c NULL, an exception
+   * is thrown.
    *
    * \return  The OpenCL object handle encapsulated within \c this object.
    *
-   * \throw uninitialized_clobj_error<handle_t>::type
+   * \throw uninitialized_cl_object_error<handle_t>::type
    *    when the object was not properly initialized (see #is_initialized()).
    */ // }}}
-  handle_t get_valid_handle() const;
+  handle_t chk_get() const;
   /** // doc: get_info() {{{
    * \brief Get certain information from OpenCL platform layer.
    *
@@ -341,7 +220,7 @@ public:
    *  handle held up to now by \c this object is decreased by one, as it is
    *  forgotten by one user (namely, by \c this object).
    *
-   * \throw uninitialized_clobj_error<handle_t>::type
+   * \throw uninitialized_cl_object_error<handle_t>::type
    *    when \e rhs is an uninitialized clobj object.
    * \throw clerror_no<status_t::invalid_clobj>
    *    when \e rhs holds a \c handle_t handle that is invalid.
@@ -367,7 +246,7 @@ public:
    *
    * \return Reference to this object
    *
-   * \throw uninitialized_clobj_error<handle_t>::type
+   * \throw uninitialized_cl_object_error<handle_t>::type
    *    when the \e rhs object is in uninitialized state
    * \throw clerror_no<status_t::invalid_clobj>
    *    propagated from retain_clobj() and release_clobj()
@@ -386,7 +265,7 @@ public:
    *    Another clobj object to be compared to \c this object.
    *
    * \return
-   *    Returns <tt>this->handle() == rhs.handle()</tt>
+   *    Returns <tt>this->get() == rhs.get()</tt>
    */ // }}}
   bool operator == (clobj const& rhs) const noexcept;
   /** // doc: operator!= {{{
@@ -395,7 +274,7 @@ public:
    * \param rhs
    *    Another clobj object to be compared to \c this object.
    *
-   * \returns <tt>this->handle() != rhs.handle()</tt>
+   * \returns <tt>this->get() != rhs.get()</tt>
    */ // }}}
   bool operator != (clobj const& rhs) const noexcept;
   /** // doc: operator< {{{
@@ -404,7 +283,7 @@ public:
    * \param rhs
    *    Another clobj object to be compared to \c this object.
    *
-   * \return <tt>this->handle() < rhs.handle())</tt>
+   * \return <tt>this->get() < rhs.get())</tt>
    */ // }}}
   bool operator < (clobj const& rhs) const noexcept;
   /** // doc: operator> {{{
@@ -413,7 +292,7 @@ public:
    * \param rhs
    *    Another clobj object to be compared to \c this object.
    *
-   * \return <tt>this->handle() > rhs.handle()</tt>
+   * \return <tt>this->get() > rhs.get()</tt>
    */ // }}}
   bool operator > (clobj const& rhs) const noexcept;
   /** // doc: operator<= {{{
@@ -422,7 +301,7 @@ public:
    * \param rhs
    *    Another clobj object to be compared to \c this object.
    *
-   * \return <tt>this->handle() <= rhs.handle()</tt>
+   * \return <tt>this->get() <= rhs.get()</tt>
    */ // }}}
   bool operator <= (clobj const& rhs) const noexcept;
   /** // doc: operator>= {{{
@@ -431,7 +310,7 @@ public:
    * \param rhs
    *    Another clobj object to be compared to \c this object.
    *
-   * \return <tt>this->handle() >= rhs.handle()</tt>
+   * \return <tt>this->get() >= rhs.get()</tt>
    */ // }}}
   bool operator >= (clobj const& rhs) const noexcept;
 };
