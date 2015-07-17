@@ -7,6 +7,7 @@
  */ // }}}
 #include <clxx/events.hpp>
 #include <clxx/functions.hpp>
+#include <clxx/util/obj2cl.hpp>
 
 namespace clxx {
 void
@@ -14,8 +15,8 @@ wait_for_events(clxx::events const& event_list)
 {
   if(!event_list.empty())
     {
-      wait_for_events(event_list.size(),
-                      reinterpret_cast<cl_event const*>(event_list.data()));
+      wait_for_events(static_cast<cl_uint>(event_list.size()),
+                      obj2cl(event_list));
     }
 }
 } // end namespace clxx
