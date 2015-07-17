@@ -144,8 +144,8 @@ public:
 
 } // end namespace clxx
 
-#include <clxx/platform_info.hpp>
-#include <clxx/platform_query.hpp>
+#include <clxx/info/platform_info.hpp>
+#include <clxx/info/platform_query.hpp>
 
 namespace clxx {
 /** \addtogroup clxx_info

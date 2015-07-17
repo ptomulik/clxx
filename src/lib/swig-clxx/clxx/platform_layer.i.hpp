@@ -16,7 +16,7 @@
 #include <clxx/std/set.i.hpp>
 #include <clxx/platforms.i.hpp>
 #include <clxx/devices.i.hpp>
-#include <clxx/platform_layer_info.i.hpp>
+#include <clxx/info/platform_layer_info.i.hpp>
 
 // stuff included by this module
 #include <clxx/platform_layer.hpp>

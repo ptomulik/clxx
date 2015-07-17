@@ -13,9 +13,9 @@
 #include <clxx/platforms.hpp>
 #include <clxx/devices.hpp>
 
-#include <clxx/platform_layer_info.hpp>
-#include <clxx/platform_query.hpp>
-#include <clxx/device_query.hpp>
+#include <clxx/info/platform_layer_info.hpp>
+#include <clxx/info/platform_query.hpp>
+#include <clxx/info/device_query.hpp>
 
 #include <set>
 #include <map>

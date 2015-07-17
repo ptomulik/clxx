@@ -16,7 +16,7 @@
 %import <clxx/std/set.i>
 %import <clxx/platforms.i>
 %import <clxx/devices.i>
-%import <clxx/platform_layer_info.i>
+%import <clxx/info/platform_layer_info.i>
 
 %{
 #include <clxx/std/string.i.hpp>
@@ -24,7 +24,7 @@
 #include <clxx/std/set.i.hpp>
 #include <clxx/platforms.i.hpp>
 #include <clxx/devices.i.hpp>
-#include <clxx/platform_layer_info.i.hpp>
+#include <clxx/info/platform_layer_info.i.hpp>
 %}
 
 %include <clxx/platform_layer.swg>

@@ -667,8 +667,8 @@ public:
 
 } // end namespace clxx
 
-#include <clxx/device_info.hpp>
-#include <clxx/device_query.hpp>
+#include <clxx/info/device_info.hpp>
+#include <clxx/info/device_query.hpp>
 
 namespace clxx {
 /** \addtogroup clxx_info

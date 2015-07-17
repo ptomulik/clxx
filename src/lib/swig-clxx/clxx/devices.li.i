@@ -14,16 +14,16 @@
 %import <clxx/types.i>
 %import <clxx/clobj.i>
 %import <clxx/std/string.i>
-%import <clxx/device_query.i>
-%import <clxx/device_info.i>
+%import <clxx/info/device_query.i>
+%import <clxx/info/device_info.i>
 %import <clxx/platforms.i>
 
 %{
 #include <clxx/types.i.hpp>
 #include <clxx/clobj.i.hpp>
 #include <clxx/std/string.i.hpp>
-#include <clxx/device_query.i.hpp>
-#include <clxx/device_info.i.hpp>
+#include <clxx/info/device_query.i.hpp>
+#include <clxx/info/device_info.i.hpp>
 #include <clxx/platforms.i.hpp>
 %}
 

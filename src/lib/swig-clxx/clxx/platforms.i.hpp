@@ -14,8 +14,8 @@
 #include <clxx/types.i.hpp>
 #include <clxx/clobj.i.hpp>
 #include <clxx/std/string.i.hpp>
-#include <clxx/platform_query.i.hpp>
-#include <clxx/platform_info.i.hpp>
+#include <clxx/info/platform_query.i.hpp>
+#include <clxx/info/platform_info.i.hpp>
 
 // stuff included by this module
 #include <clxx/platform.hpp>
