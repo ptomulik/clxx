@@ -22,6 +22,7 @@
 #include <clxx/device_partition_property.hpp>
 #include <clxx/devices.hpp>
 #include <clxx/event.hpp>
+#include <clxx/events.hpp>
 #include <clxx/functions.hpp>
 #include <clxx/kernel.hpp>
 #include <clxx/kernel_exec.hpp>
