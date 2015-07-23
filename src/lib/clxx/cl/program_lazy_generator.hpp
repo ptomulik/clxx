@@ -31,14 +31,14 @@ public:
    * \todo Write documentation
    */ // }}}
   virtual clxx::program get_program(clxx::context const& context) const;
-  /** // doc: forget_memoized_program() {{{
+  /** // doc: discard_memoized_program() {{{
    * \todo Write documentation
    */ // }}}
-  virtual size_t forget_memoized_program(clxx::context const& context) const;
-  /** // doc: forget_memoized_programs() {{{
+  virtual size_t discard_memoized_program(clxx::context const& context) const;
+  /** // doc: discard_memoized_programs() {{{
    * \todo Write documentation
    */ // }}}
-  virtual void forget_memoized_programs() const;
+  virtual void discard_memoized_programs() const;
 };
 } // end namespace clxx
 

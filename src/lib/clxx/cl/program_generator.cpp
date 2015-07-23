@@ -98,25 +98,6 @@ generate_and_lazy_build_program(clxx::program& program,
   program = program_generator.get_program(context);
 
   build_status_t status = program.get_build_status(device);
-  // FIXME: thread-safety issue?: we may end-up with two threads trying to
-  // build same program for same device. Some thoughts:
-  //
-  //  - OpenCL calls, including clBuildProgram(), claim to be thread-safe,
-  //    but the double invocation of clBuildProgram() from distinct threads may
-  //    yield unnecessary computational overhead,
-  //  - one thread may start to use cl_program, while it's being built for the
-  //    second time by another thread; while the program is being built,
-  //    colliding calls to OpenCL API by other threads shall be maintained
-  //    appropriately by the thread-safe OpenCL implementation, however
-  //  - the problem appears, for example, then two thread call this function
-  //    concurrently with all the parameters being same, but with different 
-  //    build_options; the result will be surprising for one or more threads,
-  //  - the last issue, however, would not be solved by any thread
-  //    synchronization mechanisms here.
-  //
-  // Anyway, it's an interesting question: what happens if we call
-  // clBuildProgram() on an already built program (for which the build status
-  // is initially CL_BUILD_STATUS_SUCCESS).
   switch(status)
     {
       case build_status_t::none:
