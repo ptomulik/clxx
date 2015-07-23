@@ -97,8 +97,7 @@ generate_and_lazy_build_program(clxx::program& program,
 
   program = program_generator.get_program(context);
 
-  build_status_t status = program.get_build_status(device);
-  switch(status)
+  switch(program.get_build_status(device))
     {
       case build_status_t::none:
       case build_status_t::error:

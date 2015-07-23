@@ -24,21 +24,26 @@ class program_lazy_generator
   : public program_generator
 {
 private:
-  mutable std::map<clxx::context, clxx::program> _programs;
+  typedef std::map<clxx::context, clxx::program> memoized_programs_t;
+  mutable memoized_programs_t _programs;
   mutable std::mutex _programs_mutex;
 public:
   /** // doc: get_program() {{{
    * \todo Write documentation
    */ // }}}
   virtual clxx::program get_program(clxx::context const& context) const;
+  /** // doc: get_memoized_program() {{{
+   * \todo Write documentation
+   */ // }}}
+  clxx::program get_memoized_program(clxx::context const& context) const;
   /** // doc: discard_memoized_program() {{{
    * \todo Write documentation
    */ // }}}
-  virtual size_t discard_memoized_program(clxx::context const& context) const;
+  size_t discard_memoized_program(clxx::context const& context) const;
   /** // doc: discard_memoized_programs() {{{
    * \todo Write documentation
    */ // }}}
-  virtual void discard_memoized_programs() const;
+  void discard_memoized_programs() const;
 };
 } // end namespace clxx
 
