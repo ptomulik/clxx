@@ -12,6 +12,7 @@
 
 #include <clxx/cl/program.hpp>
 #include <clxx/cl/context.hpp>
+#include <clxx/cl/command_queue.hpp>
 #include <string>
 
 namespace clxx {
@@ -73,6 +74,24 @@ public:
 };
 } // end namespace clxx
 
+namespace clxx {
+/** doc: generate_and_lazy_build_program() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+generate_and_build_program(clxx::program& program,
+                           clxx::program_generator const& program_generator,
+                           clxx::command_queue const& command_queue,
+                           std::string const& build_options = "");
+/** doc: generate_and_lazy_build_program() {{{
+ * \todo Write documentation
+ */ // }}}
+void
+generate_and_lazy_build_program(clxx::program& program,
+                                clxx::program_generator const& program_generator,
+                                clxx::command_queue const& command_queue,
+                                std::string const& build_options = "");
+} // end namespace clxx
 #endif /* CLXX_CL_PROGRAM_GENERATOR_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

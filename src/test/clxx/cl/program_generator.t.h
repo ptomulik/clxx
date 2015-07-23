@@ -160,6 +160,201 @@ public:
     TS_ASSERT_EQUALS(std::get<1>(mockCreateProgramWithSource.calls().back()), 1);
     TS_ASSERT(p.get() == (cl_program)0x1234);
   }
+  /** // doc: test__generate_and_build_program__1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__generate_and_build_program__1( )
+  {
+    union queue_info_t{
+      cl_device_id device;
+      cl_context context;
+    };
+    queue_info_t queue_info;
+    size_t queue_info_size = sizeof(queue_info);
+    queue_info.context = (cl_context)0x5678;
+
+    T::Dummy_clRetainContext mockRetainContext(CL_SUCCESS);
+    T::Dummy_clReleaseContext mockReleaseContext(CL_SUCCESS);
+    T::Dummy_clRetainProgram mockRetainProgram(CL_SUCCESS);
+    T::Dummy_clReleaseProgram mockReleaseProgram(CL_SUCCESS);
+    T::Dummy_clRetainCommandQueue mockRetainCommandQueue(CL_SUCCESS);
+    T::Dummy_clReleaseCommandQueue mockReleaseCommandQueue(CL_SUCCESS);
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
+#endif
+    T::Dummy_clCreateProgramWithSource mockCreateProgramWithSource((cl_program)0x1234, CL_SUCCESS);
+    T::Dummy_clGetCommandQueueInfo mockGetCommandQueueInfo(CL_SUCCESS, &queue_info, &queue_info_size);
+    T::Dummy_clBuildProgram mockBuildProgram(CL_SUCCESS);
+
+    program_generator const& g1 = G1{};
+    program p;
+    command_queue q{(cl_command_queue)0x4321};
+
+    generate_and_build_program(p, g1, q);
+
+    TS_ASSERT(p.get() == (cl_program)0x1234);
+
+    TS_ASSERT(mockGetCommandQueueInfo.called_twice());
+    //
+    TS_ASSERT(std::get<0>(mockGetCommandQueueInfo.calls().front()) == (cl_command_queue)0x4321);
+    TS_ASSERT(std::get<1>(mockGetCommandQueueInfo.calls().front()) == CL_QUEUE_CONTEXT);
+    TS_ASSERT(std::get<2>(mockGetCommandQueueInfo.calls().front()) == sizeof(cl_context));
+    TS_ASSERT(std::get<3>(mockGetCommandQueueInfo.calls().front()) != nullptr);
+    TS_ASSERT(std::get<4>(mockGetCommandQueueInfo.calls().front()) == nullptr);
+    //
+    TS_ASSERT(std::get<0>(mockGetCommandQueueInfo.calls().back()) == (cl_command_queue)0x4321);
+    TS_ASSERT(std::get<1>(mockGetCommandQueueInfo.calls().back()) == CL_QUEUE_DEVICE);
+    TS_ASSERT(std::get<2>(mockGetCommandQueueInfo.calls().back()) == sizeof(cl_device_id));
+    TS_ASSERT(std::get<3>(mockGetCommandQueueInfo.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mockGetCommandQueueInfo.calls().back()) == nullptr);
+
+    TS_ASSERT(mockBuildProgram.called_once());
+    TS_ASSERT(std::get<0>(mockBuildProgram.calls().front()) == (cl_program)0x1234);
+    TS_ASSERT(std::get<1>(mockBuildProgram.calls().front()) == 1);
+    TS_ASSERT(std::get<2>(mockBuildProgram.calls().front()) != nullptr);
+    TS_ASSERT(std::get<3>(mockBuildProgram.calls().front()) != nullptr);
+    TS_ASSERT(std::get<4>(mockBuildProgram.calls().front()) == nullptr);
+    TS_ASSERT(std::get<5>(mockBuildProgram.calls().front()) == nullptr);
+  }
+  /** // doc: test__generate_and_lazy_build_program__1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__generate_and_lazy_build_program__1( )
+  {
+    union queue_info_t{
+      cl_device_id device;
+      cl_context context;
+    };
+    queue_info_t queue_info;
+    size_t queue_info_size = sizeof(queue_info);
+    queue_info.context = (cl_context)0x5678;
+
+    const cl_build_status build_status = (cl_build_status)CL_BUILD_NONE;
+    size_t build_status_size = sizeof(build_status);
+
+    T::Dummy_clRetainContext mockRetainContext(CL_SUCCESS);
+    T::Dummy_clReleaseContext mockReleaseContext(CL_SUCCESS);
+    T::Dummy_clRetainProgram mockRetainProgram(CL_SUCCESS);
+    T::Dummy_clReleaseProgram mockReleaseProgram(CL_SUCCESS);
+    T::Dummy_clRetainCommandQueue mockRetainCommandQueue(CL_SUCCESS);
+    T::Dummy_clReleaseCommandQueue mockReleaseCommandQueue(CL_SUCCESS);
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
+#endif
+    T::Dummy_clCreateProgramWithSource mockCreateProgramWithSource((cl_program)0x1234, CL_SUCCESS);
+    T::Dummy_clGetCommandQueueInfo mockGetCommandQueueInfo(CL_SUCCESS, &queue_info, &queue_info_size);
+    T::Dummy_clGetProgramBuildInfo mockGetProgramBuildInfo(CL_SUCCESS, &build_status, &build_status_size);
+    T::Dummy_clBuildProgram mockBuildProgram(CL_SUCCESS);
+
+    program_generator const& g1 = G1{};
+    program p;
+    command_queue q{(cl_command_queue)0x4321};
+
+    generate_and_lazy_build_program(p, g1, q);
+
+    TS_ASSERT(p.get() == (cl_program)0x1234);
+
+    TS_ASSERT(mockGetCommandQueueInfo.called_twice());
+    //
+    TS_ASSERT(std::get<0>(mockGetCommandQueueInfo.calls().front()) == (cl_command_queue)0x4321);
+    TS_ASSERT(std::get<1>(mockGetCommandQueueInfo.calls().front()) == CL_QUEUE_CONTEXT);
+    TS_ASSERT(std::get<2>(mockGetCommandQueueInfo.calls().front()) == sizeof(cl_context));
+    TS_ASSERT(std::get<3>(mockGetCommandQueueInfo.calls().front()) != nullptr);
+    TS_ASSERT(std::get<4>(mockGetCommandQueueInfo.calls().front()) == nullptr);
+    //
+    TS_ASSERT(std::get<0>(mockGetCommandQueueInfo.calls().back()) == (cl_command_queue)0x4321);
+    TS_ASSERT(std::get<1>(mockGetCommandQueueInfo.calls().back()) == CL_QUEUE_DEVICE);
+    TS_ASSERT(std::get<2>(mockGetCommandQueueInfo.calls().back()) == sizeof(cl_device_id));
+    TS_ASSERT(std::get<3>(mockGetCommandQueueInfo.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mockGetCommandQueueInfo.calls().back()) == nullptr);
+
+    TS_ASSERT(mockGetProgramBuildInfo.called_once());
+    TS_ASSERT(std::get<0>(mockGetProgramBuildInfo.calls().front()) == (cl_program)0x1234);
+    TS_ASSERT(std::get<1>(mockGetProgramBuildInfo.calls().front()) == (cl_device_id)0x5678);
+    TS_ASSERT(std::get<2>(mockGetProgramBuildInfo.calls().front()) == CL_PROGRAM_BUILD_STATUS);
+    TS_ASSERT(std::get<3>(mockGetProgramBuildInfo.calls().front()) == sizeof(cl_build_status));
+    TS_ASSERT(std::get<4>(mockGetProgramBuildInfo.calls().front()) != nullptr);
+    TS_ASSERT(std::get<5>(mockGetProgramBuildInfo.calls().front()) == nullptr);
+
+    TS_ASSERT(mockBuildProgram.called_once());
+    TS_ASSERT(std::get<0>(mockBuildProgram.calls().front()) == (cl_program)0x1234);
+    TS_ASSERT(std::get<1>(mockBuildProgram.calls().front()) == 1);
+    TS_ASSERT(std::get<2>(mockBuildProgram.calls().front()) != nullptr);
+    TS_ASSERT(std::get<3>(mockBuildProgram.calls().front()) != nullptr);
+    TS_ASSERT(std::get<4>(mockBuildProgram.calls().front()) == nullptr);
+    TS_ASSERT(std::get<5>(mockBuildProgram.calls().front()) == nullptr);
+  }
+  /** // doc: test__generate_and_lazy_build_program__2() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__generate_and_lazy_build_program__2( )
+  {
+    union queue_info_t{
+      cl_device_id device;
+      cl_context context;
+    };
+    queue_info_t queue_info;
+    size_t queue_info_size = sizeof(queue_info);
+    queue_info.context = (cl_context)0x5678;
+
+    const cl_build_status build_status = (cl_build_status)CL_BUILD_SUCCESS;
+    size_t build_status_size = sizeof(build_status);
+
+    T::Dummy_clRetainContext mockRetainContext(CL_SUCCESS);
+    T::Dummy_clReleaseContext mockReleaseContext(CL_SUCCESS);
+    T::Dummy_clRetainProgram mockRetainProgram(CL_SUCCESS);
+    T::Dummy_clReleaseProgram mockReleaseProgram(CL_SUCCESS);
+    T::Dummy_clRetainCommandQueue mockRetainCommandQueue(CL_SUCCESS);
+    T::Dummy_clReleaseCommandQueue mockReleaseCommandQueue(CL_SUCCESS);
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+    T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+    T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
+#endif
+    T::Dummy_clCreateProgramWithSource mockCreateProgramWithSource((cl_program)0x1234, CL_SUCCESS);
+    T::Dummy_clGetCommandQueueInfo mockGetCommandQueueInfo(CL_SUCCESS, &queue_info, &queue_info_size);
+    T::Dummy_clGetProgramBuildInfo mockGetProgramBuildInfo(CL_SUCCESS, &build_status, &build_status_size);
+    T::Dummy_clBuildProgram mockBuildProgram(CL_SUCCESS);
+
+    program_generator const& g1 = G1{};
+    program p;
+    command_queue q{(cl_command_queue)0x4321};
+
+    generate_and_lazy_build_program(p, g1, q);
+
+    TS_ASSERT(p.get() == (cl_program)0x1234);
+
+    TS_ASSERT(mockGetCommandQueueInfo.called_twice());
+    //
+    TS_ASSERT(std::get<0>(mockGetCommandQueueInfo.calls().front()) == (cl_command_queue)0x4321);
+    TS_ASSERT(std::get<1>(mockGetCommandQueueInfo.calls().front()) == CL_QUEUE_CONTEXT);
+    TS_ASSERT(std::get<2>(mockGetCommandQueueInfo.calls().front()) == sizeof(cl_context));
+    TS_ASSERT(std::get<3>(mockGetCommandQueueInfo.calls().front()) != nullptr);
+    TS_ASSERT(std::get<4>(mockGetCommandQueueInfo.calls().front()) == nullptr);
+    //
+    TS_ASSERT(std::get<0>(mockGetCommandQueueInfo.calls().back()) == (cl_command_queue)0x4321);
+    TS_ASSERT(std::get<1>(mockGetCommandQueueInfo.calls().back()) == CL_QUEUE_DEVICE);
+    TS_ASSERT(std::get<2>(mockGetCommandQueueInfo.calls().back()) == sizeof(cl_device_id));
+    TS_ASSERT(std::get<3>(mockGetCommandQueueInfo.calls().back()) != nullptr);
+    TS_ASSERT(std::get<4>(mockGetCommandQueueInfo.calls().back()) == nullptr);
+
+    TS_ASSERT(mockGetProgramBuildInfo.called_once());
+    TS_ASSERT(std::get<0>(mockGetProgramBuildInfo.calls().front()) == (cl_program)0x1234);
+    TS_ASSERT(std::get<1>(mockGetProgramBuildInfo.calls().front()) == (cl_device_id)0x5678);
+    TS_ASSERT(std::get<2>(mockGetProgramBuildInfo.calls().front()) == CL_PROGRAM_BUILD_STATUS);
+    TS_ASSERT(std::get<3>(mockGetProgramBuildInfo.calls().front()) == sizeof(cl_build_status));
+    TS_ASSERT(std::get<4>(mockGetProgramBuildInfo.calls().front()) != nullptr);
+    TS_ASSERT(std::get<5>(mockGetProgramBuildInfo.calls().front()) == nullptr);
+
+    TS_ASSERT(mockBuildProgram.never_called());
+  }
 };
 
 #endif /* CLXX_CL_PROGRAM_GENERATOR_T_H_INCLUDED */
