@@ -15,44 +15,9 @@ program_generator::
 }
 /* ----------------------------------------------------------------------- */
 std::string program_generator::
-program_namespace() const
-{
-  return "";
-}
-/* ----------------------------------------------------------------------- */
-std::string program_generator::
-program_full_name() const
-{
-  return program_namespace() + "::" + program_name();
-}
-/* ----------------------------------------------------------------------- */
-std::string program_generator::
-program_file_suffix() const
-{
-  return ".cl";
-}
-/* ----------------------------------------------------------------------- */
-std::string program_generator::
-program_dir() const
-{
-  return "";
-}
-/* ----------------------------------------------------------------------- */
-std::string program_generator::
-program_file() const
-{
-  return program_name() + program_file_suffix();
-}
-/* ----------------------------------------------------------------------- */
-std::string program_generator::
 program_path() const
 {
-  std::string path(this->program_dir());
-  if(!path.empty())
-    if(path.back() != '/')
-      path.push_back('/');
-  path.append(this->program_file());
-  return path;
+  return this->program_name();
 }
 /* ----------------------------------------------------------------------- */
 std::string program_generator::

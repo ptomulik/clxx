@@ -32,13 +32,9 @@ class clxx::program_generator_test_suite : public CxxTest::TestSuite
   {
   public:
     std::string program_name() const { return "g1"; }
-    std::string program_namespace() const { return "clxx"; }
-    std::string program_file_suffix() const { return ".xyz"; }
-    std::string program_dir() const { return "/tmp/clxx"; }
+    std::string program_path() const { return "/tmp/clxx/g1.cl"; }
     void generate_program_source(std::string& src, clxx::context const&) const
-    {
-      src.append("__kernel void foo() {}\n");
-    }
+    { src.append("__kernel void foo() {}\n"); }
   };
 
 public:
@@ -52,56 +48,6 @@ public:
     TS_ASSERT_EQUALS(g0.program_name(), "g0");
     TS_ASSERT_EQUALS(g1.program_name(), "g1");
   }
-  /** // doc: test__program_namespace__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__program_namespace__1( )
-  {
-    program_generator const& g0 = G0{};
-    program_generator const& g1 = G1{};
-    TS_ASSERT_EQUALS(g0.program_namespace(), "");
-    TS_ASSERT_EQUALS(g1.program_namespace(), "clxx");
-  }
-  /** // doc: test__program_full_name__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__program_full_name__1( )
-  {
-    program_generator const& g0 = G0{};
-    program_generator const& g1 = G1{};
-    TS_ASSERT_EQUALS(g0.program_full_name(), "::g0");
-    TS_ASSERT_EQUALS(g1.program_full_name(), "clxx::g1");
-  }
-  /** // doc: test__program_file_suffix__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__program_file_suffix__1( )
-  {
-    program_generator const& g0 = G0{};
-    program_generator const& g1 = G1{};
-    TS_ASSERT_EQUALS(g0.program_file_suffix(), ".cl");
-    TS_ASSERT_EQUALS(g1.program_file_suffix(), ".xyz");
-  }
-  /** // doc: test__program_file__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__program_file__1( )
-  {
-    program_generator const& g0 = G0{};
-    program_generator const& g1 = G1{};
-    TS_ASSERT_EQUALS(g0.program_file(), "g0.cl");
-    TS_ASSERT_EQUALS(g1.program_file(), "g1.xyz");
-  }
-  /** // doc: test__program_dir__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__program_dir__1( )
-  {
-    program_generator const& g0 = G0{};
-    program_generator const& g1 = G1{};
-    TS_ASSERT_EQUALS(g0.program_dir(), "");
-    TS_ASSERT_EQUALS(g1.program_dir(), "/tmp/clxx");
-  }
   /** // doc: test__program_path__1() {{{
    * \todo Write documentation
    */ // }}}
@@ -109,22 +55,8 @@ public:
   {
     program_generator const& g0 = G0{};
     program_generator const& g1 = G1{};
-    TS_ASSERT_EQUALS(g0.program_path(), "g0.cl");
-    TS_ASSERT_EQUALS(g1.program_path(), "/tmp/clxx/g1.xyz");
-  }
-  /** // doc: test__program_path__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__program_path__2( )
-  {
-    class G : public program_generator
-    {
-      void generate_program_source(std::string&, clxx::context const&) const { }
-      std::string program_name() const { return "g"; }
-      std::string program_dir() const { return "/tmp/clxx/"; }
-    };
-    program_generator const& g = G{};
-    TS_ASSERT_EQUALS(g.program_path(), "/tmp/clxx/g.cl");
+    TS_ASSERT_EQUALS(g0.program_path(), "g0");
+    TS_ASSERT_EQUALS(g1.program_path(), "/tmp/clxx/g1.cl");
   }
   /** // doc: test__line_directive__1() {{{
    * \todo Write documentation
@@ -133,8 +65,8 @@ public:
   {
     program_generator const& g0 = G0{};
     program_generator const& g1 = G1{};
-    TS_ASSERT_EQUALS(g0.line_directive(123), "#line 123 \"g0.cl\"");
-    TS_ASSERT_EQUALS(g1.line_directive(456), "#line 456 \"/tmp/clxx/g1.xyz\"");
+    TS_ASSERT_EQUALS(g0.line_directive(123), "#line 123 \"g0\"");
+    TS_ASSERT_EQUALS(g1.line_directive(456), "#line 456 \"/tmp/clxx/g1.cl\"");
   }
   /** // doc: test__get_program__1() {{{
    * \todo Write documentation
