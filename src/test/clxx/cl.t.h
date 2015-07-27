@@ -141,12 +141,12 @@ public:
     TS_FAIL("check for CLXX_CL_KERNELS_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
-  void test__clxx_cl_kernel_exec_hpp_included()
+  void test__clxx_cl_kernel_fcn_hpp_included()
   {
-#ifdef CLXX_CL_KERNEL_EXEC_HPP_INCLUDED
+#ifdef CLXX_CL_KERNEL_FCN_HPP_INCLUDED
     TS_ASSERT(true);
 #else
-    TS_FAIL("check for CLXX_CL_KERNEL_EXEC_HPP_INCLUDED in clxx/cl.hpp failed");
+    TS_FAIL("check for CLXX_CL_KERNEL_FCN_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
   void test__clxx_cl_kernel_hpp_included()
@@ -157,12 +157,12 @@ public:
     TS_FAIL("check for CLXX_CL_KERNEL_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
-  void test__clxx_cl_kernel_lazy_constructor_hpp_included()
+  void test__clxx_cl_kernel_lazy_ctor_hpp_included()
   {
-#ifdef CLXX_CL_KERNEL_LAZY_CONSTRUCTOR_HPP_INCLUDED
+#ifdef CLXX_CL_KERNEL_LAZY_CTOR_HPP_INCLUDED
     TS_ASSERT(true);
 #else
-    TS_FAIL("check for CLXX_CL_KERNEL_LAZY_CONSTRUCTOR_HPP_INCLUDED in clxx/cl.hpp failed");
+    TS_FAIL("check for CLXX_CL_KERNEL_LAZY_CTOR_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
   void test__clxx_cl_mem_fcn_hpp_included()
@@ -205,6 +205,22 @@ public:
     TS_FAIL("check for CLXX_CL_PLATFORM_LAYER_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
+  void test__clxx_cl_program_hpp_included()
+  {
+#ifdef CLXX_CL_PROGRAM_HPP_INCLUDED
+    TS_ASSERT(true);
+#else
+    TS_FAIL("check for CLXX_CL_PROGRAM_HPP_INCLUDED in clxx/cl.hpp failed");
+#endif
+  }
+  void test__clxx_cl_program_fcn_hpp_included()
+  {
+#ifdef CLXX_CL_PROGRAM_FCN_HPP_INCLUDED
+    TS_ASSERT(true);
+#else
+    TS_FAIL("check for CLXX_CL_PROGRAM_FCN_HPP_INCLUDED in clxx/cl.hpp failed");
+#endif
+  }
   void test__clxx_cl_program_generator_hpp_included()
   {
 #ifdef CLXX_CL_PROGRAM_GENERATOR_HPP_INCLUDED
@@ -213,12 +229,20 @@ public:
     TS_FAIL("check for CLXX_CL_PROGRAM_GENERATOR_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
-  void test__clxx_cl_program_hpp_included()
+  void test__clxx_cl_program_generator_fcn_hpp_included()
   {
-#ifdef CLXX_CL_PROGRAM_HPP_INCLUDED
+#ifdef CLXX_CL_PROGRAM_GENERATOR_FCN_HPP_INCLUDED
     TS_ASSERT(true);
 #else
-    TS_FAIL("check for CLXX_CL_PROGRAM_HPP_INCLUDED in clxx/cl.hpp failed");
+    TS_FAIL("check for CLXX_CL_PROGRAM_GENERATOR_FCN_HPP_INCLUDED in clxx/cl.hpp failed");
+#endif
+  }
+  void test__clxx_cl_program_lazy_fcn_hpp_included()
+  {
+#ifdef CLXX_CL_PROGRAM_LAZY_FCN_HPP_INCLUDED
+    TS_ASSERT(true);
+#else
+    TS_FAIL("check for CLXX_CL_PROGRAM_LAZY_FCN_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
   void test__clxx_cl_program_lazy_generator_hpp_included()
@@ -235,6 +259,22 @@ public:
     TS_ASSERT(true);
 #else
     TS_FAIL("check for CLXX_CL_PROGRAM_OBSERVER_HPP_INCLUDED in clxx/cl.hpp failed");
+#endif
+  }
+  void test__clxx_cl_programs_hpp_included()
+  {
+#ifdef CLXX_CL_PROGRAMS_HPP_INCLUDED
+    TS_ASSERT(true);
+#else
+    TS_FAIL("check for CLXX_CL_PROGRAMS_HPP_INCLUDED in clxx/cl.hpp failed");
+#endif
+  }
+  void test__clxx_cl_runtime_hpp_included()
+  {
+#ifdef CLXX_CL_RUNTIME_HPP_INCLUDED
+    TS_ASSERT(true);
+#else
+    TS_FAIL("check for CLXX_CL_RUNTIME_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
   void test__clxx_common_ndrange_hpp_included()
