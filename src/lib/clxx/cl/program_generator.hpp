@@ -14,9 +14,9 @@
 #include <clxx/cl/program_fwd.hpp>
 #include <clxx/cl/context_fwd.hpp>
 #include <clxx/cl/command_queue_fwd.hpp>
+#include <clxx/cl/program_with_source_ctor.hpp>
 #include <clxx/common/shared_ptr.hpp>
 #include <string>
-#include <functional>
 
 namespace clxx {
 /** // doc: program_generator {{{
@@ -34,13 +34,12 @@ namespace clxx {
  * \ref clxx::program_generator "program_generator" object.
  *
  * A program constructor is a C++11 callable object of type
- * \c std::function<clxx::program(clxx::context const&, std::string const&)>
+ * \ref clxx::program_with_source_ctor "program_with_source_ctor"
  * (we have a typedef for it, see \ref clxx::program_generator::program_ctor_t "program_ctor_t").
  * The program constructor is pluggable, so each instanace of
  * \ref clxx::program_generator "program_generator" may use its own program
- * constructor. The program constructor may add several features to the
- * program generator, such as automatic program compilation/building or
- * offline program caching.
+ * constructor. The program constructor may add features to the program
+ * generator, such as automatic offline program caching.
  *
  * If not explicitly provided, the \ref clxx::program_generator "program_generator"
  * uses the default program constructor returned by #default_program_ctor()
@@ -72,10 +71,10 @@ public:
   /** // doc: program_ctor_t {{{
    * \brief Type of the pluggable program constructor
    */ // }}}
-  typedef std::function<clxx::program(clxx::context const&, std::string const&)> program_ctor_t;
+  typedef clxx::program_with_source_ctor program_ctor_t;
 private:
-  static thread_local program_ctor_t _default_program_ctor;
-  program_ctor_t _program_ctor;
+  static thread_local shared_ptr<program_ctor_t> _default_program_ctor;
+  shared_ptr<program_ctor_t> _program_ctor;
 protected:
   /** // doc: create_program() {{{
    * \todo Write documentation
@@ -94,14 +93,14 @@ public:
    * #default_program_ctor() simply forwards the program construction to
    * \ref clxx::program::program(clxx::context const&, clxx::program_sources const&).
    */ // }}}
-  static program_ctor_t const& default_program_ctor();
+  static shared_ptr<program_ctor_t> get_default_program_ctor();
   /** // doc: set_default_program_ctor() {{{
    * \brief Assign a program constructor that shall be used used to initialize
    *        default-constructed \ref clxx::program_generator "program_generators"
    * \param ctor
    *    New program constructor
    */ // }}}
-  void set_default_program_ctor(program_ctor_t const& ctor);
+  static void set_default_program_ctor(shared_ptr<program_ctor_t> const& ctor);
 public:
   /** // doc: program_generator() {{{
    * \brief Default constructor
@@ -113,11 +112,19 @@ public:
    * \param program_ctor
    *    The program 
    */ // }}}
-  program_generator(program_ctor_t const& program_ctor);
+  program_generator(shared_ptr<program_ctor_t> const& program_ctor);
   /** // doc: ~program_generator() {{{
    * \brief Destructor
    */ // }}}
   virtual ~program_generator();
+  /** // doc: set_program_ctor() {{{
+   * \brief Use new program constructor
+   */ // }}}
+  void set_program_ctor(shared_ptr<program_ctor_t> const& ctor);
+  /** // doc: get_program_ctor() {{{
+   * \brief Use new program constructor
+   */ // }}}
+  shared_ptr<program_ctor_t> get_program_ctor() const;
   /** // doc: generate_program_source(std::string&) {{{
    * \brief Generate program source
    *

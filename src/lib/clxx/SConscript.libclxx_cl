@@ -33,6 +33,7 @@ sources =  [
     'cl/program_lazy_fcn.cpp',
     'cl/program_lazy_generator.cpp',
     'cl/program_observer.cpp',
+    'cl/program_with_source_ctor.cpp',
     'cl/runtime.cpp',
 ]
 
@@ -77,6 +78,7 @@ headers = [
     'cl/program_lazy_fcn.hpp',
     'cl/program_lazy_generator.hpp',
     'cl/program_observer.hpp',
+    'cl/program_with_source_ctor.hpp',
     'cl/programs.hpp',
     'cl/runtime.hpp',
 ]

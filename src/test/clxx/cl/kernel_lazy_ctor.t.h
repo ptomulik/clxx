@@ -13,6 +13,7 @@
 #include <cxxtest/TestSuite.h>
 #include <clxx/cl/kernel_lazy_ctor.hpp>
 #include <clxx/cl/program.hpp>
+#include <clxx/cl/kernel.hpp>
 #include <clxx/cl/mock.hpp>
 
 namespace clxx { class kernel_lazy_ctor_test_suite; }

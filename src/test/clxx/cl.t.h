@@ -261,6 +261,14 @@ public:
     TS_FAIL("check for CLXX_CL_PROGRAM_OBSERVER_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
+  void test__clxx_cl_program_with_source_ctor_hpp_included()
+  {
+#ifdef CLXX_CL_PROGRAM_WITH_SOURCE_CTOR_HPP_INCLUDED
+    TS_ASSERT(true);
+#else
+    TS_FAIL("check for CLXX_CL_PROGRAM_WITH_SOURCE_CTOR_HPP_INCLUDED in clxx/cl.hpp failed");
+#endif
+  }
   void test__clxx_cl_programs_hpp_included()
   {
 #ifdef CLXX_CL_PROGRAMS_HPP_INCLUDED

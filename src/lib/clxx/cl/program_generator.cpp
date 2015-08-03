@@ -9,35 +9,40 @@
 #include <clxx/cl/program.hpp>
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/command_queue.hpp>
+#include <clxx/cl/program_with_source_ctor.hpp>
 
 namespace clxx {
 /* ----------------------------------------------------------------------- */
-thread_local program_generator::program_ctor_t program_generator::
-_default_program_ctor = [](clxx::context const& context, std::string const& src)
-      -> clxx::program
-{
-  return clxx::program(context, clxx::program_sources{ src });
-};
+thread_local shared_ptr<program_generator::program_ctor_t> program_generator::
+_default_program_ctor = make_shared<program_generator::program_ctor_t>();
 /* ----------------------------------------------------------------------- */
-program_generator::program_ctor_t const& program_generator::
-default_program_ctor()
+shared_ptr<program_generator::program_ctor_t> program_generator::
+get_default_program_ctor()
 {
   return _default_program_ctor;
 }
 /* ----------------------------------------------------------------------- */
 void program_generator::
-set_default_program_ctor(program_ctor_t const& ctor)
+set_default_program_ctor(shared_ptr<program_ctor_t> const& ctor)
 {
   _default_program_ctor = ctor;
 }
 /* ----------------------------------------------------------------------- */
+clxx::program program_generator::
+create_program(clxx::context const& context, std::string const& src) const
+{
+  return _program_ctor ? (*_program_ctor)(context, { src })
+                       : (*_default_program_ctor)(context, { src });
+}
+/* ----------------------------------------------------------------------- */
 program_generator::
 program_generator()
+  : _program_ctor(nullptr)
 {
 }
 /* ----------------------------------------------------------------------- */
 program_generator::
-program_generator(program_ctor_t const& program_ctor)
+program_generator(shared_ptr<program_ctor_t> const& program_ctor)
   : _program_ctor(program_ctor)
 {
 }
@@ -47,11 +52,16 @@ program_generator::
 {
 }
 /* ----------------------------------------------------------------------- */
-clxx::program program_generator::
-create_program(clxx::context const& context, std::string const& src) const
+void program_generator::
+set_program_ctor(shared_ptr<program_ctor_t> const& ctor)
 {
-  return _program_ctor ? _program_ctor(context, src)
-                       : _default_program_ctor(context, src);
+  _program_ctor = ctor;
+}
+/* ----------------------------------------------------------------------- */
+shared_ptr<program_generator::program_ctor_t> program_generator::
+get_program_ctor() const
+{
+  return _program_ctor;
 }
 /* ----------------------------------------------------------------------- */
 std::string program_generator::

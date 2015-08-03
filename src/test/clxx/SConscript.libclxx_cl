@@ -104,6 +104,7 @@ tests = [
     'cl/program_generator.t.h',
     'cl/program_generator_fcn.t.h',
     'cl/program_lazy_fcn.t.h',
+    'cl/program_with_source_ctor.t.h',
     'cl/runtime.t.h',
 ]
 

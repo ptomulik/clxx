@@ -40,6 +40,7 @@
 #include <clxx/cl/program_lazy_fcn.hpp>
 #include <clxx/cl/program_lazy_generator.hpp>
 #include <clxx/cl/program_observer.hpp>
+#include <clxx/cl/program_with_source_ctor.hpp>
 #include <clxx/cl/programs.hpp>
 #include <clxx/cl/runtime.hpp>
 #include <clxx/common/ndrange.hpp>
