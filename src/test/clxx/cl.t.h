@@ -213,6 +213,14 @@ public:
     TS_FAIL("check for CLXX_CL_PROGRAM_HPP_INCLUDED in clxx/cl.hpp failed");
 #endif
   }
+  void test__clxx_cl_program_cached_ctor_hpp_included()
+  {
+#ifdef CLXX_CL_PROGRAM_CACHED_CTOR_HPP_INCLUDED
+    TS_ASSERT(true);
+#else
+    TS_FAIL("check for CLXX_CL_PROGRAM_CACHED_CTOR_HPP_INCLUDED in clxx/cl.hpp failed");
+#endif
+  }
   void test__clxx_cl_program_fcn_hpp_included()
   {
 #ifdef CLXX_CL_PROGRAM_FCN_HPP_INCLUDED

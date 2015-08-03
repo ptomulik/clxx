@@ -100,6 +100,7 @@ tests = [
     'cl/platform_layer.t.h',
     'cl/platforms.t.h',
     'cl/program.t.h',
+    'cl/program_cached_ctor.t.h',
     'cl/program_fcn.t.h',
     'cl/program_generator.t.h',
     'cl/program_generator_fcn.t.h',

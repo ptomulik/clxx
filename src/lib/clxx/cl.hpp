@@ -34,6 +34,7 @@
 #include <clxx/cl/platform_layer.hpp>
 #include <clxx/cl/platforms.hpp>
 #include <clxx/cl/program.hpp>
+#include <clxx/cl/program_cached_ctor.hpp>
 #include <clxx/cl/program_fcn.hpp>
 #include <clxx/cl/program_generator.hpp>
 #include <clxx/cl/program_generator_fcn.hpp>
