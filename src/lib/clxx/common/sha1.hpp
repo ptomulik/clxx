@@ -246,16 +246,13 @@ private:
   uint8_t   _block[64];
   size_t _block_byte_index;
   size_t _bit_cnt_lo;
-  size_t _bit_cnt_hi;;
+  size_t _bit_cnt_hi;
 };
 /** // doc: {{{
  * \todo Write documentation
  */ // }}}
-inline std::string sha1str(std::string const& str)
+inline std::string sha1str(clxx::sha1& sha1)
 {
-  clxx::sha1 sha1;
-  sha1.process_bytes(str.data(), str.size());
-
   uint8_t digest[20];
   sha1.get_digest(digest);
 
@@ -268,6 +265,15 @@ inline std::string sha1str(std::string const& str)
       s[1 + 2*i] = (lo < 0xA) ? ('0' + lo) : ('A' + (lo - 0xA));
     }
   return s;
+}
+/** // doc: {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string sha1str(std::string const& str)
+{
+  clxx::sha1 sha1;
+  sha1.process_bytes(str.data(), str.size());
+  return sha1str(sha1);
 }
 } // end namespace clxx
 
