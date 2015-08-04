@@ -9,10 +9,11 @@
 #include <clxx/cl/program.hpp>
 #include <clxx/common/sha1.hpp>
 #include <boost/locale.hpp>
+#include <unordered_set>
 
 namespace clxx {
 /* ----------------------------------------------------------------------- */
-constexpr program_cached_ctor::wide_char_t
+constexpr program_cached_ctor::path_wchar_t
 _pathsep() noexcept
 {
 #ifdef _WIN32
@@ -23,81 +24,128 @@ _pathsep() noexcept
 }
 /* ----------------------------------------------------------------------- */
 static void
-_add_path(program_cached_ctor::path_set_t& path_set, std::wstring const& wpath)
+_add_path(program_cached_ctor::path_set_t& path_set,
+          program_cached_ctor::path_wstring_t const& wpath)
 {
-  for(size_t beg = 0ul, end; beg < wpath.size(); beg = end+1)
+  std::unordered_set<program_cached_ctor::path_wstring_t> unique_paths(path_set.cbegin(), path_set.cend());
+  for(size_t beg = 0ul, end; beg < wpath.size(); beg = end + (end < wpath.size()))
     {
       end = wpath.find(_pathsep(), beg);
-      program_cached_ctor::wide_string_t s { wpath.substr(beg, end-beg) };
-      if(!s.empty())
+      if(beg < end)
         {
-          path_set.insert(s);
+          program_cached_ctor::path_wstring_t s { wpath.substr(beg, end-beg) };
+          if(unique_paths.find(s) == unique_paths.end())
+            {
+              unique_paths.insert(s);
+              path_set.push_back(s);
+            }
         }
     }
 }
 /* ----------------------------------------------------------------------- */
-static size_t
-_remove_path(program_cached_ctor::path_set_t& path_set, std::wstring const& wpath)
+static void 
+_remove_path(program_cached_ctor::path_set_t& path_set,
+             program_cached_ctor::path_wstring_t const& wpath)
 {
-  size_t n = 0ul;
-  for(size_t beg = 0ul, end; beg < wpath.size(); beg = end+1)
+  for(size_t beg = 0ul, end; beg < wpath.size(); beg = end + (end < wpath.size()))
     {
       end = wpath.find(_pathsep(), beg);
-      program_cached_ctor::wide_string_t s { wpath.substr(beg, end-beg) };
-      if(!s.empty())
+      if(end == beg) break;
+      program_cached_ctor::path_wstring_t s { wpath.substr(beg, end-beg) };
+      path_set.erase(std::remove(path_set.begin(), path_set.end(), s), path_set.end());
+    }
+}
+/* ----------------------------------------------------------------------- */
+static program_cached_ctor::path_wstring_t
+_get_path(program_cached_ctor::path_set_t const& path_set)
+{
+  program_cached_ctor::path_wstring_t wpath;
+  auto it = path_set.cbegin();
+  if(it != path_set.cend())
+    {
+      wpath.append(*it);
+      for(++it; it != path_set.cend(); ++it)
         {
-          n += path_set.erase(s);
+          wpath += _pathsep();
+          wpath.append(*it);
         }
     }
-  return n;
+  return wpath;
 }
+#if 0
+/* ----------------------------------------------------------------------- */
+static program_cached_ctor::path_wstring_t
+_search_in_path_set(program_cached_ctor::path_set_t const& path_set,
+                    program_cached_ctor::path_wstring_t const& wpath)
+{
+}
+#endif
 /* ----------------------------------------------------------------------- */
 thread_local program_cached_ctor::path_set_t program_cached_ctor::_default_cache_path;
 /* ----------------------------------------------------------------------- */
 void program_cached_ctor::
-add_default_cache_path(std::wstring const& wpath)
+append_default_cache_wpath(path_wstring_t const& wpath)
 {
   _add_path(_default_cache_path, wpath);
 }
 /* ----------------------------------------------------------------------- */
 void program_cached_ctor::
-add_default_cache_path(std::string const& path, std::string const& charset)
+append_default_cache_path(std::string const& path, std::string const& charset)
 {
   using boost::locale::conv::to_utf;
-  add_default_cache_path(to_utf<wide_char_t>(path, charset) );
+  append_default_cache_wpath(to_utf<path_wchar_t>(path, charset) );
 }
 /* ----------------------------------------------------------------------- */
 void program_cached_ctor::
-add_default_cache_path(std::string const& path, std::locale const& locale)
+append_default_cache_path(std::string const& path, std::locale const& locale)
 {
   using boost::locale::conv::to_utf;
-  add_default_cache_path(to_utf<wide_char_t>(path, locale) );
+  append_default_cache_wpath(to_utf<path_wchar_t>(path, locale) );
 }
 /* ----------------------------------------------------------------------- */
-size_t program_cached_ctor::
-remove_default_cache_path(std::wstring const& wpath)
+void program_cached_ctor::
+remove_default_cache_wpath(path_wstring_t const& wpath)
 {
-  return _remove_path(_default_cache_path, wpath);
+  _remove_path(_default_cache_path, wpath);
 }
 /* ----------------------------------------------------------------------- */
-size_t program_cached_ctor::
+void program_cached_ctor::
 remove_default_cache_path(std::string const& path, std::string const& charset)
 {
   using boost::locale::conv::to_utf;
-  return _default_cache_path.erase(to_utf<wide_char_t>(path, charset) );
+  remove_default_cache_wpath(to_utf<path_wchar_t>(path, charset) );
 }
 /* ----------------------------------------------------------------------- */
-size_t program_cached_ctor::
+void program_cached_ctor::
 remove_default_cache_path(std::string const& path, std::locale const& locale)
 {
   using boost::locale::conv::to_utf;
-  return _default_cache_path.erase(to_utf<wide_char_t>(path, locale) );
+  remove_default_cache_wpath(to_utf<path_wchar_t>(path, locale) );
+}
+/* ----------------------------------------------------------------------- */
+program_cached_ctor::path_wstring_t program_cached_ctor::
+get_default_cache_wpath()
+{
+  return _get_path(_default_cache_path);
+}
+/* ----------------------------------------------------------------------- */
+std::string program_cached_ctor::
+get_default_cache_path(std::string const& charset)
+{
+  using boost::locale::conv::from_utf;
+  return from_utf(get_default_cache_wpath(), charset);
+}
+/* ----------------------------------------------------------------------- */
+std::string program_cached_ctor::
+get_default_cache_path(std::locale const& locale)
+{
+  using boost::locale::conv::from_utf;
+  return from_utf(get_default_cache_wpath(), locale);
 }
 /* ----------------------------------------------------------------------- */
 void program_cached_ctor::
 clear_default_cache_path()
 {
-  _default_cache_path.clear();
 }
 /* ----------------------------------------------------------------------- */
 clxx::program program_cached_ctor::
