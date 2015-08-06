@@ -33,6 +33,7 @@ headers = [
     'common/program_binary.hpp',
     'common/program_source.hpp',
     'common/program_sources.hpp',
+    'common/search_path.hpp',
     'common/sha1.hpp',
     'common/shared_ptr.hpp',
     'common/std_except_ctor_arg.hpp',

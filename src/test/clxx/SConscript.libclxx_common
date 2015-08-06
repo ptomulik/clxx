@@ -24,14 +24,15 @@ tests = [
     'common/enum2cstr.t.h',
     'common/enum2hex.t.h',
     'common/enum2name.t.h',
+    'common/search_path.t.h',
+    'common/sha1.t.h',
 #    'common/std_except_ctor_arg.t.h',
 #    'common/std_except_ctor_arg_fwd.t.h',
-    'common/sha1.t.h',
     'common/to_string.t.h',
 ]
 
 env.CxxTest('../check-libclxx_common', tests,
-           LIBS = CLVar(),
+           LIBS = CLVar('boost_locale boost_filesystem boost_system'),
            CXXTEST_CPPPATH = ['..'],
            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
            CXXTEST_TARGET = 'check-libclxx_common')
