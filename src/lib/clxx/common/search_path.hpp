@@ -10,13 +10,17 @@
 #ifndef CLXX_COMMON_SEARCH_PATH_HPP_INCLUDED
 #define CLXX_COMMON_SEARCH_PATH_HPP_INCLUDED
 
+#if 0
 #include <string>
 #include <vector>
 #include <unordered_set>
-#include <algorithm>
 #include <boost/locale.hpp>
+#endif
+#include <algorithm>
+#include <clxx/common/config.hpp>
 
 namespace clxx {
+#if 0
 /** // doc: basic_search_path {{{
  * \brief A generic string template used to implement search path &mdash; an
  *        alias for std::basic_string
@@ -51,18 +55,38 @@ typedef basic_search_paths<char> u8search_paths;
  * \todo Write documentation
  */ // }}}
 typedef basic_search_paths<char32_t> u32search_paths;
+#endif
 /** // doc: search_path_separator {{{
  * \todo Write documentation
  */ // }}}
 constexpr char32_t
 search_path_separator() noexcept
 {
-#ifdef _WIN32
+#ifdef CLXX_WINDOWS_API
   return U';';
 #else
   return U':';
 #endif
 }
+/** // doc: search_path_split() {{{
+ * \todo Write documentation
+ */ // }}}
+template<typename ToUTF, typename FromUTF>
+std::vector<std::string>
+inline search_path_split(std::string const& str, ToUTF to_utf, FromUTF from_utf)
+{
+  std::u32string u32str(to_utf(str));
+  std::vector<std::string> paths;
+  paths.reserve(1 + std::count(u32str.begin(), u32str.end(), search_path_separator()));
+  for(size_t beg = 0ul, end; beg < u32str.size(); beg = end + (end < u32str.size()))
+    {
+      end = u32str.find(search_path_separator(), beg);
+      if(beg < end)
+        paths.push_back(from_utf(u32str.substr(beg, end - beg)));
+    }
+  return paths;
+}
+#if 0
 /** // doc: search_path_split_u32() {{{
  * \todo Write documentation
  */ // }}}
@@ -269,7 +293,10 @@ search_path_lookup(basic_search_paths<CharT> const& paths,
                    std::basic_string<CharT> const& file)
 {
   // TODO: implement???
+  (void)paths;
+  (void)file;
 }
+#endif
 } // end namespace clxx
 
 #endif /* CLXX_COMMON_SEARCH_PATH_HPP_INCLUDED */
