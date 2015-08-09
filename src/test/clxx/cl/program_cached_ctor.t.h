@@ -13,6 +13,7 @@
 #include <cxxtest/TestSuite.h>
 #include <clxx/cl/program_cached_ctor.hpp>
 #include <clxx/cl/mock.hpp>
+#include <clxx/common/path.hpp>
 
 namespace clxx { class program_cached_ctor_test_suite; }
 
@@ -22,6 +23,23 @@ namespace clxx { class program_cached_ctor_test_suite; }
 class clxx::program_cached_ctor_test_suite : public CxxTest::TestSuite
 {
 public:
+  /** // doc: test__get_default_search_path__1() {{{
+   * \todo Write documentation
+   */ // }}}
+  void test__get_default_search_path__1( )
+  {
+#ifdef CLXX_WINDOWS_API
+    // TODO: write tests for windows once the implementation is ready
+#else
+    std::vector<std::string> paths(program_cached_ctor::get_default_search_path());
+    const char* home;
+    if((home = std::getenv("HOME")) != nullptr)
+      {
+        TS_ASSERT(paths.size() >= 1ul);
+        TS_ASSERT_EQUALS(paths.back(), path_join(home, ".clxx/program_cache"));
+      }
+#endif
+  }
   /** // doc: test__foo() {{{
    * \todo Write documentation
    */ // }}}

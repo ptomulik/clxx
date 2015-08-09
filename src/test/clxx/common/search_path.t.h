@@ -14,11 +14,9 @@
 #include <clxx/common/search_path.hpp>
 
 #ifdef CLXX_WINDOWS_API
-# define SEP8   u8";"
-# define SEP32  U";"
+# define DELIM   ";"
 #else
-# define SEP8   u8":"
-# define SEP32  U":"
+# define DELIM   ":"
 #endif
 
 namespace clxx { class search_path_test_suite; }
@@ -29,29 +27,29 @@ namespace clxx { class search_path_test_suite; }
 class clxx::search_path_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test__search_path_separator__1() {{{
+  /** // doc: test__search_path_delimiter__1() {{{
    * \todo Write documentation
    */ // }}}
-  void test__search_path_separator__1( )
+  void test__search_path_delimiter__1( )
   {
-    TS_ASSERT_EQUALS(search_path_separator(), SEP8[0]);
+    TS_ASSERT_EQUALS(search_path_delimiter(), DELIM[0]);
   }
   /** // doc: test__search_path_split__1() {{{
    * \todo Write documentation
    */ // }}}
   void test__search_path_split__1( )
   {
-    std::vector<std::string> paths;
+    search_paths paths;
     
     paths = search_path_split("");
     TS_ASSERT(paths.empty());
 
-    paths = search_path_split(SEP8);
+    paths = search_path_split(DELIM);
     TS_ASSERT_EQUALS(paths.size(),2ul);
     TS_ASSERT_EQUALS(paths[0], "");
     TS_ASSERT_EQUALS(paths[1], "");
 
-    paths = search_path_split(SEP8 SEP8);
+    paths = search_path_split(DELIM DELIM);
     TS_ASSERT_EQUALS(paths.size(),3ul);
     TS_ASSERT_EQUALS(paths[0], "");
     TS_ASSERT_EQUALS(paths[1], "");
@@ -62,19 +60,19 @@ public:
    */ // }}}
   void test__search_path_split__2( )
   {
-    std::vector<std::string> paths;
+    search_paths paths;
 
-    paths = search_path_split("/foo1/bar1" SEP8);
+    paths = search_path_split("/foo1/bar1" DELIM);
     TS_ASSERT_EQUALS(paths.size(), 2ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
     TS_ASSERT_EQUALS(paths[1], "");
 
-    paths = search_path_split(SEP8 "/foo1/bar1");
+    paths = search_path_split(DELIM "/foo1/bar1");
     TS_ASSERT_EQUALS(paths.size(), 2ul);
     TS_ASSERT_EQUALS(paths[0], "");
     TS_ASSERT_EQUALS(paths[1], "/foo1/bar1");
 
-    paths = search_path_split(SEP8 "/foo1/bar1" SEP8);
+    paths = search_path_split(DELIM "/foo1/bar1" DELIM);
     TS_ASSERT_EQUALS(paths.size(), 3ul);
     TS_ASSERT_EQUALS(paths[0], "");
     TS_ASSERT_EQUALS(paths[1], "/foo1/bar1");
@@ -85,18 +83,18 @@ public:
    */ // }}}
   void test__search_path_split__3( )
   {
-    std::vector<std::string> paths;
+    search_paths paths;
 
     paths = search_path_split("/foo1/bar1");
     TS_ASSERT_EQUALS(paths.size(), 1ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
 
-    paths = search_path_split("/foo1/bar1" SEP8 "/foo2/bar2");
+    paths = search_path_split("/foo1/bar1" DELIM "/foo2/bar2");
     TS_ASSERT_EQUALS(paths.size(), 2ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
     TS_ASSERT_EQUALS(paths[1], "/foo2/bar2");
 
-    paths = search_path_split("/foo1/bar1" SEP8 "/foo2/bar2" SEP8 "/foo3/bar3");
+    paths = search_path_split("/foo1/bar1" DELIM "/foo2/bar2" DELIM "/foo3/bar3");
     TS_ASSERT_EQUALS(paths.size(), 3ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
     TS_ASSERT_EQUALS(paths[1], "/foo2/bar2");
@@ -107,18 +105,18 @@ public:
    */ // }}}
   void test__search_path_split__4( )
   {
-    std::vector<std::string> paths;
+    search_paths paths;
 
     paths = search_path_split("/foo1/bar1", std::locale::classic());
     TS_ASSERT_EQUALS(paths.size(), 1ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
 
-    paths = search_path_split("/foo1/bar1" SEP8 "/foo2/bar2", std::locale::classic());
+    paths = search_path_split("/foo1/bar1" DELIM "/foo2/bar2", std::locale::classic());
     TS_ASSERT_EQUALS(paths.size(), 2ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
     TS_ASSERT_EQUALS(paths[1], "/foo2/bar2");
 
-    paths = search_path_split("/foo1/bar1" SEP8 "/foo2/bar2" SEP8 "/foo3/bar3", std::locale::classic());
+    paths = search_path_split("/foo1/bar1" DELIM "/foo2/bar2" DELIM "/foo3/bar3", std::locale::classic());
     TS_ASSERT_EQUALS(paths.size(), 3ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
     TS_ASSERT_EQUALS(paths[1], "/foo2/bar2");
@@ -129,27 +127,27 @@ public:
    */ // }}}
   void test__search_path_join__1( )
   {
-    TS_ASSERT_EQUALS(search_path_join(std::vector<std::string>()), "");
-    TS_ASSERT_EQUALS(search_path_join(std::vector<std::string>{""}), "");
-    TS_ASSERT_EQUALS(search_path_join(std::vector<std::string>{"",""}), SEP8);
+    TS_ASSERT_EQUALS(search_path_join(search_paths()), "");
+    TS_ASSERT_EQUALS(search_path_join(search_paths{""}), "");
+    TS_ASSERT_EQUALS(search_path_join(search_paths{"",""}), DELIM);
   }
   /** // doc: test__search_path_join__2() {{{
    * \todo Write documentation
    */ // }}}
   void test__search_path_join__2( )
   {
-    TS_ASSERT_EQUALS(search_path_join(std::vector<std::string>{"/foo1/bar1"}), "/foo1/bar1");
-    TS_ASSERT_EQUALS(search_path_join(std::vector<std::string>{"/foo1/bar1", ""}), "/foo1/bar1" SEP8);
-    TS_ASSERT_EQUALS(search_path_join(std::vector<std::string>{"", "/foo1/bar1"}), SEP8 "/foo1/bar1");
-    TS_ASSERT_EQUALS(search_path_join(std::vector<std::string>{"/foo1/bar1", "/foo2/bar2"}), "/foo1/bar1" SEP8 "/foo2/bar2");
+    TS_ASSERT_EQUALS(search_path_join(search_paths{"/foo1/bar1"}), "/foo1/bar1");
+    TS_ASSERT_EQUALS(search_path_join(search_paths{"/foo1/bar1", ""}), "/foo1/bar1" DELIM);
+    TS_ASSERT_EQUALS(search_path_join(search_paths{"", "/foo1/bar1"}), DELIM "/foo1/bar1");
+    TS_ASSERT_EQUALS(search_path_join(search_paths{"/foo1/bar1", "/foo2/bar2"}), "/foo1/bar1" DELIM "/foo2/bar2");
   }
   /** // doc: test__search_path_unique__1() {{{
    * \todo Write documentation
    */ // }}}
   void test__search_path_unique__1( )
   {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2", "/foo1/bar1" };
-    std::vector<std::string> result(search_path_unique(paths));
+    search_paths paths{ "/foo1/bar1", "/foo2/bar2", "/foo1/bar1" };
+    search_paths result(search_path_unique(paths));
 
     TS_ASSERT_EQUALS(result.size(), 2ul);
     TS_ASSERT_EQUALS(result[0], "/foo1/bar1");
@@ -160,8 +158,8 @@ public:
    */ // }}}
   void test__search_path_unique__2( )
   {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2", "/foo1/bar1", "/foo3/bar3" };
-    std::vector<std::string> result(search_path_unique(paths, std::vector<std::string>{ "/foo3/bar3" }));
+    search_paths paths{ "/foo1/bar1", "/foo2/bar2", "/foo1/bar1", "/foo3/bar3" };
+    search_paths result(search_path_unique(paths, search_paths{ "/foo3/bar3" }));
 
     TS_ASSERT_EQUALS(result.size(), 2ul);
     TS_ASSERT_EQUALS(result[0], "/foo1/bar1");
@@ -172,23 +170,8 @@ public:
    */ // }}}
   void test__search_path_append__1( )
   {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2" };
-    std::vector<std::string>& result(search_path_append(paths, "/foo3/bar3" SEP8 "/foo4/bar4"));
-
-    TS_ASSERT(&result == &paths);
-    TS_ASSERT_EQUALS(result.size(), 4ul);
-    TS_ASSERT_EQUALS(result[0], "/foo1/bar1");
-    TS_ASSERT_EQUALS(result[1], "/foo2/bar2");
-    TS_ASSERT_EQUALS(result[2], "/foo3/bar3");
-    TS_ASSERT_EQUALS(result[3], "/foo4/bar4");
-  }
-  /** // doc: test__search_path_append__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__search_path_append__2( )
-  {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2" };
-    std::vector<std::string>& result(search_path_append(paths, "/foo3/bar3" SEP8 "/foo4/bar4", std::locale::classic()));
+    search_paths paths{ "/foo1/bar1", "/foo2/bar2" };
+    search_paths& result = search_path_append(paths, {"/foo3/bar3", "/foo4/bar4"});
 
     TS_ASSERT(&result == &paths);
     TS_ASSERT_EQUALS(result.size(), 4ul);
@@ -202,52 +185,23 @@ public:
    */ // }}}
   void test__search_path_prepend__1( )
   {
-    std::vector<std::string> paths{ u8"/foo1/bar1", u8"/foo2/bar2" };
-    std::vector<std::string>& result(search_path_prepend(paths, u8"/foo3/bar3" SEP8 u8"/foo4/bar4"));
+    search_paths paths{ "/foo1/bar1", "/foo2/bar2" };
+    search_paths& result = search_path_prepend(paths, {"/foo3/bar3", "/foo4/bar4"});
 
     TS_ASSERT(&result == &paths);
     TS_ASSERT_EQUALS(result.size(), 4ul);
-    TS_ASSERT_EQUALS(result[0], u8"/foo3/bar3");
-    TS_ASSERT_EQUALS(result[1], u8"/foo4/bar4");
-    TS_ASSERT_EQUALS(result[2], u8"/foo1/bar1");
-    TS_ASSERT_EQUALS(result[3], u8"/foo2/bar2");
-  }
-  /** // doc: test__search_path_prepend__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__search_path_prepend__2( )
-  {
-    std::vector<std::string> paths{ u8"/foo1/bar1", u8"/foo2/bar2" };
-    std::vector<std::string>& result(search_path_prepend(paths, u8"/foo3/bar3" SEP8 u8"/foo4/bar4", std::locale::classic()));
-
-    TS_ASSERT(&result == &paths);
-    TS_ASSERT_EQUALS(result.size(), 4ul);
-    TS_ASSERT_EQUALS(result[0], u8"/foo3/bar3");
-    TS_ASSERT_EQUALS(result[1], u8"/foo4/bar4");
-    TS_ASSERT_EQUALS(result[2], u8"/foo1/bar1");
-    TS_ASSERT_EQUALS(result[3], u8"/foo2/bar2");
+    TS_ASSERT_EQUALS(result[0], "/foo3/bar3");
+    TS_ASSERT_EQUALS(result[1], "/foo4/bar4");
+    TS_ASSERT_EQUALS(result[2], "/foo1/bar1");
+    TS_ASSERT_EQUALS(result[3], "/foo2/bar2");
   }
   /** // doc: test__search_path_append_unique__1() {{{
    * \todo Write documentation
    */ // }}}
   void test__search_path_append_unique__1( )
   {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2" };
-    std::vector<std::string>& result(search_path_append_unique(paths, "/foo3/bar3" SEP8 "/foo2/bar2" SEP8 "/foo3/bar3"));
-
-    TS_ASSERT(&result == &paths);
-    TS_ASSERT_EQUALS(result.size(), 3ul);
-    TS_ASSERT_EQUALS(result[0], "/foo1/bar1");
-    TS_ASSERT_EQUALS(result[1], "/foo2/bar2");
-    TS_ASSERT_EQUALS(result[2], "/foo3/bar3");
-  }
-  /** // doc: test__search_path_append_unique__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__search_path_append_unique__2( )
-  {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2" };
-    std::vector<std::string>& result(search_path_append_unique(paths, "/foo3/bar3" SEP8 "/foo2/bar2" SEP8 "/foo3/bar3", std::locale::classic()));
+    search_paths paths{ "/foo1/bar1", "/foo2/bar2" };
+    search_paths& result = search_path_append_unique(paths, {"/foo3/bar3", "/foo2/bar2", "/foo3/bar3"});
 
     TS_ASSERT(&result == &paths);
     TS_ASSERT_EQUALS(result.size(), 3ul);
@@ -260,22 +214,10 @@ public:
    */ // }}}
   void test__search_path_prepend_unique__1( )
   {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2" };
-    std::vector<std::string> result(search_path_prepend_unique(paths, "/foo3/bar3" SEP8 "/foo2/bar2" SEP8 "/foo3/bar3"));
+    search_paths paths{ "/foo1/bar1", "/foo2/bar2" };
+    search_paths& result = search_path_prepend_unique(paths, {"/foo3/bar3", "/foo2/bar2", "/foo3/bar3"});
 
-    TS_ASSERT_EQUALS(result.size(), 3ul);
-    TS_ASSERT_EQUALS(result[0], "/foo3/bar3");
-    TS_ASSERT_EQUALS(result[1], "/foo1/bar1");
-    TS_ASSERT_EQUALS(result[2], "/foo2/bar2");
-  }
-  /** // doc: test__search_path_prepend_unique__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__search_path_prepend_unique__2( )
-  {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2" };
-    std::vector<std::string> result(search_path_prepend_unique(paths, "/foo3/bar3" SEP8 "/foo2/bar2" SEP8 "/foo3/bar3", std::locale::classic()));
-
+    TS_ASSERT(&result == &paths);
     TS_ASSERT_EQUALS(result.size(), 3ul);
     TS_ASSERT_EQUALS(result[0], "/foo3/bar3");
     TS_ASSERT_EQUALS(result[1], "/foo1/bar1");
@@ -286,36 +228,13 @@ public:
    */ // }}}
   void test__search_path_erase__1( )
   {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2", "/foo3/bar3", "/foo2/bar2"};
-    std::vector<std::string> const& pref = search_path_erase(paths, "/foo2/bar2");
+    search_paths paths{ "/foo1/bar1", "/foo2/bar2", "/foo3/bar3", "/foo2/bar2", "/foo4/bar4"};
+    search_paths const& pref = search_path_erase(paths, { "/foo2/bar2", "/foo4/bar4" });
     TS_ASSERT(&pref == &paths);
     TS_ASSERT_EQUALS(paths.size(), 2ul);
     TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
     TS_ASSERT_EQUALS(paths[1], "/foo3/bar3");
   }
-  /** // doc: test__search_path_erase__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__search_path_erase__2( )
-  {
-    std::vector<std::string> paths{ "/foo1/bar1", "/foo2/bar2", "/foo3/bar3", "/foo2/bar2"};
-    std::vector<std::string> const& pref = search_path_erase(paths, "/foo2/bar2", std::locale::classic());
-    TS_ASSERT(&pref == &paths);
-    TS_ASSERT_EQUALS(paths.size(), 2ul);
-    TS_ASSERT_EQUALS(paths[0], "/foo1/bar1");
-    TS_ASSERT_EQUALS(paths[1], "/foo3/bar3");
-  }
-//  /** // doc: test__search_path_erase__2__char__char() {{{
-//   * \todo Write documentation
-//   */ // }}}
-//  void test__search_path_erase__2__char__char( )
-//  {
-//    u8search_paths paths{ u8"/foo1/bar1", u8"/foo2/bar2", u8"/foo3/bar3", u8"/foo2/bar2"};
-//    u8search_paths const& pref = search_path_erase(paths, u8"/foo2/bar2" SEP8 u8"/foo3/bar3");
-//    TS_ASSERT(&pref == &paths);
-//    TS_ASSERT_EQUALS(paths.size(), 1ul);
-//    TS_ASSERT_EQUALS(paths[0], u8"/foo1/bar1");
-//  }
 };
 
 #endif /* CLXX_COMMON_SEARCH_PATH_T_H_INCLUDED */

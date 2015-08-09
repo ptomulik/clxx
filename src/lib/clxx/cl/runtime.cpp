@@ -14,19 +14,19 @@
 
 namespace clxx {
 /* ----------------------------------------------------------------------- */
-thread_local runtime* runtime::__current_instance = nullptr;
+thread_local runtime* runtime::_current_instance = nullptr;
 /* ----------------------------------------------------------------------- */
 clxx::runtime& runtime::
 get_current_instance()
 {
-  if(!__current_instance) __current_instance = &get_shared_instance();
-  return *__current_instance;
+  if(!_current_instance) _current_instance = &get_shared_instance();
+  return *_current_instance;
 }
 /* ----------------------------------------------------------------------- */
 void runtime::
 set_current_instance(clxx::runtime& runtime) noexcept
 {
-  __current_instance = &runtime;
+  _current_instance = &runtime;
 }
 /* ----------------------------------------------------------------------- */
 clxx::runtime& runtime::

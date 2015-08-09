@@ -20,7 +20,7 @@
 #include <type_traits>
 
 namespace clxx {
-/** \addtogroup clxx_util
+/** \addtogroup clxx_util_enum2str
  * @{ */
 /** // doc: enum_to_name_of_hex {{{
  * \brief Convert an enum value to its string representation
@@ -84,11 +84,12 @@ std::string enum_bitmask_to_string(E x, typename std::underlying_type<E>::type e
       return result;
     }
 }
-
+/** @} */
 } // end namespace clxx
 
 namespace std {
-
+/** \addtogroup clxx_util_enum2str
+ * @{ */
 /** // doc: to_string(clxx::status_t) {{{
  * \brief Convert \ref clxx::status_t "status_t" value to string
  * \param x An enum value to be converted to a string

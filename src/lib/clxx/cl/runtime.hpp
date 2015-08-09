@@ -25,7 +25,7 @@ namespace clxx {
 class runtime
 {
 private:
-  static thread_local runtime* __current_instance;
+  static thread_local runtime* _current_instance;
   typedef std::unordered_map<std::string, program_generator_ptr> program_generator_map_t;
   program_generator_map_t _program_generators;
 public:

@@ -24,6 +24,7 @@ tests = [
     'common/enum2cstr.t.h',
     'common/enum2hex.t.h',
     'common/enum2name.t.h',
+    'common/path.t.h',
     'common/search_path.t.h',
     'common/sha1.t.h',
 #    'common/std_except_ctor_arg.t.h',

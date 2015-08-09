@@ -7,11 +7,56 @@
  */ // }}}
 #include <clxx/cl/program_cached_ctor.hpp>
 #include <clxx/cl/program.hpp>
-#include <clxx/common/sha1.hpp>
-#include <boost/locale.hpp>
-#include <unordered_set>
+#include <clxx/common/search_path.hpp>
+//#include <clxx/common/sha1.hpp>
 
 namespace clxx {
+/* ----------------------------------------------------------------------- */
+thread_local std::vector<std::string>* program_cached_ctor::
+_current_search_path = nullptr;
+/* ----------------------------------------------------------------------- */
+std::vector<std::string> program_cached_ctor::
+get_default_search_path()
+{
+  std::vector<std::string> paths;
+  const char* env;
+#ifdef CLXX_WINDOWS_API  
+  // TODO: implement default search path for windows
+#else
+  if((env = std::getenv("HOME")) != nullptr)
+    {
+      paths.push_back(path_join(env,".clxx/program_cache"));
+    }
+#endif
+  if((env = std::getenv("CLXX_PROGRAM_CACHE_PATH")) != nullptr)
+    {
+      search_path_prepend(paths, search_path_split(env));
+    }
+  return paths;
+}
+/* ----------------------------------------------------------------------- */
+std::vector<std::string>& program_cached_ctor::
+get_shared_search_path()
+{
+  static std::vector<std::string> r(get_default_search_path());
+  return r;
+}
+/* ----------------------------------------------------------------------- */
+std::vector<std::string>& program_cached_ctor::
+get_current_search_path()
+{
+  if(!_current_search_path)
+    _current_search_path = &get_shared_search_path();
+  return *_current_search_path;
+}
+/* ----------------------------------------------------------------------- */
+std::vector<std::string>& program_cached_ctor::
+get_local_search_path()
+{
+  thread_local std::vector<std::string> r(get_default_search_path());
+  return r;
+}
+/* ----------------------------------------------------------------------- */
 clxx::program program_cached_ctor::
 operator()(clxx::context const& context, clxx::program_sources const& sources) const
 {

@@ -29,6 +29,7 @@ headers = [
     'common/ndrange_fwd.hpp',
     'common/obj2cl.hpp',
     'common/opencl.h',
+    'common/path.hpp',
     'common/program_binaries.hpp',
     'common/program_binary.hpp',
     'common/program_source.hpp',

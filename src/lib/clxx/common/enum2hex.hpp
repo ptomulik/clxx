@@ -15,7 +15,8 @@
 #include <cmath>
 
 namespace clxx { namespace detail {
-
+/** \addtogroup clxx_util_enum2str
+ * @{ */
 /** // doc: enum_hex_fmt_prec {{{
  * \brief Generates the \em precision part of the formating string for integers
  *
@@ -129,10 +130,12 @@ struct enum_hex_fmt
     *s = '\0';
   }
 };
+/** @} */
 } } // end namespace clxx::detail
 
 namespace clxx {
-
+/** \addtogroup clxx_util_enum2str
+ * @{ */
 /** // doc: enum2hex(x) {{{
  * \brief Convert enum value to a string in hexadecimal representation
  *
@@ -168,7 +171,7 @@ std::string enum2hex(E x)
   std::snprintf(buf, buf_size, fmt, t);
   return std::string(buf);
 }
-
+/** @} */
 } // end namespace clxx
 #endif /* COMMON_ENUM2HEX_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

@@ -14,8 +14,9 @@
 #include <string>
 
 namespace clxx {
+/** \addtogroup clxx_util_sha1
+ * @{ */
 /** // doc: sha1 {{{
- * \ingroup clxx_util
  * \todo Write documentation
  */ // }}}
 class sha1
@@ -275,6 +276,7 @@ inline std::string sha1str(std::string const& str)
   sha1.process_bytes(str.data(), str.size());
   return sha1str(sha1);
 }
+/** @} */
 } // end namespace clxx
 
 #endif /* CLXX_COMMON_SHA1_HPP_INCLUDED */

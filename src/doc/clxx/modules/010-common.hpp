@@ -171,7 +171,17 @@
  * 
  * \brief This module documents utility functions and meta-functions provided
  *        by \ref clxx_common package
+ * @{
  */
+/** \defgroup clxx_util_enum2str Enum to String Conversions
+ */
+/** \defgroup clxx_util_obj2cl Object to OpenCL Conversions
+ */
+/** \defgroup clxx_util_search_path Search Path Utilities
+ */
+/** \defgroup clxx_util_sha1 SHA-1 Utilities
+ */
+/** @} */
 /** @} */
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
