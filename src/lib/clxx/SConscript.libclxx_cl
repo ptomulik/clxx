@@ -91,7 +91,7 @@ headers += [
 
 env['CLXX_PACKAGES']['libclxx_cl'] = {
     'version' : env.subst('$CLXX_VERSION'),
-    'libdeps' : CLVar('OpenCL clxx_info boost_locale')
+    'libdeps' : CLVar('OpenCL clxx_info')
 }
 
 objects = env.SharedObject(sources)

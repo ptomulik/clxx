@@ -32,7 +32,7 @@ tests = [
 ]
 
 env.CxxTest('../check-libclxx_common', tests,
-           LIBS = CLVar('boost_locale boost_filesystem boost_system'),
+           LIBS = CLVar(),
            CXXTEST_CPPPATH = ['..'],
            CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
            CXXTEST_TARGET = 'check-libclxx_common')
