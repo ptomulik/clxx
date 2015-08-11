@@ -11,8 +11,6 @@
 #define CLXX_COMMON_NDRANGE_HPP_INCLUDED
 
 #include <clxx/common/ndrange_fwd.hpp>
-#include <clxx/cl/command_queue.hpp>
-#include <clxx/cl/kernel.hpp>
 #include <clxx/common/exceptions.hpp>
 
 #ifndef CLXX_MAX_NDRANGE_DIMENSIONS
