@@ -11,6 +11,7 @@
 #define CLXX_COMMON_PATH_HPP_INCLUDED
 
 #include <string>
+#include <sstream>
 #include <clxx/common/config.hpp>
 
 namespace clxx {
@@ -18,13 +19,25 @@ namespace clxx {
  * \brief Returns the preferred path separator for the current operating system
  */ // }}}
 constexpr char
-path_separator()
+path_separator() noexcept
 {
 #ifdef CLXX_WINDOWS_API
   return '\\';
 #else
   return '/';
 #endif
+}
+/** // doc: path_is_separator() {{{
+ * \brief Returns \c true if the current OS uses \p c as a path separator
+ */ // }}}
+constexpr bool
+is_path_separator(char c)
+{
+  return c == '/'
+#ifdef CLXX_WINDOWS_API
+      || c == '\\'
+#endif
+    ;
 }
 /** // doc: path_join() {{{
  * \brief Join two strings using #path_separator() to form a new path

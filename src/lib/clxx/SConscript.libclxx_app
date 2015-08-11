@@ -50,7 +50,7 @@ env['CLXX_PACKAGES']['libclxx_app'] = {
 }
 
 overrides = {
-    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_app']['version'],
+   'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_app']['version'],
     'LIBS'          : env['CLXX_PACKAGES']['libclxx_app']['libdeps']
 }
 

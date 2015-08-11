@@ -23,20 +23,28 @@ namespace clxx { class program_cached_ctor_test_suite; }
 class clxx::program_cached_ctor_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test__get_default_search_path__1() {{{
+  /** // doc: test__create_default_search_path__1() {{{
    * \todo Write documentation
    */ // }}}
-  void test__get_default_search_path__1( )
+  void test__create_default_search_path__1( )
   {
 #ifdef CLXX_WINDOWS_API
     // TODO: write tests for windows once the implementation is ready
 #else
-    std::vector<std::string> paths(program_cached_ctor::get_default_search_path());
-    const char* home;
-    if((home = std::getenv("HOME")) != nullptr)
+    std::vector<std::string> paths(program_cached_ctor::create_default_search_path());
+    const char* env;
+    if((env = std::getenv("HOME")) != nullptr)
       {
         TS_ASSERT(paths.size() >= 1ul);
-        TS_ASSERT_EQUALS(paths.back(), path_join(home, ".clxx/program_cache"));
+        if(paths.size() >= 1ul)
+          {
+            TS_ASSERT_EQUALS(paths.back(), path_join(env, ".clxx/program_cache"));
+            paths.erase(paths.end()-1);
+          }
+      }
+    if((env = std::getenv("CLXX_PROGRAM_CACHE_PATH")) != nullptr)
+      {
+        TS_ASSERT(paths.size() >= 1ul);
       }
 #endif
   }

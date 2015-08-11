@@ -16,7 +16,7 @@ thread_local std::vector<std::string>* program_cached_ctor::
 _current_search_path = nullptr;
 /* ----------------------------------------------------------------------- */
 std::vector<std::string> program_cached_ctor::
-get_default_search_path()
+create_default_search_path()
 {
   std::vector<std::string> paths;
   const char* env;
@@ -38,7 +38,14 @@ get_default_search_path()
 std::vector<std::string>& program_cached_ctor::
 get_shared_search_path()
 {
-  static std::vector<std::string> r(get_default_search_path());
+  static std::vector<std::string> r(create_default_search_path());
+  return r;
+}
+/* ----------------------------------------------------------------------- */
+std::vector<std::string>& program_cached_ctor::
+get_local_search_path()
+{
+  thread_local std::vector<std::string> r(create_default_search_path());
   return r;
 }
 /* ----------------------------------------------------------------------- */
@@ -50,11 +57,16 @@ get_current_search_path()
   return *_current_search_path;
 }
 /* ----------------------------------------------------------------------- */
-std::vector<std::string>& program_cached_ctor::
-get_local_search_path()
+void program_cached_ctor::
+use_shared_search_path()
 {
-  thread_local std::vector<std::string> r(get_default_search_path());
-  return r;
+  _current_search_path = &get_shared_search_path();
+}
+/* ----------------------------------------------------------------------- */
+void program_cached_ctor::
+use_local_search_path()
+{
+  _current_search_path = &get_local_search_path();
 }
 /* ----------------------------------------------------------------------- */
 clxx::program program_cached_ctor::
