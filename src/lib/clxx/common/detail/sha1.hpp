@@ -1,19 +1,19 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/sha1.hpp
+// clxx/common/detail/sha1.hpp
 
-/** // doc: clxx/common/sha1.hpp {{{
- * \file clxx/common/sha1.hpp
+/** // doc: clxx/common/detail/sha1.hpp {{{
+ * \file clxx/common/detail/sha1.hpp
  * \brief Header only c++11 implementation of the SHA-1 algorithm
  */ // }}}
-#ifndef CLXX_COMMON_SHA1_HPP_INCLUDED
-#define CLXX_COMMON_SHA1_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_SHA1_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_SHA1_HPP_INCLUDED
 
 #include <cstdint>
 #include <string>
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \addtogroup clxx_util_sha1
  * @{ */
 /** // doc: sha1 {{{
@@ -252,7 +252,7 @@ private:
 /** // doc: {{{
  * \todo Write documentation
  */ // }}}
-inline std::string sha1str(clxx::sha1& sha1)
+inline std::string sha1str(clxx::detail::sha1& sha1)
 {
   uint8_t digest[20];
   sha1.get_digest(digest);
@@ -272,13 +272,13 @@ inline std::string sha1str(clxx::sha1& sha1)
  */ // }}}
 inline std::string sha1str(std::string const& str)
 {
-  clxx::sha1 sha1;
+  clxx::detail::sha1 sha1;
   sha1.process_bytes(str.data(), str.size());
   return sha1str(sha1);
 }
 /** @} */
-} // end namespace clxx
+} } // end namespace clxx::detail
 
-#endif /* CLXX_COMMON_SHA1_HPP_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_SHA1_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

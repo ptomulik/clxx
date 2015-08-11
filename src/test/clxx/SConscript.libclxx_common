@@ -26,7 +26,7 @@ tests = [
     'common/detail/enum2name.t.h',
     'common/path.t.h',
     'common/search_path.t.h',
-    'common/sha1.t.h',
+    'common/detail/sha1.t.h',
 #    'common/detail/std_except_ctor_arg.t.h',
 #    'common/detail/std_except_ctor_arg_fwd.t.h',
     'common/to_string.t.h',

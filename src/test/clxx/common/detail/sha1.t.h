@@ -1,24 +1,24 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/sha1.t.h
+// clxx/common/detail/sha1.t.h
 
-/** // doc: clxx/common/sha1.t.h {{{
- * \file clxx/common/sha1.t.h
+/** // doc: clxx/common/detail/sha1.t.h {{{
+ * \file clxx/common/detail/sha1.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_COMMON_SHA1_T_H_INCLUDED
-#define CLXX_COMMON_SHA1_T_H_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_SHA1_T_H_INCLUDED
+#define CLXX_COMMON_DETAIL_SHA1_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/common/sha1.hpp>
+#include <clxx/common/detail/sha1.hpp>
 
-namespace clxx { class sha1_test_suite; }
+namespace clxx { namespace detail { class sha1_test_suite; } }
 
-/** // doc: class clxx::sha1_test_suite {{{
+/** // doc: class clxx::detail::sha1_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::sha1_test_suite : public CxxTest::TestSuite
+class clxx::detail::sha1_test_suite : public CxxTest::TestSuite
 {
 public:
   /** // doc: test__sha1__1() {{{
@@ -26,7 +26,7 @@ public:
    */ // }}}
   void test__sha1__1( )
   {
-    clxx::sha1 sha1;
+    clxx::detail::sha1 sha1;
     sha1.process_bytes("abc", 3);
 
     uint32_t digest[5];
@@ -42,7 +42,7 @@ public:
    */ // }}}
   void test__sha1__bytes__1( )
   {
-    clxx::sha1 sha1;
+    clxx::detail::sha1 sha1;
     sha1.process_bytes("abc", 3);
 
     uint8_t digest[20];
@@ -73,7 +73,7 @@ public:
    */ // }}}
   void test__sha1__2( )
   {
-    clxx::sha1 sha1;
+    clxx::detail::sha1 sha1;
     sha1.process_bytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq", 56);
 
     uint32_t digest[5];
@@ -89,7 +89,7 @@ public:
    */ // }}}
   void test__sha1__bytes__2( )
   {
-    clxx::sha1 sha1;
+    clxx::detail::sha1 sha1;
     sha1.process_bytes("abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq", 56);
 
     uint8_t digest[20];
@@ -120,7 +120,7 @@ public:
    */ // }}}
   void test__sha1__3( )
   {
-    clxx::sha1 sha1;
+    clxx::detail::sha1 sha1;
     uint32_t digest[5];
     for(size_t i = 0; i < 1000000; i++)
       {
@@ -142,6 +142,6 @@ public:
   }
 };
 
-#endif /* CLXX_COMMON_SHA1_T_H_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_SHA1_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

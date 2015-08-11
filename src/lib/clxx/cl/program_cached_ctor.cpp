@@ -8,7 +8,7 @@
 #include <clxx/cl/program_cached_ctor.hpp>
 #include <clxx/cl/program.hpp>
 #include <clxx/common/search_path.hpp>
-//#include <clxx/common/sha1.hpp>
+//#include <clxx/common/detail/sha1.hpp>
 
 namespace clxx {
 /* ----------------------------------------------------------------------- */

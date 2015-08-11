@@ -29,7 +29,6 @@ headers = [
     'common/program_source.hpp',
     'common/program_sources.hpp',
     'common/search_path.hpp',
-    'common/sha1.hpp',
     'common/shared_ptr.hpp',
     'common/to_string.hpp',
     'common/types.hpp',
@@ -45,6 +44,7 @@ headers = [
     'common/detail/enum2cstr.hpp',
     'common/detail/enum2hex.hpp',
     'common/detail/enum2name.hpp',
+    'common/detail/sha1.hpp',
     'common/detail/std_except_ctor_arg.hpp',
     'common/detail/std_except_ctor_arg_fwd.hpp',
 ]
