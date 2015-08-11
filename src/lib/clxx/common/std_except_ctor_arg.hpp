@@ -12,6 +12,7 @@
 
 #include <clxx/common/std_except_ctor_arg_fwd.hpp>
 #include <stdexcept>
+#include <new>
 
 namespace clxx {
 /** \addtogroup clxx_util
