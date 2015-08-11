@@ -14,13 +14,13 @@
 #include <clxx/common/exception_base.hpp>
 #include <boost/program_options/errors.hpp>
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::invalid_config_file_syntax>
   { typedef boost::program_options::invalid_config_file_syntax type; };
 /** \endcond */
-} /* namespace clxx */
+} } // end namespace clxx::detail
 
 namespace clxx { namespace app { namespace options {
 /** doc: invalid_config_file_syntax_error {{{
@@ -45,7 +45,7 @@ public:
   { }
 };
 
-} } } // end namespace clxx
+} } } // end namespace clxx::app::options
 
 #endif /* CLXX_APP_OPTIONS_EXCEPTIONS_INVALID_CONFIG_FILE_SYNTAX_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

@@ -1,14 +1,14 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/obj2cl.hpp
+// clxx/cl/detail/obj2cl.hpp
 
-/** // doc: clxx/common/obj2cl.hpp {{{
- * \file clxx/common/obj2cl.hpp
+/** // doc: clxx/cl/detail/obj2cl.hpp {{{
+ * \file clxx/cl/detail/obj2cl.hpp
  * \brief Provides functions that convert clxx objects to corresponding OpenCL objects
  */ // }}}
-#ifndef CLXX_OBJ2CL_HPP_INCLUDED
-#define CLXX_OBJ2CL_HPP_INCLUDED
+#ifndef CLXX_CL_DETAIL_OBJ2CL_HPP_INCLUDED
+#define CLXX_CL_DETAIL_OBJ2CL_HPP_INCLUDED
 
 #include <clxx/cl/command_queue_fwd.hpp>
 #include <clxx/cl/context_fwd.hpp>
@@ -21,7 +21,7 @@
 #include <clxx/common/opencl.h>
 #include <vector>
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \addtogroup clxx_util_obj2cl
  * @{ */
 /** // doc: obj2cl {{{
@@ -193,8 +193,8 @@ obj2cl(std::vector<T>* v)
   return v ? obj2cl(v->data()) : nullptr;
 }
 /** @} */
-} // end namespace clxx
+} } // end namespace clxx::detail
 
-#endif /* CLXX_OBJ2CL_HPP_INCLUDED */
+#endif /* CLXX_CL_DETAIL_OBJ2CL_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

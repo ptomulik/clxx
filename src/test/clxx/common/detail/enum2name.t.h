@@ -1,24 +1,24 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/enum2name.t.h
+// clxx/common/detail/enum2name.t.h
 
-/** // doc: clxx/enum2name.t.h {{{
- * \file clxx/enum2name.t.h
+/** // doc: clxx/common/detail/enum2name.t.h {{{
+ * \file clxx/common/detail/enum2name.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_COMMON_ENUM2NAME_T_H_INCLUDED
-#define CLXX_COMMON_ENUM2NAME_T_H_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_ENUM2NAME_T_H_INCLUDED
+#define CLXX_COMMON_DETAIL_ENUM2NAME_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/common/enum2name.hpp>
+#include <clxx/common/detail/enum2name.hpp>
 
-namespace clxx { class enum2name_test_suite; }
+namespace clxx { namespace detail { class enum2name_test_suite; } }
 
-/** // doc: class clxx::enum2name_test_suite {{{
+/** // doc: class clxx::detail::enum2name_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::enum2name_test_suite : public CxxTest::TestSuite
+class clxx::detail::enum2name_test_suite : public CxxTest::TestSuite
 {
 public:
   /** // doc: test_status_t() {{{
@@ -346,25 +346,25 @@ public:
 #endif
     TS_ASSERT_EQUALS(enum2name(static_cast<context_properties_t>(-1l)), nullptr);
   }
-#if CLXX_CL_H_VERSION_1_2
   /** // doc: test_device_partition_property_t() {{{
    * \brief Ensure that enum2name() works with device_partition_property_t.
    */ // }}}
   void test_device_partition_property_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(device_partition_property_t::equally), "equally");
     TS_ASSERT_EQUALS(enum2name(device_partition_property_t::by_counts), "by_counts");
     TS_ASSERT_EQUALS(enum2name(device_partition_property_t::by_counts_list_end), "by_counts_list_end");
     TS_ASSERT_EQUALS(enum2name(device_partition_property_t::by_affinity_domain), "by_affinity_domain");
     TS_ASSERT_EQUALS(enum2name(static_cast<device_partition_property_t>(-1l)), nullptr);
-  }
 #endif
-#if CLXX_CL_H_VERSION_1_2
+  }
   /** // doc: test_device_affinity_domain_t() {{{
    * \brief Ensure that enum2name() works with device_affinity_domain_t.
    */ // }}}
   void test_device_affinity_domain_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(device_affinity_domain_t::none), "none");
     TS_ASSERT_EQUALS(enum2name(device_affinity_domain_t::numa), "numa");
     TS_ASSERT_EQUALS(enum2name(device_affinity_domain_t::l4_cache), "l4_cache");
@@ -373,8 +373,8 @@ public:
     TS_ASSERT_EQUALS(enum2name(device_affinity_domain_t::l1_cache), "l1_cache");
     TS_ASSERT_EQUALS(enum2name(device_affinity_domain_t::next_partitionable), "next_partitionable");
     TS_ASSERT_EQUALS(enum2name(static_cast<device_affinity_domain_t>(-1l)), nullptr);
-  }
 #endif
+  }
   /** // doc: test_command_queue_info_t() {{{
    * \brief Ensure that enum2name() works with command_queue_info_t.
    */ // }}}
@@ -405,18 +405,18 @@ public:
 #endif
     TS_ASSERT_EQUALS(enum2name(static_cast<mem_flags_t>(-1l)), nullptr);
   }
-#if CLXX_CL_H_VERSION_1_2
   /** // doc: test_mem_migration_flags_t() {{{
    * \brief Ensure that enum2name() works with mem_migration_flags_t.
    */ // }}}
   void test_mem_migration_flags_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(mem_migration_flags_t::none), "none");
     TS_ASSERT_EQUALS(enum2name(mem_migration_flags_t::mem_object_host), "mem_object_host");
     TS_ASSERT_EQUALS(enum2name(mem_migration_flags_t::mem_object_content_undefined), "mem_object_content_undefined");
     TS_ASSERT_EQUALS(enum2name(static_cast<mem_migration_flags_t>(-1l)), nullptr);
-  }
 #endif
+  }
   /** // doc: test_channel_order_t() {{{
    * \brief Ensure that enum2name() works with channel_order_t.
    */ // }}}
@@ -601,19 +601,19 @@ public:
 #endif
     TS_ASSERT_EQUALS(enum2name(static_cast<program_build_info_t>(-1l)), nullptr);
   }
-#if CLXX_CL_H_VERSION_1_2
   /** // doc: test_program_binary_type_t() {{{
    * \brief Ensure that enum2name() works with program_binary_type_t.
    */ // }}}
   void test_program_binary_type_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(program_binary_type_t::none), "none");
     TS_ASSERT_EQUALS(enum2name(program_binary_type_t::compiled_object), "compiled_object");
     TS_ASSERT_EQUALS(enum2name(program_binary_type_t::library), "library");
     TS_ASSERT_EQUALS(enum2name(program_binary_type_t::executable), "executable");
     TS_ASSERT_EQUALS(enum2name(static_cast<program_binary_type_t>(-1l)), nullptr);
-  }
 #endif
+  }
   /** // doc: test_build_status_t() {{{
    * \brief Ensure that enum2name() works with build_status_t.
    */ // }}}
@@ -640,59 +640,59 @@ public:
 #endif
     TS_ASSERT_EQUALS(enum2name(static_cast<kernel_info_t>(-1l)), nullptr);
   }
-#if CLXX_CL_H_VERSION_1_2
   /** // doc: test_kernel_arg_info_t() {{{
    * \brief Ensure that enum2name() works with kernel_arg_info_t.
    */ // }}}
   void test_kernel_arg_info_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(kernel_arg_info_t::address_qualifier), "address_qualifier");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_info_t::access_qualifier), "access_qualifier");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_info_t::type_name), "type_name");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_info_t::type_qualifier), "type_qualifier");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_info_t::name), "name");
     TS_ASSERT_EQUALS(enum2name(static_cast<kernel_arg_info_t>(-1l)), nullptr);
-  }
 #endif
-#if CLXX_CL_H_VERSION_1_2
+  }
   /** // doc: test_kernel_arg_address_qualifier_t() {{{
    * \brief Ensure that enum2name() works with kernel_arg_address_qualifier_t.
    */ // }}}
   void test_kernel_arg_address_qualifier_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(kernel_arg_address_qualifier_t::global), "global");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_address_qualifier_t::local), "local");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_address_qualifier_t::constant), "constant");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_address_qualifier_t::private_), "private_");
     TS_ASSERT_EQUALS(enum2name(static_cast<kernel_arg_address_qualifier_t>(-1l)), nullptr);
-  }
 #endif
-#if CLXX_CL_H_VERSION_1_2
+  }
   /** // doc: test_kernel_arg_access_qualifier_t() {{{
    * \brief Ensure that enum2name() works with kernel_arg_access_qualifier_t.
    */ // }}}
   void test_kernel_arg_access_qualifier_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(kernel_arg_access_qualifier_t::read_only), "read_only");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_access_qualifier_t::write_only), "write_only");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_access_qualifier_t::read_write), "read_write");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_access_qualifier_t::none), "none");
     TS_ASSERT_EQUALS(enum2name(static_cast<kernel_arg_access_qualifier_t>(-1l)), nullptr);
-  }
 #endif
-#if CLXX_CL_H_VERSION_1_2
+  }
   /** // doc: test_kernel_arg_type_qualifier_t() {{{
    * \brief Ensure that enum2name() works with kernel_arg_type_qualifier_t.
    */ // }}}
   void test_kernel_arg_type_qualifier_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(enum2name(kernel_arg_type_qualifier_t::none), "none");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_type_qualifier_t::const_), "const_");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_type_qualifier_t::restrict_), "restrict_");
     TS_ASSERT_EQUALS(enum2name(kernel_arg_type_qualifier_t::volatile_), "volatile_");
     TS_ASSERT_EQUALS(enum2name(static_cast<kernel_arg_type_qualifier_t>(-1l)), nullptr);
-  }
 #endif
+  }
   /** // doc: test_kernel_work_group_info_t() {{{
    * \brief Ensure that enum2name() works with kernel_work_group_info_t.
    */ // }}}
@@ -782,16 +782,16 @@ public:
     TS_ASSERT_EQUALS(enum2name(static_cast<command_exec_status_t>(status_t::invalid_value)), "invalid_value");
     TS_ASSERT_EQUALS(enum2name(static_cast<command_exec_status_t>(-0x7FFF)), nullptr);
   }
-#if CLXX_CL_H_VERSION_1_1
   /** // doc: test_buffer_create_type_t() {{{
    * \brief Ensure that enum2name() works with buffer_create_type_t.
    */ // }}}
   void test_buffer_create_type_t( )
   {
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT_EQUALS(enum2name(buffer_create_type_t::region), "region");
     TS_ASSERT_EQUALS(enum2name(static_cast<buffer_create_type_t>(-1l)), nullptr);
-  }
 #endif
+  }
   /** // doc: test_profiling_info_t() {{{
    * \brief Ensure that enum2name() works with profiling_info_t.
    */ // }}}
@@ -805,6 +805,6 @@ public:
   }
 };
 
-#endif /* CLXX_COMMON_ENUM2NAME_T_H_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_ENUM2NAME_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

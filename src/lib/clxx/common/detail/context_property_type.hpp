@@ -1,19 +1,19 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/context_property_type.hpp
+// clxx/common/detail/context_property_type.hpp
 
-/** // doc: clxx/common/context_property_type.hpp {{{
- * \file clxx/common/context_property_type.hpp
+/** // doc: clxx/common/detail/context_property_type.hpp {{{
+ * \file clxx/common/detail/context_property_type.hpp
  * \brief Implements the \ref clxx::context_property_type "context_property_type" metafunction
  */ // }}}
-#ifndef COMMON_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED
-#define COMMON_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED
 
 #include <clxx/common/types.hpp>
-#include <clxx/common/context_property_type_fwd.hpp>
+#include <clxx/common/detail/context_property_type_fwd.hpp>
 
-namespace clxx {
+namespace clxx { namespace detail {
 
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template <>
@@ -67,8 +67,8 @@ template <>
 #endif
 /** \endcond */
 
-} // end namespace clxx
+} } // end namespace clxx
 
-#endif /* COMMON_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

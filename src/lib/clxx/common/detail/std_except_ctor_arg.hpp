@@ -1,20 +1,20 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/std_except_ctor_arg.hpp
+// clxx/common/detail/std_except_ctor_arg.hpp
 
-/** // doc: clxx/common/std_except_ctor_arg.hpp {{{
- * \file clxx/common/std_except_ctor_arg.hpp
+/** // doc: clxx/common/detail/std_except_ctor_arg.hpp {{{
+ * \file clxx/common/detail/std_except_ctor_arg.hpp
  * \brief Defines the \ref clxx::std_except_ctor_arg "std_except_ctor_arg" meta-function
  */ // }}}
-#ifndef COMMON_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
-#define COMMON_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED
 
-#include <clxx/common/std_except_ctor_arg_fwd.hpp>
+#include <clxx/common/detail/std_except_ctor_arg_fwd.hpp>
 #include <stdexcept>
 #include <new>
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \addtogroup clxx_util
  * @{ */
 /** // doc: std_except_ctor_arg {{{
@@ -38,7 +38,7 @@ namespace clxx {
  *
  * **Example**:
  * \code
- * #include <clxx/common/std_except_ctor_arg.hpp>
+ * #include <clxx/common/detail/std_except_ctor_arg.hpp>
  *
  * template<class StdExcept, class CtorArg = typename std_except_ctor_arg<StdExcept>::type>
  *   struct my_except
@@ -108,8 +108,8 @@ struct std_except_ctor_arg< std::bad_alloc>
   { typedef std_except_no_ctor_arg_tag type; };
 /** \endcond */
 /** @} */
-} // end namespace clxx
+} } // end namespace clxx::detail
 
-#endif /* COMMON_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_STD_EXCEPT_CTOR_ARG_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

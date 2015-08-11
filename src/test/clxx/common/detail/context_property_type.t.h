@@ -1,17 +1,17 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/context_property_type.t.h
+// clxx/common/detail/context_property_type.t.h
 
-/** // doc: clxx/common/context_property_type.t.h {{{
- * \file clxx/common/context_property_type.t.h
+/** // doc: clxx/common/detail/context_property_type.t.h {{{
+ * \file clxx/common/detail/context_property_type.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_COMMON_CONTEXT_PROPERTY_TYPE_T_H_INCLUDED
-#define CLXX_COMMON_CONTEXT_PROPERTY_TYPE_T_H_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_CONTEXT_PROPERTY_TYPE_T_H_INCLUDED
+#define CLXX_COMMON_DETAIL_CONTEXT_PROPERTY_TYPE_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/common/context_property_type.hpp>
+#include <clxx/common/detail/context_property_type.hpp>
 #include <type_traits>
 
 namespace clxx { class context_property_type_test_suite; }
@@ -24,7 +24,7 @@ class clxx::context_property_type_test_suite : public CxxTest::TestSuite
   template <context_properties_t T1, class T2>
   constexpr static bool chk_types() noexcept
   {
-    return (std::is_same<typename context_property_type<T1>::type,T2>::value);
+    return (std::is_same<typename detail::context_property_type<T1>::type,T2>::value);
   }
 public:
   /** // doc: test_platform() {{{
@@ -133,6 +133,6 @@ public:
   }
 };
 
-#endif /* CLXX_COMMON_CONTEXT_PROPERTY_TYPE_T_H_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_CONTEXT_PROPERTY_TYPE_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

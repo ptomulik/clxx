@@ -9,7 +9,7 @@
 #include <clxx/cl/functions.hpp>
 #include <clxx/cl/command_queue.hpp>
 #include <clxx/cl/kernel.hpp>
-#include <clxx/common/obj2cl.hpp>
+#include <clxx/cl/detail/obj2cl.hpp>
 #include <clxx/common/ndrange.hpp>
 
 namespace clxx {
@@ -30,8 +30,8 @@ enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
                          ndrange.global_size_ptr(),
                          ndrange.local_size_ptr(),
                          num_events_in_wait_list,
-                         obj2cl(event_wait_list),
-                         event ? obj2cl(&tmp) : nullptr);
+                         detail::obj2cl(event_wait_list),
+                         event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintain reference count in *event
 }
@@ -51,8 +51,8 @@ enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
                          ndrange.global_size_ptr(),
                          ndrange.local_size_ptr(),
                          event_wait_list.size(),
-                         obj2cl(event_wait_list),
-                         event ? obj2cl(&tmp) : nullptr);
+                         detail::obj2cl(event_wait_list),
+                         event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintain reference count in *event
 }
@@ -72,7 +72,7 @@ enqueue_ndrange_kernel(clxx::command_queue const& command_queue,
                          ndrange.local_size_ptr(),
                          0,
                          nullptr,
-                         event ? obj2cl(&tmp) : nullptr);
+                         event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintain reference count in *event
 }

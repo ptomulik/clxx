@@ -10,7 +10,7 @@
 #ifndef CLXX_CL_DEVICE_PARTITION_PROPERTY_HPP_INCLUDED
 #define CLXX_CL_DEVICE_PARTITION_PROPERTY_HPP_INCLUDED
 
-#include <clxx/common/device_partition_property_type.hpp>
+#include <clxx/common/detail/device_partition_property_type.hpp>
 #include <clxx/common/types.hpp>
 #include <clxx/common/exceptions.hpp>
 #include <vector>
@@ -294,7 +294,7 @@ private:
 
 /** \addtogroup clxx_platform_layer
  * @{ */
-/** // doc: make_device_partition_property_c<N>(device_partition_property_type<N>::type) {{{
+/** // doc: make_device_partition_property_c<N>(detail::device_partition_property_type<N>::type) {{{
  * \brief Type-safe constructor for \ref device_partition_property
  *
  * \tparam N property name
@@ -305,7 +305,7 @@ private:
  */ // }}}
 template <device_partition_property_t N>
 inline device_partition_property
-make_device_partition_property(typename device_partition_property_type<N>::type x)
+make_device_partition_property(typename detail::device_partition_property_type<N>::type x)
 {
   return device_partition_property(N, (cl_device_partition_property)x);
 }

@@ -12,9 +12,9 @@
 
 #include <clxx/common/clerror.hpp>
 #include <clxx/common/exception_base.hpp>
-#include <clxx/common/std_except_ctor_arg.hpp>
-#include <clxx/common/clerror_stdexcept.hpp>
-#include <clxx/common/enum2cstr.hpp>
+#include <clxx/common/detail/std_except_ctor_arg.hpp>
+#include <clxx/common/detail/clerror_stdexcept.hpp>
+#include <clxx/common/detail/enum2cstr.hpp>
 
 namespace clxx {
 
@@ -46,21 +46,21 @@ namespace clxx {
  * and adds the logic for initializing/retrieving the exception message.
  */ // }}}
 template < status_t Code
-         , class StdExcept = typename clerror_stdexcept<Code>::type
-         , class StdCtorArg = typename std_except_ctor_arg<StdExcept>::type >
+         , class StdExcept = typename detail::clerror_stdexcept<Code>::type
+         , class StdCtorArg = typename detail::std_except_ctor_arg<StdExcept>::type >
   struct clerror_base
     : public exception_base<clerror, StdExcept, StdCtorArg>
   {
   };
 
-/** // doc: clerror_base<Code, StdExcept, std_except_no_ctor_arg_tag> {{{
+/** // doc: clerror_base<Code, StdExcept, detail::std_except_no_ctor_arg_tag> {{{
  * \ingroup clxx_exceptions
  * \brief Partial specialization of the clerror_base template for exceptions
  *    based on standard exceptions with immutable error messages
  */ // }}}
 template < status_t Code, class StdExcept>
-  struct clerror_base<Code, StdExcept, std_except_no_ctor_arg_tag>
-    : public exception_base<clerror, StdExcept, std_except_no_ctor_arg_tag>
+  struct clerror_base<Code, StdExcept, detail::std_except_no_ctor_arg_tag>
+    : public exception_base<clerror, StdExcept, detail::std_except_no_ctor_arg_tag>
   {
     /** // doc: static_code {{{
      * \brief OpenCL error code represented by this exception
@@ -69,7 +69,7 @@ template < status_t Code, class StdExcept>
     /** // doc: static_what {{{
      * \brief Error message for the OpenCL error represented by this class
      */ // }}}
-    static constexpr char const* static_what = enum2cstr(Code);
+    static constexpr char const* static_what = detail::enum2cstr(Code);
     static_assert(static_what != nullptr, "");
     /** // doc: code() {{{
      * \brief Returns OpenCL error code represented by this exception
@@ -81,13 +81,13 @@ template < status_t Code, class StdExcept>
     char const* what() const noexcept { return static_what; }
   };
 
-/** // doc: clerror_base<Code, StdExcept, std_except_xstring_ctor_arg_tag> {{{
+/** // doc: clerror_base<Code, StdExcept, detail::std_except_xstring_ctor_arg_tag> {{{
  * \ingroup clxx_exceptions
  * \brief Partial specialization for exceptions with mutable messages.
  */ // }}}
 template < status_t Code, class StdExcept>
-  struct clerror_base<Code, StdExcept, std_except_xstring_ctor_arg_tag>
-    : public exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>
+  struct clerror_base<Code, StdExcept, detail::std_except_xstring_ctor_arg_tag>
+    : public exception_base<clerror, StdExcept, detail::std_except_xstring_ctor_arg_tag>
   {
     /** // doc: static_code {{{
      * \brief OpenCL error code represented by this exception
@@ -96,7 +96,7 @@ template < status_t Code, class StdExcept>
     /** // doc: static_what {{{
      * \brief Error message for the OpenCL error represented by this class
      */ // }}}
-    static constexpr char const* static_what = enum2cstr(Code);
+    static constexpr char const* static_what = detail::enum2cstr(Code);
     static_assert(static_what != nullptr, "");
     /** // doc: clerror_base() {{{
      * \brief Default constructor
@@ -104,7 +104,7 @@ template < status_t Code, class StdExcept>
      * Passes the default message string to the underlying standard exception.
      */ // }}}
     clerror_base()
-      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(static_what)
+      : exception_base<clerror, StdExcept, detail::std_except_xstring_ctor_arg_tag>(static_what)
     { }
     /** // doc: clerror_base(std::string const&) {{{
      * \brief Constructor
@@ -112,7 +112,7 @@ template < status_t Code, class StdExcept>
      * Passes the default message string to the underlying standard exception.
      */ // }}}
     clerror_base(std::string const& what_arg)
-      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(what_arg)
+      : exception_base<clerror, StdExcept, detail::std_except_xstring_ctor_arg_tag>(what_arg)
     { }
     /** // doc: clerror_base(std::string const&) {{{
      * \brief Constructor
@@ -120,7 +120,7 @@ template < status_t Code, class StdExcept>
      * Passes the default message string to the underlying standard exception.
      */ // }}}
     clerror_base(char const* what_arg)
-      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(what_arg)
+      : exception_base<clerror, StdExcept, detail::std_except_xstring_ctor_arg_tag>(what_arg)
     { }
     /** // doc: code() {{{
      * \brief Returns OpenCL error code represented by this exception.
@@ -145,7 +145,7 @@ template < status_t Code, class StdExcept>
     /** // doc: static_what {{{
      * \brief Error message for the OpenCL error represented by this class
      */ // }}}
-    static constexpr char const* static_what = enum2cstr(Code);
+    static constexpr char const* static_what = detail::enum2cstr(Code);
     static_assert(static_what != nullptr, "");
     /** // doc: clerror_base() {{{
      * \brief Default constructor
@@ -161,7 +161,7 @@ template < status_t Code, class StdExcept>
      * Passes the default message string to the underlying standard exception.
      */ // }}}
     clerror_base(char const* what_arg)
-      : exception_base<clerror, StdExcept, std_except_xstring_ctor_arg_tag>(what_arg)
+      : exception_base<clerror, StdExcept, detail::std_except_xstring_ctor_arg_tag>(what_arg)
     { }
     /** // doc: code() {{{
      * \brief Returns OpenCL error code represented by this exception.

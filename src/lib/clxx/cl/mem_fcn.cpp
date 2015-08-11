@@ -7,7 +7,7 @@
  */ // }}}
 #include <clxx/cl/mem_fcn.hpp>
 #include <clxx/cl/functions.hpp>
-#include <clxx/common/obj2cl.hpp>
+#include <clxx/cl/detail/obj2cl.hpp>
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */
@@ -30,8 +30,8 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
                       size,
                       ptr,
                       num_events_in_wait_list,
-                      obj2cl(event_wait_list),
-                      event ? obj2cl(&tmp) : nullptr);
+                      detail::obj2cl(event_wait_list),
+                      event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -54,8 +54,8 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
                       size,
                       ptr,
                       static_cast<cl_uint>(event_wait_list.size()),
-                      obj2cl(event_wait_list),
-                      event ? obj2cl(&tmp) : nullptr);
+                      detail::obj2cl(event_wait_list),
+                      event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -78,7 +78,7 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
                       ptr,
                       0,
                       nullptr,
-                      event ? obj2cl(&tmp) : nullptr);
+                      event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -102,8 +102,8 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
                        size,
                        ptr,
                        num_events_in_wait_list,
-                       obj2cl(event_wait_list),
-                       event ? obj2cl(&tmp) : nullptr);
+                       detail::obj2cl(event_wait_list),
+                       event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -126,8 +126,8 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
                        size,
                        ptr,
                        static_cast<cl_uint>(event_wait_list.size()),
-                       obj2cl(event_wait_list),
-                       event ? obj2cl(&tmp) : nullptr);
+                       detail::obj2cl(event_wait_list),
+                       event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -150,7 +150,7 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
                        ptr,
                        0,
                        nullptr,
-                       event ? obj2cl(&tmp) : nullptr);
+                       event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -174,8 +174,8 @@ enqueue_copy_buffer(clxx::command_queue const& command_queue,
                       dst_offset,
                       size,
                       num_events_in_wait_list,
-                      obj2cl(event_wait_list),
-                      event ? obj2cl(&tmp) : nullptr);
+                      detail::obj2cl(event_wait_list),
+                      event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -198,8 +198,8 @@ enqueue_copy_buffer(clxx::command_queue const& command_queue,
                       dst_offset,
                       size,
                       static_cast<cl_uint>(event_wait_list.size()),
-                      obj2cl(event_wait_list),
-                      event ? obj2cl(&tmp) : nullptr);
+                      detail::obj2cl(event_wait_list),
+                      event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -222,7 +222,7 @@ enqueue_copy_buffer(clxx::command_queue const& command_queue,
                       size,
                       0,
                       nullptr,
-                      event ? obj2cl(&tmp) : nullptr);
+                      event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -246,8 +246,8 @@ enqueue_map_buffer(clxx::command_queue const& command_queue,
                                     offset,
                                     size,
                                     num_events_in_wait_list,
-                                    obj2cl(event_wait_list),
-                                    event ? obj2cl(&tmp) : nullptr);
+                                    detail::obj2cl(event_wait_list),
+                                    event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
   return result;
@@ -271,8 +271,8 @@ enqueue_map_buffer(clxx::command_queue const& command_queue,
                                     offset,
                                     size,
                                     static_cast<cl_uint>(event_wait_list.size()),
-                                    obj2cl(event_wait_list),
-                                    event ? obj2cl(&tmp) : nullptr);
+                                    detail::obj2cl(event_wait_list),
+                                    event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
   return result;
@@ -296,7 +296,7 @@ enqueue_map_buffer(clxx::command_queue const& command_queue,
                                     size,
                                     0,
                                     nullptr,
-                                    event ? obj2cl(&tmp) : nullptr);
+                                    event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
   return result;
@@ -315,8 +315,8 @@ enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
                            memobj.chk_get(),
                            mapped_ptr,
                            num_events_in_wait_list,
-                           obj2cl(event_wait_list),
-                           event ? obj2cl(&tmp) : nullptr);
+                           detail::obj2cl(event_wait_list),
+                           event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -333,8 +333,8 @@ enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
                            memobj.chk_get(),
                            mapped_ptr,
                            static_cast<cl_uint>(event_wait_list.size()),
-                           obj2cl(event_wait_list),
-                           event ? obj2cl(&tmp) : nullptr);
+                           detail::obj2cl(event_wait_list),
+                           event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }
@@ -351,7 +351,7 @@ enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
                            mapped_ptr,
                            0,
                            nullptr,
-                           event ? obj2cl(&tmp) : nullptr);
+                           event ? detail::obj2cl(&tmp) : nullptr);
   if(event)
     *event = tmp; // maintains reference count in *event
 }

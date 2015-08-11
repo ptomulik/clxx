@@ -10,12 +10,12 @@
  * This header implements overloaded std::to_string for several types defined
  * in clxx.
  */ // }}}
-#ifndef COMMON_TO_STRING_HPP_INCLUDED
-#define COMMON_TO_STRING_HPP_INCLUDED
+#ifndef CLXX_COMMON_TO_STRING_HPP_INCLUDED
+#define CLXX_COMMON_TO_STRING_HPP_INCLUDED
 
 #include <clxx/common/types.hpp>
-#include <clxx/common/enum2name.hpp>
-#include <clxx/common/enum2hex.hpp>
+#include <clxx/common/detail/enum2name.hpp>
+#include <clxx/common/detail/enum2hex.hpp>
 #include <string>
 #include <type_traits>
 
@@ -36,8 +36,8 @@ namespace clxx {
 template<typename E>
 std::string enum_to_name_or_hex(E x)
 {
-  char const* name = clxx::enum2name(x);
-  return name ? std::string(name) : enum2hex(x);
+  char const* name = clxx::detail::enum2name(x);
+  return name ? std::string(name) : detail::enum2hex(x);
 }
 /** // doc: enum_to_name_of_hex {{{
  * \brief Convert an enum value to string interpreting it as a bitmask
@@ -391,6 +391,6 @@ inline string to_string(clxx::profiling_info_t x)
 /** @} */
 } // end namespace std
 
-#endif /* COMMON_TO_STRING_HPP_INCLUDED */
+#endif /* CLXX_COMMON_TO_STRING_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

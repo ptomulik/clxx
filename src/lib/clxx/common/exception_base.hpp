@@ -11,7 +11,7 @@
 #define CLXX_COMMON_EXCEPTION_BASE_HPP_INCLUDED
 
 #include <clxx/common/exception.hpp>
-#include <clxx/common/std_except_ctor_arg.hpp>
+#include <clxx/common/detail/std_except_ctor_arg.hpp>
 #include <string>
 
 namespace clxx {
@@ -33,7 +33,7 @@ namespace clxx {
  * implements the clxx2std() method. The template provides default
  * implementation of the clxx2std() method.
  *
- * The **StdCtorArg** should be set to std_except_no_ctor_arg_tag for standard
+ * The **StdCtorArg** should be set to detail::std_except_no_ctor_arg_tag for standard
  * exceptions having only default constructors (without arguments), such as
  * \c std::bad_alloc.
  *
@@ -56,7 +56,7 @@ namespace clxx {
  */ // }}}
 template < class ClxxExcept
          , class StdExcept
-         , class StdCtorArg = typename std_except_ctor_arg<StdExcept>::type >
+         , class StdCtorArg = typename detail::std_except_ctor_arg<StdExcept>::type >
   struct exception_base
       : public ClxxExcept,
         public StdExcept
@@ -101,7 +101,7 @@ template < class ClxxExcept
  * implements the clxx2std() method. The template provides default
  * implementation of the clxx2std() method.
  *
- * The **StdCtorArg** should be set to std_except_no_ctor_arg_tag for standard
+ * The **StdCtorArg** should be set to detail::std_except_no_ctor_arg_tag for standard
  * exceptions having only default constructors (without arguments), such as
  * \c std::bad_alloc.
  *
@@ -124,7 +124,7 @@ template < class ClxxExcept
  */ // }}}
 template < class ClxxExcept
          , class StdExcept>
-  struct exception_base<ClxxExcept, StdExcept, std_except_xstring_ctor_arg_tag>
+  struct exception_base<ClxxExcept, StdExcept, detail::std_except_xstring_ctor_arg_tag>
       : public ClxxExcept,
         public StdExcept
   {
@@ -160,7 +160,7 @@ template < class ClxxExcept
     virtual ~exception_base() noexcept {}
   };
 
-/** // doc: exception_base<StdExcept, std_except_no_ctor_arg_tag> {{{
+/** // doc: exception_base<StdExcept, detail::std_except_no_ctor_arg_tag> {{{
  * \ingroup clxx_exceptions
  * \brief Partial specialization of clxx::exception_base.
  *
@@ -170,7 +170,7 @@ template < class ClxxExcept
  * argument).
  */ // }}}
 template <class ClxxExcept, class StdExcept>
-  struct exception_base<ClxxExcept, StdExcept, std_except_no_ctor_arg_tag>
+  struct exception_base<ClxxExcept, StdExcept, detail::std_except_no_ctor_arg_tag>
     : public ClxxExcept,
       public StdExcept
   {

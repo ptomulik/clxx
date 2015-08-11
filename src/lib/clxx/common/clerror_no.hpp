@@ -11,8 +11,8 @@
 #define CLXX_COMMON_CLERROR_NO_HPP_INCLUDED
 
 #include <clxx/common/clerror_base.hpp>
-#include <clxx/common/std_except_ctor_arg.hpp>
-#include <clxx/common/clerror_stdexcept.hpp>
+#include <clxx/common/detail/std_except_ctor_arg.hpp>
+#include <clxx/common/detail/clerror_stdexcept.hpp>
 #include <string>
 
 namespace clxx {
@@ -51,22 +51,22 @@ namespace clxx {
  * \endcode
  */ // }}}
 template < status_t Code
-         , class StdExcept = typename clerror_stdexcept<Code>::type
-         , class StdCtorArg = typename std_except_ctor_arg<StdExcept>::type >
+         , class StdExcept = typename detail::clerror_stdexcept<Code>::type
+         , class StdCtorArg = typename detail::std_except_ctor_arg<StdExcept>::type >
   struct clerror_no;
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template <status_t Code, class StdExcept>
-  struct clerror_no<Code, StdExcept, std_except_no_ctor_arg_tag>
-    : public clerror_base<Code,StdExcept, std_except_no_ctor_arg_tag>
+  struct clerror_no<Code, StdExcept, detail::std_except_no_ctor_arg_tag>
+    : public clerror_base<Code,StdExcept, detail::std_except_no_ctor_arg_tag>
   {
-    typedef clerror_base<Code,StdExcept, std_except_no_ctor_arg_tag> Base;
+    typedef clerror_base<Code,StdExcept, detail::std_except_no_ctor_arg_tag> Base;
     clerror_no() : Base() { }
   };
 template <status_t Code, class StdExcept>
-  struct clerror_no<Code, StdExcept, std_except_xstring_ctor_arg_tag>
-    : public clerror_base<Code, StdExcept, std_except_xstring_ctor_arg_tag>
+  struct clerror_no<Code, StdExcept, detail::std_except_xstring_ctor_arg_tag>
+    : public clerror_base<Code, StdExcept, detail::std_except_xstring_ctor_arg_tag>
   {
-    typedef clerror_base<Code,StdExcept, std_except_xstring_ctor_arg_tag> Base;
+    typedef clerror_base<Code,StdExcept, detail::std_except_xstring_ctor_arg_tag> Base;
     clerror_no() : Base() { }
     explicit clerror_no(std::string const& what_arg) : Base(what_arg) { }
     explicit clerror_no(char const* what_arg) : Base(what_arg) { }

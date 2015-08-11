@@ -11,7 +11,7 @@
 #ifndef CLXX_CL_CONTEXT_PROPERTY_HPP_INCLUDED
 #define CLXX_CL_CONTEXT_PROPERTY_HPP_INCLUDED
 
-#include <clxx/common/context_property_type.hpp>
+#include <clxx/common/detail/context_property_type.hpp>
 #include <clxx/common/types.hpp>
 #include <clxx/cl/platform.hpp>
 
@@ -153,7 +153,7 @@ private:
 
 /** \addtogroup clxx_platform_layer
  * @{ */
-/** // doc: make_context_property_c<N>(context_property_type<N>::type) {{{
+/** // doc: make_context_property_c<N>(detail::context_property_type<N>::type) {{{
  * \brief Type-safe constructor for \ref clxx::context_property
  *
  * \tparam N property name
@@ -164,7 +164,7 @@ private:
  */ // }}}
 template <context_properties_t N>
 constexpr context_property
-make_context_property(typename context_property_type<N>::type x) noexcept
+make_context_property(typename detail::context_property_type<N>::type x) noexcept
 {
   return context_property(N, (cl_context_properties)x);
 }

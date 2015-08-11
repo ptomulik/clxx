@@ -7,7 +7,7 @@
  */ // }}}
 
 %include <clxx/common/clerror.swg>
-%include <clxx/common/clerror_stdexcept.hpp>
+%include <clxx/common/detail/clerror_stdexcept.hpp>
 %{
 #include <clxx/common/clerror_base.hpp>
 %}

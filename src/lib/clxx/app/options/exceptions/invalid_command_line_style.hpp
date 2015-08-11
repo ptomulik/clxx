@@ -14,13 +14,13 @@
 #include <clxx/common/exception_base.hpp>
 #include <boost/program_options/errors.hpp>
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::invalid_command_line_style>
   { typedef boost::program_options::invalid_command_line_style type; };
 /** \endcond */
-} // end namespace clxx
+} } // end namespace clxx::detail
 
 namespace clxx { namespace app { namespace options {
 

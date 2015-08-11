@@ -39,6 +39,9 @@ sources =  [
 ]
 
 headers = [
+    #
+    # cl/*.hpp
+    #
     'cl/clobj.hpp',
     'cl/clobj_fcn.hpp',
     'cl/clobj_impl.hpp',
@@ -83,6 +86,10 @@ headers = [
     'cl/program_with_source_ctor.hpp',
     'cl/programs.hpp',
     'cl/runtime.hpp',
+    #
+    # cl/detail/*.hpp
+    #
+    'cl/detail/obj2cl.hpp',
 ]
 
 headers += [

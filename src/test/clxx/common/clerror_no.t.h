@@ -7,8 +7,8 @@
  * \file clxx/common/clerror_no.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_CLERROR_NO_T_H_INCLUDED
-#define CLXX_CL_CLERROR_NO_T_H_INCLUDED
+#ifndef CLXX_COMMON_CLERROR_NO_T_H_INCLUDED
+#define CLXX_COMMON_CLERROR_NO_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/common/clerror_no.hpp>
@@ -201,12 +201,12 @@ public:
     TS_ASSERT_THROWS(throw T(), std::runtime_error const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
   }
-#if CLXX_CL_H_VERSION_1_1
   /** // doc: test_misaligned_sub_buffer_offset() {{{
    * \todo Write documentation
    */ // }}}
   void test_misaligned_sub_buffer_offset()
   {
+#if CLXX_CL_H_VERSION_1_1
     typedef clerror_no<status_t::misaligned_sub_buffer_offset> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::misaligned_sub_buffer_offset);
     TS_ASSERT_EQUALS(T().code(), status_t::misaligned_sub_buffer_offset);
@@ -216,12 +216,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_exec_status_error_for_events_in_wait_list() {{{
    * \todo Write documentation
    */ // }}}
   void test_exec_status_error_for_events_in_wait_list()
   {
+#if CLXX_CL_H_VERSION_1_1
     typedef clerror_no<status_t::exec_status_error_for_events_in_wait_list> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::exec_status_error_for_events_in_wait_list);
     TS_ASSERT_EQUALS(T().code(), status_t::exec_status_error_for_events_in_wait_list);
@@ -231,14 +233,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
-  }
 #endif
-#if CLXX_CL_H_VERSION_1_2
+  }
   /** // doc: test_compile_program_failure() {{{
    * \todo Write documentation
    */ // }}}
   void test_compile_program_failure()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::compile_program_failure> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::compile_program_failure);
     TS_ASSERT_EQUALS(T().code(), status_t::compile_program_failure);
@@ -248,12 +250,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::runtime_error const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_linker_not_available() {{{
    * \todo Write documentation
    */ // }}}
   void test_linker_not_available()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::linker_not_available> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::linker_not_available);
     TS_ASSERT_EQUALS(T().code(), status_t::linker_not_available);
@@ -263,12 +267,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::runtime_error const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_link_program_failure() {{{
    * \todo Write documentation
    */ // }}}
   void test_link_program_failure()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::link_program_failure> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::link_program_failure);
     TS_ASSERT_EQUALS(T().code(), status_t::link_program_failure);
@@ -278,12 +284,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::runtime_error const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_device_partition_failed() {{{
    * \todo Write documentation
    */ // }}}
   void test_device_partition_failed()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::device_partition_failed> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::device_partition_failed);
     TS_ASSERT_EQUALS(T().code(), status_t::device_partition_failed);
@@ -293,12 +301,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::runtime_error const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_kernel_arg_info_not_available() {{{
    * \todo Write documentation
    */ // }}}
   void test_kernel_arg_info_not_available()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::kernel_arg_info_not_available> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::kernel_arg_info_not_available);
     TS_ASSERT_EQUALS(T().code(), status_t::kernel_arg_info_not_available);
@@ -308,8 +318,8 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::runtime_error const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
-  }
 #endif
+  }
   /** // doc: test_invalid_value() {{{
    * \todo Write documentation
    */ // }}}
@@ -820,12 +830,12 @@ public:
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
   }
-#if CLXX_CL_H_VERSION_1_1
   /** // doc: test_invalid_property() {{{
    * \todo Write documentation
    */ // }}}
   void test_invalid_property()
   {
+#if CLXX_CL_H_VERSION_1_1
     typedef clerror_no<status_t::invalid_property> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::invalid_property);
     TS_ASSERT_EQUALS(T().code(), status_t::invalid_property);
@@ -835,14 +845,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
-  }
 #endif
-#if CLXX_CL_H_VERSION_1_2
+  }
   /** // doc: test_invalid_image_descriptor() {{{
    * \todo Write documentation
    */ // }}}
   void test_invalid_image_descriptor()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::invalid_image_descriptor> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::invalid_image_descriptor);
     TS_ASSERT_EQUALS(T().code(), status_t::invalid_image_descriptor);
@@ -852,12 +862,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_invalid_compiler_options() {{{
    * \todo Write documentation
    */ // }}}
   void test_invalid_compiler_options()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::invalid_compiler_options> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::invalid_compiler_options);
     TS_ASSERT_EQUALS(T().code(), status_t::invalid_compiler_options);
@@ -867,12 +879,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_invalid_linker_options() {{{
    * \todo Write documentation
    */ // }}}
   void test_invalid_linker_options()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::invalid_linker_options> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::invalid_linker_options);
     TS_ASSERT_EQUALS(T().code(), status_t::invalid_linker_options);
@@ -882,12 +896,14 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
+#endif
   }
   /** // doc: test_invalid_device_partition_count() {{{
    * \todo Write documentation
    */ // }}}
   void test_invalid_device_partition_count()
   {
+#if CLXX_CL_H_VERSION_1_2
     typedef clerror_no<status_t::invalid_device_partition_count> T;
     TS_ASSERT_EQUALS(T::static_code, status_t::invalid_device_partition_count);
     TS_ASSERT_EQUALS(T().code(), status_t::invalid_device_partition_count);
@@ -897,10 +913,10 @@ public:
     TS_ASSERT_THROWS(throw T(), clxx::exception const&);
     TS_ASSERT_THROWS(throw T(), std::invalid_argument const&);
     TS_ASSERT_THROWS(throw T(), std::exception const&);
-  }
 #endif
+  }
 };
 
-#endif /* CLXX_CL_CLERROR_NO_T_H_INCLUDED */
+#endif /* CLXX_COMMON_CLERROR_NO_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -14,13 +14,13 @@
 #include <clxx/common/exception_base.hpp>
 #include <boost/program_options/errors.hpp>
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
 struct std_except_ctor_arg< boost::program_options::invalid_bool_value>
   { typedef boost::program_options::invalid_bool_value type; };
 /** \endcond */
-} /* namespace clxx */
+} } // end namesapce clxx::detail
 
 namespace clxx { namespace app { namespace options {
 /** // doc: invalid_bool_option_value_error {{{

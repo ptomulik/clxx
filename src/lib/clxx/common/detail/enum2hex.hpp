@@ -1,14 +1,14 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/enum2hex.hpp
+// clxx/common/detail/enum2hex.hpp
 
-/** // doc: clxx/common/enum2hex.hpp {{{
- * \file clxx/common/enum2hex.hpp
+/** // doc: clxx/common/detail/enum2hex.hpp {{{
+ * \file clxx/common/detail/enum2hex.hpp
  * \brief Provides #enum2hex() function
  */ // }}}
-#ifndef COMMON_ENUM2HEX_HPP_INCLUDED
-#define COMMON_ENUM2HEX_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_ENUM2HEX_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_ENUM2HEX_HPP_INCLUDED
 
 #include <string>
 #include <type_traits>
@@ -133,7 +133,7 @@ struct enum_hex_fmt
 /** @} */
 } } // end namespace clxx::detail
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \addtogroup clxx_util_enum2str
  * @{ */
 /** // doc: enum2hex(x) {{{
@@ -172,7 +172,7 @@ std::string enum2hex(E x)
   return std::string(buf);
 }
 /** @} */
-} // end namespace clxx
-#endif /* COMMON_ENUM2HEX_HPP_INCLUDED */
+} } // end namespace clxx::detail
+#endif /* CLXX_COMMON_DETAIL_ENUM2HEX_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

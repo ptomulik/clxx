@@ -8,18 +8,13 @@ from SCons.Util import CLVar, NodeList
 import os
 
 headers = [
+    #
+    # common/*.hpp
+    #
     'common/clerror.hpp',
     'common/clerror_base.hpp',
     'common/clerror_no.hpp',
-    'common/clerror_stdexcept.hpp',
     'common/config.hpp',
-    'common/context_property_type.hpp',
-    'common/context_property_type_fwd.hpp',
-    'common/device_partition_property_type.hpp',
-    'common/device_partition_property_type_fwd.hpp',
-    'common/enum2cstr.hpp',
-    'common/enum2hex.hpp',
-    'common/enum2name.hpp',
     'common/exception.hpp',
     'common/exception_base.hpp',
     'common/exceptions.hpp',
@@ -27,7 +22,6 @@ headers = [
     'common/memoized_function.hpp',
     'common/ndrange.hpp',
     'common/ndrange_fwd.hpp',
-    'common/obj2cl.hpp',
     'common/opencl.h',
     'common/path.hpp',
     'common/program_binaries.hpp',
@@ -37,11 +31,22 @@ headers = [
     'common/search_path.hpp',
     'common/sha1.hpp',
     'common/shared_ptr.hpp',
-    'common/std_except_ctor_arg.hpp',
-    'common/std_except_ctor_arg_fwd.hpp',
     'common/to_string.hpp',
     'common/types.hpp',
     'config.h',
+    #
+    # common/detail/*.hpp
+    #
+    'common/detail/clerror_stdexcept.hpp',
+    'common/detail/context_property_type.hpp',
+    'common/detail/context_property_type_fwd.hpp',
+    'common/detail/device_partition_property_type.hpp',
+    'common/detail/device_partition_property_type_fwd.hpp',
+    'common/detail/enum2cstr.hpp',
+    'common/detail/enum2hex.hpp',
+    'common/detail/enum2name.hpp',
+    'common/detail/std_except_ctor_arg.hpp',
+    'common/detail/std_except_ctor_arg_fwd.hpp',
 ]
 
 env['CLXX_PACKAGES']['libclxx_common'] = {

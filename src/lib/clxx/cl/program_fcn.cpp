@@ -10,7 +10,7 @@
 #include <clxx/cl/programs.hpp>
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/functions.hpp>
-#include <clxx/common/obj2cl.hpp>
+#include <clxx/cl/detail/obj2cl.hpp>
 #include <clxx/common/exceptions.hpp>
 #include <boost/shared_array.hpp>
 
@@ -48,7 +48,7 @@ build_program(clxx::program const& program,
   build_program(
       program.chk_get(),
       devices.size(),
-      obj2cl(devices),
+      detail::obj2cl(devices),
       options.data(),
       NULL,
       NULL
@@ -79,7 +79,7 @@ build_program(clxx::program const& program,
   build_program(
       program.chk_get(),
       devices.size(),
-      obj2cl(devices),
+      detail::obj2cl(devices),
       options.data(),
       observer.fcn_ptr(),
       observer.fcn_arg()
@@ -102,7 +102,7 @@ compile_program(clxx::program const& program,
       NULL,
       options.data(),
       input_headers.size(),
-      obj2cl(input_headers),
+      detail::obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       NULL,
       NULL
@@ -125,7 +125,7 @@ compile_program(clxx::program const& program,
       NULL,
       options.data(),
       input_headers.size(),
-      obj2cl(input_headers),
+      detail::obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       observer.fcn_ptr(),
       observer.fcn_arg()
@@ -145,10 +145,10 @@ compile_program(clxx::program const& program,
   compile_program(
       program.chk_get(),
       devices.size(),
-      obj2cl(devices),
+      detail::obj2cl(devices),
       options.data(),
       input_headers.size(),
-      obj2cl(input_headers),
+      detail::obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       NULL,
       NULL
@@ -169,10 +169,10 @@ compile_program(clxx::program const& program,
   compile_program(
       program.chk_get(),
       devices.size(),
-      obj2cl(devices),
+      detail::obj2cl(devices),
       options.data(),
       input_headers.size(),
-      obj2cl(input_headers),
+      detail::obj2cl(input_headers),
       _cstrings(header_include_names).get(),
       observer.fcn_ptr(),
       observer.fcn_arg()
@@ -192,10 +192,10 @@ link_program(clxx::context const& context,
     link_program(
       context.chk_get(),
       device_list.size(),
-      obj2cl(device_list),
+      detail::obj2cl(device_list),
       options.data(),
       input_programs.size(),
-      obj2cl(input_programs),
+      detail::obj2cl(input_programs),
       nullptr,
       nullptr
     )
@@ -213,10 +213,10 @@ link_program(clxx::context const& context,
     link_program(
       context.chk_get(),
       device_list.size(),
-      obj2cl(device_list),
+      detail::obj2cl(device_list),
       options.data(),
       input_programs.size(),
-      obj2cl(input_programs),
+      detail::obj2cl(input_programs),
       observer.fcn_ptr(),
       observer.fcn_arg()
     )

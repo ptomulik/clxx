@@ -1,20 +1,20 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/device_partition_property_type.hpp
+// clxx/common/detail/device_partition_property_type.hpp
 
-/** // doc: clxx/common/device_partition_property_type.hpp {{{
- * \file clxx/common/device_partition_property_type.hpp
+/** // doc: clxx/common/detail/device_partition_property_type.hpp {{{
+ * \file clxx/common/detail/device_partition_property_type.hpp
  * \brief Defines the \ref clxx::device_partition_property_type "device_partition_property_type meta-function
  */ // }}}
-#ifndef COMMON_DEVICE_PARTITION_PROPERTY_TYPE_HPP_INCLUDED
-#define COMMON_DEVICE_PARTITION_PROPERTY_TYPE_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_DEVICE_PARTITION_PROPERTY_TYPE_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_DEVICE_PARTITION_PROPERTY_TYPE_HPP_INCLUDED
 
-#include <clxx/common/device_partition_property_type_fwd.hpp>
+#include <clxx/common/detail/device_partition_property_type_fwd.hpp>
 #include <clxx/common/types.hpp>
 #include <vector>
 
-namespace clxx {
+namespace clxx { namespace detail {
 
 /** // doc: device_partition_property_type {{{
  * \ingroup clxx_util
@@ -72,8 +72,8 @@ template <>
 #endif
 /** \endcond */
 
-} // end namespace clxx
+} } // end namespace clxx::detail
 
-#endif /* COMMON_DEVICE_PARTITION_PROPERTY_TYPE_HPP_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_DEVICE_PARTITION_PROPERTY_TYPE_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

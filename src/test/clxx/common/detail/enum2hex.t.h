@@ -1,24 +1,24 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/enum2hex.t.h
+// clxx/common/detail/enum2hex.t.h
 
-/** // doc: clxx/enum2hex.t.h {{{
- * \file clxx/enum2hex.t.h
+/** // doc: clxx/common/detail/enum2hex.t.h {{{
+ * \file clxx/common/detail/enum2hex.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_COMMON_ENUM2HEX_T_H_INCLUDED
-#define CLXX_COMMON_ENUM2HEX_T_H_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_ENUM2HEX_T_H_INCLUDED
+#define CLXX_COMMON_DETAIL_ENUM2HEX_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/common/enum2hex.hpp>
+#include <clxx/common/detail/enum2hex.hpp>
 
-namespace clxx { class enum2hex_test_suite; }
+namespace clxx { namespace detail { class enum2hex_test_suite; } }
 
-/** // doc: class clxx::enum2hex_test_suite {{{
+/** // doc: class clxx::detail::enum2hex_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::enum2hex_test_suite : public CxxTest::TestSuite
+class clxx::detail::enum2hex_test_suite : public CxxTest::TestSuite
 {
 public:
   /** // doc: test_enum_char() {{{
@@ -77,6 +77,6 @@ public:
   }
 };
 
-#endif /* CLXX_COMMON_ENUM2HEX_T_H_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_ENUM2HEX_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -9,7 +9,7 @@
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/functions.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/common/obj2cl.hpp>
+#include <clxx/cl/detail/obj2cl.hpp>
 #include <clxx/cl/clobj_impl.hpp>
 #include <boost/shared_array.hpp>
 #include <algorithm>
@@ -124,7 +124,7 @@ program(context const& ctx, devices const& device_list,
   cl_program id = create_program_with_binary(
       ctx.chk_get(),
       device_list.size(),
-      obj2cl(device_list),
+      detail::obj2cl(device_list),
       _lengths(binaries).get(),
       _pointers(binaries).get(),
       (cl_int*)binary_status.data()
@@ -145,7 +145,7 @@ program(context const& ctx, devices const& device_list,
   cl_program id = create_program_with_binary(
       ctx.chk_get(),
       device_list.size(),
-      obj2cl(device_list),
+      detail::obj2cl(device_list),
       _lengths(binaries).get(),
       _pointers(binaries).get(),
       NULL
@@ -164,7 +164,7 @@ program(context const& ctx, devices const& device_list,
   cl_program id = create_program_with_built_in_kernels(
       ctx.chk_get(),
       device_list.size(),
-      obj2cl(device_list),
+      detail::obj2cl(device_list),
       kernel_names.data()
   );
   // create_program_with_built_in_kernels() performs implicit retain, so we

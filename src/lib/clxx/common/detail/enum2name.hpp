@@ -1,20 +1,20 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/enum2name.hpp
+// clxx/common/detail/enum2name.hpp
 
-/** // doc: clxx/common/enum2name.hpp {{{
- * \file clxx/common/enum2name.hpp
+/** // doc: clxx/common/detail/enum2name.hpp {{{
+ * \file clxx/common/detail/enum2name.hpp
  * \brief Provides enum2namen() function.
  */ // }}}
-#ifndef COMMON_ENUM2NAME_HPP_INCLUDED
-#define COMMON_ENUM2NAME_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_ENUM2NAME_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_ENUM2NAME_HPP_INCLUDED
 
 #include <clxx/common/types.hpp>
 #include <stdexcept>
 #include <type_traits>
 
-namespace clxx {
+namespace clxx { namespace detail {
 /** \addtogroup clxx_util_enum2str
  * @{ */
 /** // doc: enum2name(status_t, char const*) {{{
@@ -948,8 +948,8 @@ enum2name(profiling_info_t x, char const* dflt = nullptr) noexcept
           dflt;
 }
 /** @} */
-} // end namespace clxx
+} } // end namespace clxx::detail
 
-#endif /* COMMON_ENUM2NAME_HPP_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_ENUM2NAME_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

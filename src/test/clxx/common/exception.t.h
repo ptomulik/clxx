@@ -7,8 +7,8 @@
  * \file clxx/common/exception.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_EXCEPTION_T_H_INCLUDED
-#define CLXX_EXCEPTION_T_H_INCLUDED
+#ifndef CLXX_COMMON_EXCEPTION_T_H_INCLUDED
+#define CLXX_COMMON_EXCEPTION_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/common/exception.hpp>
@@ -62,6 +62,6 @@ public:
   }
 };
 
-#endif /* CLXX_EXCEPTION_T_H_INCLUDED */
+#endif /* CLXX_COMMON_EXCEPTION_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

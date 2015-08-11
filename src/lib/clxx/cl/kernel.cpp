@@ -9,7 +9,7 @@
 #include <clxx/cl/program.hpp>
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/device.hpp>
-#include <clxx/common/obj2cl.hpp>
+#include <clxx/cl/detail/obj2cl.hpp>
 #include <clxx/cl/clobj_impl.hpp>
 #include <memory>
 
@@ -224,7 +224,7 @@ set_arg(cl_uint arg_index, size_t size, const void* arg_value) const
 void kernel::
 set_arg(cl_uint arg_index, clxx::mem const& mem) const
 {
-  set_kernel_arg(this->chk_get(), arg_index, sizeof(cl_mem), obj2cl(&mem));
+  set_kernel_arg(this->chk_get(), arg_index, sizeof(cl_mem), detail::obj2cl(&mem));
 }
 /* ----------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)

@@ -1,19 +1,19 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/common/clerror_stdexcept.hpp
+// clxx/common/detail/clerror_stdexcept.hpp
 
-/** // doc: clxx/common/clerror_stdexcept.hpp {{{
- * \file clxx/common/clerror_stdexcept.hpp
+/** // doc: clxx/common/detail/clerror_stdexcept.hpp {{{
+ * \file clxx/common/detail/clerror_stdexcept.hpp
  * \brief Provides the clxx::clerror_stdexcept metafunction.
  */ // }}}
-#ifndef COMMON_CLERROR_STDEXCEPT_HPP_INCLUDED
-#define COMMON_CLERROR_STDEXCEPT_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_CLERROR_STDEXCEPT_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_CLERROR_STDEXCEPT_HPP_INCLUDED
 
 #include <clxx/common/types.hpp>
 #include <stdexcept>
 
-namespace clxx {
+namespace clxx { namespace detail {
 
 /** // doc: clerror_stdexcept {{{
  * \ingroup clxx_util
@@ -297,8 +297,8 @@ template<>
 #endif
 /** \endcond */
 
-} // end namespace clxx
+} } // end namespace clxx::detail
 
-#endif /* COMMON_CLERROR_STDEXCEPT_HPP_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_CLERROR_STDEXCEPT_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

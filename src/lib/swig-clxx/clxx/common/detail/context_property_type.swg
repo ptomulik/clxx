@@ -1,12 +1,12 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: clxx/common/std_except_ctor_arg.swg {{{
- * \file clxx/common/std_except_ctor_arg.swg
+/** // doc: clxx/common/detail/context_property_type.swg {{{
+ * \file clxx/common/detail/context_property_type.swg
  * \todo Write documentation
  */ // }}}
 
-%include <clxx/common/std_except_ctor_arg.li.swg>
+%include <clxx/common/detail/context_property_type.li.swg>
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

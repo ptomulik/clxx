@@ -7,8 +7,8 @@
  * \file clxx/common/types.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_TYPES_T_H_INCLUDED
-#define CLXX_TYPES_T_H_INCLUDED
+#ifndef CLXX_COMMON_TYPES_T_H_INCLUDED
+#define CLXX_COMMON_TYPES_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/common/types.hpp>
@@ -1914,12 +1914,12 @@ public:
     TS_ASSERT_EQUALS(intval(kernel_info_t::attributes), CL_KERNEL_ATTRIBUTES);
 #endif
   }
-#if CLXX_CL_H_VERSION_1_2
   /** // doc: test_kernel_arg_info_t() {{{
    * \brief Test the kernel_arg_info_t type.
    */ // }}}
   void test_kernel_arg_info_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     //
     // Check the underlying type
     //
@@ -1932,12 +1932,14 @@ public:
     TS_ASSERT_EQUALS(static_cast<cl_kernel_arg_info>(kernel_arg_info_t::type_name), CL_KERNEL_ARG_TYPE_NAME);
     TS_ASSERT_EQUALS(static_cast<cl_kernel_arg_info>(kernel_arg_info_t::type_qualifier), CL_KERNEL_ARG_TYPE_QUALIFIER);
     TS_ASSERT_EQUALS(static_cast<cl_kernel_arg_info>(kernel_arg_info_t::name), CL_KERNEL_ARG_NAME);
+#endif
   }
   /** // doc: test_kernel_arg_info_t__intval() {{{
    * \brief Test the kernel_arg_info_t type with intval().
    */ // }}}
   void test_kernel_arg_info_t__intval( )
   {
+#if CLXX_CL_H_VERSION_1_2
     //
     // Check enum values
     //
@@ -1946,8 +1948,8 @@ public:
     TS_ASSERT_EQUALS(intval(kernel_arg_info_t::type_name), CL_KERNEL_ARG_TYPE_NAME);
     TS_ASSERT_EQUALS(intval(kernel_arg_info_t::type_qualifier), CL_KERNEL_ARG_TYPE_QUALIFIER);
     TS_ASSERT_EQUALS(intval(kernel_arg_info_t::name), CL_KERNEL_ARG_NAME);
-  }
 #endif
+  }
   void test_kernel_exec_info_t( )
   {
 #if CLXX_CL_H_VERSION_2_0
@@ -2391,6 +2393,6 @@ public:
   }
 };
 
-#endif /* CLXX_TYPES_T_H_INCLUDED */
+#endif /* CLXX_COMMON_TYPES_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
