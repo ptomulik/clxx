@@ -13,7 +13,6 @@
 #include <cxxtest/TestSuite.h>
 #include <clxx/cl/program_cached_ctor.hpp>
 #include <clxx/cl/mock.hpp>
-#include <clxx/common/path.hpp>
 
 namespace clxx { class program_cached_ctor_test_suite; }
 
@@ -28,6 +27,7 @@ public:
    */ // }}}
   void test__create_default_search_path__1( )
   {
+#if 0
 #ifdef CLXX_WINDOWS_API
     // TODO: write tests for windows once the implementation is ready
 #else
@@ -46,6 +46,7 @@ public:
       {
         TS_ASSERT(paths.size() >= 1ul);
       }
+#endif
 #endif
   }
   /** // doc: test__foo() {{{

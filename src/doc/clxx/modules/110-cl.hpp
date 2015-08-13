@@ -202,6 +202,13 @@
  */
 
 /** @} */
+
+/** \defgroup clxx_cl_detail Implementation details
+ * @{
+ */
+/** \defgroup clxx_util_obj2cl Object to OpenCL Conversions
+ */
+/** @} */
 /** @} */
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

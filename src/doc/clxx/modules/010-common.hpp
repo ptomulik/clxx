@@ -175,10 +175,6 @@
  */
 /** \defgroup clxx_util_enum2str Enum to String Conversions
  */
-/** \defgroup clxx_util_obj2cl Object to OpenCL Conversions
- */
-/** \defgroup clxx_util_search_path Search Path Utilities
- */
 /** \defgroup clxx_util_sha1 SHA-1 Utilities
  */
 /** @} */
