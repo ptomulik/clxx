@@ -65,16 +65,6 @@ search_path_join(const SequenceT& pieces)
 {
   return boost::algorithm::join(pieces, search_path_delimiter_str());
 }
-/** // doc: search_path_prepend() {{{
- * \todo Write documentation
- */ // }}}
-template< typename SequenceT1, typename SequenceT2 >
-SequenceT1&
-search_path_prepend(SequenceT1& p1, SequenceT2 const& p2)
-{
-  p1.insert(p1.begin(), p2.begin(), p2.end());
-  return p1;
-}
 } } // end namespace clxx::detail
 
 #endif /* CLXX_COMMON_DETAIL_SEARCH_PATH_HPP_INCLUDED */

@@ -256,44 +256,6 @@ public:
       TS_ASSERT_EQUALS(search_path_join(pieces), STR(foo) SEP SEP SEP STR(bar));
     }
   }
-  /** // doc: test__search_path_prepend__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__search_path_prepend__1( )
-  {
-    std::vector<path_string> p1{STR(foo1), STR(bar1)};
-    std::vector<path_string> p2{STR(foo2), STR(bar2)};
-    std::vector<path_string>& r = search_path_prepend(p1, p2);
-
-    TS_ASSERT(&r == &p1);
-    TS_ASSERT_EQUALS(r.size(), 4ul);
-    if(r.size() == 4ul)
-      {
-        TS_ASSERT_EQUALS(r[0], STR(foo2));
-        TS_ASSERT_EQUALS(r[1], STR(bar2));
-        TS_ASSERT_EQUALS(r[2], STR(foo1));
-        TS_ASSERT_EQUALS(r[3], STR(bar1));
-      }
-  }
-  /** // doc: test__search_path_prepend__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__search_path_prepend__2( )
-  {
-    std::vector<path_string> p1{STR(foo1), STR(bar1)};
-    std::list<path_string> p2{STR(foo2), STR(bar2)};
-    std::vector<path_string>& r = search_path_prepend(p1, p2);
-
-    TS_ASSERT(&r == &p1);
-    TS_ASSERT_EQUALS(r.size(), 4ul);
-    if(r.size() == 4ul)
-      {
-        TS_ASSERT_EQUALS(r[0], STR(foo2));
-        TS_ASSERT_EQUALS(r[1], STR(bar2));
-        TS_ASSERT_EQUALS(r[2], STR(foo1));
-        TS_ASSERT_EQUALS(r[3], STR(bar1));
-      }
-  }
 };
 
 #endif /* CLXX_COMMON_DETAIL_SEARCH_PATH_T_H_INCLUDED */

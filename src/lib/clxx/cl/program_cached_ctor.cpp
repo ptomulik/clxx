@@ -32,7 +32,9 @@ default_search_path()
   if((env = std::getenv("CLXX_PROGRAM_CACHE_PATH")) != nullptr)
     {
       std::vector<detail::path_string> pieces;
-      detail::search_path_prepend(paths, detail::search_path_split(pieces, env));
+      detail::search_path_split(pieces, env);
+      // prepend paths found in CLXX_PROGRAM_CACHE_PATH
+      paths.insert(paths.begin(), pieces.begin(), pieces.end());
     }
   return paths;
 }
