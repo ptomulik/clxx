@@ -19,11 +19,13 @@ env.Program('cl/query_device_info1.cpp', LIBS = CLVar('clxx_info clxx_io clxx_cl
 env.Program('cl/query_platform_info1.cpp', LIBS = CLVar('clxx_info clxx_io clxx_cl'))
 env.Program('cl/query_platform_layer_info1.cpp', LIBS = CLVar('clxx_info clxx_io clxx_cl'))
 #
+env.Program('common/auto_bind1.cpp')
 env.Program('common/exception1.cpp')
 env.Program('common/exception2.cpp')
 env.Program('common/exception3.cpp')
 env.Program('common/exception4.cpp')
 env.Program('common/memoized_function1.cpp', LIBS = CLVar())
+env.Program('common/current_instance1.cpp', LIBS = CLVar())
 #
 env.Program('info/device_info1.cpp', LIBS = CLVar('clxx_info clxx_io'))
 env.Program('info/platform_info1.cpp', LIBS = CLVar('clxx_info clxx_io'))

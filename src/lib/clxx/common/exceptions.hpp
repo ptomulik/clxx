@@ -18,6 +18,37 @@
 
 namespace clxx {
 
+/** // doc: internal_error {{{
+ * \ingroup clxx_exceptions
+ * \brief An exception thrown when a user tries to operate on an uninitialized
+ *        \ref clxx::device "device" object
+ */ // }}}
+struct internal_error
+    : public exception_base<clxx::exception, std::logic_error>
+  {
+    /** // doc: Base {{{
+     * \brief Typedef for base class
+     */ // }}}
+    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
+    /** // doc: internal_error() {{{
+     * \brief Default constructor
+     */ // }}}
+    internal_error() noexcept
+      : Base("internal error")
+    { }
+    /** // doc: internal_error() {{{
+     * \brief Constructor
+     */ // }}}
+    internal_error(std::string const& what_arg) noexcept
+      : Base(what_arg)
+    { }
+    /** // doc: internal_error() {{{
+     * \brief Constructor
+     */ // }}}
+    internal_error(char const* what_arg) noexcept
+      : Base(what_arg)
+    { }
+  };
 /** // doc: invalid_argument_error {{{
  * \ingroup clxx_exceptions
  * \brief An exception thrown when an invalid argument is provided to a function

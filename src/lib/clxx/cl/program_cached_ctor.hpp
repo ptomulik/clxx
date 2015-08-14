@@ -13,20 +13,12 @@
 #include <clxx/cl/program_with_source_ctor.hpp>
 #include <clxx/cl/context_fwd.hpp>
 #include <clxx/common/program_sources.hpp>
+#include <clxx/common/current_instance.hpp>
 #include <clxx/common/config.hpp>
 #include <string>
 #include <locale>
 
 namespace clxx {
-
-enum class
-singleton_storage_t
-{
-  none,
-  global,
-  thread
-};
-
 /** // doc: program_cached_ctor {{{
  * \todo Write documentation
  */ // }}}
@@ -43,16 +35,16 @@ public:
    */ // }}}
   typedef std::codecvt_base::result codecvt_result;
 public:
-  /** // doc: use_current_search_path_storage() {{{
-   * \brief Set current path pointer (returned by #get_current_path()) to the
-   *        shared (among threads) singleton search path vector
+#if 0
+  /** // doc: use_current_search_path_binding() {{{
+   * \todo Write documentation
    */ // }}}
-  static void current_search_path_use_storage(singleton_storage_t storage);
-  /** // doc: current_search_path_storage() {{{
-   * \brief Set current path pointer (returned by #get_current_path()) to the
-   *        shared (among threads) singleton search path vector
+  static void bind_current_search_path(current_instance_binding_t binding);
+  /** // doc: current_search_path_binding() {{{
+   * \todo Write documentation
    */ // }}}
-  static singleton_storage_t current_search_path_storage();
+  static current_instance_binding_t current_search_path_binding();
+#endif
 #ifdef CLXX_WINDOWS_API
   /** // doc: get_current_search_path() {{{
    * \todo Write documentation

@@ -177,6 +177,32 @@
  */
 /** \defgroup clxx_util_sha1 SHA-1 Utilities
  */
+/** \defgroup clxx_util_current_instance Current Instance 
+ *
+ * This module documents the \ref clxx_util_current_instance "Current Instance"
+ * utility. The concept of \ref clxx_util_current_instance "Current Instance"
+ * refers to a distinguished instance of a given type with a single point of
+ * access in an program. The \ref clxx_util_current_instance "Current Instance"
+ * implementation is actually a smart thread-local reference, which at given
+ * time points to one of the following:
+ *
+ * - a static instance, shared between threads, or
+ * - a thread_local instance individual to the current thread, or
+ * - a user-provided instance (which may be static, thread_local, auto or
+ *   whatever makes sense).
+ *
+ * The static and thread_local instance are managed internally by the
+ * \ref clxx::detail::current_instance "detail::current_instance<>" template.
+ * The user instance is any suitable instance provided by the user.
+ *
+ * The template class \ref clxx::detail::current_instance "detail::current_instance<>"
+ * may be used to implement current instances of different kinds. See
+ * the \ref clxx::detail::current_instance "class reference" for details.
+ *
+ * Which is the current instance for a given instantiation of
+ * \ref clxx::detail::current_instance "detail::current_instance<>" template is
+ * determined at runtime and may be changed by user at any time.
+ */
 /** @} */
 /** @} */
 

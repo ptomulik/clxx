@@ -6,9 +6,11 @@ Import(['env'])
 from SCons.Util import CLVar
 
 tests = [
+    'common/auto_bind.t.h',
 #    'common/clerror.t.h',
 #    'common/clerror_base.t.h',
     'common/clerror_no.t.h',
+    'common/current_instance.t.h',
     'common/exception.t.h',
 #    'common/exception_base.t.h',
 #    'common/exceptions.t.h',
@@ -18,6 +20,7 @@ tests = [
     'common/ndrange.t.h',
 #    'common/detail/clerror_stdexcept.t.h',
     'common/detail/context_property_type.t.h',
+    'common/detail/current_instance.t.h',
 #    'common/context_property_type_fwd.t.h',
 #    'common/device_partition_property_type.t.h',
 #    'common/device_partition_property_type_fwd.t.h',

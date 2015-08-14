@@ -11,99 +11,72 @@
 #include <clxx/common/exceptions.hpp>
 #include <clxx/common/detail/search_path.hpp>
 #include <clxx/common/detail/locale.hpp>
+#include <clxx/common/detail/current_instance.hpp>
 
 namespace clxx { namespace {
 /* ----------------------------------------------------------------------- */
-std::vector<detail::path_string>
-default_search_path()
+class current_search_path
+  : public clxx::detail::current_instance<
+               current_search_path
+             , std::vector<detail::path_string>
+           >
 {
-  std::vector<detail::path_string> paths;
-  const char* env;
+public:
+  static std::vector<detail::path_string>
+  create_global_instance()
+  {
+    std::vector<detail::path_string> paths;
+    const char* env;
 #ifdef CLXX_WINDOWS_API  
-  // TODO: implement default search path for windows
-  (void)env;
+    // TODO: implement default search path for windows
+    (void)env;
 #else
-  if((env = std::getenv("HOME")) != nullptr)
-    {
-      paths.push_back(detail::path_join(std::vector<detail::path_string>{ env, ".clxx/program_cache" }));
-      //paths.push_back(boost::algorithm::join(std::vector<std::string>{ env, ".clxx/program_cache" }, ":"));
-    }
+    if((env = std::getenv("HOME")) != nullptr)
+      {
+        paths.push_back(detail::path_join(std::vector<detail::path_string>{ env, ".clxx/program_cache" }));
+        //paths.push_back(boost::algorithm::join(std::vector<std::string>{ env, ".clxx/program_cache" }, ":"));
+      }
 #endif
-  if((env = std::getenv("CLXX_PROGRAM_CACHE_PATH")) != nullptr)
-    {
-      std::vector<detail::path_string> pieces;
-      detail::search_path_split(pieces, env);
-      // prepend paths found in CLXX_PROGRAM_CACHE_PATH
-      paths.insert(paths.begin(), pieces.begin(), pieces.end());
-    }
-  return paths;
-}
-/* ----------------------------------------------------------------------- */
-std::vector<detail::path_string>&
-global_search_path()
-{
-  static std::vector<detail::path_string> r(default_search_path());
-  return r;
-}
-/* ----------------------------------------------------------------------- */
-std::vector<detail::path_string>&
-thread_search_path()
-{
-  thread_local std::vector<detail::path_string> r(global_search_path());
-  return r;
-}
-/* ----------------------------------------------------------------------- */
-thread_local clxx::singleton_storage_t _current_search_path_storage = clxx::singleton_storage_t::none;
-/* ----------------------------------------------------------------------- */
-std::vector<detail::path_string>&
-current_search_path()
-{
-  switch(_current_search_path_storage)
-    {
-      default:
-        _current_search_path_storage = clxx::singleton_storage_t::global;
-      case clxx::singleton_storage_t::global:
-        return global_search_path();
-      case clxx::singleton_storage_t::thread:
-        return thread_search_path();
-    }
-}
+    if((env = std::getenv("CLXX_PROGRAM_CACHE_PATH")) != nullptr)
+      {
+        std::vector<detail::path_string> pieces;
+        detail::search_path_split(pieces, env);
+        // prepend paths found in CLXX_PROGRAM_CACHE_PATH
+        paths.insert(paths.begin(), pieces.begin(), pieces.end());
+      }
+    return paths;
+  }
+};
 /* ----------------------------------------------------------------------- */
 } } // end namespace clxx::{anonymous}
 
 namespace clxx {
+#if 0
 /* ----------------------------------------------------------------------- */
 void program_cached_ctor::
-current_search_path_use_storage(singleton_storage_t storage)
+bind_current_search_path(current_instance_binding_t binding)
 {
-  switch(storage)
-    {
-      case singleton_storage_t::global:
-      case singleton_storage_t::thread:
-        _current_search_path_storage = storage;
-        break;
-      default:
-        throw invalid_argument_error();
-    }
+  current_search_path::bind(binding);
 }
 /* ----------------------------------------------------------------------- */
-singleton_storage_t program_cached_ctor::
-current_search_path_storage()
+current_instance_binding_t program_cached_ctor::
+current_search_path_binding()
 {
-  return _current_search_path_storage;
+  return current_search_path::binding();
 }
+#endif
 #ifdef CLXX_WINDOWS_API
 /* ----------------------------------------------------------------------- */
 program_cached_ctor::codecvt_result  program_cached_ctor::
 get_current_search_path(std::string& out, codecvt_type const& cvt)
 {
-  return detail::convert(detail::search_path_join(current_search_path()), out, cvt);
+  return detail::convert(detail::search_path_join(current_search_path::get()), out, cvt);
 }
 /* ----------------------------------------------------------------------- */
 void program_cached_ctor::
 get_current_search_path(std::wstring& out)
 {
-  out = detail::search_path_join(current_search_path());
+  out = detail::search_path_join(current_search_path::get());
 }
 /* ----------------------------------------------------------------------- */
 program_cached_ctor::codecvt_result  program_cached_ctor::
@@ -119,7 +92,7 @@ set_current_search_path(std::string const& in, codecvt_type const& cvt)
 void program_cached_ctor::
 set_current_search_path(std::wstring const& in)
 {
-  detail::search_path_split(current_search_path(), in);
+  detail::search_path_split(current_search_path::get(), in);
 }
 /* ----------------------------------------------------------------------- */
 #else
@@ -127,19 +100,19 @@ set_current_search_path(std::wstring const& in)
 void program_cached_ctor::
 get_current_search_path(std::string& out)
 {
-  out = detail::search_path_join(current_search_path());
+  out = detail::search_path_join(current_search_path::get());
 }
 /* ----------------------------------------------------------------------- */
 program_cached_ctor::codecvt_result  program_cached_ctor::
 get_current_search_path(std::wstring& out, codecvt_type const& cvt)
 {
-  return detail::convert(detail::search_path_join(current_search_path()), out, cvt);
+  return detail::convert(detail::search_path_join(current_search_path::get()), out, cvt);
 }
 /* ----------------------------------------------------------------------- */
 void program_cached_ctor::
 set_current_search_path(std::string const& in)
 {
-  detail::search_path_split(current_search_path(), in);
+  detail::search_path_split(current_search_path::get(), in);
 }
 /* ----------------------------------------------------------------------- */
 program_cached_ctor::codecvt_result  program_cached_ctor::

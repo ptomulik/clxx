@@ -11,10 +11,12 @@ headers = [
     #
     # common/*.hpp
     #
+    'common/auto_bind.hpp',
     'common/clerror.hpp',
     'common/clerror_base.hpp',
     'common/clerror_no.hpp',
     'common/config.hpp',
+    'common/current_instance.hpp',
     'common/exception.hpp',
     'common/exception_base.hpp',
     'common/exceptions.hpp',
@@ -37,6 +39,7 @@ headers = [
     'common/detail/clerror_stdexcept.hpp',
     'common/detail/context_property_type.hpp',
     'common/detail/context_property_type_fwd.hpp',
+    'common/detail/current_instance.hpp',
     'common/detail/device_partition_property_type.hpp',
     'common/detail/device_partition_property_type_fwd.hpp',
     'common/detail/enum2cstr.hpp',
