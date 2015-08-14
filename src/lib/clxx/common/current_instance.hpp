@@ -38,43 +38,63 @@ current_instance_default_binding()
              = current_instance_binding_t::static_instance;
   return binding;
 }
-/** // doc: default_to_static_instances() {{{
- * \brief Sets static instances as a default for
+/** // doc: current_instance_default_binding() {{{
+ * \brief Resets the default binding type for
  *        \ref clxx::detail::current_instance "current_instance<>" classes
  *
  * Alters only classes that were not used before the call to
- * #default_to_static_instances(). It sets the default policy for current
+ * #current_instance_default_to_static_instance(). It sets the default policy for current
  * thread only.
  *
  * \code
  * b11 = current_instance1::binding();
- * default_to_static_instances();
+ * current_instance_reset_default_binding();
+ * b12 = current_instance1::binding();  // unaltered
+ * b21 = current_instance2::binding();  // possibly altered
+ * \endcode
+ */ // }}}
+inline void
+current_instance_reset_default_binding()
+{
+  current_instance_default_binding() = current_instance_binding_t::static_instance;
+}
+/** // doc: current_instance_default_to_static_instance() {{{
+ * \brief Sets static instance as a default for
+ *        \ref clxx::detail::current_instance "current_instance<>" classes
+ *
+ * Alters only classes that were not used before the call to
+ * #current_instance_default_to_static_instance(). It sets the default policy for current
+ * thread only.
+ *
+ * \code
+ * b11 = current_instance1::binding();
+ * current_instance_default_to_static_instance();
  * b12 = current_instance1::binding();  // unaltered
  * b21 = current_instance2::binding();  // altered
  * \endcode
  */ // }}}
 inline void
-default_to_static_instances()
+current_instance_default_to_static_instance()
 {
   current_instance_default_binding() = current_instance_binding_t::static_instance;
 }
 /** // doc: current_instance_default_binding() {{{
- * \brief Sets thread-local instances as a default for
+ * \brief Sets thread-local instance as a default for
  *        \ref clxx::detail::current_instance "current_instance<>" classes
  *
  * Alters only classes that were not used before the call to
- * #default_to_static_instances(). It sets the default policy for current
+ * #current_instance_default_to_static_instance(). It sets the default policy for current
  * thread only.
  *
  * \code
  * b11 = current_instance1::binding();
- * default_to_thread_instances();
+ * current_instance_default_to_thread_instance();
  * b12 = current_instance1::binding();  // unaltered
  * b21 = current_instance2::binding();  // altered
  * \endcode
  */ // }}}
 inline void
-default_to_thread_instances()
+current_instance_default_to_thread_instance()
 {
   current_instance_default_binding() = current_instance_binding_t::thread_instance;
 }
