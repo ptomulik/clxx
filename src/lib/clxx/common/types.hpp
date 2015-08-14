@@ -34,7 +34,7 @@ namespace clxx {
  * \par Supported OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
- * |  \check |  \check |  \check |  \check |  \check |
+ * |   \check  |   \check  |   \check  |   \check  |   \check  |
  *
  */ // }}}
 enum class status_t : cl_int {
@@ -260,7 +260,7 @@ constexpr bool is_error(status_t code) noexcept
  * \par Supported OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
- * |  \check |  \check |  \check |  \check |  \check |
+ * |   \check  |   \check  |   \check  |   \check  |   \check  |
  *
  */ // }}}
 enum class platform_info_t : cl_platform_info {
@@ -289,7 +289,7 @@ CLXX_MAKE_INTEGER_ENUM(platform_info_t, cl_platform_info)
  * \par Supported OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
- * |  \check |  \check |  \check |  \check |  \check |
+ * |   \check  |   \check  |   \check  |   \check  |   \check  |
  *
  */ // }}}
 enum class device_type_t : cl_device_type {
@@ -324,7 +324,7 @@ CLXX_MAKE_BITMASK_ENUM(device_type_t, cl_device_type)
  * \par Supported OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
- * |  \check |  \check |  \check |  \check |  \check |
+ * |   \check  |   \check  |   \check  |   \check  |   \check  |
  *
  */ // }}}
 enum class device_info_t : cl_device_info {
