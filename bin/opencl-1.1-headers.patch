@@ -1,0 +1,11 @@
+--- a/cl_gl_ext.h	2015-09-02 21:49:56.312500000 +0200
++++ b/cl_gl_ext.h	2015-09-02 21:50:28.312500000 +0200
+@@ -41,7 +41,7 @@
+ 
+ /*
+  * For each extension, follow this template
+- * /* cl_VEN_extname extension  */
++ * cl_VEN_extname extension  */
+ /* #define cl_VEN_extname 1
+  * ... define new types, if any
+  * ... define new tokens, if any
