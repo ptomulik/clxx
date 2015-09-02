@@ -22,6 +22,15 @@ if 'CXX' in env['CHANGED_VARIABLES']:
     env['CXXVERSION'] = QueryCXXVersion(env)
 
 #############################################################################
+# Add local include paths
+#############################################################################
+# 1. Prefere locally installed OpenCL headers. Please use the script named
+#    "download-opencl-headers" to download the headers to appropriate location.
+#############################################################################
+if env.Entry('#lib/OpenCL/include').exists():
+    env.AppendUnique(CPPPATH = ['#/lib/OpenCL/include'])
+
+#############################################################################
 # Adjusting C/C++ compiler flags for code coverage
 #############################################################################
 if re.match(r'^(yes|true|1)$', env.subst('$CLXX_ENABLE_GCOV'), re.I):
