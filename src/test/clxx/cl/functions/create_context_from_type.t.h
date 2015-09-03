@@ -32,72 +32,90 @@ public:
    */ // }}}
   void test__create_context_from_type( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)0x1234, CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr));
+#endif
   }
   /** // doc: test__create_context_from_type__invalid_platform() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_PLATFORM.
    */ // }}}
   void test__create_context_from_type__invalid_platform( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_PLATFORM);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_platform>);
+#endif
   }
   /** // doc: test__create_context_from_type__invalid_property() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_PROPERTY.
    */ // }}}
   void test__create_context_from_type__invalid_property( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_PROPERTY);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_property>);
+#endif
   }
   /** // doc: test__create_context_from_type__invalid_value() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_VALUE.
    */ // }}}
   void test__create_context_from_type__invalid_value( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_VALUE);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_value>);
+#endif
   }
   /** // doc: test__create_context_from_type__invalid_device_type() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_INVALID_DEVICE_TYPE.
    */ // }}}
   void test__create_context_from_type__invalid_device_type( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_INVALID_DEVICE_TYPE);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::invalid_device_type>);
+#endif
   }
   /** // doc: test__create_context_from_type__device_not_available() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_DEVICE_NOT_AVAILABLE.
    */ // }}}
   void test__create_context_from_type__device_not_available( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_DEVICE_NOT_AVAILABLE);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::device_not_available>);
+#endif
   }
   /** // doc: test__create_context_from_type__out_of_resources() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_OUT_OF_RESOURCES.
    */ // }}}
   void test__create_context_from_type__out_of_resources( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::out_of_resources>);
+#endif
   }
   /** // doc: test__create_context_from_type__out_of_host_memory() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns CL_OUT_OF_HOST_MEMORY.
    */ // }}}
   void test__create_context_from_type__out_of_host_memory( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), clerror_no<status_t::out_of_host_memory>);
+#endif
   }
   /** // doc: test__create_context_from_type__other_error() {{{
    * \brief Test create_context_from_type() in a situation when clCreateContextFromType() returns an unexpected error code.
    */ // }}}
   void test__create_context_from_type__other_error( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateContextFromType)
     T::Dummy_clCreateContextFromType mock((cl_context)NULL, -0x3456);
     TS_ASSERT_THROWS(clxx::create_context_from_type(nullptr,device_type_t::all,nullptr,nullptr), unexpected_clerror);
+#endif
   }
 };
 

@@ -15,6 +15,7 @@
 #include <vector>
 
 namespace clxx {
+#if CLXX_CL_H_VERSION_1_2
 /** // doc: device_partition_properties {{{
  * \ingroup clxx_platform_layer
  * \brief Container for context properties
@@ -149,7 +150,7 @@ make_device_partition_properties(T1 const& x1, Tail const&... tail)
   return x1 & make_device_partition_properties(tail...);
 }
 /** @} */
-
+#endif
 } // end namespace clxx
 
 #endif /* CLXX_CL_DEVICE_PARTITION_PROPERTIES_HPP_INCLUDED */

@@ -15,16 +15,6 @@
 #include <boost/shared_array.hpp>
 
 namespace clxx {
-/* ------------------------------------------------------------------------ */
-static boost::shared_array<char const*>
-_cstrings(program_sources const& sources)
-{
-  typedef boost::shared_array<char const*> array;
-  array a(new char const*[sources.size()]);
-  auto op =  [](program_source const& b) -> char const* { return b.data(); };
-  std::transform(sources.begin(), sources.end(), a.get(), op);
-  return a;
-}
 /* ----------------------------------------------------------------------- */
 void
 build_program(clxx::program const& program,
@@ -86,6 +76,16 @@ build_program(clxx::program const& program,
   );
 }
 #if CLXX_OPENCL_ALLOWED(clCompileProgram)
+/* ------------------------------------------------------------------------ */
+static boost::shared_array<char const*>
+_cstrings(program_sources const& sources)
+{
+  typedef boost::shared_array<char const*> array;
+  array a(new char const*[sources.size()]);
+  auto op =  [](program_source const& b) -> char const* { return b.data(); };
+  std::transform(sources.begin(), sources.end(), a.get(), op);
+  return a;
+}
 /* ----------------------------------------------------------------------- */
 void
 compile_program(clxx::program const& program,

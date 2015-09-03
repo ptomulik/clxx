@@ -65,8 +65,10 @@ public:
    */ // }}}
   void test__wait_for_events__exec_status_error_for_events_in_wait_list( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clWaitForEvents mock(CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST);
     TS_ASSERT_THROWS(wait_for_events(0x123, (cl_event const*)0x7654), clerror_no<status_t::exec_status_error_for_events_in_wait_list>);
+#endif
   }
   /** // doc: test__wait_for_events__out_of_resources() {{{
    * \todo Write documentation

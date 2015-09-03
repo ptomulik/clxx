@@ -8,6 +8,7 @@
 #include <clxx/common/exceptions.hpp>
 
 namespace clxx {
+#if CLXX_CL_H_VERSION_1_2
 /* ----------------------------------------------------------------------- */
 size_t
 device_partition_properties_array_size(const device_partition_properties& props)
@@ -92,6 +93,7 @@ operator& (device_partition_properties const& left, device_partition_properties 
   return cp;
 }
 /* ----------------------------------------------------------------------- */
+#endif
 } // end namespace clxx
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

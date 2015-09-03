@@ -124,8 +124,10 @@ public:
    */ // }}}
   void test__enqueue_copy_image__exec_status_error_for_events_in_wait_list( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueCopyImage mock(CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST);
     TS_ASSERT_THROWS(enqueue_copy_image((cl_command_queue)NULL, (cl_mem)NULL, (cl_mem)NULL, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::exec_status_error_for_events_in_wait_list>);
+#endif
   }
   /** // doc: test__enqueue_copy_image__out_of_resources() {{{
    * \todo Write documentation

@@ -1127,6 +1127,7 @@ public:
    */ // }}}
   Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /** // doc: Dummy_clEnqueueMigrateMemObjects {{{
  * \brief Default mock for clEnqueueMigrateMemObjects OpenCL function.
  */ // }}}
@@ -1154,6 +1155,7 @@ public:
    */ // }}}
   Dummy_clEnqueueMigrateMemObjects(cl_int err, const cl_event* event = nullptr);
 };
+#endif
 /** // doc: Dummy_clGetImageInfo {{{
  * \brief Mock for clGetImageInfo OpenCL function.
  *
@@ -1238,6 +1240,7 @@ public:
    */ // }}}
   Dummy_clReleaseMemObject(cl_int err);
 };
+#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
 /** // doc: Dummy_clSetMemObjectDestructorCallback {{{
  * \brief Mock for clSetMemObjectDestructorCallback OpenCL function.
  *
@@ -1259,6 +1262,7 @@ public:
    */ // }}}
   Dummy_clSetMemObjectDestructorCallback(cl_int err);
 };
+#endif
 /** // doc: Dummy_clCreateProgramWithSource {{{
  * \brief Default mock for clCreateProgramWithSource OpenCL function.
  */ // }}}
@@ -2846,6 +2850,7 @@ Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event)
   : _err(err), _event(event)
 {
 }
+#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clEnqueueMigrateMemObjects::
 clEnqueueMigrateMemObjects( cl_command_queue command_queue,
@@ -2870,6 +2875,7 @@ Dummy_clEnqueueMigrateMemObjects(cl_int err, const cl_event* event)
 {
 }
 /* ------------------------------------------------------------------------- */
+#endif
 cl_int Dummy_clGetImageInfo::
 clGetImageInfo(cl_mem image, cl_image_info param_name,
                size_t param_value_size, void* param_value,
@@ -2937,6 +2943,7 @@ Dummy_clReleaseMemObject(cl_int err)
   : _err(err)
 {
 }
+#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clSetMemObjectDestructorCallback::
 clSetMemObjectDestructorCallback(cl_mem memobj,
@@ -2952,6 +2959,7 @@ Dummy_clSetMemObjectDestructorCallback(cl_int err)
 {
 }
 /* ------------------------------------------------------------------------- */
+#endif
 cl_program Dummy_clCreateProgramWithSource::
 clCreateProgramWithSource(cl_context context,
                           cl_uint count,
@@ -3447,6 +3455,7 @@ Dummy_clGetEventInfo(cl_int err, void const* param_value, size_t const* param_va
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clSetEventCallback::
 clSetEventCallback(cl_event event, cl_int command_exec_callback_type,
@@ -3462,6 +3471,7 @@ Dummy_clSetEventCallback(cl_int err)
 {
 }
 /* ------------------------------------------------------------------------- */
+#endif
 cl_int Dummy_clRetainEvent::
 clRetainEvent(cl_event event)
 {

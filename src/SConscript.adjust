@@ -28,7 +28,9 @@ if 'CXX' in env['CHANGED_VARIABLES']:
 #    "download-opencl-headers" to download the headers to appropriate location.
 #############################################################################
 if env.Entry('#lib/OpenCL/include').exists():
-    env.AppendUnique(CPPPATH = ['#/lib/OpenCL/include'])
+    env.Append(CPPPATH = ['#/lib/OpenCL/include'])
+    env.Append(SWIGPY_CPPPATH = ['#/lib/OpenCL/include'])
+    env.Append(SWIGPY_SWIGPATH = ['#/lib/OpenCL/include'])
 
 #############################################################################
 # Adjusting C/C++ compiler flags for code coverage

@@ -102,6 +102,7 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Preferred Vector Width Double : "
         << info.preferred_vector_width_double();
   }
+#if CLXX_CL_H_VERSION_1_1
   if(info.has_preferred_vector_width_half()) {
     os  << as << pre << "Preferred Vector Width Half ..: "
         << info.preferred_vector_width_half();
@@ -134,6 +135,7 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Native Vector Width Half .....: "
         << info.native_vector_width_half();
   }
+#endif
   if(info.has_max_clock_frequency()) {
     os  << as << pre << "Max Clock Frequency ..........: "
         << info.max_clock_frequency();
@@ -178,6 +180,7 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Image3d Max Depth ............: "
         << info.image3d_max_depth();
   }
+#if CLXX_CL_H_VERSION_1_2
   if(info.has_image_max_buffer_size()) {
     os  << as << pre << "Image Max Buffer Size ........: "
         << info.image_max_buffer_size();
@@ -186,6 +189,7 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Image Max Array Size  ........: "
         << info.image_max_array_size();
   }
+#endif
   if(info.has_max_samplers()) {
     os  << as << pre << "Max Samplers .................: "
         << info.max_samplers();
@@ -206,10 +210,12 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Single Prec. Floating Pt Caps : "
         << info.single_fp_config();
   }
+#if CLXX_CL_H_VERSION_1_2
   if(info.has_double_fp_config()) {
     os  << as << pre << "Double Prec. Floating Pt Caps : "
         << info.double_fp_config();
   }
+#endif
   if(info.has_global_mem_cache_type()) {
     os  << as << pre << "Global Mem Cache Type ........: "
         << info.global_mem_cache_type();
@@ -246,10 +252,12 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Error Correction Support .....: "
         << info.error_correction_support();
   }
+#if CLXX_CL_H_VERSION_1_1
   if(info.has_host_unified_memory()) {
     os  << as << pre << "Host Unified Memory ..........: "
         << info.host_unified_memory();
   }
+#endif
   if(info.has_profiling_timer_resolution()) {
     os  << as << pre << "Profiling Timer Resolution ...: "
         << info.profiling_timer_resolution();
@@ -266,10 +274,12 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Compiler Available ...........: "
         << info.compiler_available();
   }
+#if CLXX_CL_H_VERSION_1_2
   if(info.has_linker_available()) {
     os  << as << pre << "Linker Available .............: "
         << info.linker_available();
   }
+#endif
   if(info.has_execution_capabilities()) {
     os  << as << pre << "Execution Capabilities .......: "
         << info.execution_capabilities();
@@ -302,14 +312,17 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Version ......................: "
         << info.version();
   }
+#if CLXX_CL_H_VERSION_1_1
   if(info.has_opencl_c_version()) {
     os  << as << pre << "Opencl C Version .............: "
         << info.opencl_c_version();
   }
+#endif
   if(info.has_extensions()) {
     os  << as << pre << "Extensions ...................: "
         << info.extensions();
   }
+#if CLXX_CL_H_VERSION_1_2
   if(info.has_built_in_kernels()) {
     os  << as << pre << "Built in Kernels .............: "
         << info.built_in_kernels();
@@ -354,6 +367,7 @@ write(Ostream& os, clxx::device_info const& info, int ind)
     os  << as << pre << "Image Base Address Alignment .: "
         << info.image_base_address_alignment();
   }
+#endif
   return os;
 }
 

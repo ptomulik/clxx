@@ -13,10 +13,10 @@
 #include <clxx/common/types.hpp>
 
 namespace clxx { namespace detail {
-
+#if CLXX_CL_H_VERSION_1_2
 template <device_partition_property_t Name>
   struct device_partition_property_type;
-
+#endif
 } } // end namespace clxx::detail
 
 #endif /* CLXX_COMMON_DETAIL_DEVICE_PARTITION_PROPERTY_TYPE_FWD_HPP_INCLUDED */

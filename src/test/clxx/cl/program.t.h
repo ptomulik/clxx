@@ -589,6 +589,7 @@ public:
    */ // }}}
   void test_get_num_kernels( )
   {
+#if CLXX_CL_H_VERSION_1_2
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
 
@@ -602,12 +603,14 @@ public:
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_PROGRAM_NUM_KERNELS);
+#endif
   }
   /** // doc: test_get_kernel_names() {{{
    * \todo Write documentation
    */ // }}}
   void test_get_kernel_names( )
   {
+#if CLXX_CL_H_VERSION_1_2
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
 
@@ -622,6 +625,7 @@ public:
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_PROGRAM_KERNEL_NAMES);
     TS_ASSERT_EQUALS(kerns, array);
+#endif
   }
   /** // doc: test_get_build_status() {{{
    * \todo Write documentation
@@ -703,6 +707,7 @@ public:
    */ // }}}
   void test_get_binary_type( )
   {
+#if CLXX_CL_H_VERSION_1_2
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -722,6 +727,7 @@ public:
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_build_status)CL_PROGRAM_BINARY_TYPE);
+#endif
   }
 };
 

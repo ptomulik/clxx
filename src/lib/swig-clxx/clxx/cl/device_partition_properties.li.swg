@@ -10,7 +10,10 @@
 #include <clxx/cl/device_partition_properties.hpp>
 %}
 %include <std_vector.i>
+
+#if CLXX_CL_H_VERSION_1_2
 %template (device_partition_properties) std::vector<clxx::device_partition_property>;
+#endif
 
 %exception clxx::device_partition_properties_fill_array(clxx::device_partition_properties const&, cl_device_partition_property *) {
   try { $action }
@@ -35,6 +38,7 @@
 %include <clxx/cl/device_partition_properties.hpp>
 
 namespace clxx {
+#if CLXX_CL_H_VERSION_1_2
   inline device_partition_properties make_device_partition_properties(device_partition_property const&);
   inline device_partition_properties make_device_partition_properties(device_partition_property const&, device_partition_property const&);
   inline device_partition_properties make_device_partition_properties(device_partition_property const&, device_partition_property const&, device_partition_property const&);
@@ -44,6 +48,7 @@ namespace clxx {
   inline device_partition_properties make_device_partition_properties(device_partition_properties const&, device_partition_property const&);
   inline device_partition_properties make_device_partition_properties(device_partition_properties const&, device_partition_property const&, device_partition_property const&);
   inline device_partition_properties make_device_partition_properties(device_partition_properties const&, device_partition_property const&, device_partition_property const&, device_partition_property const&);
+#endif
 };
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

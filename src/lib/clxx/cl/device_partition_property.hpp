@@ -16,7 +16,7 @@
 #include <vector>
 
 namespace clxx {
-
+#if CLXX_CL_H_VERSION_1_2
 /** // doc: device_partition_counts {{{
  * \ingroup clxx_platform_layer
  * \brief Value type for the \ref clxx::device_partition_property_t::by_counts
@@ -355,7 +355,6 @@ device_partition_by_counts(device_partition_counts const& x)
   {
     return make_device_partition_property<device_partition_property_t::by_counts>(x);
   }
-#if CLXX_CL_H_VERSION_1_2
 /** // doc: device_partition_by_affinity_domain() {{{
  * \brief Type-safe constructor for \ref device_partition_property
  *

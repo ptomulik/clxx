@@ -3,8 +3,12 @@ compiler:
   - gcc
   - clang
 env:
-  - COMPILE=true APIDOC=false
-  - COMPILE=false APIDOC=true
+  - CL_H_VER=''    COMPILE=true  APIDOC=false
+  - CL_H_VER='1.0' COMPILE=true  APIDOC=false
+  - CL_H_VER='1.1' COMPILE=true  APIDOC=false
+  - CL_H_VER='1.2' COMPILE=true  APIDOC=false
+  - CL_H_VER='2.0' COMPILE=true  APIDOC=false
+  - CL_H_VER=''    COMPILE=false APIDOC=true
 before_install:
   - lsb_release -c
   - lsb_release -r
@@ -32,6 +36,7 @@ install:
   - if $COMPILE; then sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev; fi
 #  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler; fi
   - if $COMPILE; then sudo pip install cpp-coveralls; fi
+  - if [ ! -z "$CL_H_VER" ]; then ./bin/download-opencl-headers "$CL_H_VER"; fi
   - if $APIDOC; then sudo apt-get --no-install-recommends -y install doxygen doxygen-latex; fi
   - if $APIDOC; then sudo apt-get --no-install-recommends -y install swig; fi
 

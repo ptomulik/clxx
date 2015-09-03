@@ -66,6 +66,7 @@ public:
    */ // }}}
   void test__ctor_2( )
   {
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
     T::Dummy_clCreateUserEvent mock1((cl_event)0x1234, CL_SUCCESS);
     T::Dummy_clRetainEvent mock2(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock3(CL_SUCCESS);
@@ -81,6 +82,7 @@ public:
     TS_ASSERT_EQUALS(e.get(), (cl_event)0x1234);
     TS_ASSERT(mock2.never_called());
     TS_ASSERT(mock3.never_called());
+#endif
   }
   /** // doc: test__copy_ctor() {{{
    * \todo Write documentation
@@ -298,11 +300,11 @@ public:
     T::Dummy_clGetEventInfo mock3(CL_SUCCESS);
 
     event e((cl_event)0x4321);
-    e.get_info(event_info_t::context, 2, (void*)0x1234, (size_t*)0x5678);
+    e.get_info(event_info_t::command_type, 2, (void*)0x1234, (size_t*)0x5678);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_event)0x4321);
-    TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_CONTEXT);
+    TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_COMMAND_TYPE);
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), 2);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), (void*)0x1234);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), (size_t*)0x5678);
@@ -317,7 +319,7 @@ public:
     T::Dummy_clGetEventInfo mock3(CL_SUCCESS);
 
     event e((cl_event)NULL);
-    TS_ASSERT_THROWS(e.get_info(event_info_t::context, 0, nullptr, nullptr), uninitialized_event_error);
+    TS_ASSERT_THROWS(e.get_info(event_info_t::command_type, 0, nullptr, nullptr), uninitialized_event_error);
   }
   /** // doc: test__get_profiling_info() {{{
    * \todo Write documentation
@@ -374,6 +376,7 @@ public:
    */ // }}}
   void test__get_context( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
 
@@ -390,6 +393,7 @@ public:
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_CONTEXT);
+#endif
   }
   /** // doc: test__get_command_queue() {{{
    * \todo Write documentation

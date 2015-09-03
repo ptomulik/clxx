@@ -235,6 +235,7 @@ get_binaries() const
   );
   return bins;
 }
+#if CLXX_CL_H_VERSION_1_2
 /* ----------------------------------------------------------------------- */
 size_t program::
 get_num_kernels() const
@@ -248,6 +249,7 @@ get_kernel_names() const
   return _get_str_info(*this, program_info_t::kernel_names);
 }
 /* ----------------------------------------------------------------------- */
+#endif
 build_status_t program::
 get_build_status(device const& dev) const
 {
@@ -266,6 +268,7 @@ get_build_log(device const& dev) const
   return _get_str_build_info(*this, dev, program_build_info_t::log);
 }
 /* ----------------------------------------------------------------------- */
+#if CLXX_CL_H_VERSION_1_2
 program_binary_type_t program::
 get_binary_type(device const& dev) const
 {
@@ -275,6 +278,7 @@ get_binary_type(device const& dev) const
       program_build_info_t::binary_type
   );
 }
+#endif
 /* ----------------------------------------------------------------------- */
 } // end namespace clxx
 

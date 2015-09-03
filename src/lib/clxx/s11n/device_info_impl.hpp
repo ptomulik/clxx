@@ -82,7 +82,10 @@ void _serialize(Archive& ar, device_info& obj, const unsigned int ver)
       & make_nvp("version", obj._version)
       & make_nvp("extensions", obj._extensions)
       & make_nvp("platform_id", obj._platform_id)
+#if CLXX_CL_H_VERSION_1_2
       & make_nvp("double_fp_config", obj._double_fp_config)
+#endif
+#if CLXX_CL_H_VERSION_1_1
       & make_nvp("preferred_vector_width_half", obj._preferred_vector_width_half)
       & make_nvp("host_unified_memory", obj._host_unified_memory)
       & make_nvp("native_vector_width_char", obj._native_vector_width_char)
@@ -93,6 +96,8 @@ void _serialize(Archive& ar, device_info& obj, const unsigned int ver)
       & make_nvp("native_vector_width_double", obj._native_vector_width_double)
       & make_nvp("native_vector_width_half", obj._native_vector_width_half)
       & make_nvp("opencl_c_version", obj._opencl_c_version)
+#endif
+#if CLXX_CL_H_VERSION_1_2
       & make_nvp("linker_available", obj._linker_available)
       & make_nvp("built_in_kernels", obj._built_in_kernels)
       & make_nvp("image_max_buffer_size", obj._image_max_buffer_size)
@@ -106,7 +111,9 @@ void _serialize(Archive& ar, device_info& obj, const unsigned int ver)
       & make_nvp("preferred_interop_user_sync", obj._preferred_interop_user_sync)
       & make_nvp("printf_buffer_size", obj._printf_buffer_size)
       & make_nvp("image_pitch_alignment", obj._image_pitch_alignment)
-      & make_nvp("image_base_address_alignment", obj._image_base_address_alignment);
+      & make_nvp("image_base_address_alignment", obj._image_base_address_alignment)
+#endif
+      ;
 }
 
 } // end namespace clxx

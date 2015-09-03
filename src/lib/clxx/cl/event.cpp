@@ -24,6 +24,7 @@ _get_pod_profiling_info(event const& p, profiling_info_t name)
   p.get_profiling_info(name,sizeof(value),&value,NULL);
   return value;
 }
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
 /* ----------------------------------------------------------------------- */
 event::
 event(context const& ctx)
@@ -32,6 +33,7 @@ event(context const& ctx)
   this->_set_handle(create_user_event(ctx.chk_get()), false, false);
 }
 /* ----------------------------------------------------------------------- */
+#endif
 void event::
 get_profiling_info(profiling_info_t name, size_t value_size, void* value,
                    size_t* value_size_ret) const
@@ -44,6 +46,7 @@ get_profiling_info(profiling_info_t name, size_t value_size, void* value,
       value_size_ret
   );
 }
+#if CLXX_CL_H_VERSION_1_1
 /* ----------------------------------------------------------------------- */
 context event::
 get_context() const
@@ -51,6 +54,7 @@ get_context() const
   return context(_get_pod_info<cl_context>(*this, event_info_t::context));
 }
 /* ----------------------------------------------------------------------- */
+#endif
 command_queue event::
 get_command_queue() const
 {

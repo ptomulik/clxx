@@ -180,8 +180,10 @@ public:
    */ // }}}
   void test__enqueue_ndrange_kernel__misaligned_sub_buffer_offset( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueNDRangeKernel mock(CL_MISALIGNED_SUB_BUFFER_OFFSET);
     TS_ASSERT_THROWS(enqueue_ndrange_kernel((cl_command_queue)NULL, (cl_kernel)NULL, 0, nullptr, nullptr, nullptr, 0, nullptr, nullptr), clerror_no<status_t::misaligned_sub_buffer_offset>);
+#endif
   }
   /** // doc: test__enqueue_ndrange_kernel__out_of_host_memory() {{{
    * \todo Write documentation

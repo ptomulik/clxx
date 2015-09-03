@@ -51,6 +51,7 @@ context(const context_properties& props,
                                                pfn_notify, user_data);
   this->_set_handle(handle, false, false);
 }
+#if CLXX_CL_H_VERSION_1_1
 /* ------------------------------------------------------------------------ */
 cl_uint context::
 get_num_devices() const
@@ -58,6 +59,7 @@ get_num_devices() const
   return _get_pod_info<cl_uint>(*this, context_info_t::num_devices);
 }
 /* ------------------------------------------------------------------------ */
+#endif
 devices context::
 get_devices() const
 {

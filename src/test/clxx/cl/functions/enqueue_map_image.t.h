@@ -129,8 +129,10 @@ public:
    */ // }}}
   void test__enqueue_map_image__exec_status_error_for_events_in_wait_list( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::exec_status_error_for_events_in_wait_list>);
+#endif
   }
   /** // doc: test__enqueue_map_image__mem_object_allocation_failure() {{{
    * \todo Write documentation

@@ -119,6 +119,7 @@ public:
   static cl_uint const preferred_vector_width_long[3];
   static cl_uint const preferred_vector_width_float[3];
   static cl_uint const preferred_vector_width_double[3];
+#if CLXX_CL_H_VERSION_1_1
   static cl_uint const preferred_vector_width_half[3];
   static cl_uint const native_vector_width_char[3];
   static cl_uint const native_vector_width_short[3];
@@ -127,6 +128,7 @@ public:
   static cl_uint const native_vector_width_float[3];
   static cl_uint const native_vector_width_double[3];
   static cl_uint const native_vector_width_half[3];
+#endif
   static cl_uint const max_clock_frequency[3];
   static cl_uint const address_bits[3];
   static cl_ulong const max_mem_alloc_size[3];
@@ -152,7 +154,9 @@ public:
   static cl_device_local_mem_type const local_mem_type[3];
   static cl_ulong const local_mem_size[3];
   static cl_bool const error_correction_support[3];
+#if CLXX_CL_H_VERSION_1_1
   static cl_bool const host_unified_memory[3];
+#endif
   static size_t const profiling_timer_resolution[3];
   static cl_bool const endian_little[3];
   static cl_bool const available[3];
@@ -165,8 +169,11 @@ public:
   static char const* const driver_version[3];
   static char const* const profile[3];
   static char const* const version[3];
+#if CLXX_CL_H_VERSION_1_1
   static char const* const opencl_c_version[3];
+#endif
   static char const* const extensions[3];
+#if CLXX_CL_H_VERSION_1_2
   static cl_device_fp_config const double_fp_config[1];
   static cl_bool const linker_available[1];
   static char const* const built_in_kernels[1];
@@ -182,6 +189,7 @@ public:
   static size_t const printf_buffer_size[1];
   static cl_uint const image_pitch_alignment[1];
   static cl_uint const image_base_address_alignment[1];
+#endif
 };
 
 /** // doc: Newton_Context {{{
@@ -440,7 +448,9 @@ clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,
     case CL_DEVICE_TYPE_CPU:
     case CL_DEVICE_TYPE_GPU:
     case CL_DEVICE_TYPE_ACCELERATOR:
+#if CLXX_CL_H_VERSION_1_2
     case CL_DEVICE_TYPE_CUSTOM:
+#endif
     case CL_DEVICE_TYPE_DEFAULT:
     case CL_DEVICE_TYPE_ALL:
       break;
@@ -525,6 +535,7 @@ preferred_vector_width_float[3] = { 4, 1, 1 };
 // CL_DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE
 cl_uint const Newton_clGetDeviceInfo::
 preferred_vector_width_double[3] = { 2, 1, 1 };
+#if CLXX_CL_H_VERSION_1_1
 // CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF
 cl_uint const Newton_clGetDeviceInfo::
 preferred_vector_width_half[3] = { 2, 0, 0 };
@@ -549,6 +560,7 @@ native_vector_width_double[3] = { 2, 1, 1 };
 // CL_DEVICE_NATIVE_VECTOR_WIDTH_HALF
 cl_uint const Newton_clGetDeviceInfo::
 native_vector_width_half[3] = { 2, 0, 0 };
+#endif
 // CL_DEVICE_MAX_CLOCK_FREQUENCY
 cl_uint const Newton_clGetDeviceInfo::
 max_clock_frequency[3] = { 2401, 1296, 1296 };
@@ -628,9 +640,11 @@ local_mem_size[3] = { 32768, 16384, 16384 };
 // CL_DEVICE_ERROR_CORRECTION_SUPPORT
 cl_bool const Newton_clGetDeviceInfo::
 error_correction_support[3] = { CL_FALSE, CL_FALSE, CL_FALSE };
+#if CLXX_CL_H_VERSION_1_1
 // CL_DEVICE_HOST_UNIFIED_MEMORY
 cl_bool const Newton_clGetDeviceInfo::
 host_unified_memory[3] = { CL_TRUE, CL_FALSE, CL_FALSE };
+#endif
 // CL_DEVICE_PROFILING_TIMER_RESOLUTION
 size_t const Newton_clGetDeviceInfo::
 profiling_timer_resolution[3] = { 1, 1000, 1000 };
@@ -699,6 +713,7 @@ version[3] = {
   "OpenCL 1.0 CUDA",
   "OpenCL 1.0 CUDA"
 };
+#if CLXX_CL_H_VERSION_1_1
 // CL_DEVICE_OPENCL_C_VERSION
 char const* const Newton_clGetDeviceInfo::
 opencl_c_version[3] = {
@@ -706,6 +721,7 @@ opencl_c_version[3] = {
   "OpenCL C 1.1",
   "OpenCL C 1.1"
 };
+#endif
 // CL_DEVICE_EXTENSIONS
 char const* const Newton_clGetDeviceInfo::
 extensions[3] = {
@@ -713,6 +729,7 @@ extensions[3] = {
   "cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll  cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp6",
   "cl_khr_byte_addressable_store cl_khr_icd cl_khr_gl_sharing cl_nv_compiler_options cl_nv_device_attribute_query cl_nv_pragma_unroll  cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_fp6"
 };
+#if CLXX_CL_H_VERSION_1_2
 cl_device_fp_config const Newton_clGetDeviceInfo::double_fp_config[1] = {
   CL_FP_DENORM | CL_FP_INF_NAN | CL_FP_ROUND_TO_NEAREST | CL_FP_ROUND_TO_ZERO | CL_FP_ROUND_TO_INF | CL_FP_FMA
 };
@@ -747,6 +764,7 @@ cl_bool const Newton_clGetDeviceInfo::preferred_interop_user_sync[1] = { CL_TRUE
 size_t const Newton_clGetDeviceInfo::printf_buffer_size[1] = { 65536 };
 cl_uint const Newton_clGetDeviceInfo::image_pitch_alignment[1] = { 0 };
 cl_uint const Newton_clGetDeviceInfo::image_base_address_alignment[1] = { 0 };
+#endif
 //////////////////////////////////////////////////////////////////////////////
 
 
@@ -815,6 +833,7 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
         ptr = &preferred_vector_width_double[di];
         size = sizeof(cl_uint);
         break;
+#if CLXX_CL_H_VERSION_1_1
       case CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF:
         ptr = &preferred_vector_width_half[di];
         size = sizeof(cl_uint);
@@ -847,6 +866,7 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
         ptr = &native_vector_width_half[di];
         size = sizeof(cl_uint);
         break;
+#endif
       case CL_DEVICE_MAX_CLOCK_FREQUENCY:
         ptr = &max_clock_frequency[di];
         size = sizeof(cl_uint);
@@ -947,10 +967,12 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
         ptr = &error_correction_support[di];
         size = sizeof(cl_bool);
         break;
+#if CLXX_CL_H_VERSION_1_1
       case CL_DEVICE_HOST_UNIFIED_MEMORY:
         ptr = &host_unified_memory[di];
         size = sizeof(cl_bool);
         break;
+#endif
       case CL_DEVICE_PROFILING_TIMER_RESOLUTION:
         ptr = &profiling_timer_resolution[di];
         size = sizeof(size_t);
@@ -999,14 +1021,17 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
         ptr = version[di];
         size = std::strlen(reinterpret_cast<char const*>(ptr)) + 1;
         break;
+#if CLXX_CL_H_VERSION_1_1
       case CL_DEVICE_OPENCL_C_VERSION:
         ptr = opencl_c_version[di];
         size = std::strlen(reinterpret_cast<char const*>(ptr)) + 1;
         break;
+#endif
       case CL_DEVICE_EXTENSIONS:
         ptr = extensions[di];
         size = std::strlen(reinterpret_cast<char const*>(ptr)) + 1;
         break;
+#if CLXX_CL_H_VERSION_1_2
       case CL_DEVICE_DOUBLE_FP_CONFIG:
         if(di > 0)
           return CL_INVALID_VALUE;
@@ -1097,6 +1122,7 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
         ptr = &image_base_address_alignment[di];
         size = sizeof(cl_uint);
         break;
+#endif
       default:
         return CL_INVALID_VALUE;
     }
@@ -1266,13 +1292,17 @@ clCreateContext(const cl_context_properties* properties,
         case CL_CONTEXT_PLATFORM:
           p+=2;
           break;
+#if CLXX_CL_H_VERSION_1_2
         case CL_CONTEXT_INTEROP_USER_SYNC:
           p+=2;
           break;
+#endif
         default:
+#if CLXX_CL_H_VERSION_1_1
           if(errcode_ret) {
             *errcode_ret = CL_INVALID_PROPERTY;
           }
+#endif
           return NULL;
       }
     }

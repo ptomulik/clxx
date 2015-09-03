@@ -84,7 +84,10 @@ public:
     TS_ASSERT(!device_info().has_version());
     TS_ASSERT(!device_info().has_extensions());
     TS_ASSERT(!device_info().has_platform_id());
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!device_info().has_double_fp_config());
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT(!device_info().has_preferred_vector_width_half());
     TS_ASSERT(!device_info().has_host_unified_memory());
     TS_ASSERT(!device_info().has_native_vector_width_char());
@@ -95,6 +98,8 @@ public:
     TS_ASSERT(!device_info().has_native_vector_width_double());
     TS_ASSERT(!device_info().has_native_vector_width_half());
     TS_ASSERT(!device_info().has_opencl_c_version());
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!device_info().has_linker_available());
     TS_ASSERT(!device_info().has_built_in_kernels());
     TS_ASSERT(!device_info().has_image_max_buffer_size());
@@ -108,7 +113,9 @@ public:
     TS_ASSERT(!device_info().has_preferred_interop_user_sync());
     TS_ASSERT(!device_info().has_printf_buffer_size());
     TS_ASSERT(!device_info().has_image_pitch_alignment());
-    TS_ASSERT(!device_info().has_image_base_address_alignment());
+    TS_ASSERT(!device_info().has_image_base_address_alignment())
+#endif
+    ;
   }
   /** // doc: test_getter_exceptions() {{{
    * \todo Write documentation
@@ -166,7 +173,10 @@ public:
     TS_ASSERT_THROWS(device_info().version(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().extensions(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().platform_id(), uninitialized_value_error);
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(device_info().double_fp_config(), uninitialized_value_error);
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT_THROWS(device_info().preferred_vector_width_half(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().host_unified_memory(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().native_vector_width_char(), uninitialized_value_error);
@@ -177,6 +187,8 @@ public:
     TS_ASSERT_THROWS(device_info().native_vector_width_double(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().native_vector_width_half(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().opencl_c_version(), uninitialized_value_error);
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS(device_info().linker_available(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().built_in_kernels(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().image_max_buffer_size(), uninitialized_value_error);
@@ -190,7 +202,9 @@ public:
     TS_ASSERT_THROWS(device_info().preferred_interop_user_sync(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().printf_buffer_size(), uninitialized_value_error);
     TS_ASSERT_THROWS(device_info().image_pitch_alignment(), uninitialized_value_error);
-    TS_ASSERT_THROWS(device_info().image_base_address_alignment(), uninitialized_value_error);
+    TS_ASSERT_THROWS(device_info().image_base_address_alignment(), uninitialized_value_error)
+#endif
+    ;
   }
   /** // doc: test_set_get() {{{
    * \todo Write documentation
@@ -198,6 +212,7 @@ public:
   void test_set_get( )
   {
     size_t max_work_item_sizes1[3] = { 1, 2, 3 };
+#if CLXX_CL_H_VERSION_1_2
     device_partition_property_t partition_properties1[2] = {
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
@@ -206,6 +221,7 @@ public:
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
     };
+#endif
 
     TS_ASSERT_EQUALS(device_info().set_id(0x1234ul).id(),0x1234ul);
     TS_ASSERT_EQUALS(device_info().set_type(device_type_t::cpu).type(),device_type_t::cpu);
@@ -258,7 +274,10 @@ public:
     TS_ASSERT_EQUALS(device_info().set_version("_version").version(),"_version");
     TS_ASSERT_EQUALS(device_info().set_extensions("_extensions").extensions(),"_extensions");
     TS_ASSERT_EQUALS(device_info().set_platform_id(0x1234ul).platform_id(),0x1234ul);
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(device_info().set_double_fp_config(device_fp_config_t::denorm).double_fp_config(),device_fp_config_t::denorm);
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT_EQUALS(device_info().set_preferred_vector_width_half(0x1234u).preferred_vector_width_half(),0x1234u);
     TS_ASSERT_EQUALS(device_info().set_host_unified_memory(0).host_unified_memory(),0);
     TS_ASSERT_EQUALS(device_info().set_native_vector_width_char(0x1234u).native_vector_width_char(),0x1234u);
@@ -269,6 +288,8 @@ public:
     TS_ASSERT_EQUALS(device_info().set_native_vector_width_double(0x1234u).native_vector_width_double(),0x1234u);
     TS_ASSERT_EQUALS(device_info().set_native_vector_width_half(0x1234u).native_vector_width_half(),0x1234u);
     TS_ASSERT_EQUALS(device_info().set_opencl_c_version("_opencl_c_version").opencl_c_version(),"_opencl_c_version");
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(device_info().set_linker_available(0).linker_available(),0);
     TS_ASSERT_EQUALS(device_info().set_built_in_kernels("_built_in_kernels").built_in_kernels(),"_built_in_kernels");
     TS_ASSERT_EQUALS(device_info().set_image_max_buffer_size(0x1234ul).image_max_buffer_size(),0x1234ul);
@@ -282,7 +303,9 @@ public:
     TS_ASSERT_EQUALS(device_info().set_preferred_interop_user_sync(0).preferred_interop_user_sync(),0);
     TS_ASSERT_EQUALS(device_info().set_printf_buffer_size(0x1234ul).printf_buffer_size(),0x1234ul);
     TS_ASSERT_EQUALS(device_info().set_image_pitch_alignment(0x1234u).image_pitch_alignment(),0x1234u);
-    TS_ASSERT_EQUALS(device_info().set_image_base_address_alignment(0x1234u).image_base_address_alignment(),0x1234u);
+    TS_ASSERT_EQUALS(device_info().set_image_base_address_alignment(0x1234u).image_base_address_alignment(),0x1234u)
+#endif
+    ;
   }
   /** // doc: test_set_has() {{{
    * \todo Write documentation
@@ -290,6 +313,7 @@ public:
   void test_set_has( )
   {
     size_t max_work_item_sizes1[3] = { 1, 2, 3 };
+#if CLXX_CL_H_VERSION_1_2
     device_partition_property_t partition_properties1[2] = {
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
@@ -298,6 +322,7 @@ public:
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
     };
+#endif
 
     TS_ASSERT(device_info().set_id(0x1234ul).has_id());
     TS_ASSERT(device_info().set_type(device_type_t::cpu).has_type());
@@ -350,7 +375,10 @@ public:
     TS_ASSERT(device_info().set_version("_version").has_version());
     TS_ASSERT(device_info().set_extensions("_extensions").has_extensions());
     TS_ASSERT(device_info().set_platform_id(0x1234ul).has_platform_id());
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(device_info().set_double_fp_config(device_fp_config_t::denorm).has_double_fp_config());
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT(device_info().set_preferred_vector_width_half(0x1234u).has_preferred_vector_width_half());
     TS_ASSERT(device_info().set_host_unified_memory(0).has_host_unified_memory());
     TS_ASSERT(device_info().set_native_vector_width_char(0x1234u).has_native_vector_width_char());
@@ -361,6 +389,8 @@ public:
     TS_ASSERT(device_info().set_native_vector_width_double(0x1234u).has_native_vector_width_double());
     TS_ASSERT(device_info().set_native_vector_width_half(0x1234u).has_native_vector_width_half());
     TS_ASSERT(device_info().set_opencl_c_version("_opencl_c_version").has_opencl_c_version());
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(device_info().set_linker_available(0).has_linker_available());
     TS_ASSERT(device_info().set_built_in_kernels("_built_in_kernels").has_built_in_kernels());
     TS_ASSERT(device_info().set_image_max_buffer_size(0x1234ul).has_image_max_buffer_size());
@@ -374,7 +404,9 @@ public:
     TS_ASSERT(device_info().set_preferred_interop_user_sync(0).has_preferred_interop_user_sync());
     TS_ASSERT(device_info().set_printf_buffer_size(0x1234ul).has_printf_buffer_size());
     TS_ASSERT(device_info().set_image_pitch_alignment(0x1234u).has_image_pitch_alignment());
-    TS_ASSERT(device_info().set_image_base_address_alignment(0x1234u).has_image_base_address_alignment());
+    TS_ASSERT(device_info().set_image_base_address_alignment(0x1234u).has_image_base_address_alignment())
+#endif
+    ;
   }
   /** // doc: test_has_1() {{{
    * \todo Write documentation
@@ -435,7 +467,10 @@ public:
         TS_ASSERT(info->has_version());
         TS_ASSERT(info->has_extensions());
         TS_ASSERT(info->has_platform_id());
+#if CLXX_CL_H_VERSION_1_2
         TS_ASSERT(info->has_double_fp_config());
+#endif
+#if CLXX_CL_H_VERSION_1_1
         TS_ASSERT(info->has_preferred_vector_width_half());
         TS_ASSERT(info->has_host_unified_memory());
         TS_ASSERT(info->has_native_vector_width_char());
@@ -446,6 +481,8 @@ public:
         TS_ASSERT(info->has_native_vector_width_double());
         TS_ASSERT(info->has_native_vector_width_half());
         TS_ASSERT(info->has_opencl_c_version());
+#endif
+#if CLXX_CL_H_VERSION_1_2
         TS_ASSERT(info->has_linker_available());
         TS_ASSERT(info->has_built_in_kernels());
         TS_ASSERT(info->has_image_max_buffer_size());
@@ -459,7 +496,9 @@ public:
         TS_ASSERT(info->has_preferred_interop_user_sync());
         TS_ASSERT(info->has_printf_buffer_size());
         TS_ASSERT(info->has_image_pitch_alignment());
-        TS_ASSERT(info->has_image_base_address_alignment());
+        TS_ASSERT(info->has_image_base_address_alignment())
+#endif
+        ;
       }
   }
   /** // doc: test_clear_dont_has_1() {{{
@@ -522,7 +561,10 @@ public:
     TS_ASSERT(!info.has_version());
     TS_ASSERT(!info.has_extensions());
     TS_ASSERT(!info.has_platform_id());
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!info.has_double_fp_config());
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT(!info.has_preferred_vector_width_half());
     TS_ASSERT(!info.has_host_unified_memory());
     TS_ASSERT(!info.has_native_vector_width_char());
@@ -533,6 +575,8 @@ public:
     TS_ASSERT(!info.has_native_vector_width_double());
     TS_ASSERT(!info.has_native_vector_width_half());
     TS_ASSERT(!info.has_opencl_c_version());
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!info.has_linker_available());
     TS_ASSERT(!info.has_built_in_kernels());
     TS_ASSERT(!info.has_image_max_buffer_size());
@@ -547,6 +591,7 @@ public:
     TS_ASSERT(!info.has_printf_buffer_size());
     TS_ASSERT(!info.has_image_pitch_alignment());
     TS_ASSERT(!info.has_image_base_address_alignment());
+#endif
   }
   /** // doc: test_clear_dont_has_2() {{{
    * \todo Write documentation
@@ -606,7 +651,10 @@ public:
     TS_ASSERT(!info.clear_version().has_version());
     TS_ASSERT(!info.clear_extensions().has_extensions());
     TS_ASSERT(!info.clear_platform_id().has_platform_id());
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!info.clear_double_fp_config().has_double_fp_config());
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT(!info.clear_preferred_vector_width_half().has_preferred_vector_width_half());
     TS_ASSERT(!info.clear_host_unified_memory().has_host_unified_memory());
     TS_ASSERT(!info.clear_native_vector_width_char().has_native_vector_width_char());
@@ -617,6 +665,8 @@ public:
     TS_ASSERT(!info.clear_native_vector_width_double().has_native_vector_width_double());
     TS_ASSERT(!info.clear_native_vector_width_half().has_native_vector_width_half());
     TS_ASSERT(!info.clear_opencl_c_version().has_opencl_c_version());
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!info.clear_linker_available().has_linker_available());
     TS_ASSERT(!info.clear_built_in_kernels().has_built_in_kernels());
     TS_ASSERT(!info.clear_image_max_buffer_size().has_image_max_buffer_size());
@@ -630,7 +680,9 @@ public:
     TS_ASSERT(!info.clear_preferred_interop_user_sync().has_preferred_interop_user_sync());
     TS_ASSERT(!info.clear_printf_buffer_size().has_printf_buffer_size());
     TS_ASSERT(!info.clear_image_pitch_alignment().has_image_pitch_alignment());
-    TS_ASSERT(!info.clear_image_base_address_alignment().has_image_base_address_alignment());
+    TS_ASSERT(!info.clear_image_base_address_alignment().has_image_base_address_alignment())
+#endif
+    ;
   }
   /** // doc: test_eq_op_1() {{{
    * \todo Write documentation
@@ -645,6 +697,7 @@ public:
   void test_eq_op_2()
   {
     size_t max_work_item_sizes1[3] = { 1, 2, 3 };
+#if CLXX_CL_H_VERSION_1_2
     device_partition_property_t partition_properties1[2] = {
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
@@ -653,6 +706,7 @@ public:
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
     };
+#endif
 
     // Note, we test separately each attribute
     TS_ASSERT(!(device_info().set_id(0x1234ul) == device_info()));
@@ -706,7 +760,10 @@ public:
     TS_ASSERT(!(device_info().set_version("_version") == device_info()));
     TS_ASSERT(!(device_info().set_extensions("_extensions") == device_info()));
     TS_ASSERT(!(device_info().set_platform_id(0x1234ul) == device_info()));
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!(device_info().set_double_fp_config(device_fp_config_t::denorm) == device_info()));
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT(!(device_info().set_preferred_vector_width_half(0x1234u) == device_info()));
     TS_ASSERT(!(device_info().set_host_unified_memory(0) == device_info()));
     TS_ASSERT(!(device_info().set_native_vector_width_char(0x1234u) == device_info()));
@@ -717,6 +774,8 @@ public:
     TS_ASSERT(!(device_info().set_native_vector_width_double(0x1234u) == device_info()));
     TS_ASSERT(!(device_info().set_native_vector_width_half(0x1234u) == device_info()));
     TS_ASSERT(!(device_info().set_opencl_c_version("_opencl_c_version") == device_info()));
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!(device_info().set_linker_available(0) == device_info()));
     TS_ASSERT(!(device_info().set_built_in_kernels("_built_in_kernels") == device_info()));
     TS_ASSERT(!(device_info().set_image_max_buffer_size(0x1234ul) == device_info()));
@@ -730,7 +789,9 @@ public:
     TS_ASSERT(!(device_info().set_preferred_interop_user_sync(0) == device_info()));
     TS_ASSERT(!(device_info().set_printf_buffer_size(0x1234ul) == device_info()));
     TS_ASSERT(!(device_info().set_image_pitch_alignment(0x1234u) == device_info()));
-    TS_ASSERT(!(device_info().set_image_base_address_alignment(0x1234u) == device_info()));
+    TS_ASSERT(!(device_info().set_image_base_address_alignment(0x1234u) == device_info()))
+#endif
+    ;
   }
   /** // doc: test_eq_op_3() {{{
    * \todo Write documentation
@@ -745,6 +806,7 @@ public:
   void test_eq_op_4()
   {
     size_t max_work_item_sizes1[3] = { 1, 2, 3 };
+#if CLXX_CL_H_VERSION_1_2
     device_partition_property_t partition_properties1[2] = {
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
@@ -753,6 +815,7 @@ public:
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
     };
+#endif
 
     TS_ASSERT((device_info().set_id(0x1234ul) == device_info().set_id(0x1234ul)));
     TS_ASSERT((device_info().set_type(device_type_t::cpu) == device_info().set_type(device_type_t::cpu)));
@@ -805,7 +868,10 @@ public:
     TS_ASSERT((device_info().set_version("_version") == device_info().set_version("_version")));
     TS_ASSERT((device_info().set_extensions("_extensions") == device_info().set_extensions("_extensions")));
     TS_ASSERT((device_info().set_platform_id(0x1234ul) == device_info().set_platform_id(0x1234ul)));
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT((device_info().set_double_fp_config(device_fp_config_t::denorm) == device_info().set_double_fp_config(device_fp_config_t::denorm)));
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT((device_info().set_preferred_vector_width_half(0x1234u) == device_info().set_preferred_vector_width_half(0x1234u)));
     TS_ASSERT((device_info().set_host_unified_memory(0) == device_info().set_host_unified_memory(0)));
     TS_ASSERT((device_info().set_native_vector_width_char(0x1234u) == device_info().set_native_vector_width_char(0x1234u)));
@@ -816,6 +882,8 @@ public:
     TS_ASSERT((device_info().set_native_vector_width_double(0x1234u) == device_info().set_native_vector_width_double(0x1234u)));
     TS_ASSERT((device_info().set_native_vector_width_half(0x1234u) == device_info().set_native_vector_width_half(0x1234u)));
     TS_ASSERT((device_info().set_opencl_c_version("_opencl_c_version") == device_info().set_opencl_c_version("_opencl_c_version")));
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT((device_info().set_linker_available(0) == device_info().set_linker_available(0)));
     TS_ASSERT((device_info().set_built_in_kernels("_built_in_kernels") == device_info().set_built_in_kernels("_built_in_kernels")));
     TS_ASSERT((device_info().set_image_max_buffer_size(0x1234ul) == device_info().set_image_max_buffer_size(0x1234ul)));
@@ -829,7 +897,9 @@ public:
     TS_ASSERT((device_info().set_preferred_interop_user_sync(0) == device_info().set_preferred_interop_user_sync(0)));
     TS_ASSERT((device_info().set_printf_buffer_size(0x1234ul) == device_info().set_printf_buffer_size(0x1234ul)));
     TS_ASSERT((device_info().set_image_pitch_alignment(0x1234u) == device_info().set_image_pitch_alignment(0x1234u)));
-    TS_ASSERT((device_info().set_image_base_address_alignment(0x1234u) == device_info().set_image_base_address_alignment(0x1234u)));
+    TS_ASSERT((device_info().set_image_base_address_alignment(0x1234u) == device_info().set_image_base_address_alignment(0x1234u)))
+#endif
+    ;
   }
   /** // doc: test_neq_op_1() {{{
    * \todo Write documentation
@@ -844,6 +914,7 @@ public:
   void test_neq_op_2()
   {
     size_t max_work_item_sizes1[3] = { 1, 2, 3 };
+#if CLXX_CL_H_VERSION_1_2
     device_partition_property_t partition_properties1[2] = {
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
@@ -852,6 +923,7 @@ public:
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
     };
+#endif
 
     TS_ASSERT((device_info().set_id(0x1234ul) != device_info()));
     TS_ASSERT((device_info().set_type(device_type_t::cpu) != device_info()));
@@ -904,7 +976,10 @@ public:
     TS_ASSERT((device_info().set_version("_version") != device_info()));
     TS_ASSERT((device_info().set_extensions("_extensions") != device_info()));
     TS_ASSERT((device_info().set_platform_id(0x1234ul) != device_info()));
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT((device_info().set_double_fp_config(device_fp_config_t::denorm) != device_info()));
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT((device_info().set_preferred_vector_width_half(0x1234u) != device_info()));
     TS_ASSERT((device_info().set_host_unified_memory(0) != device_info()));
     TS_ASSERT((device_info().set_native_vector_width_char(0x1234u) != device_info()));
@@ -915,6 +990,8 @@ public:
     TS_ASSERT((device_info().set_native_vector_width_double(0x1234u) != device_info()));
     TS_ASSERT((device_info().set_native_vector_width_half(0x1234u) != device_info()));
     TS_ASSERT((device_info().set_opencl_c_version("_opencl_c_version") != device_info()));
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT((device_info().set_linker_available(0) != device_info()));
     TS_ASSERT((device_info().set_built_in_kernels("_built_in_kernels") != device_info()));
     TS_ASSERT((device_info().set_image_max_buffer_size(0x1234ul) != device_info()));
@@ -928,7 +1005,9 @@ public:
     TS_ASSERT((device_info().set_preferred_interop_user_sync(0) != device_info()));
     TS_ASSERT((device_info().set_printf_buffer_size(0x1234ul) != device_info()));
     TS_ASSERT((device_info().set_image_pitch_alignment(0x1234u) != device_info()));
-    TS_ASSERT((device_info().set_image_base_address_alignment(0x1234u) != device_info()));
+    TS_ASSERT((device_info().set_image_base_address_alignment(0x1234u) != device_info()))
+#endif
+    ;
   }
   /** // doc: test_neq_op_3() {{{
    * \todo Write documentation
@@ -937,6 +1016,7 @@ public:
   {
     size_t max_work_item_sizes1[3] = { 1, 2, 3 };
     size_t max_work_item_sizes2[3] = { 3, 2, 1 };
+#if CLXX_CL_H_VERSION_1_2
     device_partition_property_t partition_properties1[2] = {
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
@@ -953,6 +1033,7 @@ public:
       device_partition_property_t::by_affinity_domain,
       device_partition_property_t::by_counts
     };
+#endif
 
     TS_ASSERT((device_info().set_id(0x1234ul) != device_info().set_id(0x4321ul)));
     TS_ASSERT((device_info().set_type(device_type_t::cpu) != device_info().set_type(device_type_t::gpu)));
@@ -1005,7 +1086,10 @@ public:
     TS_ASSERT((device_info().set_version("_version") != device_info().set_version("x_versionx")));
     TS_ASSERT((device_info().set_extensions("_extensions") != device_info().set_extensions("x_extensionsx")));
     TS_ASSERT((device_info().set_platform_id(0x1234ul) != device_info().set_platform_id(0x4321ul)));
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT((device_info().set_double_fp_config(device_fp_config_t::denorm) != device_info().set_double_fp_config(device_fp_config_t::inf_nan)));
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT((device_info().set_preferred_vector_width_half(0x1234u) != device_info().set_preferred_vector_width_half(0x4321u)));
     TS_ASSERT((device_info().set_host_unified_memory(0) != device_info().set_host_unified_memory(1)));
     TS_ASSERT((device_info().set_native_vector_width_char(0x1234u) != device_info().set_native_vector_width_char(0x4321u)));
@@ -1016,6 +1100,8 @@ public:
     TS_ASSERT((device_info().set_native_vector_width_double(0x1234u) != device_info().set_native_vector_width_double(0x4321u)));
     TS_ASSERT((device_info().set_native_vector_width_half(0x1234u) != device_info().set_native_vector_width_half(0x4321u)));
     TS_ASSERT((device_info().set_opencl_c_version("_opencl_c_version") != device_info().set_opencl_c_version("x_opencl_c_versionx")));
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT((device_info().set_linker_available(0) != device_info().set_linker_available(1)));
     TS_ASSERT((device_info().set_built_in_kernels("_built_in_kernels") != device_info().set_built_in_kernels("x_built_in_kernelsx")));
     TS_ASSERT((device_info().set_image_max_buffer_size(0x1234ul) != device_info().set_image_max_buffer_size(0x4321ul)));
@@ -1029,7 +1115,9 @@ public:
     TS_ASSERT((device_info().set_preferred_interop_user_sync(0) != device_info().set_preferred_interop_user_sync(1)));
     TS_ASSERT((device_info().set_printf_buffer_size(0x1234ul) != device_info().set_printf_buffer_size(0x4321ul)));
     TS_ASSERT((device_info().set_image_pitch_alignment(0x1234u) != device_info().set_image_pitch_alignment(0x4321u)));
-    TS_ASSERT((device_info().set_image_base_address_alignment(0x1234u) != device_info().set_image_base_address_alignment(0x4321u)));
+    TS_ASSERT((device_info().set_image_base_address_alignment(0x1234u) != device_info().set_image_base_address_alignment(0x4321u)))
+#endif
+    ;
   }
   /** // doc: test_neq_op_4() {{{
    * \todo Write documentation
@@ -1037,6 +1125,7 @@ public:
   void test_neq_op_4()
   {
     size_t max_work_item_sizes1[3] = { 1, 2, 3 };
+#if CLXX_CL_H_VERSION_1_2
     device_partition_property_t partition_properties1[2] = {
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
@@ -1045,6 +1134,7 @@ public:
       device_partition_property_t::by_counts,
       device_partition_property_t::by_affinity_domain
     };
+#endif
 
     TS_ASSERT(!(device_info().set_id(0x1234ul) != device_info().set_id(0x1234ul)));
     TS_ASSERT(!(device_info().set_type(device_type_t::cpu) != device_info().set_type(device_type_t::cpu)));
@@ -1097,7 +1187,10 @@ public:
     TS_ASSERT(!(device_info().set_version("_version") != device_info().set_version("_version")));
     TS_ASSERT(!(device_info().set_extensions("_extensions") != device_info().set_extensions("_extensions")));
     TS_ASSERT(!(device_info().set_platform_id(0x1234ul) != device_info().set_platform_id(0x1234ul)));
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!(device_info().set_double_fp_config(device_fp_config_t::denorm) != device_info().set_double_fp_config(device_fp_config_t::denorm)));
+#endif
+#if CLXX_CL_H_VERSION_1_1
     TS_ASSERT(!(device_info().set_preferred_vector_width_half(0x1234u) != device_info().set_preferred_vector_width_half(0x1234u)));
     TS_ASSERT(!(device_info().set_host_unified_memory(0) != device_info().set_host_unified_memory(0)));
     TS_ASSERT(!(device_info().set_native_vector_width_char(0x1234u) != device_info().set_native_vector_width_char(0x1234u)));
@@ -1108,6 +1201,8 @@ public:
     TS_ASSERT(!(device_info().set_native_vector_width_double(0x1234u) != device_info().set_native_vector_width_double(0x1234u)));
     TS_ASSERT(!(device_info().set_native_vector_width_half(0x1234u) != device_info().set_native_vector_width_half(0x1234u)));
     TS_ASSERT(!(device_info().set_opencl_c_version("_opencl_c_version") != device_info().set_opencl_c_version("_opencl_c_version")));
+#endif
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT(!(device_info().set_linker_available(0) != device_info().set_linker_available(0)));
     TS_ASSERT(!(device_info().set_built_in_kernels("_built_in_kernels") != device_info().set_built_in_kernels("_built_in_kernels")));
     TS_ASSERT(!(device_info().set_image_max_buffer_size(0x1234ul) != device_info().set_image_max_buffer_size(0x1234ul)));
@@ -1121,7 +1216,9 @@ public:
     TS_ASSERT(!(device_info().set_preferred_interop_user_sync(0) != device_info().set_preferred_interop_user_sync(0)));
     TS_ASSERT(!(device_info().set_printf_buffer_size(0x1234ul) != device_info().set_printf_buffer_size(0x1234ul)));
     TS_ASSERT(!(device_info().set_image_pitch_alignment(0x1234u) != device_info().set_image_pitch_alignment(0x1234u)));
-    TS_ASSERT(!(device_info().set_image_base_address_alignment(0x1234u) != device_info().set_image_base_address_alignment(0x1234u)));
+    TS_ASSERT(!(device_info().set_image_base_address_alignment(0x1234u) != device_info().set_image_base_address_alignment(0x1234u)))
+#endif
+    ;
   }
   /** // doc: test_copy_ctor() {{{
    * \todo Write documentation

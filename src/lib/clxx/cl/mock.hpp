@@ -299,6 +299,7 @@ CXXTEST_MOCK_GLOBAL(cl_int, clEnqueueUnmapMemObject,
     event_wait_list, event )
 );
 
+#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 CXXTEST_MOCK_GLOBAL(cl_int, clEnqueueMigrateMemObjects,
   ( cl_command_queue command_queue, cl_uint num_mem_objects,
     const cl_mem* mem_objects, cl_mem_migration_flags flags,
@@ -307,6 +308,7 @@ CXXTEST_MOCK_GLOBAL(cl_int, clEnqueueMigrateMemObjects,
   ( command_queue, num_mem_objects, mem_objects, flags,
     num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
 CXXTEST_MOCK_GLOBAL(cl_int, clGetImageInfo,
   ( cl_mem image, cl_image_info param_name, size_t param_value_size,
@@ -323,10 +325,12 @@ CXXTEST_MOCK_GLOBAL(cl_int, clGetMemObjectInfo,
 CXXTEST_MOCK_GLOBAL(cl_int, clRetainMemObject, (cl_mem memobj), (memobj));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseMemObject, (cl_mem memobj), (memobj));
 
+#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
 CXXTEST_MOCK_GLOBAL(cl_int, clSetMemObjectDestructorCallback,
   (cl_mem memobj, void(CL_CALLBACK* pfn_notify)(cl_mem, void*), void* user_data),
   (memobj, pfn_notify, user_data)
 );
+#endif
 
 CXXTEST_MOCK_GLOBAL(cl_program, clCreateProgramWithSource,
   ( cl_context context, cl_uint count, const char** strings,
@@ -485,12 +489,14 @@ CXXTEST_MOCK_GLOBAL(cl_int, clGetEventInfo,
     void* param_value, size_t* param_value_size_ret),
   ( event, param_name, param_value_size, param_value, param_value_size_ret )
 );
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 CXXTEST_MOCK_GLOBAL(cl_int, clSetEventCallback,
   ( cl_event event, cl_int command_exec_callback_type,
     void(CL_CALLBACK *pfn_event_notify)(cl_event, cl_int, void*),
     void* user_data ),
   ( event, command_exec_callback_type, pfn_event_notify, user_data )
 );
+#endif
 CXXTEST_MOCK_GLOBAL(cl_int, clRetainEvent, (cl_event event), (event));
 CXXTEST_MOCK_GLOBAL(cl_int, clReleaseEvent, (cl_event event), (event));
 

@@ -154,6 +154,7 @@ public:
                             size_t cb,
                             void* user_data) = nullptr,
           void* user_data = nullptr);
+#if CLXX_CL_H_VERSION_1_1
   /** // doc: get_reference_count() {{{
    * \brief   Get the number of devices in context.
    *
@@ -164,6 +165,7 @@ public:
    * by \ref get_context_info().
    */ // }}}
   cl_uint get_num_devices() const;
+#endif
   /** // doc: get_devices() {{{
    * \brief Get the list of devices in context.
    *

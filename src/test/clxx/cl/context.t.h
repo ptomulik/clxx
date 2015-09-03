@@ -268,6 +268,7 @@ public:
    */ // }}}
   void test__get_num_devices( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clRetainContext mock1(CL_SUCCESS);
     T::Dummy_clReleaseContext mock2(CL_SUCCESS);
     T::Dummy_clGetContextInfo mock3(CL_SUCCESS);
@@ -278,6 +279,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_context)0x1234);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), CL_CONTEXT_NUM_DEVICES);
+#endif
   }
   /** // doc: test__get_devices() {{{
    * \todo Write documentation
@@ -316,9 +318,8 @@ public:
   void test__get_properties( )
   {
     cl_context_properties array[3] = {
-        (cl_context_properties)CL_CONTEXT_INTEROP_USER_SYNC,
-        (cl_context_properties)CL_TRUE,
-        (cl_context_properties)0ul
+        (cl_context_properties)CL_CONTEXT_PLATFORM,
+        (cl_context_properties)0x4321
     };
     size_t size = sizeof(array);
     T::Dummy_clRetainContext mock1(CL_SUCCESS);
@@ -336,8 +337,8 @@ public:
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), CL_CONTEXT_PROPERTIES);
 
     TS_ASSERT_EQUALS(props.size(), 1);
-    TS_ASSERT_EQUALS(props[0].name(), context_properties_t::interop_user_sync);
-    TS_ASSERT_EQUALS(props[0].value(), (cl_context_properties)CL_TRUE);
+    TS_ASSERT_EQUALS(props[0].name(), context_properties_t::platform);
+    TS_ASSERT_EQUALS(props[0].value(), (cl_context_properties)0x4321);
   }
   void test__foo( )
   {

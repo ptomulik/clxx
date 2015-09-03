@@ -69,6 +69,7 @@ public:
    */ // }}}
   void test__retain_cl_object__cl_device_id( )
   {
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     {
       T::Dummy_clRetainDevice mock(CL_SUCCESS);
       TS_ASSERT_THROWS_NOTHING(retain_cl_object((cl_device_id)0x1234));
@@ -82,6 +83,7 @@ public:
       T::Dummy_clRetainDevice mock((cl_int)-0x1234567);
       TS_ASSERT_THROWS(retain_cl_object((cl_device_id)0), unexpected_clerror);
     }
+#endif
   }
   /** // doc: test__retain_cl_object__cl_event() {{{
    * \todo Write documentation
@@ -227,6 +229,7 @@ public:
    */ // }}}
   void test__release_cl_object__cl_device_id( )
   {
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     {
       T::Dummy_clReleaseDevice mock(CL_SUCCESS);
       TS_ASSERT_THROWS_NOTHING(release_cl_object((cl_device_id)0x1234));
@@ -240,6 +243,7 @@ public:
       T::Dummy_clReleaseDevice mock((cl_int)-0x1234567);
       TS_ASSERT_THROWS(release_cl_object((cl_device_id)0), unexpected_clerror);
     }
+#endif
   }
   /** // doc: test__release_cl_object__cl_event() {{{
    * \todo Write documentation

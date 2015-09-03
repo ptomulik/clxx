@@ -206,6 +206,8 @@ context_platform(const platform& x) noexcept
   {
     return context_platform(x.get());
   }
+
+#if CLXX_CL_H_VERSION_1_2
 /** // doc: context_interop_user_sync(bool) {{{
  * \brief Type-safe constructor for \ref clxx::context_property
  *
@@ -225,6 +227,7 @@ context_interop_user_sync(bool x) noexcept
   {
     return make_context_property<context_properties_t::interop_user_sync>(x);
   }
+#endif
 
 #if cl_khr_gl_sharing
 /** // doc: context_gl_context_khr(void*) {{{

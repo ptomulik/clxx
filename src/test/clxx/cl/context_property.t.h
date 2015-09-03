@@ -37,7 +37,9 @@ public:
   void test_ctor_1( )
   {
     TS_ASSERT_THROWS_NOTHING(context_property(context_properties_t::platform, (cl_context_properties)nullptr));
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS_NOTHING(context_property(context_properties_t::interop_user_sync, (cl_context_properties)true));
+#endif
 #if cl_khr_gl_sharing
     TS_ASSERT_THROWS_NOTHING(context_property(context_properties_t::gl_context_khr,(cl_context_properties)nullptr));
     TS_ASSERT_THROWS_NOTHING(context_property(context_properties_t::egl_display_khr,(cl_context_properties)nullptr));
@@ -66,7 +68,9 @@ public:
   void test_ctor_2( )
   {
     TS_ASSERT_THROWS_NOTHING(context_property(CL_CONTEXT_PLATFORM, (cl_context_properties)nullptr));
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS_NOTHING(context_property(CL_CONTEXT_INTEROP_USER_SYNC, (cl_context_properties)true));
+#endif
 #if cl_khr_gl_sharing
     TS_ASSERT_THROWS_NOTHING(context_property(CL_GL_CONTEXT_KHR,(cl_context_properties)nullptr));
     TS_ASSERT_THROWS_NOTHING(context_property(CL_EGL_DISPLAY_KHR,(cl_context_properties)nullptr));
@@ -103,15 +107,15 @@ public:
    */ // }}}
   void test_name( )
   {
-    TS_ASSERT_EQUALS(context_property(context_properties_t::interop_user_sync, false).name(), context_properties_t::interop_user_sync);
+    TS_ASSERT_EQUALS(context_property(context_properties_t::platform, (cl_context_properties)0x4321).name(), context_properties_t::platform);
   }
   /** // doc: test_value() {{{
    * \todo Write documentation
    */ // }}}
   void test_value( )
   {
-    TS_ASSERT_EQUALS(context_property(context_properties_t::interop_user_sync, false).value(), (cl_context_properties)CL_FALSE);
-    TS_ASSERT_EQUALS(context_property(context_properties_t::interop_user_sync, true).value(), (cl_context_properties)CL_TRUE);
+    TS_ASSERT_EQUALS(context_property(context_properties_t::platform, (cl_context_properties)0x1234).value(), (cl_context_properties)0x1234);
+    TS_ASSERT_EQUALS(context_property(context_properties_t::platform, (cl_context_properties)0x4321).value(), (cl_context_properties)0x4321);
   }
   /** // doc: test_set_name() {{{
    * \todo Write documentation
@@ -121,8 +125,10 @@ public:
     context_property cp;
     TS_ASSERT_THROWS_NOTHING(cp.set_name(context_properties_t::platform));
     TS_ASSERT_EQUALS(cp.name(), context_properties_t::platform);
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_THROWS_NOTHING(cp.set_name(context_properties_t::interop_user_sync));
     TS_ASSERT_EQUALS(cp.name(), context_properties_t::interop_user_sync);
+#endif
   }
   /** // doc: test_set_value() {{{
    * \todo Write documentation
@@ -141,10 +147,10 @@ public:
   void test_write( )
   {
     cl_context_properties array[3] = {(cl_context_properties)0, (cl_context_properties)0, (cl_context_properties)123};
-    context_property cp(context_properties_t::interop_user_sync, true);
+    context_property cp(context_properties_t::platform, (cl_context_properties)0x4321);
     cp.write(array);
-    TS_ASSERT_EQUALS(array[0], (cl_context_properties)CL_CONTEXT_INTEROP_USER_SYNC);
-    TS_ASSERT_EQUALS(array[1], (cl_context_properties)CL_TRUE);
+    TS_ASSERT_EQUALS(array[0], (cl_context_properties)CL_CONTEXT_PLATFORM);
+    TS_ASSERT_EQUALS(array[1], (cl_context_properties)0x4321);
     TS_ASSERT_EQUALS(array[2], (cl_context_properties)123);
   }
   /** // doc: test_read() {{{
@@ -152,18 +158,18 @@ public:
    */ // }}}
   void test_read( )
   {
-    cl_context_properties array[3] = {CL_CONTEXT_INTEROP_USER_SYNC, CL_TRUE, (cl_context_properties)1234};
+    cl_context_properties array[3] = {CL_CONTEXT_PLATFORM, (cl_context_properties)0x4321, (cl_context_properties)1234};
     context_property cp;
     cp.read(array);
-    TS_ASSERT_EQUALS(cp.name(), context_properties_t::interop_user_sync);
-    TS_ASSERT_EQUALS(cp.value(), (cl_context_properties)CL_TRUE);
+    TS_ASSERT_EQUALS(cp.name(), context_properties_t::platform);
+    TS_ASSERT_EQUALS(cp.value(), (cl_context_properties)0x4321);
   }
   /** // doc: test_size() {{{
    * \todo Write documentation
    */ // }}}
   void test_size( )
   {
-    TS_ASSERT_EQUALS(context_property(context_properties_t::interop_user_sync, false).size(), 2);
+    TS_ASSERT_EQUALS(context_property(context_properties_t::platform, false).size(), 2);
   }
   /** // doc: test_make_context_property() {{{
    * \todo Write documentation
@@ -172,10 +178,12 @@ public:
   {
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::platform>(nullptr).name(),context_properties_t::platform);
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::platform>(nullptr).value(),(cl_context_properties)nullptr);
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::interop_user_sync>(false).name(),context_properties_t::interop_user_sync);
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::interop_user_sync>(false).value(),(cl_context_properties)false);
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::interop_user_sync>(true).name(),context_properties_t::interop_user_sync);
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::interop_user_sync>(true).value(),(cl_context_properties)true);
+#endif
 #if cl_khr_gl_sharing
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::gl_context_khr>(nullptr).name(),context_properties_t::gl_context_khr);
     TS_ASSERT_EQUALS(make_context_property<context_properties_t::gl_context_khr>(nullptr).value(),(cl_context_properties)nullptr);
@@ -217,8 +225,10 @@ public:
     TS_ASSERT_EQUALS(context_platform((cl_platform_id)0x1234).value(),(cl_context_properties)0x1234);
     TS_ASSERT_EQUALS(context_platform(platform()).name(),context_properties_t::platform);
     TS_ASSERT_EQUALS(context_platform(platform()).value(),(cl_context_properties)nullptr);
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(context_interop_user_sync(true).name(),context_properties_t::interop_user_sync);
     TS_ASSERT_EQUALS(context_interop_user_sync(true).value(),(cl_context_properties)true);
+#endif
 #if cl_khr_gl_sharing
     TS_ASSERT_EQUALS(context_gl_context_khr((void*)0x1234).name(),context_properties_t::gl_context_khr);
     TS_ASSERT_EQUALS(context_gl_context_khr((void*)0x1234).value(),(cl_context_properties)0x1234);

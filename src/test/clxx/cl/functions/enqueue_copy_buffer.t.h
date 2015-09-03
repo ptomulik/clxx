@@ -100,8 +100,10 @@ public:
    */ // }}}
   void test__enqueue_copy_buffer__misaligned_sub_buffer_offset( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueCopyBuffer mock(CL_MISALIGNED_SUB_BUFFER_OFFSET);
     TS_ASSERT_THROWS(enqueue_copy_buffer((cl_command_queue)NULL, (cl_mem)NULL, (cl_mem)NULL, 0, 0, 0, 0, nullptr, nullptr), clerror_no<status_t::misaligned_sub_buffer_offset>);
+#endif
   }
   /** // doc: test__enqueue_copy_buffer__mem_copy_overlap() {{{
    * \todo Write documentation

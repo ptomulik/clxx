@@ -1251,6 +1251,7 @@ public:
    */ // }}}
   void test_mem_migration_flags_t( )
   {
+#if CLXX_CL_H_VERSION_1_2
     //
     // Check the underlying type
     //
@@ -1261,24 +1262,28 @@ public:
     TS_ASSERT_EQUALS(static_cast<cl_mem_migration_flags>(mem_migration_flags_t::none), 0ul);
     TS_ASSERT_EQUALS(static_cast<cl_mem_migration_flags>(mem_migration_flags_t::mem_object_host), CL_MIGRATE_MEM_OBJECT_HOST);
     TS_ASSERT_EQUALS(static_cast<cl_mem_migration_flags>(mem_migration_flags_t::mem_object_content_undefined), CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED);
+#endif
   }
   /** // doc: test_mem_migration_flags_t__intval() {{{
    * \brief Test the mem_migration_flags_t type with intval().
    */ // }}}
   void test_mem_migration_flags_t__intval( )
   {
+#if CLXX_CL_H_VERSION_1_2
     //
     // Check enum values
     //
     TS_ASSERT_EQUALS(intval(mem_migration_flags_t::none), 0ul);
     TS_ASSERT_EQUALS(intval(mem_migration_flags_t::mem_object_host), CL_MIGRATE_MEM_OBJECT_HOST);
     TS_ASSERT_EQUALS(intval(mem_migration_flags_t::mem_object_content_undefined), CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED);
+#endif
   }
   /** // doc: test_mem_migration_flags_t__bitops() {{{
    * \brief Ensure that bitwise operators work with mem_migration_flags_t
    */ // }}}
   void test_mem_migration_flags_t__bitops( )
   {
+#if CLXX_CL_H_VERSION_1_2
     // Just ensure that certain expressions get compiled ...
     TS_ASSERT_EQUALS(~(mem_migration_flags_t::mem_object_host), static_cast<mem_migration_flags_t>(~CL_MIGRATE_MEM_OBJECT_HOST));
     TS_ASSERT_EQUALS((mem_migration_flags_t::mem_object_host & mem_migration_flags_t::mem_object_content_undefined), static_cast<mem_migration_flags_t>(CL_MIGRATE_MEM_OBJECT_HOST & CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED));
@@ -1293,6 +1298,7 @@ public:
     TS_ASSERT_EQUALS(x, static_cast<mem_migration_flags_t>(CL_MIGRATE_MEM_OBJECT_HOST));
     x ^= mem_migration_flags_t::mem_object_content_undefined;
     TS_ASSERT_EQUALS(x, static_cast<mem_migration_flags_t>(CL_MIGRATE_MEM_OBJECT_HOST | CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED));
+#endif
   }
   /** // doc: test_channel_order_t() {{{
    * \brief Test the channel_order_t type.

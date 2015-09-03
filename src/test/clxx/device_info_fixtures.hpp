@@ -19,6 +19,7 @@ struct device_info_fixtures
     static device_info _1()
     {
       size_t max_work_item_sizes[3] = { 1, 2, 3 };
+#if CLXX_CL_H_VERSION_1_2
       device_partition_property_t partition_properties[2] = {
         device_partition_property_t::by_counts,
         device_partition_property_t::by_affinity_domain
@@ -27,6 +28,7 @@ struct device_info_fixtures
         device_partition_property_t::by_counts,
         device_partition_property_t::by_affinity_domain
       };
+#endif
 
       return device_info()
          .set_id(0x1234ul)
@@ -80,7 +82,10 @@ struct device_info_fixtures
          .set_version("_version")
          .set_extensions("_extensions")
          .set_platform_id(0x1234ul)
+#if CLXX_CL_H_VERSION_1_2
          .set_double_fp_config(device_fp_config_t::denorm)
+#endif
+#if CLXX_CL_H_VERSION_1_1
          .set_preferred_vector_width_half(0x1234u)
          .set_host_unified_memory(0)
          .set_native_vector_width_char(0x1234u)
@@ -91,6 +96,8 @@ struct device_info_fixtures
          .set_native_vector_width_double(0x1234u)
          .set_native_vector_width_half(0x1234u)
          .set_opencl_c_version("_opencl_c_version")
+#endif
+#if CLXX_CL_H_VERSION_1_2
          .set_linker_available(0)
          .set_built_in_kernels("_built_in_kernels")
          .set_image_max_buffer_size(0x1234ul)
@@ -104,11 +111,14 @@ struct device_info_fixtures
          .set_preferred_interop_user_sync(0)
          .set_printf_buffer_size(0x1234ul)
          .set_image_pitch_alignment(0x1234u)
-         .set_image_base_address_alignment(0x1234u);
+         .set_image_base_address_alignment(0x1234u)
+#endif
+        ;
     }
     static device_info _2()
     {
       size_t max_work_item_sizes[3] = { 3, 2, 1 };
+#if CLXX_CL_H_VERSION_1_2
       device_partition_property_t partition_properties[2] = {
         device_partition_property_t::by_affinity_domain,
         device_partition_property_t::by_counts
@@ -117,6 +127,7 @@ struct device_info_fixtures
         device_partition_property_t::by_affinity_domain,
         device_partition_property_t::by_counts
       };
+#endif
 
       return device_info()
           .set_id(0x4321ul)
@@ -170,7 +181,10 @@ struct device_info_fixtures
           .set_version("x_versionx")
           .set_extensions("x_extensionsx")
           .set_platform_id(0x4321ul)
+#if CLXX_CL_H_VERSION_1_2
           .set_double_fp_config(device_fp_config_t::inf_nan)
+#endif
+#if CLXX_CL_H_VERSION_1_1
           .set_preferred_vector_width_half(0x4321u)
           .set_host_unified_memory(1)
           .set_native_vector_width_char(0x4321u)
@@ -181,6 +195,8 @@ struct device_info_fixtures
           .set_native_vector_width_double(0x4321u)
           .set_native_vector_width_half(0x4321u)
           .set_opencl_c_version("x_opencl_c_versionx")
+#endif
+#if CLXX_CL_H_VERSION_1_2
           .set_linker_available(1)
           .set_built_in_kernels("x_built_in_kernelsx")
           .set_image_max_buffer_size(0x4321ul)
@@ -194,7 +210,9 @@ struct device_info_fixtures
           .set_preferred_interop_user_sync(1)
           .set_printf_buffer_size(0x4321ul)
           .set_image_pitch_alignment(0x4321u)
-          .set_image_base_address_alignment(0x4321u);
+          .set_image_base_address_alignment(0x4321u)
+#endif
+          ;
     }
   };
 

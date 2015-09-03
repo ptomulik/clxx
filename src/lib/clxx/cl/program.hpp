@@ -297,6 +297,7 @@ public:
    * It also throws exceptions originating from \ref get_program_info().
    */ // }}}
   program_binaries get_binaries() const;
+#if CLXX_CL_H_VERSION_1_2
   /** // doc: get_num_kernels() {{{
    * \brief Return the number of kernels declared in program
    *
@@ -325,6 +326,7 @@ public:
    * It also throws exceptions originating from \ref get_program_info().
    */ // }}}
   std::string get_kernel_names() const;
+#endif
   /** // doc: get_build_status() {{{
    * \brief Return build, compile or link status
    *
@@ -384,6 +386,7 @@ public:
    * It also throws exceptions originating from \ref get_program_build_info().
    */ // }}}
   std::string get_build_log(device const& dev) const;
+#if CLXX_CL_H_VERSION_1_2
   /** // doc: get_binary_type() {{{
    * \brief Return the program binary type for a device
    *
@@ -398,6 +401,7 @@ public:
    * It also throws exceptions originating from \ref get_program_build_info().
    */ // }}}
   program_binary_type_t get_binary_type(device const& dev) const;
+#endif
 };
 } // end namespace clxx
 

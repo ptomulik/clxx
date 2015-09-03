@@ -2421,6 +2421,7 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
                          cl_uint num_events_in_wait_list,
                          const cl_event* event_wait_list,
                          cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /** // doc: enqueue_migrate_mem_objects() {{{
  * \brief Enqueues a command to indicate which device a set of memory objects
  *        should be associated with
@@ -2493,7 +2494,7 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
  * \par Available in OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |           |           |   \check  |   \check  |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueMigrateMemObjects.html">clEnqueueMigrateMemObjects()</a>
  *
@@ -2506,6 +2507,7 @@ enqueue_migrate_mem_objects(cl_command_queue command_queue,
                             cl_uint num_events_in_wait_list,
                             const cl_event* event_wait_list,
                             cl_event* event);
+#endif
 /** // doc: get_image_info() {{{
  * \brief Get information specific to an image object created with #create_image()
  *

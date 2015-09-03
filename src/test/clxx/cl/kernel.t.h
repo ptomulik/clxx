@@ -598,8 +598,12 @@ public:
 
     kernel k((cl_kernel)0x4321);
 
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mock4(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mock5(CL_SUCCESS);
+#endif
 
     device d((cl_device_id)0x7654);
 
@@ -629,8 +633,12 @@ public:
 
     kernel k((cl_kernel)0x4321);
 
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mock4(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mock5(CL_SUCCESS);
+#endif
 
     device d((cl_device_id)0x7654);
 
@@ -638,7 +646,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_WORK_GROUP_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_WORK_GROUP_SIZE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(var));
   }
   /** // doc: test__get_compile_work_group_size() {{{
@@ -656,8 +664,12 @@ public:
 
     kernel k((cl_kernel)0x4321);
 
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mock4(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mock5(CL_SUCCESS);
+#endif
 
     device d((cl_device_id)0x7654);
 
@@ -673,7 +685,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_COMPILE_WORK_GROUP_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_COMPILE_WORK_GROUP_SIZE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), 3*sizeof(size_t));
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), array);
     TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), nullptr);
@@ -693,8 +705,12 @@ public:
 
     kernel k((cl_kernel)0x4321);
 
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mock4(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mock5(CL_SUCCESS);
+#endif
 
     device d((cl_device_id)0x7654);
 
@@ -702,7 +718,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_LOCAL_MEM_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_LOCAL_MEM_SIZE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(size_t));
   }
   /** // doc: test__get_preferred_work_group_size_multiple() {{{
@@ -721,8 +737,12 @@ public:
 
     kernel k((cl_kernel)0x4321);
 
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mock4(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mock5(CL_SUCCESS);
+#endif
 
     device d((cl_device_id)0x7654);
 
@@ -730,7 +750,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(var));
 #endif
   }
@@ -750,8 +770,12 @@ public:
 
     kernel k((cl_kernel)0x4321);
 
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mock4(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mock5(CL_SUCCESS);
+#endif
 
     device d((cl_device_id)0x7654);
 
@@ -759,7 +783,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_PRIVATE_MEM_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_PRIVATE_MEM_SIZE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(size_t));
 #endif
   }
@@ -779,8 +803,12 @@ public:
 
     kernel k((cl_kernel)0x4321);
 
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
     T::Dummy_clRetainDevice mock4(CL_SUCCESS);
+#endif
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mock5(CL_SUCCESS);
+#endif
 
     device d((cl_device_id)0x7654);
 
@@ -796,7 +824,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_GLOBAL_WORK_SIZE);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_GLOBAL_WORK_SIZE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), 3*sizeof(size_t));
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), array);
     TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), nullptr);

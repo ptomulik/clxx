@@ -742,7 +742,7 @@ CLXX_MAKE_INTEGER_ENUM(context_properties_t, cl_context_properties)
  * \par Supported OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
  * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |           |           |   \check  |   \check  |    ???    |
  *
  * \todo Elaborate how to cover the \c clCreateSubDevices() case.
  *

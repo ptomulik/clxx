@@ -100,16 +100,20 @@ public:
    */ // }}}
   void test__enqueue_read_buffer__misaligned_sub_buffer_offset( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueReadBuffer mock(CL_MISALIGNED_SUB_BUFFER_OFFSET);
     TS_ASSERT_THROWS(enqueue_read_buffer((cl_command_queue)NULL, (cl_mem)NULL, 0, 0, 0, nullptr, 0, nullptr, nullptr), clerror_no<status_t::misaligned_sub_buffer_offset>);
+#endif
   }
   /** // doc: test__enqueue_read_buffer__exec_status_error_for_events_in_wait_list() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_read_buffer__exec_status_error_for_events_in_wait_list( )
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueReadBuffer mock(CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST);
     TS_ASSERT_THROWS(enqueue_read_buffer((cl_command_queue)NULL, (cl_mem)NULL, 0, 0, 0, nullptr, 0, nullptr, nullptr), clerror_no<status_t::exec_status_error_for_events_in_wait_list>);
+#endif
   }
   /** // doc: test__enqueue_read_buffer__mem_object_allocation_failure() {{{
    * \todo Write documentation

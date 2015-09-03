@@ -15,7 +15,7 @@
 #include <vector>
 
 namespace clxx { namespace detail {
-
+#if CLXX_CL_H_VERSION_1_2
 /** // doc: device_partition_property_type {{{
  * \ingroup clxx_util
  * \brief Determines what type is used to represent given device partition property
@@ -63,7 +63,6 @@ template <>
   {
     typedef std::vector<unsigned int> const& type;
   };
-#if CLXX_CL_H_VERSION_1_2
 template <>
   struct device_partition_property_type<device_partition_property_t::by_affinity_domain>
   {

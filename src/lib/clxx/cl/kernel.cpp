@@ -21,26 +21,28 @@ static_assert(
     sizeof(clobj<cl_kernel>) == sizeof(cl_kernel),
     "sizeof(clobj<cl_kernel>) differs from sizeof(cl_kernel)"
 );
+#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
 /* ------------------------------------------------------------------------ */
 template<typename T> static T
-_get_arg_pod_info(kernel const& p, cl_uint arg_index, kernel_arg_info_t name)
+_get_arg_pod_info(kernel const& k, cl_uint arg_index, kernel_arg_info_t name)
 {
   T value;
-  p.get_arg_info(arg_index, name, sizeof(value), &value, NULL);
+  k.get_arg_info(arg_index, name, sizeof(value), &value, NULL);
   return value;
 }
 /* ------------------------------------------------------------------------ */
 static std::string
-_get_arg_str_info(kernel const& p, cl_uint arg_index, kernel_arg_info_t name)
+_get_arg_str_info(kernel const& k, cl_uint arg_index, kernel_arg_info_t name)
 {
   size_t size;
-  p.get_arg_info(arg_index, name, 0, NULL, &size);
+  k.get_arg_info(arg_index, name, 0, NULL, &size);
 
   std::unique_ptr<char[]> str(new char[size]);
   // FIXME: is(str == nullptr) { throw clxx::bad_alloc() }
-  p.get_arg_info(arg_index, name, size, str.get(), &size);
+  k.get_arg_info(arg_index, name, size, str.get(), &size);
   return std::string(str.get());
 }
+#endif
 /* ------------------------------------------------------------------------ */
 template<typename T> static T
 _get_work_group_pod_info(kernel const& p, device const& dev, kernel_work_group_info_t name)

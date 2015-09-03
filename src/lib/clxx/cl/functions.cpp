@@ -900,6 +900,7 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /* ------------------------------------------------------------------------ */
 void
 enqueue_migrate_mem_objects(cl_command_queue command_queue,
@@ -927,6 +928,7 @@ enqueue_migrate_mem_objects(cl_command_queue command_queue,
     }
 }
 /* ------------------------------------------------------------------------ */
+#endif
 void
 get_image_info(cl_mem image,
                image_info_t param_name,

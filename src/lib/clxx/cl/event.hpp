@@ -77,6 +77,7 @@ public:
    * \brief Copy constructor, see \ref clobj::clobj(clobj const&)
    */ // }}}
   event(event const&) = default;
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
   /** // doc: event(context) {{{
    * \brief Create user event with #create_user_event()
    * \throw uninitialized_context_error
@@ -85,6 +86,7 @@ public:
    * Also throws exceptions originating from #create_user_event().
    */ // }}}
   explicit event(context const& ctx);
+#endif
   /** // doc: get_info(...) {{{
    * \brief Get profiling information for the command associated with event if
    *        profiling is enabled
@@ -125,6 +127,7 @@ public:
    * Also throws exceptions originating from #get_event_info()
    */ // }}}
   command_queue get_command_queue() const;
+#if CLXX_CL_H_VERSION_1_1
   /** // doc: get_context() {{{
    * \brief Return the context associated with this \ref clxx::event "event"
    *
@@ -136,6 +139,7 @@ public:
    * Also throws exceptions originating from #get_event_info()
    */ // }}}
   context get_context() const;
+#endif
   /** // doc: get_command_type() {{{
    * \brief Return the command associated with this \ref clxx::event "event"
    *

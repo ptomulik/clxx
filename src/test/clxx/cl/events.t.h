@@ -104,6 +104,7 @@ public:
    */ // }}}
   void test__wait_for_events__exec_status_error_for_events_in_wait_list()
   {
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clRetainEvent mockRetainEvent(CL_SUCCESS);
     T::Dummy_clReleaseEvent mockReleaseEvent(CL_SUCCESS);
     T::Dummy_clWaitForEvents mockWaitForEvents(CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST);
@@ -111,6 +112,7 @@ public:
     events e = { event((cl_event)0x1234), event((cl_event)0x5678) };
 
     TS_ASSERT_THROWS(wait_for_events(e), clerror_no<status_t::exec_status_error_for_events_in_wait_list>);
+#endif
   }
 
   /** // doc: test__wait_for_events__out_of_resources() {{{

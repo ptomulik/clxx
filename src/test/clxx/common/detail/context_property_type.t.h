@@ -39,7 +39,9 @@ public:
    */ // }}}
   void test_interop_user_sync( )
   {
+#if CLXX_CL_H_VERSION_1_2
     TS_ASSERT((chk_types<context_properties_t::interop_user_sync, bool>()));
+#endif
   }
   /** // doc: test_gl_context_khr() {{{
    * \todo Write documentation

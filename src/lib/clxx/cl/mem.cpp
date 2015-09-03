@@ -60,6 +60,7 @@ get_context() const
 {
   return context(_get_pod_info<cl_context>(*this, mem_info_t::context));
 }
+#if CLXX_CL_H_VERSION_1_1
 /* ----------------------------------------------------------------------- */
 mem mem::
 get_associated_memobject() const
@@ -73,6 +74,7 @@ get_offset() const
   return _get_pod_info<size_t>(*this, mem_info_t::offset);
 }
 /* ----------------------------------------------------------------------- */
+#endif
 #if CLXX_CL_H_VERSION_2_0
 cl_bool mem::
 get_uses_svm_pointer() const
