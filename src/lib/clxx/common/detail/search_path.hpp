@@ -14,7 +14,10 @@
 
 namespace clxx { namespace detail {
 /** // doc: search_path_delimiter() {{{
- * \todo Write documentation
+ * \brief Returns search path delimiter used on current platform
+ *
+ * The search path delimiter is a signle character, which separates consecutive
+ * paths in a search path string.
  */ // }}}
 constexpr path_char_t
 search_path_delimiter() noexcept
@@ -26,7 +29,7 @@ search_path_delimiter() noexcept
 #endif
 }
 /** // doc: search_path_delimiter_str() {{{
- * \todo Write documentation
+ * \brief Returns search path delimiter as a (single-char) C string
  */ // }}}
 constexpr const path_char_t*
 search_path_delimiter_str() noexcept
@@ -38,7 +41,7 @@ search_path_delimiter_str() noexcept
 #endif
 }
 /** // doc: is_search_path_delimiter() {{{
- * \todo Write documentation
+ * \brief Returns \c true if \p c is a search patch delimiter character
  */ // }}}
 constexpr bool
 is_search_path_delimiter(path_char_t c) noexcept
@@ -46,7 +49,8 @@ is_search_path_delimiter(path_char_t c) noexcept
   return c == search_path_delimiter();
 }
 /** // doc: path_split() {{{
- * \todo Write documentation
+ * \brief Split search path string into a vector of separated paths. Uses
+ *        search path delimiter (see #is_search_path_delimiter()).
  */ // }}}
 template< typename SequenceT, typename RangeT >
 SequenceT&
@@ -57,7 +61,8 @@ search_path_split(SequenceT& pieces, RangeT& input,
   return boost::algorithm::split(pieces, input, is_search_path_delimiter, compress);
 }
 /** // doc: path_join() {{{
- * \todo Write documentation
+ * \brief Join \p pieces (path strings) to return single search path string.
+ *        Uses search path delimiter (see #search_path_delimiter_str())
  */ // }}}
 template< typename SequenceT >
 typename boost::range_value<SequenceT>::type
