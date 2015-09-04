@@ -24,8 +24,7 @@
 #include <clxx/common/config.hpp>
 
 CLXX_DIAGNOSTIC_PUSH
-//CLXX_DISABLE_COMMENT_WARNING
-#pragma GCC diagnostic ignored "-Wcomment"
+CLXX_DISABLE_COMMENT_WARNING
 #include <CL/cl.h>
 CLXX_DIAGNOSTIC_POP
 
@@ -50,8 +49,7 @@ CLXX_DIAGNOSTIC_POP
 #endif
 
 CLXX_DIAGNOSTIC_PUSH
-//CLXX_DISABLE_COMMENT_WARNING
-#pragma GCC diagnostic ignored "-Wcomment"
+CLXX_DISABLE_COMMENT_WARNING
 #include <CL/cl_ext.h>
 #include <CL/cl_gl.h>
 #if !CLXX_CL_H_VERSION_2_0
