@@ -39,8 +39,7 @@ case $VER in
     wget https://www.khronos.org/registry/cl/api/1.0/cl_gl.h && \
     wget https://www.khronos.org/registry/cl/api/1.0/cl_gl_ext.h && \
     wget https://www.khronos.org/registry/cl/api/1.0/cl_platform.h && \
-    wget https://www.khronos.org/registry/cl/api/1.0/opencl.h && \
-    patch -p1 < $SCRIPTDIR/opencl-1.0-headers.patch)
+    wget https://www.khronos.org/registry/cl/api/1.0/opencl.h)
         ;;
   1\.1) (cd "${TGT}" && \
     wget https://www.khronos.org/registry/cl/api/1.1/cl.h && \
@@ -50,8 +49,7 @@ case $VER in
     wget https://www.khronos.org/registry/cl/api/1.1/cl_gl.h && \
     wget https://www.khronos.org/registry/cl/api/1.1/cl_gl_ext.h && \
     wget https://www.khronos.org/registry/cl/api/1.1/cl_platform.h && \
-    wget https://www.khronos.org/registry/cl/api/1.1/opencl.h && \
-    patch -p1 < $SCRIPTDIR/opencl-1.1-headers.patch)
+    wget https://www.khronos.org/registry/cl/api/1.1/opencl.h)
         ;;
   1\.2) (cd "${TGT}" && \
     wget https://www.khronos.org/registry/cl/api/1.2/cl.h && \
@@ -64,8 +62,7 @@ case $VER in
     wget https://www.khronos.org/registry/cl/api/1.2/cl_gl.h && \
     wget https://www.khronos.org/registry/cl/api/1.2/cl_gl_ext.h && \
     wget https://www.khronos.org/registry/cl/api/1.2/cl_platform.h && \
-    wget https://www.khronos.org/registry/cl/api/1.2/opencl.h && \
-    patch -p1 < $SCRIPTDIR/opencl-1.2-headers.patch)
+    wget https://www.khronos.org/registry/cl/api/1.2/opencl.h)
         ;;
   2\.0) (cd "${TGT}" && \
     wget https://www.khronos.org/registry/cl/api/2.0/opencl.h && \
@@ -78,7 +75,6 @@ case $VER in
     wget https://www.khronos.org/registry/cl/api/2.0/cl_d3d11.h && \
     wget https://www.khronos.org/registry/cl/api/2.0/cl_gl.h && \
     wget https://www.khronos.org/registry/cl/api/2.0/cl_gl_ext.h && \
-    wget https://www.khronos.org/registry/cl/api/2.0/cl2.hpp && \
-    patch -p1 < $SCRIPTDIR/opencl-2.0-headers.patch)
+    wget https://www.khronos.org/registry/cl/api/2.0/cl2.hpp)
     ;;
 esac

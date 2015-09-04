@@ -27,6 +27,7 @@ command_queue(context const& ctx, device const& dev, command_queue_properties_t 
   cl_command_queue handle = create_command_queue( ctx.chk_get(),
                                                   dev.chk_get(),
                                                   props );
+  this->_set_handle(handle, false, false);
 #elif CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
   cl_queue_properties props_array[3] = {  CL_QUEUE_PROPERTIES,
                                           intval(props),
@@ -35,8 +36,13 @@ command_queue(context const& ctx, device const& dev, command_queue_properties_t 
                                                   ctx.chk_get(),
                                                   dev.chk_get(),
                                                   props_array );
-#endif
   this->_set_handle(handle, false, false);
+#else
+(void)ctx;
+(void)dev;
+(void)props;
+# error Missing clCreateCommandQueue() and clCreateCommandQueueWithProperties() do you have OpenCL library installed?
+#endif
 }
 /* ------------------------------------------------------------------------ */
 context command_queue::

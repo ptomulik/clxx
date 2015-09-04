@@ -24,13 +24,19 @@ if 'CXX' in env['CHANGED_VARIABLES']:
 #############################################################################
 # Add local include paths
 #############################################################################
-# 1. Prefere locally installed OpenCL headers. Please use the script named
+# 1. Prefer locally installed OpenCL headers. Please use the script named
 #    "download-opencl-headers" to download the headers to appropriate location.
 #############################################################################
 if env.Entry('#lib/OpenCL/include').exists():
-    env.Append(CPPPATH = ['#/lib/OpenCL/include'])
-    env.Append(SWIGPY_CPPPATH = ['#/lib/OpenCL/include'])
-    env.Append(SWIGPY_SWIGPATH = ['#/lib/OpenCL/include'])
+    env.AppendUnique(CPPPATH = ['#/lib/OpenCL/include'])
+    env.AppendUnique(SWIGPY_CPPPATH = ['#/lib/OpenCL/include'])
+    env.AppendUnique(SWIGPY_SWIGPATH = ['#/lib/OpenCL/include'])
+#############################################################################
+# 2. Prefer locally installed OpenCL shared/static library.
+#############################################################################
+if env.Entry('#lib/OpenCL/lib').exists():
+    env.AppendUnique(LIBPATH = ['#/lib/OpenCL/lib'])
+    env.AppendUnique(SWIGPY_LIBPATH = ['#/lib/OpenCL/lib'])
 
 #############################################################################
 # Adjusting C/C++ compiler flags for code coverage

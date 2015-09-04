@@ -13,6 +13,7 @@
 #include <string>
 #include <type_traits>
 #include <cmath>
+#include <cstdio>
 
 namespace clxx { namespace detail {
 /** \addtogroup clxx_util_enum2str
@@ -168,7 +169,11 @@ std::string enum2hex(E x)
     {
       detail::enum_hex_fmt<T>::apply(fmt);
     }
-  std::snprintf(buf, buf_size, fmt, t);
+  // FIXME: std::snprintf() is missing in older versions of libstc++
+  // for example it's missing when compiling with gcc 4.9.3 on cygwin
+  // 2015.09.03
+  // std::snprintf(buf, buf_size, fmt, t);
+  std::sprintf(buf, fmt, t);
   return std::string(buf);
 }
 /** @} */

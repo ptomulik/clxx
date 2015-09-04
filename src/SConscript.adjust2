@@ -12,6 +12,9 @@ from distutils import sysconfig
 #############################################################################
 libdir = '%s' % env.Dir('lib').path
 env.AppendUnique(CPPPATH = [ '#%s' % libdir ])
+if env.Entry('#cxxtest').exists():
+    # Prefer locally installed cxxtest headers. 
+    env.AppendUnique(CPPPATH = ['#cxxtest'])
 env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % libdir])
 env.AppendUnique(LIBPATH = ['#%s' % libdir])
 #############################################################################
@@ -81,6 +84,10 @@ if cc == 'gcc':
         env.AppendUnique(SWIGPY_CFLAGS = [ '-Wno-pedantic' ])
         env.AppendUnique(SWIGPY_SWIGFLAGS = [ '-D__GNUC__' ])
         env.AppendUnique(SWIGPY_SWIGFLAGS = [ '-D__STRICT_ANSI__' ])
+        if env['PLATFORM'] == 'cygwin':
+            # Because #pragma GCC diagnostic ignore "-Wcomment" is broken...
+            env.AppendUnique(CFLAGS = [ '-Wno-comment' ])
+            env.AppendUnique(SWIGPY_CFLAGS = [ '-Wno-comment' ])
 elif cc  == 'clang':
     if '-Werror' in env['SWIGPY_CFLAGS']:
         env.AppendUnique(SWIGPY_CFLAGS = [ '-Wno-unused-label' ])
@@ -102,6 +109,10 @@ if cxx == 'g++':
         env.AppendUnique(SWIGPY_CXXFLAGS = [ '-Wno-pedantic' ])
         env.AppendUnique(SWIGPY_SWIGFLAGS = [ '-D__GNUC__' ])
         env.AppendUnique(SWIGPY_SWIGFLAGS = [ '-D__STRICT_ANSI__' ])
+        if env['PLATFORM'] == 'cygwin':
+            # Because #pragma GCC diagnostic ignore "-Wcomment" is broken...
+            env.AppendUnique(CXXFLAGS = [ '-Wno-comment' ])
+            env.AppendUnique(SWIGPY_CXXFLAGS = [ '-Wno-comment' ])
 elif cxx == 'clang++':
     if '-Werror' in env['SWIGPY_CXXFLAGS']:
         env.AppendUnique(SWIGPY_CXXFLAGS = [ '-Wno-unused-label' ])

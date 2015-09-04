@@ -78,10 +78,12 @@
 # define CLXX_DIAGNOSTIC_PUSH _Pragma("clang diagnostic push")
 # define CLXX_DIAGNOSTIC_POP _Pragma("clang diagnostic pop")
 # define CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING _Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"")
+# define CLXX_DISABLE_COMMENT_WARNING _Pragma("clang diagnostic ignored \"-Wcomment\"")
 #elif defined(__GNUC__)
 # define CLXX_DIAGNOSTIC_PUSH _Pragma("GCC diagnostic push")
 # define CLXX_DIAGNOSTIC_POP _Pragma("GCC diagnostic pop")
 # define CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING _Pragma("GCC diagnostic ignored \"-Wdeprecated-declarations\"")
+# define CLXX_DISABLE_COMMENT_WARNING _Pragma("GCC diagnostic ignored \"-Wcomment\"")
 #elif defined(SWIG) || defined(DOXYGEN)
 /** // doc: CLXX_DIAGNOSTIC_PUSH {{{
  * \brief Push the configuration of compiler diagnostics
@@ -114,6 +116,12 @@
  *  _Pragma("GCC diagnostic ignored \"-Wdeprecated-declarations\"")).
  */ // }}}
 # define CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
+/** // doc: CLXX_DISABLE_COMMENT_WARNING {{{
+ * \brief Disable warnings about ill formed C/C++ comments
+ *
+ * For example, on GCC this resolves to _Pragma("GCC diagnostic ignored \"-Wcomment\"")).
+ */ // }}}
+# define CLXX_DISABLE_COMMENT_WARNING
 #endif
 
 #if defined(_WIN32) || defined(__CYGWIN__)

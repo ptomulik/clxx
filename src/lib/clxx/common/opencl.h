@@ -23,7 +23,11 @@
 
 #include <clxx/common/config.hpp>
 
+CLXX_DIAGNOSTIC_PUSH
+//CLXX_DISABLE_COMMENT_WARNING
+#pragma GCC diagnostic ignored "-Wcomment"
 #include <CL/cl.h>
+CLXX_DIAGNOSTIC_POP
 
 /////////////////////////////////////////////////////////////////////////////
 // The following prevens usage of clxx development headers without the required
@@ -45,6 +49,9 @@
 # error "clxx must be compiled with CL/cl.h version at least 2.0"
 #endif
 
+CLXX_DIAGNOSTIC_PUSH
+//CLXX_DISABLE_COMMENT_WARNING
+#pragma GCC diagnostic ignored "-Wcomment"
 #include <CL/cl_ext.h>
 #include <CL/cl_gl.h>
 #if !CLXX_CL_H_VERSION_2_0
@@ -63,6 +70,7 @@
 #   include <CL/cl_d3d11.h>
 # endif
 #endif
+CLXX_DIAGNOSTIC_POP
 
 #endif /* CLXX_COMMON_OPENCL_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

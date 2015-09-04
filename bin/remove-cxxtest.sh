@@ -3,7 +3,7 @@
 # This script downloads the most recent commit of cxxtest from
 # github.com. All the files land to cxxtest/ directory in the
 # top source dir. This is a special location, where the scons
-# cxxtest tool will look for the cxxtest installation. 
+# cxxtest tool will look for the cxxtest installation.
 #
 # The script does not download anything if the cxxtest file or
 # directory already exists. To refresh the installation, remove
@@ -15,13 +15,9 @@ SCRIPT=`readlink -f $0`;
 SCRIPTDIR=`dirname ${SCRIPT}`;
 TOPSRCDIR=`readlink -f "${SCRIPTDIR}/.."`
 
-URL="https://github.com/CxxTest/cxxtest/archive/master.tar.gz"
 TGT="${TOPSRCDIR}/cxxtest"
 
 if [ -e "${TGT}" ]; then
-  echo "warning: ${TGT} already exists" >&2;
-  echo "warning: skipping the cxxtest download" >&2;
-  exit 2;
+  echo "rm -r "${TGT}""
+        rm -r "${TGT}"
 fi
-
-mkdir "${TGT}" && (cd "${TGT}" && wget "${URL}" -O - | tar -zxf - --strip-components=1)
