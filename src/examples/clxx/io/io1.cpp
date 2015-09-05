@@ -21,7 +21,7 @@ int main(int, char const*[])
   clxx::status_t err = clxx::status_t::device_not_found;
   std::cout << "1. Error code: " << err << std::endl;
   // [OutputStatusT]
-  return EXIT_SUCCESS;
+  return 0;
 }
 // [Main]
 // [Program]

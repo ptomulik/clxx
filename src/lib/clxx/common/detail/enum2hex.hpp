@@ -169,11 +169,11 @@ std::string enum2hex(E x)
     {
       detail::enum_hex_fmt<T>::apply(fmt);
     }
-  // FIXME: std::snprintf() is missing in older versions of libstc++
-  // for example it's missing when compiling with gcc 4.9.3 on cygwin
-  // 2015.09.03
-  // std::snprintf(buf, buf_size, fmt, t);
+#if CLXX_NO_STD_SNPRINTF
   std::sprintf(buf, fmt, t);
+#else
+  std::snprintf(buf, buf_size, fmt, t);
+#endif
   return std::string(buf);
 }
 /** @} */

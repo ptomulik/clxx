@@ -22,7 +22,7 @@ int main(int, char**)
     std::cout << as << i;
   }
   std::cout << "}" << std::endl;
-  return EXIT_SUCCESS;
+  return 0;
 }
 // [Program]
 

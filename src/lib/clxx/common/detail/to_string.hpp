@@ -10,14 +10,90 @@
  * This header implements overloaded std::to_string for several types defined
  * in clxx.
  */ // }}}
-#ifndef CLXX_COMMON_TO_STRING_HPP_INCLUDED
-#define CLXX_COMMON_TO_STRING_HPP_INCLUDED
+#ifndef CLXX_COMMON_DETAIL_TO_STRING_HPP_INCLUDED
+#define CLXX_COMMON_DETAIL_TO_STRING_HPP_INCLUDED
 
+#include <clxx/common/config.hpp>
 #include <clxx/common/types.hpp>
 #include <clxx/common/detail/enum2name.hpp>
 #include <clxx/common/detail/enum2hex.hpp>
 #include <string>
 #include <type_traits>
+#if CLXX_NO_STD_TO_STRING
+# include <limits>
+#endif
+
+namespace clxx{ namespace detail {
+template<int N, typename T>
+inline std::string
+to_string_impl(T val, const char* fmt)
+{
+  char buf[N+1];
+  std::sprintf(buf, fmt, val);
+  return std::string(buf);
+}
+} } // end namespace clxx::detail
+
+namespace clxx {
+#if CLXX_NO_STD_TO_STRING
+/** // doc: to_string(int) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(int val)
+{ return detail::to_string_impl<4*sizeof(int)>(val, "%d"); }
+/** // doc: to_string(long) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(long val)
+{ return detail::to_string_impl<4*sizeof(long)>(val, "%ld"); }
+/** // doc: to_string(long long) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(long long val)
+{ return detail::to_string_impl<4*sizeof(long long)>(val, "%lld"); }
+/** // doc: to_string(unsigned) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(unsigned val)
+{ return detail::to_string_impl<4*sizeof(unsigned)>(val, "%u"); }
+/** // doc: to_string(unsigned long) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(unsigned long val)
+{ return detail::to_string_impl<4*sizeof(unsigned long)>(val, "%lu"); }
+/** // doc: to_string(unsigned long long) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(unsigned long long val)
+{ return detail::to_string_impl<4*sizeof(unsigned long long)>(val, "%llu"); }
+/** // doc: to_string(float) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(float val)
+{
+  constexpr int n = std::numeric_limits<float>::max_exponent10 + 20;
+  return detail::to_string_impl<n>(val, "%f");
+}
+/** // doc: to_string(double) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(double val)
+{
+  constexpr int n = std::numeric_limits<double>::max_exponent10 + 20;
+  return detail::to_string_impl<n>(val, "%f");
+}
+/** // doc: to_string(long double) {{{
+ * \todo Write documentation
+ */ // }}}
+inline std::string to_string(long double val)
+{
+  constexpr int n = std::numeric_limits<long double>::max_exponent10 + 20;
+  return detail::to_string_impl<n>(val, "%f");
+}
+#else
+using std::to_string;
+#endif
+} // end namespace clxx
 
 namespace clxx {
 /** \addtogroup clxx_util_enum2str
@@ -87,7 +163,7 @@ std::string enum_bitmask_to_string(E x, typename std::underlying_type<E>::type e
 /** @} */
 } // end namespace clxx
 
-namespace std {
+namespace clxx {
 /** \addtogroup clxx_util_enum2str
  * @{ */
 /** // doc: to_string(clxx::status_t) {{{
@@ -95,77 +171,77 @@ namespace std {
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the status code contained in \em x
  */ // }}}
-inline string to_string(clxx::status_t x)
+inline std::string to_string(clxx::status_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::platform_info_t) {{{
  * \brief Convert \ref clxx::platform_info_t "platform_info_t" value to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the platform info code contained in \em x
  */ // }}}
-inline string to_string(clxx::platform_info_t x)
+inline std::string to_string(clxx::platform_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::device_type_t) {{{
  * \brief Convert \ref clxx::device_type_t "device_type_t" value to string
  * \param x An enum value to be converted to a string
  * \returns String representation of the device type bits contained in \em x
  */ // }}}
-inline string to_string(clxx::device_type_t x)
+inline std::string to_string(clxx::device_type_t x)
 { return clxx::enum_bitmask_to_string(x); }
 /** // doc: to_string(clxx::device_info_t) {{{
  * \brief Convert \ref clxx::device_info_t "device_info_t" value to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the device info code contained in \em x
  */ // }}}
-inline string to_string(clxx::device_info_t x)
+inline std::string to_string(clxx::device_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::device_fp_config_t) {{{
  * \brief Convert \ref clxx::device_fp_config_t "device_fp_config_t" value to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the device fp config bits contained in \em x
  */ // }}}
-inline string to_string(clxx::device_fp_config_t x)
+inline std::string to_string(clxx::device_fp_config_t x)
 { return clxx::enum_bitmask_to_string(x); }
 /** // doc: to_string(clxx::device_mem_cache_type_t) {{{
  * \brief Convert \ref clxx::device_mem_cache_type_t "device_mem_cache_type_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the device mem cache type code contained in \em x
  */ // }}}
-inline string to_string(clxx::device_mem_cache_type_t x)
+inline std::string to_string(clxx::device_mem_cache_type_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::device_local_mem_type_t) {{{
  * \brief Convert \ref clxx::device_local_mem_type_t "device_local_mem_type_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the device local mem type code contained in \em x
  */ // }}}
-inline string to_string(clxx::device_local_mem_type_t x)
+inline std::string to_string(clxx::device_local_mem_type_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::device_exec_capabilities_t) {{{
  * \brief Convert \ref clxx::device_exec_capabilities_t "device_exec_capabilities_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation of the device exec capabilities bits contained in \em x
  */ // }}}
-inline string to_string(clxx::device_exec_capabilities_t x)
+inline std::string to_string(clxx::device_exec_capabilities_t x)
 { return clxx::enum_bitmask_to_string(x); }
 /** // doc: to_string(clxx::command_queue_properties_t) {{{
  * \brief Convert \ref clxx::command_queue_properties_t "command_queue_properties_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation of the command queue properties bits contained in \em x
  */ // }}}
-inline string to_string(clxx::command_queue_properties_t x)
+inline std::string to_string(clxx::command_queue_properties_t x)
 { return clxx::enum_bitmask_to_string(x); }
 /** // doc: to_string(clxx::context_info_t) {{{
  * \brief Convert \ref clxx::context_info_t "context_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the context info code contained in \em x
  */ // }}}
-inline string to_string(clxx::context_info_t x)
+inline std::string to_string(clxx::context_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::context_properties_t) {{{
  * \brief Convert \ref clxx::context_properties_t "context_properties_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the context info code contained in \em x
  */ // }}}
-inline string to_string(clxx::context_properties_t x)
+inline std::string to_string(clxx::context_properties_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #if CLXX_CL_H_VERSION_1_2
 /** // doc: to_string(clxx::device_partition_property_t) {{{
@@ -173,7 +249,7 @@ inline string to_string(clxx::context_properties_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the device partition property code constained in \em x
  */ // }}}
-inline string to_string(clxx::device_partition_property_t x)
+inline std::string to_string(clxx::device_partition_property_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #endif
 #if CLXX_CL_H_VERSION_1_2
@@ -182,7 +258,7 @@ inline string to_string(clxx::device_partition_property_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the device affinity domain bits contained in \em x
  */ // }}}
-inline string to_string(clxx::device_affinity_domain_t x)
+inline std::string to_string(clxx::device_affinity_domain_t x)
 { return clxx::enum_bitmask_to_string(x); }
 #endif
 /** // doc: to_string(clxx::command_queue_info_t) {{{
@@ -190,14 +266,14 @@ inline string to_string(clxx::device_affinity_domain_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the command queue info code contained in \em x
  */ // }}}
-inline string to_string(clxx::command_queue_info_t x)
+inline std::string to_string(clxx::command_queue_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::mem_flags_t) {{{
  * \brief Convert \ref clxx::mem_flags_t "mem_flags_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation of the mem flags contained in \em x
  */ // }}}
-inline string to_string(clxx::mem_flags_t x)
+inline std::string to_string(clxx::mem_flags_t x)
 { return clxx::enum_bitmask_to_string(x); }
 #if CLXX_CL_H_VERSION_1_2
 /** // doc: to_string(clxx::mem_migration_flags_t) {{{
@@ -205,7 +281,7 @@ inline string to_string(clxx::mem_flags_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation of the mem migration flags contained in \em x
  */ // }}}
-inline string to_string(clxx::mem_migration_flags_t x)
+inline std::string to_string(clxx::mem_migration_flags_t x)
 { return clxx::enum_bitmask_to_string(x); }
 #endif
 /** // doc: to_string(clxx::channel_order_t) {{{
@@ -213,77 +289,77 @@ inline string to_string(clxx::mem_migration_flags_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the channel order code contained in \em x
  */ // }}}
-inline string to_string(clxx::channel_order_t x)
+inline std::string to_string(clxx::channel_order_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::channel_type_t) {{{
  * \brief Convert \ref clxx::channel_type_t "channel_type_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the channel type code contained in \em x
  */ // }}}
-inline string to_string(clxx::channel_type_t x)
+inline std::string to_string(clxx::channel_type_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::mem_object_type_t) {{{
  * \brief Convert \ref clxx::mem_object_type_t "mem_object_type_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the mem object type code contained in \em x
  */ // }}}
-inline string to_string(clxx::mem_object_type_t x)
+inline std::string to_string(clxx::mem_object_type_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::mem_info_t) {{{
  * \brief Convert \ref clxx::mem_info_t "mem_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the mem info code contained in \em x
  */ // }}}
-inline string to_string(clxx::mem_info_t x)
+inline std::string to_string(clxx::mem_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::image_info_t) {{{
  * \brief Convert \ref clxx::image_info_t "image_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the image info code contained in \em x
  */ // }}}
-inline string to_string(clxx::image_info_t x)
+inline std::string to_string(clxx::image_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::addressing_mode_t) {{{
  * \brief Convert \ref clxx::addressing_mode_t "addressing_mode_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the addressing mode code contained in \em x
  */ // }}}
-inline string to_string(clxx::addressing_mode_t x)
+inline std::string to_string(clxx::addressing_mode_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::filter_mode_t) {{{
  * \brief Convert \ref clxx::filter_mode_t "filter_mode_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the filter mode code contained in \em x
  */ // }}}
-inline string to_string(clxx::filter_mode_t x)
+inline std::string to_string(clxx::filter_mode_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::sampler_info_t) {{{
  * \brief Convert \ref clxx::sampler_info_t "sampler_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the sampler info code contained in \em x
  */ // }}}
-inline string to_string(clxx::sampler_info_t x)
+inline std::string to_string(clxx::sampler_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::map_flags_t) {{{
  * \brief Convert \ref clxx::map_flags_t "map_flags_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation of the map flags bits contained in \em x
  */ // }}}
-inline string to_string(clxx::map_flags_t x)
+inline std::string to_string(clxx::map_flags_t x)
 { return clxx::enum_bitmask_to_string(x); }
 /** // doc: to_string(clxx::program_info_t) {{{
  * \brief Convert \ref clxx::program_info_t "program_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the program info code contained in \em x
  */ // }}}
-inline string to_string(clxx::program_info_t x)
+inline std::string to_string(clxx::program_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::program_build_info_t) {{{
  * \brief Convert \ref clxx::program_build_info_t "program_build_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the program build info code contained in \em x
  */ // }}}
-inline string to_string(clxx::program_build_info_t x)
+inline std::string to_string(clxx::program_build_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #if CLXX_CL_H_VERSION_1_2
 /** // doc: to_string(clxx::program_binary_type_t) {{{
@@ -291,7 +367,7 @@ inline string to_string(clxx::program_build_info_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation of the program binary type bits contained in \em x
  */ // }}}
-inline string to_string(clxx::program_binary_type_t x)
+inline std::string to_string(clxx::program_binary_type_t x)
 { return clxx::enum_bitmask_to_string(x); }
 #endif
 /** // doc: to_string(clxx::build_status_t) {{{
@@ -299,14 +375,14 @@ inline string to_string(clxx::program_binary_type_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the build status code contained in \em x
  */ // }}}
-inline string to_string(clxx::build_status_t x)
+inline std::string to_string(clxx::build_status_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::kernel_info_t) {{{
  * \brief Convert \ref clxx::kernel_info_t "kernel_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the kernel info code contained in \em x
  */ // }}}
-inline string to_string(clxx::kernel_info_t x)
+inline std::string to_string(clxx::kernel_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #if CLXX_CL_H_VERSION_1_2
 /** // doc: to_string(clxx::kernel_arg_info_t) {{{
@@ -314,7 +390,7 @@ inline string to_string(clxx::kernel_info_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the kernel arg info code contained in \em x
  */ // }}}
-inline string to_string(clxx::kernel_arg_info_t x)
+inline std::string to_string(clxx::kernel_arg_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #endif
 #if CLXX_CL_H_VERSION_1_2
@@ -323,7 +399,7 @@ inline string to_string(clxx::kernel_arg_info_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the kernel arg address qualifier code contained in \em x
  */ // }}}
-inline string to_string(clxx::kernel_arg_address_qualifier_t x)
+inline std::string to_string(clxx::kernel_arg_address_qualifier_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #endif
 #if CLXX_CL_H_VERSION_1_2
@@ -332,7 +408,7 @@ inline string to_string(clxx::kernel_arg_address_qualifier_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the kernel arg access qualifier code contained in \em x
  */ // }}}
-inline string to_string(clxx::kernel_arg_access_qualifier_t x)
+inline std::string to_string(clxx::kernel_arg_access_qualifier_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #endif
 #if CLXX_CL_H_VERSION_1_2
@@ -341,7 +417,7 @@ inline string to_string(clxx::kernel_arg_access_qualifier_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation of the kernel arg type qualifier bits contained in \em x
  */ // }}}
-inline string to_string(clxx::kernel_arg_type_qualifier_t x)
+inline std::string to_string(clxx::kernel_arg_type_qualifier_t x)
 { return clxx::enum_bitmask_to_string(x); }
 #endif
 /** // doc: to_string(clxx::kernel_work_group_info_t) {{{
@@ -349,28 +425,28 @@ inline string to_string(clxx::kernel_arg_type_qualifier_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation of kernel work group info code contained in \em x
  */ // }}}
-inline string to_string(clxx::kernel_work_group_info_t x)
+inline std::string to_string(clxx::kernel_work_group_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::event_info_t) {{{
  * \brief Convert \ref clxx::event_info_t "event_info_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the event info code contained in \em x
  */ // }}}
-inline string to_string(clxx::event_info_t x)
+inline std::string to_string(clxx::event_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::command_type_t) {{{
  * \brief Convert \ref clxx::command_type_t "command_type_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the command type code contained in \em x
  */ // }}}
-inline string to_string(clxx::command_type_t x)
+inline std::string to_string(clxx::command_type_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** // doc: to_string(clxx::command_exec_status_t) {{{
  * \brief Convert \ref clxx::command_exec_status_t "command_exec_status_t" to string
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the command exec status code contained in \em x
  */ // }}}
-inline string to_string(clxx::command_exec_status_t x)
+inline std::string to_string(clxx::command_exec_status_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #if CLXX_CL_H_VERSION_1_1
 /** // doc: to_string(clxx::buffer_create_type_t) {{{
@@ -378,7 +454,7 @@ inline string to_string(clxx::command_exec_status_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the buffer create type code contained in \em x
  */ // }}}
-inline string to_string(clxx::buffer_create_type_t x)
+inline std::string to_string(clxx::buffer_create_type_t x)
 { return clxx::enum_to_name_or_hex(x); }
 #endif
 /** // doc: to_string(clxx::profiling_info_t) {{{
@@ -386,11 +462,11 @@ inline string to_string(clxx::buffer_create_type_t x)
  * \param x An enum value to be converted to a string
  * \returns String representation (name) of the profiling info code contained in \em x
  */ // }}}
-inline string to_string(clxx::profiling_info_t x)
+inline std::string to_string(clxx::profiling_info_t x)
 { return clxx::enum_to_name_or_hex(x); }
 /** @} */
 } // end namespace std
 
-#endif /* CLXX_COMMON_TO_STRING_HPP_INCLUDED */
+#endif /* CLXX_COMMON_DETAIL_TO_STRING_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

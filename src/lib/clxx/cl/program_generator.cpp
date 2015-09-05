@@ -10,6 +10,7 @@
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/command_queue.hpp>
 #include <clxx/cl/program_with_source_ctor.hpp>
+#include <clxx/common/detail/to_string.hpp>
 
 namespace clxx {
 /* ----------------------------------------------------------------------- */
@@ -67,7 +68,7 @@ get_program_ctor() const
 std::string program_generator::
 line_directive(clxx::context const& context, size_t line) const
 {
-  return "#line " + std::to_string(line) + " \"" + this->program_path(context) + "\"";
+  return "#line " + clxx::to_string(line) + " \"" + this->program_path(context) + "\"";
 }
 /* ----------------------------------------------------------------------- */
 clxx::program program_generator::

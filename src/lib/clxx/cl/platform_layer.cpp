@@ -15,7 +15,6 @@
 #include <clxx/common/exceptions.hpp>
 #include <clxx/cl/mock.hpp>
 #include <algorithm>
-#include <iostream>
 
 namespace clxx {
 

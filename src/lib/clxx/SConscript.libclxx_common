@@ -30,7 +30,6 @@ headers = [
     'common/program_source.hpp',
     'common/program_sources.hpp',
     'common/shared_ptr.hpp',
-    'common/to_string.hpp',
     'common/types.hpp',
     'config.h',
     #
@@ -51,6 +50,7 @@ headers = [
     'common/detail/sha1.hpp',
     'common/detail/std_except_ctor_arg.hpp',
     'common/detail/std_except_ctor_arg_fwd.hpp',
+    'common/detail/to_string.hpp',
 ]
 
 env['CLXX_PACKAGES']['libclxx_common'] = {

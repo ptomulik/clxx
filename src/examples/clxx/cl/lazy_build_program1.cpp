@@ -18,7 +18,9 @@
 #include <clxx/cl/devices.hpp>
 #include <clxx/cl/context.hpp>
 #include <clxx/common/exceptions.hpp>
+#include <clxx/common/detail/to_string.hpp>
 #include <ctime>
+#include <iostream>
 
 /// Number of kernels to be generated and compiled in this example
 #define NUM_KERNELS 2000
@@ -32,7 +34,7 @@ generate_large_source(std::string& source)
   std::flush(std::cout);
   source.reserve(32 * NUM_KERNELS);
   for(size_t i = 0; i < NUM_KERNELS; ++i)
-    source.append("__kernel void trivial" + std::to_string(i) + "(){}\n");
+    source.append("__kernel void trivial" + clxx::to_string(i) + "(){}\n");
   std::cout << "done" << std::endl;
 }
 

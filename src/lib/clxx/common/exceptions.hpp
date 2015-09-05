@@ -12,7 +12,7 @@
 
 #include <clxx/common/exception_base.hpp>
 #include <clxx/common/clerror_no.hpp>
-#include <clxx/common/to_string.hpp>
+#include <clxx/common/detail/to_string.hpp>
 #include <clxx/common/types.hpp>
 #include <string>
 
@@ -595,7 +595,7 @@ struct unexpected_clerror
      * \brief Default constructor
      */ // }}}
     unexpected_clerror(status_t c) noexcept
-      : Base(std::string("unexpected OpenCL error: ") + std::to_string(c))
+      : Base(std::string("unexpected OpenCL error: ") + clxx::to_string(c))
       , _code(c)
     { }
     /** // doc: unexpected_clerror() {{{
