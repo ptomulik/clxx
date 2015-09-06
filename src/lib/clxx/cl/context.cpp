@@ -20,7 +20,7 @@ static_assert(
 /* ------------------------------------------------------------------------ */
 context::
 context(context_properties const& props, devices const& devs,
-        void(*pfn_notify)(const char* errinfo, const void* private_info,
+        void(CL_CALLBACK *pfn_notify)(const char* errinfo, const void* private_info,
                           size_t cb, void* user_data),
         void* user_data)
   : Base((cl_context)NULL) // because it's read by _set_handle()
@@ -39,7 +39,7 @@ context(context_properties const& props, devices const& devs,
 context::
 context(const context_properties& props,
         device_type_t dev_type,
-        void(*pfn_notify)(const char* errinfo, const void* private_info,
+        void(CL_CALLBACK *pfn_notify)(const char* errinfo, const void* private_info,
                           size_t cb, void* user_data),
         void* user_data)
   : Base((cl_context)NULL) // because it's read by _set_handle()

@@ -310,7 +310,7 @@ get_device_info(cl_device_id device,
 cl_context
 create_context(const cl_context_properties* properties,
                cl_uint num_devices, const cl_device_id* devices,
-               void(*pfn_notify)(const char* errinfo,
+               void(CL_CALLBACK *pfn_notify)(const char* errinfo,
                                  const void* private_info,
                                  size_t cb, void* user_data),
                void* user_data);
@@ -394,7 +394,7 @@ create_context(const cl_context_properties* properties,
 cl_context
 create_context_from_type(const cl_context_properties* properties,
                          device_type_t device_type,
-                         void(*pfn_notify)(const char* errinfo,
+                         void(CL_CALLBACK *pfn_notify)(const char* errinfo,
                                            const void* private_info,
                                            size_t cb,
                                            void* user_data),

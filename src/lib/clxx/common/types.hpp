@@ -215,7 +215,7 @@ enum class status_t : cl_int {
   /// Corresponds to \c CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR
   d3d10_resource_already_acquired_khr = CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR,
   /// Corresponds to \c CL_D3D10_RESOURCE_NOT_ACQUIRED_KHR
-  d3d10_resource_not_acquired_khr = CL_D3D10_RESOURCE_ALREADY_ACQUIRED_KHR,
+  d3d10_resource_not_acquired_khr = CL_D3D10_RESOURCE_NOT_ACQUIRED_KHR
 #endif
 #if cl_khr_d3d11_sharing
   ,
@@ -226,7 +226,7 @@ enum class status_t : cl_int {
   /// Corresponds to \c CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR
   d3d11_resource_already_acquired_khr = CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR,
   /// Corresponds to \c CL_D3D11_RESOURCE_NOT_ACQUIRED_KHR
-  d3d11_resource_not_acquired_khr = CL_D3D11_RESOURCE_ALREADY_ACQUIRED_KHR,
+  d3d11_resource_not_acquired_khr = CL_D3D11_RESOURCE_NOT_ACQUIRED_KHR
 #endif
 };
 

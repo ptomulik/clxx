@@ -19,37 +19,25 @@ fi
 SCRIPT=`readlink -f $0`;
 SCRIPTDIR=`dirname ${SCRIPT}`;
 TOPSRCDIR=`readlink -f "${SCRIPTDIR}/.."`
+TMPDIR=`mktemp -d`
 
-TGT="${TOPSRCDIR}/lib/OpenCL/include/CL"
+TGT="${TOPSRCDIR}/lib/OpenCL/lib"
 
 if [ -e "${TGT}" ]; then
   echo "error: ${TGT} already exists, aborting!" >&2;
-  exit 2;
+  exit 1;
 fi
 
-mkdir -p "${TGT}";
 case $VER in
-  1\.0) (cd "${TGT}" && \
-    wget -q https://www.khronos.org/registry/cl/api/1.0/cl.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl.hpp && \
-    wget -q https://www.khronos.org/registry/cl/api/1.0/cl_d3d10.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.0/cl_ext.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.0/cl_gl.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.0/cl_gl_ext.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.0/cl_platform.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.0/opencl.h)
-        ;;
-  1\.1) (cd "${TGT}" && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl.hpp && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl_d3d10.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl_ext.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl_gl.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl_gl_ext.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/cl_platform.h && \
-    wget -q https://www.khronos.org/registry/cl/api/1.1/opencl.h)
-        ;;
-  1\.2) (cd "${TGT}" && \
+  1\.0) (echo "ICD for OpenCL 1.0 can't be downloaded, sorry" >&2; rm -rf "${TMPDIR}"; exit 1)
+    ;;
+  1\.1) (echo "ICD for OpenCL 1.1 can't be downloaded, sorry" >&2; rm -rf "${TMPDIR}"; exit 1)
+    ;;
+  1\.2) (cd "${TMPDIR}" && \
+    wget -q https://www.khronos.org/registry/cl/specs/opencl-icd-1.2.11.0.tgz && \
+    tar -zxf opencl-icd-1.2.11.0.tgz && \
+    cd icd && patch -p1 < "${SCRIPTDIR}/opencl-icd-loader-1.2.11.0.patch" && \
+    cd inc && mkdir CL && cd CL && \
     wget -q https://www.khronos.org/registry/cl/api/1.2/cl.h && \
     wget -q https://www.khronos.org/registry/cl/api/1.2/cl.hpp && \
     wget -q https://www.khronos.org/registry/cl/api/1.2/cl_d3d10.h && \
@@ -61,8 +49,11 @@ case $VER in
     wget -q https://www.khronos.org/registry/cl/api/1.2/cl_gl_ext.h && \
     wget -q https://www.khronos.org/registry/cl/api/1.2/cl_platform.h && \
     wget -q https://www.khronos.org/registry/cl/api/1.2/opencl.h)
-        ;;
-  2\.0) (cd "${TGT}" && \
+    ;;
+  2\.0) (cd "${TMPDIR}" && \
+    wget -q http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz && \
+    tar -zxf opengl-icd-2.0.5.0.tgz && \
+    cd icd/inc && mkdir CL && cd CL && \
     wget -q https://www.khronos.org/registry/cl/api/2.0/opencl.h && \
     wget -q https://www.khronos.org/registry/cl/api/2.0/cl_platform.h && \
     wget -q https://www.khronos.org/registry/cl/api/2.0/cl.h && \
@@ -76,3 +67,17 @@ case $VER in
     wget -q https://www.khronos.org/registry/cl/api/2.0/cl2.hpp)
     ;;
 esac
+
+
+if uname -s | grep -i "CYGWIN" >/dev/null 2>&1; then
+  mkdir -p "${TGT}";
+  (cd "${TMPDIR}/icd" && CMAKE_LEGACY_CYGWIN_WIN32=1 CFLAGS="-mwin32 -Wno-deprecated-declarations" cmake . && make)
+  cp "${TMPDIR}"/icd/bin/cygOpenCL-?.dll "${TGT}/";
+  cp "${TMPDIR}"/icd/libOpenCL.dll.a "${TGT}/";
+else
+  echo "error: unsupported platform: `uname -s`" >&2;
+  rm -rf "${TMPDIR}";
+  exit 1;
+fi
+
+#rm -rf "${TMPDIR}"

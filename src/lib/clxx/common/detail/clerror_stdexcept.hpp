@@ -224,14 +224,6 @@ template<>
   struct clerror_stdexcept<status_t::invalid_device_queue>
   { typedef std::invalid_argument type; };
 #endif
-#if cl_khr_d3d10_sharing
-template<>
-  struct clerror_stdexcept<status_t::invalid_d3d10_device_khr>
-  { typedef std::invalid_argument type; };
-template<>
-  struct clerror_stdexcept<status_t::invalid_d3d10_resource_khr>
-  { typedef std::invalid_argument type; };
-#endif
 #if cl_khr_icd
 template<>
   struct clerror_stdexcept<status_t::platform_not_found_khr>

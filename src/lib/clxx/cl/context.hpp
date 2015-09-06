@@ -106,7 +106,7 @@ public:
    * defined by \ref context_properties_fill_array() and \ref create_context().
    */ // }}}
   context(context_properties const& props, devices const& devs,
-          void(*pfn_notify)(const char* errinfo,
+          void(CL_CALLBACK *pfn_notify)(const char* errinfo,
                             const void* private_info, size_t cb,
                             void* user_data) = nullptr,
           void* user_data = nullptr);
@@ -149,7 +149,7 @@ public:
    */ // }}}
   context(context_properties const& props,
           device_type_t dev_type,
-          void(*pfn_notify)(const char* errinfo,
+          void(CL_CALLBACK *pfn_notify)(const char* errinfo,
                             const void* private_info,
                             size_t cb,
                             void* user_data) = nullptr,

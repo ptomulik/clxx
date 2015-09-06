@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 namespace clxx { namespace app { namespace clcc {
 static program_sources

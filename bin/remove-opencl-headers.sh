@@ -12,6 +12,6 @@ if [ -h "${INCDIR}/CL" ]; then
   echo "unlink "${INCDIR}/CL""
         unlink "${INCDIR}/CL"
 elif [ -e "${INCDIR}/CL" ]; then
-  echo "rm -r "${INCDIR}/CL""
-        rm -r "${INCDIR}/CL"
+  echo "rm -rf "${INCDIR}/CL""
+        rm -rf "${INCDIR}/CL"
 fi

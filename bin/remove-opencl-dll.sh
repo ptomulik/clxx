@@ -12,6 +12,6 @@ if [ -h "${LIBDIR}/OpenCL.dll" ]; then
   echo "unlink "${LIBDIR}/OpenCL.dll""
         unlink "${LIBDIR}/OpenCL.dll"
 elif [ -e "${LIBDIR}/OpenCL.dll" ]; then
-  echo "rm -r "${LIBDIR}/OpenCL.dll""
-        rm -r "${LIBDIR}/OpenCL.dll"
+  echo "rm -rf "${LIBDIR}/OpenCL.dll""
+        rm -rf "${LIBDIR}/OpenCL.dll"
 fi

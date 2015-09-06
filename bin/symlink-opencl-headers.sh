@@ -22,8 +22,14 @@ fi
 
 INCDIR="${TOPSRCDIR}/lib/OpenCL/include"
 
-test -e "${INCDIR}/CL" && (echo "error: ${INCDIR}/CL already exists, aborting!" >&2; exit 1)
-test -e "${INCDIR}" || mkdir -p "${INCDIR}"
+test -e "${INCDIR}/CL" || mkdir -p "${INCDIR}/CL"
 
-echo "(cd "${INCDIR}" && ln -s "${CL_PATH}")"
-      (cd "${INCDIR}" && ln -s "${CL_PATH}")
+for F in "${CL_PATH}"/*.h; do
+  H=`basename "${F}"`;
+  if [ -e "${INCDIR}/CL/${H}" ]; then
+    echo "${INCDIR}/CL/${H} already exists, skipping.";
+  else
+    echo "(cd "${INCDIR}/CL/" && ln -s "${CL_PATH}/${H}")"
+          (cd "${INCDIR}/CL/" && ln -s "${CL_PATH}/${H}")
+  fi
+done
