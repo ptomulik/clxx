@@ -53,7 +53,8 @@ case $VER in
   2\.0) (cd "${TMPDIR}" && \
     wget -q http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz && \
     tar -zxf opengl-icd-2.0.5.0.tgz && \
-    cd icd/inc && mkdir CL && cd CL && \
+    cd icd && patch -p1 < "${SCRIPTDIR}/opencl-icd-loader-2.0.5.0.patch" && \
+    cd inc && mkdir CL && cd CL && \
     wget -q https://www.khronos.org/registry/cl/api/2.0/opencl.h && \
     wget -q https://www.khronos.org/registry/cl/api/2.0/cl_platform.h && \
     wget -q https://www.khronos.org/registry/cl/api/2.0/cl.h && \
@@ -70,10 +71,14 @@ esac
 
 
 if uname -s | grep -i "CYGWIN" >/dev/null 2>&1; then
-  mkdir -p "${TGT}";
   (cd "${TMPDIR}/icd" && CMAKE_LEGACY_CYGWIN_WIN32=1 CFLAGS="-mwin32 -Wno-deprecated-declarations" cmake . && make)
+  mkdir -p "${TGT}";
   cp "${TMPDIR}"/icd/bin/cygOpenCL-?.dll "${TGT}/";
   cp "${TMPDIR}"/icd/libOpenCL.dll.a "${TGT}/";
+elif uname -s | grep -i "Linux" >/dev/null 2>&1; then
+  (cd "${TMPDIR}/icd" && CFLAGS="-Wno-deprecated-declarations" cmake . && make)
+  mkdir -p "${TGT}";
+  cp "${TMPDIR}"/icd/bin/libOpenCL.so* "${TGT}/";
 else
   echo "error: unsupported platform: `uname -s`" >&2;
   rm -rf "${TMPDIR}";
