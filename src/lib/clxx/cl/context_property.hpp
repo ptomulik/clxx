@@ -360,6 +360,7 @@ context_adapter_d3d9_khr(IDirect3DDevice9* x) noexcept
   {
     return make_context_property<context_properties_t::adapter_d3d9_khr>(x);
   }
+# if !defined(__CYGWIN__)
 /** // doc: context_adapter_d3d9ex_khr(IDirect3DDeviceEx*) {{{
  * \brief Type-safe constructor for \ref clxx::context_property
  *
@@ -382,6 +383,8 @@ context_adapter_d3d9ex_khr(IDirect3DDeviceEx* x) noexcept
   {
     return make_context_property<context_properties_t::adapter_d3d9ex_khr>(x);
   }
+# endif
+# if (_WIN32_WINNT >= 0x0601)
 /** // doc: context_adapter_dxva_khr(IDXVAHD_Device*) {{{
  * \brief Type-safe constructor for \ref clxx::context_property
  *
@@ -404,6 +407,7 @@ context_adapter_dxva_khr(IDXVAHD_Device* x) noexcept
   {
     return make_context_property<context_properties_t::adapter_dxva_khr>(x);
   }
+# endif
 #endif
 
 #if cl_khr_d3d10_sharing

@@ -48,12 +48,16 @@ template<>
 template<>
   struct context_property_type<context_properties_t::adapter_d3d9_khr>
   { typedef IDirect3DDevice9* type; };
+# if !defined(__CYGWIN__)
 template<>
   struct context_property_type<context_properties_t::adapter_d3d9ex_khr>
   { typedef IDirect3DDeviceEx* type; };
+# endif
+# if (_WIN32_WINNT >= 0x0601)
 template<>
   struct context_property_type<context_properties_t::adapter_dxva_khr>
   { typedef IDXVAHD_Device* type; };
+# endif
 #endif
 
 #if cl_khr_d3d10_sharing
