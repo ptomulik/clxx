@@ -23,18 +23,6 @@
 
 #include <clxx/common/config.hpp>
 
-// Windows: OpenCL.dll was built with _WIN32 and to use it properly we also
-// must ensure that _WIN32 is set before including CL/*.h headers. Otherwise
-// we'll call OpenCL functions incorrectly which in most cases leads to
-// SEGFAULTS. So, if we use OpenCL.dll (from windows) we must ensure that
-// _WIN32 is set. This applies to cygwin and mingw.
-#if __CYGWIN32__
-# ifndef _WIN32
-#   define  CLXX_UNDEF_WIN32 1
-#   define _WIN32 1
-# endif
-#endif
-
 CLXX_DIAGNOSTIC_PUSH
 CLXX_DISABLE_COMMENT_WARNING
 #include <CL/cl.h>
@@ -81,11 +69,6 @@ CLXX_DISABLE_COMMENT_WARNING
 # endif
 #endif
 CLXX_DIAGNOSTIC_POP
-
-#if CLXX_UNDEF_WIN32
-# undef _WIN32
-# undef CLXX_UNDEF_WIN32
-#endif
 
 #endif /* CLXX_COMMON_OPENCL_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
