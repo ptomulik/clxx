@@ -34,7 +34,7 @@ public:
   {
 #if CLXX_OPENCL_ALLOWED(clLinkProgram)
     T::Dummy_clLinkProgram mock((cl_program)0x1234, CL_SUCCESS);
-    link_program                   ((cl_context)0x539, 6, (cl_device_id*)0x195, (const char*)0x542, 9, (const cl_program*)0x532, (void(*)(cl_program, void*))0x253, (void*)0x837);
+    link_program                   ((cl_context)0x539, 6, (cl_device_id*)0x195, (const char*)0x542, 9, (const cl_program*)0x532, (void(CL_CALLBACK*)(cl_program, void*))0x253, (void*)0x837);
     TS_ASSERT(mock.called_once());
     TS_ASSERT(std::get<0>(mock.calls().back()) == (cl_context)0x539);
     TS_ASSERT(std::get<1>(mock.calls().back()) == 6);
@@ -42,7 +42,7 @@ public:
     TS_ASSERT(std::get<3>(mock.calls().back()) == (const char*)0x542);
     TS_ASSERT(std::get<4>(mock.calls().back()) == 9);
     TS_ASSERT(std::get<5>(mock.calls().back()) == (const cl_program*)0x532);
-    TS_ASSERT(std::get<6>(mock.calls().back()) == (void(*)(cl_program,void*))0x253);
+    TS_ASSERT(std::get<6>(mock.calls().back()) == (void(CL_CALLBACK*)(cl_program,void*))0x253);
     TS_ASSERT(std::get<7>(mock.calls().back()) == (void*)0x837);
 #endif //  CLXX_OPENCL_ALLOWED(clLinkProgram)
   }

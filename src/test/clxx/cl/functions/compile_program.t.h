@@ -35,8 +35,8 @@ public:
   {
 #if CLXX_OPENCL_ALLOWED(clCompileProgram)
     T::Dummy_clCompileProgram mock(CL_SUCCESS);
-    compile_program                ((cl_program)0x344, 7, (const cl_device_id*)0x543, (const char*)0x937, 5, (const cl_program*)0x634, (const char**)0x834, (void(*)(cl_program,void*))0x936, (void*)0x234);
-    TS_ASSERT(mock.called_once_with((cl_program)0x344, 7, (const cl_device_id*)0x543, (const char*)0x937, 5, (const cl_program*)0x634, (const char**)0x834, (void(*)(cl_program,void*))0x936, (void*)0x234));
+    compile_program                ((cl_program)0x344, 7, (const cl_device_id*)0x543, (const char*)0x937, 5, (const cl_program*)0x634, (const char**)0x834, (void(CL_CALLBACK*)(cl_program,void*))0x936, (void*)0x234);
+    TS_ASSERT(mock.called_once_with((cl_program)0x344, 7, (const cl_device_id*)0x543, (const char*)0x937, 5, (const cl_program*)0x634, (const char**)0x834, (void(CL_CALLBACK*)(cl_program,void*))0x936, (void*)0x234));
 #endif //  CLXX_OPENCL_ALLOWED(clCompileProgram)
   }
   /** // doc: test__compile_program__invalid_program() {{{

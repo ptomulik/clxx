@@ -23,8 +23,8 @@ TOPSRCDIR=`readlink -f "${SCRIPTDIR}/.."`
 TGT="${TOPSRCDIR}/lib/OpenCL/include/CL"
 
 if [ -e "${TGT}" ]; then
-  echo "error: ${TGT} already exists, aborting!" >&2;
-  exit 2;
+  echo "${TGT} already exists, skipping!" >&2;
+  exit 0;
 fi
 
 mkdir -p "${TGT}";

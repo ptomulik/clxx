@@ -14,6 +14,7 @@
 #include <type_traits>
 #include <cmath>
 #include <cstdio>
+#include <clxx/common/config.hpp>
 
 namespace clxx { namespace detail {
 /** \addtogroup clxx_util_enum2str

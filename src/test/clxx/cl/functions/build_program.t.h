@@ -34,8 +34,8 @@ public:
   void test__build_program( )
   {
     T::Dummy_clBuildProgram mock(CL_SUCCESS);
-    build_program                  ((cl_program)0x634, 7, (const cl_device_id*)0x543, (const char*)0x5234, (void(*)(cl_program,void*))0x654, (void*)0x122);
-    TS_ASSERT(mock.called_once_with((cl_program)0x634, 7, (const cl_device_id*)0x543, (const char*)0x5234, (void(*)(cl_program,void*))0x654, (void*)0x122));
+    build_program                  ((cl_program)0x634, 7, (const cl_device_id*)0x543, (const char*)0x5234, (void(CL_CALLBACK*)(cl_program,void*))0x654, (void*)0x122);
+    TS_ASSERT(mock.called_once_with((cl_program)0x634, 7, (const cl_device_id*)0x543, (const char*)0x5234, (void(CL_CALLBACK*)(cl_program,void*))0x654, (void*)0x122));
   }
   /** // doc: test__build_program__invalid_program() {{{
    * \todo Write documentation

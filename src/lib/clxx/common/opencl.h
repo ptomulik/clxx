@@ -25,7 +25,15 @@
 
 CLXX_DIAGNOSTIC_PUSH
 CLXX_DISABLE_COMMENT_WARNING
+#if defined(__CYGWIN__)
+# define CLXX_UNDEF_WIN32 1
+# define _WIN32 1
+#endif
 #include <CL/cl.h>
+#if defined(CLXX_UNDEF_WIN32)
+# undef _WIN32
+# undef CLXX_UNDEF_WIN32
+#endif
 CLXX_DIAGNOSTIC_POP
 
 /////////////////////////////////////////////////////////////////////////////

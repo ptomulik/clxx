@@ -124,7 +124,7 @@
 # define CLXX_DISABLE_COMMENT_WARNING
 #endif
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 # define CLXX_WINDOWS_API
 #else
 # define CLXX_POSIX_API

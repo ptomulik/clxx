@@ -34,7 +34,7 @@ public:
     TS_ASSERT_EQUALS(get_num_devices((cl_platform_id)0x4321, device_type_t::cpu), 2);
     TS_ASSERT(mock.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_platform_id)0x4321);
-    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_TYPE_CPU);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), (cl_device_type)CL_DEVICE_TYPE_CPU);
     TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), 0);
     TS_ASSERT(std::get<3>(mock.calls().back()) == nullptr);
     TS_ASSERT(std::get<4>(mock.calls().back()) != nullptr);
@@ -51,13 +51,13 @@ public:
     TS_ASSERT(mock.called_twice());
 
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_platform_id)0x4321);
-    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_TYPE_ALL);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), (cl_device_type)CL_DEVICE_TYPE_ALL);
     TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0);
     TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
     TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
 
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_platform_id)0x4321);
-    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_TYPE_ALL);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), (cl_device_type)CL_DEVICE_TYPE_ALL);
     TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), 2u);
     TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
     TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
@@ -85,13 +85,13 @@ public:
     TS_ASSERT(mock.called_twice());
 
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), (cl_platform_id)0x4321);
-    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), CL_DEVICE_TYPE_ALL);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().front()), (cl_device_type)CL_DEVICE_TYPE_ALL);
     TS_ASSERT_EQUALS(std::get<2>(mock.calls().front()), 0);
     TS_ASSERT(std::get<3>(mock.calls().front()) == nullptr);
     TS_ASSERT(std::get<4>(mock.calls().front()) != nullptr);
 
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_platform_id)0x4321);
-    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), CL_DEVICE_TYPE_ALL);
+    TS_ASSERT_EQUALS(std::get<1>(mock.calls().back()), (cl_device_type)CL_DEVICE_TYPE_ALL);
     TS_ASSERT_EQUALS(std::get<2>(mock.calls().back()), 2u);
     TS_ASSERT(std::get<3>(mock.calls().back()) != nullptr);
     TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);

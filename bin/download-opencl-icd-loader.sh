@@ -71,8 +71,7 @@ PLATFORM=`uname -s`
 case "$PLATFORM" in
   CYGWIN*)
     echo "Building in \"${TMPDIR}\""
-    #(cd "${TMPDIR}/icd" && CMAKE_LEGACY_CYGWIN_WIN32=1 CFLAGS="-mwin32 -Wno-deprecated-declarations" cmake . && make)
-    (cd "${TMPDIR}/icd" && CFLAGS="-Wno-deprecated-declarations" cmake . && make)
+    (cd "${TMPDIR}/icd" && CMAKE_LEGACY_CYGWIN_WIN32=1 CFLAGS="-mwin32 -Wno-deprecated-declarations" cmake . && make)
     ;;
   Linux)
     echo "Building in \"${TMPDIR}\""
@@ -85,9 +84,8 @@ case "$PLATFORM" in
 esac
 
 if [ -e "${TGT}" ]; then
-  echo "error: ${TGT} already exists, aborting!" >&2;
-  echo "info: build dir was: ${TMPDIR}"
-  exit 1;
+  echo "${TGT} already exists, skipping!" >&2;
+  exit 0;
 fi
 mkdir -p "${TGT}";
 

@@ -12,6 +12,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/common/detail/enum2hex.hpp>
+#include <climits>
 
 namespace clxx { namespace detail { class enum2hex_test_suite; } }
 
@@ -63,17 +64,41 @@ public:
   void test_enum_long( )
   {
     enum class test_t : long { zero = 0x00, plus = 0x12, minus = -0x12 };
-    TS_ASSERT_EQUALS(enum2hex(test_t::zero), "0x0000000000000000");
-    TS_ASSERT_EQUALS(enum2hex(test_t::plus), "0x0000000000000012");
-    TS_ASSERT_EQUALS(enum2hex(test_t::minus), "-0x0000000000000012");
+    switch(sizeof(unsigned long))
+      {
+        case 4:
+          TS_ASSERT_EQUALS(enum2hex(test_t::zero), "0x00000000");
+          TS_ASSERT_EQUALS(enum2hex(test_t::plus), "0x00000012");
+          TS_ASSERT_EQUALS(enum2hex(test_t::minus), "-0x00000012");
+          break;
+        case 8:
+          TS_ASSERT_EQUALS(enum2hex(test_t::zero), "0x0000000000000000");
+          TS_ASSERT_EQUALS(enum2hex(test_t::plus), "0x0000000000000012");
+          TS_ASSERT_EQUALS(enum2hex(test_t::minus), "-0x0000000000000012");
+          break;
+        default:
+          TS_FAIL("unsupported sizeof(unsigned long)");
+          break;
+      }
   }
   /** // doc: test_enum_unsigned_long() {{{
    * \todo Write documentation
    */ // }}}
   void test_enum_unsigned_long( )
   {
-    enum class test_t : unsigned long { number = 0xffffffffffffffff };
-    TS_ASSERT_EQUALS(enum2hex(test_t::number), "0xffffffffffffffff");
+    enum class test_t : unsigned long { number = ULONG_MAX};
+    switch(sizeof(unsigned long))
+      {
+        case 4:
+          TS_ASSERT_EQUALS(enum2hex(test_t::number), "0xffffffff");
+          break;
+        case 8:
+          TS_ASSERT_EQUALS(enum2hex(test_t::number), "0xffffffffffffffff");
+          break;
+        default:
+          TS_FAIL("unsupported sizeof(unsigned long)");
+          break;
+      }
   }
 };
 

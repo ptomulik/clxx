@@ -18,7 +18,10 @@ TOPSRCDIR=`readlink -f "${SCRIPTDIR}/.."`
 URL="https://github.com/CxxTest/cxxtest/archive/master.tar.gz"
 TGT="${TOPSRCDIR}/cxxtest"
 
-test -e "${TGT}" && (echo "error: ${TGT} already exists, aborting!" >&2; exit 1;)
+if [ -w "${TGT}" ]; then
+  echo "${TGT} already exists, skipping!" >&2;
+  exit 0;
+fi
 mkdir "${TGT}"
 echo "(cd "${TGT}" && wget --quiet "${URL}" -O - | tar -zxf - --strip-components=1)"
       (cd "${TGT}" && wget --quiet "${URL}" -O - | tar -zxf - --strip-components=1)
