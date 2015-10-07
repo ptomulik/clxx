@@ -1,12 +1,12 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: clxx/common/auto_bind.cpp {{{
- * \file clxx/common/auto_bind.cpp
+/** // doc: clxx/common/auto_bind1.cpp {{{
+ * \file clxx/common/auto_bind1.cpp
  * \brief Usage example for \ref clxx::auto_bind
  */ // }}}
-/** // doc: clxx/common/auto_bind.cpp {{{
- * \example clxx/common/auto_bind.cpp
+/** // doc: clxx/common/auto_bind1.cpp {{{
+ * \example clxx/common/auto_bind1.cpp
  * \brief Usage example for \ref clxx::auto_bind
  */ // }}}
 

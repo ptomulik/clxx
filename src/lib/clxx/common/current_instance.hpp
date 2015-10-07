@@ -22,7 +22,7 @@ current_instance_binding_t
   none,             ///< Nothing is bound
   static_instance,  ///< Internally maintained static instance is bound
   thread_instance,  ///< Internally maintained thread-local instance is bound
-  user_instance     ///< User-supplied instance is bound
+  custom_instance   ///< User-supplied instance is bound
 };
 /** // doc: current_instance_default_binding() {{{
  * \brief Default \ref clxx::detail::current_instance "current_instance<>"

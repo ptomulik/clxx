@@ -60,7 +60,7 @@ public:
    * \brief Binds the user-provided instance \p obj to the current instance clas
    */ // }}}
   auto_bind(reference obj)
-    : _user_instance(obj),
+    : _custom_instance(obj),
       _saved_binding(current_instance_binding_t::none),
       _saved_pointer(nullptr)
   {
@@ -89,9 +89,9 @@ private:
   void bind()
   {
     _saved_binding = CurrentInstance::binding();
-    if(_saved_binding == current_instance_binding_t::user_instance)
+    if(_saved_binding == current_instance_binding_t::custom_instance)
       _saved_pointer = &CurrentInstance::get();
-    CurrentInstance::bind_user_instance(_user_instance);
+    CurrentInstance::bind_custom_instance(_custom_instance);
   }
   void unbind() noexcept
   {
@@ -103,8 +103,8 @@ private:
         case current_instance_binding_t::thread_instance:
           CurrentInstance::bind_thread_instance();
           break;
-        case current_instance_binding_t::user_instance:
-          CurrentInstance::bind_user_instance(*_saved_pointer);
+        case current_instance_binding_t::custom_instance:
+          CurrentInstance::bind_custom_instance(*_saved_pointer);
           break;
         default:
           break;
@@ -113,7 +113,7 @@ private:
     _saved_binding = current_instance_binding_t::none;
   }
 private:
-  reference                   _user_instance;
+  reference                   _custom_instance;
   current_instance_binding_t  _saved_binding;
   pointer                     _saved_pointer;
 };

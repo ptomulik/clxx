@@ -31,7 +31,7 @@ public:
     TS_ASSERT_EQUALS(static_cast<I>(current_instance_binding_t::none), static_cast<I>(0));
     TS_ASSERT_EQUALS(static_cast<I>(current_instance_binding_t::static_instance), static_cast<I>(1));
     TS_ASSERT_EQUALS(static_cast<I>(current_instance_binding_t::thread_instance), static_cast<I>(2));
-    TS_ASSERT_EQUALS(static_cast<I>(current_instance_binding_t::user_instance), static_cast<I>(3));
+    TS_ASSERT_EQUALS(static_cast<I>(current_instance_binding_t::custom_instance), static_cast<I>(3));
   }
   /** // doc: test__current_instance_default_binding() {{{
    * \todo Write documentation

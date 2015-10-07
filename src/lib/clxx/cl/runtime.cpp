@@ -14,35 +14,6 @@
 
 namespace clxx {
 /* ----------------------------------------------------------------------- */
-thread_local runtime* runtime::_current_instance = nullptr;
-/* ----------------------------------------------------------------------- */
-clxx::runtime& runtime::
-get_current_instance()
-{
-  if(!_current_instance) _current_instance = &get_shared_instance();
-  return *_current_instance;
-}
-/* ----------------------------------------------------------------------- */
-void runtime::
-set_current_instance(clxx::runtime& runtime) noexcept
-{
-  _current_instance = &runtime;
-}
-/* ----------------------------------------------------------------------- */
-clxx::runtime& runtime::
-get_shared_instance()
-{
-  static clxx::runtime r;
-  return r;
-}
-/* ----------------------------------------------------------------------- */
-clxx::runtime& runtime::
-get_local_instance()
-{
-  thread_local clxx::runtime r;
-  return r;
-}
-/* ----------------------------------------------------------------------- */
 program_generator_ptr const& runtime::
 get_program_generator(std::string const& name) const
 {
@@ -94,7 +65,6 @@ generate_build_program(clxx::program& program,
   program = this->generate_program(name, context);
   clxx::lazy_build_program(program, devices, build_options, force_build);
 }
-/* ----------------------------------------------------------------------- */
 } // end namespace clxx
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

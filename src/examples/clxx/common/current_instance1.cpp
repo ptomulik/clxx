@@ -48,7 +48,7 @@ int main()
   
   // [BindUserInstance]
   std::string path("/local/path");
-  current_path::bind_user_instance(path);
+  current_path::bind_custom_instance(path);
   // [BindUserInstance]
   load_program("3.cl");
 

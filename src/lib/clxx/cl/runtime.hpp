@@ -125,7 +125,6 @@ public:
                               bool force_build = false) const;
 };
 } // end namespace clxx
-
 #endif /* CLXX_CL_RUNTIME_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

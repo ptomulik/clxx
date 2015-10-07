@@ -242,8 +242,8 @@ public:
           return static_instance();
         case clxx::current_instance_binding_t::thread_instance:
           return thread_instance();
-        case clxx::current_instance_binding_t::user_instance:
-          return *_user_instance;
+        case clxx::current_instance_binding_t::custom_instance:
+          return *_custom_instance;
         default:
           throw clxx::internal_error();
       }
@@ -264,20 +264,28 @@ public:
   {
     _binding = current_instance_binding_t::thread_instance;
   }
-  /** // doc: bind_user_instance() {{{
+  /** // doc: bind_custom_instance() {{{
    * \brief Bind custom instance provided by user
    *
    * \param ref The instance to bind 
    */ // }}}
   static void
-  bind_user_instance(reference ref) noexcept
+  bind_custom_instance(reference ref) noexcept
   {
-    _binding = current_instance_binding_t::user_instance;
-    _user_instance = &ref;
+    _binding = current_instance_binding_t::custom_instance;
+    _custom_instance = &ref;
+  }
+  /** // doc: reset_binding() {{{
+   * \brief Resets current instance binding to its default state
+   */ // }}}
+  static void
+  reset_binding() noexcept
+  {
+    _binding = current_instance_binding_t::none;
   }
 private:
   static thread_local clxx::current_instance_binding_t _binding;
-  static thread_local pointer _user_instance;
+  static thread_local pointer _custom_instance;
 };
 
 template< typename Derived, typename Value, typename Reference, typename Pointer >
@@ -288,7 +296,7 @@ _binding = clxx::current_instance_binding_t::none;
 template< typename Derived, typename Value, typename Reference, typename Pointer >
 thread_local Pointer
 current_instance<Derived, Value, Reference, Pointer>::
-_user_instance = nullptr;
+_custom_instance = nullptr;
 /** @} */
 } } // end namespace clxx
 

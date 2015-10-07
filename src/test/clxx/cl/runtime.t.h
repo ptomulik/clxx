@@ -29,13 +29,6 @@ class clxx::runtime_test_suite : public CxxTest::TestSuite
     { src.append("__kernel void trivial() { }\n"); }
   };
 public:
-  void test__static_instances__1( )
-  {
-    TS_ASSERT(&runtime::get_shared_instance() != &runtime::get_local_instance());
-    TS_ASSERT(&runtime::get_current_instance() == &runtime::get_shared_instance());
-    runtime::set_current_instance(runtime::get_local_instance());
-    TS_ASSERT(&runtime::get_current_instance() == &runtime::get_local_instance());
-  }
   /** // doc: test__has_program_generator() {{{
    * \todo Write documentation
    */ // }}}
