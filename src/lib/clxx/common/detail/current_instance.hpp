@@ -211,6 +211,15 @@ private:
 public:
   /** // doc: binding() {{{
    * \brief Tell what the current instance refers to currently
+   *
+   * \par Side Effect
+   *
+   * If the object was not explicitly bound or if it was previously reset with
+   * reset_binding(), then binding() initializes its binding to a value
+   * returned by \ref clxx::current_instance_default_binding() "current_instance_default_binding()".
+   *
+   * \returns
+   *  Current binding
    */ // }}}
   static clxx::current_instance_binding_t
   binding() noexcept
@@ -229,6 +238,7 @@ public:
    * \returns Reference to current instance
    *
    * \throw clxx::internal_error()
+   *    if binding() returns an invalid value
    *
    * May also throw exceptions originating from constructors of Value and
    * from Derived::default_static_instance(), Derived::default_thread_instance().

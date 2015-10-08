@@ -20,6 +20,8 @@
 
 namespace clxx {
 /** // doc: runtime {{{
+ * \ingroup clxx_runtime
+ * \brief Collects several OpenCL objects used commonly by applications
  * \todo Write documentation
  */ // }}}
 class runtime
