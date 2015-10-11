@@ -203,6 +203,8 @@
  * \ref clxx::detail::current_instance "detail::current_instance<>" template is
  * determined at runtime and may be changed by user at any time.
  */
+ /** \defgroup clxx_util_memoized_function Memoized Function
+  */
 /** @} */
 /** @} */
 

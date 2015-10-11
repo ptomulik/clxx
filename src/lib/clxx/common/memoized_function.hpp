@@ -18,11 +18,13 @@
 
 namespace clxx {
 /** // doc: memoized_function<R(Args...)> {{{
+ * \ingroup clxx_util_memoized_function
  * \brief Memoized function, see \ref clxx__memoized_function__T__R_Args "memoized_function<R(Args...)>"
  */ // }}}
 template<typename F>
 struct memoized_function;
 /** // doc: memoized_function<R(Args...)> {{{
+ * \ingroup clxx_util_memoized_function
  * \brief Memoized function
  * \anchor clxx__memoized_function__T__R_Args
  *
@@ -193,6 +195,8 @@ public:
     _cache.clear();
   }
 };
+/** \ingroup clxx_util_memoized_function
+ * @{ */
 /** // doc: make_memoized_function() {{{
  * \brief Wrap function \p fn with \ref clxx::memoized_function "memoized_function"
  */ // }}}
@@ -231,6 +235,7 @@ make_memoized_function(R (T1::*fn)(Args...), T2* obj)
   static_assert(std::is_base_of<T1,T2>::value, "");
   return std::bind(fn, obj, std::placeholders::_1);
 }
+/** @} */
 } // end namespace clxx
 
 #endif /* CLXX_COMMON_MEMOIZED_FUNCTION_HPP_INCLUDED */
