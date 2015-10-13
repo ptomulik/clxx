@@ -91,7 +91,7 @@ def dload_patch(**kw):
     except KeyError: destdir = os.path.join(scriptdir,'hoarder')
     dest = os.path.join(destdir, 'patch.py')
     url = "https://raw.githubusercontent.com/techtonik/python-patch/master/patch.py"
-    info("downloading %r -> %r" % (url, dest))
+    info("downloading '%s' -> '%s'" % (url, dest))
     hoarder.urlretrieve(url, dest)
     return 0
 
@@ -110,7 +110,7 @@ def dload_cxxtest(**kw):
 
     if clean:
         if os.path.exists(destdir):
-            info('removing %r' % destdir)
+            info("removing '%s'" % destdir)
             shutil.rmtree(destdir)
         return 0
 
@@ -118,14 +118,14 @@ def dload_cxxtest(**kw):
     except KeyError: destdir_mode = 0755
 
     if os.path.exists(destdir):
-        warn("%r already exists, skipping cxxtest download!" % destdir)
+        warn("'%s' already exists, skipping cxxtest download!" % destdir)
         return 2
 
-    info("creating %r" % destdir)
+    info("creating '%s'" % destdir)
     os.makedirs(destdir, mode=destdir_mode)
 
     url = "https://github.com/CxxTest/cxxtest/archive/master.tar.gz"
-    info("downloading cxxtest to %r" % destdir)
+    info("downloading cxxtest to '%s'" % destdir)
     hoarder.urluntar(url, path = destdir, strip_components = 1)
     return 0
 
@@ -139,7 +139,7 @@ def dload_opencl_hdr(**kw):
 
     if clean:
         if os.path.exists(destdir):
-            info('removing %r' % destdir)
+            info("removing '%s'" % destdir)
             shutil.rmtree(destdir)
         return 0
 
@@ -153,10 +153,10 @@ def dload_opencl_hdr(**kw):
     except KeyError: destdir_mode = 0755
 
     if os.path.exists(destdir):
-        warn("%r already exists, skipping opencl-hdr download!" % destdir)
+        warn("'%s' already exists, skipping opencl-hdr download!" % destdir)
         return 2
 
-    info("creating %r" % destdir)
+    info("creating '%s'" % destdir)
     os.makedirs(destdir, mode=destdir_mode)
 
     url_base = "https://www.khronos.org/registry/cl/api/%s" % ver
@@ -202,13 +202,13 @@ def dload_opencl_hdr(**kw):
                     'cl_gl_ext.h',
                     'cl2.hpp'   ]
     else:
-        warn('unsupported OpenCL version %r' % ver)
+        warn("unsupported OpenCL version '%s'" % ver)
         return 2
 
-    info("starting downloads from %r" % url_base)
+    info("starting downloads from '%s'" % url_base)
     for f in files:
         url = url_base + f
-        info('downloading %r -> %r' % (f, os.path.join(destdir,f)))
+        info("downloading '%s' -> '%s'" % (f, os.path.join(destdir,f)))
 
     return 0
 
@@ -224,7 +224,7 @@ def dload_opencl_ldr(**kw):
 
     if clean:
         if os.path.exists(destdir):
-            info('removing %r' % destdir)
+            info("removing '%s'" % destdir)
             shutil.rmtree(destdir)
         return 0
 
@@ -239,7 +239,7 @@ def dload_opencl_ldr(**kw):
     except KeyError: destdir_mode = 0755
 
     if os.path.exists(destdir):
-        warn("%r already exists, skipping opencl-ldr download!" % destdir)
+        warn("'%s' already exists, skipping opencl-ldr download!" % destdir)
         return 2
 
     patchfile = None
@@ -253,21 +253,21 @@ def dload_opencl_ldr(**kw):
         url = "http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz"
         patchfile = 'opencl-icd-loader-2.0.5.0.patch'
     else:
-        warn("unsupported OpenCL version %r, skipping opencl-ldr download" % ver)
+        warn("unsupported OpenCL version '%s', skipping opencl-ldr download" % ver)
         return 2
 
     tmpdir = tempfile.mkdtemp()
-    info("created %r" % tmpdir)
+    info("created '%s'" % tmpdir)
 
-    info("downloading %r to %r" % (url,tmpdir))
+    info("downloading '%s' to '%s'" % (url,tmpdir))
     hoarder.urluntar(url, path=tmpdir, strip_components=1)
     dload_opencl_hdr(opencl_hdr_ver=ver, destdir=os.path.join(tmpdir,'CL'))
 
     if patchfile:
         patchfile = os.path.join(patchdir, patchfile)
-        info('reading patch file %r' % patchfile)
+        info("reading patch file '%s'" % patchfile)
         patch = hoarder.patch.fromfile(patchfile)
-        info('applying patch %r' % patchfile)
+        info("applying patch '%s'" % patchfile)
         patch.apply(strip=1, root=tmpdir)
 
     env = os.environ.copy()
@@ -276,43 +276,45 @@ def dload_opencl_ldr(**kw):
         build_cmd = ['make']
         env['CFLAGS'] = '-Wno-deprecated-declarations -Wno-implicit-function-declaration'
         files = ['bin/libOpenCL.so*']
-##    elif sysname == 'Windows':
-##        pass
+    elif sysname == 'Windows':
+        build_cmd = [os.path.join(tmpdir, 'build_using_cmake.bat')]
+        files = ['bin/OpenCL.dll']
     elif sysname.startswith('CYGWIN'):
         build_cmd = ['make']
         env['CMAKE_LEGACY_CYGWIN_WIN32'] = '1'
         env['CFLAGS'] = '-mwin32 -Wno-deprecated-declarations -Wno-implicit-function-declaration'
         files = [ 'bin/cygOpenCL-?.dll', 'libOpenCL.dll.a' ]
     else:
-        warn('unsupported operating sysname %r, aborting opencl-ldr build' % sysname)
-        info("removing %r" % tmpdir)
+        warn('unsupported operating system "%s", aborting opencl-ldr build' % sysname)
+        info("removing '%s'" % tmpdir)
         shutil.rmtree(tmpdir)
         return 2
 
+    info("building OpenCL ICD loader")
     p = subprocess.Popen(build_cmd, env = env, cwd = tmpdir)
     err = p.wait()
     if err != 0:
         cmdline = subprocess.list2cmdline(build_cmd)
-        warn('%r returned error code %r, aborting opencl-ldr build' % (cmdline, err))
-        info("removing %r" % tmpdir)
+        warn('%s returned error code %d, aborting opencl-ldr build' % (cmdline, err))
+        info("removing '%s'" % tmpdir)
         shutil.rmtree(tmpdir)
         return err
         
-    info("creating %r" % destdir)
+    info("creating '%s'" % destdir)
     os.makedirs(destdir, mode=0755)
 
     for fglob in files:
         for src in glob.glob(os.path.join(tmpdir, fglob)):
             fname = os.path.basename(src)
             dst = os.path.join(destdir, fname)
-            info('copy %r %r' %(src, dst))
+            info("copy '%s' '%s'" %(src, dst))
             if os.path.islink(src):
                 linkto = os.readlink(src)
                 os.symlink(linkto, dst)
             else:
                 shutil.copy(src, dst)
 
-    info("removing %r" % tmpdir)
+    info("removing '%s'" % tmpdir)
     shutil.rmtree(tmpdir)
     return 0
 

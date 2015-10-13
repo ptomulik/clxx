@@ -7,7 +7,8 @@ try:
     from urllib.request import urlopen, urlretrieve
 except ImportError:
     # Python 2
-    from urllib import urlopen, urlretrieve
+    from urllib2 import urlopen
+    from urllib import urlretrieve
 
 def untar(tar, **kw):
     # Options
@@ -16,10 +17,10 @@ def untar(tar, **kw):
     try:                path = kw['path']
     except KeyError:    path = '.'
     # Download the tar file
-    members = [m for m in tar.getmembers() if len(m.name.split(os.sep)) > strip_components]
+    members = [m for m in tar.getmembers() if len(m.name.split('/')) > strip_components]
     if strip_components > 0:
         for m in members:
-            m.name = os.path.join(*(m.name.split(os.sep)[strip_components:]))
+            m.name = os.path.join(*(m.name.split('/')[strip_components:]))
     tar.extractall(path = path, members = members)
 
 def urluntar(url, **kw):
