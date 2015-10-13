@@ -36,7 +36,7 @@ install:
   - if $COMPILE; then sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev; fi
 #  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler; fi
   - if $COMPILE; then sudo pip install cpp-coveralls; fi
-  - if [ ! -z "$CL_H_VER" ]; then ./bin/download-opencl-headers.sh "$CL_H_VER"; fi
+  - if [ ! -z "$CL_H_VER" ]; then ./bin/download-deps.py --opencl-ver="$CL_H_VER" opencl-hdr; fi
   - if $APIDOC; then sudo apt-get --no-install-recommends -y install doxygen doxygen-latex; fi
   - if $APIDOC; then sudo apt-get --no-install-recommends -y install swig; fi
 
