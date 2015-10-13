@@ -9,14 +9,3 @@
      cl_dx9_media_adapter_set_khr    media_adapter_set,
      cl_uint                         num_entries,
      cl_device_id *                  devices,
---- a/CMakeLists.txt	2012-08-06 08:53:38.000000000 +0200
-+++ b/CMakeLists.txt	2015-09-07 00:05:41.234375000 +0200
-@@ -22,7 +22,7 @@
- set_target_properties (OpenCL PROPERTIES VERSION "1.2" SOVERSION "1")
- 
- if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
--    set_target_properties (OpenCL PROPERTIES LINK_FLAGS "-Wl,--version-script -Wl,../icd_exports.map")
-+    set_target_properties (OpenCL PROPERTIES LINK_FLAGS "-Wl,--version-script -Wl,icd_exports.map")
- endif ()
- 
- target_link_libraries (OpenCL ${CMAKE_DL_LIBS})

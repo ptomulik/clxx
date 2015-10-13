@@ -1,0 +1,11 @@
+--- a/CMakeLists.txt	2015-08-04 21:12:44.000000000 +0200
++++ b/CMakeLists.txt	2015-10-13 16:58:51.000000000 +0200
+@@ -19,7 +19,7 @@
+ include_directories (./inc)
+ 
+ add_library (OpenCL SHARED ${OPENCL_ICD_LOADER_SOURCES})
+-set_target_properties (OpenCL PROPERTIES VERSION "1.2" SOVERSION "1")
++set_target_properties (OpenCL PROPERTIES VERSION "2.0" SOVERSION "2")
+ 
+ if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+     set_target_properties (OpenCL PROPERTIES LINK_FLAGS "-Wl,--version-script -Wl,../icd_exports.map")
