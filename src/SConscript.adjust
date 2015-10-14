@@ -40,6 +40,7 @@ if env.Entry('#lib/EGL/include').exists():
 #############################################################################
 if env.Entry('#lib/OpenCL/lib').exists():
     env.AppendUnique(LIBPATH = ['#/lib/OpenCL/lib'])
+    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#lib/OpenCL/lib')])
     env.AppendUnique(SWIGPY_LIBPATH = ['#/lib/OpenCL/lib'])
 
 #############################################################################
