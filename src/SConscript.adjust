@@ -31,6 +31,10 @@ if env.Entry('#lib/OpenCL/include').exists():
     env.AppendUnique(CPPPATH = ['#/lib/OpenCL/include'])
     env.AppendUnique(SWIGPY_CPPPATH = ['#/lib/OpenCL/include'])
     env.AppendUnique(SWIGPY_SWIGPATH = ['#/lib/OpenCL/include'])
+if env.Entry('#lib/EGL/include').exists():
+    env.AppendUnique(CPPPATH = ['#/lib/EGL/include'])
+    env.AppendUnique(SWIGPY_CPPPATH = ['#/lib/EGL/include'])
+    env.AppendUnique(SWIGPY_SWIGPATH = ['#/lib/EGL/include'])
 #############################################################################
 # 2. Prefer locally installed OpenCL shared/static library.
 #############################################################################

@@ -135,6 +135,7 @@ vendor
 # Ignore 3rd party software downloaded as build dependencies
 /cxxtest/
 /lib/OpenCL/
+/lib/EGL/
 /bin/hoarder/patch.py
 #############################################################################
 

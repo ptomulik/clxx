@@ -22,12 +22,19 @@ topsrcdir = os.path.realpath(os.path.join(scriptdir, '..'))
 
 
 default_opencl_version = '2.0'
+default_egl_version = '1.5'
 all_packages = ['cxxtest', 'opencl-hdr', 'opencl-ldr']
 
 # Validate and return OpenCL version
 def opencl_version_string(v):
     if not re.match(r'^1\.[0-2]|2\.0$', v):
         raise argparse.ArgumentTypeError("ill-formed or unsupported OpenCL version %r" % v)
+    return v
+
+# Validate and return OpenCL version
+def egl_version_string(v):
+    if not re.match(r'^1\.[0-5]$', v):
+        raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
     return v
 
 parser = argparse.ArgumentParser(
@@ -65,6 +72,22 @@ parser.add_argument(
         metavar='VER',
         help='version of OpenCL ICD loader to be downloaded'
         )
+
+parser.add_argument(
+        '--egl-ver',
+        type=egl_version_string,
+        default=default_egl_version,
+        metavar='VER',
+        help='version of OpenCL headers/loader to be downloaded'
+        )
+parser.add_argument(
+        '--egl-hdr-ver',
+        type=egl_version_string,
+        default=None,
+        metavar='VER',
+        help='version of OpenCL headers to be downloaded'
+        )
+
 parser.add_argument(
         'packages',
         metavar='PKG',
@@ -76,12 +99,16 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-def info(msg):
-    if not args.quiet:
+def info(msg, **kw):
+    try: quiet = kw['quiet']
+    except KeyError: quiet = False
+    if not quiet:
         sys.stdout.write("info: %s\n" % msg)
 
-def warn(msg):
-    if not args.quiet:
+def warn(msg, **kw):
+    try: quiet = kw['quiet']
+    except KeyError: quiet = False
+    if not quiet:
         sys.stderr.write("warning: %s\n" % msg)
 
 
@@ -91,7 +118,7 @@ def dload_patch(**kw):
     except KeyError: destdir = os.path.join(scriptdir,'hoarder')
     dest = os.path.join(destdir, 'patch.py')
     url = "https://raw.githubusercontent.com/techtonik/python-patch/master/patch.py"
-    info("downloading '%s' -> '%s'" % (url, dest))
+    info("downloading '%s' -> '%s'" % (url, dest), **kw)
     hoarder.urlretrieve(url, dest)
     return 0
 
@@ -110,7 +137,7 @@ def dload_cxxtest(**kw):
 
     if clean:
         if os.path.exists(destdir):
-            info("removing '%s'" % destdir)
+            info("removing '%s'" % destdir, **kw)
             shutil.rmtree(destdir)
         return 0
 
@@ -118,20 +145,76 @@ def dload_cxxtest(**kw):
     except KeyError: destdir_mode = 0755
 
     if os.path.exists(destdir):
-        warn("'%s' already exists, skipping cxxtest download!" % destdir)
+        warn("'%s' already exists, skipping cxxtest download!" % destdir, **kw)
         return 2
 
-    info("creating '%s'" % destdir)
+    info("creating '%s'" % destdir, **kw)
     os.makedirs(destdir, mode=destdir_mode)
 
     url = "https://github.com/CxxTest/cxxtest/archive/master.tar.gz"
-    info("downloading cxxtest to '%s'" % destdir)
+    info("downloading cxxtest to '%s'" % destdir, **kw)
     hoarder.urluntar(url, path = destdir, strip_components = 1)
     return 0
 
+def dload_egl_hdr(**kw):
+    """Download EGL header files"""
+    try: clean = kw['clean']
+    except KeyError: clean = False
+    try: destdir = kw['destdir']
+    except KeyError: destdir = os.path.join(topsrcdir, 'lib','EGL','include', 'EGL')
+
+    destdir = os.path.split(destdir)[0]
+    destdir_egl = os.path.join(destdir, 'EGL')
+    destdir_khr = os.path.join(destdir, 'KHR')
+
+    if clean:
+        for d in (destdir_egl, destdir_khr):
+            if os.path.exists(d):
+                info("removing '%s'" % d, **kw)
+                shutil.rmtree(d)
+        return 0
+
+    ver = None
+    for k in ('egl_hdr_ver', 'egl_ver'):
+        if ver is None:
+            try: ver = kw[k]
+            except KeyError: ver = None
+    if ver is None:
+        ver = default_egl_version
+
+    try: destdir_mode = kw['destdir_mode']
+    except KeyError: destdir_mode = 0755
+
+    for d in (destdir_egl, destdir_khr):
+        if os.path.exists(d):
+            warn("'%s' already exists, skipping egl-hdr download!" % d, **kw)
+            return 2
+
+    for d in (destdir_egl, destdir_khr):
+        info("creating '%s'" % d, **kw)
+        os.makedirs(d, mode=destdir_mode)
+
+    url_base = "https://www.khronos.org/registry/egl/api"
+    if ver == '1.5':
+        files = [   'EGL/egl.h',
+                    'EGL/eglext.h',
+                    'EGL/eglplatform.h',
+                    'KHR/khrplatform.h' ]
+    else:
+        warn("unsupported EGL version '%s'" % ver, **kw)
+        return 2
+
+    for f in files:
+        src = '/'.join([url_base, f])
+        dst = os.path.join(destdir,os.path.join(*f.split('/')))
+        info("downloading '%s' -> '%s'" % (src, dst), **kw)
+        hoarder.urlretrieve(src, dst)
+
+    return 0
 
 def dload_opencl_hdr(**kw):
     """Download OpenCL header files"""
+
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
@@ -139,7 +222,7 @@ def dload_opencl_hdr(**kw):
 
     if clean:
         if os.path.exists(destdir):
-            info("removing '%s'" % destdir)
+            info("removing '%s'" % destdir, **kw)
             shutil.rmtree(destdir)
         return 0
 
@@ -148,15 +231,17 @@ def dload_opencl_hdr(**kw):
         if ver is None:
             try: ver = kw[k]
             except KeyError: ver = None
+    if ver is None:
+        ver = default_opencl_version
 
     try: destdir_mode = kw['destdir_mode']
     except KeyError: destdir_mode = 0755
 
     if os.path.exists(destdir):
-        warn("'%s' already exists, skipping opencl-hdr download!" % destdir)
+        warn("'%s' already exists, skipping opencl-hdr download!" % destdir, **kw)
         return 2
 
-    info("creating '%s'" % destdir)
+    info("creating '%s'" % destdir, **kw)
     os.makedirs(destdir, mode=destdir_mode)
 
     url_base = "https://www.khronos.org/registry/cl/api/%s" % ver
@@ -202,13 +287,14 @@ def dload_opencl_hdr(**kw):
                     'cl_gl_ext.h',
                     'cl2.hpp'   ]
     else:
-        warn("unsupported OpenCL version '%s'" % ver)
+        warn("unsupported OpenCL version '%s'" % ver, **kw)
         return 2
 
-    info("starting downloads from '%s'" % url_base)
     for f in files:
-        url = url_base + f
-        info("downloading '%s' -> '%s'" % (f, os.path.join(destdir,f)))
+        src = '/'.join([url_base, f])
+        dst = os.path.join(destdir,f)
+        info("downloading '%s' -> '%s'" % (src, dst), **kw)
+        hoarder.urlretrieve(src, dst)
 
     return 0
 
@@ -224,7 +310,7 @@ def dload_opencl_ldr(**kw):
 
     if clean:
         if os.path.exists(destdir):
-            info("removing '%s'" % destdir)
+            info("removing '%s'" % destdir, **kw)
             shutil.rmtree(destdir)
         return 0
 
@@ -234,17 +320,19 @@ def dload_opencl_ldr(**kw):
         if ver is None:
             try: ver = kw[k]
             except KeyError: ver = None
+    if ver is None:
+        ver = default_opencl_version
 
     try: destdir_mode = kw['destdir_mode']
     except KeyError: destdir_mode = 0755
 
     if os.path.exists(destdir):
-        warn("'%s' already exists, skipping opencl-ldr download!" % destdir)
+        warn("'%s' already exists, skipping opencl-ldr download!" % destdir, **kw)
         return 2
 
     patchfile = None
     if ver == '1.0' or ver == '1.1':
-        warn("ICD loader for OpenCL %s can't be downloaded, sorry" % ver)
+        warn("ICD loader for OpenCL %s can't be downloaded, sorry" % ver, **kw)
         return 2
     elif ver == '1.2':
         url = "https://www.khronos.org/registry/cl/specs/opencl-icd-1.2.11.0.tgz"
@@ -253,21 +341,24 @@ def dload_opencl_ldr(**kw):
         url = "http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz"
         patchfile = 'opencl-icd-loader-2.0.5.0.patch'
     else:
-        warn("unsupported OpenCL version '%s', skipping opencl-ldr download" % ver)
+        warn("unsupported OpenCL version '%s', skipping opencl-ldr download" % ver, **kw)
         return 2
 
     tmpdir = tempfile.mkdtemp()
-    info("created '%s'" % tmpdir)
+    info("created '%s'" % tmpdir, **kw)
 
-    info("downloading '%s' to '%s'" % (url,tmpdir))
+    info("downloading '%s' to '%s'" % (url,tmpdir), **kw)
     hoarder.urluntar(url, path=tmpdir, strip_components=1)
-    dload_opencl_hdr(opencl_hdr_ver=ver, destdir=os.path.join(tmpdir,'CL'))
+    # OpenCL headers must be downloaded separately, they're not included in ICD loader's tarball
+    dload_opencl_hdr(opencl_hdr_ver=ver, destdir=os.path.join(tmpdir,'inc','CL'))
+    # EGL headers are required to build OpenCL ICD loader (at least on Windows)
+    dload_egl_hdr(egl_hdr_ver=default_egl_version, destdir=os.path.join(tmpdir, 'inc', 'EGL'))
 
     if patchfile:
         patchfile = os.path.join(patchdir, patchfile)
-        info("reading patch file '%s'" % patchfile)
+        info("reading patch file '%s'" % patchfile, **kw)
         patch = hoarder.patch.fromfile(patchfile)
-        info("applying patch '%s'" % patchfile)
+        info("applying patch '%s'" % patchfile, **kw)
         patch.apply(strip=1, root=tmpdir)
 
     env = os.environ.copy()
@@ -277,45 +368,57 @@ def dload_opencl_ldr(**kw):
         env['CFLAGS'] = '-Wno-deprecated-declarations -Wno-implicit-function-declaration'
         files = ['bin/libOpenCL.so*']
     elif sysname == 'Windows':
+        vsnumbers = ['100', '110', '120', '130', '140']
         build_cmd = [os.path.join(tmpdir, 'build_using_cmake.bat')]
         files = ['bin/OpenCL.dll']
+        # %VS90COMNTOOLS% is used by the build_using_cmake.bat, but these days
+        # it's rather %VS140COMNTOOLS% (VS 14.0) or such 
+        try: env['VS90COMNTOOLS']
+        except KeyError:
+            for vsnum in reversed(vsnumbers):
+                try: vspath = env['VS%sCOMNTOOLS' % vsnum]
+                except KeyError: pass
+                else:
+                    if os.path.exists(os.path.join(vspath,'vsvars32.bat')):
+                        env['VS90COMNTOOLS'] = vspath
+                        break
     elif sysname.startswith('CYGWIN'):
         build_cmd = ['make']
         env['CMAKE_LEGACY_CYGWIN_WIN32'] = '1'
         env['CFLAGS'] = '-mwin32 -Wno-deprecated-declarations -Wno-implicit-function-declaration'
         files = [ 'bin/cygOpenCL-?.dll', 'libOpenCL.dll.a' ]
     else:
-        warn('unsupported operating system "%s", aborting opencl-ldr build' % sysname)
-        info("removing '%s'" % tmpdir)
-        shutil.rmtree(tmpdir)
+        warn('unsupported operating system "%s", aborting opencl-ldr build' % sysname, **kw)
+        info("removing '%s'" % tmpdir, **kw)
+        #shutil.rmtree(tmpdir)
         return 2
 
-    info("building OpenCL ICD loader")
+    info("building OpenCL ICD loader", **kw)
     p = subprocess.Popen(build_cmd, env = env, cwd = tmpdir)
     err = p.wait()
     if err != 0:
         cmdline = subprocess.list2cmdline(build_cmd)
-        warn('%s returned error code %d, aborting opencl-ldr build' % (cmdline, err))
-        info("removing '%s'" % tmpdir)
-        shutil.rmtree(tmpdir)
+        warn('%s returned error code %d, aborting opencl-ldr build' % (cmdline, err), **kw)
+        info("removing '%s'" % tmpdir, **kw)
+        #shutil.rmtree(tmpdir)
         return err
         
-    info("creating '%s'" % destdir)
+    info("creating '%s'" % destdir, **kw)
     os.makedirs(destdir, mode=0755)
 
     for fglob in files:
         for src in glob.glob(os.path.join(tmpdir, fglob)):
             fname = os.path.basename(src)
             dst = os.path.join(destdir, fname)
-            info("copy '%s' '%s'" %(src, dst))
+            info("copy '%s' '%s'" %(src, dst), **kw)
             if os.path.islink(src):
                 linkto = os.readlink(src)
                 os.symlink(linkto, dst)
             else:
                 shutil.copy(src, dst)
 
-    info("removing '%s'" % tmpdir)
-    shutil.rmtree(tmpdir)
+    info("removing '%s'" % tmpdir, **kw)
+    #shutil.rmtree(tmpdir)
     return 0
 
 
@@ -324,10 +427,11 @@ for pkg in args.packages:
         dload_cxxtest(**vars(args))
     elif pkg.lower() == 'opencl-hdr':
         dload_opencl_hdr(**vars(args))
+        dload_egl_hdr(**vars(args))
     elif pkg.lower() == 'opencl-ldr':
         dload_opencl_ldr(**vars(args))
     else:
-        warn("unsupported package name: %r, skipping!" % pkg)
+        warn("unsupported package name: %r, skipping!" % pkg, **vars(args))
 
 # Local Variables:
 # # tab-width:4
