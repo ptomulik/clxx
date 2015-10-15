@@ -21,28 +21,24 @@ namespace clxx { class current_runtime_test_suite; }
 class clxx::current_runtime_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test__current_runtime() {{{
+  /** // doc: test__current_runtime__binding() {{{
    * \todo Write documentation
    */ // }}}
-  void test__current_runtime( )
+  void test__current_runtime__binding( )
   {
     clxx::runtime r;
 
     current_runtime::reset_binding();
     TS_ASSERT(current_runtime::binding() == current_instance_default_binding());
-    TS_ASSERT(&current_runtime::get() != nullptr);
 
     current_runtime::bind_static_instance();
     TS_ASSERT(current_runtime::binding() == current_instance_binding_t::static_instance);
-    TS_ASSERT(&current_runtime::get() != nullptr);
 
     current_runtime::bind_thread_instance();
     TS_ASSERT(current_runtime::binding() == current_instance_binding_t::thread_instance);
-    TS_ASSERT(&current_runtime::get() != nullptr);
 
     current_runtime::bind_custom_instance(r);
     TS_ASSERT(current_runtime::binding() == current_instance_binding_t::custom_instance);
-    TS_ASSERT(&current_runtime::get() == &r);
   }
 };
 
