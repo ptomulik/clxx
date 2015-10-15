@@ -49,7 +49,8 @@ public:
   {
     struct t : current_instance<t, int> {};
     TS_ASSERT_EQUALS(t::binding(), current_instance_default_binding());
-    TS_ASSERT(&t::get() != nullptr);
+    int *p = &t::get();
+    TS_ASSERT(p != nullptr);
   }
   /** // doc: test__binding__static_instance() {{{
    * \todo Write documentation
@@ -59,7 +60,8 @@ public:
     struct t : current_instance<t, int> {};
     t::bind_static_instance();
     TS_ASSERT_EQUALS(t::binding(), current_instance_binding_t::static_instance);
-    TS_ASSERT(&t::get() != nullptr);
+    int *p = &t::get();
+    TS_ASSERT(p != nullptr);
   }
   /** // doc: test__binding__thread_instance() {{{
    * \todo Write documentation
@@ -69,7 +71,8 @@ public:
     struct t : current_instance<t, int> {};
     t::bind_thread_instance();
     TS_ASSERT_EQUALS(t::binding(), current_instance_binding_t::thread_instance);
-    TS_ASSERT(&t::get() != nullptr);
+    int *p = &t::get();
+    TS_ASSERT(p != nullptr);
   }
   /** // doc: test__binding__custom_instance() {{{
    * \todo Write documentation
