@@ -23,7 +23,7 @@ topsrcdir = os.path.realpath(os.path.join(scriptdir, '..'))
 
 default_opencl_version = '2.0'
 default_egl_version = '1.5'
-all_packages = ['cxxtest', 'opencl-hdr', 'opencl-ldr']
+all_packages = ['cxxtest', 'opencl-hdr', 'opencl-ldr', 'swig']
 
 # Validate and return OpenCL version
 def opencl_version_string(v):
@@ -390,7 +390,7 @@ def dload_opencl_ldr(**kw):
     else:
         warn('unsupported operating system "%s", aborting opencl-ldr build' % sysname, **kw)
         info("removing '%s'" % tmpdir, **kw)
-        #shutil.rmtree(tmpdir)
+        shutil.rmtree(tmpdir)
         return 2
 
     info("building OpenCL ICD loader", **kw)
@@ -400,7 +400,7 @@ def dload_opencl_ldr(**kw):
         cmdline = subprocess.list2cmdline(build_cmd)
         warn('%s returned error code %d, aborting opencl-ldr build' % (cmdline, err), **kw)
         info("removing '%s'" % tmpdir, **kw)
-        #shutil.rmtree(tmpdir)
+        shutil.rmtree(tmpdir)
         return err
         
     info("creating '%s'" % destdir, **kw)
@@ -418,7 +418,58 @@ def dload_opencl_ldr(**kw):
                 shutil.copy(src, dst)
 
     info("removing '%s'" % tmpdir, **kw)
-    #shutil.rmtree(tmpdir)
+    shutil.rmtree(tmpdir)
+    return 0
+
+def dload_swig(**kw):
+    try: clean = kw['clean']
+    except KeyError: clean = False
+    try: destdir = kw['destdir']
+    except KeyError: destdir = os.path.join(topsrcdir, 'swig')
+
+    if clean:
+        if os.path.exists(destdir):
+            info("removing '%s'" % destdir, **kw)
+            shutil.rmtree(destdir)
+        return 0
+
+    try: destdir_mode = kw['destdir_mode']
+    except KeyError: destdir_mode = 0755
+
+    if os.path.exists(destdir):
+        warn("'%s' already exists, skipping swig download!" % destdir, **kw)
+        return 2
+
+    tmpdir = tempfile.mkdtemp()
+    info("created '%s'" % tmpdir, **kw)
+
+    url = "https://github.com/ptomulik/swig/archive/ptomulik-latest.tar.gz"
+    info("downloading '%s' to '%s'" % (url,tmpdir), **kw)
+    hoarder.urluntar(url, path=tmpdir, strip_components=1)
+
+    env = os.environ.copy()
+
+    # FIXME: what about Windows? (PowerShell script?)
+    # FIXME: what about required swig deps (yodl,...)
+    info("building swig", **kw)
+    commands = [
+        ['./autogen.sh'],
+        ['./configure', '--prefix=%s' % os.path.join(topsrcdir, "swig")],
+        ['make'],
+        ['make', 'install']
+    ]
+    for build_cmd in commands:
+        p = subprocess.Popen(build_cmd, env = env, cwd = tmpdir)
+        err = p.wait()
+        if err != 0:
+            cmdline = subprocess.list2cmdline(build_cmd)
+            warn('%s returned error code %d, aborting opencl-ldr build' % (cmdline, err), **kw)
+            info("removing '%s'" % tmpdir, **kw)
+            shutil.rmtree(tmpdir)
+            return err
+
+    info("removing '%s'" % tmpdir, **kw)
+    shutil.rmtree(tmpdir)
     return 0
 
 
@@ -430,6 +481,8 @@ for pkg in args.packages:
         dload_egl_hdr(**vars(args))
     elif pkg.lower() == 'opencl-ldr':
         dload_opencl_ldr(**vars(args))
+    elif pkg.lower() == 'swig':
+        dload_swig(**vars(args))
     else:
         warn("unsupported package name: %r, skipping!" % pkg, **vars(args))
 
