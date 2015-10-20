@@ -28,12 +28,15 @@ install:
   - sudo apt-get --no-install-recommends -y install cxxtest;
   - sudo apt-get --no-install-recommends -y install scons;
 #  - sudo apt-get --no-install-recommends -y install swig
-  - if $COMPILE; then sudo apt-get -y build-dep swig; fi
-  - if $COMPILE; then sudo apt-get -y install yodl; fi
-  - if $COMPILE; then (cd /tmp && git clone -b ptomulik-latest https://github.com/ptomulik/swig.git); fi
-  - if $COMPILE; then (cd /tmp/swig/ && ./autogen.sh && ./configure && make && sudo make install); fi
-  - if $COMPILE; then sudo apt-get --no-install-recommends -y install nvidia-opencl-dev; fi
-  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libegl1-mesa-dev; fi
+  - if $COMPILE; then
+      sudo apt-get -y build-dep swig;
+      sudo apt-get -y install yodl;
+      ./bin/download-deps.py swig;
+    fi
+  - if $COMPILE; then
+      sudo apt-get --no-install-recommends -y install nvidia-opencl-dev;
+      sudo apt-get --no-install-recommends -y install libegl1-mesa-dev;
+    fi
   - if $COMPILE; then sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev; fi
 #  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler; fi
   - if $COMPILE; then sudo pip install cpp-coveralls; fi
