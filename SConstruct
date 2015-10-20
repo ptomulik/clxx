@@ -20,7 +20,9 @@
 
 import os
 
-env = Environment()
+# Create environment with no tools. The tools with be initialized at
+# appropriate moments.
+env = Environment(tools = [])
 
 #############################################################################
 # VERSION

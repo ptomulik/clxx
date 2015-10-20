@@ -60,8 +60,8 @@ ifiles = []
 for mfile in mfiles:
     mdir = mfile.get_dir()
     ifile = env.Install('${libdir}/python/dist-packages/%s' % mdir, mfile)
-    env.Ignore("${INSTALL_SANDBOX}${libdir}/python/dist-packages/%s" % mdir, ifile)
     ifiles += ifile;
+for f in ifiles: env.Ignore(f.dir, f)
 env.Alias('install-python-clxx', ifiles)
 env.Alias('install', 'install-python-clxx')
 

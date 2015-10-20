@@ -1,158 +1,11 @@
-
 # @COPYRIGHT@
 # Licensed under MIT license (LICENSE.txt).
 
+##############################################################################
+# Checking for the existence/feasibility of certain OpenCL functions.
+##############################################################################
+
 Import('conf')
-
-import re
-import sys
-import SCons.Util
-from SConsGnu import CcChecks
-from SConsGnu.Cc import CanonCC, CanonCXX
-
-_ccWDeprecatedDeclarations = None;
-_ccWNoDeprecatedDeclarations = None;
-_cxxWDeprecatedDeclarations = None;
-_cxxWNoDeprecatedDeclarations = None;
-_ccWerror = None;
-_cxxWerror = None;
-
-def HasCcWflag(conf, flag):
-    d = conf.env['CC_HAS_FLAG']
-    d[flag] = conf.CheckCCFlag(flag, CCFLAGS=['-Werror'])
-def HasCxxWflag(conf, flag):
-    d = conf.env['CXX_HAS_FLAG']
-    d[flag] = conf.CheckCXXFlag(flag, CXXFLAGS=['-Werror'])
-
-def CheckClHVersion(ctx, ver):
-    ctx.Message('Checking for OpenCL %s support in CL/cl.h... ' % ver)
-    prog = """
-#if defined(__CYGWIN__)
-# define _WIN32 1
-#endif
-#include <CL/cl.h>
-int main(int argc, char* argv[]) {
-    (void)argc; /* prevent "unused argument argc" warning */
-    (void)argv; /* prevent "unused argument argv" warning */
-#if CL_VERSION_%s_%s
-    return 0;
-#else
-# error CL_VERSION_%s_%s not defined
-    return 1;
-#endif
-}
-
-""" % tuple(ver.split('.') + ver.split('.'))
-    success = ctx.TryCompile(prog,'.c')
-    ctx.Result(success)
-    return success
-
-def TryLinkClFunction(ctx, fun, code):
-    platform = ctx.env.subst('$PLATFORM')
-    prefix = None
-    suffix = None
-    if platform == "cygwin":
-      prefix = ctx.env.subst('$IMPLIBPREFIX')
-      suffix = ctx.env.subst('$IMPLIBSUFFIX')
-    if not prefix:
-        prefix = ctx.env.subst('$SHLIBPREFIX') or 'lib'
-    if not suffix:
-        suffix = ctx.env.subst('$SHLIBSUFFIX') or '.so'
-    ctx.Message('Checking whether %s() exists in %sOpenCL%s... ' % (fun,prefix,suffix))
-    prog = """
-#if defined(__CYGWIN__)
-# define _WIN32 1
-#endif
-#include <CL/cl.h>
-int main(int argc, char* argv[]) {
-    (void)argc; /* prevent "unused argument argc" warning */
-    (void)argv; /* prevent "unused argument argv" warning */
-    %s
-    return 0;
-}
-
-""" % code
-    flags = { '-CCFLAGS'    : _ccWDeprecatedDeclarations,
-              '-CFLAGS'     : _ccWDeprecatedDeclarations,
-              'CCFLAGS'     : _ccWNoDeprecatedDeclarations }
-    success = CcChecks.TryLinkWithFlags(ctx, flags, prog, '.c')
-    ctx.Result(success)
-    return success;
-
-def TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides):
-    caller_did_show_result = ctx.did_show_result
-    if not caller_did_show_result:
-        ctx.Message('Checking whether %s() compiles with %s' % (fun, flag))
-        ctx.did_show_result = 1
-    prog = """
-#if defined(__CYGWIN__)
-# define _WIN32 1
-#endif
-#include <CL/cl.h>
-int main(int argc, char* argv[]) {
-    (void)argc; /* prevent "unused argument argc" warning */
-    (void)argv; /* prevent "unused argument argv" warning */
-    %s
-    return 0;
-}
-
-""" % code
-    success = CcChecks.TryCompileWithFlags(ctx, flags, prog, **overrides)
-    if not caller_did_show_result:
-        ctx.did_show_result = 0
-        ctx.Result(success)
-    return success
-
-def CheckFunctionDeclared(ctx, fun, code, includes = None, extension = '.c', **overrides):
-    caller_did_show_result = ctx.did_show_result
-    if not caller_did_show_result:
-        ctx.Message('Checking whether %s is declared... ' % fun)
-        ctx.did_show_result = 1
-    if not includes:
-        includes = ""
-
-    prog = """
-%s
-int main()
-{
-  %s
-  return 0;
-}
-""" % (includes, code)
-
-    success = ctx.TryCompile(prog, extension)
-    if not caller_did_show_result:
-        ctx.did_show_result = 0
-        ctx.Result(success)
-    return success 
-
-def CheckClFunctionDeclared(ctx, fun, code, **overrides):
-    caller_did_show_result = ctx.did_show_result
-    if not caller_did_show_result:
-        ctx.Message('Checking whether %s() is declared... ' % fun)
-        ctx.did_show_result = 1
-    flags = { 'CCFLAGS'     : _ccWNoDeprecatedDeclarations,
-              '-CCFLAGS'    : _ccWDeprecatedDeclarations,
-              '-CFLAGS'     : _ccWDeprecatedDeclarations }
-    success = TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides)
-    if not caller_did_show_result:
-        ctx.did_show_result = 0
-        ctx.Result(success)
-    return success
-
-def CheckClFunctionNotDeprecated(ctx, fun, code, **overrides):
-    caller_did_show_result = ctx.did_show_result
-    if not caller_did_show_result:
-        ctx.Message('Checking whether %s() is not deprecated... ' % fun)
-        ctx.did_show_result = 1
-    flags = { 'CCFLAGS'     : _ccWDeprecatedDeclarations + ' ' + _ccWerror,
-              '-CCFLAGS'    : _ccWNoDeprecatedDeclarations,
-              '-CFLAGS'     : _ccWNoDeprecatedDeclarations }
-    success = TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides)
-    if not caller_did_show_result:
-        ctx.did_show_result = 0
-        ctx.Result(success)
-    return success
 
 def CharacterizeClFunction(conf, fun, code):
     # Check if a function is declared in CL/cl.h
@@ -165,77 +18,11 @@ def CharacterizeClFunction(conf, fun, code):
         if conf.TryLinkClFunction(fun, code):
             conf.Define('CLXX_IS_LINKABLE_%s' % fun, 1, 'libOpenCL had the %s when libclxx was build' % fun)
 
-conf.AddTests(CcChecks.Tests())
-conf.AddTests({ 'CheckFunctionDeclared' : CheckFunctionDeclared })
-conf.AddTests({ 'CheckClHVersion' : CheckClHVersion })
-conf.AddTests({ 'TryLinkClFunction' : TryLinkClFunction })
-conf.AddTests({ 'TryCompileClFunctionWithFlags' : TryCompileClFunctionWithFlags })
-conf.AddTests({ 'CheckClFunctionDeclared' : CheckClFunctionDeclared })
-conf.AddTests({ 'CheckClFunctionNotDeprecated' : CheckClFunctionNotDeprecated })
-
-conf.env['CC_HAS_FLAG'] = {}
-conf.env['CXX_HAS_FLAG'] = {}
-
 ##############################################################################
-# Version stuff
-##############################################################################
-ver_str = conf.env.subst("${CLXX_VERSION}")
-ver_triple = map(lambda x : int(x), re.findall(r'([0-9]+)', ver_str)[0:3])
-(ver_major, ver_minor, ver_patch) = ver_triple
-ver_hex = (ver_major << 16) | (ver_minor << 8) | ver_patch;
-conf.Define('CLXX_VERSION_STRING', '"%s"' % ver_str, "Library version as string")
-conf.Define('CLXX_VERSION_MAJOR', ver_major, "Library version: major number")
-conf.Define('CLXX_VERSION_MINOR', ver_minor, "Library version: minor number")
-conf.Define('CLXX_VERSION_PATCH', ver_patch, "Library version: patch number")
-conf.Define('CLXX_VERSION', "0x{0:06x}".format(ver_hex), "Library version: 0xMMmmpp (MM - major, mm - minor, pp - patch)")
-##############################################################################
-
-if sys.maxsize > 2**32:
-    conf.Define( 'CLXX_ARCH_64BIT', None, "Library was built for 64-bit host architecture" )
-
-cc = CanonCC(conf.env)
-if cc == 'clang':
-    HasCcWflag(conf, '-Wdeprecated-register')
-    HasCcWflag(conf, '-Wdeprecated-declarations')
-    HasCcWflag(conf, '-Wunused-parameter')
-    _ccWDeprecatedDeclarations = '-Wdeprecated-declarations'
-    _ccWNoDeprecatedDeclarations = '-Wno-deprecated-declarations'
-    _ccWerror = '-Werror'
-elif cc == 'gcc':
-    HasCcWflag(conf, '-Wmaybe-uninitialized')
-    HasCcWflag(conf, '-Wdeprecated-declarations')
-    _ccWDeprecatedDeclarations = '-Wdeprecated-declarations'
-    _ccWNoDeprecatedDeclarations = '-Wno-deprecated-declarations'
-    _ccWerror = '-Werror'
-
-cxx = CanonCXX(conf.env)
-if cxx == 'clang++':
-    HasCxxWflag(conf, '-Wdeprecated-register')
-    HasCxxWflag(conf, '-Wdeprecated-declarations')
-    HasCxxWflag(conf, '-Wunused-parameter')
-    _cxxWDeprecatedDeclarations = '-Wdeprecated-declarations'
-    _cxxWNoDeprecatedDeclarations = '-Wno-deprecated-declarations'
-    _cxxWerror = '-Werror'
-elif cxx == 'g++':
-    HasCxxWflag(conf, '-Wmaybe-uninitialized')
-    HasCxxWflag(conf, '-Wdeprecated-declarations')
-    _cxxWDeprecatedDeclarations = '-Wdeprecated-declarations'
-    _cxxWNoDeprecatedDeclarations = '-Wno-deprecated-declarations'
-    _cxxWerror = '-Werror'
-
-##############################################################################
-# At the time (2015.09.04) standard library on cygwin and mingw is still
-# missing some string and i/o functions such as std::to_string() or
-# std::snprintf(). We check for their existence to be able to overcome this
-# issue somehow in the c++ code.
-##############################################################################
-_snprintf="""std::snprintf(static_cast<char*>(0), 0, "%d\\n", 10);"""
-if not conf.CheckFunctionDeclared('std::snprintf', _snprintf, '#include <cstdio>', '.cpp'):
-    conf.Define('CLXX_NO_STD_SNPRINTF', 1, 'std::snprintf was not provided by <cstdio>')
-_to_string="""std::to_string(123);"""
-if not conf.CheckFunctionDeclared('std::to_string', _to_string, '#include <string>', '.cpp'):
-    conf.Define('CLXX_NO_STD_TO_STRING', 1, 'std::to_string was not provided by <string>' )
-##############################################################################
+## 
+## if sys.maxsize > 2**32:
+##     conf.Define( 'CLXX_ARCH_64BIT', None, "Library was built for 64-bit host architecture" )
+## 
 
 # Prepare modified environment for the OpenCL checks
 orgEnv = conf.env
@@ -250,10 +37,6 @@ if conf.CheckClHVersion('1.2'):
     conf.Define( 'CLXX_CL_H_VERSION_1_2', 1, 'Library was built against CL/cl.h which had OpenCL 1.2 features')
 if conf.CheckClHVersion('2.0'):
     conf.Define( 'CLXX_CL_H_VERSION_2_0', 1, 'Library was built against CL/cl.h which had OpenCL 2.0 features')
-
-#
-# Checking for the existence/feasibility of certain OpenCL functions.
-#
 
 #
 # clCreateSubDevices()

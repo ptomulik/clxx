@@ -23,7 +23,7 @@ topsrcdir = os.path.realpath(os.path.join(scriptdir, '..'))
 
 default_opencl_version = '2.0'
 default_egl_version = '1.5'
-all_packages = ['cxxtest', 'opencl-hdr', 'opencl-ldr', 'swig']
+all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig']
 
 # Validate and return OpenCL version
 def opencl_version_string(v):
@@ -66,7 +66,7 @@ parser.add_argument(
         help='version of OpenCL headers to be downloaded'
         )
 parser.add_argument(
-        '--opencl-ldr-ver',
+        '--opencl-icd-ldr-ver',
         type=opencl_version_string,
         default=None,
         metavar='VER',
@@ -298,7 +298,7 @@ def dload_opencl_hdr(**kw):
 
     return 0
 
-def dload_opencl_ldr(**kw):
+def dload_opencl_icd_ldr(**kw):
     """Download and build OpenCL ICD loader (libOpenCL.so)
 
     This requires 'cmake' and 'make' to be installed"""
@@ -316,7 +316,7 @@ def dload_opencl_ldr(**kw):
 
 
     ver = None
-    for k in ('opencl_ldr_ver', 'opencl_ver'):
+    for k in ('opencl_icd_ldr_ver', 'opencl_ver'):
         if ver is None:
             try: ver = kw[k]
             except KeyError: ver = None
@@ -327,7 +327,7 @@ def dload_opencl_ldr(**kw):
     except KeyError: destdir_mode = 0755
 
     if os.path.exists(destdir):
-        warn("'%s' already exists, skipping opencl-ldr download!" % destdir, **kw)
+        warn("'%s' already exists, skipping opencl-icd-ldr download!" % destdir, **kw)
         return 2
 
     patchfile = None
@@ -341,7 +341,7 @@ def dload_opencl_ldr(**kw):
         url = "http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz"
         patchfile = 'opencl-icd-loader-2.0.5.0.patch'
     else:
-        warn("unsupported OpenCL version '%s', skipping opencl-ldr download" % ver, **kw)
+        warn("unsupported OpenCL version '%s', skipping opencl-icd-ldr download" % ver, **kw)
         return 2
 
     tmpdir = tempfile.mkdtemp()
@@ -388,7 +388,7 @@ def dload_opencl_ldr(**kw):
         env['CFLAGS'] = '-mwin32 -Wno-deprecated-declarations -Wno-implicit-function-declaration'
         files = [ 'bin/cygOpenCL-?.dll', 'libOpenCL.dll.a' ]
     else:
-        warn('unsupported operating system "%s", aborting opencl-ldr build' % sysname, **kw)
+        warn('unsupported operating system "%s", aborting opencl-icd-ldr build' % sysname, **kw)
         info("removing '%s'" % tmpdir, **kw)
         shutil.rmtree(tmpdir)
         return 2
@@ -398,7 +398,7 @@ def dload_opencl_ldr(**kw):
     err = p.wait()
     if err != 0:
         cmdline = subprocess.list2cmdline(build_cmd)
-        warn('%s returned error code %d, aborting opencl-ldr build' % (cmdline, err), **kw)
+        warn('%s returned error code %d, aborting opencl-icd-ldr build' % (cmdline, err), **kw)
         info("removing '%s'" % tmpdir, **kw)
         shutil.rmtree(tmpdir)
         return err
@@ -463,7 +463,7 @@ def dload_swig(**kw):
         err = p.wait()
         if err != 0:
             cmdline = subprocess.list2cmdline(build_cmd)
-            warn('%s returned error code %d, aborting opencl-ldr build' % (cmdline, err), **kw)
+            warn('%s returned error code %d, aborting opencl-icd-ldr build' % (cmdline, err), **kw)
             info("removing '%s'" % tmpdir, **kw)
             shutil.rmtree(tmpdir)
             return err
@@ -479,8 +479,8 @@ for pkg in args.packages:
     elif pkg.lower() == 'opencl-hdr':
         dload_opencl_hdr(**vars(args))
         dload_egl_hdr(**vars(args))
-    elif pkg.lower() == 'opencl-ldr':
-        dload_opencl_ldr(**vars(args))
+    elif pkg.lower() == 'opencl-icd-ldr':
+        dload_opencl_icd_ldr(**vars(args))
     elif pkg.lower() == 'swig':
         dload_swig(**vars(args))
     else:

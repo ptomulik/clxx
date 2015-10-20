@@ -1,0 +1,16 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import('conf')
+
+import sys
+
+if sys.maxsize > 2**32:
+    conf.Define( 'CLXX_ARCH_64BIT', None, "Library was built for 64-bit host architecture" )
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

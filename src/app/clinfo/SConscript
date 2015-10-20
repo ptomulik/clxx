@@ -10,7 +10,8 @@ libs = CLVar('clxx_app_clinfo')
 clinfo = env.Program('clxx-clinfo', 'main.cpp', LIBS = libs)
 
 ibin = env.Install('${bindir}', clinfo)
-env.Ignore("${INSTALL_SANDBOX}${bindir}", ibin)
+for f in ibin:
+    env.Ignore(f.dir.get_path(), f)
 
 env.Alias('install-app-clinfo', ibin)
 env.Alias('install','install-app-clinfo')

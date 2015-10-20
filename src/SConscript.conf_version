@@ -1,0 +1,26 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import('conf')
+
+import re
+
+##############################################################################
+# Version stuff
+##############################################################################
+ver_str = conf.env.subst("${CLXX_VERSION}")
+ver_triple = map(lambda x : int(x), re.findall(r'([0-9]+)', ver_str)[0:3])
+(ver_major, ver_minor, ver_patch) = ver_triple
+ver_hex = (ver_major << 16) | (ver_minor << 8) | ver_patch;
+conf.Define('CLXX_VERSION_STRING', '"%s"' % ver_str, "Library version as string")
+conf.Define('CLXX_VERSION_MAJOR', ver_major, "Library version: major number")
+conf.Define('CLXX_VERSION_MINOR', ver_minor, "Library version: minor number")
+conf.Define('CLXX_VERSION_PATCH', ver_patch, "Library version: patch number")
+conf.Define('CLXX_VERSION', "0x{0:06x}".format(ver_hex), "Library version: 0xMMmmpp (MM - major, mm - minor, pp - patch)")
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

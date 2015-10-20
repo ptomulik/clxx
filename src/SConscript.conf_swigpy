@@ -2,78 +2,67 @@
 # @COPYRIGHT@
 # Licensed under MIT license (LICENSE.txt).
 
-Import('env')
-
-from SConsGnu.Cc import CanonCC, CanonCXX, QueryCCTarget, QueryCXXTarget
-from distutils import sysconfig
-
 #############################################################################
-# CC/CXX
-#############################################################################
-libdir = '%s' % env.Dir('lib').path
-env.AppendUnique(CPPPATH = [ '#%s' % libdir ])
-if env.Entry('#cxxtest').exists():
-    # Prefer locally installed cxxtest headers. 
-    env.AppendUnique(CPPPATH = ['#cxxtest'])
-env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % libdir])
-env.AppendUnique(LIBPATH = ['#%s' % libdir])
+# Configure 'swigpy' tool
 #############################################################################
 
-#############################################################################
-# PROTOC
-#############################################################################
-#env.Append(PROTOCPROTOPATH = [ env.Dir('lib').srcnode().path ])
-#env.Append(PROTOCPROTOPATH = [ env.Dir('lib').path ])
-#############################################################################
+Import('conf')
 
+import SConsGnu.Cc
+import distutils.sysconfig
+
+env = conf.env
+
+if env.get('SWIG'):
+    env.Tool('swigpy')
+else:
+    Return()
 
 #############################################################################
-# SWIG
+# Add local include paths
 #############################################################################
-swigflags = [
-    '-c++'
-]
-
-swigpath = [
-    '#%s' % env.Dir('lib').path,
-    '#%s' % env.Dir('lib/swig-clxx').path,
-    '/usr/include'
-]
-
-# Swig in general
-env.Append(SWIGFLAGS = swigflags)
-env.Append(SWIGPATH = swigpath)
-env.Append(SWIGPATH = [ '/usr/include' ])
+if env.Dir('#lib/OpenCL/include').exists():
+    env.AppendUnique(SWIGPY_CPPPATH = ['#/lib/OpenCL/include'])
+    env.AppendUnique(SWIGPY_SWIGPATH = ['#/lib/OpenCL/include'])
+if env.Dir('#lib/EGL/include').exists():
+    env.AppendUnique(SWIGPY_CPPPATH = ['#/lib/EGL/include'])
+    env.AppendUnique(SWIGPY_SWIGPATH = ['#/lib/EGL/include'])
 #############################################################################
-
+# 2. Prefer locally installed OpenCL shared/static library.
+#############################################################################
+if env.Dir('#lib/OpenCL/lib').exists():
+    env.AppendUnique(SWIGPY_LIBPATH = ['#/lib/OpenCL/lib'])
 
 #############################################################################
 # SWIGPY
 #############################################################################
 # SWIGPY_SWIGPATH
-env.Append(SWIGPY_SWIGPATH = ['.'])
-env.Append(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/python-clxx').path])
-env.Append(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/swig-clxx/python').path])
-env.Append(SWIGPY_SWIGPATH = swigpath)
-#env.Append(SWIGPY_SWIGPATH = ['/usr/include'])
+env.AppendUnique(SWIGPY_SWIGPATH = ['.'])
+env.AppendUnique(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/python-clxx').path])
+env.AppendUnique(SWIGPY_SWIGPATH = ['#%s' % env.Dir('lib/swig-clxx/python').path])
+env.AppendUnique(SWIGPY_SWIGPATH = env.get('SWIGPATH', []))
+#env.AppendUnique(SWIGPY_SWIGPATH = ['/usr/include'])
 
 # SWIGPY_SWIGFLAGS
-env.Append(SWIGPY_SWIGFLAGS = swigflags + ['-enumclass'])
+env.AppendUnique(SWIGPY_SWIGFLAGS = env.get('SWIGFLAGS',[]) + ['-enumclass'])
 
 # SWIGPY_CPPPATH
-env.Append(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib').path ])
-env.Append(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib/swig-clxx').path ])
-env.Append(SWIGPY_CPPPATH = sysconfig.get_python_inc())
+env.AppendUnique(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib').path ])
+env.AppendUnique(SWIGPY_CPPPATH = [ '#%s' % env.Dir('lib/swig-clxx').path ])
+env.AppendUnique(SWIGPY_CPPPATH = distutils.sysconfig.get_python_inc())
 
 # CFLAGS and SWIGPY_CXXFLAGS
 env.SetDefault(SWIGPY_CFLAGS = env.get('CFLAGS',[])[:])
 env.SetDefault(SWIGPY_CXXFLAGS = env.get('CXXFLAGS',[])[:])
 
-swigver = tuple([int(n) for n in env.subst('$SWIGVERSION').split('.')])
+try:
+    swigver = tuple([int(n) for n in env.subst('$SWIGVERSION').split('.')])
+except ValueError:
+    swigver = (1,0)
 
 # Additional SWIG flags for python. This evolved over months. Flags were
 # adjusted experimentally. Think twice before you decide to change anything!!
-cc = CanonCC(env)
+cc = SConsGnu.Cc.CanonCC(env)
 if cc == 'gcc':
     if '-Werror' in env['SWIGPY_CFLAGS']:
         if env.get('CC_HAS_FLAG', {}).get('-Wmaybe-uninitialized'):
@@ -101,7 +90,7 @@ elif cc  == 'clang':
         if (swigver < (3,)) and env.get('CC_HAS_FLAG',{}).get('-Wdeprecated-register'):
             env.AppendUnique(SWIGPY_CFLAGS = [ '-Wno-deprecated-register' ])
 
-cxx = CanonCXX(env)
+cxx = SConsGnu.Cc.CanonCXX(env)
 if cxx == 'g++':
     if '-Werror' in env['SWIGPY_CXXFLAGS']:
         if env.get('CXX_HAS_FLAG', {}).get('-Wmaybe-uninitialized'):

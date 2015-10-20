@@ -1,28 +1,47 @@
-
 # @COPYRIGHT@
 # Licensed under MIT license (LICENSE.txt).
 
 Import(['env'])
 
+def shall_configure(env):
+    """Returns true if we shall run configure scripts"""
+    return not env.GetOption('help')  and \
+           not env.GetOption('help_variables')
+
+def shall_recurse(env):
+    """Returns true if we shall recurse to descendant SConscrips"""
+    return not env.GetOption('help')  and \
+           not env.GetOption('help_variables')
+
 env['CLXX_PACKAGES'] = {}
 
-SConscript('SConscript.tools', exports = ['env'])
 SConscript('SConscript.defaults', exports = ['env'])
 SConscript('SConscript.cli', exports = ['env'])
-SConscript('SConscript.adjust', exports = ['env'])
-if not env.GetOption('clean') and not env.GetOption('help') \
-   and not env.GetOption('help_variables'):
-   conf = env.Configure(conf_dir = '.sconf_temp', log_file = 'config.log',
-                        config_h = 'lib/clxx/config.h')
-   SConscript('SConscript.conf', exports = ['conf'])
-   env = conf.Finish()
-SConscript('SConscript.adjust2', exports = ['env'])
 
-SConscript('lib/SConscript', exports = ['env'])
-SConscript('examples/SConscript', exports = ['env'])
-SConscript('doc/SConscript', exports = ['env'])
-SConscript('test/SConscript', exports = ['env'])
-SConscript('app/SConscript', exports = ['env'])
+if shall_configure(env):
+    conf = env.Configure(conf_dir = '.sconf_temp', log_file = 'config.log',
+                         config_h = 'lib/clxx/config.h')
+    SConscript('SConscript.conf_init',      exports = ['conf'])
+    SConscript('SConscript.conf_version',   exports = ['conf'])
+    SConscript('SConscript.conf_arch',      exports = ['conf'])
+    SConscript('SConscript.conf_cxx',       exports = ['conf'])
+    SConscript('SConscript.conf_libstdcxx', exports = ['conf'])
+    SConscript('SConscript.conf_opencl',    exports = ['conf'])
+    SConscript('SConscript.conf_swig',      exports = ['conf'])
+    SConscript('SConscript.conf_swigpy',    exports = ['conf'])
+    SConscript('SConscript.conf_cxxtest',   exports = ['conf'])
+    SConscript('SConscript.conf_gcccov',    exports = ['conf'])
+    SConscript('SConscript.conf_doxygen',   exports = ['conf'])
+    SConscript('SConscript.conf_doxyfile',  exports = ['conf'])
+    SConscript('SConscript.conf_install',   exports = ['conf'])
+    env = conf.Finish()
+
+if shall_recurse(env):
+    SConscript('lib/SConscript', exports = ['env'])
+    SConscript('examples/SConscript', exports = ['env'])
+    SConscript('doc/SConscript', exports = ['env'])
+    SConscript('test/SConscript', exports = ['env'])
+    SConscript('app/SConscript', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4

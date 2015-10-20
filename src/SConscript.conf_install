@@ -2,18 +2,12 @@
 # @COPYRIGHT@
 # Licensed under MIT license (LICENSE.txt).
 
-Import(['env'])
+Import(['conf'])
 
-env.Tool('cxxtest')
-env.Tool('doxyfile')
-env.Tool('doxygen')
-env.Tool('gcccov')
-env.Tool('swig')
-env.Tool('swigpy')
+env = conf.env
 
 # Pre-load 'install' tool to create 'install_sandbox' option
 env.Tool('install')
-env['INSTALL_SANDBOX'] = GetOption('install_sandbox')
 
 # Local Variables:
 # # tab-width:4

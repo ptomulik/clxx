@@ -29,10 +29,10 @@ overrides = {
 lib = env.SharedLibrary('../clxx_app_clcc', sources, **overrides)
 
 ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
-env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+for f in ilib: env.Ignore(f.dir.get_path(), f)
 
 iheaders = env.Install("${includedir}/clxx/app/clcc", headers)
-env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/app/clcc", iheaders)
+for f in iheaders: env.Ignore(f.dir.get_path(), f)
 
 env.Alias('install-libclxx_app_clcc-headers', iheaders)
 env.Alias('install-libclxx_app_clcc-lib', ilib)

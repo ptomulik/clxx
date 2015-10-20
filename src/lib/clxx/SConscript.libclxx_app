@@ -57,7 +57,7 @@ overrides = {
 lib = env.SharedLibrary('../clxx_app', sources, **overrides)
 
 ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
-env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+for f in ilib: env.Ignore(f.dir, f)
 
 iheaders = NodeList()
 for header in headers:

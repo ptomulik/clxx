@@ -6,7 +6,7 @@
  * \todo Write documentation
  */ // }}}
 
-%module(package="clxx") platform_query
+%module(package="clxx.info") platform_query
 %feature("autodoc","3");
 %include <clxx/info/platform_query.li.i>
 

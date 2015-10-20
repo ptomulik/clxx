@@ -12,14 +12,14 @@ Import(['env'])
 ##############################################################################
 def munge_os_environ(ose):
     """Apply appropriate converters to variables from OS environment"""
-    clvars = CcVars.GVarNames(categories = 'flags')
-    res = ose.copy()
-    for fv in clvars:
+    flags = CcVars.GVarNames(categories = 'flags')
+    result = ose.copy()
+    for flag in flags:
         try:
-            res[fv] = CLVar(ose[fv])
+            result[flag] = CLVar(ose[flag])
         except KeyError:
             pass
-    return res
+    return result
 ##############################################################################
 
 variables = Variables('.scons.variables')
@@ -42,11 +42,18 @@ decls = GVarDeclsU(
         'action'    : 'store_true',
         'help'      : 'Do not include CL/cl_egl.h, even if it is available'
     },
+    SWIG = {
+        'env_key'   : 'CLI_SWIG',
+        'opt_key'   : 'SWIG',
+        'option'    : '--swig',
+        'type'      : 'string',
+        'help'      : 'Specify path to SWIG executable'
+    },
 )
 ##############################################################################
 # Declare some standard CLI variables
 ##############################################################################
-decls.update(CcVars.DeclareGVars(defaults = env))
+decls.update(CcVars.DeclareGVars(defaults = env, env_key_transform = lambda s : 'CLI_%s' % s))
 decls.update(AcDirVars.DeclareGVars(defaults = env))
 ##############################################################################
 

@@ -1,0 +1,29 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+# Determine compiler and linker flags, additional libraries etc.
+# If provided, the default values will be replaced with corresponding values
+# from OS environment.
+
+Import('conf')
+
+##############################################################################
+# At the time (2015.09.04) standard library on cygwin and mingw is still
+# missing some string and i/o functions such as std::to_string() or
+# std::snprintf(). We check for their existence to be able to overcome this
+# issue somehow in the c++ code.
+##############################################################################
+_snprintf="""std::snprintf(static_cast<char*>(0), 0, "%d\\n", 10);"""
+if not conf.CheckFunctionDeclared('std::snprintf', _snprintf, '#include <cstdio>', '.cpp'):
+    conf.Define('CLXX_NO_STD_SNPRINTF', 1, 'std::snprintf was not provided by <cstdio>')
+_to_string="""std::to_string(123);"""
+if not conf.CheckFunctionDeclared('std::to_string', _to_string, '#include <string>', '.cpp'):
+    conf.Define('CLXX_NO_STD_TO_STRING', 1, 'std::to_string was not provided by <string>' )
+##############################################################################
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

@@ -10,7 +10,7 @@ libs = CLVar('clxx_app_clcc')
 clcc = env.Program('clxx-clcc', 'main.cpp', LIBS = libs)
 
 ibin = env.Install('${bindir}', clcc)
-env.Ignore("${INSTALL_SANDBOX}${bindir}", ibin)
+for f in ibin: env.Ignore(f.dir, f)
 
 env.Alias('install-app-clcc', ibin)
 env.Alias('install','install-app-clcc')

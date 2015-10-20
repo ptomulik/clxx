@@ -6,7 +6,7 @@
  * \todo Write documentation
  */ // }}}
 
-%module(package="clxx") device_query
+%module(package="clxx.info") device_query
 %feature("autodoc","3");
 %include <clxx/info/device_query.li.i>
 

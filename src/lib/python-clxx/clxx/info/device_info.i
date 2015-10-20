@@ -6,7 +6,7 @@
  * \todo Write documentation
  */ // }}}
 
-%module(package="clxx") device_info
+%module(package="clxx.info") device_info
 %feature("autodoc","3");
 %include <clxx/info/device_info.li.i>
 

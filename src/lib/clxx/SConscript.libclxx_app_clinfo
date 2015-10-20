@@ -43,10 +43,10 @@ overrides = {
 lib = env.SharedLibrary('../clxx_app_clinfo', sources, **overrides)
 
 ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
-env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+for f in ilib: env.Ignore(f.dir, f)
 
 iheaders = env.Install("${includedir}/clxx/app/clinfo", headers)
-env.Ignore("${INSTALL_SANDBOX}${includedir}/clxx/app/clinfo", iheaders)
+for f in iheaders: env.Ignore(f.dir, f)
 
 env.Alias('install-libclxx_app_clinfo-headers', iheaders)
 env.Alias('install-libclxx_app_clinfo-lib', ilib)

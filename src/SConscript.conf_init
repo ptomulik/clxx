@@ -1,0 +1,174 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import('conf')
+
+##############################################################################
+# Initialize configure contexts, add all the tests we use later
+##############################################################################
+
+import SConsGnu.CcChecks
+import SConsGnu.AcProgChecks
+
+##############################################################################
+def CheckClHVersion(ctx, ver):
+    ctx.Message('Checking for OpenCL %s support in CL/cl.h... ' % ver)
+    prog = """
+#if defined(__CYGWIN__)
+# define _WIN32 1
+#endif
+#include <CL/cl.h>
+int main(int argc, char* argv[]) {
+    (void)argc; /* prevent "unused argument argc" warning */
+    (void)argv; /* prevent "unused argument argv" warning */
+#if CL_VERSION_%s_%s
+    return 0;
+#else
+# error CL_VERSION_%s_%s not defined
+    return 1;
+#endif
+}
+
+""" % tuple(ver.split('.') + ver.split('.'))
+    success = ctx.TryCompile(prog,'.c')
+    ctx.Result(success)
+    return success
+##############################################################################
+
+##############################################################################
+def TryLinkClFunction(ctx, fun, code):
+    platform = ctx.env.subst('$PLATFORM')
+    prefix = None
+    suffix = None
+    if platform == "cygwin":
+      prefix = ctx.env.subst('$IMPLIBPREFIX')
+      suffix = ctx.env.subst('$IMPLIBSUFFIX')
+    if not prefix:
+        prefix = ctx.env.subst('$SHLIBPREFIX') or 'lib'
+    if not suffix:
+        suffix = ctx.env.subst('$SHLIBSUFFIX') or '.so'
+    ctx.Message('Checking whether %s() exists in %sOpenCL%s... ' % (fun,prefix,suffix))
+    prog = """
+#if defined(__CYGWIN__)
+# define _WIN32 1
+#endif
+#include <CL/cl.h>
+int main(int argc, char* argv[]) {
+    (void)argc; /* prevent "unused argument argc" warning */
+    (void)argv; /* prevent "unused argument argv" warning */
+    %s
+    return 0;
+}
+
+""" % code
+    # FIXME: the following flags should in fact depend on the compiler used
+    flags = { '-CCFLAGS'    : '-Wdeprecated-declarations',
+              '-CFLAGS'     : '-Wdeprecated-declarations',
+              'CCFLAGS'     : '-Wno-deprecated-declarations'}
+    success = SConsGnu.CcChecks.TryLinkWithFlags(ctx, flags, prog, '.c')
+    ctx.Result(success)
+    return success;
+##############################################################################
+
+##############################################################################
+def TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides):
+    caller_did_show_result = ctx.did_show_result
+    if not caller_did_show_result:
+        ctx.Message('Checking whether %s() compiles with %s' % (fun, flag))
+        ctx.did_show_result = 1
+    prog = """
+#if defined(__CYGWIN__)
+# define _WIN32 1
+#endif
+#include <CL/cl.h>
+int main(int argc, char* argv[]) {
+    (void)argc; /* prevent "unused argument argc" warning */
+    (void)argv; /* prevent "unused argument argv" warning */
+    %s
+    return 0;
+}
+
+""" % code
+    success = SConsGnu.CcChecks.TryCompileWithFlags(ctx, flags, prog, **overrides)
+    if not caller_did_show_result:
+        ctx.did_show_result = 0
+        ctx.Result(success)
+    return success
+##############################################################################
+
+##############################################################################
+def CheckFunctionDeclared(ctx, fun, code, includes = None, extension = '.c', **overrides):
+    caller_did_show_result = ctx.did_show_result
+    if not caller_did_show_result:
+        ctx.Message('Checking whether %s is declared... ' % fun)
+        ctx.did_show_result = 1
+    if not includes:
+        includes = ""
+
+    prog = """
+%s
+int main()
+{
+  %s
+  return 0;
+}
+""" % (includes, code)
+
+    success = ctx.TryCompile(prog, extension)
+    if not caller_did_show_result:
+        ctx.did_show_result = 0
+        ctx.Result(success)
+    return success 
+##############################################################################
+
+##############################################################################
+def CheckClFunctionDeclared(ctx, fun, code, **overrides):
+    caller_did_show_result = ctx.did_show_result
+    if not caller_did_show_result:
+        ctx.Message('Checking whether %s() is declared... ' % fun)
+        ctx.did_show_result = 1
+    # FIXME: the following flags should in fact depend on the compiler used
+    flags = { 'CCFLAGS'     : '-Wno-deprecated-declarations',
+              '-CCFLAGS'    : '-Wdeprecated-declarations',
+              '-CFLAGS'     : '-Wdeprecated-declarations'}
+    success = TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides)
+    if not caller_did_show_result:
+        ctx.did_show_result = 0
+        ctx.Result(success)
+    return success
+##############################################################################
+
+##############################################################################
+def CheckClFunctionNotDeprecated(ctx, fun, code, **overrides):
+    caller_did_show_result = ctx.did_show_result
+    if not caller_did_show_result:
+        ctx.Message('Checking whether %s() is not deprecated... ' % fun)
+        ctx.did_show_result = 1
+    # FIXME: the following flags should in fact depend on the compiler used
+    flags = { 'CCFLAGS'     : '-Wdeprecated-declarations -Werror',
+              '-CCFLAGS'    : '-Wno-deprecated-declarations',
+              '-CFLAGS'     : '-Wno-deprecated-declarations'}
+    success = TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides)
+    if not caller_did_show_result:
+        ctx.did_show_result = 0
+        ctx.Result(success)
+    return success
+##############################################################################
+
+##############################################################################
+conf.AddTests(SConsGnu.CcChecks.Tests())
+conf.AddTests(SConsGnu.AcProgChecks.Tests())
+conf.AddTests({ 'CheckFunctionDeclared' : CheckFunctionDeclared })
+conf.AddTests({ 'CheckClHVersion' : CheckClHVersion })
+conf.AddTests({ 'TryLinkClFunction' : TryLinkClFunction })
+conf.AddTests({ 'TryCompileClFunctionWithFlags' : TryCompileClFunctionWithFlags })
+conf.AddTests({ 'CheckClFunctionDeclared' : CheckClFunctionDeclared })
+conf.AddTests({ 'CheckClFunctionNotDeprecated' : CheckClFunctionNotDeprecated })
+##############################################################################
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

@@ -1,0 +1,169 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+#############################################################################
+# Configure and load 'default' scons tools.
+#############################################################################
+
+Import('conf')
+
+import os
+import re
+import SCons.Errors
+import SConsGnu.Cc
+import SConsGnu.CcChecks
+import SConsGnu.CcVars
+
+#############################################################################
+# Local utility functions
+#############################################################################
+def HasCcWflag(conf, flag):
+    """Check if the current C compiler supports -Wxxx flag"""
+    try: conf.env['CC_HAS_FLAG']
+    except KeyError: conf.env['CC_HAS_FLAG'] = {}
+    d = conf.env['CC_HAS_FLAG']
+    d[flag] = conf.CheckCCFlag(flag, CCFLAGS=['-Werror'])
+def HasCxxWflag(conf, flag):
+    """Check if the current C++ compiler supports -Wxxx flag"""
+    try: conf.env['CXX_HAS_FLAG']
+    except KeyError: conf.env['CXX_HAS_FLAG'] = {}
+    d = conf.env['CXX_HAS_FLAG']
+    d[flag] = conf.CheckCXXFlag(flag, CXXFLAGS=['-Werror'])
+
+#############################################################################
+# Current environment
+#############################################################################
+env = conf.env
+
+#############################################################################
+# Copy CC, CXX and such from CLI/OS to env
+#############################################################################
+for var in SConsGnu.CcVars.GVarNames(categories = ['programs']):
+    try:
+##        if var in env['CHANGED_VARIABLES']:
+            env[var] = env['GVARS'][var]
+    except KeyError: pass
+
+#############################################################################
+# Initialize default tools (c/c++ compilers, linkers, etc.)
+#############################################################################
+env.Tool('default')
+
+#############################################################################
+# Copy CFLAGS, CCFLAGS, CXXFLAGS and such from CLI/OS to env
+#############################################################################
+for var in SConsGnu.CcVars.GVarNames(categories = ['flags']):
+    try:
+##        if var in env['CHANGED_VARIABLES']:
+            env[var] = env['GVARS'][var]
+    except KeyError: pass
+
+#############################################################################
+# Check what C and C++ compilers were selected by Tool('default')
+#############################################################################
+cc  = SConsGnu.Cc.CanonCC(env)
+cxx = SConsGnu.Cc.CanonCXX(env)
+
+supported_compilers = [
+  ('gcc', 'g++'),
+  ('clang', 'clang++')
+]
+
+if (cc,cxx) not in supported_compilers:
+    raise SCons.Errors.UserError("using %s and %s as C/C++ compiler pair is not supported" % (env['CC'],env['CXX']))
+
+libdir = '%s' % env.Dir('lib').path
+
+#############################################################################
+# 0. Prefer libraries from our source tree
+#############################################################################
+env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % libdir])
+env.AppendUnique(LIBPATH = ['#%s' % libdir])
+#############################################################################
+# 1. Prefer locally installed OpenCL library.
+#############################################################################
+if env.Dir('#lib/OpenCL/lib').exists():
+    env.AppendUnique(LIBPATH = ['#/lib/OpenCL/lib'])
+    # FIXME: the following should only be applied for gcc/clang
+    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#lib/OpenCL/lib')])
+
+#############################################################################
+# Add local include paths
+#############################################################################
+
+#############################################################################
+# 0. Prefer headers from our source tree
+#############################################################################
+env.AppendUnique(CPPPATH = [ '#%s' % libdir ])
+#############################################################################
+# 1. Prefer locally installed OpenCL and EGL headers over the system-wide.
+#############################################################################
+if env.Dir('#lib/OpenCL/include').exists():
+    env.AppendUnique(CPPPATH = ['#/lib/OpenCL/include'])
+if env.Dir('#lib/EGL/include').exists():
+    env.AppendUnique(CPPPATH = ['#/lib/EGL/include'])
+#############################################################################
+# 3. Prefer locally installed cxxtest headers 
+#############################################################################
+if env.Dir('#cxxtest').exists():
+    env.AppendUnique(CPPPATH = ['#cxxtest'])
+
+ 
+#############################################################################
+# Adjust C/C++ compiler flags for code coverage
+#############################################################################
+if re.match(r'^(yes|true|1)$', env.subst('$CLXX_ENABLE_GCOV'), re.I):
+    # Remove optimization flags provided by user or given as defaults.
+    for f in ['CCFLAGS', 'CXXFLAGS', 'CFLAGS']:
+        for i in (0,1,2,3):
+            try:
+                env[f].remove('-O%d' % i)
+            except (KeyError, ValueError):
+                pass
+    env.Append( CCFLAGS = '-O0 --coverage' )
+    env.Append( LINKFLAGS = '--coverage' )
+
+    # Workaround for clang bug: http://llvm.org/bugs/show_bug.cgi?id=15953
+    if cc == 'clang':
+        if env['CCVERSION'].split('.')[0:2] == ['3','3']:
+            target =  SConsGnu.Cc.QueryCCTarget(env)
+            if target:
+                try:
+                    cpu, vendor, system  = target.split('-')
+                    kernel = system
+                except ValueError:
+                    cpu, vendor, kernel, system  = target.split('-')
+                lib = 'clang_rt.profile-%s' % cpu
+                libf = 'lib%s.a' % lib
+                # Add known locations for other OSes
+                paths = [ '/usr/lib/llvm-3.3/lib/clang/3.3/lib/%s' % kernel ]
+                try:
+                    # find existing file libclang_rt.profile-<arch>.a
+                    path = next(p for p in paths if os.path.exists(os.path.join(p,libf)))
+                    env.AppendUnique(LIBS = [lib])
+                    env.AppendUnique(LIBPATH = [path])
+                except StopIteration:
+                    pass
+
+if cc == 'clang':
+    HasCcWflag(conf, '-Wdeprecated-register')
+    HasCcWflag(conf, '-Wdeprecated-declarations')
+    HasCcWflag(conf, '-Wunused-parameter')
+elif cc == 'gcc':
+    HasCcWflag(conf, '-Wmaybe-uninitialized')
+    HasCcWflag(conf, '-Wdeprecated-declarations')
+
+if cxx == 'clang++':
+    HasCxxWflag(conf, '-Wdeprecated-register')
+    HasCxxWflag(conf, '-Wdeprecated-declarations')
+    HasCxxWflag(conf, '-Wunused-parameter')
+elif cxx == 'g++':
+    HasCxxWflag(conf, '-Wmaybe-uninitialized')
+    HasCxxWflag(conf, '-Wdeprecated-declarations')
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

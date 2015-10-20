@@ -116,7 +116,7 @@ tlib = env.SharedLibrary('../clxx_cl_test', objects + ['cl/mock.cpp'], **overrid
 env.Ignore('../..', tlib)
 
 ilib = env.InstallVersionedLib('${libdir}', rlib, **overrides)
-env.Ignore("${INSTALL_SANDBOX}${libdir}", ilib)
+for f in ilib: env.Ignore(f.dir, f)
 
 iheaders = NodeList()
 for header in headers:
