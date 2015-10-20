@@ -8,36 +8,34 @@
 
 Import('conf')
 
+import SConsGnu.AcProgChecks
+
 env = conf.env
 
-swigflags = [ '-c++' ]
-
-swigpath = [
-    '#%s' % env.Dir('lib').path,
-    '#%s' % env.Dir('lib/swig-clxx').path,
-    '/usr/include'
-]
-
-
-#############################################################################
-# SWIG belongs to 'default' tools, if we wan't to alter the tool initialization
-# we have to do it here.
-#############################################################################
+# Prefer locally installed swig over the system-wide one
 if env.Dir('#swig/bin').exists():
     env.PrependENVPath('PATH', env.Dir('#swig/bin'))
 
 try:
-    if 'SWIG' in env['CHANGED_VARIABLES']:
-        env['SWIG'] = env['GVARS']['SWIG']
+    env['SWIG'] = env['GVARS']['SWIG']
 except KeyError:
-    pass
+    try:
+        import SCons.Tool.swig
+        swigs = SCons.Tool.swig.swigs
+    except (ImportError, AttributeError):
+        swigs = ['swig', 'swig3.0', 'swig2.0']
+    swig = conf.AcCheckProgs(swigs)
+    if not swig:
+        Return()
+    env['SWIG'] = swig
 
 env.Tool('swig')
 
 #############################################################################
-env.Append(SWIGFLAGS = swigflags)
-env.Append(SWIGPATH = swigpath)
-env.Append(SWIGPATH = [ '/usr/include' ])
+env.Append(SWIGFLAGS = [ 'c++' ])
+env.Append(SWIGPATH  = [ '#%s' % env.Dir('lib').path ])
+env.Append(SWIGPATH  = [ '#%s' % env.Dir('lib/swig-clxx').path ])
+env.Append(SWIGPATH  = [ '/usr/include' ])
 #############################################################################
 
 

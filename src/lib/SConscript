@@ -4,7 +4,9 @@
 
 Import(['env'])
 SConscript('clxx/SConscript', exports = ['env'])
-SConscript('python-clxx/SConscript', exports = ['env'])
+
+if env.get('SWIG'):
+    SConscript('python-clxx/SConscript', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4
