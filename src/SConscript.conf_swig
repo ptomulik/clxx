@@ -32,7 +32,7 @@ except KeyError:
 env.Tool('swig')
 
 #############################################################################
-env.Append(SWIGFLAGS = [ 'c++' ])
+env.Append(SWIGFLAGS = [ '-c++' ])
 env.Append(SWIGPATH  = [ '#%s' % env.Dir('lib').path ])
 env.Append(SWIGPATH  = [ '#%s' % env.Dir('lib/swig-clxx').path ])
 env.Append(SWIGPATH  = [ '/usr/include' ])

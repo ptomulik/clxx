@@ -18,6 +18,8 @@ def CharacterizeClFunction(conf, fun, code):
         if conf.TryLinkClFunction(fun, code):
             conf.Define('CLXX_IS_LINKABLE_%s' % fun, 1, 'libOpenCL had the %s when libclxx was build' % fun)
 
+env = conf.env
+
 # Prefer locally installed OpenCL library.
 if env.Dir('#ext/OpenCL/lib').exists():
     env.AppendUnique(LIBPATH = ['#ext/OpenCL/lib'])
