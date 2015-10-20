@@ -133,7 +133,7 @@ def dload_cxxtest(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'cxxtest')
+    except KeyError: destdir = os.path.join(topsrcdir, 'ext', 'cxxtest')
 
     if clean:
         if os.path.exists(destdir):
@@ -161,7 +161,7 @@ def dload_egl_hdr(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'lib','EGL','include', 'EGL')
+    except KeyError: destdir = os.path.join(topsrcdir, 'ext','EGL','include', 'EGL')
 
     destdir = os.path.split(destdir)[0]
     destdir_egl = os.path.join(destdir, 'EGL')
@@ -218,7 +218,7 @@ def dload_opencl_hdr(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'lib','OpenCL','include','CL')
+    except KeyError: destdir = os.path.join(topsrcdir, 'ext','OpenCL','include','CL')
 
     if clean:
         if os.path.exists(destdir):
@@ -306,7 +306,7 @@ def dload_opencl_icd_ldr(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'lib','OpenCL','lib')
+    except KeyError: destdir = os.path.join(topsrcdir, 'ext','OpenCL','lib')
 
     if clean:
         if os.path.exists(destdir):
@@ -425,7 +425,7 @@ def dload_swig(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'swig')
+    except KeyError: destdir = os.path.join(topsrcdir, 'ext', 'swig')
 
     if clean:
         if os.path.exists(destdir):
@@ -454,7 +454,7 @@ def dload_swig(**kw):
     info("building swig", **kw)
     commands = [
         ['./autogen.sh'],
-        ['./configure', '--prefix=%s' % os.path.join(topsrcdir, "swig")],
+        ['./configure', '--prefix=%s' % destdir ],
         ['make'],
         ['make', 'install']
     ]

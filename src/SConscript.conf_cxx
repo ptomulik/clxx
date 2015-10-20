@@ -80,13 +80,6 @@ libdir = '%s' % env.Dir('lib').path
 #############################################################################
 env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % libdir])
 env.AppendUnique(LIBPATH = ['#%s' % libdir])
-#############################################################################
-# 1. Prefer locally installed OpenCL library.
-#############################################################################
-if env.Dir('#lib/OpenCL/lib').exists():
-    env.AppendUnique(LIBPATH = ['#/lib/OpenCL/lib'])
-    # FIXME: the following should only be applied for gcc/clang
-    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#lib/OpenCL/lib')])
 
 #############################################################################
 # Add local include paths
@@ -96,19 +89,6 @@ if env.Dir('#lib/OpenCL/lib').exists():
 # 0. Prefer headers from our source tree
 #############################################################################
 env.AppendUnique(CPPPATH = [ '#%s' % libdir ])
-#############################################################################
-# 1. Prefer locally installed OpenCL and EGL headers over the system-wide.
-#############################################################################
-if env.Dir('#lib/OpenCL/include').exists():
-    env.AppendUnique(CPPPATH = ['#/lib/OpenCL/include'])
-if env.Dir('#lib/EGL/include').exists():
-    env.AppendUnique(CPPPATH = ['#/lib/EGL/include'])
-#############################################################################
-# 3. Prefer locally installed cxxtest headers 
-#############################################################################
-if env.Dir('#cxxtest').exists():
-    env.AppendUnique(CPPPATH = ['#cxxtest'])
-
  
 #############################################################################
 # Adjust C/C++ compiler flags for code coverage

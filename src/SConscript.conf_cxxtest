@@ -5,6 +5,11 @@ Import('conf')
 
 env = conf.env
 
+# Prefer locally installed cxxtest headers 
+if env.Dir('#ext/cxxtest').exists():
+    env.AppendUnique(CPPPATH = ['#ext/cxxtest'])
+    env.AppendUnique(CXXTEST_INSTALL_DIR = ['#ext/cxxtest'])
+
 env.Tool('cxxtest')
 
 # Local Variables:

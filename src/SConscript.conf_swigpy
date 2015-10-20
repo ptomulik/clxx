@@ -18,20 +18,17 @@ if env.get('SWIG'):
 else:
     Return()
 
-#############################################################################
-# Add local include paths
-#############################################################################
-if env.Dir('#lib/OpenCL/include').exists():
-    env.AppendUnique(SWIGPY_CPPPATH = ['#/lib/OpenCL/include'])
-    env.AppendUnique(SWIGPY_SWIGPATH = ['#/lib/OpenCL/include'])
-if env.Dir('#lib/EGL/include').exists():
-    env.AppendUnique(SWIGPY_CPPPATH = ['#/lib/EGL/include'])
-    env.AppendUnique(SWIGPY_SWIGPATH = ['#/lib/EGL/include'])
-#############################################################################
-# 2. Prefer locally installed OpenCL shared/static library.
-#############################################################################
-if env.Dir('#lib/OpenCL/lib').exists():
-    env.AppendUnique(SWIGPY_LIBPATH = ['#/lib/OpenCL/lib'])
+# Prefer locally installed OpenCL/EGL headers over the system-wide ones.
+if env.Dir('#ext/OpenCL/include').exists():
+    env.AppendUnique(SWIGPY_CPPPATH = ['#ext/OpenCL/include'])
+    env.AppendUnique(SWIGPY_SWIGPATH = ['#ext/OpenCL/include'])
+if env.Dir('#ext/EGL/include').exists():
+    env.AppendUnique(SWIGPY_CPPPATH = ['#ext/EGL/include'])
+    env.AppendUnique(SWIGPY_SWIGPATH = ['#ext/EGL/include'])
+
+# Prefer locally installed libOpenCL.so over the system-wide one.
+if env.Dir('#ext/OpenCL/lib').exists():
+    env.AppendUnique(SWIGPY_LIBPATH = ['#ext/OpenCL/lib'])
 
 #############################################################################
 # SWIGPY

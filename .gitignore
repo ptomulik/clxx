@@ -134,9 +134,10 @@ vendor
 #############################################################################
 # Ignore 3rd party software downloaded as build dependencies
 /cxxtest/
-/swig/
-/lib/OpenCL/
-/lib/EGL/
+#/swig/
+#/lib/OpenCL/
+#/lib/EGL/
+/ext/
 /bin/hoarder/patch.py
 #############################################################################
 

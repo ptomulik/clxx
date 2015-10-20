@@ -18,11 +18,16 @@ def CharacterizeClFunction(conf, fun, code):
         if conf.TryLinkClFunction(fun, code):
             conf.Define('CLXX_IS_LINKABLE_%s' % fun, 1, 'libOpenCL had the %s when libclxx was build' % fun)
 
-##############################################################################
-## 
-## if sys.maxsize > 2**32:
-##     conf.Define( 'CLXX_ARCH_64BIT', None, "Library was built for 64-bit host architecture" )
-## 
+# Prefer locally installed OpenCL library.
+if env.Dir('#ext/OpenCL/lib').exists():
+    env.AppendUnique(LIBPATH = ['#ext/OpenCL/lib'])
+    # FIXME: the following should only be applied for gcc/clang
+    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#ext/OpenCL/lib')])
+# Prefer locally installed OpenCL and EGL headers over the system-wide.
+if env.Dir('#ext/OpenCL/include').exists():
+    env.AppendUnique(CPPPATH = ['#ext/OpenCL/include'])
+if env.Dir('#ext/EGL/include').exists():
+    env.AppendUnique(CPPPATH = ['#ext/EGL/include'])
 
 # Prepare modified environment for the OpenCL checks
 orgEnv = conf.env

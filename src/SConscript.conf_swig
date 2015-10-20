@@ -13,8 +13,8 @@ import SConsGnu.AcProgChecks
 env = conf.env
 
 # Prefer locally installed swig over the system-wide one
-if env.Dir('#swig/bin').exists():
-    env.PrependENVPath('PATH', env.Dir('#swig/bin'))
+if env.Dir('#ext/swig/bin').exists():
+    env.PrependENVPath('PATH', env.Dir('#ext/swig/bin'))
 
 try:
     env['SWIG'] = env['GVARS']['SWIG']
