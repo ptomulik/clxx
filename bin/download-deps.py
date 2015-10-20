@@ -23,7 +23,20 @@ topsrcdir = os.path.realpath(os.path.join(scriptdir, '..'))
 
 default_opencl_version = '2.0'
 default_egl_version = '1.5'
-all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig']
+all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig', 'scons']
+scons_versions = [ 'tip',
+                   '2.4.0', 
+                   '2.3.6',
+                   '2.3.5',
+                   '2.3.4',
+                   '2.3.3',
+                   '2.3.2',
+                   '2.3.1',
+                   '2.3.0',
+                   '2.2.0',
+                   '2.1.0.final.0',
+                   'tip' ]
+default_scons_version = scons_versions[0]
 
 # Validate and return OpenCL version
 def opencl_version_string(v):
@@ -31,9 +44,15 @@ def opencl_version_string(v):
         raise argparse.ArgumentTypeError("ill-formed or unsupported OpenCL version %r" % v)
     return v
 
-# Validate and return OpenCL version
+# Validate and return EGL version
 def egl_version_string(v):
     if not re.match(r'^1\.[0-5]$', v):
+        raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
+    return v
+
+# Validate and return SCons version
+def scons_version_string(v):
+    if v not in scons_versions:
         raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
     return v
 
@@ -86,6 +105,19 @@ parser.add_argument(
         default=None,
         metavar='VER',
         help='version of OpenCL headers to be downloaded'
+        )
+
+parser.add_argument(
+        '--scons-ver',
+        type=scons_version_string,
+        default=default_scons_version,
+        metavar='VER',
+        help='version of scons to be downloaded'
+        )
+
+parser.add_argument(
+        '--scons-from-bitbucket', action='store_true',
+        help='download scons from bitbucket.org instead of from sourceforge'
         )
 
 parser.add_argument(
@@ -404,7 +436,7 @@ def dload_opencl_icd_ldr(**kw):
         return err
         
     info("creating '%s'" % destdir, **kw)
-    os.makedirs(destdir, mode=0755)
+    os.makedirs(destdir, mode=destdir_mode)
 
     for fglob in files:
         for src in glob.glob(os.path.join(tmpdir, fglob)):
@@ -472,6 +504,62 @@ def dload_swig(**kw):
     shutil.rmtree(tmpdir)
     return 0
 
+def dload_scons(**kw):
+    try: clean = kw['clean']
+    except KeyError: clean = False
+    try: destdir = kw['destdir']
+    except KeyError: destdir = os.path.join(topsrcdir, 'ext', 'scons')
+
+    if clean:
+        if os.path.exists(destdir):
+            info("removing '%s'" % destdir, **kw)
+            shutil.rmtree(destdir)
+        return 0
+
+    ver = default_scons_version
+    try: ver = kw['scons_ver']
+    except KeyError: pass
+
+    from_bitbucket = False
+    try: from_bitbucket = kw['scons_from_bitbucket']
+    except KeyError: pass
+
+    if not from_bitbucket:
+        from_bitbucket = (ver == 'tip')
+
+    try: destdir_mode = kw['destdir_mode']
+    except KeyError: destdir_mode = 0755
+
+    if os.path.exists(destdir):
+        warn("'%s' already exists, skipping scons download!" % destdir, **kw)
+        return 2
+
+    info("creating '%s'" % destdir, **kw)
+    os.makedirs(destdir, mode=destdir_mode)
+
+    if not from_bitbucket:
+        url = "http://sourceforge.net/projects/scons/files/scons/%(ver)s/scons-%(ver)s.tar.gz/download" % locals()
+        info("downloading '%s' to '%s'" % (url,destdir), **kw)
+        hoarder.urluntar(url, path=destdir, strip_components=1)
+    else:
+        if ver is None: ver = 'tip'
+        url = "https://bitbucket.org/scons/scons/get/%s.tar.gz" % ver
+
+        tmpdir = tempfile.mkdtemp()
+        info("created '%s'" % tmpdir, **kw)
+
+        info("downloading '%s' to '%s'" % (url,tmpdir), **kw)
+        hoarder.urluntar(url, path=tmpdir, strip_components=1)
+
+        for f in ['script', 'engine']:
+            src = os.path.join(tmpdir,'src', f)
+            dst = os.path.join(destdir, f)
+            info("copytree '%s' -> '%s'" % (src, dst), **kw)
+            shutil.copytree(src, dst)
+
+        info("removing '%s'" % tmpdir, **kw)
+        shutil.rmtree(tmpdir)
+    return 0
 
 for pkg in args.packages:
     if pkg.lower() == 'cxxtest':
@@ -483,6 +571,8 @@ for pkg in args.packages:
         dload_opencl_icd_ldr(**vars(args))
     elif pkg.lower() == 'swig':
         dload_swig(**vars(args))
+    elif pkg.lower() == 'scons':
+        dload_scons(**vars(args))
     else:
         warn("unsupported package name: %r, skipping!" % pkg, **vars(args))
 
