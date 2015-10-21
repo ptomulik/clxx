@@ -27,6 +27,7 @@ if shall_configure(env):
     SConscript('SConscript.conf_cxx',       exports = ['conf'])
     SConscript('SConscript.conf_libstdcxx', exports = ['conf'])
     SConscript('SConscript.conf_opencl',    exports = ['conf'])
+    SConscript('SConscript.conf_boost',     exports = ['conf'])
     SConscript('SConscript.conf_swig',      exports = ['conf'])
     SConscript('SConscript.conf_swigpy',    exports = ['conf'])
     SConscript('SConscript.conf_cxxtest',   exports = ['conf'])

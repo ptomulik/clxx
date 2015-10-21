@@ -67,7 +67,8 @@ cxx = SConsGnu.Cc.CanonCXX(env)
 
 supported_compilers = [
   ('gcc', 'g++'),
-  ('clang', 'clang++')
+  ('clang', 'clang++'),
+  ('cl', 'cl')
 ]
 
 if (cc,cxx) not in supported_compilers:

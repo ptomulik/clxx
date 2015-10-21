@@ -8,8 +8,52 @@ Import('conf')
 # Initialize configure contexts, add all the tests we use later
 ##############################################################################
 
+import SConsGnu.Cc
 import SConsGnu.CcChecks
 import SConsGnu.AcProgChecks
+
+def _Werror(cc):
+    flags = {
+      'gcc'     : '-Werror',
+      'g++'     : '-Werror',
+      'clang'   : '-Werror',
+      'clang++' : '-Werror',
+      'cl'      : '',
+#      'cl'      : '/WX',
+    }
+    return flags.get(cc)
+
+def _Wdeprecated_declarations(cc):
+    flags = {
+      'gcc'     : '-Wdeprecated-declarations',
+      'g++'     : '-Wdeprecated-declarations',
+      'clang'   : '-Wdeprecated-declarations',
+      'clang++' : '-Wdeprecated-declarations',
+      'cl'      : '/we4996',
+    }
+    return flags.get(cc)
+
+def _Wno_deprecated_declarations(cc):
+    flags = {
+      'gcc'     : '-Wno-deprecated-declarations',
+      'g++'     : '-Wno-deprecated-declarations',
+      'clang'   : '-Wno-deprecated-declarations',
+      'clang++' : '-Wno-deprecated-declarations',
+      'cl'      : '/wd4996',
+    }
+    return flags.get(cc)
+    
+def _CC_Werror(env):
+    cc = SConsGnu.Cc.CanonCC(env)
+    return _Werror(cc)
+
+def _CC_Wdeprecated_declarations(env):
+    cc = SConsGnu.Cc.CanonCC(env)
+    return _Wdeprecated_declarations(cc)
+
+def _CC_Wno_deprecated_declarations(env):
+    cc = SConsGnu.Cc.CanonCC(env)
+    return _Wno_deprecated_declarations(cc)
 
 ##############################################################################
 def CheckClHVersion(ctx, ver):
@@ -63,9 +107,9 @@ int main(int argc, char* argv[]) {
 
 """ % code
     # FIXME: the following flags should in fact depend on the compiler used
-    flags = { '-CCFLAGS'    : '-Wdeprecated-declarations',
-              '-CFLAGS'     : '-Wdeprecated-declarations',
-              'CCFLAGS'     : '-Wno-deprecated-declarations'}
+    flags = { '-CCFLAGS'    : _CC_Wdeprecated_declarations(ctx.env),
+              '-CFLAGS'     : _CC_Wdeprecated_declarations(ctx.env),
+              'CCFLAGS'     : _CC_Wno_deprecated_declarations(ctx.env) }
     success = SConsGnu.CcChecks.TryLinkWithFlags(ctx, flags, prog, '.c')
     ctx.Result(success)
     return success;
@@ -129,9 +173,9 @@ def CheckClFunctionDeclared(ctx, fun, code, **overrides):
         ctx.Message('Checking whether %s() is declared... ' % fun)
         ctx.did_show_result = 1
     # FIXME: the following flags should in fact depend on the compiler used
-    flags = { 'CCFLAGS'     : '-Wno-deprecated-declarations',
-              '-CCFLAGS'    : '-Wdeprecated-declarations',
-              '-CFLAGS'     : '-Wdeprecated-declarations'}
+    flags = { 'CCFLAGS'     : _CC_Wno_deprecated_declarations(ctx.env),
+              '-CCFLAGS'    : _CC_Wdeprecated_declarations(ctx.env),
+              '-CFLAGS'     : _CC_Wdeprecated_declarations(ctx.env) }
     success = TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides)
     if not caller_did_show_result:
         ctx.did_show_result = 0
@@ -146,9 +190,9 @@ def CheckClFunctionNotDeprecated(ctx, fun, code, **overrides):
         ctx.Message('Checking whether %s() is not deprecated... ' % fun)
         ctx.did_show_result = 1
     # FIXME: the following flags should in fact depend on the compiler used
-    flags = { 'CCFLAGS'     : '-Wdeprecated-declarations -Werror',
-              '-CCFLAGS'    : '-Wno-deprecated-declarations',
-              '-CFLAGS'     : '-Wno-deprecated-declarations'}
+    flags = { 'CCFLAGS'     : _CC_Wdeprecated_declarations(ctx.env) + ' ' + _CC_Werror(ctx.env),
+              '-CCFLAGS'    : _CC_Wno_deprecated_declarations(ctx.env),
+              '-CFLAGS'     : _CC_Wno_deprecated_declarations(ctx.env)}
     success = TryCompileClFunctionWithFlags(ctx, flags, fun, code, **overrides)
     if not caller_did_show_result:
         ctx.did_show_result = 0

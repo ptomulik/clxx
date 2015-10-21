@@ -14,9 +14,12 @@ from SCons.Util import CLVar
 #############################################################################
 # Default flags
 #############################################################################
-env.Replace( CCFLAGS = CLVar('-g -O2') )
-env.Replace( CXXFLAGS = CLVar('-ansi -std=c++11 -Werror -Wall -Wextra -pedantic') )
-env.Replace( CFLAGS = CLVar('-ansi -std=c1x -Werror -Wall -Wextra -pedantic') )
+##env.Replace( CCFLAGS = CLVar('-g -O2') )
+##env.Replace( CXXFLAGS = CLVar('-ansi -std=c++11 -Werror -Wall -Wextra -pedantic') )
+##env.Replace( CFLAGS = CLVar('-ansi -std=c1x -Werror -Wall -Wextra -pedantic') )
+##env.Replace( CCFLAGS = CLVar('/Zi /O2') )
+##env.Replace( CXXFLAGS = CLVar('/Wall /WX') )
+##env.Replace( CFLAGS = CLVar('/Wall /WX') )
 #############################################################################
 
 # Local Variables:

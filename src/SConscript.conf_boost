@@ -1,0 +1,24 @@
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+##############################################################################
+# Configuring Boost libraries
+##############################################################################
+
+Import('conf')
+
+env = conf.env
+
+# Prefer locally installed Boost library with headers.
+if env.Dir('#ext/boost').exists():
+    env.AppendUnique(LIBPATH = ['#ext/boost/lib'])
+    # FIXME: the following should only be applied for gcc/clang
+    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#ext/boost/lib')])
+    env.AppendUnique(CPPPATH = ['#ext/boost'])
+
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:
