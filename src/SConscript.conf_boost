@@ -7,13 +7,20 @@
 
 Import('conf')
 
+import SConsGnu.Cc
+
 env = conf.env
+
+cc = SConsGnu.Cc.CanonCC(env)
 
 # Prefer locally installed Boost library with headers.
 if env.Dir('#ext/boost').exists():
-    env.AppendUnique(LIBPATH = ['#ext/boost/lib'])
-    # FIXME: the following should only be applied for gcc/clang
-    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#ext/boost/lib')])
+    # FIXME: elaborate proper way do discover LIBPATH for boost
+    env.AppendUnique(LIBPATH = ['#ext/boost/lib64-msvc-14.0'])
+    # FIXME: the distinction should be made based on $LINK not $CC/$CXX
+    if cc == 'gcc' or cc == 'clang':
+        # FIXME: elaborate proper way do discover LIBPATH for boost
+        env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#ext/boost/lib64-msvc-14.0')])
     env.AppendUnique(CPPPATH = ['#ext/boost'])
 
 

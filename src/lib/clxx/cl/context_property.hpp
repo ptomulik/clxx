@@ -379,7 +379,7 @@ context_adapter_d3d9_khr(IDirect3DDevice9* x) noexcept
  * extension is enabled.
  */ // }}}
 constexpr context_property
-context_adapter_d3d9ex_khr(IDirect3DDeviceEx* x) noexcept
+context_adapter_d3d9ex_khr(IDirect3DDevice9Ex* x) noexcept
   {
     return make_context_property<context_properties_t::adapter_d3d9ex_khr>(x);
   }

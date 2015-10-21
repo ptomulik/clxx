@@ -68,9 +68,13 @@ CLXX_DISABLE_COMMENT_WARNING
 #   include <CL/cl_egl.h>
 # endif
 # include <CL/cl_dx9_media_sharing.h>
+# ifdef _WIN32
+#   include <dxvahd.h> // IDXVAHD_Device is defined here...
+# endif
 #endif
 
 #ifdef _WIN32
+# include <d3d10_1.h>
 # include <CL/cl_d3d10.h>
 # if CLXX_CL_H_VERSION_1_2
 #   include <CL/cl_d3d11.h>

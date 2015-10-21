@@ -79,7 +79,9 @@ libdir = '%s' % env.Dir('lib').path
 #############################################################################
 # 0. Prefer libraries from our source tree
 #############################################################################
-env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % libdir])
+# FIXME: the distinction should actually be made based on $LINK not $CC/$CXX
+if cc == 'gcc' or cc == 'clang':
+    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % libdir])
 env.AppendUnique(LIBPATH = ['#%s' % libdir])
 
 #############################################################################

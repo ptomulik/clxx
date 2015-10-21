@@ -51,7 +51,7 @@ template<>
 # if !defined(__CYGWIN__)
 template<>
   struct context_property_type<context_properties_t::adapter_d3d9ex_khr>
-  { typedef IDirect3DDeviceEx* type; };
+  { typedef IDirect3DDevice9Ex* type; };
 # endif
 # if (_WIN32_WINNT >= 0x0601)
 template<>

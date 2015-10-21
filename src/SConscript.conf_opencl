@@ -7,6 +7,9 @@
 
 Import('conf')
 
+import SConsGnu.Cc
+
+
 def CharacterizeClFunction(conf, fun, code):
     # Check if a function is declared in CL/cl.h
     if conf.CheckClFunctionDeclared(fun, code):
@@ -20,11 +23,14 @@ def CharacterizeClFunction(conf, fun, code):
 
 env = conf.env
 
+cc = SConsGnu.Cc.CanonCC(env)
+
 # Prefer locally installed OpenCL library.
 if env.Dir('#ext/OpenCL/lib').exists():
     env.AppendUnique(LIBPATH = ['#ext/OpenCL/lib'])
-    # FIXME: the following should only be applied for gcc/clang
-    env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#ext/OpenCL/lib')])
+    # FIXME: the distinction should be made based on $LINK not $CC/$CXX
+    if cc == 'gcc' or cc == 'clang':
+        env.AppendUnique(LINKFLAGS = ['-Wl,-rpath-link=%s' % env.Dir('#ext/OpenCL/lib')])
 # Prefer locally installed OpenCL and EGL headers over the system-wide.
 if env.Dir('#ext/OpenCL/include').exists():
     env.AppendUnique(CPPPATH = ['#ext/OpenCL/include'])
