@@ -15,7 +15,6 @@ def shall_recurse(env):
 
 env['CLXX_PACKAGES'] = {}
 
-SConscript('SConscript.defaults', exports = ['env'])
 SConscript('SConscript.cli', exports = ['env'])
 
 if shall_configure(env):

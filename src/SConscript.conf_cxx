@@ -11,6 +11,7 @@ Import('conf')
 import os
 import re
 import SCons.Errors
+import SCons.Util
 import SConsGnu.Cc
 import SConsGnu.CcChecks
 import SConsGnu.CcVars
@@ -51,15 +52,6 @@ for var in SConsGnu.CcVars.GVarNames(categories = ['programs']):
 env.Tool('default')
 
 #############################################################################
-# Copy CFLAGS, CCFLAGS, CXXFLAGS and such from CLI/OS to env
-#############################################################################
-for var in SConsGnu.CcVars.GVarNames(categories = ['flags']):
-    try:
-##        if var in env['CHANGED_VARIABLES']:
-            env[var] = env['GVARS'][var]
-    except KeyError: pass
-
-#############################################################################
 # Check what C and C++ compilers were selected by Tool('default')
 #############################################################################
 cc  = SConsGnu.Cc.CanonCC(env)
@@ -73,6 +65,33 @@ supported_compilers = [
 
 if (cc,cxx) not in supported_compilers:
     raise SCons.Errors.UserError("using %s and %s as C/C++ compiler pair is not supported" % (env['CC'],env['CXX']))
+
+#############################################################################
+# Default flags for compilers
+#############################################################################
+if (cc == 'gcc' and cxx=='g++') or (cc == 'clang' and cxx == 'clang++'):
+    env.Replace( CCFLAGS = SCons.Util.CLVar('-g -O2') )
+elif cc == 'cl':
+    env.Replace( CCFLAGS = SCons.Util.CLVar('/Zi /O2 /nologo') )
+
+if cc == 'gcc' or cc == 'clang':
+    env.Replace( CFLAGS = SCons.Util.CLVar('-ansi -std=c1x -Werror -Wall -Wextra -pedantic') )
+elif cc == 'cl':
+    env.Replace( CFLAGS = SCons.Util.CLVar('') )
+
+if cxx == 'g++' or cxx == 'clang++':
+    env.Replace( CXXFLAGS = SCons.Util.CLVar('-ansi -std=c++11 -Werror -Wall -Wextra -pedantic') )
+elif cxx == 'cl':
+    env.Replace( CXXFLAGS = SCons.Util.CLVar('$( /TP $) /EHsc') )
+
+#############################################################################
+# Copy CFLAGS, CCFLAGS, CXXFLAGS and such from CLI/OS to env
+#############################################################################
+for var in SConsGnu.CcVars.GVarNames(categories = ['flags']):
+    try:
+##        if var in env['CHANGED_VARIABLES']:
+            env[var] = env['GVARS'][var]
+    except KeyError: pass
 
 libdir = '%s' % env.Dir('lib').path
 

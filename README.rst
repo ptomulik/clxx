@@ -21,6 +21,93 @@ Start with cloning this repository (note: we use git submodules so we need
 
     git clone --recursive git://github.com/ptomulik/clxx.git
 
+REQUIREMENTS
+------------
+
+To build the project
+`````````````````````
+
+1. Boost libraries:
+
+- `Boost.Algorithm`_
+- `Boost.Serialization`_
+- `Boost.Bimap`_
+- `Boost.Core`_
+- `Boost.Config`_
+- `Boost.Smart Ptr`_
+- `Boost.Program Options`_
+- `Boost.Unordered`_
+
+
+2. OpenCL library
+
+3. OpenGL library
+
+4. CxxTest
+
+5. SWIG
+
+6. SCons
+   
+7. X11 client-side library (development):
+
+- `libx11-dev`_
+
+Some of the above prerequisites may be downloaded to a local directory (inside
+project tree) by using ``bin/download-deps.py`` script.
+
+To download some prerequisites
+``````````````````````````````
+
+Python_ is required to run ``bin/download-deps.py`` script. Then the following
+software is necessary for the particular packages to be downloaded and compiled
+
+=================== ========================================================== ========================================= =======================================
+      Package                      Common Prerequisites                                         Linux                                Windows
+=================== ========================================================== ========================================= =======================================
+  cxxtest
+------------------- ---------------------------------------------------------- ----------------------------------------- ---------------------------------------
+  opencl-icd-ldr      c/c++ toolchain, make, cmake, autotools, libpcre,         libx11-dev
+                      OpenGL headers,
+------------------- ---------------------------------------------------------- ----------------------------------------- ---------------------------------------
+  opencl-hdr
+------------------- ---------------------------------------------------------- ----------------------------------------- ---------------------------------------
+  swig                c/c++ toolchain, make, autotools, bison, yodl
+------------------- ---------------------------------------------------------- ----------------------------------------- ---------------------------------------
+  scons
+=================== ========================================================== ========================================= =======================================
+
+Installing dependencies on Debian
+`````````````````````````````````
+
+Boost libraries::
+
+    sudo apt-get install libboost-dev libboost-program-options-dev
+
+or just::
+
+    sudo apt-get install libboost-all-dev
+
+X11 libraries::
+
+    sudo apt-get install libx11-dev
+
+PCRE library::
+
+    sudo apt-get install libpcre3-dev
+
+OpenGL headers::
+
+    sudo apt-get install mesa-common-dev
+
+Bison::
+
+    sudo apt-get install bison
+
+Yodl::
+
+    sudo apt-get install yodl
+
 HOWTO
 -----
 
@@ -77,6 +164,18 @@ Top level source directory contains following subdirs:
 .. _HOWTO/compile.rst: HOWTO/compile.rst
 .. _HOWTO/create-source.rst: HOWTO/create-source.rst
 .. _HOWTO/test.rst: HOWTO/test.rst
+.. _libboost-dev: https://packages.debian.org/libboost-dev
+.. _libx11-dev: https://packages.debian.org/libx11-dev
+.. _Boost.Algorithm: http://www.boost.org/doc/libs/release/libs/algorithm/
+.. _Boost.Serialization: http://www.boost.org/doc/libs/release/libs/serialization/
+.. _Boost.Bimap: http://www.boost.org/doc/libs/release/libs/bimap/
+.. _Boost.Core: http://www.boost.org/doc/libs/release/libs/core/
+.. _Boost.Config: http://www.boost.org/doc/libs/release/libs/config/config.htm
+.. _Boost.Smart Ptr: http://www.boost.org/doc/libs/release/libs/smart_ptr/smart_ptr.htm
+.. _Boost.Program Options: http://www.boost.org/doc/libs/release/libs/program_options/
+.. _Boost.Unordered: http://www.boost.org/doc/libs/release/libs/unordered/
+.. _bison: https://www.gnu.org/software/bison/
+.. _Python: https://www.python.org/
 
 LICENSE
 -------

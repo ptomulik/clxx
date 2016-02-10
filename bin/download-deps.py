@@ -277,6 +277,7 @@ def dload_opencl_hdr(**kw):
     os.makedirs(destdir, mode=destdir_mode)
 
     url_base = "https://www.khronos.org/registry/cl/api/%s" % ver
+    patchfile = None
     if ver == '1.0':
         files = [   'cl.h',
                     'cl.hpp',
@@ -318,6 +319,7 @@ def dload_opencl_hdr(**kw):
                     'cl_gl.h',
                     'cl_gl_ext.h',
                     'cl2.hpp'   ]
+        patchfile = 'opencl-hdr-2.0.patch'
     else:
         warn("unsupported OpenCL version '%s'" % ver, **kw)
         return 2
@@ -327,6 +329,13 @@ def dload_opencl_hdr(**kw):
         dst = os.path.join(destdir,f)
         info("downloading '%s' -> '%s'" % (src, dst), **kw)
         hoarder.urlretrieve(src, dst)
+
+    if patchfile:
+        patchfile = os.path.join(patchdir, patchfile)
+        info("reading patch file '%s'" % patchfile, **kw)
+        patch = hoarder.patch.fromfile(patchfile)
+        info("applying patch '%s'" % patchfile, **kw)
+        patch.apply(strip=1, root=destdir)
 
     return 0
 
