@@ -155,6 +155,7 @@ if cc == 'clang':
 elif cc == 'gcc':
     HasCcWflag(conf, '-Wmaybe-uninitialized')
     HasCcWflag(conf, '-Wdeprecated-declarations')
+    HasCcWflag(conf, '-Wignored-attributes')
 
 if cxx == 'clang++':
     HasCxxWflag(conf, '-Wdeprecated-register')
@@ -163,6 +164,18 @@ if cxx == 'clang++':
 elif cxx == 'g++':
     HasCxxWflag(conf, '-Wmaybe-uninitialized')
     HasCxxWflag(conf, '-Wdeprecated-declarations')
+    HasCxxWflag(conf, '-Wignored-attributes')
+
+if cc == 'gcc':
+    if env.get('CC_HAS_FLAG',{}).get('-Wignored-attributes'):
+        # -Wno-ignored-attributes is necessary since gcc 6, attributes come
+        #  from CL/cl.h, CL/cl_platform.h, and so on
+        env.AppendUnique(CFLAGS = ['-Wno-ignored-attributes']);
+if cxx == 'g++':
+    if env.get('CXX_HAS_FLAG',{}).get('-Wignored-attributes'):
+        # -Wno-ignored-attributes is necessary since gcc 6, attributes come
+        #  from CL/cl.h, CL/cl_platform.h, and so on
+        env.AppendUnique(CXXFLAGS = ['-Wno-ignored-attributes']);
 
 # Local Variables:
 # # tab-width:4

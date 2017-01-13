@@ -42,7 +42,7 @@ def _Wno_deprecated_declarations(cc):
       'cl'      : '/wd4996',
     }
     return flags.get(cc)
-    
+
 def _CC_Werror(env):
     cc = SConsGnu.Cc.CanonCC(env)
     return _Werror(cc)
@@ -54,6 +54,14 @@ def _CC_Wdeprecated_declarations(env):
 def _CC_Wno_deprecated_declarations(env):
     cc = SConsGnu.Cc.CanonCC(env)
     return _Wno_deprecated_declarations(cc)
+
+def _CC_Wignored_attributes(env):
+    cc = SConsGnu.Cc.CanonCC(env)
+    return _Wignored_attributes(cc)
+
+def _CC_Wno_ignored_attributes(env):
+    cc = SConsGnu.Cc.CanonCC(env)
+    return _Wno_ignored_attributes(cc)
 
 ##############################################################################
 def CheckClHVersion(ctx, ver):
@@ -163,7 +171,7 @@ int main()
     if not caller_did_show_result:
         ctx.did_show_result = 0
         ctx.Result(success)
-    return success 
+    return success
 ##############################################################################
 
 ##############################################################################
