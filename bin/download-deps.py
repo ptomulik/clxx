@@ -25,7 +25,7 @@ default_opencl_version = '2.0'
 default_egl_version = '1.5'
 all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig', 'scons']
 scons_versions = [ 'tip',
-                   '2.4.0', 
+                   '2.4.0',
                    '2.3.6',
                    '2.3.5',
                    '2.3.4',
@@ -40,7 +40,7 @@ default_scons_version = scons_versions[0]
 
 # Validate and return OpenCL version
 def opencl_version_string(v):
-    if not re.match(r'^1\.[0-2]|2\.0$', v):
+    if not re.match(r'^1\.[0-2]|2\.[0-2]$', v):
         raise argparse.ArgumentTypeError("ill-formed or unsupported OpenCL version %r" % v)
     return v
 
@@ -124,7 +124,7 @@ parser.add_argument(
         'packages',
         metavar='PKG',
         type=str,
-        nargs='*', 
+        nargs='*',
         default = all_packages,
         help='package to download (cxxtest, opencl-lib, opencl-hdr)'
         )
@@ -276,7 +276,8 @@ def dload_opencl_hdr(**kw):
     info("creating '%s'" % destdir, **kw)
     os.makedirs(destdir, mode=destdir_mode)
 
-    url_base = "https://www.khronos.org/registry/cl/api/%s" % ver
+    #url_base = "https://www.khronos.org/registry/cl/api/%s" % ver
+    url_base = "https://raw.githubusercontent.com/KhronosGroup/OpenCL-Headers/opencl%s" % ''.join(ver.split('.'))
     patchfile = None
     if ver == '1.0':
         files = [   'cl.h',
@@ -372,18 +373,19 @@ def dload_opencl_icd_ldr(**kw):
         return 2
 
     patchfile = None
-    if ver == '1.0' or ver == '1.1':
-        warn("ICD loader for OpenCL %s can't be downloaded, sorry" % ver, **kw)
-        return 2
-    elif ver == '1.2':
-        url = "https://www.khronos.org/registry/cl/specs/opencl-icd-1.2.11.0.tgz"
-        patchfile = 'opencl-icd-loader-1.2.11.0.patch'
-    elif ver == '2.0':
-        url = "http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz"
-        patchfile = 'opencl-icd-loader-2.0.5.0.patch'
-    else:
-        warn("unsupported OpenCL version '%s', skipping opencl-icd-ldr download" % ver, **kw)
-        return 2
+##    if ver == '1.0' or ver == '1.1':
+##        warn("ICD loader for OpenCL %s can't be downloaded, sorry" % ver, **kw)
+##        return 2
+##    elif ver == '1.2':
+##        url = "https://www.khronos.org/registry/cl/specs/opencl-icd-1.2.11.0.tgz"
+##        patchfile = 'opencl-icd-loader-1.2.11.0.patch'
+##    elif ver == '2.0':
+##        url = "http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz"
+##        patchfile = 'opencl-icd-loader-2.0.5.0.patch'
+##    else:
+##        warn("unsupported OpenCL version '%s', skipping opencl-icd-ldr download" % ver, **kw)
+##        return 2
+    url = 'https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/master.tar.gz'
 
     tmpdir = tempfile.mkdtemp()
     info("created '%s'" % tmpdir, **kw)
@@ -413,7 +415,7 @@ def dload_opencl_icd_ldr(**kw):
         build_cmd = [os.path.join(tmpdir, 'build_using_cmake.bat')]
         files = ['bin/OpenCL.dll']
         # %VS90COMNTOOLS% is used by the build_using_cmake.bat, but these days
-        # it's rather %VS140COMNTOOLS% (VS 14.0) or such 
+        # it's rather %VS140COMNTOOLS% (VS 14.0) or such
         try: env['VS90COMNTOOLS']
         except KeyError:
             for vsnum in reversed(vsnumbers):
@@ -443,7 +445,7 @@ def dload_opencl_icd_ldr(**kw):
         info("removing '%s'" % tmpdir, **kw)
         shutil.rmtree(tmpdir)
         return err
-        
+
     info("creating '%s'" % destdir, **kw)
     os.makedirs(destdir, mode=destdir_mode)
 
