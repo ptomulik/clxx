@@ -82,7 +82,7 @@ Installing dependencies on Debian
 
 Boost libraries::
 
-    sudo apt-get install libboost-dev libboost-program-options-dev
+    sudo apt-get install libboost-dev libboost-program-options-dev libboost-serialization-dev
 
 or just::
 
@@ -107,6 +107,10 @@ Bison::
 Yodl::
 
     sudo apt-get install yodl
+
+NVIDIA OpenCL::
+
+    sudo apt-get install nvidia-opencl-dev
 
 HOWTO
 -----
