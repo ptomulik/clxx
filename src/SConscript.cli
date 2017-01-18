@@ -79,7 +79,7 @@ env['CHANGED_VARIABLES'] = new
 AddOption( '--help-variables', dest='help_variables', action='store_true',
            help='print help for CLI variables' )
 if GetOption('help_variables'):
-    print gvars.GenerateVariablesHelpText(variables, env, True)
+    print(gvars.GenerateVariablesHelpText(variables, env, True))
     Exit(0)
 ##############################################################################
 
