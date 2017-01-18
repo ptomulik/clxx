@@ -23,7 +23,8 @@ topsrcdir = os.path.realpath(os.path.join(scriptdir, '..'))
 
 default_opencl_version = '2.0'
 default_egl_version = '1.5'
-all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig', 'scons', 'scons-arguments', 'scons-gnu-arguments']
+all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig', 'scons',
+                'scons-arguments', 'scons-common-arguments', 'scons-gnu-arguments']
 scons_versions = [ 'tip',
                    '2.5.1',
                    '2.5.0',
@@ -43,6 +44,9 @@ default_scons_version = scons_versions[0]
 
 scons_arguments_versions = [ 'master' ]
 default_scons_arguments_version = scons_arguments_versions[0]
+
+scons_common_arguments_versions = [ 'master' ]
+default_scons_common_arguments_version = scons_common_arguments_versions[0]
 
 scons_gnu_arguments_versions = [ 'master' ]
 default_scons_gnu_arguments_version = scons_gnu_arguments_versions[0]
@@ -68,6 +72,12 @@ def scons_version_string(v):
 # Validate and return scons-arguments version
 def scons_arguments_version_string(v):
 ##    if v not in scons_arguments_versions:
+##        raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
+    return v
+
+# Validate and return scons-common-arguments version
+def scons_common_arguments_version_string(v):
+##    if v not in scons_versions:
 ##        raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
     return v
 
@@ -151,6 +161,14 @@ parser.add_argument(
         )
 
 parser.add_argument(
+        '--scons-common-arguments-ver',
+        type=scons_common_arguments_version_string,
+        default=default_scons_common_arguments_version,
+        metavar='VER',
+        help='version of scons-common-arguments to be downloaded'
+        )
+
+parser.add_argument(
         '--scons-gnu-arguments-ver',
         type=scons_gnu_arguments_version_string,
         default=default_scons_gnu_arguments_version,
@@ -164,7 +182,7 @@ parser.add_argument(
         type=str,
         nargs='*',
         default = all_packages,
-        help='package to download (cxxtest, opencl-lib, opencl-hdr, scons, scons-arguments, scons-gnu-arguments)'
+        help='package to download (cxxtest, opencl-lib, opencl-hdr, scons, scons-arguments, scons-common-arguments, scons-gnu-arguments)'
         )
 
 args = parser.parse_args()
@@ -649,6 +667,46 @@ def dload_scons_arguments(**kw):
     shutil.rmtree(tmpdir)
     return 0
 
+def dload_scons_common_arguments(**kw):
+    try: clean = kw['clean']
+    except KeyError: clean = False
+    try: destdir = kw['destdir']
+    except KeyError: destdir = os.path.join(topsrcdir, 'site_scons', 'SConsCommonArguments')
+
+    if clean:
+        if os.path.exists(destdir):
+            info("removing '%s'" % destdir, **kw)
+            shutil.rmtree(destdir)
+        return 0
+
+    try: destdir_mode = kw['destdir_mode']
+    except KeyError: destdir_mode = 0755
+
+    if os.path.exists(destdir):
+        warn("'%s' already exists, skipping scons_common_arguments download!" % destdir, **kw)
+        return 2
+
+    try: ver = kw['scons_common_arguments_ver']
+    except KeyError: ver = None
+    if ver is None:
+        ver = default_scons_common_arguments_version
+
+    tmpdir = tempfile.mkdtemp()
+    info("created '%s'" % tmpdir, **kw)
+
+    url = "https://github.com/ptomulik/scons-common-arguments/archive/%s.tar.gz" % ver
+    info("downloading '%s' to '%s'" % (url,tmpdir), **kw)
+    hoarder.urluntar(url, path=tmpdir, strip_components=1)
+
+    src = os.path.join(tmpdir, 'SConsCommonArguments')
+    dst = destdir
+    info("copytree '%s' -> '%s'" % (src, dst), **kw)
+    shutil.copytree(src, dst)
+
+    info("removing '%s'" % tmpdir, **kw)
+    shutil.rmtree(tmpdir)
+    return 0
+
 def dload_scons_gnu_arguments(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
@@ -705,6 +763,8 @@ for pkg in args.packages:
         dload_scons(**vars(args))
     elif pkg.lower() == 'scons-arguments':
         dload_scons_arguments(**vars(args))
+    elif pkg.lower() == 'scons-common-arguments':
+        dload_scons_common_arguments(**vars(args))
     elif pkg.lower() == 'scons-gnu-arguments':
         dload_scons_gnu_arguments(**vars(args))
     else:

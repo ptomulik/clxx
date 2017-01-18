@@ -143,6 +143,7 @@ vendor
 /ext/
 /bin/hoarder/patch.py
 /site_scons/SConsArguments/
+/site_scons/SConsCommonArguments/
 /site_scons/SConsGnuArguments/
 #############################################################################
 
