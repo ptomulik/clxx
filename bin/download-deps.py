@@ -45,7 +45,7 @@ default_scons_version = scons_versions[0]
 scons_arguments_versions = [ 'master' ]
 default_scons_arguments_version = scons_arguments_versions[0]
 
-scons_common_arguments_versions = [ 'master' ]
+scons_common_arguments_versions = [ 'develop' ]
 default_scons_common_arguments_version = scons_common_arguments_versions[0]
 
 scons_gnu_arguments_versions = [ 'master' ]

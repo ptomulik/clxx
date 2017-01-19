@@ -6,13 +6,17 @@ import os
 from SCons.Util import CLVar
 from SConsGnu import GVars, AcDirVars, CcVars
 from SConsGnu.GVars import GVarDeclsU
+# We're migrating from SConsGnu.GVars to SConsCommonArguments and so on...
+from SConsArguments import DeclareArguments
+import SConsCommonArguments.cc
+import SConsGnuArguments.AltPrograms
 
 Import(['env'])
 
 ##############################################################################
 def munge_os_environ(ose):
     """Apply appropriate converters to variables from OS environment"""
-    flags = CcVars.GVarNames(categories = 'flags')
+    flags = SConsCommonArguments.cc.Names(include_progs = [])
     result = ose.copy()
     for flag in flags:
         try:
@@ -27,7 +31,30 @@ variables = Variables('.scons.variables')
 ##############################################################################
 # Declare local CLI variables
 ##############################################################################
-decls = GVarDeclsU(
+##decls = GVarDeclsU(
+##    CLXX_ENABLE_GCOV = {
+##        'env_key'   : 'CLXX_ENABLE_GCOV',
+##        'var_key'   : 'CLXX_ENABLE_GCOV',
+##        'help'      : 'Compile with GCOV support',
+##        'default'   : 'no'
+##    },
+##    WITHOUT_CL_EGL = {
+##        'env_key'   : 'WITHOUT_CL_EGL',
+###        'var_key'   : 'WITHOUT_CL_EGL',
+##        'opt_key'   : 'WITHOUT_CL_EGL',
+##        'option'    : '--without-cl-egl',
+##        'action'    : 'store_true',
+##        'help'      : 'Do not include CL/cl_egl.h, even if it is available'
+##    },
+##    SWIG = {
+##        'env_key'   : 'CLI_SWIG',
+##        'opt_key'   : 'SWIG',
+##        'option'    : '--swig',
+##        'type'      : 'string',
+##        'help'      : 'Specify path to SWIG executable'
+##    },
+##)
+decls = DeclareArguments(
     CLXX_ENABLE_GCOV = {
         'env_key'   : 'CLXX_ENABLE_GCOV',
         'var_key'   : 'CLXX_ENABLE_GCOV',
@@ -53,8 +80,11 @@ decls = GVarDeclsU(
 ##############################################################################
 # Declare some standard CLI variables
 ##############################################################################
-decls.update(CcVars.DeclareGVars(defaults = env, env_key_transform = lambda s : 'CLI_%s' % s))
-decls.update(AcDirVars.DeclareGVars(defaults = env))
+##decls.update(CcVars.DeclareGVars(defaults = env, env_key_transform = lambda s : 'CLI_%s' % s))
+##decls.update(AcDirVars.DeclareGVars(defaults = env))
+decls.update(SConsCommonArguments.cc.Declarations(defaults = env, env_key_transform = lambda s : 'CLI_%s' % s))
+####decls.update(SConsCommonArguments.CC.Declarations(defaults = env))
+decls.update(SConsGnuArguments.AltPrograms.Declarations(defaults = env))
 ##############################################################################
 
 
@@ -62,14 +92,14 @@ decls.update(AcDirVars.DeclareGVars(defaults = env))
 ##SConscript('xyz/SConscript.cli', exports = ['env', 'decls'])
 
 ##############################################################################
-# Incorporate GVars into environment
+# Incorporate Arguments into environment
 ##############################################################################
-gvars = decls.Commit(env, variables, True)
+args = decls.Commit(env, variables, True)
 osenv = munge_os_environ(os.environ)
 # FIXME: in fact, variables should be saved only on demand ('configure' target)
 #        so by default filename should be None
-new = gvars.Postprocess(env, variables, True, osenv, filename='.scons.variables')
-env['GVARS'] = gvars.EnvProxy(env) # so we can do env['GVARS']['XYZ'].
+new = args.Postprocess(env, variables, True, osenv, filename='.scons.variables')
+env['GVARS'] = args.EnvProxy(env) # so we can do env['GVARS']['XYZ'].
 env['CHANGED_VARIABLES'] = new
 ##############################################################################
 
