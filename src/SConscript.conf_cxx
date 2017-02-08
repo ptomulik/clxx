@@ -43,7 +43,7 @@ env = conf.env
 for var in SConsGnu.CcVars.GVarNames(categories = ['programs']):
     try:
 ##        if var in env['CHANGED_VARIABLES']:
-            env[var] = env['GVARS'][var]
+            env[var] = env['ARGUMENTS'][var]
     except KeyError: pass
 
 #############################################################################
@@ -90,7 +90,7 @@ elif cxx == 'cl':
 for var in SConsGnu.CcVars.GVarNames(categories = ['flags']):
     try:
 ##        if var in env['CHANGED_VARIABLES']:
-            env[var] = env['GVARS'][var]
+            env[var] = env['ARGUMENTS'][var]
     except KeyError: pass
 
 libdir = '%s' % env.Dir('lib').path

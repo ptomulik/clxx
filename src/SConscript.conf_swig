@@ -17,7 +17,7 @@ if env.Dir('#ext/swig/bin').exists():
     env.PrependENVPath('PATH', env.Dir('#ext/swig/bin'))
 
 try:
-    env['SWIG'] = env['GVARS']['SWIG']
+    env['SWIG'] = env['ARGUMENTS']['SWIG']
 except KeyError:
     try:
         import SCons.Tool.swig

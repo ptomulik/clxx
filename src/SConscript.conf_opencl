@@ -379,7 +379,7 @@ conf.env = orgEnv
 
 # --without-cl-egl
 try:
-    if conf.env['GVARS']['WITHOUT_CL_EGL']:
+    if conf.env['ARGUMENTS']['WITHOUT_CL_EGL']:
         conf.Define('CLXX_WITHOUT_CL_EGL', 1, 'Do not inclue CL/cl_egl.h')
 except KeyError:
     pass
