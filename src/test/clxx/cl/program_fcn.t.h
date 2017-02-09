@@ -44,10 +44,10 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_program)0x1234);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), 0ul);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), static_cast<const void*>(nullptr));
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
-    TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), nullptr);
-    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), static_cast<const void*>(nullptr));
+    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), static_cast<const void*>(nullptr));
   }
 /** // doc: test_build_program_2() {{{
    * \todo Write documentation
@@ -73,8 +73,8 @@ public:
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), 2ul);
     TS_ASSERT(std::get<2>(mock3.calls().back()) != nullptr);
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
-    TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), nullptr);
-    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), static_cast<const void*>(nullptr));
+    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), static_cast<const void*>(nullptr));
   }
 /** // doc: test_build_program_3() {{{
    * \todo Write documentation
@@ -93,7 +93,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_program)0x1234);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), 0ul);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), static_cast<const void*>(nullptr));
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT(std::get<4>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), (void*)&po);
@@ -147,13 +147,13 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_program)0x1234);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), 0ul);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), static_cast<const void*>(nullptr));
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 0ul);
     TS_ASSERT(std::get<5>(mock3.calls().back()) == nullptr);
     TS_ASSERT(std::get<6>(mock3.calls().back()) != nullptr);
-    TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), nullptr);
-    TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), static_cast<const void*>(nullptr));
+    TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), static_cast<const void*>(nullptr));
 #endif
   }
 /** // doc: test_compile_program_2() {{{
@@ -178,7 +178,7 @@ public:
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_program)0x1234);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), 0ul);
-    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), static_cast<const void*>(nullptr));
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 0ul);
     TS_ASSERT(std::get<5>(mock3.calls().back()) == nullptr);
@@ -217,8 +217,8 @@ public:
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 0ul);
     TS_ASSERT(std::get<5>(mock3.calls().back()) == nullptr);
     TS_ASSERT(std::get<6>(mock3.calls().back()) != nullptr);
-    TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), nullptr);
-    TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), static_cast<const void*>(nullptr));
+    TS_ASSERT_EQUALS(std::get<8>(mock3.calls().back()), static_cast<const void*>(nullptr));
 #endif
   }
 /** // doc: test_compile_program_4() {{{
@@ -290,8 +290,8 @@ public:
     TS_ASSERT(std::get<3>(mock3.calls().back()) != nullptr);
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), 2ul);
     TS_ASSERT(std::get<5>(mock3.calls().back()) != nullptr);
-    TS_ASSERT_EQUALS(std::get<6>(mock3.calls().back()), nullptr);
-    TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<6>(mock3.calls().back()), static_cast<const void*>(nullptr));
+    TS_ASSERT_EQUALS(std::get<7>(mock3.calls().back()), static_cast<const void*>(nullptr));
     TS_ASSERT(std::get<8>(mock3.calls().back()) != nullptr);
 
 #endif

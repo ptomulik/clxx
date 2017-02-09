@@ -3,11 +3,6 @@
 # Licensed under MIT license (LICENSE.txt).
 
 import os
-#from SCons.Util import CLVar
-#from SConsGnu import GVars, AcDirVars, CcVars
-#from SConsGnu.GVars import GVarDeclsU
-# We're migrating from SConsGnu.GVars to SConsCommonArguments and so on...
-
 import SConsArguments
 
 Import(['env'])
@@ -48,19 +43,12 @@ decls = SConsArguments.DeclareArguments(
         'help'      : 'Do not include CL/cl_egl.h, even if it is available'
     }
 )
-decls.update(SConsArguments.ImportArguments(['swig', 'cc', 'c++'], env_key_prefix = 'CLI_'))
 ##############################################################################
 # Declare some standard CLI variables
 ##############################################################################
-##decls.update(CcVars.DeclareGVars(defaults = env, env_key_transform = lambda s : 'CLI_%s' % s))
-## FIXME: we need something similar to AcDirVars to implement customized
-##        installation directories
-##decls.update(AcDirVars.DeclareGVars(defaults = env))
-##decls.update(SConsCommonArguments.cc.Declarations(defaults = env, env_key_transform = lambda s : 'CLI_%s' % s))
-####decls.update(SConsCommonArguments.CC.Declarations(defaults = env))
-##decls.update(SConsGnuArguments.AltPrograms.Declarations(defaults = env))
+decls.update(SConsArguments.ImportArguments(['swig', 'cc', 'c++'], env_key_prefix = 'CLI_'))
+decls.update(SConsArguments.ImportArguments('gnuinstall'))
 ##############################################################################
-
 
 # Let anyone else downwards to inject its CLI options and variables.
 ##SConscript('xyz/SConscript.cli', exports = ['env', 'decls'])

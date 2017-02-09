@@ -21,10 +21,10 @@ patchdir  = os.path.join(scriptdir, 'patches')
 topsrcdir = os.path.realpath(os.path.join(scriptdir, '..'))
 
 
-default_opencl_version = '2.0'
+default_opencl_version = '2.1'
 default_egl_version = '1.5'
 all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig', 'scons',
-                'scons-arguments', 'scons-common-arguments', 'scons-gnu-arguments']
+                'scons-arguments', 'scons-arguments-gnuinstall']
 scons_versions = [ 'tip',
                    '2.5.1',
                    '2.5.0',
@@ -45,11 +45,8 @@ default_scons_version = scons_versions[0]
 scons_arguments_versions = [ 'master' ]
 default_scons_arguments_version = scons_arguments_versions[0]
 
-scons_common_arguments_versions = [ 'develop' ]
-default_scons_common_arguments_version = scons_common_arguments_versions[0]
-
-scons_gnu_arguments_versions = [ 'master' ]
-default_scons_gnu_arguments_version = scons_gnu_arguments_versions[0]
+scons_arguments_gnuinstall_versions = [ 'master' ]
+default_scons_arguments_gnuinstall_version = scons_arguments_gnuinstall_versions[0]
 
 # Validate and return OpenCL version
 def opencl_version_string(v):
@@ -75,21 +72,14 @@ def scons_arguments_version_string(v):
 ##        raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
     return v
 
-# Validate and return scons-common-arguments version
-def scons_common_arguments_version_string(v):
-##    if v not in scons_versions:
+# Validate and return scons-arguments-gnuinstall version
+def scons_arguments_gnuinstall_version_string(v):
+##    if v not in scons_arguments_versions:
 ##        raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
     return v
-
-# Validate and return scons-gnu-arguments version
-def scons_gnu_arguments_version_string(v):
-##    if v not in scons_versions:
-##        raise argparse.ArgumentTypeError("ill-formed or unsupported EGL version %r" % v)
-    return v
-
 
 parser = argparse.ArgumentParser(
-        prog='download.py',
+        prog='download-deps.py',
         description="""\
         This tool downloads predefined prerequisites (call it packages) for
         clxx project. You may cherry pick what packages are to be downloaded
@@ -161,19 +151,11 @@ parser.add_argument(
         )
 
 parser.add_argument(
-        '--scons-common-arguments-ver',
-        type=scons_common_arguments_version_string,
-        default=default_scons_common_arguments_version,
+        '--scons-arguments-gnuinstall-ver',
+        type=scons_arguments_gnuinstall_version_string,
+        default=default_scons_arguments_gnuinstall_version,
         metavar='VER',
-        help='version of scons-common-arguments to be downloaded'
-        )
-
-parser.add_argument(
-        '--scons-gnu-arguments-ver',
-        type=scons_gnu_arguments_version_string,
-        default=default_scons_gnu_arguments_version,
-        metavar='VER',
-        help='version of scons-gnu-arguments to be downloaded'
+        help='version of scons-arguments-gnuinstall to be downloaded'
         )
 
 parser.add_argument(
@@ -182,7 +164,7 @@ parser.add_argument(
         type=str,
         nargs='*',
         default = all_packages,
-        help='package to download (cxxtest, opencl-lib, opencl-hdr, scons, scons-arguments, scons-common-arguments, scons-gnu-arguments)'
+        help='package to download (cxxtest, opencl-lib, opencl-hdr, scons, scons-arguments, scons-arguments-gnuinstall)'
         )
 
 args = parser.parse_args()
@@ -667,87 +649,49 @@ def dload_scons_arguments(**kw):
     shutil.rmtree(tmpdir)
     return 0
 
-def dload_scons_common_arguments(**kw):
+def dload_scons_arguments_gnuinstall(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'site_scons', 'SConsCommonArguments')
+    except KeyError: destdir = os.path.join(topsrcdir, 'site_scons', 'site_arguments')
 
+    dst = os.path.join(destdir, 'gnuinstall.py')
     if clean:
-        if os.path.exists(destdir):
-            info("removing '%s'" % destdir, **kw)
-            shutil.rmtree(destdir)
+        if os.path.exists(dst):
+            info("removing '%s'" % dst, **kw)
+            os.remove(dst)
         return 0
 
     try: destdir_mode = kw['destdir_mode']
     except KeyError: destdir_mode = 0755
 
-    if os.path.exists(destdir):
-        warn("'%s' already exists, skipping scons_common_arguments download!" % destdir, **kw)
+    if os.path.exists(dst):
+        warn("'%s' already exists, skipping scons_arguments_gnuinstall download!" % dst, **kw)
         return 2
 
-    try: ver = kw['scons_common_arguments_ver']
+    try: ver = kw['scons_arguments_gnuinstall_ver']
     except KeyError: ver = None
     if ver is None:
-        ver = default_scons_common_arguments_version
+        ver = default_scons_arguments_gnuinstall_version
 
     tmpdir = tempfile.mkdtemp()
     info("created '%s'" % tmpdir, **kw)
 
-    url = "https://github.com/ptomulik/scons-common-arguments/archive/%s.tar.gz" % ver
+    url = "https://github.com/ptomulik/scons-arguments-gnuinstall/archive/%s.tar.gz" % ver
     info("downloading '%s' to '%s'" % (url,tmpdir), **kw)
     hoarder.urluntar(url, path=tmpdir, strip_components=1)
 
-    src = os.path.join(tmpdir, 'SConsCommonArguments')
-    dst = destdir
-    info("copytree '%s' -> '%s'" % (src, dst), **kw)
-    shutil.copytree(src, dst)
+    if not os.path.exists(destdir):
+        info("creating '%s'" % destdir, **kw)
+        os.makedirs(destdir, mode=destdir_mode)
+
+    src = os.path.join(tmpdir, 'gnuinstall.py')
+    info("copyfile '%s' -> '%s'" % (src, dst), **kw)
+    shutil.copyfile(src, dst)
 
     info("removing '%s'" % tmpdir, **kw)
     shutil.rmtree(tmpdir)
     return 0
-
-def dload_scons_gnu_arguments(**kw):
-    try: clean = kw['clean']
-    except KeyError: clean = False
-    try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'site_scons', 'SConsGnuArguments')
-
-    if clean:
-        if os.path.exists(destdir):
-            info("removing '%s'" % destdir, **kw)
-            shutil.rmtree(destdir)
-        return 0
-
-    try: destdir_mode = kw['destdir_mode']
-    except KeyError: destdir_mode = 0755
-
-    if os.path.exists(destdir):
-        warn("'%s' already exists, skipping scons_gnu_arguments download!" % destdir, **kw)
-        return 2
-
-    try: ver = kw['scons_gnu_arguments_ver']
-    except KeyError: ver = None
-    if ver is None:
-        ver = default_scons_gnu_arguments_version
-
-    tmpdir = tempfile.mkdtemp()
-    info("created '%s'" % tmpdir, **kw)
-
-    url = "https://github.com/ptomulik/scons-gnu-arguments/archive/%s.tar.gz" % ver
-    info("downloading '%s' to '%s'" % (url,tmpdir), **kw)
-    hoarder.urluntar(url, path=tmpdir, strip_components=1)
-
-    src = os.path.join(tmpdir, 'SConsGnuArguments')
-    dst = destdir
-    info("copytree '%s' -> '%s'" % (src, dst), **kw)
-    shutil.copytree(src, dst)
-
-    info("removing '%s'" % tmpdir, **kw)
-    shutil.rmtree(tmpdir)
-    return 0
-
-
 
 for pkg in args.packages:
     if pkg.lower() == 'cxxtest':
@@ -763,10 +707,8 @@ for pkg in args.packages:
         dload_scons(**vars(args))
     elif pkg.lower() == 'scons-arguments':
         dload_scons_arguments(**vars(args))
-    elif pkg.lower() == 'scons-common-arguments':
-        dload_scons_common_arguments(**vars(args))
-    elif pkg.lower() == 'scons-gnu-arguments':
-        dload_scons_gnu_arguments(**vars(args))
+    elif pkg.lower() == 'scons-arguments-gnuinstall':
+        dload_scons_arguments_gnuinstall(**vars(args))
     else:
         warn("unsupported package name: %r, skipping!" % pkg, **vars(args))
 

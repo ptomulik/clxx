@@ -688,7 +688,7 @@ public:
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_COMPILE_WORK_GROUP_SIZE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), 3*sizeof(size_t));
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), array);
-    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), static_cast<const void*>(nullptr));
   }
   /** // doc: test__get_local_mem_size() {{{
    * \todo Write documentation
@@ -827,7 +827,7 @@ public:
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_GLOBAL_WORK_SIZE);
     TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), 3*sizeof(size_t));
     TS_ASSERT_EQUALS(std::get<4>(mock3.calls().back()), array);
-    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), nullptr);
+    TS_ASSERT_EQUALS(std::get<5>(mock3.calls().back()), static_cast<const void*>(nullptr));
 #endif
   }
   /** // doc: test__set_arg_1() {{{
