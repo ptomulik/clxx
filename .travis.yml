@@ -18,6 +18,7 @@ before_install:
   - sudo apt-key update
   - sudo apt-get -y update
 install:
+  - ./bin/download-deps.py scons-arguments scons-arguments-gnuinstall
   - if $COMPILE; then sudo apt-get --no-install-recommends -y install g++; fi
   - if $COMPILE; then sudo apt-get --no-install-recommends -y install clang; fi
   - if $COMPILE; then
