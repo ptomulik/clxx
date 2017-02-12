@@ -129,7 +129,7 @@ public:
         }
     }
 
-    // append length of message (before pre-processing) 
+    // append length of message (before pre-processing)
     // as a 64-bit big-endian integer
     process_byte_impl( static_cast<uint8_t>((_bit_cnt_hi>>24) & 0xFF) );
     process_byte_impl( static_cast<uint8_t>((_bit_cnt_hi>>16) & 0xFF) );

@@ -110,7 +110,7 @@ public:
    * \brief Constructor with pluggable program constructor
    *
    * \param program_ctor
-   *    The program 
+   *    The program
    */ // }}}
   program_generator(shared_ptr<program_ctor_t> const& program_ctor);
   /** // doc: ~program_generator() {{{
@@ -172,7 +172,7 @@ public:
    *    Line number, starting from \c 1 for the first line.
    *
    * \returns
-   *    The generated line directive as a c++ string 
+   *    The generated line directive as a c++ string
    *
    * \note Inserting the line directive at the beginning of each program source
    *       is a recommended practice. This shall help with identifying

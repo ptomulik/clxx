@@ -45,7 +45,7 @@ namespace clxx {
  * That way it reduces a boilerplate that would otherwise go to particular
  * clxx classes such as #clxx::device or #clxx::event.
  *
- * The reference count is maintained automatically. A newly created instance 
+ * The reference count is maintained automatically. A newly created instance
  * of #clobj increments a reference count for its underlying handle
  * (retains its OpenCL object). The reference count is decreased when the
  * #clobj object goes out of scope or is deleted. Assignment operator
@@ -71,7 +71,7 @@ public:
   typedef typename cl_object_info_type<Handle>::type info_t;
 protected:
   /** // doc: _set_handle() {{{
-   * \brief Encapsulate new OpenCL object 
+   * \brief Encapsulate new OpenCL object
    *
    * This method assigns the new OpenCL object handle to the #clobj object
    * and maintains reference count (for both, the currently held and the new

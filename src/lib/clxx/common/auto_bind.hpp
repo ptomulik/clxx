@@ -5,7 +5,10 @@
 
 /** // doc: clxx/common/auto_bind.hpp {{{
  * \file clxx/common/auto_bind.hpp
- * \todo Write documentation
+ * \brief Provides the clxx::auto_bind class
+ *
+ * This file contains definition of clxx::auto_bind class which helps to work
+ * with \ref clxx::detail::current_instance "current_instance".
  */ // }}}
 #ifndef CLXX_COMMON_AUTO_BIND_HPP_INCLUDED
 #define CLXX_COMMON_AUTO_BIND_HPP_INCLUDED
@@ -21,7 +24,7 @@ namespace clxx {
  *
  * Using RAII pattern the object allows to bind user supplied instance to
  * a \ref clxx::detail::current_instance "current_instance" class. The original
- * bind is restored at the end of current scope (or, more generally, at the 
+ * bind is restored at the end of current scope (or, more generally, at the
  * \ref clxx::auto_bind "auto_bind" destruction).
  *
  * \par Example

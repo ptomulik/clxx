@@ -80,7 +80,7 @@ public:
   /** // doc: memoized_function(memoized_function const&) {{{
    * \brief Assignment operator
    *
-   * The assignment operator assigns the copy of the callable object and 
+   * The assignment operator assigns the copy of the callable object and
    * and copy of the internally maintained result cache.
    *
    * \param other

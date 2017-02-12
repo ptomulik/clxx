@@ -19,7 +19,7 @@ namespace clxx {
  * \ingroup clxx_runtime
  * \brief Thread-local reference to "current" \ref clxx::runtime "runtime"
  *
- * The current runtime is a reference pointing to a distinguished 
+ * The current runtime is a reference pointing to a distinguished
  * \ref clxx::runtime "runtime" object. The \ref clxx::current_runtime "current_runtime"
  * is a specialization of the \ref clxx::current_instance "current_instance"
  * for the \ref clxx::runtime "runtime" class.

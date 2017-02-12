@@ -277,7 +277,7 @@ public:
   /** // doc: bind_custom_instance() {{{
    * \brief Bind custom instance provided by user
    *
-   * \param ref The instance to bind 
+   * \param ref The instance to bind
    */ // }}}
   static void
   bind_custom_instance(reference ref) noexcept

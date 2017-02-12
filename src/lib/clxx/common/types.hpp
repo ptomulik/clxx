@@ -2018,7 +2018,7 @@ CLXX_SPECIALIZE_cl_object_info_type(cl_sampler, sampler_info_t);
 /** \endcond */
 
 /** // doc: invalid_cl_object_errcode {{{
- * \brief Return appropriate error code for a given OpenCL object type 
+ * \brief Return appropriate error code for a given OpenCL object type
  *
  * The returned value is, for example, #status_t::invalid_command_queue for
  * \c cl_command_queue, #status_t::invalid_context for \c cl_context etc.

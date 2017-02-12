@@ -46,7 +46,7 @@ namespace clxx {
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular read command and
  *    can be used to query or queue a wait for this particular command to
@@ -93,7 +93,7 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular read command and
  *    can be used to query or queue a wait for this particular command to
@@ -181,7 +181,7 @@ enqueue_read_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -228,7 +228,7 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -317,7 +317,7 @@ enqueue_write_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -364,7 +364,7 @@ enqueue_copy_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -457,7 +457,7 @@ enqueue_copy_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -510,7 +510,7 @@ enqueue_map_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -602,7 +602,7 @@ enqueue_map_buffer(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -641,7 +641,7 @@ enqueue_unmap_mem_object(clxx::command_queue const& command_queue,
  *    synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to

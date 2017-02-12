@@ -27,7 +27,7 @@ public:
   {
     std::vector<detail::path_string> paths;
     const char* env;
-#ifdef CLXX_WINDOWS_API  
+#ifdef CLXX_WINDOWS_API
     // TODO: implement default search path for windows
     (void)env;
 #else

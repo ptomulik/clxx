@@ -67,7 +67,7 @@ template<typename T>
     /** doc: apply() {{{
      * \brief The generator
      */ // }}}
-    static void apply(char*&) {} 
+    static void apply(char*&) {}
   };
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>

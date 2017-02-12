@@ -82,7 +82,7 @@ public:
    * Creates new OpenCL buffer via #create_buffer().
    *
    * \param ctx
-   *    A valid #context object used to create the buffer object. 
+   *    A valid #context object used to create the buffer object.
    * \param flags
    *    A bit-field that is used to specify allocation and usage information
    *    such as the memory arena that should be used to allocate the buffer
@@ -175,7 +175,7 @@ public:
    *
    * If the #mem object is created with #create_sub_buffer(), the context
    * associated with the memory object specified as the \e buffer argument to
-   * create_sub_buffer() is returned. 
+   * create_sub_buffer() is returned.
    *
    * \throw uninitialized_mem_error
    *    If the #mem object (this) is uninitialized
@@ -203,7 +203,7 @@ public:
    */ // }}}
   mem get_associated_memobject() const;
   /** // doc: get_offset() {{{
-   * \brief Return offset if the #mem object is a sub-buffer created using #create_sub_buffer() 
+   * \brief Return offset if the #mem object is a sub-buffer created using #create_sub_buffer()
    *
    * This returns 0 if memobj is not a subbuffer object
    *
@@ -222,7 +222,7 @@ public:
    * mem_flags_t::use_host_ptr or is a sub-buffer object of a buffer object
    * that was created with mem_flags_t::use_host_ptr and the \e host_ptr
    * specified when the \e buffer object was created is a SVM pointer;
-   * otherwise returns \c CL_FALSE. 
+   * otherwise returns \c CL_FALSE.
    *
    * \throw uninitialized_mem_error
    *    If the #mem object (this) is uninitialized

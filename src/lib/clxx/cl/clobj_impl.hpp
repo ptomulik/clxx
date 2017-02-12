@@ -97,7 +97,7 @@ _retain(cl_device_id)
   //       (also 1.1 GPU) where the clRetainDevice was not implemented.
   //       Finally decided to ignore the reference count management for
   //       device class. This needs to be fixed at some point.
-  // 
+  //
   // NOTE: I could eventually check if this device is a subdevice (with
   //       get_device_info()) and maintain the reference count conditionally,
   //       but this would introduce clGetDeviceInfo mock into the code of
@@ -113,7 +113,7 @@ _release(cl_device_id)
   //       (also 1.1 GPU) where the clReleaseDevice was not implemented.
   //       Finally decided to ignore the reference count management for
   //       device class. This needs to be fixed at some point.
-  // 
+  //
   // NOTE: I could eventually check if this device is a subdevice (with
   //       get_device_info()) and maintain the reference count conditionally
   //       but this would introduce clGetDeviceInfo mock into the code of

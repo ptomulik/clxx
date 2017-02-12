@@ -85,7 +85,7 @@ public:
    * \throws clxx::invalid_key_error
    *    If there is no kernel memoized for the given arguments.
    *
-   * It may also throw other exceptions originating from 
+   * It may also throw other exceptions originating from
    */ // }}}
   clxx::kernel get_memoized_kernel(clxx::program const& program,
                                    std::string const& kernel_name) const;

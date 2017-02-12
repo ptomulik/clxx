@@ -939,7 +939,7 @@ get_command_queue_info(cl_command_queue command_queue,
  * \param host_ptr
  *    A pointer to the buffer data that may already be allocated by the
  *    application. The size of the buffer that \p host_ptr points to must be
- *    greater than or equal to the size bytes. 
+ *    greater than or equal to the size bytes.
  *
  * \returns The newly created OpenCL memory object
  *
@@ -1037,7 +1037,7 @@ create_sub_buffer(cl_mem buffer,
  *
  * The main difference between #enqueue_read_buffer() and \c clEnqueueReadBuffer()
  * is that it throws %clxx exceptions instead of returning OpenCL error codes.
- * 
+ *
  * \param command_queue
  *    Is a valid host command-queue in which the read command will be queued.
  *    \p command_queue and buffer must be created with the same OpenCL context.
@@ -1054,7 +1054,7 @@ create_sub_buffer(cl_mem buffer,
  *    read command has completed. The \p event argument returns an event object
  *    which can be used to query the execution status of the read command. When
  *    the read command has completed, the contents of the buffer that \p ptr
- *    points to can be used by the application. 
+ *    points to can be used by the application.
  * \param offset
  *    The offset in bytes in the buffer object to read from.
  * \param size
@@ -1075,7 +1075,7 @@ create_sub_buffer(cl_mem buffer,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular read command and
  *    can be used to query or queue a wait for this particular command to
@@ -1139,7 +1139,7 @@ enqueue_read_buffer(cl_command_queue command_queue,
  *
  * The main difference between #enqueue_write_buffer() and \c clEnqueueWriteBuffer()
  * is that it throws %clxx exceptions instead of returning OpenCL error codes.
- * 
+ *
  * \param command_queue
  *    Is a valid host command-queue in which the write command will be queued.
  *    \p command_queue and buffer must be created with the same OpenCL context.
@@ -1158,7 +1158,7 @@ enqueue_read_buffer(cl_command_queue command_queue,
  *    argument returns an \p event object which can be used to query the
  *    execution status of the write command. When the write command has
  *    completed, the memory pointed to by \p ptr can then be reused by the
- *    application. 
+ *    application.
  * \param offset
  *    The offset in bytes in the buffer object to write to.
  * \param size
@@ -1179,7 +1179,7 @@ enqueue_read_buffer(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -1272,7 +1272,7 @@ enqueue_write_buffer(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular copy command and
  *    can be used to query or queue a wait for this particular command to
@@ -1381,7 +1381,7 @@ enqueue_copy_buffer(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular map command and
  *    can be used to query or queue a wait for this particular command to
@@ -1575,7 +1575,7 @@ get_supported_image_formats(cl_context context,
                             cl_image_format* image_formats,
                             cl_uint* num_image_formats);
 /** // doc: enqueue_read_image() {{{
- * \brief Enqueue commands to read from an image or image array object to host memory. 
+ * \brief Enqueue commands to read from an image or image array object to host memory.
  *
  * This is a wrapper for \c clEnqueueReadImage(). The call to
  * #enqueue_read_image() has same effect as a call to
@@ -1650,7 +1650,7 @@ get_supported_image_formats(cl_context context,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular read command and
  *    can be used to query or queue a wait for this particular command to
@@ -1710,7 +1710,7 @@ enqueue_read_image(cl_command_queue command_queue,
                    const cl_event* event_wait_list,
                    cl_event* event);
 /** // doc: enqueue_write_image() {{{
- * \brief Enqueue commands to write to an image or image array object from host memory. 
+ * \brief Enqueue commands to write to an image or image array object from host memory.
  *
  * This is a wrapper for \c clEnqueueWriteImage(). The call to
  * #enqueue_write_image() has same effect as a call to
@@ -1787,7 +1787,7 @@ enqueue_read_image(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular write command and
  *    can be used to query or queue a wait for this particular command to
@@ -1911,7 +1911,7 @@ enqueue_write_image(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular copy command and
  *    can be used to query or queue a wait for this particular command to
@@ -2031,7 +2031,7 @@ enqueue_copy_image(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular copy command and
  *    can be used to query or queue a wait for this particular command to
@@ -2149,7 +2149,7 @@ enqueue_copy_image_to_buffer(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular copy command and
  *    can be used to query or queue a wait for this particular command to
@@ -2210,7 +2210,7 @@ enqueue_copy_buffer_to_image(cl_command_queue command_queue,
 /** // doc: enqueue_map_image() {{{
  * \brief Enqueues a command to map a region of an image object into the host
  *        address space and returns a pointer to this mapped region
- *  
+ *
  * This is a wrapper for \c clEnqueueMapImage(). The call to
  * #enqueue_map_image() has same effect as a call to
  *    - \c clEnqueueMapImage(command_queue, image, blocking_map, static_cast<cl_map_flags>(map_flags), origin, region, image_row_pitch, image_slice_pitch, num_events_in_wait_list, event_wait_list, event, &errcode)
@@ -2268,7 +2268,7 @@ enqueue_copy_buffer_to_image(cl_command_queue command_queue,
  *    each 1D or 2D image in a 1D or 2D image array for the mapped region. For
  *    a 1D and 2D image, zero is returned if this argument is not \c NULL. For
  *    a 3D image, 1D, and 2D image array, \p image_slice_pitch must be a
- *    non-NULL value. 
+ *    non-NULL value.
  * \param num_events_in_wait_list
  *    Number of events in the \p event_wait_list.
  *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
@@ -2283,7 +2283,7 @@ enqueue_copy_buffer_to_image(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular map command and
  *    can be used to query or queue a wait for this particular command to
@@ -2356,7 +2356,7 @@ enqueue_map_image(cl_command_queue command_queue,
  * is that it throws %clxx exceptions instead of returning OpenCL error codes.
  *
  * \param command_queue
- *    Must be a valid host command-queue. 
+ *    Must be a valid host command-queue.
  * \param memobj
  *    A valid memory (buffer or image) object. The OpenCL context associated
  *    with \p command_queue and \p memobj must be the same.
@@ -2377,7 +2377,7 @@ enqueue_map_image(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular unmap command and
  *    can be used to query or queue a wait for this particular command to
@@ -2460,7 +2460,7 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
  *    as synchronization points. The context associated with events in
  *    \p event_wait_list and \p command_queue must be the same. The memory
  *    associated with \p event_wait_list can be reused or freed after the
- *    function returns. 
+ *    function returns.
  * \param event
  *    Returns an event object that identifies this particular command and
  *    can be used to query or queue a wait for this particular command to
@@ -2519,7 +2519,7 @@ enqueue_migrate_mem_objects(cl_command_queue command_queue,
  * is that it throws %clxx exceptions instead of returning OpenCL error codes.
  *
  * \param image
- *    Specifies the image object being queried. 
+ *    Specifies the image object being queried.
  * \param param_name
  *    Specifies the information to query. See the documentation of
  *    #image_info_t for the list of predefined names.
@@ -2559,7 +2559,7 @@ get_image_info(cl_mem image,
                size_t* param_value_size_ret);
 /** // doc: get_mem_object_info() {{{
  * \brief Get information that is common to all memory objects (buffer and
- *        image objects). 
+ *        image objects).
  *
  * This is a wrapper for \c clGetMemObjectInfo(). The call to
  * #get_mem_object_info() has same effect as a call to

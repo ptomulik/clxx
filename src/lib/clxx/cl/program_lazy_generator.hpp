@@ -42,7 +42,7 @@ public:
    * \brief Return the generated program
    *
    * When invoked for the first time, the method calls the
-   * \ref clxx::program_generator::get_program(), memoizes the created 
+   * \ref clxx::program_generator::get_program(), memoizes the created
    * \ref clxx::program "program" and returns it. Each subsequent invocation
    * with same \p context returns the memoized program, until it is discarded
    * with #discard_memoized_program() or #discard_memoized_programs().

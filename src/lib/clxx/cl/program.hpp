@@ -133,7 +133,7 @@ public:
   /** // doc: program(context, device_list, binaries) {{{
    * \brief Create program with binaries
    *
-   * Creates new program by using \ref create_program_with_binary(). 
+   * Creates new program by using \ref create_program_with_binary().
    *
    * \param ctx
    *    must be a valid \ref clxx::context "context",
