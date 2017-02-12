@@ -21,7 +21,7 @@
 #include <iostream>
 
 /// Main function
-int main() 
+int main()
 {
   std::string     source    { "__kernel void mykernel() { }\n" };
   clxx::platforms platforms { clxx::get_platforms() };

@@ -52,7 +52,7 @@ call_lazy_build_program(clxx::program const& program, std::string const& options
 }
 
 /// Main function
-int main() 
+int main()
 {
   std::string source;
   generate_large_source(source);

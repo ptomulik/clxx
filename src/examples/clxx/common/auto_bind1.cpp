@@ -38,7 +38,7 @@ void load_program(std::string const& name, std::string const& path = current_pat
 // [LoadProgramFcn]
 
 /// Main function
-int main() 
+int main()
 {
   // [ExampleCore]
   std::string path1("/local/path1");
@@ -46,7 +46,7 @@ int main()
 
   load_program("1.cl");
 
-  { 
+  {
     // bind path1, the bind will be reverted at the end of current scope
     clxx::auto_bind<current_path> ab1(path1);
     load_program("2.cl");

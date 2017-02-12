@@ -490,7 +490,7 @@ public:
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    size_t _value[] = { 512ul, 512ul, 64ul }; 
+    size_t _value[] = { 512ul, 512ul, 64ul };
     size_t _value_size = sizeof(_value);
     T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
 
@@ -2092,7 +2092,7 @@ public:
 
     cl_device_partition_property _value[] = { CL_DEVICE_PARTITION_EQUALLY,
                                               CL_DEVICE_PARTITION_BY_COUNTS,
-                                              CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN }; 
+                                              CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN };
     size_t _value_size = sizeof(_value);
     T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
 
@@ -2165,7 +2165,7 @@ public:
     cl_device_partition_property _value[] = { CL_DEVICE_PARTITION_EQUALLY,
                                               CL_DEVICE_PARTITION_BY_COUNTS,
                                               CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN,
-                                              0}; 
+                                              0};
     size_t _value_size = sizeof(_value);
     T::Dummy_clGetDeviceInfo mock(CL_SUCCESS, _value, &_value_size);
 

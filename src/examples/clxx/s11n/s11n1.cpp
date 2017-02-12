@@ -18,7 +18,7 @@
 #include <iostream>
 
 /// Main function
-int main() 
+int main()
 {
   clxx::platform_layer_info obj{ clxx::query_platform_layer_info() };
   boost::archive::xml_oarchive ar(std::cout);

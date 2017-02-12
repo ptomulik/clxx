@@ -37,7 +37,7 @@ void load_program(std::string const& name, std::string const& path = current_pat
 // [LoadProgramFcn]
 
 /// Main function
-int main() 
+int main()
 {
   load_program("1.cl");
 
@@ -45,7 +45,7 @@ int main()
   current_path::bind_thread_instance();
   // [BindThreadInstance]
   load_program("2.cl");
-  
+
   // [BindUserInstance]
   std::string path("/local/path");
   current_path::bind_custom_instance(path);

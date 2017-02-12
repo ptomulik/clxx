@@ -25,7 +25,7 @@
  *
  * \par Example
  *
- * Read platform layer info from an XML archive using 
+ * Read platform layer info from an XML archive using
  * <a href="http://www.boost.org/doc/libs/release/libs/serialization/doc/archives.html#archive_models">boost::xml_iarchive</a>
  * and print it out to standard output.
  *

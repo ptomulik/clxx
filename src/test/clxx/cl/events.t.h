@@ -128,7 +128,7 @@ public:
 
     TS_ASSERT_THROWS(wait_for_events(e), clerror_no<status_t::out_of_resources>);
   }
-  
+
   /** // doc: test__wait_for_events__out_of_host_memory() {{{
    * \brief Test wait_for_events(clxx::events const&)
    */ // }}}

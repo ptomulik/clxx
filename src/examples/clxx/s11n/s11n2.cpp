@@ -19,7 +19,7 @@
 #include <iostream>
 
 /// Main function
-int main() 
+int main()
 {
   clxx::platform_layer_info obj;
   boost::archive::xml_iarchive ar(std::cin);

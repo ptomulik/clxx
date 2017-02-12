@@ -126,7 +126,7 @@ public:
     TS_ASSERT(mock.called_once_with((cl_platform_id)0x1234, CL_PLATFORM_NAME, 123, (void*)0x4321, (size_t*)0x8765));
   }
   /** // doc: test__get_info__uninitialized_platform_error() {{{
-   * \brief Test platform::get_info() 
+   * \brief Test platform::get_info()
    */ // }}}
   void test__get_info__uninitialized_platform_error( )
   {
@@ -134,7 +134,7 @@ public:
     TS_ASSERT_THROWS(platform().get_info(platform_info_t::profile, 0, NULL, NULL), uninitialized_platform_error);
   }
   /** // doc: test__get_info__invalid_platform() {{{
-   * \brief Test platform::get_info() 
+   * \brief Test platform::get_info()
    */ // }}}
   void test__get_info__invalid_platform( )
   {
@@ -142,7 +142,7 @@ public:
     TS_ASSERT_THROWS(platform((cl_platform_id)0x34556ul).get_info(platform_info_t::profile, 0, NULL, NULL), clerror_no<status_t::invalid_platform>);
   }
   /** // doc: test__get_info__invalid_value() {{{
-   * \brief Test platform::get_info() 
+   * \brief Test platform::get_info()
    */ // }}}
   void test__get_info__invalid_value( )
   {
@@ -150,7 +150,7 @@ public:
     TS_ASSERT_THROWS(platform((cl_platform_id)0x34556ul).get_info(platform_info_t::profile, 0, NULL, NULL), clerror_no<status_t::invalid_value>);
   }
   /** // doc: test__get_info__out_of_host_memory() {{{
-   * \brief Test platform::get_info() 
+   * \brief Test platform::get_info()
    */ // }}}
   void test__get_info__out_of_host_memory( )
   {
@@ -158,7 +158,7 @@ public:
     TS_ASSERT_THROWS(platform((cl_platform_id)0x34556ul).get_info(platform_info_t::profile, 0, NULL, NULL), clerror_no<status_t::out_of_host_memory>);
   }
   /** // doc: test__get_info__unexpected_clerror() {{{
-   * \brief Test platform::get_info() 
+   * \brief Test platform::get_info()
    */ // }}}
   void test__get_info__unexpected_clerror( )
   {

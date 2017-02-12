@@ -12,7 +12,7 @@
 
 namespace T {
 class LazyBuildProgram_clGetProgramBuildInfo
-  : Base_clGetProgramBuildInfo, 
+  : Base_clGetProgramBuildInfo,
     Dummy_CallArgs<cl_program, cl_device_id, cl_program_info, size_t, void*, size_t*>
 {
 public:

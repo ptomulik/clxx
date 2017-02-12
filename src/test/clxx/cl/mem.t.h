@@ -449,7 +449,7 @@ public:
     T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
 
     mem m((cl_mem)0x4321);
-    
+
     T::Dummy_clRetainContext mock4(CL_SUCCESS);
     T::Dummy_clReleaseContext mock5(CL_SUCCESS);
 

@@ -37,7 +37,7 @@ class trivial_program
 }
 
 /// Main function
-int main() 
+int main()
 {
   clxx::platforms                 platforms { clxx::get_platforms() };
   clxx::platform                  platform  { platforms[0] };

@@ -111,7 +111,7 @@ env.AppendUnique(LIBPATH = ['#%s' % libdir])
 # 0. Prefer headers from our source tree
 #############################################################################
 env.AppendUnique(CPPPATH = [ '#%s' % libdir ])
- 
+
 #############################################################################
 # Adjust C/C++ compiler flags for code coverage
 #############################################################################

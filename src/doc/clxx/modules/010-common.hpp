@@ -168,7 +168,7 @@
 
 /**
  * \defgroup clxx_util Utilities
- * 
+ *
  * \brief This module documents utility functions and meta-functions provided
  *        by \ref clxx_common package
  * @{
@@ -177,7 +177,7 @@
  */
 /** \defgroup clxx_util_sha1 SHA-1 Utilities
  */
-/** \defgroup clxx_util_current_instance Current Instance 
+/** \defgroup clxx_util_current_instance Current Instance
  *
  * This module documents the \ref clxx_util_current_instance "Current Instance"
  * utility. The concept of \ref clxx_util_current_instance "Current Instance"

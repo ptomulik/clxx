@@ -100,7 +100,7 @@ public:
     TS_ASSERT_EQUALS(g0.discard_memoized_program(c), 0u);
     clxx::program const& p{ g0.get_program(c) };
     TS_ASSERT_EQUALS(g0.discard_memoized_program(c), 1u);
-      
+
     TS_ASSERT(mockRetainContext.called_once_with((cl_context)0x4567));
     TS_ASSERT(mockReleaseContext.caled_once_with((cl_context)0x4567));
     TS_ASSERT(mockRetainProgram.never_called());
@@ -126,7 +126,7 @@ public:
     TS_ASSERT_EQUALS(g0.discard_memoized_program(c), 0u);
     clxx::program const& p{ g0.get_program(c) };
     TS_ASSERT_EQUALS(g0.discard_memoized_program(c), 1u);
-      
+
     TS_ASSERT(mockRetainContext.called_once_with((cl_context)0x4567));
     TS_ASSERT(mockReleaseContext.caled_once_with((cl_context)0x4567));
     TS_ASSERT(mockRetainProgram.never_called());

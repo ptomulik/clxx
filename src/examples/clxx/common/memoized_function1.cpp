@@ -25,7 +25,7 @@ int add(int a, int b)
 auto lazy_add = clxx::make_memoized_function(add);
 
 /// Main function
-int main() 
+int main()
 {
   std::cout << "2 + 2 = " << lazy_add(2,2) << std::endl;
   std::cout << "3 + 4 = " << lazy_add(3,4) << std::endl;

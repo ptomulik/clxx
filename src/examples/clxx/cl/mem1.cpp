@@ -20,7 +20,7 @@
 /// Size of array
 #define ARRAY_SIZE 16
 /// Main function
-int main() 
+int main()
 {
   clxx::platforms platforms(clxx::get_platforms());
   clxx::context   context(clxx::make_context_properties(platforms[0]),
