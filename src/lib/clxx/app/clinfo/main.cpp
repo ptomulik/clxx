@@ -32,7 +32,7 @@
 
 namespace clxx { namespace app { namespace clinfo {
 
-/** doc: io_format {{{
+/** // doc: io_format {{{
  * \todo Write documentation
  */ // }}}
 enum io_format {

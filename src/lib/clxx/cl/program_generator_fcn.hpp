@@ -18,7 +18,7 @@
 #include <string>
 
 namespace clxx {
-/** doc: generate_and_lazy_build_program() {{{
+/** // doc: generate_and_lazy_build_program() {{{
  * \todo Write documentation
  */ // }}}
 void generate_build_program(clxx::program& program_ret,
@@ -26,7 +26,7 @@ void generate_build_program(clxx::program& program_ret,
                             clxx::context const& context,
                             std::string const& build_options = "",
                             bool force_build = false);
-/** doc: generate_and_lazy_build_program() {{{
+/** // doc: generate_and_lazy_build_program() {{{
  * \todo Write documentation
  */ // }}}
 void generate_build_program(clxx::program& program_ret,

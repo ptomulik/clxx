@@ -23,7 +23,7 @@ struct std_except_ctor_arg< boost::program_options::required_option>
 } } // end namespace clxx
 
 namespace clxx { namespace app { namespace options {
-/** doc: required_option_error {{{
+/** // doc: required_option_error {{{
  * \brief Exception thrown when a required CLI option is missing
  */ //}}}
 class required_option_error

@@ -23,7 +23,7 @@ struct std_except_ctor_arg< boost::program_options::multiple_values>
 } } // end namespace clxx::detail
 
 namespace clxx { namespace app { namespace options {
-/** doc: multiple_option_values_error {{{
+/** // doc: multiple_option_values_error {{{
  * \brief Exception thrown when multiple options values are provided to a
  *    single-valued option
  */ // }}}

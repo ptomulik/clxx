@@ -23,7 +23,7 @@ struct std_except_ctor_arg< boost::program_options::unknown_option>
 } } // end namespace clxx::detail
 
 namespace clxx { namespace app { namespace options {
-/** doc: unknown_option_error {{{
+/** // doc: unknown_option_error {{{
  * \brief Exception thrown when unknown option is passed to a clxx application
  */ // }}}
 class unknown_option_error

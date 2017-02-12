@@ -23,7 +23,7 @@ struct std_except_ctor_arg< boost::program_options::invalid_config_file_syntax>
 } } // end namespace clxx::detail
 
 namespace clxx { namespace app { namespace options {
-/** doc: invalid_config_file_syntax_error {{{
+/** // doc: invalid_config_file_syntax_error {{{
  * \brief Exception thrown when syntax error is detected in a configuration file.
  */ // }}}
 class invalid_config_file_syntax_error

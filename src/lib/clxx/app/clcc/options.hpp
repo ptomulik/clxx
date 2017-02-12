@@ -125,12 +125,16 @@ public:
   std::string const& cloptions() const noexcept
   { return this->_cloptions; }
   /** // doc: platform_filter() {{{
-   * \todo Write documentation
+   * \brief Returns the value of \em --platform_filter option
+   *
+   * \returns the value of \em --platform_filter option
    */ // }}}
   std::string const& platform_filter() const noexcept
   { return this->_platform_filter; }
   /** // doc: device_filter() {{{
-   * \todo Write documentation
+   * \brief Returns the value of \em --device_filter option
+   *
+   * \returns the value of \em --device_filter option
    */ // }}}
   std::string const& device_filter() const noexcept
   { return this->_device_filter; }

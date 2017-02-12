@@ -23,7 +23,7 @@ struct std_except_ctor_arg< boost::program_options::invalid_option_value>
 } } // end namespace clxx::detail
 
 namespace clxx { namespace app { namespace options {
-/** doc: invalid_option_value_error {{{
+/** // doc: invalid_option_value_error {{{
  * \brief Exception thrown when invalid value for an option is provided
  */ // }}}
 class invalid_option_value_error

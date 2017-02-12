@@ -23,7 +23,7 @@ struct std_except_ctor_arg< boost::program_options::invalid_command_line_syntax 
 } } // end namespace clxx::detail
 
 namespace clxx { namespace app { namespace options {
-/** doc: invalid_command_line_syntax_error {{{
+/** // doc: invalid_command_line_syntax_error {{{
  * \brief Exception thrown when invalid command line syntax is detected
  */ // }}}
 class invalid_command_line_syntax_error

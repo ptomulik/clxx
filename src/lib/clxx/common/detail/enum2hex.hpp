@@ -36,7 +36,7 @@ namespace clxx { namespace detail {
 template<typename T>
   struct enum_hex_fmt_prec
   {
-    /** doc: apply() {{{
+    /** // doc: apply() {{{
      * \brief The generator
      */ // }}}
     static void
@@ -64,7 +64,7 @@ template<typename T>
 template<typename T>
   struct enum_hex_fmt_len
   {
-    /** doc: apply() {{{
+    /** // doc: apply() {{{
      * \brief The generator
      */ // }}}
     static void apply(char*&) {}
@@ -116,7 +116,7 @@ template<>
 template< typename T >
 struct enum_hex_fmt
 {
-  /** doc: apply() {{{
+  /** // doc: apply() {{{
    * \brief The generator
    */ // }}}
   static void

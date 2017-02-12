@@ -2586,7 +2586,7 @@ public:
     TS_ASSERT_THROWS(d.get_image_base_address_alignment(), unexpected_clerror);
 #endif
   }
-  /** doc: test__query_device_info_1() {{{
+  /** // doc: test__query_device_info_1() {{{
    * \todo Write documentation
    */ // }}}
   void test__query_device_info_1()
@@ -2613,7 +2613,7 @@ public:
     TS_ASSERT_EQUALS(info.profile(), "FULL_PROFILE");
     TS_ASSERT_EQUALS(info.version(), "OpenCL 1.2 AMD-APP (1348.4)");
   }
-  /** doc: test__query_device_info_1() {{{
+  /** // doc: test__query_device_info_1() {{{
    * \todo Write documentation
    */ // }}}
   void test__query_device_info_2()
