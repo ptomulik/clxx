@@ -123,7 +123,7 @@
  * \endcode
  *
  * Whenever a new \e category has to be implemented, a new base class for the
- * \e category should be defined (the "branch base"). For example, the a base
+ * \e category should be defined (a "branch base"). For example, a base
  * for errors returned by OpenCL functions is the clxx::clerror class. The
  * category class should be derived from clxx::exception.
  *

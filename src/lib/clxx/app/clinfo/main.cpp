@@ -33,7 +33,7 @@
 namespace clxx { namespace app { namespace clinfo {
 
 /** // doc: io_format {{{
- * \todo Write documentation
+ * \brief Input/Output formats implemented by clxx-clinfo application
  */ // }}}
 enum io_format {
   iof_uff,          // User-friendly format (only for output)
