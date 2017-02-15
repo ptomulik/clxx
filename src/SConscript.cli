@@ -68,10 +68,7 @@ env['CHANGED_VARIABLES'] = new
 ##############################################################################
 # Additional --help-variables option to list available CLI variables.
 ##############################################################################
-AddOption( '--help-variables', dest='help_variables', action='store_true',
-           help='print help for CLI variables' )
-if GetOption('help_variables'):
-    print(args.GenerateVariablesHelpText(variables, env, True))
+if args.HandleVariablesHelp(variables, env, True):
     Exit(0)
 ##############################################################################
 
