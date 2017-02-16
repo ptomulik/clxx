@@ -59,7 +59,7 @@ int main()
 
   clxx::platforms platforms { clxx::get_platforms() };
   clxx::platform  platform  { platforms[0] };
-  clxx::context   context   { make_context_properties(platform), clxx::device_type_t::all };
+  clxx::context   context   { clxx::make_context_properties(platform), clxx::device_type_t::all };
   clxx::program   program   ( context, clxx::program_sources { source } );
   clxx::devices   devices   { program.get_devices() };
 

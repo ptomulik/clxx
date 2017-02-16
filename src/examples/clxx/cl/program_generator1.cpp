@@ -41,7 +41,7 @@ int main()
 {
   clxx::platforms                 platforms { clxx::get_platforms() };
   clxx::platform                  platform  { platforms[0] };
-  clxx::context                   context   { make_context_properties(platform), clxx::device_type_t::all };
+  clxx::context                   context   { clxx::make_context_properties(platform), clxx::device_type_t::all };
   clxx::program_generator const&  generator = clxx::trivial_program();
   clxx::program                   program   { generator.get_program(context) };
   clxx::devices                   devices   { program.get_devices()[0] };
