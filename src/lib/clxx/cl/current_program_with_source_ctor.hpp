@@ -7,8 +7,8 @@
  * \file clxx/cl/current_program_with_source_ctor.hpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_CURRENT_PROGRAM_CTOR_HPP_INCLUDED
-#define CLXX_CL_CURRENT_PROGRAM_CTOR_HPP_INCLUDED
+#ifndef CLXX_CL_CURRENT_PROGRAM_WITH_SOURCE_CTOR_HPP_INCLUDED
+#define CLXX_CL_CURRENT_PROGRAM_WITH_SOURCE_CTOR_HPP_INCLUDED
 
 #include <clxx/cl/program_with_source_ctor.hpp>
 #include <clxx/cl/program_cached_ctor.hpp>
@@ -47,6 +47,6 @@ class current_program_with_source_ctor
 };
 } // end namespace clxx
 
-#endif /* CLXX_CL_CURRENT_PROGRAM_CTOR_HPP_INCLUDED */
+#endif /* CLXX_CL_CURRENT_PROGRAM_WITH_SOURCE_CTOR_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

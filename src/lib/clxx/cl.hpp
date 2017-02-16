@@ -16,6 +16,7 @@
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/context_properties.hpp>
 #include <clxx/cl/context_property.hpp>
+#include <clxx/cl/current_program_with_source_ctor.hpp>
 #include <clxx/cl/current_runtime.hpp>
 #include <clxx/cl/device.hpp>
 #include <clxx/cl/device_partition.hpp>
