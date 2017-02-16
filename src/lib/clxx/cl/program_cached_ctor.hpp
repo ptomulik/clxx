@@ -35,16 +35,6 @@ public:
    */ // }}}
   typedef std::codecvt_base::result codecvt_result;
 public:
-#if 0
-  /** // doc: use_current_search_path_binding() {{{
-   * \todo Write documentation
-   */ // }}}
-  static void bind_current_search_path(current_instance_binding_t binding);
-  /** // doc: current_search_path_binding() {{{
-   * \todo Write documentation
-   */ // }}}
-  static current_instance_binding_t current_search_path_binding();
-#endif
 #ifdef CLXX_WINDOWS_API
   /** // doc: get_current_search_path() {{{
    * \todo Write documentation

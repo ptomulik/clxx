@@ -11,6 +11,8 @@ sources =  [
     'cl/command_queue.cpp',
     'cl/context.cpp',
     'cl/context_properties.cpp',
+    'cl/current_program_with_source_ctor.cpp',
+    'cl/current_runtime.cpp',
     'cl/device.cpp',
     'cl/device_partition.cpp',
     'cl/device_partition_properties.cpp',

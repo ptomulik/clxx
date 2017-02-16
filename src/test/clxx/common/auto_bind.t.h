@@ -11,6 +11,7 @@
 #define CLXX_COMMON_AUTO_BIND_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
+#define CLXX_CURRENT_INSTANCE_STATIC_MEMBERS
 #include <clxx/common/auto_bind.hpp>
 #include <clxx/common/detail/current_instance.hpp>
 

@@ -8,32 +8,18 @@
 #include <clxx/cl/program_generator.hpp>
 #include <clxx/cl/program.hpp>
 #include <clxx/cl/context.hpp>
-#include <clxx/cl/command_queue.hpp>
 #include <clxx/cl/program_with_source_ctor.hpp>
 #include <clxx/common/detail/to_string.hpp>
+#include <clxx/cl/current_program_with_source_ctor.hpp>
 
 namespace clxx {
-/* ----------------------------------------------------------------------- */
-thread_local shared_ptr<program_generator::program_ctor_t> program_generator::
-_default_program_ctor = make_shared<program_generator::program_ctor_t>();
-/* ----------------------------------------------------------------------- */
-shared_ptr<program_generator::program_ctor_t> program_generator::
-get_default_program_ctor()
-{
-  return _default_program_ctor;
-}
-/* ----------------------------------------------------------------------- */
-void program_generator::
-set_default_program_ctor(shared_ptr<program_ctor_t> const& ctor)
-{
-  _default_program_ctor = ctor;
-}
 /* ----------------------------------------------------------------------- */
 clxx::program program_generator::
 create_program(clxx::context const& context, std::string const& src) const
 {
-  return _program_ctor ? (*_program_ctor)(context, { src })
-                       : (*_default_program_ctor)(context, { src });
+  clxx::program_with_source_ctor const& ctor = _program_ctor ? *_program_ctor
+                              : clxx::current_program_with_source_ctor::get();
+  return ctor(context, { src });
 }
 /* ----------------------------------------------------------------------- */
 program_generator::

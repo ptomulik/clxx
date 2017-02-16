@@ -14,6 +14,7 @@ tests = [
     'cl/context.t.h',
     'cl/context_properties.t.h',
     'cl/context_property.t.h',
+    'cl/current_program_with_source_ctor.t.h',
     'cl/current_runtime.t.h',
     'cl/device.t.h',
     'cl/device_partition.t.h',

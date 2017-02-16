@@ -28,6 +28,7 @@ public:
   /// Default value for thread-singleton instance
   static std::string default_thread_instance() { return "/thread/path"; }
 };
+CLXX_CURRENT_INSTANCE_CLASS_IMPL(current_path)
 // [CurrentPathClass]
 
 // [LoadProgramFcn]

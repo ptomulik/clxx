@@ -11,8 +11,10 @@
 #define CLXX_COMMON_DETAIL_CURRENT_INSTANCE_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/common/detail/current_instance.hpp>
 #include <type_traits>
+#define CLXX_CURRENT_INSTANCE_STATIC_MEMBERS
+#include <clxx/common/detail/current_instance.hpp>
+
 
 namespace clxx { namespace detail { class current_instance_test_suite; } }
 

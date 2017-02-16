@@ -155,6 +155,10 @@ public:
    * \brief Pointer type used to store addresses of user-provided instances
    */ // }}}
   typedef Pointer pointer;
+  /** // doc: current_instance_base_t {{{
+   * \todo Write documentation
+   */ // }}}
+  typedef current_instance<Derived, Value, Reference, Pointer> current_instance_base_t;
 private:
   // Checks if T::default_static_instance() may be used to initialize the
   // value_type.
@@ -297,18 +301,30 @@ private:
   static thread_local clxx::current_instance_binding_t _binding;
   static thread_local pointer _custom_instance;
 };
-
-template< typename Derived, typename Value, typename Reference, typename Pointer >
-thread_local clxx::current_instance_binding_t
-current_instance<Derived, Value, Reference, Pointer>::
-_binding = clxx::current_instance_binding_t::none;
-
-template< typename Derived, typename Value, typename Reference, typename Pointer >
-thread_local Pointer
-current_instance<Derived, Value, Reference, Pointer>::
-_custom_instance = nullptr;
 /** @} */
 } } // end namespace clxx
+
+#define CLXX_CURRENT_INSTANCE_CLASS_IMPL(klass) \
+template<> \
+  thread_local clxx::current_instance_binding_t \
+  klass::current_instance_base_t:: \
+  _binding = clxx::current_instance_binding_t::none; \
+template<> \
+  thread_local klass::pointer \
+  klass::current_instance_base_t:: \
+  _custom_instance = nullptr;
+
+#ifdef CLXX_CURRENT_INSTANCE_STATIC_MEMBERS
+  template< typename Derived, typename Value, typename Reference, typename Pointer >
+    thread_local clxx::current_instance_binding_t
+    clxx::detail::current_instance<Derived, Value, Reference, Pointer>::
+    _binding = clxx::current_instance_binding_t::none;
+
+  template< typename Derived, typename Value, typename Reference, typename Pointer >
+    thread_local Pointer
+    clxx::detail::current_instance<Derived, Value, Reference, Pointer>::
+    _custom_instance = nullptr;
+#endif
 
 #endif /* CLXX_COMMON_DETAIL_CURRENT_INSTANCE_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

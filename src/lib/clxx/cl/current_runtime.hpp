@@ -21,7 +21,7 @@ namespace clxx {
  *
  * The current runtime is a reference pointing to a distinguished
  * \ref clxx::runtime "runtime" object. The \ref clxx::current_runtime "current_runtime"
- * is a specialization of the \ref clxx::current_instance "current_instance"
+ * is a specialization of the \ref clxx::detail::current_instance "current_instance"
  * for the \ref clxx::runtime "runtime" class.
  *
  * Quick guide:

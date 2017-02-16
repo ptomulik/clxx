@@ -26,7 +26,7 @@ public:
    */ // }}}
   void test__current_runtime__binding( )
   {
-    clxx::runtime r;
+    clxx::runtime custom;
 
     current_runtime::reset_binding();
     TS_ASSERT(current_runtime::binding() == current_instance_default_binding());
@@ -37,7 +37,7 @@ public:
     current_runtime::bind_thread_instance();
     TS_ASSERT(current_runtime::binding() == current_instance_binding_t::thread_instance);
 
-    current_runtime::bind_custom_instance(r);
+    current_runtime::bind_custom_instance(custom);
     TS_ASSERT(current_runtime::binding() == current_instance_binding_t::custom_instance);
   }
 };

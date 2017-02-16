@@ -47,24 +47,12 @@ public:
     return paths;
   }
 };
+
+CLXX_CURRENT_INSTANCE_CLASS_IMPL(current_search_path)
 /* ----------------------------------------------------------------------- */
 } } // end namespace clxx::{anonymous}
 
 namespace clxx {
-#if 0
-/* ----------------------------------------------------------------------- */
-void program_cached_ctor::
-bind_current_search_path(current_instance_binding_t binding)
-{
-  current_search_path::bind(binding);
-}
-/* ----------------------------------------------------------------------- */
-current_instance_binding_t program_cached_ctor::
-current_search_path_binding()
-{
-  return current_search_path::binding();
-}
-#endif
 #ifdef CLXX_WINDOWS_API
 /* ----------------------------------------------------------------------- */
 program_cached_ctor::codecvt_result  program_cached_ctor::

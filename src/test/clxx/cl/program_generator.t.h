@@ -15,6 +15,7 @@
 #include <clxx/cl/program.hpp>
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/command_queue.hpp>
+#include <clxx/cl/current_program_with_source_ctor.hpp>
 #include <clxx/cl/mock.hpp>
 
 namespace clxx { class program_generator_test_suite; }
@@ -114,35 +115,34 @@ public:
     T::Dummy_clReleaseContext mockReleaseContext(CL_SUCCESS);
     T::Dummy_clCreateProgramWithSource mockCreateProgramWithSource((cl_program)0x1234, CL_SUCCESS);
 
+    clxx::current_program_with_source_ctor::reset_binding();
 
     {
-      shared_ptr<clxx::program_with_source_ctor> ctor = program_generator::get_default_program_ctor();
-      TS_ASSERT(ctor);
+      clxx::program_with_source_ctor& ctor = clxx::current_program_with_source_ctor::get();
 
       mockCreateProgramWithSource.reset();
       clxx::context c{(cl_context)0x4321};
-      clxx::program p{ (*ctor)(c, {"__kernel void trivial(){ }\n"}) };
+      clxx::program p{ ctor(c, {"__kernel void trivial(){ }\n"}) };
       TS_ASSERT(p.get() == (cl_program)0x1234);
       TS_ASSERT(mockCreateProgramWithSource.called_once());
       TS_ASSERT(std::get<0>(mockCreateProgramWithSource.calls().front()) == c.get());
     }
 
-    shared_ptr<C0> c0{ make_shared<C0>() };
-    program_generator::set_default_program_ctor(c0);
-    TS_ASSERT_EQUALS(c0->count, 0);
+    C0 c0;
+    clxx::current_program_with_source_ctor::bind_custom_instance(c0);
+    TS_ASSERT_EQUALS(c0.count, 0);
 
     {
-      shared_ptr<clxx::program_with_source_ctor> ctor = program_generator::get_default_program_ctor();
-      TS_ASSERT(ctor);
+      clxx::program_with_source_ctor& ctor = clxx::current_program_with_source_ctor::get();
 
       mockCreateProgramWithSource.reset();
       clxx::context c{(cl_context)0x4321};
-      clxx::program p{ (*ctor)(c, {"__kernel void trivial(){ }\n"}) };
+      clxx::program p{ ctor(c, {"__kernel void trivial(){ }\n"}) };
       TS_ASSERT(p.get() == (cl_program)0x1234);
       TS_ASSERT(mockCreateProgramWithSource.called_once());
       TS_ASSERT(std::get<0>(mockCreateProgramWithSource.calls().front()) == c.get());
     }
-    TS_ASSERT_EQUALS(c0->count, 1);
+    TS_ASSERT_EQUALS(c0.count, 1);
 
     {
       mockCreateProgramWithSource.reset();
@@ -152,17 +152,17 @@ public:
       TS_ASSERT(p.get() == (cl_program)0x1234);
       TS_ASSERT(mockCreateProgramWithSource.called_once());
       TS_ASSERT(std::get<0>(mockCreateProgramWithSource.calls().front()) == c.get());
-      TS_ASSERT_EQUALS(c0->count, 2);
+      TS_ASSERT_EQUALS(c0.count, 2);
 
       mockCreateProgramWithSource.reset();
-      shared_ptr<C0> c1 { make_shared<C0>() };
-      program_generator::set_default_program_ctor(c1);
+      C0 c1;
+      clxx::current_program_with_source_ctor::bind_custom_instance(c1);
       p = g0.get_program(c);
       TS_ASSERT(p.get() == (cl_program)0x1234);
       TS_ASSERT(mockCreateProgramWithSource.called_once());
       TS_ASSERT(std::get<0>(mockCreateProgramWithSource.calls().front()) == c.get());
-      TS_ASSERT_EQUALS(c0->count, 2);
-      TS_ASSERT_EQUALS(c1->count, 1);
+      TS_ASSERT_EQUALS(c0.count, 2);
+      TS_ASSERT_EQUALS(c1.count, 1);
 
 
       mockCreateProgramWithSource.reset();
@@ -171,8 +171,8 @@ public:
       p = g1.get_program(c);
       TS_ASSERT(mockCreateProgramWithSource.called_once());
       TS_ASSERT(std::get<0>(mockCreateProgramWithSource.calls().front()) == c.get());
-      TS_ASSERT_EQUALS(c0->count, 2);
-      TS_ASSERT_EQUALS(c1->count, 1);
+      TS_ASSERT_EQUALS(c0.count, 2);
+      TS_ASSERT_EQUALS(c1.count, 1);
       TS_ASSERT_EQUALS(c2->count, 1);
 
       {
@@ -182,11 +182,12 @@ public:
         p = g0.get_program(c);
         TS_ASSERT(mockCreateProgramWithSource.called_once());
         TS_ASSERT(std::get<0>(mockCreateProgramWithSource.calls().front()) == c.get());
-        TS_ASSERT_EQUALS(c0->count, 2);
-        TS_ASSERT_EQUALS(c1->count, 1);
+        TS_ASSERT_EQUALS(c0.count, 2);
+        TS_ASSERT_EQUALS(c1.count, 1);
         TS_ASSERT_EQUALS(c2->count, 2);
       }
     }
+    clxx::current_program_with_source_ctor::reset_binding();
   }
 };
 
