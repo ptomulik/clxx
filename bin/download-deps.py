@@ -653,19 +653,19 @@ def dload_scons_arguments_gnuinstall(**kw):
     try: clean = kw['clean']
     except KeyError: clean = False
     try: destdir = kw['destdir']
-    except KeyError: destdir = os.path.join(topsrcdir, 'site_scons', 'site_arguments')
+    except KeyError: destdir = os.path.join(topsrcdir, 'site_scons', 'site_arguments', 'gnuinstall')
 
-    dst = os.path.join(destdir, 'gnuinstall.py')
+    dst = os.path.join(destdir, '__init__.py')
     if clean:
-        if os.path.exists(dst):
-            info("removing '%s'" % dst, **kw)
-            os.remove(dst)
+        if os.path.exists(destdir):
+            info("removing '%s'" % destdir, **kw)
+            shutil.rmtree(destdir)
         return 0
 
     try: destdir_mode = kw['destdir_mode']
     except KeyError: destdir_mode = 0755
 
-    if os.path.exists(dst):
+    if os.path.exists(destdir):
         warn("'%s' already exists, skipping scons_arguments_gnuinstall download!" % dst, **kw)
         return 2
 
@@ -685,7 +685,7 @@ def dload_scons_arguments_gnuinstall(**kw):
         info("creating '%s'" % destdir, **kw)
         os.makedirs(destdir, mode=destdir_mode)
 
-    src = os.path.join(tmpdir, 'gnuinstall.py')
+    src = os.path.join(tmpdir, '__init__.py')
     info("copyfile '%s' -> '%s'" % (src, dst), **kw)
     shutil.copyfile(src, dst)
 
