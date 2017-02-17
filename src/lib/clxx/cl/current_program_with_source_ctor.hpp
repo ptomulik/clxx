@@ -11,7 +11,6 @@
 #define CLXX_CL_CURRENT_PROGRAM_WITH_SOURCE_CTOR_HPP_INCLUDED
 
 #include <clxx/cl/program_with_source_ctor.hpp>
-#include <clxx/cl/program_cached_ctor.hpp>
 #include <clxx/common/current_instance.hpp>
 #include <clxx/common/detail/current_instance.hpp>
 
@@ -42,8 +41,8 @@ namespace clxx {
 class current_program_with_source_ctor
   : public detail::current_instance<current_program_with_source_ctor, program_with_source_ctor>
 {
-  static clxx::program_cached_ctor default_static_instance() { return clxx::program_cached_ctor(); }
-  static clxx::program_cached_ctor default_thread_instance() { return clxx::program_cached_ctor(); }
+  static clxx::program_with_source_ctor default_static_instance() { return clxx::program_with_source_ctor(); }
+  static clxx::program_with_source_ctor default_thread_instance() { return clxx::program_with_source_ctor(); }
 };
 } // end namespace clxx
 
