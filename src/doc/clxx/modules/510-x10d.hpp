@@ -16,6 +16,12 @@
  *
  * Programs which use this package should be linked against \c libclxx_x10d
  * library (\c -lclxx_x10d).
+ *
+ * @{ */
+
+/**
+ * \defgroup clxx_x10d_program_generator Program Generator
  */
+/** @} */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -20,7 +20,7 @@
 
 namespace clxx {
 /** // doc: program_generator {{{
- * \ingroup clxx_x10d
+ * \ingroup clxx_x10d_program_generator
  * \brief Abstract base class for OpenCL program generators
  *
  * A program generator object (an instance of program generator class derived
