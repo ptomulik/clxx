@@ -19,12 +19,12 @@ class program;
  * \brief Program observer
  *
  * Use the \ref clxx::program_observer "program_observer" as a base class for
- * your own observers to be used when compiling/building/linking OpenCL
- * programs. Original OpenCL API allows provide a callback function to \c
- * clBuildProgram(), \c clCompileProgram(), or \c clLinkProgram() which are
- * called when the build process completes. In clxx, we use observer objects
- * instead, which shall be a subclasses of \ref clxx::program_observer
- * "program_observer".
+ * your own observers to get notifications when compiling/building/linking
+ * OpenCL programs. Original OpenCL functions \c clBuildProgram(),
+ * \c clCompileProgram(), or \c clLinkProgram() accept a pointer to callback
+ * function to invoke the callback when the build process completes. In clxx,
+ * we use observer objects instead, which shall be subclasses of the
+ * \ref clxx::program_observer "program_observer".
  */ // }}}
 class program_observer
 {
