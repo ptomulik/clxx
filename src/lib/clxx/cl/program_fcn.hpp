@@ -17,7 +17,7 @@
 #include <clxx/cl/devices.hpp>
 
 namespace clxx {
-/** \addtogroup clxx_program_objects
+/** \ingroup clxx_cl_program_objects
  * @{ */
 /** // doc: build_program(options) {{{
  * \brief Builds (compiles and links) a program executable from the program

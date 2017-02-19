@@ -22,7 +22,7 @@
 #include <vector>
 
 namespace clxx { namespace detail {
-/** \addtogroup clxx_util_obj2cl
+/** \ingroup clxx_common_util_obj2cl
  * @{ */
 /** // doc: obj2cl {{{
  * \brief Converts const clxx::command_queue* to const cl_command_queue*

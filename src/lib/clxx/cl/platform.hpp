@@ -22,7 +22,7 @@
 namespace clxx {
 
 /** // {{{ doc: platform
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief OpenCL platform proxy
  *
  * This class provides access to OpenCL platform information, equivalent to
@@ -30,7 +30,7 @@ namespace clxx {
  *
  * - it has easy to use, type-safe c++ interface,
  * - returns \c std::string instead of plain \c char* data,
- * - replaces OpenCL error codes with exceptions (see \ref clxx_exceptions),
+ * - replaces OpenCL error codes with exceptions (see \ref clxx_common_exceptions),
  *
  * The object is lightweight. It encapsulates only a single \c cl_platform_id
  * identifier.
@@ -148,7 +148,7 @@ public:
 #include <clxx/info/platform_query.hpp>
 
 namespace clxx {
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: query_platform_info(platform, query) {{{
  * \brief Query platform info

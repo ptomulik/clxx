@@ -1,0 +1,35 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import(['env'])
+
+from SCons.Util import CLVar
+
+tests = [
+    'x10d/current_program_with_source_ctor.t.h',
+    'x10d/current_runtime.t.h',
+    'x10d/kernel_lazy_ctor.t.h',
+    'x10d/program_cached_ctor.t.h',
+    'x10d/program_generator_fcn.t.h',
+    'x10d/program_generator.t.h',
+    'x10d/program_lazy_fcn.t.h',
+#    'x10d/program_lazy_generator.t.h',
+    'x10d/program_with_source_ctor.t.h',
+    'x10d/runtime.t.h',
+]
+
+env.CxxTest('../check-libclxx_x10d', tests,
+           LIBS = CLVar('clxx_cl_test clxx_x10d'),
+           CXXTEST_CPPPATH = ['..'],
+           CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
+           CXXTEST_TARGET = 'check-libclxx_x10d')
+
+env.Alias('check', [ 'check-libclxx_x10d' ])
+env.AlwaysBuild('check-libclxx_x10d')
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

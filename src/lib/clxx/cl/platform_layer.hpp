@@ -24,7 +24,7 @@
 namespace clxx {
 
 /** // doc: class platform_layer {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  *
  * Simple associative container to store \ref clxx::device "devices",
  * \ref clxx::platform "platforms" and relations between them. Note, that this
@@ -274,7 +274,7 @@ private:
   device_platform_map _device_platform;
 };
 
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: query_platform_layer_info(layer,pquery,dquery) {{{
  * \brief Perform an aggregate query on multiple platforms and devices

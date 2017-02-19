@@ -15,7 +15,7 @@
 
 namespace clxx {
 
-/** \addtogroup clxx_platform_layer
+/** \ingroup clxx_cl_platform_layer
  *  @{ */
 #if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
 /** // doc: get_num_sub_devices() {{{

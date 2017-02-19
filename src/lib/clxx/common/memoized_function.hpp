@@ -18,13 +18,13 @@
 
 namespace clxx {
 /** // doc: memoized_function<R(Args...)> {{{
- * \ingroup clxx_util_memoized_function
+ * \ingroup clxx_common_util_memoized_function
  * \brief Memoized function, see \ref clxx__memoized_function__T__R_Args "memoized_function<R(Args...)>"
  */ // }}}
 template<typename F>
 struct memoized_function;
 /** // doc: memoized_function<R(Args...)> {{{
- * \ingroup clxx_util_memoized_function
+ * \ingroup clxx_common_util_memoized_function
  * \brief Memoized function
  * \anchor clxx__memoized_function__T__R_Args
  *
@@ -195,7 +195,7 @@ public:
     _cache.clear();
   }
 };
-/** \ingroup clxx_util_memoized_function
+/** \ingroup clxx_common_util_memoized_function
  * @{ */
 /** // doc: make_memoized_function() {{{
  * \brief Wrap function \p fn with \ref clxx::memoized_function "memoized_function"

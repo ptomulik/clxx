@@ -22,7 +22,7 @@
 
 namespace clxx {
 /** // doc: kernel {{{
- * \ingroup clxx_kernel_objects
+ * \ingroup clxx_cl_kernel_objects
  * \brief Encapsulates an OpenCL kernel object
  *
  * This class represents OpenCL kernel and forwards basic operations on

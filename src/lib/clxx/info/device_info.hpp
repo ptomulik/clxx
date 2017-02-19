@@ -2005,7 +2005,7 @@ private:
   // }}}
 };
 
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: operator==(a,b) {{{
  * \brief Compare two \ref clxx::device_info "device_info" objects

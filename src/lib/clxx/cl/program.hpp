@@ -23,7 +23,7 @@
 
 namespace clxx {
 /** // doc: program {{{
- * \ingroup clxx_program_objects
+ * \ingroup clxx_cl_program_objects
  * \brief Encapsulates an OpenCL program object
  *
  * This class represents OpenCL program and forwards basic operations on

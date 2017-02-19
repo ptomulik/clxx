@@ -18,7 +18,7 @@
 
 namespace clxx {
 /** // doc: mem {{{
- * \ingroup clxx_buffer_objects
+ * \ingroup clxx_cl_buffer_objects
  * \brief Encapsulates an OpenCL memory object
  *
  * This class represents OpenCL memory object (e.g. buffer or image) and

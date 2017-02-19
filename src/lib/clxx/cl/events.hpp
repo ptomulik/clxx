@@ -15,14 +15,14 @@
 
 namespace clxx {
 /** // doc: events {{{
- * \ingroup clxx_event_objects
+ * \ingroup clxx_cl_event_objects
  * \brief Collection of clxx::event objects.
  */ // }}}
 typedef std::vector<event> events;
 } // end namespace clxx
 
 namespace clxx {
-/** \addtogroup clxx_event_objects
+/** \ingroup clxx_cl_event_objects
  * @{ */
 /** // doc: wait_for_events() {{{
  * \brief Waits on the host thread for commands identified by event objects to complete

@@ -3,8 +3,8 @@
 
 // clxx/common/to_string.hpp
 
-/** // doc: clxx/common/to_string.hpp {{{
- * \file clxx/common/to_string.hpp
+/** // doc: clxx/common/detail/to_string.hpp {{{
+ * \file clxx/common/detail/to_string.hpp
  * \brief Conversions of several types of data to string
  *
  * This header implements overloaded std::to_string for several types defined
@@ -96,7 +96,7 @@ using std::to_string;
 } // end namespace clxx
 
 namespace clxx {
-/** \addtogroup clxx_util_enum2str
+/** \ingroup clxx_common_util_enum2str clxx_common_detail
  * @{ */
 /** // doc: enum_to_name_of_hex {{{
  * \brief Convert an enum value to its string representation
@@ -164,7 +164,7 @@ std::string enum_bitmask_to_string(E x, typename std::underlying_type<E>::type e
 } // end namespace clxx
 
 namespace clxx {
-/** \addtogroup clxx_util_enum2str
+/** \ingroup clxx_common_util_enum2str clxx_common_detail
  * @{ */
 /** // doc: to_string(clxx::status_t) {{{
  * \brief Convert \ref clxx::status_t "status_t" value to string

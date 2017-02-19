@@ -18,7 +18,7 @@
 namespace clxx {
 
 /** // struct context_property {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \class context_property
  * \brief Encapsulate single OpenCL context property
  *
@@ -151,7 +151,7 @@ private:
   cl_context_properties _value;
 };
 
-/** \addtogroup clxx_platform_layer
+/** \ingroup clxx_cl_platform_layer
  * @{ */
 /** // doc: make_context_property_c<N>(detail::context_property_type<N>::type) {{{
  * \brief Type-safe constructor for \ref clxx::context_property

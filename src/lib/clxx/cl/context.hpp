@@ -18,7 +18,7 @@
 namespace clxx {
 
 /** // doc: context {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief Proxy to OpenCL context.
  *
  * This class represents OpenCL context and forwards basic operations on

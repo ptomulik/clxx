@@ -17,12 +17,12 @@
 
 namespace clxx {
 /** // doc: context_properties {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief Container for context properties
  */ // }}}
 typedef std::vector<context_property> context_properties;
 
-/** \addtogroup clxx_platform_layer
+/** \ingroup clxx_cl_platform_layer
  * @{ */
 /** // doc: context_properties_array_size(const context_properties&) {{{
  * \brief Compute minium size of C array necessary to store context properties

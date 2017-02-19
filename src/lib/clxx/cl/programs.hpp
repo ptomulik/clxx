@@ -14,7 +14,7 @@
 #include <vector>
 
 namespace clxx {
-/** \addtogroup clxx_program_objects
+/** \ingroup clxx_cl_program_objects
  * @{ */
   /** // doc: programs {{{
    * \brief Sequence of \ref clxx::program "program"s

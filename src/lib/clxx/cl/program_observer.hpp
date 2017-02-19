@@ -15,7 +15,7 @@
 namespace clxx {
 class program;
 /** // doc: program_observer {{{
- * \ingroup clxx_program_objects
+ * \ingroup clxx_cl_program_objects
  * \brief Program observer
  *
  * Use the \ref clxx::program_observer "program_observer" as a base class for

@@ -19,7 +19,7 @@
 
 namespace clxx {
 /** // doc: event {{{
- * \ingroup clxx_event_objects
+ * \ingroup clxx_cl_event_objects
  * \brief Encapsulates an OpenCL event object
  *
  * This class represents OpenCL event and forwards basic operations on

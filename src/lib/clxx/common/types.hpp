@@ -19,7 +19,7 @@
 #include <clxx/common/macros.hpp>
 
 namespace clxx {
-/** \addtogroup clxx_types
+/** \ingroup clxx_common_types
  * @{ */
 
 /** // doc: status_t {{{

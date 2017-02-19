@@ -15,7 +15,7 @@
 #include <new>
 
 namespace clxx { namespace detail {
-/** \addtogroup clxx_util
+/** \ingroup clxx_common_detail
  * @{ */
 /** // doc: std_except_ctor_arg {{{
  * \brief Determine how to construct a given standard exception.

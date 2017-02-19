@@ -195,7 +195,7 @@ private:
   bimap _bimap;
 };
 
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: operator==(l,r) {{{
  * \brief Compare two \ref clxx::platform_layer_info "platform_layer_infos"

@@ -1555,7 +1555,7 @@ private:
   bool _image_base_address_alignment;
   // }}}
 };
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: operator==(device_query, device_query) {{{
  * \brief Compare two \ref clxx::device_query "device_query" objects

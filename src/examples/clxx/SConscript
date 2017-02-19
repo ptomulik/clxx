@@ -7,14 +7,11 @@ Import(['env'])
 from SCons.Util import CLVar
 
 env.Program('cl/device1.cpp', LIBS = CLVar('clxx_cl'))
-env.Program('cl/kernel_lazy_ctor1.cpp', LIBS = CLVar('clxx_cl'))
-env.Program('cl/lazy_build_program1.cpp', LIBS = CLVar('clxx_cl'))
 env.Program('cl/mem1.cpp', LIBS = CLVar('clxx_cl clxx_io'))
 env.Program('cl/platform1.cpp', LIBS = CLVar('clxx_cl'))
 env.Program('cl/platform2.cpp', LIBS = CLVar('clxx_cl clxx_info clxx_io'))
 env.Program('cl/platform3.cpp', LIBS = CLVar('clxx_cl clxx_info clxx_io'))
 env.Program('cl/platform4.cpp', LIBS = CLVar('clxx_cl clxx_info clxx_io'))
-env.Program('cl/program_generator1.cpp', LIBS = CLVar('clxx_cl clxx_io'))
 env.Program('cl/query_device_info1.cpp', LIBS = CLVar('clxx_info clxx_io clxx_cl'))
 env.Program('cl/query_platform_info1.cpp', LIBS = CLVar('clxx_info clxx_io clxx_cl'))
 env.Program('cl/query_platform_layer_info1.cpp', LIBS = CLVar('clxx_info clxx_io clxx_cl'))
@@ -35,6 +32,10 @@ env.Program('io/io1.cpp', LIBS = CLVar('clxx_io'))
 #
 env.Program('s11n/s11n1.cpp', LIBS = CLVar('clxx_cl clxx_info clxx_s11n boost_serialization'))
 env.Program('s11n/s11n2.cpp', LIBS = CLVar('clxx_info clxx_s11n clxx_io boost_serialization'))
+#
+env.Program('x10d/kernel_lazy_ctor1.cpp', LIBS = CLVar('clxx_cl clxx_x10d'))
+env.Program('x10d/lazy_build_program1.cpp', LIBS = CLVar('clxx_cl clxx_x10d'))
+env.Program('x10d/program_generator1.cpp', LIBS = CLVar('clxx_cl clxx_x10d clxx_io'))
 
 # Local Variables:
 # # tab-width:4

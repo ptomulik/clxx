@@ -15,7 +15,7 @@
 
 #ifndef CLXX_MAX_NDRANGE_DIMENSIONS
 /** // doc: CLXX_MAX_NDRANGE_DIMENSIONS {{{
- * \ingroup clxx_executing_kernels
+ * \ingroup clxx_cl_executing_kernels
  * \brief Max number of dimensions supported by \ref clxx::ndrange
  */ // }}}
 # define CLXX_MAX_NDRANGE_DIMENSIONS 3
@@ -23,7 +23,7 @@
 
 namespace clxx {
 /** // doc: ndrange {{{
- * \ingroup clxx_executing_kernels
+ * \ingroup clxx_cl_executing_kernels
  * \brief Describes an ND-range over which a kernel is supposed to execute
  *
  * This object gathers together numbers used to describe size of an OpenCL work
@@ -617,7 +617,7 @@ cmp(ndrange const& other) const noexcept
   return true;
 }
 
-/** \addtogroup clxx_executing_kernels
+/** \ingroup clxx_cl_executing_kernels
  * @{ */
 /** // doc: operator==(ndrange, ndrange) {{{
  * \brief Compare two \ref clxx::ndrange "ndrange" objects

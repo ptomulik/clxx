@@ -15,7 +15,7 @@
 
 namespace clxx { namespace io {
 
-/** \addtogroup clxx_io
+/** \ingroup clxx_io
  *  @{ */
 /** // doc: write(os,query){{{
  * \brief Write out clxx::platform_query object to a stream

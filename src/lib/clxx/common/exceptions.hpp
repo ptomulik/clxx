@@ -19,7 +19,7 @@
 namespace clxx {
 
 /** // doc: internal_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception thrown when a user tries to operate on an uninitialized
  *        \ref clxx::device "device" object
  */ // }}}
@@ -50,7 +50,7 @@ struct internal_error
     { }
   };
 /** // doc: invalid_argument_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception thrown when an invalid argument is provided to a function
  */ // }}}
 struct invalid_argument_error
@@ -80,7 +80,7 @@ struct invalid_argument_error
     { }
   };
 /** // doc: length_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception thrown when a sequence of invalid length is provided as an argument to a function
  */ // }}}
 struct length_error
@@ -110,7 +110,7 @@ struct length_error
     { }
   };
 /** // doc: out_of_range_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception thrown when a value provided to a function is out of allowed range
  */ // }}}
 struct out_of_range_error
@@ -140,7 +140,7 @@ struct out_of_range_error
     { }
   };
 /** // doc: not_enough_space_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception thrown when a user-defined storage is not sufficient to
  *        contain data provided by function caller
  */ // }}}
@@ -171,7 +171,7 @@ struct not_enough_space_error
     { }
   };
 /** // doc: uninitialized_command_queue_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when a user tries to operate on an
  *        uninitialized \ref clxx::command_queue "command_queue" object
  */ // }}}
@@ -202,7 +202,7 @@ struct uninitialized_command_queue_error
     { }
   };
 /** // doc: uninitialized_context_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when a user tries to operate on an
  *        uninitialized \ref clxx::context "context" object
  */ // }}}
@@ -233,7 +233,7 @@ struct uninitialized_context_error
     { }
   };
 /** // doc: uninitialized_device_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception thrown when a user tries to operate on an uninitialized
  *        \ref clxx::device "device" object
  */ // }}}
@@ -264,7 +264,7 @@ struct uninitialized_device_error
     { }
   };
 /** // doc: uninitialized_event_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when a user tries to operate on an
  *        uninitialized \ref clxx::event "event" object
  */ // }}}
@@ -295,7 +295,7 @@ struct uninitialized_event_error
     { }
   };
 /** // doc: uninitialized_kernel_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when a user tries to operate on an
  *        uninitialized \ref clxx::kernel "kernel" object
  */ // }}}
@@ -326,7 +326,7 @@ struct uninitialized_kernel_error
     { }
   };
 /** // doc: uninitialized_mem_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when a user tries to operate on an
  *        uninitialized \ref clxx::mem "mem" object
  */ // }}}
@@ -357,7 +357,7 @@ struct uninitialized_mem_error
     { }
   };
 /** // doc: uninitialized_platform_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception thrown when user tries to operate on an uninitialized
  *        \ref clxx::platform "platform" object
  */ // }}}
@@ -388,7 +388,7 @@ struct uninitialized_platform_error
     { }
   };
 /** // doc: uninitialized_program_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when a user tries to operate on an
  *        uninitialized \ref clxx::program "program" object
  */ // }}}
@@ -419,7 +419,7 @@ struct uninitialized_program_error
     { }
   };
 /** // doc: uninitialized_sampler_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when a user tries to operate on an
  *        uninitialized \ref clxx::sampler "sampler" object
  */ // }}}
@@ -450,7 +450,7 @@ struct uninitialized_sampler_error
     { }
   };
 /** // doc: uninitialized_value_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception begin thrown when a user tries to access a value which
  *        was not initialized
  *
@@ -485,7 +485,7 @@ struct uninitialized_value_error
     { }
   };
 /** // doc: value_access_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when there is an error in a value access
  *        logic
  *
@@ -521,7 +521,7 @@ struct value_access_error
     { }
   };
 /** // doc: invalid_index_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when index to an array is out of range
  */ // }}}
 struct invalid_index_error
@@ -551,7 +551,7 @@ struct invalid_index_error
     { }
   };
 /** // doc: invalid_key_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception being thrown when an inexistent key is used to lookup a map
  */ // }}}
 struct invalid_key_error
@@ -581,7 +581,7 @@ struct invalid_key_error
     { }
   };
 /** // doc: unexpected_clerror {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief An exception when an OpenCL function returns error code that is unknown to clxx
  */ // }}}
 struct unexpected_clerror
@@ -625,7 +625,7 @@ struct unexpected_clerror
   };
 
 /** // doc: uninitialized_cl_object_error {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Return the exception type for an uninitialized OpenCL object
  *
  * The returned type is, for example, \ref clxx::uninitialized_command_queue_error

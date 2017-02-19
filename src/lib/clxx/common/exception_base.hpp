@@ -16,7 +16,7 @@
 
 namespace clxx {
 /** // doc: exception_base {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Template to generate clxx exceptions.
  *
  * \tparam ClxxExcept clxx base class for the exception, usually
@@ -84,7 +84,7 @@ template < class ClxxExcept
   };
 
 /** // doc: exception_base {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Template to generate clxx exceptions.
  *
  * \tparam ClxxExcept clxx base class for the exception, usually
@@ -161,7 +161,7 @@ template < class ClxxExcept
   };
 
 /** // doc: exception_base<StdExcept, detail::std_except_no_ctor_arg_tag> {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Partial specialization of clxx::exception_base.
  *
  * This is partial specialization of clxx::exception_base for cases when the

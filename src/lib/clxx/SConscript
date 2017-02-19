@@ -4,14 +4,15 @@
 
 Import('env')
 
-SConscript('SConscript.libclxx_common', exports = ['env'])
-SConscript('SConscript.libclxx_cl', exports = ['env'])
 SConscript('SConscript.libclxx_app', exports = ['env'])
 SConscript('SConscript.libclxx_app_clcc', exports = ['env'])
 SConscript('SConscript.libclxx_app_clinfo', exports = ['env'])
+SConscript('SConscript.libclxx_cl', exports = ['env'])
+SConscript('SConscript.libclxx_common', exports = ['env'])
 SConscript('SConscript.libclxx_info', exports = ['env'])
 SConscript('SConscript.libclxx_io', exports = ['env'])
 SConscript('SConscript.libclxx_s11n', exports = ['env'])
+SConscript('SConscript.libclxx_x10d', exports = ['env'])
 
 # Local Variables:
 # # tab-width:4

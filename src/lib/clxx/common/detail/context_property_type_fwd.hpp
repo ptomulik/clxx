@@ -13,7 +13,7 @@
 namespace clxx { namespace detail {
 
 /** // doc: context_property_type {{{
- * \ingroup clxx_util
+ * \ingroup clxx_common_detail
  * \brief Returns a type used to represent given context property
  *
  * Context properties defined by OpenCL are identified by enums

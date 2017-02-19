@@ -16,7 +16,7 @@
 namespace clxx {
 
 /** // doc: clerror {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Base class for all clxx exceptions originating from OpenCL errors.
  *
  * If OpenCL returns an error code, the clxx library throws one of the

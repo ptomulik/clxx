@@ -19,7 +19,7 @@ BOOST_CLASS_VERSION( clxx::platform_layer_info
 
 namespace boost {
 namespace serialization {
-/** \addtogroup clxx_s11n
+/** \ingroup clxx_s11n
  * @{ */
 /** // doc: serialize(ar,obj,ver) {{{
  * \brief Serialize or deserialize \ref clxx::platform_layer_info

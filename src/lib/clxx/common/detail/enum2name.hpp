@@ -15,7 +15,7 @@
 #include <type_traits>
 
 namespace clxx { namespace detail {
-/** \addtogroup clxx_util_enum2str
+/** \ingroup clxx_common_util_enum2str clxx_common_detail
  * @{ */
 /** // doc: enum2name(status_t, char const*) {{{
  * \brief Convert #status_t to C string (human-readable enum name)

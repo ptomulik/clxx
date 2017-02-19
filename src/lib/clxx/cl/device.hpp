@@ -22,7 +22,7 @@
 namespace clxx {
 
 /** // doc: device {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief OpenCL device proxy
  *
  * This class provides access to OpenCL device information equivalent to
@@ -31,7 +31,7 @@ namespace clxx {
  * - it has easy to use, type-safe c++ interface,
  * - whenever necessary, returns \c std::string, \c std::vector and so on,
  *   instead of operating on plain C buffers/arrays,
- * - replaces OpenCL error codes with exceptions (see \ref clxx_exceptions).
+ * - replaces OpenCL error codes with exceptions (see \ref clxx_common_exceptions).
  *
  * The object is lightweight, it encapsulates only a single \c cl_device_id
  * identifier.
@@ -671,7 +671,7 @@ public:
 #include <clxx/info/device_query.hpp>
 
 namespace clxx {
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: query_device_info(device, query) {{{
  * \brief Query device info

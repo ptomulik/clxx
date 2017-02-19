@@ -15,7 +15,7 @@
 
 namespace clxx {
 /** // doc: program_sources {{{
- * \ingroup clxx_program_objects
+ * \ingroup clxx_cl_program_objects
  * \brief A type used to represent multiple OpenCL program sources
  * \sa \ref clxx::program_source "program_source"
  */ // }}}

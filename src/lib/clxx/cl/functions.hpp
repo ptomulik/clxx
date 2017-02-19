@@ -14,7 +14,7 @@
 
 namespace clxx {
 
-/** \addtogroup clxx_cl_functions
+/** \ingroup clxx_cl_functions
  *  @{ */
 /** // {{{ doc: get_platform_ids(...)
  * \brief Retrieve platform identifiers of locally available OpenCL platforms.

@@ -15,13 +15,13 @@
 #include <type_traits>
 
 namespace clxx { namespace detail {
-/** \addtogroup clxx_util_current_instance
+/** \ingroup clxx_common_util_current_instance clxx_common_detail
  * @{ */
 /** // doc: current_instance {{{
  * \brief Template base for "current instance" classes
  *
  * This class may be used to implement a convenient device called
- * \ref clxx_util_current_instance "current instance". The current instance
+ * \ref clxx_common_util_current_instance "current instance". The current instance
  * is a smart reference which at any time points to one of the following:
  *
  * - a static instance, shared between threads, or

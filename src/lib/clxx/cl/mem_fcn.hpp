@@ -16,7 +16,7 @@
 #include <clxx/cl/events.hpp>
 
 namespace clxx {
-/** \addtogroup clxx_buffer_objects
+/** \ingroup clxx_cl_buffer_objects
  * @{ */
 /** // doc: enqueue_read_buffer() {{{
  * \brief Enqueue commands to read from a buffer object to host memory

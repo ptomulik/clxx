@@ -19,7 +19,7 @@
 namespace clxx {
 
 /** // clerror_base {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Base class for clxx::clerror_no exceptions.
  *
  * \tparam Code error code for the particular exception,
@@ -54,7 +54,7 @@ template < status_t Code
   };
 
 /** // doc: clerror_base<Code, StdExcept, detail::std_except_no_ctor_arg_tag> {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Partial specialization of the clerror_base template for exceptions
  *    based on standard exceptions with immutable error messages
  */ // }}}
@@ -82,7 +82,7 @@ template < status_t Code, class StdExcept>
   };
 
 /** // doc: clerror_base<Code, StdExcept, detail::std_except_xstring_ctor_arg_tag> {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Partial specialization for exceptions with mutable messages.
  */ // }}}
 template < status_t Code, class StdExcept>
@@ -131,7 +131,7 @@ template < status_t Code, class StdExcept>
   };
 
 /** // doc: clerror_base<Code, StdExcept, char const*> {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Partial specialization for exceptions with mutable messages.
  */ // }}}
 template < status_t Code, class StdExcept>

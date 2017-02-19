@@ -19,12 +19,12 @@
 namespace clxx {
 
 /** // doc: devices {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief Collection of clxx::device objects.
  */ // }}}
 typedef std::vector<device> devices;
 
-/** \addtogroup clxx_platform_layer
+/** \ingroup clxx_cl_platform_layer
  *  @{ */
 /** // doc: get_num_devices() {{{
  * \brief Get number of OpenCL devices available locally.

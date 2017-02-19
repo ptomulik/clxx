@@ -7,9 +7,9 @@
  * \brief This module documents contents of \ref clxx_common package
  *
  * The package contains entities that do not directly fit to any other package
- * of the clxx project. You'll find here \ref clxx_types "enumerative types"
- * used across the project, definition of \ref clxx_exceptions "exception classes",
- * and some other specific \ref clxx_util "utilities".
+ * of the clxx project. You'll find here \ref clxx_common_types "enumerative types"
+ * used across the project, definition of \ref clxx_common_exceptions "exception classes",
+ * and some other specific \ref clxx_common_util "utilities".
  *
  * \par Linking
  *
@@ -18,14 +18,14 @@
  * @{ */
 
 /**
- * \defgroup clxx_types Types
+ * \defgroup clxx_common_types Types
  *
  * \brief This module documents enumerative types defined by \ref clxx_common
  *        package and functions that provide basic operations on them
  */
 
 /**
- * \defgroup clxx_exceptions Exceptions
+ * \defgroup clxx_common_exceptions Exceptions
  *
  * \brief This module introduces clxx exceptions provided by \ref clxx_common
  *        package
@@ -167,22 +167,22 @@
 
 
 /**
- * \defgroup clxx_util Utilities
+ * \defgroup clxx_common_util Utilities
  *
  * \brief This module documents utility functions and meta-functions provided
  *        by \ref clxx_common package
  * @{
  */
-/** \defgroup clxx_util_enum2str Enum to String Conversions
+/** \defgroup clxx_common_util_enum2str Enum to String Conversions
  */
-/** \defgroup clxx_util_sha1 SHA-1 Utilities
+/** \defgroup clxx_common_util_sha1 SHA-1 Utilities
  */
-/** \defgroup clxx_util_current_instance Current Instance
+/** \defgroup clxx_common_util_current_instance Current Instance
  *
- * This module documents the \ref clxx_util_current_instance "Current Instance"
- * utility. The concept of \ref clxx_util_current_instance "Current Instance"
+ * This module documents the \ref clxx_common_util_current_instance "Current Instance"
+ * utility. The concept of \ref clxx_common_util_current_instance "Current Instance"
  * refers to a distinguished instance of a given type with a single point of
- * access in an program. The \ref clxx_util_current_instance "Current Instance"
+ * access in an program. The \ref clxx_common_util_current_instance "Current Instance"
  * implementation is actually a smart thread-local reference, which at given
  * time points to one of the following:
  *
@@ -203,9 +203,11 @@
  * \ref clxx::detail::current_instance "detail::current_instance<>" template is
  * determined at runtime and may be changed by user at any time.
  */
- /** \defgroup clxx_util_memoized_function Memoized Function
+/** \defgroup clxx_common_util_memoized_function Memoized Function
   */
 /** @} */
+/** \defgroup clxx_common_detail Implementation details
+*/
 /** @} */
 
 // vim: set expandtab tabstop=2 shiftwidth=2:

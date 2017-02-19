@@ -16,7 +16,7 @@
 namespace clxx { namespace detail {
 
 /** // doc: clerror_stdexcept {{{
- * \ingroup clxx_util
+ * \ingroup clxx_common_detail
  * \brief Determine an underlying standard exception for given error code.
  *
  * \tparam Code error code

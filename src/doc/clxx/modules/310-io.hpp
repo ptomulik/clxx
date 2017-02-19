@@ -9,7 +9,7 @@
  * to output streams in a user-readable form. They may be used for simple
  * diagnostics, debugging or user-interface implementation.
  *
- * The implemented functions cover all the %clxx \ref clxx_types "enumerative types"
+ * The implemented functions cover all the %clxx \ref clxx_common_types "enumerative types"
  * and some of the object classes, such as clxx::platform_info.
  * For convenience, we have specialized the "shift" operator (\c <<) for these
  * types and these specializations work with most standard streams. In

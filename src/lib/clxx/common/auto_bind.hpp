@@ -16,7 +16,7 @@
 #include <clxx/common/current_instance.hpp>
 
 namespace clxx {
-/** \addtogroup clxx_util_current_instance
+/** \ingroup clxx_common_util_current_instance
  * @{ */
 /** // doc: auto_bind {{{
  * \brief Allows to temporarily bind user instance to a

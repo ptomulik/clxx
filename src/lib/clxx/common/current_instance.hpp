@@ -11,7 +11,7 @@
 #define CLXX_COMMON_CURRENT_INSTANCE_HPP_INCLUDED
 
 namespace clxx {
-/** \addtogroup clxx_util_current_instance
+/** \ingroup clxx_common_util_current_instance
  * @{ */
 /** // doc: current_instance_binding_t {{{
  * \brief Possible bindings for \ref clxx::detail::current_instance "detail::current_instance<>"

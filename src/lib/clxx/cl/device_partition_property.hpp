@@ -18,14 +18,14 @@
 namespace clxx {
 #if CLXX_CL_H_VERSION_1_2
 /** // doc: device_partition_counts {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief Value type for the \ref clxx::device_partition_property_t::by_counts
  *        "device_partition_property_t::by_counts" device partitioning property
  */ // }}}
 typedef std::vector<unsigned int> device_partition_counts;
 
 /** // struct device_partition_property {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief A single device partition property
  *
  * This is a single element of \ref clxx::device_partition_properties
@@ -292,7 +292,7 @@ private:
   std::vector<cl_device_partition_property> _values;
 };
 
-/** \addtogroup clxx_platform_layer
+/** \ingroup clxx_cl_platform_layer
  * @{ */
 /** // doc: make_device_partition_property_c<N>(detail::device_partition_property_type<N>::type) {{{
  * \brief Type-safe constructor for \ref device_partition_property

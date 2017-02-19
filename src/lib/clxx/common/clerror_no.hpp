@@ -18,7 +18,7 @@
 namespace clxx {
 
 /** // doc: clerror_no {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Template class for all exceptions that result from OpenCL errors.
  *
  * OpenCL functions used to return error codes whenever an error occured. The

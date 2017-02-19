@@ -17,7 +17,7 @@
 
 namespace clxx {
 /** // doc: command_queue {{{
- * \ingroup clxx_command_queues
+ * \ingroup clxx_cl_command_queues
  * \brief OpenCL Command Queue.
  *
  * Represents OpenCL Command Queue and forwards basic operations on a Command

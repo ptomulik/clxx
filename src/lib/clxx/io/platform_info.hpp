@@ -15,7 +15,7 @@
 
 namespace clxx { namespace io {
 
-/** \addtogroup clxx_io
+/** \ingroup clxx_io
  *  @{ */
 /** // doc: write(os, info, pre) {{{
  * \brief Write out clxx::platform_info object to a stream

@@ -16,8 +16,6 @@
 #include <clxx/cl/context.hpp>
 #include <clxx/cl/context_properties.hpp>
 #include <clxx/cl/context_property.hpp>
-#include <clxx/cl/current_program_with_source_ctor.hpp>
-#include <clxx/cl/current_runtime.hpp>
 #include <clxx/cl/device.hpp>
 #include <clxx/cl/device_partition.hpp>
 #include <clxx/cl/device_partition_properties.hpp>
@@ -28,7 +26,6 @@
 #include <clxx/cl/functions.hpp>
 #include <clxx/cl/kernel.hpp>
 #include <clxx/cl/kernel_fcn.hpp>
-#include <clxx/cl/kernel_lazy_ctor.hpp>
 #include <clxx/cl/kernels.hpp>
 #include <clxx/cl/mem.hpp>
 #include <clxx/cl/mem_fcn.hpp>
@@ -36,16 +33,9 @@
 #include <clxx/cl/platform_layer.hpp>
 #include <clxx/cl/platforms.hpp>
 #include <clxx/cl/program.hpp>
-#include <clxx/cl/program_cached_ctor.hpp>
 #include <clxx/cl/program_fcn.hpp>
-#include <clxx/cl/program_generator.hpp>
-#include <clxx/cl/program_generator_fcn.hpp>
-#include <clxx/cl/program_lazy_fcn.hpp>
-#include <clxx/cl/program_lazy_generator.hpp>
 #include <clxx/cl/program_observer.hpp>
-#include <clxx/cl/program_with_source_ctor.hpp>
 #include <clxx/cl/programs.hpp>
-#include <clxx/cl/runtime.hpp>
 #include <clxx/common/ndrange.hpp>
 #include <clxx/common/program_binaries.hpp>
 #include <clxx/common/program_binary.hpp>

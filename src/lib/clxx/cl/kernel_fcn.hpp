@@ -16,7 +16,7 @@
 #include <clxx/common/ndrange_fwd.hpp>
 
 namespace clxx {
-/** \addtogroup clxx_executing_kernels
+/** \ingroup clxx_cl_executing_kernels
  * @{ */
 /** // doc: enqueue_ndrange_kernel() {{{
  * \brief Enqueues a command to execute a kernel on a device

@@ -17,7 +17,7 @@
 #include <clxx/common/config.hpp>
 
 namespace clxx { namespace detail {
-/** \addtogroup clxx_util_enum2str
+/** \ingroup clxx_common_util_enum2str clxx_common_detail
  * @{ */
 /** // doc: enum_hex_fmt_prec {{{
  * \brief Generates the \em precision part of the formating string for integers
@@ -136,7 +136,7 @@ struct enum_hex_fmt
 } } // end namespace clxx::detail
 
 namespace clxx { namespace detail {
-/** \addtogroup clxx_util_enum2str
+/** \ingroup clxx_common_util_enum2str clxx_common_detail
  * @{ */
 /** // doc: enum2hex(x) {{{
  * \brief Convert enum value to a string in hexadecimal representation

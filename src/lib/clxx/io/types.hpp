@@ -13,7 +13,7 @@
 #include <clxx/common/types.hpp>
 #include <iosfwd>
 
-/** \addtogroup clxx_io
+/** \ingroup clxx_io
  * @{ */
 /** // doc: operator << (os, status_t) {{{
  * \brief Write a value of clxx::status_t to an output stream.

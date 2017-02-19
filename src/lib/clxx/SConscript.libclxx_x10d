@@ -1,0 +1,79 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import('env')
+
+from SCons.Util import CLVar, NodeList
+import os
+
+sources =  [
+    'x10d/current_program_with_source_ctor.cpp',
+    'x10d/current_runtime.cpp',
+    'x10d/kernel_lazy_ctor.cpp',
+    'x10d/program_cached_ctor.cpp',
+    'x10d/program_generator.cpp',
+    'x10d/program_generator_fcn.cpp',
+    'x10d/program_lazy_fcn.cpp',
+    'x10d/program_lazy_generator.cpp',
+    'x10d/program_with_source_ctor.cpp',
+    'x10d/runtime.cpp',
+]
+
+headers = [
+    #
+    # x10d/*.hpp
+    #
+    'x10d/current_program_with_source_ctor.hpp',
+    'x10d/current_runtime.hpp',
+    'x10d/kernel_lazy_ctor.hpp',
+    'x10d/program_cached_ctor.hpp',
+    'x10d/program_generator_fcn.hpp',
+    'x10d/program_generator_fwd.hpp',
+    'x10d/program_generator.hpp',
+    'x10d/program_lazy_fcn.hpp',
+    'x10d/program_lazy_generator.hpp',
+    'x10d/program_with_source_ctor.hpp',
+    'x10d/runtime.hpp',
+]
+
+## headers += [
+##     'x10d.hpp'
+## ]
+
+env['CLXX_PACKAGES']['libclxx_x10d'] = {
+    'version' : env.subst('$CLXX_VERSION'),
+    'libdeps' : CLVar('clxx_cl')
+}
+
+objects = env.SharedObject(sources)
+
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_x10d']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_x10d']['libdeps']
+}
+
+lib = env.SharedLibrary('../clxx_x10d', objects, **overrides)
+env.Ignore('../..', lib)
+
+ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
+for f in ilib: env.Ignore(f.dir, f)
+
+iheaders = NodeList()
+for header in headers:
+    [head, tail] = os.path.split(header)
+    idir = os.path.join(env.subst("${includedir}"), "clxx", head);
+    iheader = env.Install(idir, header)
+    env.Ignore(idir, iheader)
+    iheaders += iheader
+
+env.Alias('install-libclxx_x10d-headers', iheaders)
+env.Alias('install-libclxx_x10d-lib', ilib)
+env.Alias('install-libclxx_x10d-dev', ['install-libclxx_x10d-headers', 'install-libclxx_x10d-lib' ])
+env.Alias('install','install-libclxx_x10d-dev')
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

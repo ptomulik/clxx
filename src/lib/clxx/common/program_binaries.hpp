@@ -15,7 +15,7 @@
 
 namespace clxx {
 /** // doc: program_binaries {{{
- * \ingroup clxx_program_objects
+ * \ingroup clxx_cl_program_objects
  * \brief A type used to represent multiple OpenCL program binaries
  * \sa \ref clxx::program_binary "program_binary".
  */ // }}}

@@ -202,7 +202,7 @@ private:
   bool _extensions;
   // }}}
 };
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: operator==(platform_query, platform_query) {{{
  * \brief Compare two \ref clxx::platform_query "platform_queries"

@@ -14,7 +14,7 @@
 
 namespace clxx {
 /** // doc: program_binary {{{
- * \ingroup clxx_program_objects
+ * \ingroup clxx_cl_program_objects
  * \brief A type used to represent OpenCL program binary
  */ // }}}
 typedef std::vector<unsigned char> program_binary;

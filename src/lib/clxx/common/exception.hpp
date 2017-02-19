@@ -15,7 +15,7 @@
 namespace clxx {
 
 /** // doc: exception {{{
- * \ingroup clxx_exceptions
+ * \ingroup clxx_common_exceptions
  * \brief Base class for all clxx exceptions.
  *
  * By design, all the clxx exceptions derive from clxx::exception class and

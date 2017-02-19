@@ -17,12 +17,12 @@
 namespace clxx {
 #if CLXX_CL_H_VERSION_1_2
 /** // doc: device_partition_properties {{{
- * \ingroup clxx_platform_layer
+ * \ingroup clxx_cl_platform_layer
  * \brief Container for context properties
  */ // }}}
 typedef std::vector<device_partition_property> device_partition_properties;
 
-/** \addtogroup clxx_platform_layer
+/** \ingroup clxx_cl_platform_layer
  * @{ */
 /** // doc: device_partition_properties_array_size(const device_partition_properties&) {{{
  * \brief Compute minium size of C array necessary to store context properties

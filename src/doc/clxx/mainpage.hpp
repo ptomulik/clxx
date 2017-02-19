@@ -52,7 +52,7 @@
  * Clxx defines extensive (and extensible) hierarchy of exception classes to
  * represent errors occurring inside calls to %clxx functions/methods. As a
  * %clxx programmer, you should get familiar with the exception hierarchy and
- * forget checking OpenCL return codes. See \ref clxx_exceptions for details.
+ * forget checking OpenCL return codes. See \ref clxx_common_exceptions for details.
  *
  * \par Proxy objects for OpenCL resources
  *

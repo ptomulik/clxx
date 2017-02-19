@@ -14,7 +14,7 @@
 #include <string>
 
 namespace clxx { namespace detail {
-/** \addtogroup clxx_util_sha1
+/** \ingroup clxx_common_util_sha1 clxx_common_detail
  * @{ */
 /** // doc: sha1 {{{
  * \todo Write documentation

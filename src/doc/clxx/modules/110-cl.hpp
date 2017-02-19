@@ -11,10 +11,10 @@
  *
  * The functions documented in this module provide thin wrappers around OpenCL
  * functions. Their purpose is to:
- *   - introduce \ref clxx_exceptions "our exceptions" &mdash; the new
- *     functions throw appropriate \ref clxx_exceptions "exceptions" instead of
+ *   - introduce \ref clxx_common_exceptions "our exceptions" &mdash; the new
+ *     functions throw appropriate \ref clxx_common_exceptions "exceptions" instead of
  *     returning OpenCL error codes,
- *   - introduce \ref clxx_types "clxx enumerative types" &mdash; whenever
+ *   - introduce \ref clxx_common_types "clxx enumerative types" &mdash; whenever
  *     appropriate, the new functions accept strongly typed enums defined in
  *     \ref clxx/common/types.hpp, instead of the OpenCL's \c CL_* constants,
  *   - introduce cxxtest mocks &mdash; this is used internally for unit
@@ -22,7 +22,7 @@
  */
 
 /**
- * \defgroup clxx_platform_layer OpenCL platform layer
+ * \defgroup clxx_cl_platform_layer OpenCL platform layer
  *
  * \brief Object-oriented API to OpenCL platform layer
  *
@@ -30,7 +30,7 @@
  * layer* described by the OpenCL specification under chapter 4 "The OpenCL
  * Platform Layer". Most of the functionalities is exposed in object oriented
  * way, some calls are simplified. OpenCL errors are turned-out into %clxx
- * exceptions (see \ref clxx_exceptions). The API defined by this module is
+ * exceptions (see \ref clxx_common_exceptions). The API defined by this module is
  * type-safe.
  *
  * <h4>Platforms and devices</h4>
@@ -115,14 +115,14 @@
  * described by the OpenCL specification under chapter 5 "The OpenCL
  * Runtime". Most of the functionalities is exposed in object oriented
  * way, some calls are simplified. OpenCL errors are turned-out into %clxx
- * exceptions (see \ref clxx_exceptions). The API defined by this module is
+ * exceptions (see \ref clxx_common_exceptions). The API defined by this module is
  * type-safe.
  *
  * @{
  */
 
 /**
- * \defgroup clxx_command_queues Command Queues
+ * \defgroup clxx_cl_command_queues Command Queues
  *
  * This module documents an object-oriented c++11 interface to *OpenCL command
  * queues*. OpenCL command queues are described by the OpenCL specification as
@@ -139,7 +139,7 @@
  */
 
 /**
- * \defgroup clxx_buffer_objects Buffer Objects
+ * \defgroup clxx_cl_buffer_objects Buffer Objects
  *
  * This module documents an object-oriented c++11 interface to OpenCL buffer
  * objects. OpenCL buffer objects are described by the OpenCL specification as
@@ -172,19 +172,19 @@
  */
 
 /**
- * \defgroup clxx_program_objects Program Objects
+ * \defgroup clxx_cl_program_objects Program Objects
  */
 
 /**
- * \defgroup clxx_kernel_objects Kernel Objects
+ * \defgroup clxx_cl_kernel_objects Kernel Objects
  */
 
 /**
- * \defgroup clxx_executing_kernels Executng Kernel
+ * \defgroup clxx_cl_executing_kernels Executng Kernel
  */
 
 /**
- * \defgroup clxx_event_objects Event Objects
+ * \defgroup clxx_cl_event_objects Event Objects
  */
 
 /**
@@ -206,7 +206,7 @@
 /** \defgroup clxx_cl_detail Implementation details
  * @{
  */
-/** \defgroup clxx_util_obj2cl Object to OpenCL Conversions
+/** \defgroup clxx_common_util_obj2cl Object to OpenCL Conversions
  */
 /** @} */
 /** @} */

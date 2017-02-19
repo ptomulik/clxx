@@ -228,7 +228,7 @@ private:
   // }}}
 };
 
-/** \addtogroup clxx_info
+/** \ingroup clxx_info
  * @{ */
 /** // doc: operator==(a,b) {{{
  * \brief Compare two \ref clxx::platform_info "platform_info" objects
