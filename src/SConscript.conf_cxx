@@ -75,12 +75,12 @@ elif cc == 'cl':
     env.Replace( CCFLAGS = SCons.Util.CLVar('/Zi /O2 /nologo') )
 
 if cc == 'gcc' or cc == 'clang':
-    env.Replace( CFLAGS = SCons.Util.CLVar('-ansi -std=c1x -Werror -Wall -Wextra -pedantic') )
+    env.Replace( CFLAGS = SCons.Util.CLVar('-std=c1x -Werror -Wall -Wextra -pedantic') )
 elif cc == 'cl':
     env.Replace( CFLAGS = SCons.Util.CLVar('') )
 
 if cxx == 'g++' or cxx == 'clang++':
-    env.Replace( CXXFLAGS = SCons.Util.CLVar('-ansi -std=c++11 -Werror -Wall -Wextra -pedantic') )
+    env.Replace( CXXFLAGS = SCons.Util.CLVar('-std=c++11 -Werror -Wall -Wextra -pedantic') )
 elif cxx == 'cl':
     env.Replace( CXXFLAGS = SCons.Util.CLVar('$( /TP $) /EHsc') )
 
