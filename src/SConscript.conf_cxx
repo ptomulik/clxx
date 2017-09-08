@@ -165,6 +165,9 @@ elif cxx == 'g++':
     HasCxxWflag(conf, '-Wmaybe-uninitialized')
     HasCxxWflag(conf, '-Wdeprecated-declarations')
     HasCxxWflag(conf, '-Wignored-attributes')
+    try: conf.env['CXX_HAS_FLAG']
+    except KeyError: conf.env['CXX_HAS_FLAG'] = {}
+    conf.env['CXX_HAS_FLAG']['-faligned-new'] = conf.CheckCXXFlag('-faligned-new')
 
 if cc == 'gcc':
     if env.get('CC_HAS_FLAG',{}).get('-Wignored-attributes'):

@@ -16,7 +16,7 @@
 /** // doc: CLXX_USE_DEPRECATED_clCreateDommandQueue {{{
  * \brief Use the \c clCreateCommandQueue() even if it's marked as deprecated
  */ // }}}
-#define CLXX_USE_DEPRECATED_clCreateCommandQueue
+#define CLXX_USE_DEPRECATED_clCreateCommandQueue 1
 
 /** // doc: CLXX_OPENCL_PROVIDES {{{
  * \brief Whether OpenCL library provides function \p fun
@@ -31,8 +31,8 @@
  * \param fun
  *    A function to be examined.
  */ // }}}
-#define CLXX_OPENCL_PROVIDES(fun) (defined(CLXX_IS_DECLARED_ ## fun) \
-                                && defined(CLXX_IS_LINKABLE_ ## fun))
+#define CLXX_OPENCL_PROVIDES(fun) ((CLXX_IS_DECLARED_ ## fun) \
+                                && (CLXX_IS_LINKABLE_ ## fun))
 /** // doc: CLXX_OPENCL_UNDEPRECATED {{{
  * \brief Whether the function \em fun is deprecated or not
  *
@@ -46,8 +46,8 @@
  * \param fun
  *    A function to be examined.
  */ // }}}
-#define CLXX_OPENCL_DEPRECATED(fun) (defined (CLXX_IS_DEPRECATED_ ## fun) \
-                                 && !defined (CLXX_USE_DEPRECATED_ ## fun))
+#define CLXX_OPENCL_DEPRECATED(fun) ((CLXX_IS_DEPRECATED_ ## fun) \
+                                 && !(CLXX_USE_DEPRECATED_ ## fun))
 
 /** // doc: CLXX_OPENCL_ALLOWED {{{
  * \brief Is it allowed to use given OpenCL function?
@@ -71,7 +71,7 @@
  * \param fun
  *    A function to be examined.
  */ // }}}
-#define CLXX_OPENCL_ALLOWED(fun) CLXX_OPENCL_PROVIDES(fun) && !CLXX_OPENCL_DEPRECATED(fun)
+#define CLXX_OPENCL_ALLOWED(fun) (CLXX_OPENCL_PROVIDES(fun) && !CLXX_OPENCL_DEPRECATED(fun))
 
 
 #if defined(__clang__)

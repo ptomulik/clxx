@@ -105,6 +105,8 @@ if cxx == 'g++':
         # broken...
         env.AppendUnique(CXXFLAGS = [ '-Wno-comment' ])
         env.AppendUnique(SWIGPY_CXXFLAGS = [ '-Wno-comment' ])
+    if env.get('CXX_HAS_FLAG', {}).get('-faligned-new'):
+        env.AppendUnique(SWIGPY_CXXFLAGS = ['-faligned-new'])
 elif cxx == 'clang++':
     if '-Werror' in env['SWIGPY_CXXFLAGS']:
         env.AppendUnique(SWIGPY_CXXFLAGS = [ '-Wno-unused-label' ])
