@@ -56,7 +56,6 @@ headers = [
     'cl/kernel.hpp',
     'cl/kernel_fcn.hpp',
     'cl/kernel_fwd.hpp',
-    'cl/kernel_lazy_ctor.hpp',
     'cl/kernels.hpp',
     'cl/mem.hpp',
     'cl/mem_fcn.hpp',
@@ -66,18 +65,11 @@ headers = [
     'cl/platform_layer.hpp',
     'cl/platforms.hpp',
     'cl/program.hpp',
-    'cl/program_cached_ctor.hpp',
     'cl/program_fcn.hpp',
     'cl/program_fwd.hpp',
-    'cl/program_generator.hpp',
-    'cl/program_generator_fcn.hpp',
-    'cl/program_generator_fwd.hpp',
-    'cl/program_lazy_fcn.hpp',
-    'cl/program_lazy_generator.hpp',
     'cl/program_observer.hpp',
-    'cl/program_with_source_ctor.hpp',
     'cl/programs.hpp',
-    'cl/runtime.hpp',
+    'cl/detail/obj2cl.hpp',
     #
     # cl/detail/*.hpp
     #
