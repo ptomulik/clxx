@@ -48,9 +48,9 @@ namespace clxx {
  * CLXX, or when get_platform_ids() has a bug.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |  \check   |  \check   |  \check   |  \check   |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |  \check   |  \check   |  \check   |  \check   |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformIDs.html">clGetPlatformIDs()</a>
  */ // }}}
@@ -100,9 +100,9 @@ get_platform_ids(cl_uint num_entries,
  * CLXX, or when get_platform_info() has a bug.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformInfo.html">clGetPlatformInfo()</a>
  */ // }}}
@@ -163,9 +163,9 @@ get_platform_info(cl_platform_id platform,
  * %clxx, or when get_platform_ids() has a bug.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceIDs.html">clGetDeviceIDs()</a>
  */ // }}}
@@ -216,9 +216,9 @@ get_device_ids(cl_platform_id platform,
  *    when \c clGetDeviceInfo() returns any other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceInfo.html">clGetDeviceInfo()</a>
  */ // }}}
@@ -301,9 +301,9 @@ get_device_info(cl_device_id device,
  *    When \c clCreateContext() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContext.html">clCreateContext()</a>
  */ // }}}
@@ -385,9 +385,9 @@ create_context(const cl_context_properties* properties,
  *    When \c clCreateContextFromType() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContextFromType.html">clCreateContextFromType()</a>
  */ // }}}
@@ -425,9 +425,9 @@ create_context_from_type(const cl_context_properties* properties,
  *    implicit retain.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainContext.html">clRetainContext()</a>
  */ // }}}
@@ -456,9 +456,9 @@ retain_context(cl_context context);
  *    When \c clReleaseContext() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseContext.html">clReleaseContext()</a>
  */ // }}}
@@ -502,9 +502,9 @@ release_context(cl_context context);
  *    When \c clGetContextInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetContextInfo.html">clGetContextInfo()</a>
  */ // }}}
@@ -562,9 +562,9 @@ get_context_info(cl_context context,
  *    When \c clCreateSubDevices() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSubDevices.html">clCreateSubDevices()</a>
  */ // }}}
@@ -606,9 +606,9 @@ create_sub_devices(cl_device_id in_device,
  *    When \c clRetainDevice() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainDevice.html">clRetainDevice()</a>
  */ // }}}
@@ -646,9 +646,9 @@ retain_device(cl_device_id device);
  *    When \c clReleaseDevice() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseDevice.html">clReleaseDevice()</a>
  */ // }}}
@@ -711,9 +711,9 @@ release_device(cl_device_id device);
  *    When \c clCreateCommandQueue() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \cross  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \cross  |  \cross   |    ???    |
  *
  * \cross - \c clCreateCommandQueue() has been removed from OpenCL in the
  * version 2.0, however <tt>CL/cl.h</tt> header still declares it (but
@@ -787,9 +787,9 @@ create_command_queue(cl_context context,
  *    When \c clCreateCommandQueueWithProperties() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueueWithProperties.html">clCreateCommandQueueWithProperties()</a>
  */ // }}}
@@ -824,9 +824,9 @@ create_command_queue_with_properties(cl_context context,
  * \note \ref create_command_queue() performs an implicit retain.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainCommandQueue.html">clRetainCommandQueue()</a>
  */ // }}}
@@ -856,9 +856,9 @@ retain_command_queue(cl_command_queue command_queue);
  *    When \c clReleaseCommandQueue() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseCommandQueue.html">clReleaseCommandQueue()</a>
  */ // }}}
@@ -903,9 +903,9 @@ release_command_queue(cl_command_queue command_queue);
  *    When \c clGetCommandQueueInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetCommandQueueInfo.html">clGetCommandQueueInfo()</a>
  */ // }}}
@@ -961,9 +961,9 @@ get_command_queue_info(cl_command_queue command_queue,
  *    When \c clCreateBuffer() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateBuffer.html">clCreateBuffer()</a>
  */ // }}}
@@ -1016,9 +1016,9 @@ create_buffer(cl_context context,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSubBuffer.html">clCreateSubBuffer()</a>
  */ // }}}
@@ -1113,9 +1113,9 @@ create_sub_buffer(cl_mem buffer,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueReadBuffer.html">clEnqueueReadBuffer()</a>
  *
@@ -1217,9 +1217,9 @@ enqueue_read_buffer(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWriteBuffer.html">clEnqueueWriteBuffer()</a>
  *
@@ -1310,9 +1310,9 @@ enqueue_write_buffer(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBuffer.html">clEnqueueCopyBuffer()</a>
  *
@@ -1422,9 +1422,9 @@ enqueue_copy_buffer(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBuffer.html">clEnqueueCopyBuffer()</a>
  *
@@ -1500,9 +1500,9 @@ enqueue_map_buffer(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateImage.html">clCreateImage()</a>
  *
@@ -1560,9 +1560,9 @@ create_image(cl_context context,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetSupportedImageFormats.html">clGetSupportedImageFormats()</a>
  *
@@ -1690,9 +1690,9 @@ get_supported_image_formats(cl_context context,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueReadBuffer.html">clEnqueueReadBuffer()</a>
  *
@@ -1827,9 +1827,9 @@ enqueue_read_image(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWriteImage.html">clEnqueueWriteImage()</a>
  *
@@ -1954,9 +1954,9 @@ enqueue_write_image(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyImage.html">clEnqueueCopyImage()</a>
  *
@@ -2072,9 +2072,9 @@ enqueue_copy_image(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyImageToBuffer.html">clEnqueueCopyImageToBuffer()</a>
  *
@@ -2190,9 +2190,9 @@ enqueue_copy_image_to_buffer(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBufferToImage.html">clEnqueueCopyBufferToImage()</a>
  *
@@ -2326,9 +2326,9 @@ enqueue_copy_buffer_to_image(cl_command_queue command_queue,
  *
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueMapImage.html">clEnqueueMapImage()</a>
  *
@@ -2407,9 +2407,9 @@ enqueue_map_image(cl_command_queue command_queue,
  *    When \c clEnqueueUnmapMemObject() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueUnmapMemObject.html">clEnqueueUnmapMemObject()</a>
  *
@@ -2492,9 +2492,9 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
  *    When \c clEnqueueMigrateMemObjects() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueMigrateMemObjects.html">clEnqueueMigrateMemObjects()</a>
  *
@@ -2545,9 +2545,9 @@ enqueue_migrate_mem_objects(cl_command_queue command_queue,
  *    When \c clGetImageInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetImageInfo.html">clGetImageInfo()</a>
  */ // }}}
@@ -2595,9 +2595,9 @@ get_image_info(cl_mem image,
  *    When \c clGetMemObjectInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetMemObjectInfo.html">clGetMemObjectInfo()</a>
  *
@@ -2631,9 +2631,9 @@ get_mem_object_info(cl_mem memobj,
  *    When \c clRetainMemObject() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainMemObject.html">clRetainMemObject()</a>
  *
@@ -2663,9 +2663,9 @@ retain_mem_object(cl_mem memobj);
  *    When \c clReleaseMemObject() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseMemObject.html">clReleaseMemObject()</a>
  *
@@ -2723,9 +2723,9 @@ release_mem_object(cl_mem memobj);
  *    When \c clCreateProgramWithSource() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithSource.html">clCreateProgramWithSource()</a>
  */ // }}}
@@ -2831,9 +2831,9 @@ create_program_with_source(cl_context context,
  *    \endcode
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBinary.html">clCreateProgramWithBinary()</a>
  */ // }}}
@@ -2892,9 +2892,9 @@ create_program_with_binary(cl_context context,
  *    When \c clCreateProgramWithBuiltInKernels() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBuiltInKernels.html">clCreateProgramWithBuiltInKernels()</a>
  */ // }}}
@@ -2932,9 +2932,9 @@ create_program_with_built_in_kernels(cl_context context,
  *    When \c clRetainProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainProgram.html">clRetainProgram()</a>
  */ // }}}
@@ -2967,9 +2967,9 @@ retain_program(cl_program program);
  *    When \c clReleaseProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseProgram.html">clReleaseProgram()</a>
  */ // }}}
@@ -3061,9 +3061,9 @@ release_program(cl_program program);
  *    When \c clBuildProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clBuildProgram.html">clBuildProgram()</a>
  */ // }}}
@@ -3166,9 +3166,9 @@ build_program(cl_program program,
  *    When \c clCompileProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCompileProgram.html">clCompileProgram()</a>
  */ // }}}
@@ -3287,9 +3287,9 @@ compile_program(cl_program program,
  *    When \c clLinkProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clLinkProgram.html">clLinkProgram()</a>
  */ // }}}
@@ -3331,9 +3331,9 @@ link_program(cl_context context,
  *    When \c clUnloadPlatformCompiler() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clUnloadPlatformCompiler.html">clUnloadPlatformCompiler()</a>
  */ // }}}
@@ -3381,9 +3381,9 @@ unload_platform_compiler(cl_platform_id platform);
  *    When \c clGetProgramInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramInfo.html">clGetProgramInfo()</a>
  */ // }}}
@@ -3447,9 +3447,9 @@ get_program_info(cl_program program,
  *    When \c clGetProgramBuildInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramBuildInfo.html">clGetProgramBuildInfo()</a>
  */ // }}}
@@ -3497,9 +3497,9 @@ get_program_build_info(cl_program program,
  *    When \c clCreateKernel() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clXxx.html">clXxx()</a>
  */ // }}}
@@ -3545,9 +3545,9 @@ create_kernel(cl_program program,
  *    When \c clCreateKernelsInProgram() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateKernelsInProgram.html">clCreateKernelsInProgram()</a>
  */ // }}}
@@ -3593,9 +3593,9 @@ create_kernels_in_program(cl_program program,
  *    When \c clGetKernelInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelInfo.html">clGetKernelInfo()</a>
  */ // }}}
@@ -3649,9 +3649,9 @@ get_kernel_info(cl_kernel kernel,
  *    When \c clGetKernelArgInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelArgInfo.html">clGetKernelArgInfo()</a>
  */ // }}}
@@ -3710,9 +3710,9 @@ get_kernel_arg_info(cl_kernel kernel,
  *    When \c clGetKernelWorkGroupInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelWorkGroupInfo.html">clGetKernelWorkGroupInfo()</a>
  */ // }}}
@@ -3747,9 +3747,9 @@ get_kernel_work_group_info(cl_kernel kernel,
  *    When \c clRetainKernel() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainKernel.html">clRetainKernel()</a>
  */ // }}}
@@ -3783,9 +3783,9 @@ retain_kernel(cl_kernel kernel);
  *    When \c clReleaseKernel() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseKernel.html">clReleaseKernel()</a>
  */ // }}}
@@ -3850,9 +3850,9 @@ release_kernel(cl_kernel kernel);
  *    When \c clSetKernelArg() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArg.html">clSetKernelArg()</a>
  */ // }}}
@@ -3907,9 +3907,9 @@ set_kernel_arg(cl_kernel kernel,
  *    When \c clSetKernelArgSVMPointer() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArgSVMPointer.html">clSetKernelArgSVMPointer()</a>
  */ // }}}
@@ -3957,9 +3957,9 @@ set_kernel_arg_svm_pointer(cl_kernel kernel,
  *    When \c clSetKernelExecInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelExecInfo.html">clSetKernelExecInfo()</a>
  */ // }}}
@@ -4069,9 +4069,9 @@ set_kernel_exec_info(cl_kernel kernel,
  *    When other error code is returned
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNDRangeKernel.html">clEnqueueNDRangeKernel()</a>
  */ // }}}
@@ -4166,9 +4166,9 @@ enqueue_ndrange_kernel(cl_command_queue command_queue,
  *    When \c clEnqueueNativeKernel returns other error code
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNativeKernel.html">clEnqueueNativeKernel()</a>
  */ // }}}
@@ -4210,9 +4210,9 @@ enqueue_native_kernel(cl_command_queue command_queue,
  *    When \c clCreateUserEvent() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateUserEvent.html">clCreateUserEvent()</a>
  */ // }}}
@@ -4254,9 +4254,9 @@ create_user_event(cl_context context);
  *    When \c clSetUserEventStatus() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetUserEventStatus.html">clSetUserEventStatus()</a>
  */ // }}}
@@ -4293,9 +4293,9 @@ set_user_event_status(cl_event event, cl_int execution_status);
  *    When \c clWaitForEvents returns CL_OUT_OF_HOST_MEMORY
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clWaitForEvents.html">clWaitForEvents()</a>
  */ // }}}
@@ -4338,9 +4338,9 @@ wait_for_events(cl_uint num_events, const cl_event* event_list);
  *    When \c clGetEventInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetEventInfo.html">clGetEventInfo()</a>
  */ // }}}
@@ -4387,9 +4387,9 @@ get_event_info(cl_event event, event_info_t param_name,
  *    When \c clGetEventInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetEventCallback.html">clSetEventCallback()</a>
  */ // }}}
@@ -4423,9 +4423,9 @@ set_event_callback(cl_event event, cl_int command_exec_callback_type,
  *    When \c clRetainEvent() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainEvent.html">clRetainEvent()</a>
  */ // }}}
@@ -4459,9 +4459,9 @@ retain_event(cl_event event);
  *    When \c clReleaseEvent() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseEvent.html">clReleaseEvent()</a>
  */ // }}}
@@ -4507,9 +4507,9 @@ release_event(cl_event event);
  *    When \c clGetEventProfilingInfo() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetEventProfilingInfo.html">clGetEventProfilingInfo()</a>
  */ // }}}
@@ -4542,9 +4542,9 @@ get_event_profiling_info(cl_event event,
  *    When \c clFlush() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clFlush.html">clFlush()</a>
  */ // }}}
@@ -4574,9 +4574,9 @@ flush(cl_command_queue command_queue);
  *    When \c clFinish() returns other error code.
  *
  * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
- * | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |    ???    |
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clFinish.html">clFinish()</a>
  */ // }}}

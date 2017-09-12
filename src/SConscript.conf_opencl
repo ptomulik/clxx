@@ -42,14 +42,10 @@ orgEnv = conf.env
 conf.env = orgEnv.Clone()
 conf.env.AppendUnique(LIBS = ['OpenCL'])
 
-if conf.CheckClHVersion('1.0'):
-    conf.Define( 'CLXX_CL_H_VERSION_1_0', 1, 'Library was built against CL/cl.h which had OpenCL 1.0 features')
-if conf.CheckClHVersion('1.1'):
-    conf.Define( 'CLXX_CL_H_VERSION_1_1', 1, 'Library was built against CL/cl.h which had OpenCL 1.1 features')
-if conf.CheckClHVersion('1.2'):
-    conf.Define( 'CLXX_CL_H_VERSION_1_2', 1, 'Library was built against CL/cl.h which had OpenCL 1.2 features')
-if conf.CheckClHVersion('2.0'):
-    conf.Define( 'CLXX_CL_H_VERSION_2_0', 1, 'Library was built against CL/cl.h which had OpenCL 2.0 features')
+for clver in ('1.0', '1.1', '1.2', '2.0', '2.1', '2.2'):
+    if conf.CheckClHVersion(clver):
+      cltag = clver.replace('.', '_')
+      conf.Define('CLXX_CL_H_VERSION_%s' % cltag, 1, 'Library was built against CL/cl.h which had OpenCL %s features' % clver)
 
 #
 # clCreateSubDevices()
@@ -269,6 +265,55 @@ _clCreateImage = \
 CharacterizeClFunction(conf, 'clCreateImage', _clCreateImage)
 
 #
+# clCreateImage2D()
+#
+# (removed in OpenCL 2.0)
+_clCreateImage2D = \
+"""clCreateImage2D( (cl_context)0,
+                  (cl_mem_flags)0,
+                  (const cl_image_format*)NULL,
+                  (size_t)0ul,
+                  (size_t)0ul,
+                  (size_t)0ul,
+                  (void*)NULL,
+                  (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreateImage2D', _clCreateImage2D)
+
+#
+# clCreateImage3D()
+#
+# (removed in OpenCL 2.0)
+_clCreateImage3D = \
+"""clCreateImage3D( (cl_context)0,
+                  (cl_mem_flags)0,
+                  (const cl_image_format*)NULL,
+                  (size_t)0ul,
+                  (size_t)0ul,
+                  (size_t)0ul,
+                  (size_t)0ul,
+                  (size_t)0ul,
+                  (void*)NULL,
+                  (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreateImage3D', _clCreateImage3D)
+
+#
+# clCreatePipe()
+#
+# (removed in OpenCL 2.0)
+_clCreatePipe = \
+"""clCreatePipe( (cl_context)0,
+                  (cl_mem_flags)0,
+                  (const cl_image_format*)NULL,
+                  (cl_uint)0u,
+                  (cl_uint)0u,
+                  (const cl_pipe_properties*)NULL,
+                  (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreatePipe', _clCreatePipe)
+
+#
 # clEnqueueFillImage()
 #
 # (added in OpenCL 1.2)
@@ -309,6 +354,16 @@ _clSetMemObjectDestructorCallback = \
                                      NULL );
 """
 CharacterizeClFunction(conf, 'clSetMemObjectDestructorCallback', _clSetMemObjectDestructorCallback)
+
+#
+# clCloneKernel()
+#
+# (added in OpenCL 2.1)
+_clCloneKernel = \
+"""clCloneKernel( (cl_kernel)0,
+                  (cl_int*)NULL);
+"""
+CharacterizeClFunction(conf, 'clCloneKernel', _clCloneKernel)
 
 #
 # clGetKernelArgInfo()

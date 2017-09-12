@@ -347,18 +347,46 @@ def dload_opencl_hdr(**kw):
                     'cl_platform.h',
                     'opencl.h'  ]
     elif ver == '2.0':
-        files = [   'opencl.h',
-                    'cl_platform.h',
-                    'cl.h',
-                    'cl_ext.h',
-                    'cl_egl.h',
-                    'cl_dx9_media_sharing.h',
+        files = [   'cl.h',
                     'cl_d3d10.h',
                     'cl_d3d11.h',
+                    'cl_dx9_media_sharing.h',
+                    'cl_egl.h',
+                    'cl_ext.h',
                     'cl_gl.h',
                     'cl_gl_ext.h',
-                    'cl2.hpp'   ]
+                    'cl_platform.h',
+                    'opencl.h' ]
         patchfile = 'opencl-hdr-2.0.patch'
+    elif ver == '2.1':
+        files = [   'cl.h',
+                    'cl_d3d10.h',
+                    'cl_d3d11.h',
+                    'cl_dx9_media_sharing.h',
+                    'cl_dx9_media_sharing_intel.h',
+                    'cl_egl.h',
+                    'cl_ext.h',
+                    'cl_ext_intel.h',
+                    'cl_gl.h',
+                    'cl_gl_ext.h',
+                    'cl_platform.h',
+                    'cl_via_api_media_sharing_intel.h',
+                    'opencl.h' ]
+    elif ver == '2.2':
+        url_base = "https://github.com/KhronosGroup/OpenCL-Headers/raw/master/opencl22/CL"
+        files = [   'cl.h',
+                    'cl_d3d10.h',
+                    'cl_d3d11.h',
+                    'cl_dx9_media_sharing.h',
+                    'cl_dx9_media_sharing_intel.h',
+                    'cl_egl.h',
+                    'cl_ext.h',
+                    'cl_ext_intel.h',
+                    'cl_gl.h',
+                    'cl_gl_ext.h',
+                    'cl_platform.h',
+                    'cl_via_api_media_sharing_intel.h',
+                    'opencl.h' ]
     else:
         warn("unsupported OpenCL version '%s'" % ver, **kw)
         return 2
