@@ -15,6 +15,7 @@ before_install:
   - sudo rm -f /etc/dpkg/dpkg.cfg.d/multiarch
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu vivid main universe multiverse restricted'
   - sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu trusty main universe multiverse restricted'
+  - sudo apt-add-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-key update
   - sudo apt-get -y update
 install:
