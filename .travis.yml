@@ -19,7 +19,7 @@ before_install:
   - sudo apt-get -y update
 install:
   - ./bin/download-deps.py scons-arguments scons-arguments-gnuinstall
-  - if $COMPILE; then sudo apt-get --no-install-recommends -y install g++; fi
+  - if $COMPILE; then sudo apt-get --no-install-recommends -y install g++-4.9; fi
   - if $COMPILE; then sudo apt-get --no-install-recommends -y install clang; fi
   - if $COMPILE; then
       if (clang --version | grep 'clang version 3\.3'); then
