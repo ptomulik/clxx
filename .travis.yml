@@ -10,13 +10,17 @@ env:
   - CL_H_VER='1.1' COMPILE=true  APIDOC=false
   - CL_H_VER='1.2' COMPILE=true  APIDOC=false
   - CL_H_VER='2.0' COMPILE=true  APIDOC=false
+  - CL_H_VER='2.1' COMPILE=true  APIDOC=false
+  - CL_H_VER='2.2' COMPILE=true  APIDOC=false
   - CL_H_VER=''    COMPILE=false APIDOC=true
+matrix:
+  exclude:
+    - compiler: clang
+      env: COMPILE=false
 before_install:
   - lsb_release -c
   - lsb_release -r
   - sudo rm -f /etc/dpkg/dpkg.cfg.d/multiarch
-    #- sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu vivid main universe multiverse restricted'
-    #- sudo apt-add-repository 'deb http://archive.ubuntu.com/ubuntu trusty main universe multiverse restricted'
   - sudo apt-add-repository ppa:ubuntu-toolchain-r/test -y
   - sudo apt-key update
   - sudo apt-get -y update
@@ -39,7 +43,7 @@ install:
     fi
   - if $COMPILE; then
       sudo apt-get --no-install-recommends -y install nvidia-opencl-dev;
-      (sudo apt-get --no-install-recommends -y install libegl1-mesa-dev || cat /var/log/fontconfig.log);
+      sudo apt-get --no-install-recommends -y install libegl1-mesa-dev;
     fi
   - if $COMPILE; then sudo apt-get --no-install-recommends -y install libboost-dev libboost-program-options-dev libboost-serialization-dev; fi
 #  - if $COMPILE; then sudo apt-get --no-install-recommends -y install libprotobuf-dev protobuf-compiler; fi
