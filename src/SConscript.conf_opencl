@@ -48,50 +48,19 @@ for clver in ('1.0', '1.1', '1.2', '2.0', '2.1', '2.2'):
       conf.Define('CLXX_CL_H_VERSION_%s' % cltag, 1, 'Library was built against CL/cl.h which had OpenCL %s features' % clver)
 
 #
-# clCreateSubDevices()
+# clCloneKernel()
 #
-_clCreateSubDevices = \
-"""clCreateSubDevices(
-        (cl_device_id)NULL,
-        (const cl_device_partition_property*)NULL,
-        0u,
-        (cl_device_id*)NULL,
-        (cl_uint*)NULL);
+# (added in OpenCL 2.1)
+_clCloneKernel = \
+"""clCloneKernel( (cl_kernel)0,
+                  (cl_int*)NULL);
 """
-CharacterizeClFunction(conf, 'clCreateSubDevices', _clCreateSubDevices)
-
-#
-# clRetainDevice()
-#
-_clRetainDevice = \
-"""clRetainDevice((cl_device_id)NULL);
-"""
-CharacterizeClFunction(conf, 'clRetainDevice', _clRetainDevice)
-
-#
-# clReleaseDevice()
-#
-_clReleaseDevice = \
-"""clReleaseDevice((cl_device_id)NULL);
-"""
-CharacterizeClFunction(conf, 'clReleaseDevice', _clReleaseDevice)
-
-#
-# clCreateProgramWithBuiltInKernels()
-#
-_clCreateProgramWithBuiltInKernels = \
-"""clCreateProgramWithBuiltInKernels(
-        (cl_context)NULL,
-        0,
-        (const cl_device_id*)NULL,
-        (const char*)NULL,
-        (cl_int*)NULL);
-"""
-CharacterizeClFunction(conf, 'clCreateProgramWithBuiltInKernels', _clCreateProgramWithBuiltInKernels)
+CharacterizeClFunction(conf, 'clCloneKernel', _clCloneKernel)
 
 #
 # clCompileProgram()
 #
+# (added in OpenCL 1.2)
 _clCompileProgram = \
 """clCompileProgram(
         (cl_program)NULL,
@@ -105,31 +74,6 @@ _clCompileProgram = \
         NULL);
 """
 CharacterizeClFunction(conf, 'clCompileProgram', _clCompileProgram)
-
-#
-# clLinkProgram()
-#
-_clLinkProgram = \
-"""clLinkProgram(
-        (cl_context)NULL,
-        0,
-        (const cl_device_id*)NULL,
-        (const char*)NULL,
-        0,
-        (const cl_program*)NULL,
-        (void(CL_CALLBACK*)(cl_program,void*))NULL,
-        NULL,
-        NULL);
-"""
-CharacterizeClFunction(conf, 'clLinkProgram', _clLinkProgram)
-
-#
-# clUnloadPlatformCompiler()
-#
-_clUnloadPlatformCompiler = \
-"""clUnloadPlatformCompiler((cl_platform_id)NULL);
-"""
-CharacterizeClFunction(conf, 'clUnloadPlatformCompiler', _clUnloadPlatformCompiler)
 
 #
 # clCreateCommandQueue()
@@ -154,101 +98,6 @@ _clCreateCommandQueueWithProperties = \
                                         (cl_int*)NULL );
 """
 CharacterizeClFunction(conf, 'clCreateCommandQueueWithProperties', _clCreateCommandQueueWithProperties)
-
-#
-# clCreateSubBuffer()
-#
-# (added in OpenCL 1.1)
-_clCreateSubBuffer = \
-"""clCreateSubBuffer( (cl_mem)0,
-                      (cl_mem_flags)0,
-                      (cl_buffer_create_type)0,
-                      (const void*)NULL,
-                      (cl_int*)NULL );
-"""
-CharacterizeClFunction(conf, 'clCreateSubBuffer', _clCreateSubBuffer)
-
-#
-# clEnqueueReadBufferRect()
-#
-# (added in OpenCL 1.1)
-_clEnqueueReadBufferRect = \
-"""clEnqueueReadBufferRect( (cl_command_queue)0,
-                            (cl_mem)0,
-                            (cl_bool)0,
-                            (const size_t*)NULL,
-                            (const size_t*)NULL,
-                            (const size_t*)NULL,
-                             0ul,
-                             0ul,
-                             0ul,
-                             0ul,
-                            (void*)NULL,
-                             0u,
-                            (const cl_event*)NULL,
-                            (cl_event*)NULL );
-"""
-CharacterizeClFunction(conf, 'clEnqueueReadBufferRect', _clEnqueueReadBufferRect)
-
-#
-# clEnqueueWriteBufferRect()
-#
-# (added in OpenCL 1.1)
-_clEnqueueWriteBufferRect = \
-"""clEnqueueWriteBufferRect( (cl_command_queue)0,
-                             (cl_mem)0,
-                             (cl_bool)0,
-                             (const size_t*)NULL,
-                             (const size_t*)NULL,
-                             (const size_t*)NULL,
-                              0ul,
-                              0ul,
-                              0ul,
-                              0ul,
-                             (void*)NULL,
-                              0u,
-                             (const cl_event*)NULL,
-                             (cl_event*)NULL );
-"""
-CharacterizeClFunction(conf, 'clEnqueueWriteBufferRect', _clEnqueueWriteBufferRect)
-
-#
-# clEnqueueCopyBufferRect()
-#
-# (added in OpenCL 1.1)
-_clEnqueueCopyBufferRect = \
-"""clEnqueueCopyBufferRect( (cl_command_queue)0,
-                            (cl_mem)0,
-                            (cl_mem)0,
-                            (const size_t*)NULL,
-                            (const size_t*)NULL,
-                            (const size_t*)NULL,
-                             0ul,
-                             0ul,
-                             0ul,
-                             0ul,
-                             0u,
-                            (const cl_event*)NULL,
-                            (cl_event*)NULL );
-"""
-CharacterizeClFunction(conf, 'clEnqueueCopyBufferRect', _clEnqueueCopyBufferRect)
-
-#
-# clEnqueueFillBuffer()
-#
-# (added in OpenCL 1.2)
-_clEnqueueFillBuffer = \
-"""clEnqueueFillBuffer( (cl_command_queue)0,
-                        (cl_mem)0,
-                        (const void*)NULL,
-                         0ul,
-                         0ul,
-                         0ul,
-                         0u,
-                        (const cl_event*)NULL,
-                        (cl_event*)NULL );
-"""
-CharacterizeClFunction(conf, 'clEnqueueFillBuffer', _clEnqueueFillBuffer)
 
 #
 # clCreateImage()
@@ -304,14 +153,154 @@ CharacterizeClFunction(conf, 'clCreateImage3D', _clCreateImage3D)
 # (removed in OpenCL 2.0)
 _clCreatePipe = \
 """clCreatePipe( (cl_context)0,
-                  (cl_mem_flags)0,
-                  (const cl_image_format*)NULL,
-                  (cl_uint)0u,
-                  (cl_uint)0u,
-                  (const cl_pipe_properties*)NULL,
-                  (cl_int*)NULL );
+                 (cl_mem_flags)0,
+                 (cl_uint)0u,
+                 (cl_uint)0u,
+                 (const cl_pipe_properties*)NULL,
+                 (cl_int*)NULL );
 """
 CharacterizeClFunction(conf, 'clCreatePipe', _clCreatePipe)
+
+#
+# clCreateProgramWithBuiltInKernels()
+#
+_clCreateProgramWithBuiltInKernels = \
+"""clCreateProgramWithBuiltInKernels( (cl_context)NULL,
+                                      0,
+                                      (const cl_device_id*)NULL,
+                                      (const char*)NULL,
+                                      (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreateProgramWithBuiltInKernels', _clCreateProgramWithBuiltInKernels)
+
+#
+# clCreateProgramWithIL()
+#
+_clCreateProgramWithIL = \
+"""clCreateProgramWithIL( (cl_context)0,
+                          (const void*)NULL,
+                          (size_t)0ul,
+                          (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreateProgramWithIL', _clCreateProgramWithIL)
+
+#
+# clCreateSampler()
+#
+# (removed/deprecated in OpenCL 2.0)
+_clCreateSampler = """
+clCreateSampler( (cl_context)0,
+                 (cl_bool)0,
+                 (cl_addressing_mode)0,
+                 (cl_filter_mode)0,
+                 (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreateSampler', _clCreateSampler)
+
+#
+# clCreateSamplerWithProperties()
+#
+# (added in OpenCL 2.0)
+_clCreateSamplerWithProperties = """
+clCreateSamplerWithProperties( (cl_context)0,
+                               (const cl_sampler_properties*)NULL,
+                               (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreateSamplerWithProperties', _clCreateSamplerWithProperties)
+
+#
+# clCreateSubBuffer()
+#
+# (added in OpenCL 1.1)
+_clCreateSubBuffer = \
+"""clCreateSubBuffer( (cl_mem)0,
+                      (cl_mem_flags)0,
+                      (cl_buffer_create_type)0,
+                      (const void*)NULL,
+                      (cl_int*)NULL );
+"""
+CharacterizeClFunction(conf, 'clCreateSubBuffer', _clCreateSubBuffer)
+
+#
+# clCreateSubDevices()
+#
+_clCreateSubDevices = \
+"""clCreateSubDevices(
+        (cl_device_id)NULL,
+        (const cl_device_partition_property*)NULL,
+        0u,
+        (cl_device_id*)NULL,
+        (cl_uint*)NULL);
+"""
+CharacterizeClFunction(conf, 'clCreateSubDevices', _clCreateSubDevices)
+
+#
+# clCreateUserEvent()
+#
+# (added in OpenCL 1.1)
+_clCreateUserEvent = \
+"""clCreateUserEvent((cl_context)0, NULL);
+"""
+CharacterizeClFunction(conf, 'clCreateUserEvent', _clCreateUserEvent)
+
+#
+# clEnqueueBarrier()
+#
+# (removed in OpenCL 2.0)
+_clEnqueueBarrier = \
+"""clEnqueueBarrier( (cl_command_queue)0 );
+"""
+CharacterizeClFunction(conf, 'clEnqueueBarrier', _clEnqueueBarrier)
+
+#
+# clEnqueueBarrierWithWaitList()
+#
+# (added in OpenCL 1.2)
+_clEnqueueBarrierWithWaitList = \
+"""clEnqueueBarrierWithWaitList( (cl_command_queue)0,
+                                 (cl_uint)0,
+                                 (const cl_event*)NULL,
+                                 (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueBarrierWithWaitList', _clEnqueueBarrierWithWaitList)
+
+#
+# clEnqueueCopyBufferRect()
+#
+# (added in OpenCL 1.1)
+_clEnqueueCopyBufferRect = \
+"""clEnqueueCopyBufferRect( (cl_command_queue)0,
+                            (cl_mem)0,
+                            (cl_mem)0,
+                            (const size_t*)NULL,
+                            (const size_t*)NULL,
+                            (const size_t*)NULL,
+                             0ul,
+                             0ul,
+                             0ul,
+                             0ul,
+                             0u,
+                            (const cl_event*)NULL,
+                            (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueCopyBufferRect', _clEnqueueCopyBufferRect)
+
+#
+# clEnqueueFillBuffer()
+#
+# (added in OpenCL 1.2)
+_clEnqueueFillBuffer = \
+"""clEnqueueFillBuffer( (cl_command_queue)0,
+                        (cl_mem)0,
+                        (const void*)NULL,
+                         0ul,
+                         0ul,
+                         0ul,
+                         0u,
+                        (const cl_event*)NULL,
+                        (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueFillBuffer', _clEnqueueFillBuffer)
 
 #
 # clEnqueueFillImage()
@@ -330,6 +319,28 @@ _clEnqueueFillImage = \
 CharacterizeClFunction(conf, 'clEnqueueFillImage', _clEnqueueFillImage)
 
 #
+# clEnqueueMarker()
+#
+# (removed in OpenCL 2.0)
+_clEnqueueMarker = \
+"""clEnqueueMarker( (cl_command_queue)0,
+                    (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueMarker', _clEnqueueMarker)
+
+#
+# clEnqueueMarkerWithWaitList()
+#
+# (added in OpenCL 1.2)
+_clEnqueueMarkerWithWaitList = \
+"""clEnqueueMarkerWithWaitList( (cl_command_queue)0,
+                                (cl_uint)0,
+                                (const cl_event*)NULL,
+                                (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueMarkerWithWaitList', _clEnqueueMarkerWithWaitList)
+
+#
 # clEnqueueMigrateMemObjects()
 #
 # (added in OpenCL 1.2)
@@ -345,25 +356,206 @@ _clEnqueueMigrateMemObjects = \
 CharacterizeClFunction(conf, 'clEnqueueMigrateMemObjects', _clEnqueueMigrateMemObjects)
 
 #
-# clSetMemObjectDestructorCallback()
+# clEnqueueReadBufferRect()
 #
-# (added in OpenCL 1.2)
-_clSetMemObjectDestructorCallback = \
-"""clSetMemObjectDestructorCallback( (cl_mem)0,
-                                     (void(*)(cl_mem, void*))NULL,
-                                     NULL );
+# (added in OpenCL 1.1)
+_clEnqueueReadBufferRect = \
+"""clEnqueueReadBufferRect( (cl_command_queue)0,
+                            (cl_mem)0,
+                            (cl_bool)0,
+                            (const size_t*)NULL,
+                            (const size_t*)NULL,
+                            (const size_t*)NULL,
+                             0ul,
+                             0ul,
+                             0ul,
+                             0ul,
+                            (void*)NULL,
+                             0u,
+                            (const cl_event*)NULL,
+                            (cl_event*)NULL );
 """
-CharacterizeClFunction(conf, 'clSetMemObjectDestructorCallback', _clSetMemObjectDestructorCallback)
+CharacterizeClFunction(conf, 'clEnqueueReadBufferRect', _clEnqueueReadBufferRect)
 
 #
-# clCloneKernel()
+# clEnqueueSVMFree()
+#
+# (added in OpenCL 2.0)
+_clEnqueueSVMFree = \
+"""clEnqueueSVMFree( (cl_command_queue)0,
+                     (cl_uint)0,
+                     (void**)NULL,
+                     (void (CL_CALLBACK*)(cl_command_queue,cl_uint,void*[],void*))NULL,
+                     (void*)NULL,
+                     (cl_uint)0,
+                     (const cl_event*)NULL,
+                     (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueSVMFree', _clEnqueueSVMFree)
+
+#
+# clEnqueueSVMMap()
+#
+# (added in OpenCL 2.0)
+_clEnqueueSVMMap = \
+"""clEnqueueSVMMap( (cl_command_queue)0,
+                    (cl_bool)0,
+                    (cl_map_flags)0,
+                    (void*)NULL,
+                    (size_t)0ul,
+                    (cl_uint)0,
+                    (const cl_event*)NULL,
+                    (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueSVMMap', _clEnqueueSVMMap)
+
+#
+# clEnqueueSVMMemFill()
+#
+# (added in OpenCL 2.0)
+_clEnqueueSVMMemFill = \
+"""clEnqueueSVMMemFill( (cl_command_queue)0,
+                        (void*)NULL,
+                        (const void*)NULL,
+                        (size_t)0ul,
+                        (size_t)0ul,
+                        (cl_uint)0,
+                        (const cl_event*)NULL,
+                        (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueSVMMemFill', _clEnqueueSVMMemFill)
+
+#
+# clEnqueueSVMMemcpy()
+#
+# (added in OpenCL 2.0)
+_clEnqueueSVMMemcpy = \
+"""clEnqueueSVMMemcpy( (cl_command_queue)0,
+                       (cl_bool)0,
+                       (void*)NULL,
+                       (const void*)NULL,
+                       (size_t)0ul,
+                       (cl_uint)0,
+                       (const cl_event*)NULL,
+                       (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueSVMMemcpy', _clEnqueueSVMMemcpy)
+
+#
+# clEnqueueSVMMigrateMem()
 #
 # (added in OpenCL 2.1)
-_clCloneKernel = \
-"""clCloneKernel( (cl_kernel)0,
-                  (cl_int*)NULL);
+_clEnqueueSVMMigrateMem = \
+"""clEnqueueSVMMigrateMem( (cl_command_queue)0,
+                           (cl_uint)0,
+                           (cl_bool)0,
+                           (const void**)NULL,
+                           (const size_t*)NULL,
+                           (cl_mem_migration_flags)0,
+                           (cl_uint)0,
+                           (const cl_event*)NULL,
+                           (cl_event*)NULL );
 """
-CharacterizeClFunction(conf, 'clCloneKernel', _clCloneKernel)
+CharacterizeClFunction(conf, 'clEnqueueSVMMigrateMem', _clEnqueueSVMMemcpy)
+
+#
+# clEnqueueSVMUnmap()
+#
+# (added in OpenCL 2.0)
+_clEnqueueSVMUnmap = \
+"""clEnqueueSVMUnmap( (cl_command_queue)0,
+                      (void*)NULL,
+                      (cl_uint)0,
+                      (const cl_event*)NULL,
+                      (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueSVMUnmap', _clEnqueueSVMMemcpy)
+
+#
+# clEnqueueTask()
+#
+# (removed in OpenCL 2.0)
+_clEnqueueTask = \
+"""clEnqueueTask( (cl_command_queue)0,
+                  (cl_kernel)0,
+                  (cl_uint)0,
+                  (const cl_event*)NULL,
+                  (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueTask', _clEnqueueSVMMemcpy)
+
+#
+# clEnqueueWaitForEvents()
+#
+# (removed in OpenCL 2.0)
+_clEnqueueWaitForEvents = \
+"""clEnqueueWaitForEvents( (cl_uint)0,
+                           (const cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueWaitForEvents', _clEnqueueSVMMemcpy)
+
+
+#
+# clEnqueueWriteBufferRect()
+#
+# (added in OpenCL 1.1)
+_clEnqueueWriteBufferRect = \
+"""clEnqueueWriteBufferRect( (cl_command_queue)0,
+                             (cl_mem)0,
+                             (cl_bool)0,
+                             (const size_t*)NULL,
+                             (const size_t*)NULL,
+                             (const size_t*)NULL,
+                              0ul,
+                              0ul,
+                              0ul,
+                              0ul,
+                             (void*)NULL,
+                              0u,
+                             (const cl_event*)NULL,
+                             (cl_event*)NULL );
+"""
+CharacterizeClFunction(conf, 'clEnqueueWriteBufferRect', _clEnqueueWriteBufferRect)
+
+#
+# clGetDeviceAndHostTimer()
+#
+# (added in OpenCL 2.1)
+_clGetDeviceAndHostTimer = \
+"""clGetDeviceAndHostTimer(  (cl_device_id)0,
+                             (cl_ulong*)NULL,
+                             (cl_ulong*)NULL ) ;
+"""
+CharacterizeClFunction(conf, 'clGetDeviceAndHostTimer', _clGetDeviceAndHostTimer)
+
+#
+# clGetExtensionFunctionAddress()
+#
+# (removed in OpenCL 1.2)
+_clGetExtensionFunctionAddress = \
+"""clGetExtensionFunctionAddress(  (const char*)NULL );
+"""
+CharacterizeClFunction(conf, 'clGetExtensionFunctionAddress', _clGetExtensionFunctionAddress)
+
+#
+# clGetExtensionFunctionAddressForPlatform()
+#
+# (added in OpenCL 1.2)
+_clGetExtensionFunctionAddressForPlatform = \
+"""clGetExtensionFunctionAddressForPlatform( (cl_platform_id)0,
+                                             (const char*)NULL );
+"""
+CharacterizeClFunction(conf, 'clGetExtensionFunctionAddressForPlatform', _clGetExtensionFunctionAddressForPlatform)
+
+#
+# clGetHostTimer()
+#
+# (added in OpenCL 2.1)
+_clGetHostTimer = \
+"""clGetHostTimer(  (cl_device_id)0,
+                    (cl_ulong*)NULL ) ;
+"""
+CharacterizeClFunction(conf, 'clGetHostTimer', _clGetHostTimer)
 
 #
 # clGetKernelArgInfo()
@@ -378,6 +570,122 @@ _clGetKernelArgInfo = \
                         (size_t*)NULL);
 """
 CharacterizeClFunction(conf, 'clGetKernelArgInfo', _clGetKernelArgInfo)
+
+#
+# clGetKernelSubGroupInfo()
+#
+# (added in OpenCL 2.1)
+_clGetKernelSubGroupInfo = \
+"""clGetKernelSubGroupInfo( (cl_kernel)0,
+                            (cl_device_id)0,
+                            (cl_kernel_sub_group_info)0,
+                            (size_t)0ul,
+                            (const void*)NULL,
+                            (size_t)0ul,
+                            (void*)NULL,
+                            (size_t*)NULL );
+"""
+CharacterizeClFunction(conf, 'clGetKernelSubGroupInfo', _clGetKernelSubGroupInfo)
+
+#
+# clGetPipeInfo()
+#
+# (added in OpenCL 2.0)
+_clGetPipeInfo = \
+"""clGetPipeInfo( (cl_mem)0,
+                  (cl_pipe_info)0,
+                  (size_t)0ul,
+                  (void*)NULL,
+                  (size_t*)NULL );
+"""
+CharacterizeClFunction(conf, 'clGetPipeInfo', _clGetPipeInfo)
+
+#
+# clLinkProgram()
+#
+_clLinkProgram = \
+"""clLinkProgram(
+        (cl_context)NULL,
+        0,
+        (const cl_device_id*)NULL,
+        (const char*)NULL,
+        0,
+        (const cl_program*)NULL,
+        (void(CL_CALLBACK*)(cl_program,void*))NULL,
+        NULL,
+        NULL);
+"""
+CharacterizeClFunction(conf, 'clLinkProgram', _clLinkProgram)
+
+#
+# clReleaseDevice()
+#
+_clReleaseDevice = \
+"""clReleaseDevice((cl_device_id)NULL);
+"""
+CharacterizeClFunction(conf, 'clReleaseDevice', _clReleaseDevice)
+
+#
+# clRetainDevice()
+#
+_clRetainDevice = \
+"""clRetainDevice((cl_device_id)NULL);
+"""
+CharacterizeClFunction(conf, 'clRetainDevice', _clRetainDevice)
+
+#
+# clSetCommandQueueProperty()
+#
+# (removed in OpenCL 1.2)
+_clSetCommandQueueProperty = \
+"""clSetCommandQueueProperty(  (cl_command_queue)0,
+                               (cl_queue_properties)0,
+                               (cl_bool)0,
+                               (cl_command_queue_properties*) );
+"""
+CharacterizeClFunction(conf, 'clSetCommandQueueProperty', _clSetCommandQueueProperty)
+
+#
+# clSVMAlloc()
+#
+# (added in OpenCL 2.0)
+_clSVMAlloc = \
+"""clSVMAlloc( (cl_context)0,
+               (cl_svm_mem_flags)0,
+               (size_t)0ul,
+               (cl_uint)0 );
+"""
+CharacterizeClFunction(conf, 'clSVMAlloc', _clSVMAlloc)
+
+#
+# clSVMFree()
+#
+# (added in OpenCL 2.0)
+_clSVMFree = \
+"""clSVMFree( (cl_context)0,
+              (void*)NULL );
+"""
+CharacterizeClFunction(conf, 'clSVMFree', _clSVMFree)
+
+#
+# clSetDefaultDeviceCommandQueue()
+#
+# (added in OpenCL 2.1)
+_clSetDefaultDeviceCommandQueue = \
+"""clSetDefaultDeviceCommandQueue( (cl_context)0,
+                                   (cl_device_id)0,
+                                   (cl_command_queue)0 );
+"""
+CharacterizeClFunction(conf, 'clSetDefaultDeviceCommandQueue', _clSetDefaultDeviceCommandQueue)
+
+#
+# clSetEventCallback()
+#
+# (added in OpenCL 1.1)
+_clSetEventCallback = \
+"""clSetEventCallback((cl_event)0, 0, NULL, NULL);
+"""
+CharacterizeClFunction(conf, 'clSetEventCallback', _clSetEventCallback)
 
 #
 # clSetKernelArgSVMPointer()
@@ -403,13 +711,15 @@ _clSetKernelExecInfo = \
 CharacterizeClFunction(conf, 'clSetKernelExecInfo', _clSetKernelExecInfo)
 
 #
-# clCreateUserEvent()
+# clSetMemObjectDestructorCallback()
 #
-# (added in OpenCL 1.1)
-_clCreateUserEvent = \
-"""clCreateUserEvent((cl_context)0, NULL);
+# (added in OpenCL 1.2)
+_clSetMemObjectDestructorCallback = \
+"""clSetMemObjectDestructorCallback( (cl_mem)0,
+                                     (void(*)(cl_mem, void*))NULL,
+                                     NULL );
 """
-CharacterizeClFunction(conf, 'clCreateUserEvent', _clCreateUserEvent)
+CharacterizeClFunction(conf, 'clSetMemObjectDestructorCallback', _clSetMemObjectDestructorCallback)
 
 #
 # clSetUserEventStatus()
@@ -421,17 +731,24 @@ _clSetUserEventStatus = \
 CharacterizeClFunction(conf, 'clSetUserEventStatus', _clSetUserEventStatus)
 
 #
-# clSetEventCallback()
+# clUnloadCompiler()
 #
-# (added in OpenCL 1.1)
-_clSetEventCallback = \
-"""clSetEventCallback((cl_event)0, 0, NULL, NULL);
+# (removed in OpenCL 2.0)
+_clUnloadCompiler = \
+"""clUnloadCompiler();
 """
-CharacterizeClFunction(conf, 'clSetEventCallback', _clSetEventCallback)
+CharacterizeClFunction(conf, 'clUnloadCompiler', _clUnloadCompiler)
+
+#
+# clUnloadPlatformCompiler()
+#
+_clUnloadPlatformCompiler = \
+"""clUnloadPlatformCompiler((cl_platform_id)NULL);
+"""
+CharacterizeClFunction(conf, 'clUnloadPlatformCompiler', _clUnloadPlatformCompiler)
 
 # Restore the original environment
 conf.env = orgEnv
-
 # --without-cl-egl
 try:
     if conf.env['ARGUMENTS']['WITHOUT_CL_EGL']:
