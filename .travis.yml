@@ -16,7 +16,7 @@ env:
 matrix:
   exclude:
     - compiler: clang
-      env: COMPILE=false
+      env: CL_H_VER=''    COMPILE=false APIDOC=true
 before_install:
   - lsb_release -c
   - lsb_release -r
