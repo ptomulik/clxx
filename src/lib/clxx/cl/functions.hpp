@@ -3662,7 +3662,7 @@ get_kernel_arg_info(cl_kernel kernel,
                     size_t param_value_size, void* param_value,
                     size_t* param_value_size_ret);
 #endif
-/** // doc: get_kernel_arg_info() {{{
+/** // doc: get_kernel_work_group_info() {{{
  * \brief Returns information about the kernel object that may be specific to a device.
  *
  * This function is a wrapper around \c clGetKernelWorkGroupInfo(). The call to
