@@ -199,82 +199,117 @@ static void _throw_clerror_no(status_t s)
 }
 /* ------------------------------------------------------------------------ */
 void
-get_platform_ids(cl_uint num_entries,
-                 cl_platform_id* platforms,
-                 cl_uint* num_platforms)
+build_program(cl_program program,
+              cl_uint num_devices,
+              const cl_device_id* device_list,
+              const char* options,
+              void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+              void* user_data)
 {
   status_t s = static_cast<status_t>(
-      T::clGetPlatformIDs(num_entries, platforms, num_platforms)
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_platform_info(cl_platform_id platform,
-                  platform_info_t param_name,
-                  size_t param_value_size,
-                  void* param_value,
-                  size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetPlatformInfo( platform,
-                            static_cast<cl_platform_info>(param_name),
-                            param_value_size,
-                            param_value,
-                            param_value_size_ret )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_device_ids(cl_platform_id platform,
-               device_type_t device_type,
-               cl_uint num_entries,
-               cl_device_id* devices,
-               cl_uint* num_devices)
-{
-  status_t s = static_cast<status_t>(
-    T::clGetDeviceIDs(
-      platform,
-      static_cast<cl_device_type>(device_type),
-      num_entries,
-      devices,
-      num_devices
+    T::clBuildProgram(
+      program,
+      num_devices,
+      device_list,
+      options,
+      pfn_notify,
+      user_data
     )
   );
-  if(is_error(s) && s != status_t::device_not_found)
+  if(is_error(s))
     {
       _throw_clerror_no(s);
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCompileProgram)
 void
-get_device_info(cl_device_id device,
-                device_info_t param_name,
-                size_t param_value_size,
-                void* param_value,
-                size_t* param_value_size_ret)
+compile_program(cl_program program,
+                cl_uint num_devices,
+                const cl_device_id* device_list,
+                const char* options,
+                cl_uint num_input_headers,
+                const cl_program* input_headers,
+                const char** header_include_names,
+                void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+                void* user_data)
 {
   status_t s = static_cast<status_t>(
-      T::clGetDeviceInfo(
-        device,
-        static_cast<cl_device_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
+    T::clCompileProgram(
+      program,
+      num_devices,
+      device_list,
+      options,
+      num_input_headers,
+      input_headers,
+      header_include_names,
+      pfn_notify,
+      user_data
+    )
   );
   if(is_error(s))
     {
       _throw_clerror_no(s);
     }
 }
+#endif // CLXX_OPENCL_ALLOWED(clCompileProgram)
+/* ------------------------------------------------------------------------ */
+cl_mem
+create_buffer(cl_context context,
+              mem_flags_t flags,
+              size_t size,
+              void* host_ptr)
+{
+  cl_int s = CL_SUCCESS;
+  cl_mem m = T::clCreateBuffer(
+      context,
+      static_cast<cl_mem_flags>(flags),
+      size,
+      host_ptr,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return m;
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
+cl_command_queue
+create_command_queue(cl_context context,
+                     cl_device_id device,
+                     command_queue_properties_t properties)
+{
+  cl_int s = CL_SUCCESS;
+  cl_command_queue queue;
+  queue = T::clCreateCommandQueue(context, device, static_cast<cl_command_queue_properties>(properties), &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+
+  return queue;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
+cl_command_queue
+create_command_queue_with_properties(cl_context context,
+                                     cl_device_id device,
+                                     const cl_queue_properties* properties)
+{
+  cl_int s = CL_SUCCESS;
+  cl_command_queue queue;
+  queue = T::clCreateCommandQueueWithProperties(context, device, properties, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+
+  return queue;
+}
+#endif
 /* ------------------------------------------------------------------------ */
 cl_context
 create_context(const cl_context_properties* properties,
@@ -322,318 +357,6 @@ create_context_from_type(const cl_context_properties* properties,
 
   return ctx;
 }
-/* ------------------------------------------------------------------------ */
-void
-retain_context(cl_context context)
-{
-  status_t s = static_cast<status_t>(T::clRetainContext(context));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-release_context(cl_context context)
-{
-  status_t s = static_cast<status_t>(T::clReleaseContext(context));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_context_info(cl_context context,
-                 context_info_t param_name,
-                 size_t param_value_size,
-                 void* param_value,
-                 size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-    T::clGetContextInfo(
-      context,
-      static_cast<cl_context_info>(param_name),
-      param_value_size,
-      param_value,
-      param_value_size_ret
-    )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
-void
-create_sub_devices(cl_device_id in_device,
-                   const cl_device_partition_property* properties,
-                   cl_uint num_devices,
-                   cl_device_id* out_devices,
-                   cl_uint *num_devices_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clCreateSubDevices(
-        in_device,
-        properties,
-        num_devices,
-        out_devices,
-        num_devices_ret
-      )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-#endif // CLXX_OPENCL_ALLOWED(clCreateSubDevices)
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
-void
-retain_device(cl_device_id device)
-{
-  status_t s = static_cast<status_t>(T::clRetainDevice(device));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-#endif // CLXX_OPENCL_ALLOWED(clRetainDevice)
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
-void
-release_device(cl_device_id device)
-{
-  status_t s = static_cast<status_t>(T::clReleaseDevice(device));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-#endif // CLXX_OPENCL_ALLOWED(clReleaseDevice)
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
-cl_command_queue
-create_command_queue(cl_context context,
-                     cl_device_id device,
-                     command_queue_properties_t properties)
-{
-  cl_int s = CL_SUCCESS;
-  cl_command_queue queue;
-  queue = T::clCreateCommandQueue(context, device, static_cast<cl_command_queue_properties>(properties), &s);
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-
-  return queue;
-}
-#endif
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
-cl_command_queue
-create_command_queue_with_properties(cl_context context,
-                                     cl_device_id device,
-                                     const cl_queue_properties* properties)
-{
-  cl_int s = CL_SUCCESS;
-  cl_command_queue queue;
-  queue = T::clCreateCommandQueueWithProperties(context, device, properties, &s);
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-
-  return queue;
-}
-#endif
-/* ------------------------------------------------------------------------ */
-void
-retain_command_queue(cl_command_queue command_queue)
-{
-  status_t s = static_cast<status_t>(T::clRetainCommandQueue(command_queue));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-release_command_queue(cl_command_queue command_queue)
-{
-  status_t s = static_cast<status_t>(T::clReleaseCommandQueue(command_queue));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_command_queue_info(cl_command_queue command_queue,
-                       command_queue_info_t param_name,
-                       size_t param_value_size,
-                       void* param_value,
-                       size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-    T::clGetCommandQueueInfo(
-      command_queue,
-      static_cast<cl_command_queue_info>(param_name),
-      param_value_size,
-      param_value,
-      param_value_size_ret
-    )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-cl_mem
-create_buffer(cl_context context,
-              mem_flags_t flags,
-              size_t size,
-              void* host_ptr)
-{
-  cl_int s = CL_SUCCESS;
-  cl_mem m = T::clCreateBuffer(
-      context,
-      static_cast<cl_mem_flags>(flags),
-      size,
-      host_ptr,
-      &s
-  );
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return m;
-}
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
-cl_mem
-create_sub_buffer(cl_mem buffer, mem_flags_t flags,
-                  buffer_create_type_t buffer_create_type,
-                  const void* buffer_create_info)
-{
-  cl_int s = CL_SUCCESS;
-  cl_mem m = T::clCreateSubBuffer(
-      buffer,
-      static_cast<cl_mem_flags>(flags),
-      static_cast<cl_buffer_create_type>(buffer_create_type),
-      buffer_create_info,
-      &s
-  );
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return m;
-}
-#endif
-/* ------------------------------------------------------------------------ */
-void
-enqueue_read_buffer( cl_command_queue command_queue, cl_mem buffer,
-                     cl_bool blocking_read, size_t offset, size_t size,
-                     void* ptr, cl_uint num_events_in_wait_list,
-                     const cl_event* event_wait_list, cl_event* event )
-{
-  status_t s = static_cast<status_t>(
-      T::clEnqueueReadBuffer(
-        command_queue,
-        buffer,
-        blocking_read,
-        offset,
-        size,
-        ptr,
-        num_events_in_wait_list,
-        event_wait_list,
-        event
-      )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-enqueue_write_buffer( cl_command_queue command_queue, cl_mem buffer,
-                      cl_bool blocking_write, size_t offset, size_t size,
-                      const void* ptr, cl_uint num_events_in_wait_list,
-                      const cl_event* event_wait_list, cl_event* event )
-{
-  status_t s = static_cast<status_t>(
-      T::clEnqueueWriteBuffer(
-        command_queue,
-        buffer,
-        blocking_write,
-        offset,
-        size,
-        ptr,
-        num_events_in_wait_list,
-        event_wait_list,
-        event
-      )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-enqueue_copy_buffer( cl_command_queue command_queue, cl_mem src_buffer,
-                     cl_mem dst_buffer, size_t src_offset, size_t dst_offset,
-                     size_t size, cl_uint num_events_in_wait_list,
-                     const cl_event* event_wait_list, cl_event* event )
-{
-  status_t s = static_cast<status_t>(
-      T::clEnqueueCopyBuffer(
-        command_queue,
-        src_buffer,
-        dst_buffer,
-        src_offset,
-        dst_offset,
-        size,
-        num_events_in_wait_list,
-        event_wait_list,
-        event
-      )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void*
-enqueue_map_buffer( cl_command_queue command_queue, cl_mem buffer,
-                    cl_bool blocking_map, map_flags_t map_flags,
-                    size_t offset, size_t size, cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list, cl_event* event)
-{
-  cl_int s = CL_SUCCESS;
-  void* result = T::clEnqueueMapBuffer(
-      command_queue,
-      buffer,
-      blocking_map,
-      static_cast<cl_map_flags>(map_flags),
-      offset,
-      size,
-      num_events_in_wait_list,
-      event_wait_list,
-      event,
-      &s
-  );
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return result;
-}
 #if CLXX_OPENCL_ALLOWED(clCreateImage)
 /* ------------------------------------------------------------------------ */
 cl_mem
@@ -660,23 +383,182 @@ create_image(cl_context context,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+cl_kernel
+create_kernel(cl_program program,
+              const char* kernel_name)
+{
+  cl_int s = CL_SUCCESS;
+  cl_kernel kern;
+  kern = T::clCreateKernel(program, kernel_name, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return kern;
+}
+/* ------------------------------------------------------------------------ */
 void
-get_supported_image_formats(cl_context context,
-                            mem_flags_t flags,
-                            mem_object_type_t image_type,
-                            cl_uint num_entries,
-                            cl_image_format* image_formats,
-                            cl_uint* num_image_formats)
+create_kernels_in_program(cl_program program,
+                          cl_uint num_kernels,
+                          cl_kernel* kernels,
+                          cl_uint* num_kernels_ret)
 {
   status_t s = static_cast<status_t>(
-    T::clGetSupportedImageFormats(
+      T::clCreateKernelsInProgram(
+        program,
+        num_kernels,
+        kernels,
+        num_kernels_ret
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+cl_program
+create_program_with_binary(cl_context context,
+                           cl_uint num_devices,
+                           const cl_device_id* device_list,
+                           const size_t* lengths,
+                           const unsigned char** binaries,
+                           cl_int* binary_status)
+{
+  cl_int s = CL_SUCCESS;
+  cl_program p = T::clCreateProgramWithBinary(
       context,
+      num_devices,
+      device_list,
+      lengths,
+      binaries,
+      binary_status,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return p;
+}
+#if CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
+/* ------------------------------------------------------------------------ */
+cl_program
+create_program_with_built_in_kernels(cl_context context,
+                                     cl_uint num_devices,
+                                     const cl_device_id* device_list,
+                                     const char* kernel_names)
+{
+  cl_int s = CL_SUCCESS;
+  cl_program p = T::clCreateProgramWithBuiltInKernels(
+      context,
+      num_devices,
+      device_list,
+      kernel_names,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return p;
+}
+#endif // CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
+/* ------------------------------------------------------------------------ */
+cl_program
+create_program_with_source(cl_context context,
+                           cl_uint count,
+                           const char** strings,
+                           const size_t* lengths)
+{
+  cl_int s = CL_SUCCESS;
+  cl_program p;
+  p = T::clCreateProgramWithSource(context, count, strings, lengths, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return p;
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+cl_mem
+create_sub_buffer(cl_mem buffer, mem_flags_t flags,
+                  buffer_create_type_t buffer_create_type,
+                  const void* buffer_create_info)
+{
+  cl_int s = CL_SUCCESS;
+  cl_mem m = T::clCreateSubBuffer(
+      buffer,
       static_cast<cl_mem_flags>(flags),
-      static_cast<cl_mem_object_type>(image_type),
-      num_entries,
-      image_formats,
-      num_image_formats
-    )
+      static_cast<cl_buffer_create_type>(buffer_create_type),
+      buffer_create_info,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return m;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
+void
+create_sub_devices(cl_device_id in_device,
+                   const cl_device_partition_property* properties,
+                   cl_uint num_devices,
+                   cl_device_id* out_devices,
+                   cl_uint *num_devices_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clCreateSubDevices(
+        in_device,
+        properties,
+        num_devices,
+        out_devices,
+        num_devices_ret
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif // CLXX_OPENCL_ALLOWED(clCreateSubDevices)
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+cl_event
+create_user_event(cl_context context)
+{
+  cl_int s = CL_SUCCESS;
+  cl_event event = T::clCreateUserEvent(context, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return event;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+void
+enqueue_copy_buffer( cl_command_queue command_queue, cl_mem src_buffer,
+                     cl_mem dst_buffer, size_t src_offset, size_t dst_offset,
+                     size_t size, cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list, cl_event* event )
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueCopyBuffer(
+        command_queue,
+        src_buffer,
+        dst_buffer,
+        src_offset,
+        dst_offset,
+        size,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
   );
   if(is_error(s))
     {
@@ -685,62 +567,24 @@ get_supported_image_formats(cl_context context,
 }
 /* ------------------------------------------------------------------------ */
 void
-enqueue_read_image(cl_command_queue command_queue,
-                   cl_mem image,
-                   cl_bool blocking_read,
-                   const size_t* origin,
-                   const size_t* region,
-                   size_t row_pitch,
-                   size_t slice_pitch,
-                   void* ptr,
-                   cl_uint num_events_in_wait_list,
-                   const cl_event* event_wait_list,
-                   cl_event* event)
+enqueue_copy_buffer_to_image(cl_command_queue command_queue,
+                             cl_mem src_image,
+                             cl_mem dst_buffer,
+                             size_t src_offset,
+                             const size_t* src_origin,
+                             const size_t* region,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event)
 {
   status_t s = static_cast<status_t>(
-    T::clEnqueueReadImage(
+    T::clEnqueueCopyBufferToImage(
       command_queue,
-      image,
-      blocking_read,
-      origin,
+      src_image,
+      dst_buffer,
+      src_offset,
+      src_origin,
       region,
-      row_pitch,
-      slice_pitch,
-      ptr,
-      num_events_in_wait_list,
-      event_wait_list,
-      event
-    )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-enqueue_write_image(cl_command_queue command_queue,
-                    cl_mem image,
-                    cl_bool blocking_write,
-                    const size_t* origin,
-                    const size_t* region,
-                    size_t input_row_pitch,
-                    size_t input_slice_pitch,
-                    const void* ptr,
-                    cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list,
-                    cl_event* event)
-{
-  status_t s = static_cast<status_t>(
-    T::clEnqueueWriteImage(
-      command_queue,
-      image,
-      blocking_write,
-      origin,
-      region,
-      input_row_pitch,
-      input_slice_pitch,
-      ptr,
       num_events_in_wait_list,
       event_wait_list,
       event
@@ -812,34 +656,30 @@ enqueue_copy_image_to_buffer(cl_command_queue command_queue,
     }
 }
 /* ------------------------------------------------------------------------ */
-void
-enqueue_copy_buffer_to_image(cl_command_queue command_queue,
-                             cl_mem src_image,
-                             cl_mem dst_buffer,
-                             size_t src_offset,
-                             const size_t* src_origin,
-                             const size_t* region,
-                             cl_uint num_events_in_wait_list,
-                             const cl_event* event_wait_list,
-                             cl_event* event)
+void*
+enqueue_map_buffer( cl_command_queue command_queue, cl_mem buffer,
+                    cl_bool blocking_map, map_flags_t map_flags,
+                    size_t offset, size_t size, cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list, cl_event* event)
 {
-  status_t s = static_cast<status_t>(
-    T::clEnqueueCopyBufferToImage(
+  cl_int s = CL_SUCCESS;
+  void* result = T::clEnqueueMapBuffer(
       command_queue,
-      src_image,
-      dst_buffer,
-      src_offset,
-      src_origin,
-      region,
+      buffer,
+      blocking_map,
+      static_cast<cl_map_flags>(map_flags),
+      offset,
+      size,
       num_events_in_wait_list,
       event_wait_list,
-      event
-    )
+      event,
+      &s
   );
-  if(is_error(s))
+  if(is_error(static_cast<status_t>(s)))
     {
-      _throw_clerror_no(s);
+      _throw_clerror_no(static_cast<status_t>(s));
     }
+  return result;
 }
 /* ------------------------------------------------------------------------ */
 void*
@@ -876,30 +716,6 @@ enqueue_map_image(cl_command_queue command_queue,
     }
   return result;
 }
-/* ------------------------------------------------------------------------ */
-void
-enqueue_unmap_mem_object(cl_command_queue command_queue,
-                         cl_mem memobj,
-                         void* mapped_ptr,
-                         cl_uint num_events_in_wait_list,
-                         const cl_event* event_wait_list,
-                         cl_event* event)
-{
-  status_t s = static_cast<status_t>(
-    T::clEnqueueUnmapMemObject(
-      command_queue,
-      memobj,
-      mapped_ptr,
-      num_events_in_wait_list,
-      event_wait_list,
-      event
-    )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /* ------------------------------------------------------------------------ */
 void
@@ -929,6 +745,357 @@ enqueue_migrate_mem_objects(cl_command_queue command_queue,
 }
 /* ------------------------------------------------------------------------ */
 #endif
+/* ------------------------------------------------------------------------ */
+void
+enqueue_native_kernel( cl_command_queue command_queue,
+                       void (CL_CALLBACK* user_func)(void*),
+                       void* args,
+                       size_t cb_args,
+                       cl_uint num_mem_objects,
+                       const cl_mem* mem_list,
+                       const void** args_mem_loc,
+                       cl_uint num_events_in_wait_list,
+                       const cl_event* event_wait_list,
+                       cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueNativeKernel(
+        command_queue,
+        user_func,
+        args,
+        cb_args,
+        num_mem_objects,
+        mem_list,
+        args_mem_loc,
+        num_events_in_wait_list,
+        event_wait_list, event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_ndrange_kernel( cl_command_queue command_queue,
+                         cl_kernel kernel,
+                         cl_uint work_dim,
+                         const size_t* global_work_offset,
+                         const size_t* global_work_size,
+                         const size_t* local_work_size,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueNDRangeKernel(
+        command_queue,
+        kernel,
+        work_dim,
+        global_work_offset,
+        global_work_size,
+        local_work_size,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_read_buffer( cl_command_queue command_queue, cl_mem buffer,
+                     cl_bool blocking_read, size_t offset, size_t size,
+                     void* ptr, cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list, cl_event* event )
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueReadBuffer(
+        command_queue,
+        buffer,
+        blocking_read,
+        offset,
+        size,
+        ptr,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_read_image(cl_command_queue command_queue,
+                   cl_mem image,
+                   cl_bool blocking_read,
+                   const size_t* origin,
+                   const size_t* region,
+                   size_t row_pitch,
+                   size_t slice_pitch,
+                   void* ptr,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueReadImage(
+      command_queue,
+      image,
+      blocking_read,
+      origin,
+      region,
+      row_pitch,
+      slice_pitch,
+      ptr,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_unmap_mem_object(cl_command_queue command_queue,
+                         cl_mem memobj,
+                         void* mapped_ptr,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueUnmapMemObject(
+      command_queue,
+      memobj,
+      mapped_ptr,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_write_buffer( cl_command_queue command_queue, cl_mem buffer,
+                      cl_bool blocking_write, size_t offset, size_t size,
+                      const void* ptr, cl_uint num_events_in_wait_list,
+                      const cl_event* event_wait_list, cl_event* event )
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueWriteBuffer(
+        command_queue,
+        buffer,
+        blocking_write,
+        offset,
+        size,
+        ptr,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+enqueue_write_image(cl_command_queue command_queue,
+                    cl_mem image,
+                    cl_bool blocking_write,
+                    const size_t* origin,
+                    const size_t* region,
+                    size_t input_row_pitch,
+                    size_t input_slice_pitch,
+                    const void* ptr,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueWriteImage(
+      command_queue,
+      image,
+      blocking_write,
+      origin,
+      region,
+      input_row_pitch,
+      input_slice_pitch,
+      ptr,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+finish(cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(T::clFinish(command_queue));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+flush(cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(T::clFlush(command_queue));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_command_queue_info(cl_command_queue command_queue,
+                       command_queue_info_t param_name,
+                       size_t param_value_size,
+                       void* param_value,
+                       size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetCommandQueueInfo(
+      command_queue,
+      static_cast<cl_command_queue_info>(param_name),
+      param_value_size,
+      param_value,
+      param_value_size_ret
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_context_info(cl_context context,
+                 context_info_t param_name,
+                 size_t param_value_size,
+                 void* param_value,
+                 size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetContextInfo(
+      context,
+      static_cast<cl_context_info>(param_name),
+      param_value_size,
+      param_value,
+      param_value_size_ret
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_device_ids(cl_platform_id platform,
+               device_type_t device_type,
+               cl_uint num_entries,
+               cl_device_id* devices,
+               cl_uint* num_devices)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetDeviceIDs(
+      platform,
+      static_cast<cl_device_type>(device_type),
+      num_entries,
+      devices,
+      num_devices
+    )
+  );
+  if(is_error(s) && s != status_t::device_not_found)
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_device_info(cl_device_id device,
+                device_info_t param_name,
+                size_t param_value_size,
+                void* param_value,
+                size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetDeviceInfo(
+        device,
+        static_cast<cl_device_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_event_info(cl_event event, event_info_t param_name,
+               size_t param_value_size, void* param_value,
+               size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetEventInfo(event,
+                        static_cast<cl_event_info>(param_name),
+                        param_value_size,
+                        param_value,
+                        param_value_size_ret)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_event_profiling_info(cl_event event,
+                         profiling_info_t param_name,
+                         size_t param_value_size, void* param_value,
+                         size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetEventProfilingInfo(
+        event,
+        static_cast<cl_profiling_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
 void
 get_image_info(cl_mem image,
                image_info_t param_name,
@@ -939,332 +1106,6 @@ get_image_info(cl_mem image,
       T::clGetImageInfo(
         image,
         static_cast<cl_image_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_mem_object_info(cl_mem memobj,
-                    mem_info_t param_name,
-                    size_t param_value_size, void* param_value,
-                    size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetMemObjectInfo(
-        memobj,
-        static_cast<cl_mem_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-retain_mem_object(cl_mem memobj)
-{
-  status_t s = static_cast<status_t>(T::clRetainMemObject(memobj));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-release_mem_object(cl_mem memobj)
-{
-  status_t s = static_cast<status_t>(T::clReleaseMemObject(memobj));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-cl_program
-create_program_with_source(cl_context context,
-                           cl_uint count,
-                           const char** strings,
-                           const size_t* lengths)
-{
-  cl_int s = CL_SUCCESS;
-  cl_program p;
-  p = T::clCreateProgramWithSource(context, count, strings, lengths, &s);
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return p;
-}
-/* ------------------------------------------------------------------------ */
-cl_program
-create_program_with_binary(cl_context context,
-                           cl_uint num_devices,
-                           const cl_device_id* device_list,
-                           const size_t* lengths,
-                           const unsigned char** binaries,
-                           cl_int* binary_status)
-{
-  cl_int s = CL_SUCCESS;
-  cl_program p = T::clCreateProgramWithBinary(
-      context,
-      num_devices,
-      device_list,
-      lengths,
-      binaries,
-      binary_status,
-      &s
-  );
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return p;
-}
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
-/* ------------------------------------------------------------------------ */
-cl_program
-create_program_with_built_in_kernels(cl_context context,
-                                     cl_uint num_devices,
-                                     const cl_device_id* device_list,
-                                     const char* kernel_names)
-{
-  cl_int s = CL_SUCCESS;
-  cl_program p = T::clCreateProgramWithBuiltInKernels(
-      context,
-      num_devices,
-      device_list,
-      kernel_names,
-      &s
-  );
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return p;
-}
-#endif // CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
-/* ------------------------------------------------------------------------ */
-void
-retain_program(cl_program program)
-{
-  status_t s = static_cast<status_t>(T::clRetainProgram(program));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-release_program(cl_program program)
-{
-  status_t s = static_cast<status_t>(T::clReleaseProgram(program));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-build_program(cl_program program,
-              cl_uint num_devices,
-              const cl_device_id* device_list,
-              const char* options,
-              void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
-              void* user_data)
-{
-  status_t s = static_cast<status_t>(
-    T::clBuildProgram(
-      program,
-      num_devices,
-      device_list,
-      options,
-      pfn_notify,
-      user_data
-    )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clCompileProgram)
-void
-compile_program(cl_program program,
-                cl_uint num_devices,
-                const cl_device_id* device_list,
-                const char* options,
-                cl_uint num_input_headers,
-                const cl_program* input_headers,
-                const char** header_include_names,
-                void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
-                void* user_data)
-{
-  status_t s = static_cast<status_t>(
-    T::clCompileProgram(
-      program,
-      num_devices,
-      device_list,
-      options,
-      num_input_headers,
-      input_headers,
-      header_include_names,
-      pfn_notify,
-      user_data
-    )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-#endif // CLXX_OPENCL_ALLOWED(clCompileProgram)
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clLinkProgram)
-cl_program
-link_program(cl_context context,
-             cl_uint num_devices,
-             const cl_device_id* device_list,
-             const char* options,
-             cl_uint num_input_programs,
-             const cl_program* input_programs,
-             void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
-             void* user_data)
-{
-
-  cl_int s = CL_SUCCESS;
-  cl_program p = T::clLinkProgram(
-      context,
-      num_devices,
-      device_list,
-      options,
-      num_input_programs,
-      input_programs,
-      pfn_notify,
-      user_data,
-      &s
-  );
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return p;
-}
-#endif // CLXX_OPENCL_ALLOWED(clLinkProgram)
-#if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
-/* ------------------------------------------------------------------------ */
-void
-unload_platform_compiler(cl_platform_id platform)
-{
-  status_t s = static_cast<status_t>(T::clUnloadPlatformCompiler(platform));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-#endif // CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
-/* ------------------------------------------------------------------------ */
-void
-get_program_info(cl_program program,
-                 program_info_t param_name,
-                 size_t param_value_size,
-                 void* param_value,
-                 size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetProgramInfo(
-        program,
-        static_cast<cl_program_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_program_build_info(cl_program program,
-                       cl_device_id device,
-                       program_build_info_t param_name,
-                       size_t param_value_size,
-                       void* param_value,
-                       size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetProgramBuildInfo(
-        program,
-        device,
-        static_cast<cl_program_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-cl_kernel
-create_kernel(cl_program program,
-              const char* kernel_name)
-{
-  cl_int s = CL_SUCCESS;
-  cl_kernel kern;
-  kern = T::clCreateKernel(program, kernel_name, &s);
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return kern;
-}
-/* ------------------------------------------------------------------------ */
-void
-create_kernels_in_program(cl_program program,
-                          cl_uint num_kernels,
-                          cl_kernel* kernels,
-                          cl_uint* num_kernels_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clCreateKernelsInProgram(
-        program,
-        num_kernels,
-        kernels,
-        num_kernels_ret
-      )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_kernel_info(cl_kernel kernel,
-                kernel_info_t param_name,
-                size_t param_value_size, void* param_value,
-                size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetKernelInfo(
-        kernel,
-        static_cast<cl_kernel_info>(param_name),
         param_value_size,
         param_value,
         param_value_size_ret
@@ -1302,6 +1143,27 @@ get_kernel_arg_info(cl_kernel kernel,
 #endif
 /* ------------------------------------------------------------------------ */
 void
+get_kernel_info(cl_kernel kernel,
+                kernel_info_t param_name,
+                size_t param_value_size, void* param_value,
+                size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetKernelInfo(
+        kernel,
+        static_cast<cl_kernel_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
 get_kernel_work_group_info(cl_kernel kernel,
                            cl_device_id device,
                            kernel_work_group_info_t param_name,
@@ -1325,9 +1187,198 @@ get_kernel_work_group_info(cl_kernel kernel,
 }
 /* ------------------------------------------------------------------------ */
 void
-retain_kernel(cl_kernel kernel)
+get_mem_object_info(cl_mem memobj,
+                    mem_info_t param_name,
+                    size_t param_value_size, void* param_value,
+                    size_t* param_value_size_ret)
 {
-  status_t s = static_cast<status_t>(T::clRetainKernel(kernel));
+  status_t s = static_cast<status_t>(
+      T::clGetMemObjectInfo(
+        memobj,
+        static_cast<cl_mem_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_platform_ids(cl_uint num_entries,
+                 cl_platform_id* platforms,
+                 cl_uint* num_platforms)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetPlatformIDs(num_entries, platforms, num_platforms)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_platform_info(cl_platform_id platform,
+                  platform_info_t param_name,
+                  size_t param_value_size,
+                  void* param_value,
+                  size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetPlatformInfo( platform,
+                            static_cast<cl_platform_info>(param_name),
+                            param_value_size,
+                            param_value,
+                            param_value_size_ret )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_program_build_info(cl_program program,
+                       cl_device_id device,
+                       program_build_info_t param_name,
+                       size_t param_value_size,
+                       void* param_value,
+                       size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetProgramBuildInfo(
+        program,
+        device,
+        static_cast<cl_program_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_program_info(cl_program program,
+                 program_info_t param_name,
+                 size_t param_value_size,
+                 void* param_value,
+                 size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetProgramInfo(
+        program,
+        static_cast<cl_program_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+get_supported_image_formats(cl_context context,
+                            mem_flags_t flags,
+                            mem_object_type_t image_type,
+                            cl_uint num_entries,
+                            cl_image_format* image_formats,
+                            cl_uint* num_image_formats)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetSupportedImageFormats(
+      context,
+      static_cast<cl_mem_flags>(flags),
+      static_cast<cl_mem_object_type>(image_type),
+      num_entries,
+      image_formats,
+      num_image_formats
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clLinkProgram)
+cl_program
+link_program(cl_context context,
+             cl_uint num_devices,
+             const cl_device_id* device_list,
+             const char* options,
+             cl_uint num_input_programs,
+             const cl_program* input_programs,
+             void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+             void* user_data)
+{
+
+  cl_int s = CL_SUCCESS;
+  cl_program p = T::clLinkProgram(
+      context,
+      num_devices,
+      device_list,
+      options,
+      num_input_programs,
+      input_programs,
+      pfn_notify,
+      user_data,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return p;
+}
+#endif // CLXX_OPENCL_ALLOWED(clLinkProgram)
+/* ------------------------------------------------------------------------ */
+void
+release_command_queue(cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(T::clReleaseCommandQueue(command_queue));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+release_context(cl_context context)
+{
+  status_t s = static_cast<status_t>(T::clReleaseContext(context));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+void
+release_device(cl_device_id device)
+{
+  status_t s = static_cast<status_t>(T::clReleaseDevice(device));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif // CLXX_OPENCL_ALLOWED(clReleaseDevice)
+/* ------------------------------------------------------------------------ */
+void
+release_event(cl_event event)
+{
+  status_t s = static_cast<status_t>(T::clReleaseEvent(event));
   if(is_error(s))
     {
       _throw_clerror_no(s);
@@ -1343,6 +1394,117 @@ release_kernel(cl_kernel kernel)
       _throw_clerror_no(s);
     }
 }
+/* ------------------------------------------------------------------------ */
+void
+release_mem_object(cl_mem memobj)
+{
+  status_t s = static_cast<status_t>(T::clReleaseMemObject(memobj));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+release_program(cl_program program)
+{
+  status_t s = static_cast<status_t>(T::clReleaseProgram(program));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+retain_command_queue(cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(T::clRetainCommandQueue(command_queue));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+retain_context(cl_context context)
+{
+  status_t s = static_cast<status_t>(T::clRetainContext(context));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+void
+retain_device(cl_device_id device)
+{
+  status_t s = static_cast<status_t>(T::clRetainDevice(device));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif // CLXX_OPENCL_ALLOWED(clRetainDevice)
+/* ------------------------------------------------------------------------ */
+void
+retain_event(cl_event event)
+{
+  status_t s = static_cast<status_t>(T::clRetainEvent(event));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+retain_kernel(cl_kernel kernel)
+{
+  status_t s = static_cast<status_t>(T::clRetainKernel(kernel));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+retain_mem_object(cl_mem memobj)
+{
+  status_t s = static_cast<status_t>(T::clRetainMemObject(memobj));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+retain_program(cl_program program)
+{
+  status_t s = static_cast<status_t>(T::clRetainProgram(program));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+void
+set_event_callback(cl_event event, cl_int command_exec_callback_type,
+                   void(CL_CALLBACK*pfn_event_notify)(cl_event, cl_int, void*),
+                   void* user_data)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetEventCallback(event,
+                            command_exec_callback_type,
+                            pfn_event_notify,
+                            user_data)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
 /* ------------------------------------------------------------------------ */
 void
 set_kernel_arg(cl_kernel kernel,
@@ -1406,81 +1568,6 @@ set_kernel_exec_info(cl_kernel kernel,
 }
 #endif
 /* ------------------------------------------------------------------------ */
-void
-enqueue_ndrange_kernel( cl_command_queue command_queue,
-                         cl_kernel kernel,
-                         cl_uint work_dim,
-                         const size_t* global_work_offset,
-                         const size_t* global_work_size,
-                         const size_t* local_work_size,
-                         cl_uint num_events_in_wait_list,
-                         const cl_event* event_wait_list,
-                         cl_event* event)
-{
-  status_t s = static_cast<status_t>(
-      T::clEnqueueNDRangeKernel(
-        command_queue,
-        kernel,
-        work_dim,
-        global_work_offset,
-        global_work_size,
-        local_work_size,
-        num_events_in_wait_list,
-        event_wait_list,
-        event
-      )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-enqueue_native_kernel( cl_command_queue command_queue,
-                       void (CL_CALLBACK* user_func)(void*),
-                       void* args,
-                       size_t cb_args,
-                       cl_uint num_mem_objects,
-                       const cl_mem* mem_list,
-                       const void** args_mem_loc,
-                       cl_uint num_events_in_wait_list,
-                       const cl_event* event_wait_list,
-                       cl_event* event)
-{
-  status_t s = static_cast<status_t>(
-      T::clEnqueueNativeKernel(
-        command_queue,
-        user_func,
-        args,
-        cb_args,
-        num_mem_objects,
-        mem_list,
-        args_mem_loc,
-        num_events_in_wait_list,
-        event_wait_list, event
-      )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
-cl_event
-create_user_event(cl_context context)
-{
-  cl_int s = CL_SUCCESS;
-  cl_event event = T::clCreateUserEvent(context, &s);
-  if(is_error(static_cast<status_t>(s)))
-    {
-      _throw_clerror_no(static_cast<status_t>(s));
-    }
-  return event;
-}
-#endif
-/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
 void
 set_user_event_status(cl_event event, cl_int execution_status)
@@ -1495,6 +1582,18 @@ set_user_event_status(cl_event event, cl_int execution_status)
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
+void
+unload_platform_compiler(cl_platform_id platform)
+{
+  status_t s = static_cast<status_t>(T::clUnloadPlatformCompiler(platform));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif // CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
+/* ------------------------------------------------------------------------ */
 void
 wait_for_events(cl_uint num_events, const cl_event* event_list)
 {
@@ -1507,104 +1606,7 @@ wait_for_events(cl_uint num_events, const cl_event* event_list)
     }
 }
 /* ------------------------------------------------------------------------ */
-void
-get_event_info(cl_event event, event_info_t param_name,
-               size_t param_value_size, void* param_value,
-               size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetEventInfo(event,
-                        static_cast<cl_event_info>(param_name),
-                        param_value_size,
-                        param_value,
-                        param_value_size_ret)
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
-void
-set_event_callback(cl_event event, cl_int command_exec_callback_type,
-                   void(CL_CALLBACK*pfn_event_notify)(cl_event, cl_int, void*),
-                   void* user_data)
-{
-  status_t s = static_cast<status_t>(
-      T::clSetEventCallback(event,
-                            command_exec_callback_type,
-                            pfn_event_notify,
-                            user_data)
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-#endif
-/* ------------------------------------------------------------------------ */
-void
-retain_event(cl_event event)
-{
-  status_t s = static_cast<status_t>(T::clRetainEvent(event));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-release_event(cl_event event)
-{
-  status_t s = static_cast<status_t>(T::clReleaseEvent(event));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-get_event_profiling_info(cl_event event,
-                         profiling_info_t param_name,
-                         size_t param_value_size, void* param_value,
-                         size_t* param_value_size_ret)
-{
-  status_t s = static_cast<status_t>(
-      T::clGetEventProfilingInfo(
-        event,
-        static_cast<cl_profiling_info>(param_name),
-        param_value_size,
-        param_value,
-        param_value_size_ret
-     )
-  );
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-flush(cl_command_queue command_queue)
-{
-  status_t s = static_cast<status_t>(T::clFlush(command_queue));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
-/* ------------------------------------------------------------------------ */
-void
-finish(cl_command_queue command_queue)
-{
-  status_t s = static_cast<status_t>(T::clFinish(command_queue));
-  if(is_error(s))
-    {
-      _throw_clerror_no(s);
-    }
-}
+// CUR
 } // end namespace clxx
-
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
