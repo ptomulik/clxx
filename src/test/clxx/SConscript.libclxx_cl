@@ -30,6 +30,8 @@ tests = [
     'cl/functions/create_context.t.h',
     'cl/functions/create_context_from_type.t.h',
     'cl/functions/create_image.t.h',
+    'cl/functions/create_image_2d.t.h',
+    'cl/functions/create_image_3d.t.h',
     'cl/functions/create_kernel.t.h',
     'cl/functions/create_kernels_in_program.t.h',
     'cl/functions/create_program_with_binary.t.h',

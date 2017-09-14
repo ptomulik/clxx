@@ -14,6 +14,7 @@
 
 /* XXX: Keep the following list  sorted in alphabetical order */
 %throws_clerror(clxx::build_program(cl_program, cl_uint, const cl_device_id *, const char *, void(*pfn_notify)(cl_program, void *), void *))
+%throws_clerror(clxx::clone_kernel(cl_kernel))
 %throws_clerror(clxx::compile_program(cl_program, cl_uint, const cl_device_id *, const char *, cl_uint, const cl_program *, const char **, void(*)(cl_program, void *), void *))
 %throws_clerror(clxx::create_buffer(cl_context, mem_flags_t, size_t, void*))
 %throws_clerror(clxx::create_command_queue(cl_context, cl_device_id, command_queue_properties_t))
@@ -21,6 +22,8 @@
 %throws_clerror(clxx::create_context(const cl_context_properties *, cl_uint, const cl_device_id *, void(*)(const char *, const void *,size_t, void *), void *))
 %throws_clerror(clxx::create_context_from_type(const cl_context_properties *, device_type_t, void(*)(const char *, const void *, size_t, void *), void *))
 %throws_clerror(clxx::create_image(cl_context, mem_flags_t, const cl_image_format*, const cl_image_desc*, void*))
+%throws_clerror(clxx::create_image_2d(cl_context, mem_flags_t, const cl_image_format*, size_t image_width, size_t image_height, size_t image_row_pitch, void*))
+%throws_clerror(clxx::create_image_3d(cl_context, mem_flags_t, const cl_image_format*, size_t image_width, size_t image_height, size_t image_depth, size_t image_row_pitch, size_t image_slice_pitch, void*))
 %throws_clerror(clxx::create_kernel(cl_program, const char*))
 %throws_clerror(clxx::create_kernels_in_program(cl_program, cl_uint, cl_kernel*, cl_uint*))
 %throws_clerror(clxx::create_program_with_binary(cl_context, cl_uint, const cl_device_id *, const size_t *, const unsigned char **, cl_int *))

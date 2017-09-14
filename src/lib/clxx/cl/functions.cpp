@@ -372,8 +372,8 @@ create_context_from_type(const cl_context_properties* properties,
 
   return ctx;
 }
-#if CLXX_OPENCL_ALLOWED(clCreateImage)
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateImage)
 cl_mem
 create_image(cl_context context,
              mem_flags_t flags,
@@ -387,6 +387,63 @@ create_image(cl_context context,
       static_cast<cl_mem_flags>(flags),
       image_format,
       image_desc,
+      host_ptr,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return result;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+cl_mem
+create_image_2d(cl_context context,
+                mem_flags_t flags,
+                const cl_image_format *image_format,
+                size_t image_width, size_t image_height,
+                size_t image_row_pitch, void *host_ptr)
+{
+  cl_int s = CL_SUCCESS;
+  cl_mem result = T::clCreateImage2D(
+      context,
+      static_cast<cl_mem_flags>(flags),
+      image_format,
+      image_width,
+      image_height,
+      image_row_pitch,
+      host_ptr,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return result;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+cl_mem
+create_image_3d(cl_context context,
+                mem_flags_t flags,
+                const cl_image_format *image_format,
+                size_t image_width, size_t image_height,
+                size_t image_depth, size_t image_row_pitch,
+                size_t image_slice_pitch, void *host_ptr)
+{
+  cl_int s = CL_SUCCESS;
+  cl_mem result = T::clCreateImage3D(
+      context,
+      static_cast<cl_mem_flags>(flags),
+      image_format,
+      image_width,
+      image_height,
+      image_depth,
+      image_row_pitch,
+      image_slice_pitch,
       host_ptr,
       &s
   );

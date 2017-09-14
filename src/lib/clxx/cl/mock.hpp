@@ -104,6 +104,29 @@ CXXTEST_MOCK_GLOBAL(cl_mem,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+CXXTEST_MOCK_GLOBAL(cl_mem,
+  clCreateImage2D,
+  ( cl_context context, cl_mem_flags flags, const cl_image_format* image_format,
+    size_t image_width, size_t image_height, size_t image_row_pitch,
+    void* host_ptr, cl_int* errcode_ret ),
+  ( context, flags, image_format, image_width, image_height, image_row_pitch,
+    host_ptr, errcode_ret )
+);
+#endif
+
+#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+CXXTEST_MOCK_GLOBAL(cl_mem,
+  clCreateImage3D,
+  ( cl_context context, cl_mem_flags flags, const cl_image_format* image_format,
+    size_t image_width, size_t image_height, size_t image_depth,
+    size_t image_row_pitch, size_t image_slice_pitch, void* host_ptr,
+    cl_int* errcode_ret ),
+  ( context, flags, image_format, image_width, image_height, image_depth,
+    image_row_pitch, image_slice_pitch, host_ptr, errcode_ret )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_kernel,
   clCreateKernel,
   ( cl_program program, const char* kernel_name, cl_int* errcode_ret),

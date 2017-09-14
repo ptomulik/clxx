@@ -382,6 +382,60 @@ public:
   Dummy_clCreateImage(cl_mem mem, cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+/** // doc: Dummy_clCreateImage2D {{{
+ * \brief Default mock for clCreateImage2D OpenCL function.
+ */ // }}}
+class Dummy_clCreateImage2D
+  : public T::Base_clCreateImage2D,
+    public T::Dummy_CallArgs<cl_context, cl_mem_flags, const cl_image_format*,
+                             size_t, size_t, size_t, void*, cl_int*>
+{
+  cl_mem _mem;
+  cl_int _err;
+  cl_mem clCreateImage2D( cl_context context, cl_mem_flags flags,
+                        const cl_image_format* image_format,
+                        size_t image_width, size_t image_height,
+                        size_t image_row_pitch, void* host_ptr,
+                        cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreateImage2D() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param mem Memory object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateImage2D(cl_mem mem, cl_int err);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+/** // doc: Dummy_clCreateImage3D {{{
+ * \brief Default mock for clCreateImage3D OpenCL function.
+ */ // }}}
+class Dummy_clCreateImage3D
+  : public T::Base_clCreateImage3D,
+    public T::Dummy_CallArgs<cl_context, cl_mem_flags, const cl_image_format*,
+                             size_t, size_t, size_t, size_t, size_t, void*,
+                             cl_int*>
+{
+  cl_mem _mem;
+  cl_int _err;
+  cl_mem clCreateImage3D( cl_context context, cl_mem_flags flags,
+                        const cl_image_format* image_format,
+                        size_t image_width, size_t image_height,
+                        size_t image_depth, size_t image_row_pitch,
+                        size_t image_slice_pitch, void* host_ptr,
+                        cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreateImage3D() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param mem Memory object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateImage3D(cl_mem mem, cl_int err);
+};
+#endif
 /** // doc: Dummy_clCreateKernel {{{
  * \brief Default mock for clCreateKernel OpenCL function.
  */ // }}}
@@ -2214,6 +2268,52 @@ clCreateImage( cl_context context, cl_mem_flags flags,
 }
 Dummy_clCreateImage::
 Dummy_clCreateImage(cl_mem mem, cl_int err)
+  :_mem(mem), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+cl_mem Dummy_clCreateImage2D::
+clCreateImage2D( cl_context context, cl_mem_flags flags,
+               const cl_image_format* image_format,
+               size_t image_width, size_t image_height, size_t image_row_pitch,
+               void* host_ptr, cl_int* errcode_ret )
+{
+  call_with( context, flags, image_format, image_width, image_height,
+             image_row_pitch, host_ptr, errcode_ret );
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _mem;
+}
+Dummy_clCreateImage2D::
+Dummy_clCreateImage2D(cl_mem mem, cl_int err)
+  :_mem(mem), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+cl_mem Dummy_clCreateImage3D::
+clCreateImage3D( cl_context context, cl_mem_flags flags,
+               const cl_image_format* image_format,
+               size_t image_width, size_t image_height, size_t image_depth,
+               size_t image_row_pitch, size_t image_slice_pitch,
+               void* host_ptr, cl_int* errcode_ret )
+{
+  call_with( context, flags, image_format, image_width, image_height,
+             image_depth, image_row_pitch, image_slice_pitch, host_ptr,
+             errcode_ret );
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _mem;
+}
+Dummy_clCreateImage3D::
+Dummy_clCreateImage3D(cl_mem mem, cl_int err)
   :_mem(mem), _err(err)
 {
 }

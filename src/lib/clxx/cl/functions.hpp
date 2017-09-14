@@ -705,6 +705,183 @@ create_image(cl_context context,
              const cl_image_desc *image_desc,
              void *host_ptr);
 #endif
+#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+/** // doc: create_image_2d() {{{
+ * \brief Creates a 2D image object.
+ *
+ *
+ * This is a wrapper for \c clCreateImage2D(). The call to
+ * #create_image_2d() has same effect as a call to
+ *    - \c clCreateImage2D(context, static_cast<cl_mem_flags>(flags), image_format, image_width, image_height, image_row_pitch, host_ptr, &errcode)
+ *
+ * with \c errcode being defined internally by #create_image_2d().
+ *
+ * The main difference between #create_image_2d() and \c clCreateImage2D()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param context
+ *    A valid OpenCL context on which the image object is to be created.
+ * \param flags
+ *    A bit-field that is used to specify allocation and usage information
+ *    about the image memory object being created. See the documentation
+ *    of #mem_flags_t for the list of predefined bit values.
+ * \param image_format
+ *    A pointer to a structure that describes format properties of the image to
+ *    be allocated.
+ *    See <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/cl_image_format.html">cl_image_format</a>
+ *    for a detailed description of the image format descriptor.
+ * \param image_width
+ *    The width of the image in pixels. Must be a value greater than or equal to 1.
+ * \param image_height
+ *    The height of the image in pixels. Must be value greater than or equal to 1.
+ * \param image_row_pitch
+ *    The scan-line pitch in bytes. This must be 0 if host_ptr is NULL and can
+ *    be either 0 or greater than or equal to image_width * size of element in
+ *    bytes if host_ptr is not NULL. If host_ptr is not NULL and
+ *    image_row_pitch is equal to 0, image_row_pitch is calculated as
+ *    image_width * size of element in bytes. If image_row_pitch is not 0, it
+ *    must be a multiple of the image element size in bytes.
+ * \param host_ptr
+ *    A pointer to the image data that may already be allocated by the
+ *    application.
+ *
+ * \returns A handle to the newly created OpenCL image object
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateImage2D() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateImage2D() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_image_format_descriptor>
+ *    When \c clCreateImage2D() returns \c CL_INVALID_IMAGE_FORMAT_DESCRIPTOR.
+ * \throw clerror_no<status_t::invalid_image_size>
+ *    When \c clCreateImage2D() returns \c CL_INVALID_IMAGE_SIZE.
+ * \throw clerror_no<status_t::invalid_host_ptr>
+ *    When \c clCreateImage2D() returns \c CL_INVALID_HOST_PTR.
+ * \throw clerror_no<status_t::image_format_not_supported>
+ *    When \c clCreateImage2D() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clCreateImage2D() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clCreateImage2D() returns \c CL_INVALID_OPERATION.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateImage2D() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateImage2D() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateImage2D() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |  \check   |  \check   |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">clCreateImage2D()</a>
+ *
+ */ // }}}
+cl_mem
+create_image_2d(cl_context context,
+             mem_flags_t flags,
+             const cl_image_format *image_format,
+             size_t image_width,
+             size_t image_height,
+             size_t image_row_pitch,
+             void *host_ptr);
+#endif
+#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+/** // doc: create_image_3d() {{{
+ * \brief Creates a 3D image object.
+ *
+ *
+ * This is a wrapper for \c clCreateImage3D(). The call to
+ * #create_image_3d() has same effect as a call to
+ *    - \c clCreateImage3D(context, static_cast<cl_mem_flags>(flags), image_format, image_width, image_height, image_row_pitch, host_ptr, &errcode)
+ *
+ * with \c errcode being defined internally by #create_image_3d().
+ *
+ * The main difference between #create_image_3d() and \c clCreateImage3D()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param context
+ *    A valid OpenCL context on which the image object is to be created.
+ * \param flags
+ *    A bit-field that is used to specify allocation and usage information
+ *    about the image memory object being created. See the documentation
+ *    of #mem_flags_t for the list of predefined bit values.
+ * \param image_format
+ *    A pointer to a structure that describes format properties of the image to
+ *    be allocated.
+ *    See <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/cl_image_format.html">cl_image_format</a>
+ *    for a detailed description of the image format descriptor.
+ * \param image_width
+ *    The width of the image in pixels. Must be a value greater than or equal to 1.
+ * \param image_height
+ *    The height of the image in pixels. Must be value greater than or equal to 1.
+ * \param image_depth
+ *    The depth of the image in pixels. Must be a value greater than 1.
+ * \param image_row_pitch
+ *    The scan-line pitch in bytes. This must be 0 if host_ptr is NULL and can
+ *    be either 0 or greater than or equal to image_width * size of element in
+ *    bytes if host_ptr is not NULL. If host_ptr is not NULL and
+ *    image_row_pitch is equal to 0, image_row_pitch is calculated as
+ *    image_width * size of element in bytes. If image_row_pitch is not 0, it
+ *    must be a multiple of the image element size in bytes.
+ * \param image_slice_pitch
+ *    The size in bytes of each 2D slice in the 3D image. This must be 0 if
+ *    host_ptr is NULL and can be either 0 or greater than or equal to
+ *    image_row_pitch * image_height if host_ptr is not NULL. If host_ptr is
+ *    not NULL and image_slice_pitch equal to 0, image_slice_pitch is
+ *    calculated as image_row_pitch * image_height. If image_slice_pitch is not
+ *    0, it must be a multiple of the image_row_pitch.
+ * \param host_ptr
+ *    A pointer to the image data that may already be allocated by the
+ *    application.
+ *
+ * \returns A handle to the newly created OpenCL image object
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateImage3D() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateImage3D() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_image_format_descriptor>
+ *    When \c clCreateImage3D() returns \c CL_INVALID_IMAGE_FORMAT_DESCRIPTOR.
+ * \throw clerror_no<status_t::invalid_image_size>
+ *    When \c clCreateImage3D() returns \c CL_INVALID_IMAGE_SIZE.
+ * \throw clerror_no<status_t::invalid_host_ptr>
+ *    When \c clCreateImage3D() returns \c CL_INVALID_HOST_PTR.
+ * \throw clerror_no<status_t::image_format_not_supported>
+ *    When \c clCreateImage3D() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clCreateImage3D() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clCreateImage3D() returns \c CL_INVALID_OPERATION.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateImage3D() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateImage3D() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateImage3D() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |  \check   |  \check   |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">clCreateImage3D()</a>
+ *
+ */ // }}}
+cl_mem
+create_image_3d(cl_context context,
+             mem_flags_t flags,
+             const cl_image_format *image_format,
+             size_t image_width,
+             size_t image_height,
+             size_t image_depth,
+             size_t image_row_pitch,
+             size_t image_slice_pitch,
+             void *host_ptr);
+#endif
 /** // doc: create_kernel() {{{
  * \brief Creates OpenCL kernel
  *
