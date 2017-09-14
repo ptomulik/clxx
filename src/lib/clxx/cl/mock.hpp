@@ -26,6 +26,14 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( program, num_devices, device_list, options, pfn_notify, user_data )
 );
 
+#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+CXXTEST_MOCK_GLOBAL(cl_kernel,
+  clCloneKernel,
+  (cl_kernel source_kernel, cl_int* errcode_ret),
+  (source_kernel, errcode_ret)
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clCompileProgram)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clCompileProgram,

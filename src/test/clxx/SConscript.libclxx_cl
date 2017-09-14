@@ -22,6 +22,7 @@ tests = [
     'cl/event.t.h',
     'cl/events.t.h',
     'cl/functions/build_program.t.h',
+    'cl/functions/clone_kernel.t.h',
     'cl/functions/compile_program.t.h',
     'cl/functions/create_buffer.t.h',
     'cl/functions/create_command_queue.t.h',

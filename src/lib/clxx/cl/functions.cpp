@@ -222,6 +222,21 @@ build_program(cl_program program,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+cl_kernel
+clone_kernel(cl_kernel source_kernel)
+{
+  cl_int s = CL_SUCCESS;
+  cl_kernel kern;
+  kern = T::clCloneKernel(source_kernel, &s);
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return kern;
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clCompileProgram)
 void
 compile_program(cl_program program,

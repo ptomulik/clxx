@@ -115,6 +115,41 @@ build_program(cl_program program,
               const char* options,
               void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
               void* user_data);
+#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+/** // doc: clone_kernel() {{{
+ * \brief Make a shallow copy of the kernel object.
+ *
+ * This function is a wrapper around \c clCloneKernel(). The call to this
+ * function has same effect as
+ * - \c clCloneKernel(source_kernel, &errcode_ret),
+ * with \c errcode_ret being defined internally in #clone_kernel().
+ *
+ * The main difference between #clone_kernel() and \c clCloneKernel() is that
+ * it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param source_kernel A valid cl_kernel object that will be copied.
+ *        source_kernel will not be modified in any way by this function
+ * \returns A handle to the cloned kernel object
+ *
+ * \throw clerror_no<status_t::invalid_kernel>
+ *    When \c clCloneKernel() returns CL_INVALID_KERNEL
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCloneKernel() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCloneKernel() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clCloneKernel() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clXxx.html">clXxx()</a>
+ */ // }}}
+cl_kernel
+clone_kernel(cl_kernel source_kernel);
+#endif
 #if CLXX_OPENCL_ALLOWED(clCompileProgram)
 /** // doc: compile_program(...) {{{
  * \brief Compiles a program’s source for all the devices or a specific

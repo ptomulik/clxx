@@ -180,6 +180,26 @@ public:
    */ // }}}
   Dummy_clBuildProgram(cl_int err);
 };
+#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+/** // doc: Dummy_clCloneKernel {{{
+ * \brief Default mock for clCloneKernel OpenCL function.
+ */ // }}}
+class Dummy_clCloneKernel
+  : public T::Base_clCloneKernel,
+    public T::Dummy_CallArgs<cl_kernel,cl_int*>
+{
+  cl_kernel _kern;
+  cl_int _err;
+  cl_kernel clCloneKernel(cl_kernel source_kernel, cl_int* errcode_ret);
+public:
+  /** // doc: Dummy_clCloneKernel() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCloneKernel(cl_kernel kern, cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clCompileProgram)
 /** // doc: Dummy_clCompileProgram {{{
  * \brief Default mock for clCompileProgram OpenCL function.
@@ -2038,6 +2058,24 @@ Dummy_clBuildProgram(cl_int err)
   :_err(err)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+cl_kernel Dummy_clCloneKernel::
+clCloneKernel(cl_kernel source_kernel, cl_int* errcode_ret)
+{
+  call_with(source_kernel, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return this->_kern;
+}
+Dummy_clCloneKernel::
+Dummy_clCloneKernel(cl_kernel kern, cl_int err)
+  : _kern(kern), _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clCompileProgram)
 cl_int Dummy_clCompileProgram::
