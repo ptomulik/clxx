@@ -485,6 +485,31 @@ public:
    */ // }}}
   Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels = nullptr, cl_uint* num_kernels_ret = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+/** // doc: Dummy_clCreatePipe {{{
+ * \brief Default mock for clCreatePipe OpenCL function.
+ */ // }}}
+class Dummy_clCreatePipe
+  : public T::Base_clCreatePipe,
+    public T::Dummy_CallArgs<cl_context, cl_mem_flags, cl_uint, cl_uint,
+                             const cl_pipe_properties*, cl_int*>
+{
+  cl_mem _mem;
+  cl_int _err;
+  cl_mem clCreatePipe( cl_context context, cl_mem_flags flags,
+                       cl_uint pipe_packet_size, cl_uint pipe_max_packets,
+                       const cl_pipe_properties* properties,
+                       cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreatePipe() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param mem Memory object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreatePipe(cl_mem mem, cl_int err);
+};
+#endif
 /** // doc: Dummy_clCreateProgramWithBinary {{{
  * \brief Default mock for clCreateProgramWithBinary OpenCL function.
  */ // }}}
@@ -2355,6 +2380,27 @@ Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels, cl_uint* num_kern
   : _err(err), _kernels(kernels), _num_kernels_ret(num_kernels_ret)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+cl_mem Dummy_clCreatePipe::
+clCreatePipe( cl_context context, cl_mem_flags flags,
+              cl_uint pipe_packet_size, cl_uint pipe_max_packets,
+              const cl_pipe_properties* properties, cl_int* errcode_ret )
+{
+  call_with( context, flags, pipe_packet_size, pipe_max_packets, properties,
+             errcode_ret );
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _mem;
+}
+Dummy_clCreatePipe::
+Dummy_clCreatePipe(cl_mem mem, cl_int err)
+  :_mem(mem), _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_program Dummy_clCreateProgramWithBinary::
 clCreateProgramWithBinary(cl_context context,

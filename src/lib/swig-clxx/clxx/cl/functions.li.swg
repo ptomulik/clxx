@@ -26,6 +26,7 @@
 %throws_clerror(clxx::create_image_3d(cl_context, mem_flags_t, const cl_image_format*, size_t image_width, size_t image_height, size_t image_depth, size_t image_row_pitch, size_t image_slice_pitch, void*))
 %throws_clerror(clxx::create_kernel(cl_program, const char*))
 %throws_clerror(clxx::create_kernels_in_program(cl_program, cl_uint, cl_kernel*, cl_uint*))
+%throws_clerror(clxx::create_pipe(cl_context, mem_flags_t, cl_uint, cl_uint, const cl_pipe_properties*))
 %throws_clerror(clxx::create_program_with_binary(cl_context, cl_uint, const cl_device_id *, const size_t *, const unsigned char **, cl_int *))
 %throws_clerror(clxx::create_program_with_built_in_kernels(cl_context, cl_uint, const cl_device_id *, const char *))
 %throws_clerror(clxx::create_program_with_source(cl_context, cl_uint, const char **, const size_t *))

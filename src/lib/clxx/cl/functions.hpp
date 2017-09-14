@@ -873,14 +873,14 @@ create_image_2d(cl_context context,
  */ // }}}
 cl_mem
 create_image_3d(cl_context context,
-             mem_flags_t flags,
-             const cl_image_format *image_format,
-             size_t image_width,
-             size_t image_height,
-             size_t image_depth,
-             size_t image_row_pitch,
-             size_t image_slice_pitch,
-             void *host_ptr);
+                mem_flags_t flags,
+                const cl_image_format *image_format,
+                size_t image_width,
+                size_t image_height,
+                size_t image_depth,
+                size_t image_row_pitch,
+                size_t image_slice_pitch,
+                void *host_ptr);
 #endif
 /** // doc: create_kernel() {{{
  * \brief Creates OpenCL kernel
@@ -979,6 +979,68 @@ create_kernels_in_program(cl_program program,
                           cl_uint num_kernels,
                           cl_kernel* kernels,
                           cl_uint* num_kernels_ret);
+#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+/** // doc: create_pipe() {{{
+ * \brief Creates a pipe object.
+ *
+ * This is a wrapper for \c clCreatePipe(). The call to
+ * #create_pipe() has same effect as a call to
+ *    - \c clCreatePipe(context, static_cast<cl_mem_flags>(flags), pipe_packet_size, pipe_max_packets, properties, &errcode)
+ *
+ * with \c errcode being defined internally by #create_pipe().
+ *
+ * The main difference between #create_pipe() and \c clCreatePipe()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param context
+ *    A valid OpenCL context used to create the pipe object.
+ * \param flags
+ *    A bit-field that is used to specify allocation and usage information such
+ *    as the memory arena that should be used to allocate the pipe object and
+ *    how it will be used.
+ * \param pipe_packet_size
+ *    Size in bytes of a pipe packet.
+ * \param pipe_max_packets
+ *    Specifies the pipe capacity by specifying the maximum number of packets
+ *    the pipe can hold.
+ * \param properties
+ *    A list of properties for the pipe and their corresponding values. Each
+ *    property name is immediately followed by the corresponding desired value.
+ *    The list is terminated with 0. In OpenCL 2.0, properties must be NULL.
+ *
+ * \returns A handle to the newly created OpenCL image object
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreatePipe() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreatePipe() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_pipe_size>
+ *    When \c clCreatePipe() returns \c CL_INVALID_PIPE_SIZE.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clCreatePipe() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreatePipe() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreatePipe() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreatePipe() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCreatePipe.html">clCreatePipe()</a>
+ *
+ */ // }}}
+cl_mem
+create_pipe(cl_context context,
+             mem_flags_t flags,
+             cl_uint pipe_packet_size,
+             cl_uint pipe_max_packets,
+             const cl_pipe_properties* properties);
+#endif
 /** // doc: create_program_with_binary(...) {{{
  * \brief Creates a program object for a context, and loads the binary bits
  *    specified by binary into the program object

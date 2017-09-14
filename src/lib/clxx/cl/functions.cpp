@@ -489,6 +489,31 @@ create_kernels_in_program(cl_program program,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+cl_mem
+create_pipe(cl_context context,
+            mem_flags_t flags,
+            cl_uint pipe_packet_size,
+            cl_uint pipe_max_packets,
+            const cl_pipe_properties* properties)
+{
+  cl_int s = CL_SUCCESS;
+  cl_mem result = T::clCreatePipe(
+      context,
+      static_cast<cl_mem_flags>(flags),
+      pipe_packet_size,
+      pipe_max_packets,
+      properties,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return result;
+}
+#endif
+/* ------------------------------------------------------------------------ */
 cl_program
 create_program_with_binary(cl_context context,
                            cl_uint num_devices,

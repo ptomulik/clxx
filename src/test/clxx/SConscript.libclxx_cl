@@ -34,6 +34,7 @@ tests = [
     'cl/functions/create_image_3d.t.h',
     'cl/functions/create_kernel.t.h',
     'cl/functions/create_kernels_in_program.t.h',
+    'cl/functions/create_pipe.t.h',
     'cl/functions/create_program_with_binary.t.h',
     'cl/functions/create_program_with_built_in_kernels.t.h',
     'cl/functions/create_program_with_source.t.h',

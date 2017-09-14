@@ -139,6 +139,16 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( program, num_kernels, kernels, num_kernels_ret )
 );
 
+#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+CXXTEST_MOCK_GLOBAL(cl_mem,
+  clCreatePipe,
+  ( cl_context context, cl_mem_flags flags, cl_uint pipe_packet_size,
+    cl_uint pipe_max_packets, const cl_pipe_properties* properties,
+    cl_int* errcode_ret),
+  ( context, flags, pipe_packet_size, pipe_max_packets, properties, errcode_ret )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_program,
   clCreateProgramWithBinary,
   ( cl_context context, cl_uint num_devices, const cl_device_id* device_list,
