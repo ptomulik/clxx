@@ -1166,12 +1166,6 @@ create_program_with_binary(cl_context context,
  * \c clCreateProgramWithBuiltInKernels() is that it throws %clxx exceptions instead of returning
  * OpenCL error codes.
  *
- * The function decrements the \e device reference count if \e device is a
- * valid sub-device created by call to \ref create_sub_devices() or
- * \c clCreateSubDevices(). If \e device is a root level device i.e.
- * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
- * the \e device reference count remains unchanged.
- *
  * \param context
  *    Must be a valid OpenCL context.
  * \param num_devices
@@ -1210,6 +1204,52 @@ create_program_with_built_in_kernels(cl_context context,
                                      cl_uint num_devices,
                                      const cl_device_id* device_list,
                                      const char* kernel_names);
+#endif
+#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+/** // doc: create_program_with_il(...) {{{
+ * \brief Creates a program object for a context, and loads the IL into the
+ *        program object.
+ *
+ * This function is a wrapper around \c clCreateProgramWithIL().
+ * The call to this function has same effect as
+ *  - \c clCreateProgramWithIL(context, il, length, &errcode_ret)
+ *
+ * with \c errcode_ret defined internally in create_program_with_il().
+ *
+ * The main difference between \ref create_program_with_il() and
+ * \c clCreateProgramWithIL() is that it throws %clxx exceptions instead of returning
+ * OpenCL error codes.
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param il
+ *    A pointer to a \e length-byte block of memory containing SPIR-V or an
+ *    implementation-defined intermediate language.
+ * \param length
+ *    Length, in bytes, of the \e il buffer.
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateProgramWithIL() returns CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateProgramWithIL() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateProgramWithIL() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateProgramWithIL() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateProgramWithIL() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithIL.html">clCreateProgramWithIL()</a>
+ */ // }}}
+cl_program
+create_program_with_il(cl_context context,
+                       const void* il,
+                       size_t length);
 #endif
 /** // doc: create_program_with_source(...) {{{
  * \brief Creates a program object for a context, and loads the source

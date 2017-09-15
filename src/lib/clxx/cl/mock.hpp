@@ -167,6 +167,14 @@ CXXTEST_MOCK_GLOBAL(cl_program,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+CXXTEST_MOCK_GLOBAL(cl_program,
+  clCreateProgramWithIL,
+  ( cl_context context, const void* il, size_t length, cl_int* errcode_ret),
+  ( context, il, length, errcode_ret )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_program,
   clCreateProgramWithSource,
   ( cl_context context, cl_uint count, const char** strings,

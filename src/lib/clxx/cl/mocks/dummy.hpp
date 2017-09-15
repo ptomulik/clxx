@@ -563,6 +563,30 @@ public:
   Dummy_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+/** // doc: Dummy_clCreateProgramWithIL {{{
+ * \brief Default mock for clCreateProgramWithIL OpenCL function.
+ */ // }}}
+class Dummy_clCreateProgramWithIL
+  : public T::Base_clCreateProgramWithIL,
+    public T::Dummy_CallArgs<cl_context, const void*, size_t, cl_int*>
+{
+  cl_program _program;
+  cl_int _err;
+  cl_program clCreateProgramWithIL(cl_context context,
+                                   const void* il,
+                                   size_t length,
+                                   cl_int* errcode_ret);
+public:
+  /** // doc: Dummy_clCreateProgramWithIL() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param program An OpenCL program to be returned by the mock
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateProgramWithIL(cl_program program, cl_int err);
+};
+#endif
 /** // doc: Dummy_clCreateProgramWithSource {{{
  * \brief Default mock for clCreateProgramWithSource OpenCL function.
  */ // }}}
@@ -2437,6 +2461,25 @@ clCreateProgramWithBuiltInKernels(cl_context context,
 }
 Dummy_clCreateProgramWithBuiltInKernels::
 Dummy_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err)
+  :_program(program), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+cl_program Dummy_clCreateProgramWithIL::
+clCreateProgramWithIL(cl_context context,
+                      const void* il,
+                      size_t length,
+                      cl_int* errcode_ret)
+{
+  call_with(context, il, length, errcode_ret);
+  if(errcode_ret)
+    *errcode_ret = _err;
+  return _program;
+}
+Dummy_clCreateProgramWithIL::
+Dummy_clCreateProgramWithIL(cl_program program, cl_int err)
   :_program(program), _err(err)
 {
 }

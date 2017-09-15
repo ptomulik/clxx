@@ -32,9 +32,15 @@ public:
    */ // }}}
   void test__create_program_with_binary( )
   {
-    //T::Dummy_clCreateProgramWithBinary mock((cl_program)0x1234, CL_SUCCESS);
-    //create_program_with_binary     ((cl_context)0x567, 5, (const cl_device_id*)0x487, (const size_t*)0x634, (const unsigned char**)0x174, (cl_int*)0x757);
-    //TS_ASSERT(mock.called_once_with((cl_context)0x567, 5, (const cl_device_id*)0x487, (const size_t*)0x634, (const unsigned char**)0x174, (cl_int*)0x757));
+    T::Dummy_clCreateProgramWithBinary mock((cl_program)0x1234, CL_SUCCESS);
+    TS_ASSERT_EQUALS(create_program_with_binary((cl_context)0x567, 5, (const cl_device_id*)0x487, (const size_t*)0x634, (const unsigned char**)0x174, (cl_int*)0x757), (cl_program)0x1234);
+    TS_ASSERT(std::get<0>(mock.calls().back()) == (cl_context)0x567);
+    TS_ASSERT(std::get<1>(mock.calls().back()) == 5);
+    TS_ASSERT(std::get<2>(mock.calls().back()) == (const cl_device_id*)0x487);
+    TS_ASSERT(std::get<3>(mock.calls().back()) == (const size_t*)0x634);
+    TS_ASSERT(std::get<4>(mock.calls().back()) == (const unsigned char**)0x174);
+    TS_ASSERT(std::get<5>(mock.calls().back()) == (cl_int*)0x757);
+    TS_ASSERT(mock.called_once());
   }
   /** // doc: test__create_program_with_binary__invalid_context() {{{
    * \todo Write documentation

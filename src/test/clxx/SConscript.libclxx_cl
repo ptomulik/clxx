@@ -37,6 +37,7 @@ tests = [
     'cl/functions/create_pipe.t.h',
     'cl/functions/create_program_with_binary.t.h',
     'cl/functions/create_program_with_built_in_kernels.t.h',
+    'cl/functions/create_program_with_il.t.h',
     'cl/functions/create_program_with_source.t.h',
     'cl/functions/create_sub_buffer.t.h',
     'cl/functions/create_sub_devices.t.h',

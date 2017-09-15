@@ -29,6 +29,7 @@
 %throws_clerror(clxx::create_pipe(cl_context, mem_flags_t, cl_uint, cl_uint, const cl_pipe_properties*))
 %throws_clerror(clxx::create_program_with_binary(cl_context, cl_uint, const cl_device_id *, const size_t *, const unsigned char **, cl_int *))
 %throws_clerror(clxx::create_program_with_built_in_kernels(cl_context, cl_uint, const cl_device_id *, const char *))
+%throws_clerror(clxx::create_program_with_il(cl_context, const void*, size_t))
 %throws_clerror(clxx::create_program_with_source(cl_context, cl_uint, const char **, const size_t *))
 %throws_clerror(clxx::create_sub_buffer(cl_mem, mem_flags_t, buffer_create_type_t, const void*))
 %throws_clerror(clxx::create_sub_devices(cl_device_id, const cl_device_partition_property *, cl_uint, cl_device_id *, cl_uint *))

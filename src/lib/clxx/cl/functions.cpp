@@ -562,6 +562,27 @@ create_program_with_built_in_kernels(cl_context context,
 }
 #endif // CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+cl_program
+create_program_with_il(cl_context context,
+                       const void* il,
+                       size_t length)
+{
+  cl_int s = CL_SUCCESS;
+  cl_program p = T::clCreateProgramWithIL(
+      context,
+      il,
+      length,
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return p;
+}
+#endif
+/* ------------------------------------------------------------------------ */
 cl_program
 create_program_with_source(cl_context context,
                            cl_uint count,
