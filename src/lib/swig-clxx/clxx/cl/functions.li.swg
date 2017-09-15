@@ -32,6 +32,7 @@
 %throws_clerror(clxx::create_program_with_il(cl_context, const void*, size_t))
 %throws_clerror(clxx::create_program_with_source(cl_context, cl_uint, const char **, const size_t *))
 %throws_clerror(clxx::create_sampler(cl_context, cl_bool, addressing_mode_t, filter_mode_t))
+%throws_clerror(clxx::create_sampler_with_properties(cl_context, const cl_sampler_properties*))
 %throws_clerror(clxx::create_sub_buffer(cl_mem, mem_flags_t, buffer_create_type_t, const void*))
 %throws_clerror(clxx::create_sub_devices(cl_device_id, const cl_device_partition_property *, cl_uint, cl_device_id *, cl_uint *))
 %throws_clerror(clxx::create_user_event(cl_context))

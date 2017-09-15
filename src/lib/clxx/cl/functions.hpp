@@ -1366,10 +1366,63 @@ create_program_with_source(cl_context context,
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSampler.html">clCreateSampler()</a>
  */ // }}}
 cl_sampler
-create_sampler( cl_context context,
-                cl_bool normalized_coords,
-                addressing_mode_t addressing_mode,
-                filter_mode_t filter_mode);
+create_sampler(cl_context context,
+               cl_bool normalized_coords,
+               addressing_mode_t addressing_mode,
+               filter_mode_t filter_mode);
+#endif
+#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+/** // doc: create_sampler_with_properties() {{{
+ * \brief Creates a sampler object
+ *
+ * This is a wrapper for \c clCreateSamplerWithProperties(). The call to
+ * #create_sampler_with_properties() has same effect as a call to
+ *    - \c clCreateSamplerWithProperties(context, sampler_properties, &errcode)
+ *
+ * with \c errcode being internally defined by #create_sampler_with_properties().
+ *
+ * The main difference between #create_sampler_with_properties() and \c clCreateSamplerWithProperties()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param sampler_properties
+ *    Specifies a list of sampler property names and their corresponding
+ *    values. Each sampler property name is immediately followed by the
+ *    corresponding desired value. The list is terminated with 0. The list of
+ *    supported properties is described in the OpenCL documentation of
+ *    <a href="https://www.khronos.org/registry/OpenCL/sdk/2.0/docs/man/xhtml/clCreateSamplerWithProperties.html">clCreateSamplerWithProperties</a>.
+ *    If a supported property and its value is not specified in
+ *    sampler_properties, its default value will be used. sampler_properties
+ *    can be NULL in which case the default values for supported sampler
+ *    properties will be used.
+ *
+ * \returns The newly created sampler
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateSamplerWithProperties() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateSamplerWithProperties() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clCreateSamplerWithProperties() returns \c CL_INVALID_OPERATION.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateSamplerWithProperties() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateSamplerWithProperties() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateSamplerWithProperties() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSamplerWithProperties.html">clCreateSamplerWithProperties()</a>
+ */ // }}}
+cl_sampler
+create_sampler_with_properties(cl_context context,
+                               const cl_sampler_properties* sampler_properties);
 #endif
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 /** // doc: create_sub_buffer() {{{

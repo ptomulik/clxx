@@ -40,6 +40,7 @@ tests = [
     'cl/functions/create_program_with_il.t.h',
     'cl/functions/create_program_with_source.t.h',
     'cl/functions/create_sampler.t.h',
+    'cl/functions/create_sampler_with_properties.t.h',
     'cl/functions/create_sub_buffer.t.h',
     'cl/functions/create_sub_devices.t.h',
     'cl/functions/create_user_event.t.h',

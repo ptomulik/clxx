@@ -634,6 +634,29 @@ public:
   Dummy_clCreateSampler(cl_sampler sampler, cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+/** // doc: Dummy_clCreateSamplerWithProperties {{{
+ * \brief Default mock for clCreateSamplerWithProperties OpenCL function.
+ */ // }}}
+class Dummy_clCreateSamplerWithProperties
+  : public T::Base_clCreateSamplerWithProperties,
+    public T::Dummy_CallArgs<cl_context, const cl_sampler_properties*, cl_int*>
+{
+  cl_sampler _sampler;
+  cl_int _err;
+  cl_sampler clCreateSamplerWithProperties( cl_context context,
+                                            const cl_sampler_properties* sampler_properties,
+                                            cl_int* errcode_ret );
+public:
+  /** // doc: Dummy_clCreateSamplerWithProperties() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param sampler Sampler object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateSamplerWithProperties(cl_sampler sampler, cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 /** // doc: Dummy_clCreateSubBuffer {{{
  * \brief Default mock for clCreateSubBuffer OpenCL function.
@@ -2542,6 +2565,26 @@ clCreateSampler( cl_context context, cl_bool normalized_coords,
 }
 Dummy_clCreateSampler::
 Dummy_clCreateSampler(cl_sampler sampler, cl_int err)
+  : _sampler(sampler), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+cl_sampler Dummy_clCreateSamplerWithProperties::
+clCreateSamplerWithProperties( cl_context context,
+                               const cl_sampler_properties* sampler_properties,
+                               cl_int* errcode_ret )
+{
+  call_with(context, sampler_properties, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _sampler;
+}
+Dummy_clCreateSamplerWithProperties::
+Dummy_clCreateSamplerWithProperties(cl_sampler sampler, cl_int err)
   : _sampler(sampler), _err(err)
 {
 }

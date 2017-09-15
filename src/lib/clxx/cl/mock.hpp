@@ -192,6 +192,15 @@ CXXTEST_MOCK_GLOBAL(cl_sampler,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+CXXTEST_MOCK_GLOBAL(cl_sampler,
+  clCreateSamplerWithProperties,
+  ( cl_context context, const cl_sampler_properties* sampler_properties,
+    cl_int* errcode_ret ),
+  ( context, sampler_properties, errcode_ret )
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreateSubBuffer,

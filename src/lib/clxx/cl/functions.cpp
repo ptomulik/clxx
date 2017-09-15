@@ -601,10 +601,10 @@ create_program_with_source(cl_context context,
 /* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clCreateSampler)
 cl_sampler
-create_sampler( cl_context context,
-                cl_bool normalized_coords,
-                addressing_mode_t addressing_mode,
-                filter_mode_t filter_mode)
+create_sampler(cl_context context,
+               cl_bool normalized_coords,
+               addressing_mode_t addressing_mode,
+               filter_mode_t filter_mode)
 {
   cl_int s = CL_SUCCESS;
   cl_sampler m = T::clCreateSampler(
@@ -612,6 +612,25 @@ create_sampler( cl_context context,
       normalized_coords,
       static_cast<cl_addressing_mode>(addressing_mode),
       static_cast<cl_filter_mode>(filter_mode),
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return m;
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+cl_sampler
+create_sampler_with_properties(cl_context context,
+                               const cl_sampler_properties* sampler_properties)
+{
+  cl_int s = CL_SUCCESS;
+  cl_sampler m = T::clCreateSamplerWithProperties(
+      context,
+      sampler_properties,
       &s
   );
   if(is_error(static_cast<status_t>(s)))
