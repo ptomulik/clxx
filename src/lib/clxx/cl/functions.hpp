@@ -1773,6 +1773,128 @@ enqueue_copy_buffer(cl_command_queue command_queue,
                     cl_uint num_events_in_wait_list,
                     const cl_event* event_wait_list,
                     cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+/** // doc: enqueue_copy_buffer_rect() {{{
+ * \brief Enqueues a command to copy a 2D or 3D rectangular region from a
+ *        buffer object to another buffer object.
+ *
+ * This is a wrapper for \c clEnqueueCopyBufferRect(). The call to
+ * #enqueue_copy_buffer_rect() has same effect as a call to
+ *    - \c clEnqueueCopyBufferRect(command_queue, src_buffer, dst_buffer, src_origin, dst_origin, region, src_row_pitch, src_slice_pitch, dst_row_pitch, dst_slice_pitch, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_copy_buffer_rect() and \c clEnqueueCopyBufferRect()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    The host command-queue in which the copy command will be queued. The
+ *    OpenCL context associated with \p command_queue, \p src_buffer, and
+ *    \p dst_buffer must be the same.
+ * \param src_buffer
+ *    Source buffer, where the data is to be copied from.
+ * \param dst_buffer
+ *    Destination buffer, where the data is to be copied into.
+ * \param src_origin
+ *    The (x, y, z) offset in the memory region associated with \p src_buffer.
+ *    For a 2D rectangle region, the \c z value given by \p src_origin[2]
+ *    should be \c 0. The offset in bytes is computed as \p src_origin[2] * \p
+ *    src_slice_pitch + \p src_origin[1] * \p src_row_pitch + \p src_origin[0].
+ * \param dst_origin
+ *    The (x, y, z) offset in the memory region associated with \p dst_buffer.
+ *    For a 2D rectangle region, the \c z value given by \p dst_origin[2]
+ *    should be \c 0. The offset in bytes is computed as \p dst_origin[2] *
+ *    \p dst_slice_pitch + \p dst_origin[1] * \p dst_row_pitch + dst_origin[0].
+ * \param region
+ *    The (width in bytes, height in rows, depth in slices) in bytes of the 2D
+ *    or 3D rectangle being copied. For a 2D rectangle, the depth value given
+ *    by \p region[2] should be \c 1. The values in region cannot be \c 0.
+ * \param src_row_pitch
+ *    The length of each row in bytes to be used for the memory region
+ *    associated with \p src_buffer. If \p src_row_pitch is \c 0,
+ *    \p src_row_pitch is computed as \p region[0].
+ * \param src_slice_pitch
+ *    The length of each 2D slice in bytes to be used for the memory region
+ *    associated with \p src_buffer. If \p src_slice_pitch is \c 0, \p
+ *    src_slice_pitch is computed as \p region[1] * \p src_row_pitch.
+ * \param dst_row_pitch
+ *    The length of each row in bytes to be used for the memory region
+ *    associated with \p dst_buffer. If \p dst_row_pitch is \c 0,
+ *    \p dst_row_pitch is computed as \p region[0].
+ * \param dst_slice_pitch
+ *    The length of each 2D slice in bytes to be used for the memory region
+ *    associated with \p dst_buffer. If \p dst_slice_pitch is \c 0, \p
+ *    dst_slice_pitch is computed as \p region[1] * \p dst_row_pitch.
+ * \param num_events_in_wait_list
+ *    Number of events in the \p event_wait_list.
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
+ *    If \p event_wait_list is not \c NULL, the list of events pointed to by
+ *    \p event_wait_list must be valid and \p num_events_in_wait_list must be
+ *    greater than \c 0.
+ * \param event_wait_list
+ *    \p event_wait_list and \p num_events_in_wait_list specify events that
+ *    need to complete before this particular command can be executed. If
+ *    \p event_wait_list is \c NULL, then this particular command does not wait
+ *    on any event to complete.The events specified in \p event_wait_list act
+ *    as synchronization points. The context associated with events in
+ *    \p event_wait_list and \p command_queue must be the same. The memory
+ *    associated with \p event_wait_list can be reused or freed after the
+ *    function returns.
+ * \param event
+ *    Returns an event object that identifies this particular copy command and
+ *    can be used to query or queue a wait for this particular command to
+ *    complete.\p event can be \c NULL in which case it will not be possible
+ *    for the application to query the status of this command or queue a wait
+ *    for this command to complete. If the \p event_wait_list and the \p event
+ *    arguments are not \c NULL, the event argument should not refer to an
+ *    element of the \p event_wait_list array
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_INVALID_MEM_OBJECT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::mem_copy_overlap>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_MEM_COPY_OVERLAP.
+ * \throw clerror_no<status_t::misaligned_sub_buffer_offset>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_MISALIGNED_SUB_BUFFER_OFFSET.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueCopyBufferRect() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueCopyBufferRect() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBufferRect.html">clEnqueueCopyBufferRect()</a>
+ *
+ */ // }}}
+void
+enqueue_copy_buffer_rect(cl_command_queue command_queue,
+                    cl_mem src_buffer,
+                    cl_mem dst_buffer,
+                    const size_t* src_origin,
+                    const size_t* dst_origin,
+                    const size_t* region,
+                    size_t src_row_pitch,
+                    size_t src_slice_pitch,
+                    size_t dst_row_pitch,
+                    size_t dst_slice_pitch,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event);
+#endif
 /** // doc: enqueue_copy_buffer_to_image() {{{
  * \brief Enqueues a command to copy an image object to a buffer object
  *

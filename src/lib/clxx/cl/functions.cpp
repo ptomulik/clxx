@@ -758,6 +758,46 @@ enqueue_copy_buffer( cl_command_queue command_queue, cl_mem src_buffer,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+void
+enqueue_copy_buffer_rect(cl_command_queue command_queue,
+                    cl_mem src_buffer,
+                    cl_mem dst_buffer,
+                    const size_t* src_origin,
+                    const size_t* dst_origin,
+                    const size_t* region,
+                    size_t src_row_pitch,
+                    size_t src_slice_pitch,
+                    size_t dst_row_pitch,
+                    size_t dst_slice_pitch,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueCopyBufferRect(
+        command_queue,
+        src_buffer,
+        dst_buffer,
+        src_origin,
+        dst_origin,
+        region,
+        src_row_pitch,
+        src_slice_pitch,
+        dst_row_pitch,
+        dst_slice_pitch,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 enqueue_copy_buffer_to_image(cl_command_queue command_queue,
                              cl_mem src_image,

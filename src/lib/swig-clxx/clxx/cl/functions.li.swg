@@ -39,6 +39,7 @@
 %throws_clerror(clxx::enqueue_barrier(cl_command_queue))
 %throws_clerror(clxx::enqueue_barrier_with_wait_list(cl_command_queue, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_copy_buffer(cl_command_queue, cl_mem, cl_mem, size_t, size_t, size_t, cl_uint, const cl_event*, cl_event*))
+%throws_clerror(clxx::enqueue_copy_buffer_rect(cl_command_queue, cl_mem, cl_mem, const size_t*, const size_t*, const size_t*, size_t, size_t, size_t, size_t, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_copy_buffer_to_image(cl_command_queue, cl_mem, cl_mem, size_t, const size_t*, const size_t*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_copy_image(cl_command_queue, cl_mem, cl_mem, const size_t*, const size_t*, const size_t*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_copy_image_to_buffer(cl_command_queue, cl_mem, cl_mem, const size_t*, const size_t*, size_t, cl_uint, const cl_event*, cl_event*))
