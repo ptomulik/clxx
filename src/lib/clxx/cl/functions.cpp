@@ -1010,8 +1010,26 @@ enqueue_map_image(cl_command_queue command_queue,
     }
   return result;
 }
-#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+void
+enqueue_marker(cl_command_queue command_queue,
+               cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueMarker(
+      command_queue,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 void
 enqueue_migrate_mem_objects(cl_command_queue command_queue,
                             cl_uint num_mem_objects,

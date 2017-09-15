@@ -55,6 +55,7 @@ tests = [
     'cl/functions/enqueue_fill_image.t.h',
     'cl/functions/enqueue_map_buffer.t.h',
     'cl/functions/enqueue_map_image.t.h',
+    'cl/functions/enqueue_marker.t.h',
     'cl/functions/enqueue_migrate_mem_objects.t.h',
     'cl/functions/enqueue_native_kernel.t.h',
     'cl/functions/enqueue_ndrange_kernel.t.h',

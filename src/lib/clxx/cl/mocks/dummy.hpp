@@ -1033,6 +1033,28 @@ public:
    */ // }}}
   Dummy_clEnqueueMapImage(void* result, cl_int err, const cl_event* event = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+/** // doc: Dummy_clEnqueueMarker {{{
+ * \brief Default mock for clEnqueueMarker OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueMarker
+  : public T::Base_clEnqueueMarker,
+    public T::Dummy_CallArgs<cl_command_queue, cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueMarker( cl_command_queue command_queue,
+                          cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueMarker() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param result A value to be returned by the mock
+   * \param err Error code to be returned by the mock
+   * \param event An event to be returned
+   */ // }}}
+  Dummy_clEnqueueMarker(cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /** // doc: Dummy_clEnqueueMigrateMemObjects {{{
  * \brief Default mock for clEnqueueMigrateMemObjects OpenCL function.
@@ -2948,6 +2970,21 @@ Dummy_clEnqueueMapImage(void* result, cl_int err, const cl_event* event)
   : _result(result), _err(err), _event(event)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+cl_int Dummy_clEnqueueMarker::
+clEnqueueMarker( cl_command_queue command_queue,
+                 cl_event* event )
+{
+  call_with( command_queue, event );
+  return _err;
+}
+Dummy_clEnqueueMarker::
+Dummy_clEnqueueMarker(cl_int err)
+  : _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 cl_int Dummy_clEnqueueMigrateMemObjects::

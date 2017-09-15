@@ -344,6 +344,14 @@ CXXTEST_MOCK_GLOBAL(void*,
     event_wait_list, event, errcode_ret )
 );
 
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueMarker,
+  ( cl_command_queue command_queue, cl_event* event ),
+  ( command_queue, event )
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueMigrateMemObjects,

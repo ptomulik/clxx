@@ -2729,6 +2729,56 @@ enqueue_map_image(cl_command_queue command_queue,
                   cl_uint num_events_in_wait_list,
                   const cl_event* event_wait_list,
                   cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+/** // doc: enqueue_marker() {{{
+ * \brief Enqueues a marker command.
+ *
+ * This is a wrapper for \c clEnqueueMarker(). The call to
+ * #enqueue_marker() has same effect as a call to
+ *    - \c clEnqueueMarker(command_queue, &errcode)
+ *
+ * with \c errcode being internally defined by #enqueue_marker().
+ *
+ * The main difference between #enqueue_marker() and \c clEnqueueMarker()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * Enqueues a marker command to command_queue. The marker command is not
+ * completed until all commands enqueued before it have completed. The marker
+ * command returns an event which can be waited on, i.e. this event can be
+ * waited on to ensure that all commands which have been queued before the
+ * marker command have been completed.
+ *
+ * \param command_queue
+ *    Must be a valid host command-queue.
+ * \param event
+ *    Returns an event object that identifies this particular mark command and
+ *    can be used to query or queue a wait for this particular command to
+ *    complete.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueMarker() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueMarker() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueMarker() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueMarker() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueMarker() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueMarker.html">clEnqueueMarker()</a>
+ *
+ */ // }}}
+void
+enqueue_marker(cl_command_queue command_queue,
+               cl_event* event);
+#endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /** // doc: enqueue_migrate_mem_objects() {{{
  * \brief Enqueues a command to indicate which device a set of memory objects
