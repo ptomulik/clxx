@@ -920,6 +920,36 @@ enqueue_fill_buffer(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+void
+enqueue_fill_image(cl_command_queue command_queue,
+                    cl_mem image,
+                    const void* fill_color,
+                    const size_t* origin,
+                    const size_t* region,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueFillImage(
+      command_queue,
+      image,
+      fill_color,
+      origin,
+      region,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void*
 enqueue_map_buffer( cl_command_queue command_queue, cl_mem buffer,
                     cl_bool blocking_map, map_flags_t map_flags,

@@ -2361,6 +2361,124 @@ enqueue_fill_buffer(cl_command_queue command_queue,
                     const cl_event* event_wait_list,
                     cl_event* event);
 #endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+/** // doc: enqueue_fill_image() {{{
+ * \brief Enqueues a command to fill an image object with a specified color.
+ *
+ * This is a wrapper for \c clEnqueueFillImage(). The call to
+ * #enqueue_fill_image() has same effect as a call to
+ *    - \c clEnqueueFillImage(command_queue, image, fill_color, origin, region, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_fill_image() and \c clEnqueueFillImage()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Refers to the host command-queue in which the fill command will be
+ *    queued. The OpenCL context associated with \p command_queue and \p image
+ *    must be the same.
+ * \param image
+ *    A valid image object.
+ * \param fill_color
+ *    The color used to fill the image. The fill color is a single floating
+ *    point value if the channel order is cl_chanel_order_t::depth. Otherwise,
+ *    the fill color is a four component RGBA floating-point color value if the
+ *    image channel data type is not an unnormalized signed or unsigned integer
+ *    type, is a four component signed integer value if the image channel data
+ *    type is an unnormalized signed integer type and is a four component
+ *    unsigned integer value if the image channel data type is an unnormalized
+ *    unsigned integer type. The fill color will be converted to the
+ *    appropriate image channel format and order associated with image as
+ *    described in OpenCL standard.
+ * \param origin
+ *    Defines the (x, y, z) offset in pixels in the 1D, 2D, or 3D image, the
+ *    (x, y) offset and the image index in the image array or the (x) offset
+ *    and the image index in the 1D image array. If \p image is a 2D image
+ *    object, \p origin[2] must be \c 0. If \p image is a 1D image or 1D image
+ *    buffer object, \p origin[1] and \p origin[2] must be \c 0. If \p image is
+ *    a 1D image array object, \p origin[2] must be \c 0. If \p image is a 1D
+ *    image array object, \p origin[1] describes the image index in the 1D
+ *    image array. If \p image is a 2D image array object, \p origin[2]
+ *    describes the image index in the 2D image array.
+ * \param region
+ *    Defines the (width, height, depth) in pixels of the 1D, 2D or 3D
+ *    rectangle, the (width, height) in pixels of the 2D rectangle and the
+ *    number of images of a 2D image array or the (width) in pixels of the 1D
+ *    rectangle and the number of images of a 1D image array. If \p image is a
+ *    2D image object, \p region[2] must be \c 1. If \p image is a 1D image or
+ *    1D image buffer object, \p region[1] and \p region[2] must be \c 1. If
+ *    \p image is a 1D image array object, \p region[2] must be \c 1. The
+ *    values in region cannot be \c 0.
+ * \param num_events_in_wait_list
+ *    Number of events in the \p event_wait_list.
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
+ *    If \p event_wait_list is not \c NULL, the list of events pointed to by
+ *    \p event_wait_list must be valid and \p num_events_in_wait_list must be
+ *    greater than \c 0.
+ * \param event_wait_list
+ *    Together with \p num_events_in_wait_list specify events that need to
+ *    complete before this particular command can be executed. If
+ *    \p event_wait_list is \c NULL, then this particular command does not wait
+ *    on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be
+ *    valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization points. The
+ *    context associated with events in \p event_wait_list and \p command_queue
+ *    must be the same. The memory associated with \p event_wait_list can be
+ *    reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular write command and
+ *    can be used to query or queue a wait for this particular command to
+ *    complete.\p event can be \c NULL in which case it will not be possible
+ *    for the application to query the status of this command or queue a wait
+ *    for this command to complete.
+ *    \ref clxx::enqueue_barrier_with_wait_list "enqueue_barrier_with_wait_list"
+ *    can be used instead. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueFillImage() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueFillImage() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When \c clEnqueueFillImage() returns \c CL_INVALID_MEM_OBJECT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueFillImage() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueFillImage() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::invalid_image_size>
+ *    When \c clEnqueueFillImage() returns \c CL_INVALID_IMAGE_SIZE.
+ * \throw clerror_no<status_t::image_format_not_supported>
+ *    When \c clEnqueueFillImage() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clEnqueueFillImage() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueFillImage() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueFillImage() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueFillImage() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueFillImage.html">clEnqueueFillImage()</a>
+ *
+ */ // }}}
+void
+enqueue_fill_image(cl_command_queue command_queue,
+                    cl_mem image,
+                    const void* fill_color,
+                    const size_t* origin,
+                    const size_t* region,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event);
+#endif
 /** // doc: enqueue_map_buffer() {{{
  * \brief Enqueues a command to map a region of the buffer object given by \p
  *        buffer into the host address space and returns a pointer to this

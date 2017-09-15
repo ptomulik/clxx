@@ -939,7 +939,6 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
-   * \param event An event to be returned
    */ // }}}
   Dummy_clEnqueueFillBuffer(cl_int err);
 };
@@ -955,7 +954,6 @@ class Dummy_clEnqueueFillImage
                              cl_event*>
 {
   cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueFillImage( cl_command_queue command_queue,
                              cl_mem image,
                              const void *fill_color,
@@ -969,9 +967,8 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
-   * \param event An event to be returned
    */ // }}}
-  Dummy_clEnqueueFillImage(cl_int err, const cl_event* event = nullptr);
+  Dummy_clEnqueueFillImage(cl_int err);
 };
 #endif
 /** // doc: Dummy_clEnqueueMapBuffer {{{
@@ -2884,15 +2881,11 @@ clEnqueueFillImage( cl_command_queue command_queue,
 {
   call_with( command_queue, image, fill_color, origin, region,
              num_events_in_wait_list, event_wait_list, event);
-  if(event && _event)
-    {
-      *event = *_event;
-    }
   return _err;
 }
 Dummy_clEnqueueFillImage::
-Dummy_clEnqueueFillImage(cl_int err, const cl_event* event)
-  : _err(err), _event(event)
+Dummy_clEnqueueFillImage(cl_int err)
+  : _err(err)
 {
 }
 #endif
