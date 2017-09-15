@@ -2742,7 +2742,7 @@ enqueue_map_image(cl_command_queue command_queue,
  * The main difference between #enqueue_marker() and \c clEnqueueMarker()
  * is that it throws %clxx exceptions instead of returning OpenCL error codes.
  *
- * Enqueues a marker command to command_queue. The marker command is not
+ * Enqueues a marker command to \p command_queue. The marker command is not
  * completed until all commands enqueued before it have completed. The marker
  * command returns an event which can be waited on, i.e. this event can be
  * waited on to ensure that all commands which have been queued before the
@@ -2778,6 +2778,84 @@ enqueue_map_image(cl_command_queue command_queue,
 void
 enqueue_marker(cl_command_queue command_queue,
                cl_event* event);
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+/** // doc: enqueue_marker_with_wait_list() {{{
+ * \brief Enqueues a marker command which waits for either a list of events to
+ *        complete, or all previously enqueued commands to complete.
+ *
+ * This is a wrapper for \c clEnqueueMarkerWithWaitList(). The call to
+ * #enqueue_marker_with_wait_list() has same effect as a call to
+ *    - \c clEnqueueMarkerWithWaitList(command_queue, &errcode)
+ *
+ * with \c errcode being internally defined by #enqueue_marker_with_wait_list().
+ *
+ * The main difference between #enqueue_marker_with_wait_list() and \c clEnqueueMarkerWithWaitList()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * Enqueues a marker command which waits for either a list of events to
+ * complete, or if the list is empty it waits for all commands previously
+ * enqueued in \p command_queue to complete before it completes. This command
+ * returns an event which can be waited on, i.e. this event can be waited on to
+ * insure that all events either in the \p event_wait_list or all previously
+ * enqueued commands, queued before this command to \p command_queue, have
+ * completed.
+ *
+ * \param command_queue
+ *    A valid host command-queue.
+ * \param num_events_in_wait_list
+ *    Number of elements in \p event_wait_list.
+ * \param event_wait_list
+ *    Specifies events that need to complete before this particular command can
+ *    be executed.
+ *
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be
+ *    \c 0. If \p event_wait_list is not \c NULL, the list of events pointed to
+ *    by \p event_wait_list must be valid and \p num_events_in_wait_list must
+ *    be greater than \c 0. The events specified in \p event_wait_list act as
+ *    synchronization points. The context associated with events in
+ *    \p event_wait_list and \p command_queue must be the same. The memory
+ *    associated with \p event_wait_list can be reused or freed after the
+ *    function returns.
+ *
+ *    If \p event_wait_list is \c NULL, then this particular command waits
+ *    until all previous enqueued commands to \p command_queue have completed.
+ * \param event
+ *    Returns an event object that identifies this particular command. Event
+ *    objects are unique and can be used to identify this marker command later
+ *    on. \p event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the \p event argument should not refer to an element of
+ *    the \p event_wait_list array.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueMarkerWithWaitList() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueMarkerWithWaitList() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueMarkerWithWaitList() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueMarkerWithWaitList() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueMarkerWithWaitList() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueMarkerWithWaitList() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |  \check   |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueMarkerWithWaitList.html">clEnqueueMarkerWithWaitList()</a>
+ *
+ */ // }}}
+void
+enqueue_marker_with_wait_list(cl_command_queue command_queue,
+                              cl_uint num_events_in_wait_list,
+                              const cl_event* event_wait_list,
+                              cl_event* event);
 #endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 /** // doc: enqueue_migrate_mem_objects() {{{

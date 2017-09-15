@@ -1048,11 +1048,32 @@ public:
   /** // doc: Dummy_clEnqueueMarker() {{{
    * \brief Constructor, initializes the mock object.
    *
-   * \param result A value to be returned by the mock
    * \param err Error code to be returned by the mock
-   * \param event An event to be returned
    */ // }}}
   Dummy_clEnqueueMarker(cl_int err);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+/** // doc: Dummy_clEnqueueMarkerWithWaitList {{{
+ * \brief Default mock for clEnqueueMarkerWithWaitList OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueMarkerWithWaitList
+  : public T::Base_clEnqueueMarkerWithWaitList,
+    public T::Dummy_CallArgs<cl_command_queue, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueMarkerWithWaitList( cl_command_queue command_queue,
+                                      cl_uint num_events_in_wait_list,
+                                      const cl_event* event_wait_list,
+                                      cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueMarkerWithWaitList() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueMarkerWithWaitList(cl_int err);
 };
 #endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
@@ -2981,6 +3002,23 @@ clEnqueueMarker( cl_command_queue command_queue,
 }
 Dummy_clEnqueueMarker::
 Dummy_clEnqueueMarker(cl_int err)
+  : _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+cl_int Dummy_clEnqueueMarkerWithWaitList::
+clEnqueueMarkerWithWaitList( cl_command_queue command_queue,
+                             cl_uint num_events_in_wait_list,
+                             const cl_event* event_wait_list,
+                             cl_event* event )
+{
+  call_with( command_queue, num_events_in_wait_list, event_wait_list, event );
+  return _err;
+}
+Dummy_clEnqueueMarkerWithWaitList::
+Dummy_clEnqueueMarkerWithWaitList(cl_int err)
   : _err(err)
 {
 }

@@ -32,6 +32,7 @@ public:
    */ // }}}
   void test__enqueue_marker( )
   {
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
     T::Dummy_clEnqueueMarker mock(CL_SUCCESS);
 
     TS_ASSERT_THROWS_NOTHING(enqueue_marker( (cl_command_queue)0x123,
@@ -41,46 +42,57 @@ public:
 
     TS_ASSERT(std::get<0>(mock.calls().back()) == (cl_command_queue)0x123);
     TS_ASSERT(std::get<1>(mock.calls().back()) == (cl_event*)0x901);
+#endif
   }
   /** // doc: test__enqueue_marker__invalid_command_queue() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_marker__invalid_command_queue( )
   {
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
     T::Dummy_clEnqueueMarker mock(CL_INVALID_COMMAND_QUEUE);
     TS_ASSERT_THROWS(enqueue_marker((cl_command_queue)NULL,nullptr), clerror_no<status_t::invalid_command_queue>);
+#endif
   }
   /** // doc: test__enqueue_marker__invalid_value() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_marker__invalid_value( )
   {
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
     T::Dummy_clEnqueueMarker mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(enqueue_marker((cl_command_queue)NULL,nullptr), clerror_no<status_t::invalid_value>);
+#endif
   }
   /** // doc: test__enqueue_marker__out_of_resources() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_marker__out_of_resources( )
   {
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
     T::Dummy_clEnqueueMarker mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(enqueue_marker((cl_command_queue)NULL,nullptr), clerror_no<status_t::out_of_resources>);
+#endif
   }
   /** // doc: test__enqueue_marker__out_of_host_memory() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_marker__out_of_host_memory( )
   {
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
     T::Dummy_clEnqueueMarker mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(enqueue_marker((cl_command_queue)NULL,nullptr), clerror_no<status_t::out_of_host_memory>);
+#endif
   }
   /** // doc: test__enqueue_marker__unexpected_clerror() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_marker__unexpected_clerror( )
   {
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
     T::Dummy_clEnqueueMarker mock(-0x1234567);
     TS_ASSERT_THROWS(enqueue_marker((cl_command_queue)NULL,nullptr), unexpected_clerror);
+#endif
   }
 };
 

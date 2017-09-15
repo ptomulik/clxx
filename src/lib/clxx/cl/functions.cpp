@@ -1029,6 +1029,28 @@ enqueue_marker(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+void
+enqueue_marker_with_wait_list(cl_command_queue command_queue,
+                              cl_uint num_events_in_wait_list,
+                              const cl_event* event_wait_list,
+                              cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueMarkerWithWaitList(
+      command_queue,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
 void
 enqueue_migrate_mem_objects(cl_command_queue command_queue,

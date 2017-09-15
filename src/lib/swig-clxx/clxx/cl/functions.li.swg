@@ -48,6 +48,7 @@
 %throws_clerror(clxx::enqueue_map_buffer(cl_command_queue, cl_mem, cl_bool, map_flags_t, size_t, size_t, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_map_image(cl_command_queue, cl_mem, cl_bool, map_flags_t, const size_t*, const size_t*, size_t*, size_t*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_marker(cl_command_queue, cl_event*))
+%throws_clerror(clxx::enqueue_marker_with_wait_list(cl_command_queue, cl_event*))
 %throws_clerror(clxx::enqueue_migrate_mem_objects(cl_command_queue, cl_uint, const cl_mem*, mem_migration_flags_t, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_read_buffer(cl_command_queue, cl_mem, cl_bool, size_t, size_t, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_read_image(cl_command_queue, cl_mem, cl_bool, const size_t*, const size_t*, size_t, size_t, void*, cl_uint, const cl_event*, cl_event*))
