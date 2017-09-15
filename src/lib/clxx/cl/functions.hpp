@@ -2141,11 +2141,11 @@ enqueue_copy_image(cl_command_queue command_queue,
 /** // doc: enqueue_copy_image_to_buffer() {{{
  * \brief Enqueues a command to copy an image object to a buffer object
  *
- * This is a wrapper for \c clEnqueueCopyImageToBuffer(). The call to
+ * This is a wrapper for \c clEnqueueFillBuffer(). The call to
  * #enqueue_copy_image_to_buffer() has same effect as a call to
- *    - \c clEnqueueCopyImageToBuffer(command_queue, src_image, dst_buffer, src_origin, region, dst_offset, num_events_in_wait_list, event_wait_list, event)
+ *    - \c clEnqueueFillBuffer(command_queue, src_image, dst_buffer, src_origin, region, dst_offset, num_events_in_wait_list, event_wait_list, event)
  *
- * The main difference between #enqueue_copy_image_to_buffer() and \c clEnqueueCopyImageToBuffer()
+ * The main difference between #enqueue_copy_image_to_buffer() and \c clEnqueueFillBuffer()
  * is that it throws %clxx exceptions instead of returning OpenCL error codes.
  *
  * \param command_queue
@@ -2209,33 +2209,33 @@ enqueue_copy_image(cl_command_queue command_queue,
  *    element of the \p event_wait_list array
  *
  * \throw clerror_no<status_t::invalid_command_queue>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_INVALID_COMMAND_QUEUE.
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_COMMAND_QUEUE.
  * \throw clerror_no<status_t::invalid_context>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_INVALID_CONTEXT.
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_CONTEXT.
  * \throw clerror_no<status_t::invalid_mem_object>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_INVALID_MEM_OBJECT.
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_MEM_OBJECT.
  * \throw clerror_no<status_t::invalid_value>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_INVALID_VALUE.
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_VALUE.
  * \throw clerror_no<status_t::invalid_event_wait_list>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_EVENT_WAIT_LIST.
  * \throw clerror_no<status_t::misaligned_sub_buffer_offset>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_MISALIGNED_SUB_BUFFER_OFFSET.
+ *    When \c clEnqueueFillBuffer() returns \c CL_MISALIGNED_SUB_BUFFER_OFFSET.
  * \throw clerror_no<status_t::invalid_image_size>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_INVALID_IMAGE_SIZE.
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_IMAGE_SIZE.
  * \throw clerror_no<status_t::image_format_not_supported>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
+ *    When \c clEnqueueFillBuffer() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
  * \throw clerror_no<status_t::exec_status_error_for_events_in_wait_list>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
+ *    When \c clEnqueueFillBuffer() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
  * \throw clerror_no<status_t::mem_object_allocation_failure>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ *    When \c clEnqueueFillBuffer() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
  * \throw clerror_no<status_t::invalid_operation>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_INVALID_OPERATION.
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_OPERATION.
  * \throw clerror_no<status_t::out_of_resources>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_OUT_OF_RESOURCES.
+ *    When \c clEnqueueFillBuffer() returns \c CL_OUT_OF_RESOURCES.
  * \throw clerror_no<status_t::out_of_host_memory>
- *    When \c clEnqueueCopyImageToBuffer() returns \c CL_OUT_OF_HOST_MEMORY.
+ *    When \c clEnqueueFillBuffer() returns \c CL_OUT_OF_HOST_MEMORY.
  * \throw unexpected_clerror
- *    When \c clEnqueueCopyImageToBuffer() returns other error code.
+ *    When \c clEnqueueFillBuffer() returns other error code.
  *
  *
  * \par Available in OpenCL versions
@@ -2243,7 +2243,7 @@ enqueue_copy_image(cl_command_queue command_queue,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyImageToBuffer.html">clEnqueueCopyImageToBuffer()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueFillBuffer.html">clEnqueueFillBuffer()</a>
  *
  */ // }}}
 void
@@ -2256,6 +2256,111 @@ enqueue_copy_image_to_buffer(cl_command_queue command_queue,
                              cl_uint num_events_in_wait_list,
                              const cl_event* event_wait_list,
                              cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+/** // doc: enqueue_fill_buffer() {{{
+ * \brief Enqueues a command to fill a buffer object with a pattern of a given
+ *        pattern size
+ *
+ * This is a wrapper for \c clEnqueueFillBuffer(). The call to
+ * #enqueue_fill_buffer() has same effect as a call to
+ *    - \c clEnqueueFillBuffer(command_queue, buffer, pattern, pattern_size, offset, size, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_fill_buffer() and \c clEnqueueFillBuffer()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Refers to the host command-queue in which the fill command will be
+ *    queued. The OpenCL context associated with \p command_queue and \p buffer
+ *    must be the same.
+ * \param buffer
+ *    A valid buffer object.
+ * \param pattern
+ *    A pointer to the data pattern of size \p pattern_size in bytes. pattern
+ *    will be used to fill a region in buffer starting at \p offset and is
+ *    \p size bytes in size. The data pattern must be a scalar or vector
+ *    integer or floating-point data type. For example, if \p buffer is to be
+ *    filled with a pattern of \c float4 values, then \p pattern will be a
+ *    pointer to a \c cl_float4 value and \p pattern_size will be
+ *    <tt>sizeof(cl_float4)</tt>. The maximum value of \p pattern_size is the
+ *    size of the largest integer or floating-point vector data type supported
+ *    by the OpenCL device. The memory associated with \p pattern can be reused
+ *    or freed after the function returns.
+ * \param offset
+ *    The location in bytes of the region being filled in \p buffer and must be
+ *    a multiple of \p pattern_size.
+ * \param size
+ *    The size in bytes of region being filled in \p buffer and must be a
+ *    multiple of \p pattern_size.
+ * \param num_events_in_wait_list
+ *    Number of events in the \p event_wait_list.
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
+ *    If \p event_wait_list is not \c NULL, the list of events pointed to by
+ *    \p event_wait_list must be valid and \p num_events_in_wait_list must be
+ *    greater than \c 0.
+ * \param event_wait_list
+ *    Together with \p num_events_in_wait_list specify events that need to
+ *    complete before this particular command can be executed. If
+ *    \p event_wait_list is \c NULL, then this particular command does not wait
+ *    on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be
+ *    valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization points. The
+ *    context associated with events in \p event_wait_list and \p command_queue
+ *    must be the same. The memory associated with \p event_wait_list can be
+ *    reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular write command and
+ *    can be used to query or queue a wait for this particular command to
+ *    complete.\p event can be \c NULL in which case it will not be possible
+ *    for the application to query the status of this command or queue a wait
+ *    for this command to complete.
+ *    \ref clxx::enqueue_barrier_with_wait_list "enqueue_barrier_with_wait_list"
+ *    can be used instead. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_MEM_OBJECT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueFillBuffer() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::misaligned_sub_buffer_offset>
+ *    When \c clEnqueueFillBuffer() returns \c CL_MISALIGNED_SUB_BUFFER_OFFSET.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clEnqueueFillBuffer() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueFillBuffer() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueFillBuffer() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueFillBuffer() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueFillBuffer.html">clEnqueueFillBuffer()</a>
+ *
+ */ // }}}
+void
+enqueue_fill_buffer(cl_command_queue command_queue,
+                    cl_mem buffer,
+                    const void* pattern,
+                    size_t pattern_size,
+                    size_t offset,
+                    size_t size,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event);
+#endif
 /** // doc: enqueue_map_buffer() {{{
  * \brief Enqueues a command to map a region of the buffer object given by \p
  *        buffer into the host address space and returns a pointer to this

@@ -928,7 +928,6 @@ class Dummy_clEnqueueFillBuffer
                              cl_event*>
 {
   cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueFillBuffer( cl_command_queue command_queue, cl_mem buffer,
                               const void *pattern, size_t pattern_size,
                               size_t offset, size_t size,
@@ -942,7 +941,7 @@ public:
    * \param err Error code to be returned by the mock
    * \param event An event to be returned
    */ // }}}
-  Dummy_clEnqueueFillBuffer(cl_int err, const cl_event* event = nullptr);
+  Dummy_clEnqueueFillBuffer(cl_int err);
 };
 #endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
@@ -2863,15 +2862,11 @@ clEnqueueFillBuffer( cl_command_queue command_queue, cl_mem buffer,
 {
   call_with( command_queue, buffer, pattern, pattern_size, offset, size,
              num_events_in_wait_list, event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
   return _err;
 }
 Dummy_clEnqueueFillBuffer::
-Dummy_clEnqueueFillBuffer(cl_int err, const cl_event* event)
-  :_err(err), _event(event)
+Dummy_clEnqueueFillBuffer(cl_int err)
+  :_err(err)
 {
 }
 #endif

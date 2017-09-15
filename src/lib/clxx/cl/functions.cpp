@@ -888,6 +888,38 @@ enqueue_copy_image_to_buffer(cl_command_queue command_queue,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+void
+enqueue_fill_buffer(cl_command_queue command_queue,
+                    cl_mem buffer,
+                    const void* pattern,
+                    size_t pattern_size,
+                    size_t offset,
+                    size_t size,
+                    cl_uint num_events_in_wait_list,
+                    const cl_event* event_wait_list,
+                    cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueFillBuffer(
+      command_queue,
+      buffer,
+      pattern,
+      pattern_size,
+      offset,
+      size,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void*
 enqueue_map_buffer( cl_command_queue command_queue, cl_mem buffer,
                     cl_bool blocking_map, map_flags_t map_flags,
