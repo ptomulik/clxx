@@ -3261,6 +3261,7 @@ enqueue_read_buffer(cl_command_queue command_queue,
                     cl_uint num_events_in_wait_list,
                     const cl_event* event_wait_list,
                     cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
 /** // doc: enqueue_read_buffer_rect() {{{
  * \brief Enqueue command to read from a 2D or 3D rectangular region from a
  *        buffer object to host memory.
@@ -3401,6 +3402,7 @@ enqueue_read_buffer_rect(cl_command_queue command_queue,
                          cl_uint num_events_in_wait_list,
                          const cl_event* event_wait_list,
                          cl_event* event);
+#endif
 /** // doc: enqueue_read_image() {{{
  * \brief Enqueue commands to read from an image or image array object to host memory.
  *
