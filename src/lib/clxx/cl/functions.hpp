@@ -3170,7 +3170,8 @@ enqueue_ndrange_kernel(cl_command_queue command_queue,
  *
  * \param command_queue
  *    Is a valid host command-queue in which the read command will be queued.
- *    \p command_queue and buffer must be created with the same OpenCL context.
+ *    \p command_queue and \p buffer must be created with the same OpenCL
+ *    context.
  * \param buffer
  *    Refers to a valid buffer object.
  * \param blocking_read
@@ -3260,6 +3261,146 @@ enqueue_read_buffer(cl_command_queue command_queue,
                     cl_uint num_events_in_wait_list,
                     const cl_event* event_wait_list,
                     cl_event* event);
+/** // doc: enqueue_read_buffer_rect() {{{
+ * \brief Enqueue command to read from a 2D or 3D rectangular region from a
+ *        buffer object to host memory.
+ *
+ * This is a wrapper for \c clEnqueueReadBufferRect(). The call to
+ * #enqueue_read_buffer_rect() has same effect as a call to
+ *    - \c clEnqueueReadBufferRect(command_queue, buffer, blocking_read, buffer_origin, host_origin, region, buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_read_buffer_rect() and \c clEnqueueReadBufferRect()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Is a valid host command-queue in which the read command will be queued.
+ *    \p command_queue and \p buffer must be created with the same OpenCL context.
+ * \param buffer
+ *    Refers to a valid buffer object.
+ * \param blocking_read
+ *    Indicates if the read operations are \e blocking or \e non-blocking.
+ *    If \p blocking_read is \c CL_TRUE i.e. the read command is blocking,
+ *    #enqueue_read_buffer_rect() does not return until the buffer data has been
+ *    read and copied into memory pointed to by \p ptr.
+ *    If \p blocking_read is \c CL_FALSE i.e. the read command is non-blocking,
+ *    #enqueue_read_buffer_rect() queues a non-blocking read command and returns.
+ *    The contents of the buffer that \p ptr points to cannot be used until the
+ *    read command has completed. The \p event argument returns an event object
+ *    which can be used to query the execution status of the read command. When
+ *    the read command has completed, the contents of the buffer that \p ptr
+ *    points to can be used by the application.
+ * \param buffer_origin
+ *    The (x, y, z) offset in the memory region associated with \p buffer. For
+ *    a 2D rectangle region, the \c z value given by \p buffer_origin[2] should
+ *    be \c 0. The offset in bytes is computed as \p buffer_origin[2] *
+ *    \p buffer_slice_pitch + \p buffer_origin[1] * \p buffer_row_pitch +
+ *    \p buffer_origin[0].
+ * \param host_origin
+ *    The (x, y, z) offset in the memory region pointed to by \p ptr. For a 2D
+ *    rectangle region, the \c z value given by \p host_origin[2] should be
+ *    \c 0. The offset in bytes is computed as \p host_origin[2] *
+ *    \p host_slice_pitch + \p host_origin[1] * \p host_row_pitch +
+ *    \p host_origin[0].
+ * \param region
+ *    The (width in bytes, height in rows, depth in slices) of the 2D or 3D
+ *    rectangle being read or written. For a 2D rectangle copy, the depth value
+ *    given by \p region[2] should be \c 1. The values in \p region cannot be
+ *    \c 0.
+ * \param buffer_row_pitch
+ *    The length of each row in bytes to be used for the memory region
+ *    associated with \p buffer. If \p buffer_row_pitch is \c 0,
+ *    \p buffer_row_pitch is computed as \p region[0].
+ * \param buffer_slice_pitch
+ *    The length of each 2D slice in bytes to be used for the memory region
+ *    associated with \p buffer. If \p buffer_slice_pitch is \c 0,
+ *    \p buffer_slice_pitch is computed as \p region[1] * \p buffer_row_pitch.
+ * \param host_row_pitch
+ *    The length of each row in bytes to be used for the memory region pointed
+ *    to by \p ptr. If \p host_row_pitch is \c 0, \p host_row_pitch is computed
+ *    as \p region[0].
+ * \param host_slice_pitch
+ *    The length of each 2D slice in bytes to be used for the memory region
+ *    pointed to by \p ptr. If \p host_slice_pitch is \c 0, \p host_slice_pitch
+ *    is computed as \p region[1] * \p host_row_pitch.
+ * \param ptr
+ *    The pointer to buffer in host memory where data is to be read into.
+ * \param num_events_in_wait_list
+ *    Number of events in the \p event_wait_list.
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
+ *    If \p event_wait_list is not \c NULL, the list of events pointed to by
+ *    \p event_wait_list must be valid and \p num_events_in_wait_list must be
+ *    greater than \c 0.
+ * \param event_wait_list
+ *    \p event_wait_list and \p num_events_in_wait_list specify events that
+ *    need to complete before this particular command can be executed. If
+ *    \p event_wait_list is \c NULL, then this particular command does not wait
+ *    on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be valid
+ *    and \p num_events_in_wait_list must be greater than \c 0.  The events
+ *    specified in \p event_wait_list act as synchronization points. The
+ *    context associated with events in \p event_wait_list and \p command_queue
+ *    must be the same. The memory associated with \p event_wait_list can be
+ *    reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular read command and
+ *    can be used to query or queue a wait for this particular command to
+ *    complete.\p event can be \c NULL in which case it will not be possible
+ *    for the application to query the status of this command or queue a wait
+ *    for this command to complete. If the \p event_wait_list and the \p event
+ *    arguments are not \c NULL, the event argument should not refer to an
+ *    element of the \p event_wait_list array
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_INVALID_MEM_OBJECT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::misaligned_sub_buffer_offset>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_MISALIGNED_SUB_BUFFER_OFFSET.
+ * \throw clerror_no<status_t::exec_status_error_for_events_in_wait_list>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_INVALID_OPERATION.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueReadBufferRect() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueReadBufferRect() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">clEnqueueReadBufferRect()</a>
+ *
+ */ // }}}
+void
+enqueue_read_buffer_rect(cl_command_queue command_queue,
+                         cl_mem buffer,
+                         cl_bool blocking_read,
+                         const size_t* buffer_origin,
+                         const size_t* host_origin,
+                         const size_t* region,
+                         size_t buffer_row_pitch,
+                         size_t buffer_slice_pitch,
+                         size_t host_row_pitch,
+                         size_t host_slice_pitch,
+                         void* ptr,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event);
 /** // doc: enqueue_read_image() {{{
  * \brief Enqueue commands to read from an image or image array object to host memory.
  *
@@ -3483,7 +3624,8 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
  *
  * \param command_queue
  *    Is a valid host command-queue in which the write command will be queued.
- *    \p command_queue and buffer must be created with the same OpenCL context.
+ *    \p command_queue and \p buffer must be created with the same OpenCL
+ *    context.
  * \param buffer
  *    Refers to a valid buffer object.
  * \param blocking_write

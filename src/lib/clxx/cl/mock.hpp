@@ -426,6 +426,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
     slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event )
 );
 
+
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueUnmapMemObject,
   ( cl_command_queue command_queue, cl_mem memobj, void* mapped_ptr,

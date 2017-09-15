@@ -1205,28 +1205,26 @@ class Dummy_clEnqueueReadBufferRect
                              cl_event*>
 {
   cl_int _err;
-  const cl_event* _event;
-  cl_int clEnqueueReadBufferRectRect( cl_command_queue command_queue,
-                                      cl_mem buffer, cl_bool blocking_read,
-                                      const size_t* buffer_origin,
-                                      const size_t* host_origin,
-                                      const size_t* region,
-                                      size_t buffer_row_pitch,
-                                      size_t buffer_splice_pitch,
-                                      size_t host_row_pitch,
-                                      size_t host_slice_pitch,
-                                      void* ptr,
-                                      cl_uint num_events_in_wait_list,
-                                      const cl_event* event_wait_list,
-                                      cl_event* event );
+  cl_int clEnqueueReadBufferRect( cl_command_queue command_queue,
+                                  cl_mem buffer, cl_bool blocking_read,
+                                  const size_t* buffer_origin,
+                                  const size_t* host_origin,
+                                  const size_t* region,
+                                  size_t buffer_row_pitch,
+                                  size_t buffer_splice_pitch,
+                                  size_t host_row_pitch,
+                                  size_t host_slice_pitch,
+                                  void* ptr,
+                                  cl_uint num_events_in_wait_list,
+                                  const cl_event* event_wait_list,
+                                  cl_event* event );
 public:
   /** // doc: Dummy_clEnqueueReadBufferRect() {{{
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
-   * \param event An event to be returned
    */ // }}}
-  Dummy_clEnqueueReadBufferRect(cl_int err, const cl_event* event = nullptr);
+  Dummy_clEnqueueReadBufferRect(cl_int err);
 };
 #endif
 /** // doc: Dummy_clEnqueueReadImage {{{
@@ -1323,7 +1321,7 @@ class Dummy_clEnqueueWriteBufferRect
 {
   cl_int _err;
   const cl_event* _event;
-  cl_int clEnqueueWriteBufferRectRect( cl_command_queue command_queue,
+  cl_int clEnqueueWriteBufferRect( cl_command_queue command_queue,
                                       cl_mem buffer, cl_bool blocking_read,
                                       const size_t* buffer_origin,
                                       const size_t* host_origin,
@@ -3126,33 +3124,29 @@ Dummy_clEnqueueReadBuffer(cl_int err, const cl_event* event)
 /* ------------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
 cl_int Dummy_clEnqueueReadBufferRect::
-clEnqueueReadBufferRectRect( cl_command_queue command_queue,
-                             cl_mem buffer, cl_bool blocking_read,
-                             const size_t* buffer_origin,
-                             const size_t* host_origin,
-                             const size_t* region,
-                             size_t buffer_row_pitch,
-                             size_t buffer_splice_pitch,
-                             size_t host_row_pitch,
-                             size_t host_slice_pitch,
-                             void* ptr,
-                             cl_uint num_events_in_wait_list,
-                             const cl_event* event_wait_list,
-                             cl_event* event )
+clEnqueueReadBufferRect( cl_command_queue command_queue,
+                         cl_mem buffer, cl_bool blocking_read,
+                         const size_t* buffer_origin,
+                         const size_t* host_origin,
+                         const size_t* region,
+                         size_t buffer_row_pitch,
+                         size_t buffer_splice_pitch,
+                         size_t host_row_pitch,
+                         size_t host_slice_pitch,
+                         void* ptr,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list,
+                         cl_event* event )
 {
   call_with( command_queue, buffer, blocking_read, buffer_origin, host_origin,
              region, buffer_row_pitch, buffer_splice_pitch, host_row_pitch,
              host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
              event);
-  if(event && _event)
-    {
-      *event = *_event;
-    }
   return _err;
 }
 Dummy_clEnqueueReadBufferRect::
-Dummy_clEnqueueReadBufferRect(cl_int err, const cl_event* event)
-  :_err(err), _event(event)
+Dummy_clEnqueueReadBufferRect(cl_int err)
+  :_err(err)
 {
 }
 #endif
@@ -3231,7 +3225,7 @@ Dummy_clEnqueueWriteBuffer(cl_int err, const cl_event* event)
 /* ------------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
 cl_int Dummy_clEnqueueWriteBufferRect::
-clEnqueueWriteBufferRectRect( cl_command_queue command_queue,
+clEnqueueWriteBufferRect( cl_command_queue command_queue,
                              cl_mem buffer, cl_bool blocking_read,
                              const size_t* buffer_origin,
                              const size_t* host_origin,
