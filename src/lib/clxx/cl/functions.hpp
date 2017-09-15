@@ -1313,6 +1313,64 @@ create_program_with_source(cl_context context,
                            cl_uint count,
                            const char** strings,
                            const size_t* lengths);
+#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+/** // doc: create_sampler() {{{
+ * \brief Creates a sampler object
+ *
+ * This is a wrapper for \c clCreateSampler(). The call to
+ * #create_sampler() has same effect as a call to
+ *    - \c clCreateSampler(context, normalized_coords, static_cast<cl_addressing_mode>(addressing_mode), static_cast<cl_filter_mode>(filter_mode), &errcode)
+ *
+ * with \c errcode being internally defined by #create_sampler().
+ *
+ * The main difference between #create_sampler() and \c clCreateSampler()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param context
+ *    Must be a valid OpenCL context.
+ * \param normalized_coords
+ *    Determines if the image coordinates specified are normalized (if \e
+ *    normalized_coords is \c CL_TRUE) or not (if \e normalized_coords is
+ *    \c CL_FALSE).
+ * \param addressing_mode
+ *    Specifies how out-of-range image coordinates are handled when reading
+ *    from an image. See documentation of
+ *    \ref clxx::addressing_mode_t "addressing_mode_t"
+ *    for the list of possible values.
+ * \param filter_mode
+ *    Specifies the type of filter that must be applied when reading an image.
+ *    See documentation of \ref clxx::filter_mode_t "filter_mode_t" for the
+ *    list of possible values.
+ *
+ * \returns The newly created sampler
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clCreateSampler() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clCreateSampler() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clCreateSampler() returns \c CL_INVALID_OPERATION.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clCreateSampler() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clCreateSampler() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clCreateSampler() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |  \check   |   \check  |   \check  |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSampler.html">clCreateSampler()</a>
+ */ // }}}
+cl_sampler
+create_sampler( cl_context context,
+                cl_bool normalized_coords,
+                addressing_mode_t addressing_mode,
+                filter_mode_t filter_mode);
+#endif
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 /** // doc: create_sub_buffer() {{{
  * \brief Creates a buffer object (referred to as a sub-buffer object) from an

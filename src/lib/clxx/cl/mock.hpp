@@ -182,6 +182,16 @@ CXXTEST_MOCK_GLOBAL(cl_program,
   ( context, count, strings, lengths, errcode_ret )
 );
 
+#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+CXXTEST_MOCK_GLOBAL(cl_sampler,
+  clCreateSampler,
+  ( cl_context context, cl_bool normalized_coords,
+    cl_addressing_mode addressing_mode, cl_filter_mode filter_mode,
+    cl_int* errcode_ret ),
+  ( context, normalized_coords, addressing_mode, filter_mode, errcode_ret )
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreateSubBuffer,

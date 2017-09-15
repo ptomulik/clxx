@@ -599,6 +599,29 @@ create_program_with_source(cl_context context,
   return p;
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+cl_sampler
+create_sampler( cl_context context,
+                cl_bool normalized_coords,
+                addressing_mode_t addressing_mode,
+                filter_mode_t filter_mode)
+{
+  cl_int s = CL_SUCCESS;
+  cl_sampler m = T::clCreateSampler(
+      context,
+      normalized_coords,
+      static_cast<cl_addressing_mode>(addressing_mode),
+      static_cast<cl_filter_mode>(filter_mode),
+      &s
+  );
+  if(is_error(static_cast<status_t>(s)))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+  return m;
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 cl_mem
 create_sub_buffer(cl_mem buffer, mem_flags_t flags,

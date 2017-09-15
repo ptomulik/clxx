@@ -610,6 +610,30 @@ public:
    */ // }}}
   Dummy_clCreateProgramWithSource(cl_program program, cl_int err);
 };
+#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+/** // doc: Dummy_clCreateSampler {{{
+ * \brief Default mock for clCreateSampler OpenCL function.
+ */ // }}}
+class Dummy_clCreateSampler
+  : public T::Base_clCreateSampler,
+    public T::Dummy_CallArgs<cl_context, cl_bool, cl_addressing_mode,
+                             cl_filter_mode, cl_int*>
+{
+  cl_sampler _sampler;
+  cl_int _err;
+  cl_sampler clCreateSampler( cl_context context, cl_bool normalized_coords,
+                              cl_addressing_mode addressing_mode, cl_filter_mode
+                              filter_mode, cl_int* errcode_ret);
+public:
+  /** // doc: Dummy_clCreateSampler() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param sampler Sampler object to be returned to caller
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clCreateSampler(cl_sampler sampler, cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 /** // doc: Dummy_clCreateSubBuffer {{{
  * \brief Default mock for clCreateSubBuffer OpenCL function.
@@ -1058,7 +1082,7 @@ class Dummy_clEnqueueReadBuffer
                               const cl_event* event_wait_list,
                               cl_event* event);
 public:
-  /** // doc: Dummy_clCreateSubBuffer() {{{
+  /** // doc: Dummy_clEnqueueReadBuffer() {{{
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
@@ -1175,7 +1199,7 @@ class Dummy_clEnqueueWriteBuffer
                                const cl_event* event_wait_list,
                                cl_event* event);
 public:
-  /** // doc: Dummy_clCreateSubBuffer() {{{
+  /** // doc: Dummy_clEnqueueWriteBuffer() {{{
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
@@ -2502,6 +2526,26 @@ Dummy_clCreateProgramWithSource(cl_program program, cl_int err)
   :_program(program), _err(err)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+cl_sampler Dummy_clCreateSampler::
+clCreateSampler( cl_context context, cl_bool normalized_coords,
+                 cl_addressing_mode addressing_mode, cl_filter_mode filter_mode,
+                 cl_int* errcode_ret )
+{
+  call_with(context, normalized_coords, addressing_mode, filter_mode, errcode_ret);
+  if(errcode_ret)
+    {
+      *errcode_ret = _err;
+    }
+  return _sampler;
+}
+Dummy_clCreateSampler::
+Dummy_clCreateSampler(cl_sampler sampler, cl_int err)
+  : _sampler(sampler), _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
 cl_mem Dummy_clCreateSubBuffer::

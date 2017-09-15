@@ -336,7 +336,7 @@ def dload_opencl_hdr(**kw):
                     'cl_platform.h',
                     'opencl.h'  ]
     elif ver == '1.2':
-        files = [   'cl.hpp',
+        files = [   'cl.h',
                     'cl_d3d10.h',
                     'cl_d3d11.h',
                     'cl_dx9_media_sharing.h',
