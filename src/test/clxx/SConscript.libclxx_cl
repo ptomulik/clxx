@@ -44,6 +44,8 @@ tests = [
     'cl/functions/create_sub_buffer.t.h',
     'cl/functions/create_sub_devices.t.h',
     'cl/functions/create_user_event.t.h',
+    'cl/functions/enqueue_barrier.t.h',
+    'cl/functions/enqueue_barrier_with_wait_list.t.h',
     'cl/functions/enqueue_copy_buffer.t.h',
     'cl/functions/enqueue_copy_buffer_to_image.t.h',
     'cl/functions/enqueue_copy_image.t.h',

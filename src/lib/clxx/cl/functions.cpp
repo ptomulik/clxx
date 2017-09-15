@@ -701,6 +701,38 @@ create_user_event(cl_context context)
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+void
+enqueue_barrier(cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(T::clEnqueueBarrier(command_queue));
+  if(is_error(s))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+void
+enqueue_barrier_with_wait_list(cl_command_queue command_queue,
+                               cl_uint num_events_in_wait_list,
+                               const cl_event* event_wait_list,
+                               cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueBarrierWithWaitList(command_queue,
+                                      num_events_in_wait_list,
+                                      event_wait_list,
+                                      event)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(static_cast<status_t>(s));
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 enqueue_copy_buffer( cl_command_queue command_queue, cl_mem src_buffer,
                      cl_mem dst_buffer, size_t src_offset, size_t dst_offset,

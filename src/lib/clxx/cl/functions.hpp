@@ -1577,6 +1577,109 @@ create_sub_devices(cl_device_id in_device,
 cl_event
 create_user_event(cl_context context);
 #endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+/** // doc: enqueue_barrier() {{{
+ * \brief A synchronization point that enqueues a barrier operation.
+ *
+ * This is a wrapper for \c clEnqueueBarrier(). The call to
+ * #enqueue_barrier() has same effect as a call to
+ *    - \c clEnqueueBarrier(command_queue)
+ *
+ * The main difference between #enqueue_barrier() and \c clEnqueueBarrier()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    The host command-queue in which the copy command will be queued.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueBarrier() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueBarrier() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueBarrier() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueBarrier() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueBarrier.html">clEnqueueBarrier()</a>
+ *
+ */ // }}}
+void
+enqueue_barrier(cl_command_queue command_queue);
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+/** // doc: enqueue_barrier_with_wait_list() {{{
+ * \brief A synchronization point that enqueues a barrier operation.
+ *
+ * This is a wrapper for \c clEnqueueBarrierWithWaitList(). The call to
+ * #enqueue_barrier_with_wait_list() has same effect as a call to
+ *    - \c clEnqueueBarrierWithWaitList(command_queue)
+ *
+ * The main difference between #enqueue_barrier_with_wait_list() and \c clEnqueueBarrierWithWaitList()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    A valid host command queue.
+ * \param num_events_in_wait_list
+ *    Number of events in \e events_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed.
+ *
+ *    If \e event_wait_list is \c NULL, \e num_events_in_wait_list must be 0.
+ *    If \e event_wait_list is not \c NULL, the list of events pointed to by
+ *    \e event_wait_list must be valid and \e num_events_in_wait_list must be
+ *    greater than \c 0. The events specified in \e event_wait_list act as
+ *    synchronization points. The context associated with events in
+ *    \e event_wait_list and command_queue must be the same. The memory
+ *    associated with \e event_wait_list can be reused or freed after the
+ *    function returns.
+ *
+ *    If \e event_wait_list is NULL, then this particular command waits until
+ *    all previous enqueued commands to command_queue have completed.
+ * \param event
+ *    Returns an event object that identifies this particular command. Event
+ *    objects are unique and can be used to identify this barrier command later
+ *    on. \e event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. If the \e event_wait_list and the \e event arguments
+ *    are not \c NULL, the \e event argument should not refer to an element of
+ *    the \e event_wait_list array.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueBarrierWithWaitList() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueBarrierWithWaitList() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueBarrierWithWaitList() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueBarrierWithWaitList() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueBarrierWithWaitList() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueBarrierWithWaitList() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |  \check   |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueBarrierWithWaitList.html">clEnqueueBarrierWithWaitList()</a>
+ *
+ */ // }}}
+void
+enqueue_barrier_with_wait_list(cl_command_queue command_queue,
+                               cl_uint num_events_in_wait_list,
+                               const cl_event* event_wait_list,
+                               cl_event* event);
+#endif
 /** // doc: enqueue_copy_buffer() {{{
  * \brief Enqueues a command to copy from one buffer object to another
  *

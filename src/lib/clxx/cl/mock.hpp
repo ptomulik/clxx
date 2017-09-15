@@ -227,6 +227,24 @@ CXXTEST_MOCK_GLOBAL(cl_event,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueBarrier,
+  ( cl_command_queue command_queue),
+  ( command_queue )
+);
+#endif
+
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueBarrierWithWaitList,
+  ( cl_command_queue command_queue, cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list, cl_event* event ),
+  ( command_queue, num_events_in_wait_list, event_wait_list, event )
+);
+#endif
+
+
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueCopyBuffer,
   ( cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer,

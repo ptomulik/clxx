@@ -731,6 +731,47 @@ public:
   Dummy_clCreateUserEvent(cl_event event, cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+/** // doc: Dummy_clEnqueueBarrier {{{
+ * \brief Default mock for clEnqueueBarrier OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueBarrier
+  : public T::Base_clEnqueueBarrier,
+    public T::Dummy_CallArgs<cl_command_queue>
+{
+  cl_int _err;
+  cl_int clEnqueueBarrier( cl_command_queue command_queue );
+public:
+  /** // doc: Dummy_clEnqueueBarrier() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueBarrier(cl_int err);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+/** // doc: Dummy_clEnqueueBarrierWithWaitList {{{
+ * \brief Default mock for clEnqueueBarrierWithWaitList OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueBarrierWithWaitList
+  : public T::Base_clEnqueueBarrierWithWaitList,
+    public T::Dummy_CallArgs<cl_command_queue, cl_uint, const cl_event*, cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueBarrierWithWaitList( cl_command_queue command_queue,
+                                       cl_uint num_events_in_wait_list,
+                                       const cl_event* event_wait_list,
+                                       cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueBarrierWithWaitList() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueBarrierWithWaitList(cl_int err);
+};
+#endif
 /** // doc: Dummy_clEnqueueCopyBuffer {{{
  * \brief Default mock for clEnqueueCopyBuffer OpenCL function.
  */ // }}}
@@ -2650,6 +2691,37 @@ clCreateUserEvent( cl_context context, cl_int* errcode_ret )
 Dummy_clCreateUserEvent::
 Dummy_clCreateUserEvent(cl_event event, cl_int err)
   :_event(event), _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+cl_int Dummy_clEnqueueBarrier::
+clEnqueueBarrier( cl_command_queue command_queue )
+{
+  call_with( command_queue );
+  return _err;
+}
+Dummy_clEnqueueBarrier::
+Dummy_clEnqueueBarrier(cl_int err )
+  :_err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+cl_int Dummy_clEnqueueBarrierWithWaitList::
+clEnqueueBarrierWithWaitList( cl_command_queue command_queue,
+                              cl_uint num_events_in_wait_list,
+                              const cl_event* event_wait_list,
+                              cl_event* event )
+{
+  call_with( command_queue, num_events_in_wait_list, event_wait_list, event );
+  return _err;
+}
+Dummy_clEnqueueBarrierWithWaitList::
+Dummy_clEnqueueBarrierWithWaitList(cl_int err )
+  :_err(err)
 {
 }
 #endif

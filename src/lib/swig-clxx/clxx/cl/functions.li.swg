@@ -36,6 +36,8 @@
 %throws_clerror(clxx::create_sub_buffer(cl_mem, mem_flags_t, buffer_create_type_t, const void*))
 %throws_clerror(clxx::create_sub_devices(cl_device_id, const cl_device_partition_property *, cl_uint, cl_device_id *, cl_uint *))
 %throws_clerror(clxx::create_user_event(cl_context))
+%throws_clerror(clxx::enqueue_barrier(cl_command_queue))
+%throws_clerror(clxx::enqueue_barrier_with_wait_list(cl_command_queue, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_copy_buffer(cl_command_queue, cl_mem, cl_mem, size_t, size_t, size_t, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_copy_buffer_to_image(cl_command_queue, cl_mem, cl_mem, size_t, const size_t*, const size_t*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_copy_image(cl_command_queue, cl_mem, cl_mem, const size_t*, const size_t*, const size_t*, cl_uint, const cl_event*, cl_event*))
