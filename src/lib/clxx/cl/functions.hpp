@@ -145,7 +145,7 @@ build_program(cl_program program,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |           |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clXxx.html">clXxx()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCloneKernel.html">clCloneKernel()</a>
  */ // }}}
 cl_kernel
 clone_kernel(cl_kernel source_kernel);
@@ -924,7 +924,7 @@ create_image_3d(cl_context context,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clXxx.html">clXxx()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCreateKernel.html">clCreateKernel()</a>
  */ // }}}
 cl_kernel
 create_kernel(cl_program program,
