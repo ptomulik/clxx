@@ -1752,6 +1752,7 @@ get_mem_object_info(cl_mem memobj,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
 void
 get_pipe_info(cl_mem pipe,
               pipe_info_t param_name,
@@ -1772,6 +1773,7 @@ get_pipe_info(cl_mem pipe,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 void
 get_platform_ids(cl_uint num_entries,
@@ -1997,6 +1999,16 @@ void
 release_program(cl_program program)
 {
   status_t s = static_cast<status_t>(T::clReleaseProgram(program));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
+release_sampler(cl_sampler sampler)
+{
+  status_t s = static_cast<status_t>(T::clReleaseSampler(sampler));
   if(is_error(s))
     {
       _throw_clerror_no(s);

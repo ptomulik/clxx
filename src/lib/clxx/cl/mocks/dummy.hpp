@@ -2179,6 +2179,23 @@ public:
    */ // }}}
   Dummy_clReleaseProgram(cl_int err);
 };
+/** // doc: Dummy_clReleaseSampler {{{
+ * \brief Default mock for clReleaseSampler OpenCL function.
+ */ // }}}
+class Dummy_clReleaseSampler
+  : public T::Base_clReleaseSampler,
+    public T::Dummy_CallArgs<cl_sampler>
+{
+  cl_int _err;
+  cl_int clReleaseSampler(cl_sampler sampler);
+public:
+  /** // doc: Dummy_clReleaseSampler() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clReleaseSampler(cl_int err);
+};
 /** // doc: Dummy_clRetainCommandQueue {{{
  * \brief Default mock for clRetainCommandQueue OpenCL function.
  */ // }}}
@@ -4112,6 +4129,18 @@ clReleaseProgram(cl_program program)
 }
 Dummy_clReleaseProgram::
 Dummy_clReleaseProgram(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clReleaseSampler::
+clReleaseSampler(cl_sampler sampler)
+{
+  call_with(sampler);
+  return _err;
+}
+Dummy_clReleaseSampler::
+Dummy_clReleaseSampler(cl_int err)
   : _err(err)
 {
 }

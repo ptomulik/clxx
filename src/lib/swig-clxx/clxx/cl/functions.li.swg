@@ -89,6 +89,7 @@
 %throws_clerror(clxx::release_kernel(cl_kernel))
 %throws_clerror(clxx::release_mem_object(cl_mem))
 %throws_clerror(clxx::release_program(cl_program))
+%throws_clerror(clxx::release_sampler(cl_sampler))
 %throws_clerror(clxx::retain_command_queue(cl_command_queue))
 %throws_clerror(clxx::retain_context(cl_context))
 %throws_clerror(clxx::retain_device(cl_device_id))

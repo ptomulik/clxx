@@ -5746,6 +5746,46 @@ release_mem_object(cl_mem memobj);
  */ // }}}
 void
 release_program(cl_program program);
+/** // doc: release_sampler(...) {{{
+ * \brief Decrements the \e sampler reference count
+ *
+ * This function is a wrapper around \c clReleaseSampler(). The call to this
+ * function has same effect as
+ *  - \c clReleaseSampler(sampler)
+ *
+ * The main difference between \ref release_sampler() and
+ * \c clReleaseSampler() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \note The sampler object is deleted after the reference count becomes zero
+ * and commands queued for execution on a command-queue(s) that use sampler
+ * have finished.
+ *
+ * \note Using this function to release a reference that was not obtained by
+ * creating the object or by calling #retain_sampler() causes undefined
+ * behavior.
+ *
+ * \param sampler
+ *    The sampler to be released
+ *
+ * \throw clerror_no<status_t::invalid_sampler>
+ *    When \c clReleaseSampler() returns CL_INVALID_PROGRAM.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clReleaseSampler() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clReleaseSampler() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clReleaseSampler() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseSampler.html">clReleaseSampler()</a>
+ */ // }}}
+void
+release_sampler(cl_sampler sampler);
 /** // doc: retain_command_queue(...) {{{
  * \brief Increment the \e command_queue reference count
  *

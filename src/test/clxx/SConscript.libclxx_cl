@@ -102,6 +102,7 @@ tests = [
     'cl/functions/release_kernel.t.h',
     'cl/functions/release_mem_object.t.h',
     'cl/functions/release_program.t.h',
+    'cl/functions/release_sampler.t.h',
     'cl/functions/retain_command_queue.t.h',
     'cl/functions/retain_context.t.h',
     'cl/functions/retain_device.t.h',

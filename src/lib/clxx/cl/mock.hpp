@@ -718,6 +718,11 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   (program));
 
 CXXTEST_MOCK_GLOBAL(cl_int,
+  clReleaseSampler,
+  (cl_sampler sampler),
+  (sampler));
+
+CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainCommandQueue,
   (cl_command_queue command_queue), (command_queue));
 
