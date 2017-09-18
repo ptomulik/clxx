@@ -1283,6 +1283,27 @@ public:
    */ // }}}
   Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+/** // doc: Dummy_clEnqueueWaitForEvents {{{
+ * \brief Default mock for clEnqueueWaitForEvents OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueWaitForEvents
+  : public T::Base_clEnqueueWaitForEvents,
+    public T::Dummy_CallArgs<cl_command_queue, cl_uint, const cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueWaitForEvents( cl_command_queue command_queue,
+                                 cl_uint num_events_,
+                                 const cl_event* event_list );
+public:
+  /** // doc: Dummy_clEnqueueWaitForEvents() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueWaitForEvents(cl_int err);
+};
+#endif
 /** // doc: Dummy_clEnqueueWriteBuffer {{{
  * \brief Default mock for clEnqueueWriteBuffer OpenCL function.
  */ // }}}
@@ -3200,6 +3221,22 @@ Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event)
   : _err(err), _event(event)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+cl_int Dummy_clEnqueueWaitForEvents::
+clEnqueueWaitForEvents( cl_command_queue command_queue,
+                        cl_uint num_events,
+                        const cl_event* event_list )
+{
+  call_with( command_queue, num_events, event_list );
+  return _err;
+}
+Dummy_clEnqueueWaitForEvents::
+Dummy_clEnqueueWaitForEvents(cl_int err)
+  :_err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clEnqueueWriteBuffer::
 clEnqueueWriteBuffer( cl_command_queue command_queue,

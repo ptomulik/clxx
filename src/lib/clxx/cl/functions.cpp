@@ -1266,6 +1266,26 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+void
+enqueue_wait_for_events(cl_command_queue command_queue,
+                        cl_uint num_events,
+                        const cl_event* event_list)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueWaitForEvents(
+        command_queue,
+        num_events,
+        event_list
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 enqueue_write_buffer( cl_command_queue command_queue, cl_mem buffer,
                       cl_bool blocking_write, size_t offset, size_t size,

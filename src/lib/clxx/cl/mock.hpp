@@ -436,6 +436,15 @@ CXXTEST_MOCK_GLOBAL(cl_int,
     event_wait_list, event )
 );
 
+#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueWaitForEvents,
+  ( cl_command_queue command_queue, cl_uint num_events,
+    const cl_event* event_list),
+  ( command_queue, num_events, event_list )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueWriteBuffer,
   ( cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_write,

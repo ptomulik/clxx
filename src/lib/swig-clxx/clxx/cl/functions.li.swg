@@ -54,6 +54,7 @@
 %throws_clerror(clxx::enqueue_read_buffer_rect(cl_command_queue, cl_mem, cl_bool, const size_t*, const size_t*, const size_t*, size_t, size_t, size_t, size_t, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_read_image(cl_command_queue, cl_mem, cl_bool, const size_t*, const size_t*, size_t, size_t, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_unmap_mem_object(cl_command_queue, cl_mem, void*, cl_uint, const cl_event*, cl_event*))
+%throws_clerror(clxx::enqueue_wait_for_events(cl_command_queue, cl_uint, const cl_event*))
 %throws_clerror(clxx::enqueue_write_buffer(cl_command_queue, cl_mem, cl_bool, size_t, size_t, const void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_write_image(cl_command_queue, cl_mem, cl_bool, const size_t*, const size_t*, size_t, size_t, const void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::get_command_queue_info(cl_command_queue, command_queue_info_t, size_t, void *, size_t *))

@@ -3614,6 +3614,75 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
                          cl_uint num_events_in_wait_list,
                          const cl_event* event_wait_list,
                          cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+/** // doc: enqueue_wait_for_events() {{{
+ * \brief Enqueues a wait for a specific event or a list of events to complete
+ *        before any future commands queued in the command-queue are executed.
+ *
+ * This is a wrapper for \c clEnqueueWaitForEvents(). The call to
+ * #enqueue_wait_for_events() has same effect as a call to
+ *    - \c clEnqueueWaitForEvents(command_queue, num_events, event_list)
+ *
+ * The main difference between #enqueue_wait_for_events() and \c clEnqueueWaitForEvents()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    A valid host command-queue.
+ * \param num_events
+ *    Specifies the number of events givent by \p event_list.
+ * \param event_list
+ *    Events specified in \p event_list act as synchronization points. The
+ *    context associated with events in \p event_list and \p command_queue must
+ *    be the same. Each event in \p event_list must be a valid event object
+ *    returned by a previous call to on of the following functions:
+ *
+ *    - #enqueue_ndrange_kernel(),
+ *    - #enqueue_task(),
+ *    - #enqueue_native_kernel(),
+ *    - #enqueue_read_image(),
+ *    - #enqueue_write_image(),
+ *    - #enqueue_map_image(),
+ *    - #enqueue_read_buffer(),
+ *    - #enqueue_write_buffer(),
+ *    - #enqueue_map_buffer(),
+ *    - #enqueue_unmap_mem_object(),
+ *    - #enqueue_read_buffer_rect(),
+ *    - #enqueue_write_buffer_rect(),
+ *    - #enqueue_copy_buffer(),
+ *    - #enqueue_copy_image(),
+ *    - #enqueue_copy_buffer_rect(),
+ *    - #enqueue_copy_buffer_to_image(),
+ *    - #enqueue_copy_image_to_buffer(),
+ *    - #enqueue_marker().
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueWaitForEvents() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueWaitForEvents() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueWaitForEvents() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event>
+ *    When \c clEnqueueWaitForEvents() returns \c CL_INVALID_EVENT.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueWaitForEvents() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueWaitForEvents() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueWaitForEvents() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWaitForEvents.html">clEnqueueWaitForEvents()</a>
+ *
+ */ // }}}
+void
+enqueue_wait_for_events(cl_command_queue command_queue,
+                        cl_uint num_events,
+                        const cl_event* event_list);
+#endif
 /** // doc: enqueue_write_buffer() {{{
  * \brief Enqueue commands to write to a buffer object from host memory
  *
