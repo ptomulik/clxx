@@ -2334,6 +2334,30 @@ public:
    */ // }}}
   Dummy_clRetainSampler(cl_int err);
 };
+#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+/** // doc: Dummy_clSetCommandQueueProperty {{{
+ * \brief Mock for clSetCommandQueueProperty OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetCommandQueueProperty
+  : public T::Base_clSetCommandQueueProperty,
+    public T::Dummy_CallArgs<cl_command_queue, cl_command_queue_properties, cl_bool, cl_command_queue_properties*>
+{
+  cl_int _err;
+  cl_int clSetCommandQueueProperty(cl_command_queue command_queue,
+                                      cl_command_queue_properties properties,
+                                      cl_bool enable,
+                                      cl_command_queue_properties* old_properties);
+public:
+  /** // doc: Dummy_clSetCommandQueueProperty() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetCommandQueueProperty(cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /** // doc: Dummy_clSetEventCallback {{{
  * \brief Mock for clSetEventCallback OpenCL function.
@@ -4259,6 +4283,23 @@ Dummy_clRetainSampler(cl_int err)
   : _err(err)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+cl_int Dummy_clSetCommandQueueProperty::
+clSetCommandQueueProperty(cl_command_queue command_queue,
+                          cl_command_queue_properties properties,
+                          cl_bool enable,
+                          cl_command_queue_properties* old_properties)
+{
+  call_with(command_queue, properties, enable, old_properties);
+  return _err;
+}
+Dummy_clSetCommandQueueProperty::
+Dummy_clSetCommandQueueProperty(cl_int err)
+  :_err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 cl_int Dummy_clSetEventCallback::

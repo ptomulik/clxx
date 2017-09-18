@@ -763,6 +763,15 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   (cl_sampler sampler),
   (sampler));
 
+#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clSetCommandQueueProperty,
+  ( cl_command_queue command_queue, cl_command_queue_properties properties,
+    cl_bool enable, cl_command_queue_properties* old_properties ),
+  ( command_queue, properties, enable, old_properties)
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetEventCallback,

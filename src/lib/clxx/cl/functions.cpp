@@ -2097,6 +2097,26 @@ retain_sampler(cl_sampler sampler)
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+void
+set_command_queue_property(cl_command_queue command_queue,
+                           command_queue_properties_t properties,
+                           cl_bool enable,
+                           cl_command_queue_properties* old_properties)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetCommandQueueProperty(command_queue,
+                                   static_cast<cl_command_queue_properties>(properties),
+                                   enable,
+                                   old_properties)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 void
 set_event_callback(cl_event event, cl_int command_exec_callback_type,

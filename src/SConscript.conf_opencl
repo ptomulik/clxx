@@ -636,12 +636,12 @@ CharacterizeClFunction(conf, 'clRetainDevice', _clRetainDevice)
 #
 # clSetCommandQueueProperty()
 #
-# (removed in OpenCL 1.2)
+# (deprecated in OpenCL 1.1, removed in OpenCL 1.2)
 _clSetCommandQueueProperty = \
 """clSetCommandQueueProperty(  (cl_command_queue)0,
-                               (cl_queue_properties)0,
+                               (cl_command_queue_properties)0,
                                (cl_bool)0,
-                               (cl_command_queue_properties*) );
+                               (cl_command_queue_properties*) NULL);
 """
 CharacterizeClFunction(conf, 'clSetCommandQueueProperty', _clSetCommandQueueProperty)
 

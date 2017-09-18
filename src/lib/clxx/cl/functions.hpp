@@ -6064,6 +6064,57 @@ retain_program(cl_program program);
  */ // }}}
 void
 retain_sampler(cl_sampler sampler);
+#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+/** // doc: set_command_queue_property() {{{
+ * \brief Enable or disable the properties of a command-queue
+ *
+ * This function is a wrapper around \c clSetCommandQueueProperty(). The call to
+ * this function has same effect as
+ * - \c clSetCommandQueueProperty(command_queue, static_cast<cl_command_queue_properties>(properties), enable, old_properties)
+ *
+ * The main difference between #set_command_queue_property() and
+ * \c clSetCommandQueueProperty() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Specifies the command-queue being queried.
+ * \param properties
+ *    Specifies the new command-queue properties to be applied to
+ *    \p command_queue. Only command-queue properties specified for
+ *    #create_command_queue() can be set in properties; otherwise the value
+ *    specified in properties is considered to be not valid.
+ * \param enable
+ *    Determines whether the values specified by properties are enabled (if
+ *    \p enable is \c CL_TRUE) or disabled (if \p enable is \c CL_FALSE) for
+ *    the command-queue. The allowed property values are the same as those
+ *    specified for #create_command_queue().
+ * \param old_properties
+ *     Returns the command-queue properties before they were changed by
+ *     #set_command_queue_property(). If \p old_properties is \c NULL, it is
+ *     ignored.
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When the \c clSetCommandQueueProperty() returns CL_INVALID_COMMAND_QUEUE
+ * \throw clerror_no<status_t::invalid_value>
+ *    When the \c clSetCommandQueueProperty() returns CL_INVALID_VALUE
+ * \throw clerror_no<status_t::invalid_queue_properties>
+ *    When the \c clSetCommandQueueProperty() returns CL_INVALID_QUEUE_PROPERTIES
+ * \throw unexpected_clerror
+ *    When \c clSetCommandQueueProperty() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |  \check   |           |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clSetCommandQueueProperty.html">clSetCommandQueueProperty()</a>
+ */ // }}}
+void
+set_command_queue_property(cl_command_queue command_queue,
+                           command_queue_properties_t properties,
+                           cl_bool enable,
+                           cl_command_queue_properties* old_properties);
+#endif
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /** // doc: set_event_callback() {{{
  * \brief Registers a user callback function for a specific command execution status
@@ -6092,15 +6143,15 @@ retain_sampler(cl_sampler sampler);
  *    \p user_data can be \c NULL.
  *
  * \throw clerror_no<status_t::invalid_event>
- *    When the \c clGetEventInfo() returns CL_INVALID_EVENT
+ *    When the \c clSetEventCallback() returns CL_INVALID_EVENT
  * \throw clerror_no<status_t::invalid_value>
- *    When the \c clGetEventInfo() returns CL_INVALID_VALUE
+ *    When the \c clSetEventCallback() returns CL_INVALID_VALUE
  * \throw clerror_no<status_t::out_of_resources>
- *    When the \c clGetEventInfo() returns CL_OUT_OF_RESOURCES
+ *    When the \c clSetEventCallback() returns CL_OUT_OF_RESOURCES
  * \throw clerror_no<status_t::out_of_host_memory>
- *    When the \c clGetEventInfo() returns CL_OUT_OF_HOST_MEMORY
+ *    When the \c clSetEventCallback() returns CL_OUT_OF_HOST_MEMORY
  * \throw unexpected_clerror
- *    When \c clGetEventInfo() returns other error code.
+ *    When \c clSetEventCallback() returns other error code.
  *
  * \par Available in OpenCL versions
  * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
