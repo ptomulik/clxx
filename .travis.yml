@@ -42,6 +42,7 @@ install:
       ./bin/download-deps.py swig;
     fi
   - if $COMPILE; then
+      sudo apt-get --no-install-recommends -y install ocl-icd-opencl-dev;
       sudo apt-get --no-install-recommends -y install nvidia-opencl-dev;
       sudo apt-get --no-install-recommends -y install libegl1-mesa-dev;
     fi
