@@ -65,6 +65,7 @@
 %throws_clerror(clxx::get_device_ids(cl_platform_id, device_type_t, cl_uint, cl_device_id *, cl_uint *))
 %throws_clerror(clxx::get_device_info(cl_device_id, device_info_t, size_t, void *, size_t *))
 %throws_clerror(clxx::get_event_info(cl_event, event_info_t, size_t, void*, size_t*))
+%throws_clerror(clxx::get_extension_function_address(const char*))
 %throws_clerror(clxx::get_image_info(cl_mem, image_info_t, size_t, void*, size_t*))
 %throws_clerror(clxx::get_kernel_arg_info(cl_kernel, kernel_arg_info_t, size_t, void*, size_t*))
 %throws_clerror(clxx::get_kernel_info(cl_kernel, kernel_info_t, size_t, void*, size_t*))

@@ -1578,6 +1578,14 @@ get_event_profiling_info(cl_event event,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+void*
+get_extension_function_address(const char* funcname)
+{
+  return T::clGetExtensionFunctionAddress(funcname);
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 get_image_info(cl_mem image,
                image_info_t param_name,

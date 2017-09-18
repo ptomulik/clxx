@@ -115,8 +115,10 @@ public:
   void test__enqueue_task__misaligned_sub_buffer_offset( )
   {
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueTask mock(CL_MISALIGNED_SUB_BUFFER_OFFSET);
     TS_ASSERT_THROWS(enqueue_task((cl_command_queue)NULL, (cl_kernel)NULL, 0u, nullptr, nullptr), clerror_no<status_t::misaligned_sub_buffer_offset>);
+#endif
 #endif
   }
   /** // doc: test__enqueue_task__invalid_image_size() {{{

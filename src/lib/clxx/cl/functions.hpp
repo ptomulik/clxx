@@ -4585,6 +4585,27 @@ get_event_profiling_info(cl_event event,
                          profiling_info_t param_name,
                          size_t param_value_size, void* param_value,
                          size_t* param_value_size_ret);
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+/** // doc: get_extension_function_address() {{{
+ * \brief Returns the address of the extension function named by \p funcname.
+ *
+ * This function is a wrapper around \c clGetExtensionFunctionAddress(). The call to
+ * this function has same effect as
+ * - \c clGetExtensionFunctionAddress(funcname)
+ *
+ * \param funcname
+ *    Name of an extension function.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clGetExtensionFunctionAddress.html">clGetExtensionFunctionAddress()</a>
+ */ // }}}
+void*
+get_extension_function_address(const char* funcname);
+#endif
 /** // doc: get_image_info() {{{
  * \brief Get information specific to an image object created with #create_image()
  *

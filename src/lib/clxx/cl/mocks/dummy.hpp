@@ -1622,6 +1622,29 @@ public:
    */ // }}}
   Dummy_clGetEventProfilingInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+/** // doc: Dummy_clGetExtensionFunctionAddress {{{
+ * \brief Mock for clGetExtensionFunctionAddress OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetExtensionFunctionAddress
+  : public T::Base_clGetExtensionFunctionAddress,
+    public T::Dummy_CallArgs<const char*>
+{
+  void* _ptr;
+  void* clGetExtensionFunctionAddress(const char* funcname);
+public:
+  /** // doc: Dummy_clGetExtensionFunctionAddress() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetExtensionFunctionAddress(void * ptr);
+};
+#endif
 /** // doc: Dummy_clGetImageInfo {{{
  * \brief Mock for clGetImageInfo OpenCL function.
  *
@@ -3549,6 +3572,20 @@ Dummy_clGetEventProfilingInfo(cl_int err, void const* param_value, size_t const*
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+void* Dummy_clGetExtensionFunctionAddress::
+clGetExtensionFunctionAddress(const char* funcname)
+{
+  call_with(funcname);
+  return _ptr;
+}
+Dummy_clGetExtensionFunctionAddress::
+Dummy_clGetExtensionFunctionAddress(void* ptr)
+  : _ptr(ptr)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetImageInfo::
 clGetImageInfo(cl_mem image, cl_image_info param_name,

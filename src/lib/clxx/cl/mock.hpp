@@ -546,6 +546,14 @@ CXXTEST_MOCK_GLOBAL(cl_int,
    void* param_value, size_t* param_value_size_ret),
   (event, param_name, param_value_size, param_value, param_value_size_ret));
 
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+CXXTEST_MOCK_GLOBAL(void*,
+  clGetExtensionFunctionAddress,
+  ( const char* funcname ),
+  ( funcname )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetImageInfo,
   ( cl_mem image, cl_image_info param_name, size_t param_value_size,

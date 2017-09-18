@@ -121,8 +121,10 @@ public:
   void test__enqueue_copy_buffer_rect__misaligned_sub_buffer_offset( )
   {
 #if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+#if CLXX_CL_H_VERSION_1_1
     T::Dummy_clEnqueueCopyBufferRect mock(CL_MISALIGNED_SUB_BUFFER_OFFSET);
     TS_ASSERT_THROWS(enqueue_copy_buffer_rect((cl_command_queue)NULL, (cl_mem)NULL, (cl_mem)NULL, nullptr, nullptr, nullptr, 0ul, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::misaligned_sub_buffer_offset>);
+#endif
 #endif
   }
   /** // doc: test__enqueue_copy_buffer_rect__mem_copy_overlap() {{{

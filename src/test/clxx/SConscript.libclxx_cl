@@ -78,6 +78,7 @@ tests = [
     'cl/functions/get_device_info.t.h',
     'cl/functions/get_event_info.t.h',
     'cl/functions/get_event_profiling_info.t.h',
+    'cl/functions/get_extension_function_address.t.h',
     'cl/functions/get_image_info.t.h',
     'cl/functions/get_kernel_arg_info.t.h',
     'cl/functions/get_kernel_info.t.h',
