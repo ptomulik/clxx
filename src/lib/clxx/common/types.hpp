@@ -1629,6 +1629,34 @@ enum class kernel_work_group_info_t : cl_kernel_work_group_info {
 
 CLXX_MAKE_INTEGER_ENUM(kernel_work_group_info_t, cl_kernel_work_group_info)
 
+#if CLXX_CL_H_VERSION_2_1
+/** // doc: kernel_sub_group_info_t {{{
+ * \brief Corresponds to OpenCL's \c cl_kernel_sub_group_info
+ *
+ * The OpenCL's \c cl_kernel_sub_group_info is used by
+ * \c clGetKernelSubGroupInfo() to select particular information to be queried
+ * from the OpenCL. The \ref kernel_sub_group_info_t is a C++ equivalent of
+ * the \c cl_kernel_sub_group_info. It's used by get_kernel_sub_group_info()
+ * for the same purpose.
+ *
+ * \par Supported OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |   \check  |
+ *
+ */ // }}}
+enum class kernel_sub_group_info_t : cl_kernel_sub_group_info {
+  /// Corresponds to \c CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE
+  max_sub_group_size_for_ndrange    = CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE,
+  /// Corresponds to \c CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE
+  sub_group_count_for_ndrange       = CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE,
+  /// Corresponds to \c CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT
+  local_size_for_sub_group_count    = CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT
+};
+
+CLXX_MAKE_INTEGER_ENUM(kernel_sub_group_info_t, cl_kernel_sub_group_info)
+#endif
+
 /** // doc: event_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_event_info
  *

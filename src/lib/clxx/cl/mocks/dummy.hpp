@@ -1792,6 +1792,33 @@ public:
    */ // }}}
   Dummy_clGetKernelWorkGroupInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+/** // doc: Dummy_clGetKernelSubGroupInfo {{{
+ * \brief Mock for clGetKernelSubGroupInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetKernelSubGroupInfo
+  : public T::Base_clGetKernelSubGroupInfo,
+    public T::Dummy_CallArgs<cl_kernel, cl_device_id, cl_kernel_sub_group_info, size_t, const void*, size_t, void*, size_t*>
+{
+  cl_int _err;
+  cl_int clGetKernelSubGroupInfo(cl_kernel kernel, cl_device_id device,
+                                  cl_kernel_sub_group_info param_name,
+                                  size_t input_value_size, const void* input_value,
+                                  size_t param_value_size, void* param_value,
+                                  size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetKernelSubGroupInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetKernelSubGroupInfo(cl_int err);
+};
+#endif
 /** // doc: Dummy_clGetMemObjectInfo {{{
  * \brief Mock for clGetMemObjectInfo OpenCL function.
  *
@@ -3747,6 +3774,23 @@ Dummy_clGetKernelWorkGroupInfo(cl_int err, void const* param_value, size_t const
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetKernelSubGroupInfo::
+clGetKernelSubGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_group_info param_name,
+                         size_t input_value_size, const void* input_value,
+                         size_t param_value_size, void* param_value,
+                         size_t* param_value_size_ret)
+{
+  call_with(kernel, device, param_name, input_value_size, input_value, param_value_size, param_value, param_value_size_ret);
+  return _err;
+}
+Dummy_clGetKernelSubGroupInfo::
+Dummy_clGetKernelSubGroupInfo(cl_int err)
+  : _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetMemObjectInfo::
 clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,

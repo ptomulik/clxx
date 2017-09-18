@@ -1680,6 +1680,34 @@ get_kernel_info(cl_kernel kernel,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+void
+get_kernel_sub_group_info(cl_kernel kernel,
+                          cl_device_id device,
+                          kernel_sub_group_info_t param_name,
+                          size_t input_value_size, const void* input_value,
+                          size_t param_value_size, void* param_value,
+                          size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetKernelSubGroupInfo(
+        kernel,
+        device,
+        static_cast<cl_kernel_sub_group_info>(param_name),
+        input_value_size,
+        input_value,
+        param_value_size,
+        param_value,
+        param_value_size_ret
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 get_kernel_work_group_info(cl_kernel kernel,
                            cl_device_id device,

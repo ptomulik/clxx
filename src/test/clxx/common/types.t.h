@@ -473,6 +473,9 @@ public:
     TS_ASSERT_EQUALS(static_cast<cl_platform_info>(platform_info_t::name), CL_PLATFORM_NAME);
     TS_ASSERT_EQUALS(static_cast<cl_platform_info>(platform_info_t::vendor), CL_PLATFORM_VENDOR);
     TS_ASSERT_EQUALS(static_cast<cl_platform_info>(platform_info_t::extensions), CL_PLATFORM_EXTENSIONS);
+#if CLXX_CL_H_VERSION_2_1
+    TS_ASSERT_EQUALS(static_cast<cl_platform_info>(platform_info_t::host_timer_resolution), CL_PLATFORM_HOST_TIMER_RESOLUTION);
+#endif
   }
   /** // doc: test_platform_info_t__intval() {{{
    * \brief Test the platform_info_t__intval type.
@@ -487,6 +490,9 @@ public:
     TS_ASSERT_EQUALS(intval(platform_info_t::name), CL_PLATFORM_NAME);
     TS_ASSERT_EQUALS(intval(platform_info_t::vendor), CL_PLATFORM_VENDOR);
     TS_ASSERT_EQUALS(intval(platform_info_t::extensions), CL_PLATFORM_EXTENSIONS);
+#if CLXX_CL_H_VERSION_2_1
+    TS_ASSERT_EQUALS(intval(platform_info_t::host_timer_resolution), CL_PLATFORM_HOST_TIMER_RESOLUTION);
+#endif
   }
   /** // doc: test_device_type_t() {{{
    * \brief Test the device_type_t type.
@@ -2139,6 +2145,38 @@ public:
 #endif
 #if CLXX_CL_H_VERSION_1_2
     TS_ASSERT_EQUALS(intval(kernel_work_group_info_t::global_work_size), CL_KERNEL_GLOBAL_WORK_SIZE);
+#endif
+  }
+  /** // doc: test_kernel_sub_group_info_t() {{{
+   * \brief Test the kernel_sub_group_info_t type.
+   */ // }}}
+  void test_kernel_sub_group_info_t( )
+  {
+    //
+    // Check the underlying type
+    //
+    TS_ASSERT((std::is_same<std::underlying_type<kernel_sub_group_info_t>::type, cl_kernel_sub_group_info>::value));
+    //
+    // Check enum values
+    //
+#if CLXX_CL_H_VERSION_2_1
+    TS_ASSERT_EQUALS(static_cast<cl_kernel_sub_group_info>(kernel_sub_group_info_t::max_sub_group_size_for_ndrange), CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE);
+    TS_ASSERT_EQUALS(static_cast<cl_kernel_sub_group_info>(kernel_sub_group_info_t::sub_group_count_for_ndrange), CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE);
+    TS_ASSERT_EQUALS(static_cast<cl_kernel_sub_group_info>(kernel_sub_group_info_t::local_size_for_sub_group_count), CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT);
+#endif
+  }
+  /** // doc: test_kernel_sub_group_info_t__intval() {{{
+   * \brief Test the kernel_sub_group_info_t type with intval().
+   */ // }}}
+  void test_kernel_sub_group_info_t__intval( )
+  {
+    //
+    // Check enum values
+    //
+#if CLXX_CL_H_VERSION_2_1
+    TS_ASSERT_EQUALS(intval(kernel_sub_group_info_t::max_sub_group_size_for_ndrange), CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE);
+    TS_ASSERT_EQUALS(intval(kernel_sub_group_info_t::sub_group_count_for_ndrange), CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE);
+    TS_ASSERT_EQUALS(intval(kernel_sub_group_info_t::local_size_for_sub_group_count), CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT);
 #endif
   }
   /** // doc: test_event_info_t() {{{

@@ -4825,6 +4825,76 @@ get_kernel_info(cl_kernel kernel,
                 kernel_info_t param_name,
                 size_t param_value_size, void* param_value,
                 size_t* param_value_size_ret);
+#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+/** // doc: get_kernel_sub_group_info() {{{
+ * \brief Returns information about the kernel object
+ *
+ * This function is a wrapper around \c clGetKernelSubGroupInfo(). The call to
+ * this function has same effect as
+ * - \c clGetKernelSubGroupInfo(kernel, device, static_cast<cl_kernel_sub_group_info>(param_name), input_value_size, input_value, param_value_size, param_value, param_value_size_ret).
+ *
+ * The main difference between #get_kernel_sub_group_info() and
+ * \c clGetKernelSubGroupInfo() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param kernel
+ *    Specifies the kernel object being queried.
+ * \param device
+ *    Identifies a specific device in the list of devices associated with
+ *    \p kernel. The list of devices is the list of devices in the OpenCL
+ *    context that is associated with kernel. If the list of devices associated
+ *    with kernel is a single device, \p device can be a \c NULL value.
+ * \param param_name
+ *    Specifies the information to query. The list of supported \p param_name
+ *    types is documented in \ref clxx::kernel_sub_group_info_t. The
+ *    information returned in \p param_value is described in the OpenCL
+ *    standard.
+ * \param input_value_size
+ *    Specifies the size in bytes of memory pointed to by input_value. This
+ *    size must be == size of input type as described in OpenCL documentation
+ *    for [clGetKernelSubGroupInfo()](https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html)
+ * \param input_value
+ *    A pointer to memory where the appropriate parameterization of the query
+ *    is passed from. If \p input_value is \c NULL, it is ignored.
+ * \param param_value_size
+ *    Used to specify the size in bytes of memory pointed to by \p param_value.
+ *    This size must be \c >= size of return type as described in the OpenCL
+ *    documentation for [clGetKernelSubGroupInfo()](https://www.khronos.org/registry/OpenCL/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html).
+ * \param param_value
+ *    A pointer to memory where the appropriate result being queried is
+ *    returned. If \p param_value is \c NULL, it is ignored.
+ * \param param_value_size_ret
+ *    Returns the actual size in bytes of data copied to \p param_value. If
+ *    \p param_value_size_ret is \c NULL, it is ignored.
+ *
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clGetKernelSubGroupInfo() returns CL_INVALID_DEVICE
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetKernelSubGroupInfo() returns CL_INVALID_VALUE
+ * \throw clerror_no<status_t::invalid_kernel>
+ *    When \c clGetKernelSubGroupInfo() returns CL_INVALID_KERNEL
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetKernelSubGroupInfo() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetKernelSubGroupInfo() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clGetKernelSubGroupInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html">clGetKernelSubGroupInfo()</a>
+ */ // }}}
+void
+get_kernel_sub_group_info(cl_kernel kernel,
+                          cl_device_id device,
+                          kernel_sub_group_info_t param_name,
+                          size_t input_value_size, const void* input_value,
+                          size_t param_value_size, void* param_value,
+                          size_t* param_value_size_ret);
+#endif
 /** // doc: get_kernel_work_group_info() {{{
  * \brief Returns information about the kernel object that may be specific to a device.
  *
