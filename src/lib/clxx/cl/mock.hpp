@@ -554,6 +554,22 @@ CXXTEST_MOCK_GLOBAL(void*,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+CXXTEST_MOCK_GLOBAL(void*,
+  clGetExtensionFunctionAddressForPlatform,
+  ( cl_platform_id platform, const char* funcname ),
+  ( platform, funcname )
+);
+#endif
+
+#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clGetHostTimer,
+  ( cl_device_id device, cl_ulong* host_timestamp ),
+  ( device, host_timestamp )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetImageInfo,
   ( cl_mem image, cl_image_info param_name, size_t param_value_size,

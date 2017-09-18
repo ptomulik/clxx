@@ -79,6 +79,8 @@ tests = [
     'cl/functions/get_event_info.t.h',
     'cl/functions/get_event_profiling_info.t.h',
     'cl/functions/get_extension_function_address.t.h',
+    'cl/functions/get_extension_function_address_for_platform.t.h',
+    'cl/functions/get_host_timer.t.h',
     'cl/functions/get_image_info.t.h',
     'cl/functions/get_kernel_arg_info.t.h',
     'cl/functions/get_kernel_info.t.h',

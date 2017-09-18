@@ -1645,6 +1645,49 @@ public:
   Dummy_clGetExtensionFunctionAddress(void * ptr);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+/** // doc: Dummy_clGetExtensionFunctionAddressForPlatform {{{
+ * \brief Mock for clGetExtensionFunctionAddressForPlatform OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetExtensionFunctionAddressForPlatform
+  : public T::Base_clGetExtensionFunctionAddressForPlatform,
+    public T::Dummy_CallArgs<cl_platform_id, const char*>
+{
+  void* _ptr;
+  void* clGetExtensionFunctionAddressForPlatform(cl_platform_id platform,
+                                                 const char* funcname);
+public:
+  /** // doc: Dummy_clGetExtensionFunctionAddressForPlatform() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetExtensionFunctionAddressForPlatform(void * ptr);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+/** // doc: Dummy_clGetHostTimer {{{
+ * \brief Default mock for clGetHostTimer OpenCL function.
+ */ // }}}
+class Dummy_clGetHostTimer
+  : public T::Base_clGetHostTimer,
+    public T::Dummy_CallArgs<cl_device_id,cl_ulong*>
+{
+  cl_int _err;
+  cl_int clGetHostTimer(cl_device_id device, cl_ulong* host_timestamp);
+public:
+  /** // doc: Dummy_clGetHostTimer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clGetHostTimer(cl_int err);
+};
+#endif
 /** // doc: Dummy_clGetImageInfo {{{
  * \brief Mock for clGetImageInfo OpenCL function.
  *
@@ -3583,6 +3626,34 @@ clGetExtensionFunctionAddress(const char* funcname)
 Dummy_clGetExtensionFunctionAddress::
 Dummy_clGetExtensionFunctionAddress(void* ptr)
   : _ptr(ptr)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+void* Dummy_clGetExtensionFunctionAddressForPlatform::
+clGetExtensionFunctionAddressForPlatform(cl_platform_id platform, const char* funcname)
+{
+  call_with(platform, funcname);
+  return _ptr;
+}
+Dummy_clGetExtensionFunctionAddressForPlatform::
+Dummy_clGetExtensionFunctionAddressForPlatform(void* ptr)
+  : _ptr(ptr)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+cl_int Dummy_clGetHostTimer::
+clGetHostTimer(cl_device_id device, cl_ulong* host_timestamp)
+{
+  call_with(device, host_timestamp);
+  return _err;
+}
+Dummy_clGetHostTimer::
+Dummy_clGetHostTimer(cl_int err)
+  : _err(err)
 {
 }
 #endif

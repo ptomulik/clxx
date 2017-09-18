@@ -4606,6 +4606,70 @@ get_event_profiling_info(cl_event event,
 void*
 get_extension_function_address(const char* funcname);
 #endif
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+/** // doc: get_extension_function_address_for_platform() {{{
+ * \brief Returns the address of the extension function named by \p funcname
+ *        for a given \p platform
+ *
+ * This function is a wrapper around \c clGetExtensionFunctionAddressForPlatform(). The call to
+ * this function has same effect as
+ * - \c clGetExtensionFunctionAddressForPlatform(platform, funcname)
+ *
+ * \param funcname
+ *    Name of an extension function.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |  \check   |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clGetExtensionFunctionAddressForPlatform.html">clGetExtensionFunctionAddressForPlatform()</a>
+ */ // }}}
+void*
+get_extension_function_address_for_platform(cl_platform_id platform,
+                                            const char* funcname);
+#endif
+#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+/** // doc: get_host_timer(...) {{{
+ * \brief Return the current value of the host clock as seen by device.
+ *
+ * This is a wrapper for \c clGetHostTimer(). The call to \ref
+ * get_host_timer() has same effect as a call to
+ *    - \c clGetHostTimer(device, host_timestamp)
+ *
+ *  The main difference between get_host_timer() and \c clGetHostTimer() is
+ *  that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param device
+ *    A device returned by #get_device_ids().
+ * \param host_timestamp
+ *    Will be updated with the value of the current timer in nanoseconds.
+ *    The resolution of the timer may be queried via
+ *    #get_platform_info() and the flag
+ *    #platform_info_t::host_timer_resolution query.
+ *
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clGetHostTimer() returns \c CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetHostTimer() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetHostTimer() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetHostTimer() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clGetHostTimer() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetHostTimer.html">clGetHostTimer()</a>
+ */ // }}}
+void
+get_host_timer(cl_device_id device,
+               cl_ulong* host_timestamp);
+#endif
 /** // doc: get_image_info() {{{
  * \brief Get information specific to an image object created with #create_image()
  *

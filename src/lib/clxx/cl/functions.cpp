@@ -1586,6 +1586,33 @@ get_extension_function_address(const char* funcname)
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+void*
+get_extension_function_address_for_platform(cl_platform_id platform,
+                                            const char* funcname)
+{
+  return T::clGetExtensionFunctionAddressForPlatform(platform, funcname);
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+void
+get_host_timer(cl_device_id device,
+               cl_ulong* host_timestamp)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetHostTimer(
+      device,
+      host_timestamp
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 get_image_info(cl_mem image,
                image_info_t param_name,
