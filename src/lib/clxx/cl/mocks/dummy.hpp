@@ -1361,11 +1361,10 @@ class Dummy_clEnqueueWriteBufferRect
   : public T::Base_clEnqueueWriteBufferRect,
     public T::Dummy_CallArgs<cl_command_queue, cl_mem, cl_bool, const size_t*,
                              const size_t*, const size_t*, size_t, size_t,
-                             size_t, size_t, void*, cl_uint, const cl_event*,
-                             cl_event*>
+                             size_t, size_t, const void*, cl_uint,
+                             const cl_event*, cl_event*>
 {
   cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueWriteBufferRect( cl_command_queue command_queue,
                                       cl_mem buffer, cl_bool blocking_read,
                                       const size_t* buffer_origin,
@@ -1375,7 +1374,7 @@ class Dummy_clEnqueueWriteBufferRect
                                       size_t buffer_splice_pitch,
                                       size_t host_row_pitch,
                                       size_t host_slice_pitch,
-                                      void* ptr,
+                                      const void* ptr,
                                       cl_uint num_events_in_wait_list,
                                       const cl_event* event_wait_list,
                                       cl_event* event );
@@ -1384,9 +1383,8 @@ public:
    * \brief Constructor, initializes the mock object.
    *
    * \param err Error code to be returned by the mock
-   * \param event An event to be returned
    */ // }}}
-  Dummy_clEnqueueWriteBufferRect(cl_int err, const cl_event* event = nullptr);
+  Dummy_clEnqueueWriteBufferRect(cl_int err);
 };
 #endif
 /** // doc: Dummy_clEnqueueWriteImage {{{
@@ -3314,7 +3312,7 @@ clEnqueueWriteBufferRect( cl_command_queue command_queue,
                              size_t buffer_splice_pitch,
                              size_t host_row_pitch,
                              size_t host_slice_pitch,
-                             void* ptr,
+                             const void* ptr,
                              cl_uint num_events_in_wait_list,
                              const cl_event* event_wait_list,
                              cl_event* event )
@@ -3323,15 +3321,11 @@ clEnqueueWriteBufferRect( cl_command_queue command_queue,
              region, buffer_row_pitch, buffer_splice_pitch, host_row_pitch,
              host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
              event);
-  if(event && _event)
-    {
-      *event = *_event;
-    }
   return _err;
 }
 Dummy_clEnqueueWriteBufferRect::
-Dummy_clEnqueueWriteBufferRect(cl_int err, const cl_event* event)
-  :_err(err), _event(event)
+Dummy_clEnqueueWriteBufferRect(cl_int err)
+  :_err(err)
 {
 }
 #endif

@@ -3793,7 +3793,7 @@ enqueue_wait_for_events(cl_command_queue command_queue,
  *    If \p blocking_write is \c CL_TRUE, the OpenCL implementation copies the
  *    data referred to by \p ptr and enqueues the write operation in the
  *    command-queue. The memory pointed to by \p ptr can be reused by the
- *    application after the \c clEnqueueWriteBuffer call returns.
+ *    application after the #enqueue_write_buffer() call returns.
  *    If \p blocking_write is \c CL_FALSE, the OpenCL implementation will use
  *    \p ptr to perform a nonblocking write. As the write is non-blocking the
  *    implementation can return immediately. The memory pointed to by ptr
@@ -3877,6 +3877,149 @@ enqueue_write_buffer(cl_command_queue command_queue,
                      cl_uint num_events_in_wait_list,
                      const cl_event* event_wait_list,
                      cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+/** // doc: enqueue_write_buffer_rect() {{{
+ * \brief Enqueue command to write a 2D or 3D rectangular region to a buffer
+ *        object from host memory.
+ *
+ * This is a wrapper for \c clEnqueueWriteBufferRect(). The call to
+ * #enqueue_write_buffer_rect() has same effect as a call to
+ *    - \c clEnqueueWriteBufferRect(command_queue, buffer, blocking_write, buffer_origin, host_origin, region, buffer_row_pitch, buffer_slice_pitch, host_row_pitch, host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_write_buffer_rect() and \c clEnqueueWriteBufferRect()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Is a valid host command-queue in which the write command will be queued.
+ *    \p command_queue and \p buffer must be created with the same OpenCL
+ *    context.
+ * \param buffer
+ *    Refers to a valid buffer object.
+ * \param blocking_write
+ *    Indicates if the write operations are blocking or non-blocking.
+ *    If \p blocking_write is \c CL_TRUE, the OpenCL implementation copies the
+ *    data referred to by \p ptr and enqueues the write operation in the
+ *    command-queue. The memory pointed to by \p ptr can be reused by the
+ *    application after the #enqueue_write_buffer_rect() call returns.
+ *    If \p blocking_write is \c CL_FALSE, the OpenCL implementation will use
+ *    \p ptr to perform a nonblocking write. As the write is non-blocking the
+ *    implementation can return immediately. The memory pointed to by ptr
+ *    cannot be reused by the application after the call returns. The event
+ *    argument returns an \p event object which can be used to query the
+ *    execution status of the write command. When the write command has
+ *    completed, the memory pointed to by \p ptr can then be reused by the
+ *    application.
+ * \param buffer_origin
+ *    The (x, y, z) offset in the memory region associated with buffer. For a
+ *    2D rectangle region, the \c z value given by \p buffer_origin[2] should
+ *    be \c 0. The offset in bytes is computed as \p buffer_origin[2] *
+ *    \p buffer_slice_pitch + \p buffer_origin[1] * \p buffer_row_pitch +
+ *    \p buffer_origin[0].
+ * \param host_origin
+ *    The (x, y, z) offset in the memory region pointed to by ptr. For a 2D
+ *    rectangle region, the z value given by \p host_origin[2] should be \c 0.
+ *    The offset in bytes is computed as \p host_origin[2] *
+ *    \p host_slice_pitch + \p host_origin[1] * \p host_row_pitch +
+ *    \p host_origin[0].
+ * \param region
+ *    The (width in bytes, height in rows, depth in slices) of the 2D or 3D
+ *    rectangle being read or written. For a 2D rectangle copy, the depth value
+ *    given by \p region[2] should be \c 1. The values in region cannot be
+ *    \c 0.
+ * \param buffer_row_pitch
+ *    The length of each row in bytes to be used for the memory region
+ *    associated with buffer. If \p buffer_row_pitch is \c 0,
+ *    \p buffer_row_pitch is computed as \p region[0].
+ * \param buffer_slice_pitch
+ *    The length of each 2D slice in bytes to be used for the memory region
+ *    associated with buffer. If \p buffer_slice_pitch is \c 0,
+ *    \p buffer_slice_pitch is computed as \p region[1] * \p buffer_row_pitch.
+ * \param host_row_pitch
+ *    The length of each row in bytes to be used for the memory region pointed
+ *    to by \p ptr. If \p host_row_pitch is \c 0, \p host_row_pitch is computed
+ *    as \p region[0].
+ * \param host_slice_pitch
+ *    The length of each 2D slice in bytes to be used for the memory region
+ *    pointed to by \p ptr. If \p host_slice_pitch is \c 0, \p host_slice_pitch
+ *    is computed as \p region[1] * \p host_row_pitch.
+ * \param num_events_in_wait_list
+ *    Number of events in the \p event_wait_list.
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
+ *    If \p event_wait_list is not \c NULL, the list of events pointed to by
+ *    \p event_wait_list must be valid and \p num_events_in_wait_list must be
+ *    greater than \c 0.
+ * \param event_wait_list
+ *    \p event_wait_list and \p num_events_in_wait_list specify events that
+ *    need to complete before this particular command can be executed. If
+ *    \p event_wait_list is \c NULL, then this particular command does not wait
+ *    on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be
+ *    valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization points. The
+ *    context associated with events in \p event_wait_list and \p command_queue
+ *    must be the same. The memory associated with \p event_wait_list can be
+ *    reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular write command and
+ *    can be used to query or queue a wait for this particular command to
+ *    complete.\p event can be \c NULL in which case it will not be possible
+ *    for the application to query the status of this command or queue a wait
+ *    for this command to complete. If the \p event_wait_list and the \p event
+ *    arguments are not \c NULL, the event argument should not refer to an
+ *    element of the \p event_wait_list array.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_INVALID_MEM_OBJECT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::misaligned_sub_buffer_offset>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_MISALIGNED_SUB_BUFFER_OFFSET.
+ * \throw clerror_no<status_t::exec_status_error_for_events_in_wait_list>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::invalid_operation>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_INVALID_OPERATION.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueWriteBufferRect() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueWriteBufferRect() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">clEnqueueWriteBufferRect()</a>
+ *
+ */ // }}}
+void
+enqueue_write_buffer_rect(cl_command_queue command_queue,
+                          cl_mem buffer,
+                          cl_bool blocking_write,
+                          const size_t* buffer_origin,
+                          const size_t* host_origin,
+                          const size_t* region,
+                          size_t buffer_row_pitch,
+                          size_t buffer_slice_pitch,
+                          size_t host_row_pitch,
+                          size_t host_slice_pitch,
+                          const void* ptr,
+                          cl_uint num_events_in_wait_list,
+                          const cl_event* event_wait_list,
+                          cl_event* event);
+#endif
 /** // doc: enqueue_write_image() {{{
  * \brief Enqueue commands to write to an image or image array object from host memory.
  *

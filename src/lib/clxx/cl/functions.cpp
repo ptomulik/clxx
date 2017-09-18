@@ -1335,6 +1335,48 @@ enqueue_write_buffer( cl_command_queue command_queue, cl_mem buffer,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+void
+enqueue_write_buffer_rect(cl_command_queue command_queue,
+                          cl_mem buffer,
+                          cl_bool blocking_write,
+                          const size_t* buffer_origin,
+                          const size_t* host_origin,
+                          const size_t* region,
+                          size_t buffer_row_pitch,
+                          size_t buffer_slice_pitch,
+                          size_t host_row_pitch,
+                          size_t host_slice_pitch,
+                          const void* ptr,
+                          cl_uint num_events_in_wait_list,
+                          const cl_event* event_wait_list,
+                          cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+      T::clEnqueueWriteBufferRect(
+        command_queue,
+        buffer,
+        blocking_write,
+        buffer_origin,
+        host_origin,
+        region,
+        buffer_row_pitch,
+        buffer_slice_pitch,
+        host_row_pitch,
+        host_slice_pitch,
+        ptr,
+        num_events_in_wait_list,
+        event_wait_list,
+        event
+      )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 enqueue_write_image(cl_command_queue command_queue,
                     cl_mem image,

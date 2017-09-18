@@ -67,6 +67,7 @@ tests = [
     'cl/functions/enqueue_unmap_mem_object.t.h',
     'cl/functions/enqueue_wait_for_events.t.h',
     'cl/functions/enqueue_write_buffer.t.h',
+    'cl/functions/enqueue_write_buffer_rect.t.h',
     'cl/functions/enqueue_write_image.t.h',
     'cl/functions/finish.t.h',
     'cl/functions/flush.t.h',
