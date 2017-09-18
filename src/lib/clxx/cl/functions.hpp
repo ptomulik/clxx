@@ -4322,6 +4322,55 @@ get_context_info(cl_context context,
                  size_t param_value_size,
                  void* param_value,
                  size_t* param_value_size_ret);
+#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+/** // doc: get_device_and_host_timer(...) {{{
+ * \brief Returns a reasonably synchronized pair of timestamps from the device
+ * timer and the host timer as seen by device.
+ *
+ * This is a wrapper for \c clGetDeviceAndHostTimer(). The call to \ref
+ * get_device_and_host_timer() has same effect as a call to
+ *    - \c clGetDeviceAndHostTimer(device, device_timestamp, host_timestamp)
+ *
+ *  The main difference between get_device_and_host_timer() and \c clGetDeviceAndHostTimer() is
+ *  that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param device
+ *    A device returned by #get_device_ids().
+ * \param device_timestamp
+ *    Will be updated with the value of the current timer in nanoseconds. The
+ *    resolution of the timer is the same as the device profiling timer
+ *    returned by #get_device_info() and the #device_info_t::profiling_timer_resolution
+ *    query.
+ * \param host_timestamp
+ *    Will be updated with the value of the current timer in nanoseconds at the
+ *    closest possible point in time to that at which device_timer was
+ *    returned. The resolution of the timer may be queried via
+ *    #get_platform_info() and the flag
+ *    #platform_info_t::host_timer_resolution query.
+ *
+ * \throw clerror_no<status_t::invalid_device>
+ *    When \c clGetDeviceAndHostTimer() returns \c CL_INVALID_DEVICE.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetDeviceAndHostTimer() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetDeviceAndHostTimer() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetDeviceAndHostTimer() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clGetDeviceAndHostTimer() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetDeviceAndHostTimer.html">clGetDeviceAndHostTimer()</a>
+ */ // }}}
+void
+get_device_and_host_timer(cl_device_id device,
+                          cl_ulong* device_timestamp,
+                          cl_ulong* host_timestamp);
+#endif
 /** // doc: get_device_ids() {{{
  * \brief Retrieve device identifiers of locally available OpenCL devices.
  *

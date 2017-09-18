@@ -1475,6 +1475,26 @@ get_context_info(cl_context context,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+void
+get_device_and_host_timer(cl_device_id device,
+                          cl_ulong* device_timestamp,
+                          cl_ulong* host_timestamp)
+{
+  status_t s = static_cast<status_t>(
+    T::clGetDeviceAndHostTimer(
+      device,
+      device_timestamp,
+      host_timestamp
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 get_device_ids(cl_platform_id platform,
                device_type_t device_type,

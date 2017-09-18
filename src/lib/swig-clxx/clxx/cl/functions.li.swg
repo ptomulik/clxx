@@ -61,6 +61,7 @@
 %throws_clerror(clxx::enqueue_write_image(cl_command_queue, cl_mem, cl_bool, const size_t*, const size_t*, size_t, size_t, const void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::get_command_queue_info(cl_command_queue, command_queue_info_t, size_t, void *, size_t *))
 %throws_clerror(clxx::get_context_info(cl_context, context_info_t, size_t, void *, size_t *))
+%throws_clerror(clxx::get_device_and_host_timer(cl_device, cl_ulong*, cl_ulong*))
 %throws_clerror(clxx::get_device_ids(cl_platform_id, device_type_t, cl_uint, cl_device_id *, cl_uint *))
 %throws_clerror(clxx::get_device_info(cl_device_id, device_info_t, size_t, void *, size_t *))
 %throws_clerror(clxx::get_event_info(cl_event, event_info_t, size_t, void*, size_t*))

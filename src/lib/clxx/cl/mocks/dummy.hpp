@@ -1499,6 +1499,26 @@ public:
    */ // }}}
   Dummy_clGetContextInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+/** // doc: Dummy_clGetDeviceAndHostTimer {{{
+ * \brief Default mock for clGetDeviceAndHostTimer OpenCL function.
+ */ // }}}
+class Dummy_clGetDeviceAndHostTimer
+  : public T::Base_clGetDeviceAndHostTimer,
+    public T::Dummy_CallArgs<cl_device_id,cl_ulong*,cl_ulong*>
+{
+  cl_int _err;
+  cl_int clGetDeviceAndHostTimer(cl_device_id device, cl_ulong* device_timestamp,
+                                 cl_ulong* host_timestamp);
+public:
+  /** // doc: Dummy_clGetDeviceAndHostTimer() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clGetDeviceAndHostTimer(cl_int err);
+};
+#endif
 /** // doc: Dummy_clGetDeviceIDs {{{
  * \brief Mock for clGetDeviceIDs OpenCL function.
  *
@@ -3425,6 +3445,21 @@ Dummy_clGetContextInfo(cl_int err, void const* param_value, size_t const* param_
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+cl_int Dummy_clGetDeviceAndHostTimer::
+clGetDeviceAndHostTimer(cl_device_id device, cl_ulong* device_timestamp,
+                        cl_ulong* host_timestamp)
+{
+  call_with(device, device_timestamp, host_timestamp);
+  return _err;
+}
+Dummy_clGetDeviceAndHostTimer::
+Dummy_clGetDeviceAndHostTimer(cl_int err)
+  : _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetDeviceIDs::
 clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,

@@ -73,6 +73,7 @@ tests = [
     'cl/functions/flush.t.h',
     'cl/functions/get_command_queue_info.t.h',
     'cl/functions/get_context_info.t.h',
+    'cl/functions/get_device_and_host_timer.t.h',
     'cl/functions/get_device_ids.t.h',
     'cl/functions/get_device_info.t.h',
     'cl/functions/get_event_info.t.h',

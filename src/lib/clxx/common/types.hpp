@@ -274,6 +274,11 @@ enum class platform_info_t : cl_platform_info {
   vendor     = CL_PLATFORM_VENDOR,
   /// Corresponds to \c CL_PLATFORM_EXTENSIONS
   extensions = CL_PLATFORM_EXTENSIONS
+#if CLXX_CL_H_VERSION_2_1
+  /// Corresponds to \c CL_PLATFORM_HOST_TIMER_RESOLUTION
+  ,
+  host_timer_resolution           = CL_PLATFORM_HOST_TIMER_RESOLUTION
+#endif
 };
 
 CLXX_MAKE_INTEGER_ENUM(platform_info_t, cl_platform_info)

@@ -511,6 +511,14 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( context, param_name, param_value_size, param_value, param_value_size_ret)
 );
 
+#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clGetDeviceAndHostTimer,
+  ( cl_device_id device, cl_ulong* device_timestamp, cl_ulong* host_timestamp ),
+  ( device, device_timestamp, host_timestamp )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetDeviceIDs,
   (cl_platform_id platform, cl_device_type device_type, cl_uint num_entries,
