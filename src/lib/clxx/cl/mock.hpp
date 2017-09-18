@@ -758,6 +758,11 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   (cl_program program),
   (program));
 
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clRetainSampler,
+  (cl_sampler sampler),
+  (sampler));
+
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetEventCallback,

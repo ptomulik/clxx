@@ -2185,11 +2185,11 @@ public:
     //
     // Check the underlying type
     //
+#if CLXX_CL_H_VERSION_2_1
     TS_ASSERT((std::is_same<std::underlying_type<kernel_sub_group_info_t>::type, cl_kernel_sub_group_info>::value));
     //
     // Check enum values
     //
-#if CLXX_CL_H_VERSION_2_1
     TS_ASSERT_EQUALS(static_cast<cl_kernel_sub_group_info>(kernel_sub_group_info_t::max_sub_group_size_for_ndrange), CL_KERNEL_MAX_SUB_GROUP_SIZE_FOR_NDRANGE);
     TS_ASSERT_EQUALS(static_cast<cl_kernel_sub_group_info>(kernel_sub_group_info_t::sub_group_count_for_ndrange), CL_KERNEL_SUB_GROUP_COUNT_FOR_NDRANGE);
     TS_ASSERT_EQUALS(static_cast<cl_kernel_sub_group_info>(kernel_sub_group_info_t::local_size_for_sub_group_count), CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT);

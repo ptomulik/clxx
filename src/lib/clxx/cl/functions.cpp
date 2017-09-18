@@ -2087,6 +2087,16 @@ retain_program(cl_program program)
     }
 }
 /* ------------------------------------------------------------------------ */
+void
+retain_sampler(cl_sampler sampler)
+{
+  status_t s = static_cast<status_t>(T::clRetainSampler(sampler));
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 void
 set_event_callback(cl_event event, cl_int command_exec_callback_type,

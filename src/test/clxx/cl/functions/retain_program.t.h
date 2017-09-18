@@ -33,7 +33,7 @@ public:
   void test__retain_program( )
   {
     T::Dummy_clRetainProgram mock(CL_SUCCESS);
-    retain_program                 ((cl_program)0x344);
+    TS_ASSERT_THROWS_NOTHING(retain_program((cl_program)0x344));
     TS_ASSERT(mock.called_once_with((cl_program)0x344));
   }
   /** // doc: test__retain_program__invalid_program() {{{

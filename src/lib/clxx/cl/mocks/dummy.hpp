@@ -2317,6 +2317,23 @@ public:
    */ // }}}
   Dummy_clRetainProgram(cl_int err);
 };
+/** // doc: Dummy_clRetainSampler {{{
+ * \brief Default mock for clRetainSampler OpenCL function.
+ */ // }}}
+class Dummy_clRetainSampler
+  : public T::Base_clRetainSampler,
+    public T::Dummy_CallArgs<cl_sampler>
+{
+  cl_int _err;
+  cl_int clRetainSampler(cl_sampler sampler);
+public:
+  /** // doc: Dummy_clRetainSampler() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clRetainSampler(cl_int err);
+};
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /** // doc: Dummy_clSetEventCallback {{{
  * \brief Mock for clSetEventCallback OpenCL function.
@@ -4227,6 +4244,18 @@ clRetainProgram(cl_program program)
 }
 Dummy_clRetainProgram::
 Dummy_clRetainProgram(cl_int err)
+  : _err(err)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clRetainSampler::
+clRetainSampler(cl_sampler sampler)
+{
+  call_with(sampler);
+  return _err;
+}
+Dummy_clRetainSampler::
+Dummy_clRetainSampler(cl_int err)
   : _err(err)
 {
 }

@@ -6028,6 +6028,42 @@ retain_mem_object(cl_mem memobj);
  */ // }}}
 void
 retain_program(cl_program program);
+/** // doc: retain_sampler(...) {{{
+ * \brief Increments the \e sampler reference count
+ *
+ * This function is a wrapper around \c clRetainSampler(). The call to this
+ * function has same effect as
+ *  - \c clRetainSampler(sampler)
+ *
+ * The main difference between \ref retain_sampler() and
+ * \c clRetainSampler() is that it throws %clxx exceptions instead of returning
+ * OpenCL error codes.
+ *
+ * \note #create_sampler() and #create_sampler_with_properties()
+ * do an implicit retain. The same applies to \c clCreateSampler()
+ * and \c clCreateSamplerWithProperties() functions.
+ *
+ * \param sampler
+ *    The sampler to be retained
+ *
+ * \throw clerror_no<status_t::invalid_sampler>
+ *    When \c clRetainSampler() returns CL_INVALID_PROGRAM.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clRetainSampler() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clRetainSampler() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clRetainSampler() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clRetainSampler.html">clRetainSampler()</a>
+ */ // }}}
+void
+retain_sampler(cl_sampler sampler);
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /** // doc: set_event_callback() {{{
  * \brief Registers a user callback function for a specific command execution status
