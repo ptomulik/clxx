@@ -655,6 +655,13 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 
 CXXTEST_MOCK_GLOBAL(cl_int,
+  clGetSamplerInfo,
+  ( cl_sampler sampler, cl_sampler_info param_name,
+    size_t param_value_size, void* param_value, size_t* param_value_size_ret),
+  ( sampler, param_name, param_value_size, param_value, param_value_size_ret)
+);
+
+CXXTEST_MOCK_GLOBAL(cl_int,
   clGetSupportedImageFormats,
   ( cl_context context, cl_mem_flags flags, cl_mem_object_type image_type,
     cl_uint num_entries, cl_image_format* image_formats,

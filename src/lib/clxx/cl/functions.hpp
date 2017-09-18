@@ -5273,6 +5273,57 @@ get_program_info(cl_program program,
                  size_t param_value_size,
                  void* param_value,
                  size_t* param_value_size_ret);
+/** // doc: get_sampler_info {{{
+ * \brief Returns information about the sampler object.
+ *
+ * This function is a wrapper around \c clGetSamplerInfo(). The call to this
+ * function has same effect as
+ *  - \c clGetSamplerInfo(sampler, static_cast<cl_sampler_info>(param_name), param_value_size, param_value, param_value_size_ret)
+ *
+ * The main difference between \ref get_sampler_info() and
+ * \c clGetSamplerInfo() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes and accepts \ref clxx::sampler_info_t
+ * "sampler_info_t" instead of \c cl_sampler_info as \e param_name.
+ *
+ * \param sampler
+ *    Specifies the sampler object being queried.
+ * \param param_name
+ *    Specifies the information to query. The list of supported \e param_name
+ *    types is documented in \ref clxx::sampler_info_t "sampler_info_t".
+ * \param param_value_size
+ *    Used to specify the size in bytes of memory pointed to by param_value.
+ *    This size must be >= size of return type as described in the table above.
+ * \param param_value
+ *    A pointer to memory where the appropriate result being queried is
+ *    returned. If param_value is \c NULL, it is ignored.
+ * \param param_value_size_ret
+ *    Returns the actual size in bytes of data copied to param_value. If
+ *    \e param_value_size_ret is \c NULL, it is ignored.
+ *
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetSamplerInfo() returns CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_sampler>
+ *    When \c clGetSamplerInfo() returns CL_INVALID_SAMPLER.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetSamplerInfo() returns CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetSamplerInfo() returns CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clGetSamplerInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetSamplerInfo.html">clGetSamplerInfo()</a>
+ */ // }}}
+void
+get_sampler_info(cl_sampler sampler,
+                 sampler_info_t param_name,
+                 size_t param_value_size,
+                 void* param_value,
+                 size_t* param_value_size_ret);
 /** // doc: get_supported_image_formats() {{{
  * \brief Get the list of image formats supported by an OpenCL implementation
  *

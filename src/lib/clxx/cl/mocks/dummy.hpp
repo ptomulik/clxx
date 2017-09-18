@@ -1975,6 +1975,29 @@ public:
    */ // }}}
   Dummy_clGetProgramInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+/** // doc: Dummy_clGetSamplerInfo {{{
+ * \brief Mock for clGetSamplerInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetSamplerInfo
+  : public T::Base_clGetSamplerInfo,
+    public T::Dummy_CallArgs<cl_sampler, cl_sampler_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  cl_int clGetSamplerInfo(cl_sampler sampler, cl_sampler_info param_name,
+                          size_t param_value_size, void* param_value,
+                          size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetSamplerInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetSamplerInfo(cl_int err);
+};
 /** // doc: Dummy_clGetSupportedImageFormats {{{
  * \brief Default mock for clGetSupportedImageFormats OpenCL function.
  */ // }}}
@@ -3939,6 +3962,20 @@ clGetProgramInfo(cl_program program, cl_program_info param_name,
 Dummy_clGetProgramInfo::
 Dummy_clGetProgramInfo(cl_int err, void const* param_value, size_t const* param_value_size_ret)
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
+{
+}
+/* ------------------------------------------------------------------------- */
+cl_int Dummy_clGetSamplerInfo::
+clGetSamplerInfo(cl_sampler sampler, cl_sampler_info param_name,
+                 size_t param_value_size, void* param_value,
+                 size_t* param_value_size_ret)
+{
+  call_with(sampler, param_name, param_value_size, param_value, param_value_size_ret);
+  return _err;
+}
+Dummy_clGetSamplerInfo::
+Dummy_clGetSamplerInfo(cl_int err)
+  : _err(err)
 {
 }
 /* ------------------------------------------------------------------------- */

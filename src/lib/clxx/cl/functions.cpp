@@ -1854,6 +1854,28 @@ get_program_info(cl_program program,
 }
 /* ------------------------------------------------------------------------ */
 void
+get_sampler_info(cl_sampler sampler,
+                 sampler_info_t param_name,
+                 size_t param_value_size,
+                 void* param_value,
+                 size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetSamplerInfo(
+        sampler,
+        static_cast<cl_sampler_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
 get_supported_image_formats(cl_context context,
                             mem_flags_t flags,
                             mem_object_type_t image_type,

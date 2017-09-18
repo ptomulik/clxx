@@ -79,6 +79,7 @@
 %throws_clerror(clxx::get_platform_info(cl_platform_id, platform_info_t, size_t, void *, size_t *))
 %throws_clerror(clxx::get_program_build_info(cl_program, cl_device_id, program_build_info_t, size_t, void *, size_t *))
 %throws_clerror(clxx::get_program_info(cl_program, program_info_t, size_t, void *, size_t *))
+%throws_clerror(clxx::get_sampler_info(cl_sampler, sampler_info_t, size_t, void *, size_t *))
 %throws_clerror(clxx::get_supported_image_formats(cl_context, mem_flags_t, mem_object_type_t, cl_uint, cl_image_format*, cl_uint*))
 %throws_clerror(clxx::link_program(cl_context, cl_uint, const cl_device_id *, const char *, cl_uint, const cl_program *, void(*)(cl_program, void *), void *))
 %throws_clerror(clxx::release_command_queue(cl_command_queue))

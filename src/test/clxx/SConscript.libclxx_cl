@@ -92,6 +92,7 @@ tests = [
     'cl/functions/get_platform_info.t.h',
     'cl/functions/get_program_build_info.t.h',
     'cl/functions/get_program_info.t.h',
+    'cl/functions/get_sampler_info.t.h',
     'cl/functions/get_supported_image_formats.t.h',
     'cl/functions/link_program.t.h',
     'cl/functions/release_command_queue.t.h',
