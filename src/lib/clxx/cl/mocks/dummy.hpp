@@ -1844,6 +1844,31 @@ public:
    */ // }}}
   Dummy_clGetMemObjectInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+/** // doc: Dummy_clGetPipeInfo {{{
+ * \brief Mock for clGetPipeInfo OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clGetPipeInfo
+  : public T::Base_clGetPipeInfo,
+    public T::Dummy_CallArgs<cl_mem, cl_pipe_info, size_t, void*, size_t*>
+{
+  cl_int _err;
+  cl_int clGetPipeInfo(cl_mem pipe, cl_pipe_info param_name,
+                       size_t param_value_size, void* param_value,
+                       size_t* param_value_size_ret);
+public:
+  /** // doc: Dummy_clGetPipeInfo() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   * \param param_value A parameter value to be returned by the mock
+   * \param param_value_size_ret A parameter value size to be returned by the mock
+   */ // }}}
+  Dummy_clGetPipeInfo(cl_int err);
+};
+#endif
 /** // doc: Dummy_clGetPlatformIDs {{{
  * \brief Mock for clGetPlatformIDs OpenCL function.
  *
@@ -3813,6 +3838,22 @@ Dummy_clGetMemObjectInfo(cl_int err, void const* param_value, size_t const* para
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+cl_int Dummy_clGetPipeInfo::
+clGetPipeInfo(cl_mem pipe, cl_pipe_info param_name,
+              size_t param_value_size, void* param_value,
+              size_t* param_value_size_ret)
+{
+  call_with(pipe, param_name, param_value_size, param_value, param_value_size_ret);
+  return _err;
+}
+Dummy_clGetPipeInfo::
+Dummy_clGetPipeInfo(cl_int err)
+  : _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clGetPlatformIDs::
 clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,

@@ -1060,7 +1060,7 @@ CLXX_MAKE_INTEGER_ENUM(mem_object_type_t, cl_mem_object_type)
  *
  * The OpenCL's \c cl_mem_info is used by \c clGetMemObjectInfo() to select
  * particular information to be queried from OpenCL. The \ref mem_info_t is
- * a C++ equivalent of the \c cl_mem_info. It's used by gt_mem_object_info()
+ * a C++ equivalent of the \c cl_mem_info. It's used by get_mem_object_info()
  * for the same purpose.
  *
  * \par Supported OpenCL versions
@@ -1100,12 +1100,37 @@ enum class mem_info_t : cl_mem_info {
 
 CLXX_MAKE_INTEGER_ENUM(mem_info_t, cl_mem_info)
 
+#if CLXX_CL_H_VERSION_2_0
+/** // doc: pipe_info_t {{{
+ * \brief Corresponds to OpenCL's \c cl_pipe_info
+ *
+ * The OpenCL's \c cl_pipe_info is used by \c clGetMemObjectInfo() to select
+ * particular information to be queried from OpenCL. The \ref pipe_info_t is
+ * a C++ equivalent of the \c cl_pipe_info. It's used by get_pipe_info()
+ * for the same purpose.
+ *
+ * \par Supported OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |
+ *
+ */ // }}}
+enum class pipe_info_t : cl_pipe_info {
+  /// Corresponds to \c CL_PIPE_PACKET_SIZE
+  packet_size           = CL_PIPE_PACKET_SIZE,
+  /// Corresponds to \c CL_PIPE_MAX_PACKETS
+  max_packets           = CL_PIPE_MAX_PACKETS
+};
+
+CLXX_MAKE_INTEGER_ENUM(pipe_info_t, cl_pipe_info)
+#endif
+
 /** // doc: image_info_t {{{
  * \brief Corresponds to OpenCL's cl_image_info
  *
  * The OpenCL's \c cl_image_info is used by \c clGetImageInfo() to select
  * particular information to be queried from OpenCL. The \ref image_info_t is
- * a C++ equivalent of the \c cl_image_info. It's used by gt_image_info()
+ * a C++ equivalent of the \c cl_image_info. It's used by get_image_info()
  * for the same purpose.
  *
  * \par Supported OpenCL versions

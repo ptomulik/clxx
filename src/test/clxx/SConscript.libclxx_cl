@@ -87,6 +87,7 @@ tests = [
     'cl/functions/get_kernel_sub_group_info.t.h',
     'cl/functions/get_kernel_work_group_info.t.h',
     'cl/functions/get_mem_object_info.t.h',
+    'cl/functions/get_pipe_info.t.h',
     'cl/functions/get_platform_ids.t.h',
     'cl/functions/get_platform_info.t.h',
     'cl/functions/get_program_build_info.t.h',

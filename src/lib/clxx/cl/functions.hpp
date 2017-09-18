@@ -5006,6 +5006,58 @@ get_mem_object_info(cl_mem memobj,
                     size_t param_value_size,
                     void* param_value,
                     size_t* param_value_size_ret);
+#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+/** // doc: get_pipe_info() {{{
+ * \brief Get information specific to a pipe object created with #create_pipe
+ *
+ * This is a wrapper for \c clGetPipeInfo(). The call to
+ * #get_pipe_info() has same effect as a call to
+ *    - \c clGetPipeInfo(pipe, static_cast<cl_pipe_info>(param_name), param_value_size, param_value, param_value_size_ret)
+ *
+ * The main difference between #get_pipe_info() and \c clGetPipeInfo()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param pipe
+ *    Specifies the pipe being queried.
+ * \param param_name
+ *    Specifies the information to query. See the documentation of
+ *    #pipe_info_t for the list of predefined names.
+ * \param param_value_size
+ *    Used to specify the size in bytes of memory pointed to by \p param_value.
+ *    This size must be >= size of return type.
+ * \param param_value
+ *    A pointer to memory where the appropriate result being queried is
+ *    returned. If \p param_value is \c NULL, it is ignored.
+ * \param param_value_size_ret
+ *    Returns the actual size in bytes of data being queried by \p param_value.
+ *    If \p param_value_size_ret is \c NULL, it is ignored
+ *
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When \c clGetPipeInfo() returns \c CL_INVALID_MEM_OBJECT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clGetPipeInfo() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clGetPipeInfo() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clGetPipeInfo() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clGetPipeInfo() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">clGetPipeInfo()</a>
+ *
+ */ // }}}
+void
+get_pipe_info(cl_mem pipe,
+              pipe_info_t param_name,
+              size_t param_value_size,
+              void* param_value,
+              size_t* param_value_size_ret);
+#endif
 /** // {{{ doc: get_platform_ids(...)
  * \brief Retrieve platform identifiers of locally available OpenCL platforms.
  *

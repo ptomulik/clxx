@@ -1508,6 +1508,36 @@ public:
     TS_ASSERT_EQUALS(intval(mem_info_t::offset), CL_MEM_OFFSET);
 #endif
   }
+  /** // doc: test_pipe_info_t() {{{
+   * \brief Test the pipe_info_t type.
+   */ // }}}
+  void test_pipe_info_t( )
+  {
+    //
+    // Check the underlying type
+    //
+#if CLXX_CL_H_VERSION_2_0
+    TS_ASSERT((std::is_same<std::underlying_type<pipe_info_t>::type, cl_pipe_info>::value));
+    //
+    // Check enum values
+    //
+    TS_ASSERT_EQUALS(static_cast<cl_pipe_info>(pipe_info_t::packet_size), CL_PIPE_PACKET_SIZE);
+    TS_ASSERT_EQUALS(static_cast<cl_pipe_info>(pipe_info_t::max_packets), CL_PIPE_MAX_PACKETS);
+#endif
+  }
+  /** // doc: test_pipe_info_t__intval() {{{
+   * \brief Test the pipe_info_t type with intval().
+   */ // }}}
+  void test_pipe_info_t__intval( )
+  {
+    //
+    // Check enum values
+    //
+#if CLXX_CL_H_VERSION_2_0
+    TS_ASSERT_EQUALS(intval(pipe_info_t::packet_size), CL_PIPE_PACKET_SIZE);
+    TS_ASSERT_EQUALS(intval(pipe_info_t::max_packets), CL_PIPE_MAX_PACKETS);
+#endif
+  }
   /** // doc: test_image_info_t() {{{
    * \brief Test the image_info_t type.
    */ // }}}

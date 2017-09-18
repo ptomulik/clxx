@@ -618,6 +618,15 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( memobj, param_name, param_value_size, param_value, param_value_size_ret )
 );
 
+#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clGetPipeInfo,
+  ( cl_mem pipe, cl_pipe_info param_name, size_t param_value_size,
+    void* param_value, size_t* param_value_size_ret),
+  ( pipe, param_name, param_value_size, param_value, param_value_size_ret )
+);
+#endif
+
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetPlatformIDs,
   (cl_uint num_entries, cl_platform_id* platforms, cl_uint *num_platforms),

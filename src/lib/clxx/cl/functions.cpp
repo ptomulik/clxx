@@ -1753,6 +1753,27 @@ get_mem_object_info(cl_mem memobj,
 }
 /* ------------------------------------------------------------------------ */
 void
+get_pipe_info(cl_mem pipe,
+              pipe_info_t param_name,
+              size_t param_value_size, void* param_value,
+              size_t* param_value_size_ret)
+{
+  status_t s = static_cast<status_t>(
+      T::clGetPipeInfo(
+        pipe,
+        static_cast<cl_pipe_info>(param_name),
+        param_value_size,
+        param_value,
+        param_value_size_ret
+     )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+/* ------------------------------------------------------------------------ */
+void
 get_platform_ids(cl_uint num_entries,
                  cl_platform_id* platforms,
                  cl_uint* num_platforms)

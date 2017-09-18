@@ -74,6 +74,7 @@
 %throws_clerror(clxx::get_kernel_work_group_info(cl_kernel, cl_device_id, kernel_work_group_info_t, size_t, void*, size_t*))
 %throws_clerror(clxx::get_kernel_sub_group_info(cl_kernel, cl_device_id, kernel_work_group_info_t, size_t, const void*, size_t, void*, size_t*))
 %throws_clerror(clxx::get_mem_object_info(cl_mem, mem_info_t, size_t, void*, size_t*))
+%throws_clerror(clxx::get_pipe_info(cl_pipe, pipe_info_t, size_t, void*, size_t*))
 %throws_clerror(clxx::get_platform_ids(cl_uint, cl_platform_id *, cl_uint *))
 %throws_clerror(clxx::get_platform_info(cl_platform_id, platform_info_t, size_t, void *, size_t *))
 %throws_clerror(clxx::get_program_build_info(cl_program, cl_device_id, program_build_info_t, size_t, void *, size_t *))
