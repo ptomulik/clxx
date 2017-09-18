@@ -426,6 +426,15 @@ CXXTEST_MOCK_GLOBAL(cl_int,
     slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event )
 );
 
+#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueTask,
+  ( cl_command_queue command_queue, cl_kernel kernel,
+    cl_uint num_events_in_wait_list, const cl_event* event_wait_list,
+    cl_event* event ),
+  ( command_queue, kernel, num_events_in_wait_list, event_wait_list, event )
+);
+#endif
 
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueUnmapMemObject,

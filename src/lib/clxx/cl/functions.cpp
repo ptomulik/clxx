@@ -1242,6 +1242,30 @@ enqueue_read_image(cl_command_queue command_queue,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+void
+enqueue_task(cl_command_queue command_queue,
+             cl_kernel kernel,
+             cl_uint num_events_in_wait_list,
+             const cl_event* event_wait_list,
+             cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueTask(
+      command_queue,
+      kernel,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 void
 enqueue_unmap_mem_object(cl_command_queue command_queue,
                          cl_mem memobj,

@@ -63,6 +63,7 @@ tests = [
     'cl/functions/enqueue_read_buffer.t.h',
     'cl/functions/enqueue_read_buffer_rect.t.h',
     'cl/functions/enqueue_read_image.t.h',
+    'cl/functions/enqueue_task.t.h',
     'cl/functions/enqueue_unmap_mem_object.t.h',
     'cl/functions/enqueue_wait_for_events.t.h',
     'cl/functions/enqueue_write_buffer.t.h',

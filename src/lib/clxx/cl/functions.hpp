@@ -3538,6 +3538,95 @@ enqueue_read_image(cl_command_queue command_queue,
                    cl_uint num_events_in_wait_list,
                    const cl_event* event_wait_list,
                    cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+/** // doc: enqueue_task() {{{
+ * \brief Enqueues a command to execute a kernel on a device.
+ *
+ * This is a wrapper for \c clEnqueueTask(). The call to
+ * #enqueue_task() has same effect as a call to
+ *    - \c clEnqueueTask(command_queue, kernel, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_task() and \c clEnqueueTask()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ *
+ * \param command_queue
+ *    A valid command-queue. The kernel will be queued for execution on the
+ *    device associated with \p command_queue.
+ * \param image
+ *    A valid kernel object. The OpenCL context associated with \p kernel and
+ *    \p command_queue must be the same.
+ * \param num_events_in_wait_list
+ *    Number of events in the \p event_wait_list.
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
+ *    If \p event_wait_list is not \c NULL, the list of events pointed to by
+ *    \p event_wait_list must be valid and \p num_events_in_wait_list must be
+ *    greater than \c 0.
+ * \param event_wait_list
+ *    \p event_wait_list and \p num_events_in_wait_list specify events that
+ *    need to complete before this particular command can be executed. If
+ *    \p event_wait_list is \c NULL, then this particular command does not wait
+ *    on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be
+ *    valid and num_\p events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization points.
+ *    The context associated with events in \p event_wait_list and
+ *    \p command_queue must be the same. The memory associated with
+ *    \p event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular kernel execution
+ *    instance. Event objects are unique and can be used to identify a
+ *    particular kernel execution instance later on. If \p event is \c NULL, no
+ *    event will be created for this kernel execution instance and therefore it
+ *    will not be possible for the application to query or queue a wait for
+ *    this particular kernel execution instance.
+ *
+ * \throw clerror_no<status_t::invalid_program_executable>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_PROGRAM_EXECUTABLE.
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_kernel>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_KERNEL.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_kernel_args>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_KERNEL_ARGS.
+ * \throw clerror_no<status_t::invalid_work_group_size>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_WORK_GROUP_SIZE.
+ * \throw clerror_no<status_t::misaligned_sub_buffer_offset>
+ *    When \c clEnqueueTask() returns \c CL_MISALIGNED_SUB_BUFFER_OFFSET.
+ * \throw clerror_no<status_t::invalid_image_size>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_IMAGE_SIZE.
+ * \throw clerror_no<status_t::invalid_image_format_descriptor>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_IMAGE_FORMAT_DESCRIPTOR.
+ * \throw clerror_no<status_t::mem_object_allocation_failure>
+ *    When \c clEnqueueTask() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueTask() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueTask() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueTask() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueTask() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |   \check  |   \check  |   \check  |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clEnqueueTask.html">clEnqueueTask()</a>
+ *
+ */ // }}}
+void
+enqueue_task(cl_command_queue command_queue,
+             cl_kernel kernel,
+             cl_uint num_events_in_wait_list,
+             const cl_event* event_wait_list,
+             cl_event* event);
+#endif
 /** // doc: enqueue_unmap_mem_object() {{{
  * \brief Enqueues a command to unmap a previously mapped region of a memory object
  *
@@ -3675,7 +3764,7 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |   \check  |   \check  |           |           |           |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWaitForEvents.html">clEnqueueWaitForEvents()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueWaitForEvents.html">clEnqueueWaitForEvents()</a>
  *
  */ // }}}
 void

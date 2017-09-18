@@ -482,7 +482,7 @@ _clEnqueueTask = \
                   (const cl_event*)NULL,
                   (cl_event*)NULL );
 """
-CharacterizeClFunction(conf, 'clEnqueueTask', _clEnqueueSVMMemcpy)
+CharacterizeClFunction(conf, 'clEnqueueTask', _clEnqueueTask)
 
 #
 # clEnqueueWaitForEvents()
@@ -492,7 +492,7 @@ _clEnqueueWaitForEvents = \
 """clEnqueueWaitForEvents( (cl_uint)0,
                            (const cl_event*)NULL );
 """
-CharacterizeClFunction(conf, 'clEnqueueWaitForEvents', _clEnqueueSVMMemcpy)
+CharacterizeClFunction(conf, 'clEnqueueWaitForEvents', _clEnqueueWaitForEvents)
 
 
 #

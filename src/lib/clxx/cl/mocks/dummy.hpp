@@ -1258,6 +1258,30 @@ public:
    */ // }}}
   Dummy_clEnqueueReadImage(cl_int err, const cl_event* event = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+/** // doc: Dummy_clEnqueueTask {{{
+ * \brief Default mock for clEnqueueTask OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueTask
+  : public T::Base_clEnqueueTask,
+    public T::Dummy_CallArgs<cl_command_queue, cl_kernel, cl_uint,
+                             const cl_event*, cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueTask( cl_command_queue command_queue,
+                        cl_kernel kernel,
+                        cl_uint num_events_in_wait_list,
+                        const cl_event* event_wait_list,
+                        cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueTask() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueTask(cl_int err);
+};
+#endif
 /** // doc: Dummy_clEnqueueUnmapMemObject {{{
  * \brief Default mock for clEnqueueUnmapMemObject OpenCL function.
  */ // }}}
@@ -3199,6 +3223,25 @@ Dummy_clEnqueueReadImage(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+cl_int Dummy_clEnqueueTask::
+clEnqueueTask( cl_command_queue command_queue,
+               cl_kernel kernel,
+               cl_uint num_events_in_wait_list,
+               const cl_event* event_wait_list,
+               cl_event* event )
+{
+  call_with( command_queue, kernel, num_events_in_wait_list,
+             event_wait_list, event );
+  return _err;
+}
+Dummy_clEnqueueTask::
+Dummy_clEnqueueTask(cl_int err)
+  : _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 cl_int Dummy_clEnqueueUnmapMemObject::
 clEnqueueUnmapMemObject( cl_command_queue command_queue,
