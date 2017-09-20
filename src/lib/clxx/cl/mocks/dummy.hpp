@@ -1258,6 +1258,54 @@ public:
    */ // }}}
   Dummy_clEnqueueReadImage(cl_int err, const cl_event* event = nullptr);
 };
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+/** // doc: Dummy_clEnqueueSVMFree {{{
+ * \brief Default mock for clEnqueueSVMFree OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueSVMFree
+  : public T::Base_clEnqueueSVMFree,
+    public T::Dummy_CallArgs<cl_command_queue, cl_uint, void*,
+                             void(CL_CALLBACK*)(cl_command_queue, cl_uint, void**, void*),
+                             void*, cl_uint, const cl_event*, cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueSVMFree(cl_command_queue command_queue,
+                          cl_uint num_svm_pointers, void* svm_pointers[],
+                          void(CL_CALLBACK* pfn_free_func)(cl_command_queue, cl_uint, void*[], void*),
+                          void* user_data, cl_uint num_events_in_wait_list,
+                          const cl_event* event_wait_list, cl_event* event);
+public:
+  /** // doc: Dummy_clEnqueueSVMFree() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueSVMFree(cl_int err);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+/** // doc: Dummy_clEnqueueSVMMap {{{
+ * \brief Default mock for clEnqueueSVMMap OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueSVMMap
+  : public T::Base_clEnqueueSVMMap,
+    public T::Dummy_CallArgs<cl_command_queue, cl_bool, cl_map_flags, void*,
+                             size_t, cl_uint, const cl_event*, cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueSVMMap(cl_command_queue command_queue, cl_bool blocking_map,
+                         cl_map_flags map_flags, void* svm_ptr, size_t size,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list, cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueSVMMap() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueSVMMap(cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 /** // doc: Dummy_clEnqueueTask {{{
  * \brief Default mock for clEnqueueTask OpenCL function.
@@ -3481,6 +3529,46 @@ Dummy_clEnqueueReadImage(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+cl_int Dummy_clEnqueueSVMFree::
+clEnqueueSVMFree(cl_command_queue command_queue,
+                 cl_uint num_svm_pointers, void* svm_pointers[],
+                 void(CL_CALLBACK* pfn_free_func)(cl_command_queue,
+                                                  cl_uint,
+                                                  void*[],
+                                                  void*),
+                 void* user_data, cl_uint num_events_in_wait_list,
+                 const cl_event* event_wait_list, cl_event* event)
+{
+  call_with(command_queue, num_svm_pointers, svm_pointers, pfn_free_func,
+            user_data, num_events_in_wait_list, event_wait_list, event);
+  return _err;
+}
+Dummy_clEnqueueSVMFree::
+Dummy_clEnqueueSVMFree(cl_int err)
+  : _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+cl_int Dummy_clEnqueueSVMMap::
+clEnqueueSVMMap(cl_command_queue command_queue, cl_bool blocking_map,
+                cl_map_flags map_flags, void* svm_ptr, size_t size,
+                cl_uint num_events_in_wait_list,
+                const cl_event* event_wait_list, cl_event* event )
+{
+  call_with(command_queue, blocking_map, map_flags, svm_ptr, size,
+            num_events_in_wait_list, event_wait_list, event);
+  return _err;
+}
+Dummy_clEnqueueSVMMap::
+Dummy_clEnqueueSVMMap(cl_int err)
+  : _err(err)
+{
+}
+#endif
 /* ------------------------------------------------------------------------- */
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 cl_int Dummy_clEnqueueTask::

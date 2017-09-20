@@ -3538,6 +3538,200 @@ enqueue_read_image(cl_command_queue command_queue,
                    cl_uint num_events_in_wait_list,
                    const cl_event* event_wait_list,
                    cl_event* event);
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+/** // doc: enqueue_svm_free() {{{
+ * \brief Enqueues a command to free the shared virtual memory allocated using
+ *        #svm_alloc() or a shared system memory pointer
+ *
+ * This is a wrapper for \c clEnqueueSVMFree(). The call to
+ * #enqueue_svm_free() has same effect as a call to
+ *    - \c clEnqueueSVMFree(command_queue, num_svm_pointers, svm_pointers, pfn_free_func, user_data, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_svm_free() and \c clEnqueueSVMFree()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    A valid host command-queue.
+ * \param num_svm_pointers
+ *    Number of elements in \p svm_pointers array.
+ * \param svm_pointers
+ *    Specifiy shared virtual memory pointers to be freed. Each pointer in
+ *    \p svm_pointers that was allocated using #svm_alloc() must have been
+ *    allocated from the same context from which \p command_queue was created.
+ *    The memory associated with \p svm_pointers can be reused or freed after
+ *    the function returns.
+ * \param pfn_free_func
+ *    Specifies the callback function to be called to free the SVM pointers.
+ *    \p pfn_free_func takes four arguments: \p queue which is the command
+ *    queue in which #enqueue_svm_free() was enqueued, the count and list of
+ *    SVM pointers to free and \p user_data which is a pointer to user
+ *    specified data. If \p pfn_free_func is \c NULL, all pointers specified in
+ *    \p svm_pointers must be allocated using #svm_alloc() (or \c clSVMAlloc)
+ *    and the OpenCL implementation will free these SVM pointers.
+ *    \p pfn_free_func must be a valid callback function if any SVM pointer to
+ *    be freed is a shared system memory pointer i.e. not allocated using
+ *    #svm_alloc (\c clSVMAlloc). If \p pfn_free_func is a valid callback
+ *    function, the OpenCL implementation will call \p pfn_free_func to free
+ *    all the SVM pointers specified in \p svm_pointers.
+ * \param user_data
+ *    Will be passed as the \p user_data argument when \p pfn_free_func is
+ *    called. \p user_data can be \c NULL.
+ * \param num_events_in_wait_list
+ *    Number of elements in \p event_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before #enqueue_svm_free() can be
+ *    executed. If \p event_wait_list is \c NULL, then #enqueue_svm_free() does
+ *    not wait on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be
+ *    valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events *    specified in \p event_wait_list act as synchronization
+ *    points. The context associated with events in \p event_wait_list and
+ *    \p command_queue must be the same. The memory associated with
+ *    \p event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular command and can
+ *    be used to query or queue a wait for this particular command to complete.
+ *    \p event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueSVMFree() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueSVMFree() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueSVMFree() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueSVMFree() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueSVMFree() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueSVMFree() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMFree.html">clEnqueueSVMFree()</a>
+ *
+ */ // }}}
+void
+enqueue_svm_free(cl_command_queue command_queue,
+                 cl_uint num_svm_pointers,
+                 void* svm_pointers[],
+                 void (CL_CALLBACK* pfn_free_func)(cl_command_queue queue,
+                                                   cl_uint num_svm_pointers,
+                                                   void *svm_pointers[],
+                                                   void *user_data),
+                 void* user_data,
+                 cl_uint num_events_in_wait_list,
+                 const cl_event* event_wait_list,
+                 cl_event* event);
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+/** // doc: enqueue_svm_map() {{{
+ * \brief Enqueues a command that will allow the host to update a region of a
+ *        SVM buffer
+ *
+ * This is a wrapper for \c clEnqueueSVMMap(). The call to
+ * #enqueue_svm_map() has same effect as a call to
+ *    - \c clEnqueueSVMMap(command_queue, blocking_map, static_cast<cl_map_flags>(map_flags), svm_ptr, size, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_svm_map() and \c clEnqueueSVMMap()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes
+ * and uses enums instead of OpenCL constants.
+ *
+ * \param command_queue
+ *    Must be a valid host command-queue.
+ * \param blocking_map
+ *    Indicates if the map operation is blocking or non-blocking.
+ *
+ *    If \p blocking_map is \c CL_TRUE, #enqueue_svm_map() does not return
+ *    until the application can access the contents of the SVM region specified
+ *    by \p svm_ptr and size on the host.
+ *
+ *    If \p blocking_map is \c CL_FALSE i.e. map operation is non-blocking, the
+ *    region specified by \p svm_ptr and \p size cannot be used until the map
+ *    command has completed. The event argument returns an event object which
+ *    can be used to query the execution status of the map command. When the
+ *    map command is completed, the application can access the contents of the
+ *    region specified by \p svm_ptr and \p size.
+ * \param map_flags
+ *    A bitfield with the values defined in the documentation of #map_flags_t.
+ * \param svm_ptr
+ *    A pointer to a memory region that will be updated by the host. If
+ *    \p svm_ptr is allocated using #svm_alloc (\c clSVMAlloc) then it must be
+ *    allocated from the same context from which \p command_queue was created.
+ *    Otherwise the behavior is undefined.
+ * \param size
+ *    Size in bytes of the memory region pointed to by \p svm_ptr that will be
+ *    updated by the host.
+ * \param num_events_in_wait_list
+ *    Number of elements in \p event_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed. If \p event_wait_list is \c NULL, then this particular
+ *    command does not wait on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be
+ *    valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization
+ *    points. The context associated with events in \p event_wait_list and
+ *    \p command_queue must be the same. The memory associated with
+ *    \p event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular command and can
+ *    be used to query or queue a wait for this particular command to complete.
+ *    \p event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. #enqueue_barrier_with_wait_list() can be used
+ *    instead. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueSVMMap() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueSVMMap() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueSVMMap() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueSVMMap() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::exec_status_error_for_events_in_wait_list>
+ *    When \c clEnqueueSVMMap() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueSVMMap() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueSVMMap() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueSVMMap() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMap.html">clEnqueueSVMMap()</a>
+ *
+ */ // }}}
+void
+enqueue_svm_map(cl_command_queue command_queue,
+                cl_bool blocking_map,
+                map_flags_t map_flags,
+                void* svm_ptr,
+                size_t size,
+                cl_uint num_events_in_wait_list,
+                const cl_event* event_wait_list,
+                cl_event* event);
+#endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 /** // doc: enqueue_task() {{{
  * \brief Enqueues a command to execute a kernel on a device.

@@ -53,6 +53,7 @@
 %throws_clerror(clxx::enqueue_read_buffer(cl_command_queue, cl_mem, cl_bool, size_t, size_t, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_read_buffer_rect(cl_command_queue, cl_mem, cl_bool, const size_t*, const size_t*, const size_t*, size_t, size_t, size_t, size_t, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_read_image(cl_command_queue, cl_mem, cl_bool, const size_t*, const size_t*, size_t, size_t, void*, cl_uint, const cl_event*, cl_event*))
+%throws_clerror(clxx::enqueue_svm_free(cl_command_queue, cl_uint, void*[], void(CL_CALLBACK*)(cl_command_queue,cl_uint,void*[],void*), void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_task(cl_command_queue, cl_kernel, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_unmap_mem_object(cl_command_queue, cl_mem, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_wait_for_events(cl_command_queue, cl_uint, const cl_event*))

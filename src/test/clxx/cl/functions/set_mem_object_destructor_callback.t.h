@@ -45,7 +45,6 @@ public:
   void test__set_mem_object_destructor_callback__invalid_mem_object( )
   {
 #if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
-    //typedef void (CL_CALLBACK* callback_t)(cl_mem, void*);
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_INVALID_MEM_OBJECT);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::invalid_mem_object>);
 #endif
@@ -56,7 +55,6 @@ public:
   void test__set_mem_object_destructor_callback__invalid_value( )
   {
 #if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
-    //typedef void (CL_CALLBACK* callback_t)(cl_mem, void*);
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::invalid_value>);
 #endif
@@ -67,7 +65,6 @@ public:
   void test__set_mem_object_destructor_callback__out_of_resources( )
   {
 #if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
-    //typedef void (CL_CALLBACK* callback_t)(cl_mem, void*);
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
 #endif
@@ -78,7 +75,6 @@ public:
   void test__set_mem_object_destructor_callback__out_of_host_memory( )
   {
 #if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
-    //typedef void (CL_CALLBACK* callback_t)(cl_mem, void*);
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
 #endif
@@ -89,7 +85,6 @@ public:
   void test__set_mem_object_destructor_callback__unexpected_clerror( )
   {
 #if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
-    //typedef void (CL_CALLBACK* callback_t)(cl_mem, void*);
     T::Dummy_clSetMemObjectDestructorCallback mock(-0x1234567);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), unexpected_clerror);
 #endif

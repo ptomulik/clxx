@@ -1242,6 +1242,69 @@ enqueue_read_image(cl_command_queue command_queue,
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+void
+enqueue_svm_free(cl_command_queue command_queue,
+                 cl_uint num_svm_pointers,
+                 void* svm_pointers[],
+                 void (CL_CALLBACK* pfn_free_func)(cl_command_queue queue,
+                                                   cl_uint num_svm_pointers,
+                                                   void *svm_pointers[],
+                                                   void *user_data),
+                 void* user_data,
+                 cl_uint num_events_in_wait_list,
+                 const cl_event* event_wait_list,
+                 cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueSVMFree(
+      command_queue,
+      num_svm_pointers,
+      svm_pointers,
+      pfn_free_func,
+      user_data,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+void
+enqueue_svm_map(cl_command_queue command_queue,
+                cl_bool blocking_map,
+                map_flags_t map_flags,
+                void* svm_ptr,
+                size_t size,
+                cl_uint num_events_in_wait_list,
+                const cl_event* event_wait_list,
+                cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueSVMMap(
+      command_queue,
+      blocking_map,
+      static_cast<cl_map_flags>(map_flags),
+      svm_ptr,
+      size,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 void
 enqueue_task(cl_command_queue command_queue,
