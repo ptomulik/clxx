@@ -6479,6 +6479,38 @@ set_mem_object_destructor_callback(cl_mem memobj,
 void
 set_user_event_status(cl_event event, cl_int execution_status);
 #endif
+#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+/** // doc: unload_compiler(...) {{{
+ * \brief Allows the implementation to release the resources allocated by the
+ *        OpenCL compiler
+ *
+ * This function is a wrapper around \c clUnloadCompiler(). The call to
+ * this function has same effect as
+ *  - \c clUnloadCompiler()
+ *
+ * The main difference between \ref unload_compiler() and
+ * \c clUnloadCompiler() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \note This is a hint from the application and does not guarantee that the
+ * compiler will not be used in the future or that the compiler will actually
+ * be unloaded by the implementation. Calls to #build_program (or
+ * \c clBuildProgram) after \c #unload_compiler will reload the compiler, if
+ * necessary, to build the appropriate program executable.
+ *
+ * \throw unexpected_clerror
+ *    When \c clUnloadCompiler() returns an error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |  \check   |  \check   |           |           |           |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clUnloadCompiler.html">clUnloadCompiler()</a>
+ */ // }}}
+void
+unload_compiler();
+#endif
 #if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
 /** // doc: unload_platform_compiler(...) {{{
  * \brief Allows the implementation to release the resources allocated by the

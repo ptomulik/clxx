@@ -829,6 +829,11 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clUnloadCompiler, (), ());
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clUnloadPlatformCompiler, (cl_platform_id platform), (platform));

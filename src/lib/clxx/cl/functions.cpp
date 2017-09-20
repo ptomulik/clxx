@@ -2244,6 +2244,18 @@ set_user_event_status(cl_event event, cl_int execution_status)
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+void
+unload_compiler()
+{
+  status_t s = static_cast<status_t>(T::clUnloadCompiler());
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
 void
 unload_platform_compiler(cl_platform_id platform)

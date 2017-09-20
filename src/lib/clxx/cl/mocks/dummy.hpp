@@ -2509,6 +2509,25 @@ public:
   Dummy_clSetUserEventStatus(cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+/** // doc: Dummy_clUnloadCompiler {{{
+ * \brief Default mock for clUnloadCompiler OpenCL function.
+ */ // }}}
+class Dummy_clUnloadCompiler
+  : public T::Base_clUnloadCompiler,
+    public T::Dummy_CallArgs<>
+{
+  cl_int _err;
+  cl_int clUnloadCompiler();
+public:
+  /** // doc: Dummy_clUnloadCompiler() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clUnloadCompiler(cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
 /** // doc: Dummy_clUnloadPlatformCompiler {{{
  * \brief Default mock for clUnloadPlatformCompiler OpenCL function.
@@ -4420,6 +4439,20 @@ clSetUserEventStatus( cl_event event , cl_int execution_status )
 Dummy_clSetUserEventStatus::
 Dummy_clSetUserEventStatus(cl_int err)
   :_err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+cl_int Dummy_clUnloadCompiler::
+clUnloadCompiler()
+{
+  call_with();
+  return _err;
+}
+Dummy_clUnloadCompiler::
+Dummy_clUnloadCompiler(cl_int err)
+  : _err(err)
 {
 }
 #endif
