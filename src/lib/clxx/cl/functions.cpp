@@ -2214,6 +2214,22 @@ set_kernel_exec_info(cl_kernel kernel,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+void
+set_mem_object_destructor_callback(cl_mem memobj,
+                                   void (CL_CALLBACK* pfn_notify)(cl_mem, void*),
+                                   void* user_data)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetMemObjectDestructorCallback(memobj, pfn_notify, user_data)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
 void
 set_user_event_status(cl_event event, cl_int execution_status)

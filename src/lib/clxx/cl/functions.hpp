@@ -6384,6 +6384,57 @@ set_kernel_exec_info(cl_kernel kernel,
                      size_t param_value_size,
                      const void* param_value);
 #endif
+#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+/** // doc: set_mem_object_destructor_callback() {{{
+ * \brief Registers a user callback function with a memory object.
+ *
+ * This function is a wrapper around \c clSetMemObjectDestructorCallback(). The call to
+ * this function has same effect as
+ * - \c clSetMemObjectDestructorCallback(memobj, pfn_notify, user_data)
+ *
+ * The main difference between #set_mem_object_destructor_callback() and
+ * \c clSetMemObjectDestructorCallback() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param memobj
+ *    A valid memory object.
+ * \param pfn_notify
+ *     The callback function that can be registered by the application. This
+ *     callback function may be called asynchronously by the OpenCL
+ *     implementation. It is the application's responsibility to ensure that
+ *     the callback function is thread-safe. The parameters to this callback
+ *     function are:
+ *         - \p memobj: the memory object being deleted. When the user callback
+ *           is called by the implementation, this memory object is no longer
+ *            valid. memobj is only provided for reference purposes.
+ *         - \p user_data: a pointer to user supplied data
+ * \param user_data
+ *    Will be passed as the \p user_data argument when \p pfn_notify is called.
+ *    \p user_data can be \c NULL.
+ *
+ * \throw clerror_no<status_t::invalid_mem_object>
+ *    When the \c clSetMemObjectDestructorCallback() returns CL_INVALID_MEM_OBJECT
+ * \throw clerror_no<status_t::invalid_value>
+ *    When the \c clSetMemObjectDestructorCallback() returns CL_INVALID_VALUE
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When the \c clSetMemObjectDestructorCallback() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When the \c clSetMemObjectDestructorCallback() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clSetMemObjectDestructorCallback() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetMemObjectDestructorCallback.html">clSetMemObjectDestructorCallback()</a>
+ */ // }}}
+void
+set_mem_object_destructor_callback(cl_mem memobj,
+                                   void (CL_CALLBACK* pfn_notify)(cl_mem, void*),
+                                   void* user_data);
+#endif
 #if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
 /** // doc: set_user_event_status() {{{
  * \brief Sets the execution status of a user event object
