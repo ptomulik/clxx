@@ -2117,6 +2117,22 @@ set_command_queue_property(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+void
+set_default_device_command_queue(cl_context context,
+                                 cl_device_id device,
+                                 cl_command_queue command_queue)
+{
+  status_t s = static_cast<status_t>(
+      T::clSetDefaultDeviceCommandQueue(context, device, command_queue)
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 void
 set_event_callback(cl_event event, cl_int command_exec_callback_type,

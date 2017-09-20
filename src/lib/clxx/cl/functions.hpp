@@ -6115,6 +6115,47 @@ set_command_queue_property(cl_command_queue command_queue,
                            cl_bool enable,
                            cl_command_queue_properties* old_properties);
 #endif
+#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+/** // doc: set_default_device_command_queue() {{{
+ * \brief Replaces the default command queue on the device.
+ *
+ * This function is a wrapper around \c clSetDefaultDeviceCommandQueue(). The call to
+ * this function has same effect as
+ * - \c clSetDefaultDeviceCommandQueue(context, device, command_queue)
+ *
+ * The main difference between #set_default_device_command_queue() and
+ * \c clSetDefaultDeviceCommandQueue() is that it throws %clxx exceptions instead of
+ * returning OpenCL error codes.
+ *
+ * \param context
+ * \param device
+ * \param command_queue
+ *
+ * \throw clerror_no<status_t::invalid_context>
+ *    When the \c clSetDefaultDeviceCommandQueue() returns CL_INVALID_CONTEXT
+ * \throw clerror_no<status_t::invalid_device>
+ *    When the \c clSetDefaultDeviceCommandQueue() returns CL_INVALID_DEVICE
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When the \c clSetDefaultDeviceCommandQueue() returns CL_INVALID_COMMAND_QUEUE
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When the \c clSetDefaultDeviceCommandQueue() returns CL_OUT_OF_RESOURCES
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When the \c clSetDefaultDeviceCommandQueue() returns CL_OUT_OF_HOST_MEMORY
+ * \throw unexpected_clerror
+ *    When \c clSetDefaultDeviceCommandQueue() returns other error code.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSetDefaultDeviceCommandQueue.html">clSetDefaultDeviceCommandQueue()</a>
+ */ // }}}
+void
+set_default_device_command_queue(cl_context context,
+                                 cl_device_id device,
+                                 cl_command_queue command_queue);
+#endif
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /** // doc: set_event_callback() {{{
  * \brief Registers a user callback function for a specific command execution status

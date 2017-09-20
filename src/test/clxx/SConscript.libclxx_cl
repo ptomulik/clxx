@@ -112,6 +112,7 @@ tests = [
     'cl/functions/retain_program.t.h',
     'cl/functions/retain_sampler.t.h',
     'cl/functions/set_command_queue_property.t.h',
+    'cl/functions/set_default_device_command_queue.t.h',
     'cl/functions/set_event_callback.t.h',
     'cl/functions/set_kernel_arg.t.h',
     'cl/functions/set_kernel_arg_svm_pointer.t.h',

@@ -772,6 +772,15 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clSetDefaultDeviceCommandQueue,
+  ( cl_context context, cl_device_id device, cl_command_queue command_queue ),
+  ( context, device, command_queue )
+);
+#endif
+
+
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetEventCallback,

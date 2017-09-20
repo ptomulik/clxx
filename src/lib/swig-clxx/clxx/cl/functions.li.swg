@@ -99,6 +99,7 @@
 %throws_clerror(clxx::retain_program(cl_program))
 %throws_clerror(clxx::retain_sampler(cl_sampler))
 %throws_clerror(clxx::set_command_queue_property(cl_command_queue, command_queue_properties_t, cl_bool, cl_command_queue_properties*))
+%throws_clerror(clxx::set_default_device_command_queue(cl_context, cl_device_id, cl_command_queue))
 %throws_clerror(clxx::set_event_callback(cl_event, cl_int, void(*)(cl_event, cl_int, void*), void*))
 %throws_clerror(clxx::set_kernel_arg(cl_kernel, cl_uint, size_t, const void*))
 %throws_clerror(clxx::set_kernel_arg_svm_pointer(cl_kernel, cl_uint, const void*))

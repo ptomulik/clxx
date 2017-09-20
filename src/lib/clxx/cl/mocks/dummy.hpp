@@ -2358,6 +2358,28 @@ public:
   Dummy_clSetCommandQueueProperty(cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+/** // doc: Dummy_clSetDefaultDeviceCommandQueue {{{
+ * \brief Mock for clSetDefaultDeviceCommandQueue OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSetDefaultDeviceCommandQueue
+  : public T::Base_clSetDefaultDeviceCommandQueue,
+    public T::Dummy_CallArgs<cl_context, cl_device_id, cl_command_queue>
+{
+  cl_int _err;
+  cl_int clSetDefaultDeviceCommandQueue(cl_context context, cl_device_id device,
+                                        cl_command_queue command_queue);
+public:
+  /** // doc: Dummy_clSetDefaultDeviceCommandQueue() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSetDefaultDeviceCommandQueue(cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clSetEventCallback)
 /** // doc: Dummy_clSetEventCallback {{{
  * \brief Mock for clSetEventCallback OpenCL function.
@@ -4296,6 +4318,21 @@ clSetCommandQueueProperty(cl_command_queue command_queue,
 }
 Dummy_clSetCommandQueueProperty::
 Dummy_clSetCommandQueueProperty(cl_int err)
+  :_err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+cl_int Dummy_clSetDefaultDeviceCommandQueue::
+clSetDefaultDeviceCommandQueue(cl_context context, cl_device_id device,
+                               cl_command_queue command_queue)
+{
+  call_with(context, device, command_queue);
+  return _err;
+}
+Dummy_clSetDefaultDeviceCommandQueue::
+Dummy_clSetDefaultDeviceCommandQueue(cl_int err)
   :_err(err)
 {
 }
