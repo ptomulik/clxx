@@ -34,7 +34,7 @@ namespace clxx {
  * using the source or the binary. \ref build_program() must be called for
  * program created using either create_program_with_source() or
  * create_program_with_binary() to build the program executable for one or
- * more devices associated with \e program. If \e program is created with
+ * more devices associated with \p program. If \p program is created with
  * create_program_with_binary(), then the program binary must be an executable
  * binary (not a compiled binary or library).
  *
@@ -49,7 +49,7 @@ namespace clxx {
  * \param program
  *    The program object.
  * \param num_devices
- *    The number of devices listed in \e device_list.
+ *    The number of devices listed in \p device_list.
  * \param device_list
  *    A pointer to a list of devices associated with program. If device_list is
  *    \c NULL value, the program executable is built for all devices associated
@@ -64,18 +64,18 @@ namespace clxx {
  *    A function pointer to a notification routine. The notification routine is
  *    a callback function that an application can register and which will be
  *    called when the program executable has been built (successfully or
- *    unsuccessfully). If \e pfn_notify is not \c NULL, build_program() does
+ *    unsuccessfully). If \p pfn_notify is not \c NULL, build_program() does
  *    not need to wait for the build to complete and can return immediately
  *    once the build operation can begin. The build operation can begin if the
  *    context, program whose sources are being compiled and linked, list of
  *    devices and build options specified are all valid and appropriate host
  *    and device resources needed to perform the build are available. If
- *    \e pfn_notify is \c NULL, build_program() does not return until the build
+ *    \p pfn_notify is \c NULL, build_program() does not return until the build
  *    has completed. This callback function may be called asynchronously by the
  *    OpenCL implementation. It is the application’s responsibility to ensure
  *    that the callback function is thread-safe.
  * \param user_data
- *    Passed as an argument when \e pfn_notify is called. \e user_data can be
+ *    Passed as an argument when \p pfn_notify is called. \p user_data can be
  *    \c NULL.
  *
  * \throw clerror_no<status_t::invalid_program>
@@ -164,9 +164,9 @@ clone_kernel(cl_kernel source_kernel);
  * returning OpenCL error codes.
  *
  * Compiles a program’s source for all the devices or a specific device(s) in
- * the OpenCL context associated with \e program. The pre-processor runs before
+ * the OpenCL context associated with \p program. The pre-processor runs before
  * the program sources are compiled. The compiled binary is built for all
- * devices associated with \e program or the list of devices specified. The
+ * devices associated with \p program or the list of devices specified. The
  * compiled binary can be queried using get_program_info(program,
  * program_info_t::binaries, ...) and can be specified to
  * create_program_with_binary() to create a new program object.
@@ -178,9 +178,9 @@ clone_kernel(cl_kernel source_kernel);
  * \param program
  *    The program object that is the compilation target.
  * \param num_devices
- *    The number of devices listed in \e device_list.
+ *    The number of devices listed in \p device_list.
  * \param device_list
- *    A pointer to a list of devices associated with program. If \e device_list
+ *    A pointer to a list of devices associated with program. If \p device_list
  *    is a \c NULL value, the compile is performed for all devices associated
  *    with program. If device_list is a non-NULL value, the compile is
  *    performed for devices specified in this list.
@@ -189,35 +189,35 @@ clone_kernel(cl_kernel source_kernel);
  *    compilation options to be used for building the program executable.
  * \param num_input_headers
  *    Specifies the number of programs that describe headers in the array
- *    referenced by \e input_headers.
+ *    referenced by \p input_headers.
  * \param input_headers
  *    An array of program embedded headers created with
  *    create_program_with_source().
  * \param header_include_names
- *    An array that has a one to one correspondence with \e input_headers. Each
- *    entry in \e header_include_names specifies the include name used by
+ *    An array that has a one to one correspondence with \p input_headers. Each
+ *    entry in \p header_include_names specifies the include name used by
  *    source in program that comes from an embedded header. The corresponding
- *    entry in \e input_headers identifies the program object which contains
+ *    entry in \p input_headers identifies the program object which contains
  *    the header source to be used. The embedded headers are first searched
  *    before the headers in the list of directories specified by the -I compile
- *    option. If multiple entries in \e header_include_names refer to the same
+ *    option. If multiple entries in \p header_include_names refer to the same
  *    header name, the first one encountered will be used.
  * \param pfn_notify
  *    A function pointer to a notification routine. The notification routine is
  *    a callback function that an application can register and which will be
  *    called when the program executable has been built (successfully or
- *    unsuccessfully). If \e pfn_notify is not \c NULL, compile_program() does
+ *    unsuccessfully). If \p pfn_notify is not \c NULL, compile_program() does
  *    not need to wait for the compile to complete and can return immediately
  *    once the compile operation can begin. The compile operation can begin if the
  *    context, program whose sources are being compiled and linked, list of
  *    devices and compile options specified are all valid and appropriate host
  *    and device resources needed to perform the compile are available. If
- *    \e pfn_notify is \c NULL, compile_program() does not return until the compile
+ *    \p pfn_notify is \c NULL, compile_program() does not return until the compile
  *    has completed. This callback function may be called asynchronously by the
  *    OpenCL implementation. It is the application’s responsibility to ensure
  *    that the callback function is thread-safe.
  * \param user_data
- *    Passed as an argument when \e pfn_notify is called. \e user_data can be
+ *    Passed as an argument when \p pfn_notify is called. \p user_data can be
  *    \c NULL.
  *
  * \throw clerror_no<status_t::invalid_program>
@@ -324,13 +324,13 @@ create_buffer(cl_context context,
  * same effect as call to
  *   - \c clCreateCommandQueue(context,device,static_cast<cl_command_queue_properties>(properties),errcode_ret)
  *
- * with \e errcode_ret being defined internaly in the create_command_queue().
+ * with \p errcode_ret being defined internaly in the create_command_queue().
  *
  * The main difference between clxx::create_command_queue() and
  * \c clCreateCommandQueue() is that it throws %clxx exceptions
  * instead of returning OpenCL error codes and accepts
  * \ref clxx::command_queue_properties_t "command_queue_properties_t"
- * instead of \c cl_command_queue_properties as the \e properties argument.
+ * instead of \c cl_command_queue_properties as the \p properties argument.
  *
  * OpenCL objects such as memory, program and kernel objects are created using
  * a context. Operations on these objects are performed using a command-queue.
@@ -345,8 +345,8 @@ create_buffer(cl_context context,
  * \param context
  *    Must be a valid OpenCL context.
  * \param device
- *    Must be a device associated with \e context. It can either be in the list
- *    of devices specified when \e context is created using
+ *    Must be a device associated with \p context. It can either be in the list
+ *    of devices specified when \p context is created using
  *    \ref clxx::create_context() "create_context()" or have the same device
  *    type as the device type specified when the context is created using
  *    \ref clxx::create_context_from_type() "create_context_from_type()".
@@ -397,7 +397,7 @@ create_command_queue(cl_context context,
  * to this function has same effect as call to
  *   - \c clCreateCommandQueueWithProperties(context,device,properties,errcode_ret)
  *
- * with \e errcode_ret being defined internaly in the
+ * with \p errcode_ret being defined internaly in the
  * create_command_queue_with_properties().
  *
  * The main difference between clxx::create_command_queue_with_properties() and
@@ -417,8 +417,8 @@ create_command_queue(cl_context context,
  * \param context
  *    Must be a valid OpenCL context.
  * \param device
- *    Must be a device associated with \e context. It can either be in the list
- *    of devices specified when \e context is created using
+ *    Must be a device associated with \p context. It can either be in the list
+ *    of devices specified when \p context is created using
  *    \ref clxx::create_context() "create_context()" or have the same device
  *    type as the device type specified when the context is created using
  *    \ref clxx::create_context_from_type() "create_context_from_type()".
@@ -427,8 +427,8 @@ create_command_queue(cl_context context,
  *    corresponding values. Each property name is immediately followed by the
  *    corresponding desired value. This list is terminated with 0. The list of
  *    supported properties is defined in the OpenCL standard. If a supported
- *    property and its value is not specified in \e properties, its default
- *    value will be used. \e properties can be \c NULL in which case the
+ *    property and its value is not specified in \p properties, its default
+ *    value will be used. \p properties can be \c NULL in which case the
  *    default values for supported command-queue properties will be used.
  *
  *
@@ -472,12 +472,12 @@ create_command_queue_with_properties(cl_context context,
  * \param properties
  *    Specifies a list of context property names and their corresponding
  *    values. Each property name is immediately followed by the corresponding
- *    desired value. The list is terminated with \c 0. \e properties can be
+ *    desired value. The list is terminated with \c 0. \p properties can be
  *    NULL in which case the platform that is selected is
  *    implementation-defined. The list of supported propertes is described in
  *    the OpenCL standard.
  * \param num_devices
- *    The number of devices specified in \e devices argument.
+ *    The number of devices specified in \p devices argument.
  * \param devices
  *    A pointer to a list of unique devices returned by \ref get_device_ids()
  *    or sub-devices created by \ref create_sub_devices().
@@ -488,7 +488,7 @@ create_command_queue_with_properties(cl_context context,
  *    occur at runtime in this context. This callback function may be called
  *    asynchronously by the OpenCL implementation. It is the application's
  *    responsibility to ensure that the callback function is thread-save. If
- *    \e pfn_notify is \c NULL, no callback function is registered. The
+ *    \p pfn_notify is \c NULL, no callback function is registered. The
  *    parameters to this callback function are:
  *      - *errinfo* is a pointer to an error string.
  *      - *private_info*  and *cb* represent a pointer to binary data that is
@@ -496,12 +496,12 @@ create_command_queue_with_properties(cl_context context,
  *        additional information helpful in debugging the error.
  *      - *user_data* is a pointer to user supplied data.
  * \param user_data
- *    Passed as the *user_data* argument when \e pfn_notify is called.
- *    \e user_data can be \c NULL.
+ *    Passed as the *user_data* argument when \p pfn_notify is called.
+ *    \p user_data can be \c NULL.
  *
  * \note there are a number of cases where error notifications need to be
  *    delivered due to an error that occurs outside a context. Such
- *    notification may not be delivered through the \e pfn_notify callback.
+ *    notification may not be delivered through the \p pfn_notify callback.
  *    Where these notification go is implementation-defined.
  *
  * \throw clerror_no<status_t::invalid_platform>
@@ -559,7 +559,7 @@ create_context(const cl_context_properties* properties,
  * \param properties
  *    Specifies a list of context property names and their corresponding
  *    values. Each property name is immediately followed by the corresponding
- *    desired value. The list is terminated with \c 0. \e properties can be
+ *    desired value. The list is terminated with \c 0. \p properties can be
  *    NULL in which case the platform that is selected is
  *    implementation-defined. The list of supported propertes is described in
  *    the OpenCL standard.
@@ -572,7 +572,7 @@ create_context(const cl_context_properties* properties,
  *    occur at runtime in this context. This callback function may be called
  *    asynchronously by the OpenCL implementation. It is the application's
  *    responsibility to ensure that the callback function is thread-save. If
- *    \e pfn_notify is \c NULL, no callback function is registered. The
+ *    \p pfn_notify is \c NULL, no callback function is registered. The
  *    parameters to this callback function are:
  *      - *errinfo* is a pointer to an error string.
  *      - *private_info*  and *cb* represent a pointer to binary data that is
@@ -580,12 +580,12 @@ create_context(const cl_context_properties* properties,
  *        additional information helpful in debugging the error.
  *      - *user_data* is a pointer to user supplied data.
  * \param user_data
- *    Passed as the *user_data* argument when \e pfn_notify is called.
- *    \e user_data can be \c NULL.
+ *    Passed as the *user_data* argument when \p pfn_notify is called.
+ *    \p user_data can be \c NULL.
  *
  * \note there are a number of cases where error notifications need to be
  *    delivered due to an error that occurs outside a context. Such
- *    notification may not be delivered through the \e pfn_notify callback.
+ *    notification may not be delivered through the \p pfn_notify callback.
  *    Where these notification go is implementation-defined.
  *
  * \throw clerror_no<status_t::invalid_platform>
@@ -1067,40 +1067,40 @@ create_pipe(cl_context context,
  * \param context
  *    Must be a valid OpenCL context.
  * \param num_devices
- *    The number of devices listed in \e device_list.
+ *    The number of devices listed in \p device_list.
  *    The devices associated with the program object will be the list of
- *    devices specified by \e device_list. The list of devices specified by \e
- *    device_list must be devices associated with context.
+ *    devices specified by \p device_list. The list of devices specified by
+ *    \p device_list must be devices associated with context.
  * \param device_list
- *    A pointer to a list of devices that are in \e context. \c device_list
+ *    A pointer to a list of devices that are in \p context. \p device_list
  *    must be a non-NULL value. The binaries are loaded for devices specified
  *    in this list.
  * \param lengths
- *    Lengths of the \e binaries arrays. For each \c i \e lengths[i] defines
- *    length of \e binaries[i] array.
+ *    Lengths of the \p binaries arrays. For each \c i \p lengths[i] defines
+ *    length of \p binaries[i] array.
  * \param binaries
  *    An array of pointers to program binaries to be loaded for devices
- *    specified by \e device_list. For each device given by \e device_list[i],
+ *    specified by \p device_list. For each device given by \p device_list[i],
  *    the pointer to the program binary for that device is given by
- *    \e binaries[i] and the length of this corresponding binary is given by
- *    \e lengths[i]. \e lengths[i] cannot be zero and \e binaries[i] cannot be
+ *    \p binaries[i] and the length of this corresponding binary is given by
+ *    \p lengths[i]. \p lengths[i] cannot be zero and \p binaries[i] cannot be
  *    a NULL pointer. The program binaries specified by binaries contain the
  *    bits that describe one of the following:
- *      - a program executable to be run on the device(s) associated with \e context.
- *      - a compiled program for \e device(s) associated with context.
- *      - a library of compiled programs for \e device(s) associated with context.
+ *      - a program executable to be run on the device(s) associated with \p context.
+ *      - a compiled program for \p device(s) associated with context.
+ *      - a library of compiled programs for \p device(s) associated with context.
  *    The program binary can consist of either or both of device-specific code
  *    and/or implementation-specific intermediate representation (IR) which
  *    will be converted to the device-specific code.
  * \param binary_status
  *    Returns whether the program binary for each device specified in
  *    device_list was loaded successfully or not. It is an array of
- *    \e num_devices entries and returns \c CL_SUCCESS in \e binary_status[i]
- *    if binary was successfully loaded for device specified by \e device_list[i];
- *    otherwise returns CL_INVALID_VALUE if \e lengths[i] is zero or if
- *    \e binaries[i] is a \c NULL value or \c CL_INVALID_BINARY in
- *    \e binary_status[i] if program binary is not a valid binary for the
- *    specified device. If \e binary_status is \c NULL, it is ignored.
+ *    \p num_devices entries and returns \c CL_SUCCESS in \p binary_status[i]
+ *    if binary was successfully loaded for device specified by \p device_list[i];
+ *    otherwise returns CL_INVALID_VALUE if \p lengths[i] is zero or if
+ *    \p binaries[i] is a \c NULL value or \c CL_INVALID_BINARY in
+ *    \p binary_status[i] if program binary is not a valid binary for the
+ *    specified device. If \p binary_status is \c NULL, it is ignored.
  *
  * \returns
  *    A valid non-zero program object if the program object is created
@@ -1123,8 +1123,8 @@ create_pipe(cl_context context,
  *
  * \note This function throws <tt>clerror_no<status_t::invalid_binary></tt>
  *    if any of the provided binaries is invalid. Before raising the exception,
- *    the array pointed to by \e binary_status gets filled with error
- *    information. To ensure that storage for \e binary_status is maintained
+ *    the array pointed to by \p binary_status gets filled with error
+ *    information. To ensure that storage for \p binary_status is maintained
  *    properly and does not go out of scope when exception is caught or
  *    propagated, the following (or similar) code pattern should be used
  *    \code
@@ -1169,12 +1169,12 @@ create_program_with_binary(cl_context context,
  * \param context
  *    Must be a valid OpenCL context.
  * \param num_devices
- *    The number of devices listed in \e device_list.
+ *    The number of devices listed in \p device_list.
  * \param device_list
- *    A pointer to a list of devices that are in \e context. \e device_list
+ *    A pointer to a list of devices that are in \p context. \p device_list
  *    must be a non-NULL value. The built-in kernels are loaded for devices
  *    specified in this list. The devices associated with the program object
- *    will be the list of devices specified by \e device_list. The list of
+ *    will be the list of devices specified by \p device_list. The list of
  *    devices specified by device_list must be devices associated with context.
  * \param kernel_names
  *    A semi-colon separated list of built-in kernel names.
@@ -1223,10 +1223,10 @@ create_program_with_built_in_kernels(cl_context context,
  * \param context
  *    Must be a valid OpenCL context.
  * \param il
- *    A pointer to a \e length-byte block of memory containing SPIR-V or an
+ *    A pointer to a \p length-byte block of memory containing SPIR-V or an
  *    implementation-defined intermediate language.
  * \param length
- *    Length, in bytes, of the \e il buffer.
+ *    Length, in bytes, of the \p il buffer.
  *
  * \throw clerror_no<status_t::invalid_context>
  *    When \c clCreateProgramWithIL() returns CL_INVALID_CONTEXT.
@@ -1253,7 +1253,7 @@ create_program_with_il(cl_context context,
 #endif
 /** // doc: create_program_with_source(...) {{{
  * \brief Creates a program object for a context, and loads the source
- *    code specified by the text strings in the \e strings array into the program
+ *    code specified by the text strings in the \p strings array into the program
  *    object.
  *
  * This function is a wrapper around \c clCreateProgramWithSource(). The call
@@ -1266,23 +1266,23 @@ create_program_with_il(cl_context context,
  * returning OpenCL error codes.
  *
  * This function creates a program object for a context, and loads the source
- * code specified by the text strings in the \e strings array into the program
+ * code specified by the text strings in the \p strings array into the program
  * object. The devices associated with the program object are the devices
- * associated with \e context. The source code specified by \e strings is
+ * associated with \p context. The source code specified by \p strings is
  * either an OpenCL C program source, header or implementation-defined source
  * for custom devices that support an online compiler.
  *
  * \param context
  *    Must be a valid OpenCL context.
  * \param count
- *    Number of elements in \e strings and \e lengths.
+ *    Number of elements in \p strings and \p lengths.
  * \param strings
- *    An array of \e count pointers to optionally null-terminated character
+ *    An array of \p count pointers to optionally null-terminated character
  *    strings that make up the source code.
  * \param lengths
  *    An array with the number of chars in each string (the string length). I
  *    an element in lengths i zero, its accompanuing string is null-terminated.
- *    If \e lengths is NULL, all strings in the \e strings argument are
+ *    If \p lengths is NULL, all strings in the \p strings argument are
  *    considered null-terminated. Any length value passed in that is greater
  *    than zero excludes the null terminator in its count.
  *
@@ -1329,8 +1329,8 @@ create_program_with_source(cl_context context,
  * \param context
  *    Must be a valid OpenCL context.
  * \param normalized_coords
- *    Determines if the image coordinates specified are normalized (if \e
- *    normalized_coords is \c CL_TRUE) or not (if \e normalized_coords is
+ *    Determines if the image coordinates specified are normalized (if
+ *    \p normalized_coords is \c CL_TRUE) or not (if \p normalized_coords is
  *    \c CL_FALSE).
  * \param addressing_mode
  *    Specifies how out-of-range image coordinates are handled when reading
@@ -1483,7 +1483,7 @@ create_sub_buffer(cl_mem buffer,
 #if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
 /** // doc: create_sub_devices(...) {{{
  * \brief Creates an array of sub-devices that each reference
- *    a non-intersecting set of compute units within \e in_device.
+ *    a non-intersecting set of compute units within \p in_device.
  *
  * This function is a wrapper around \c clCreateSubDevices(). The main
  * difference between \ref create_sub_devices() and \c clCreateSubDevices() is
@@ -1492,7 +1492,7 @@ create_sub_buffer(cl_mem buffer,
  * \param in_device
  *    The device to be partitioned
  * \param properties
- *    Specifies how \e in_device is to be partition described by a partition
+ *    Specifies how \p in_device is to be partition described by a partition
  *    name and its corresponding value. Each partition name is immediately
  *    followed by the corresponding desired value. The list is terminated with
  *    0. The list of supported partitioning schemes is described by the OpenCL
@@ -1502,15 +1502,15 @@ create_sub_buffer(cl_mem buffer,
  *    Size of memory pointed to by **out_devices&& specified as the number of
  *    \c cl_device_id entries.
  * \param out_devices
- *    The buffer where OpenCL sub-devices will be returned. If \e out_devices
- *    is \c NULL, this argument is ignored. If \e out_devices is not \c NULL,
- *    \e num_devices must be greater than or equal to the number of
- *    sub-devices than \e in_device may be partitioned into according to the
- *    partitioning scheme specified in \e properties.
+ *    The buffer where OpenCL sub-devices will be returned. If \p out_devices
+ *    is \c NULL, this argument is ignored. If \p out_devices is not \c NULL,
+ *    \p num_devices must be greater than or equal to the number of
+ *    sub-devices than \p in_device may be partitioned into according to the
+ *    partitioning scheme specified in \p properties.
  * \param num_devices_ret
  *    Returns the number of sub-devices that device may be partitioned into
- *    according to the partitioning scheme specified in \e properties. If
- *    \e num_devices_reg is \c NULL, it is ignored.
+ *    according to the partitioning scheme specified in \p properties. If
+ *    \p num_devices_reg is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_device>
  *    When \c clCreateSubDevices() returns CL_INVALID_DEVICE.
@@ -1627,30 +1627,30 @@ enqueue_barrier(cl_command_queue command_queue);
  * \param command_queue
  *    A valid host command queue.
  * \param num_events_in_wait_list
- *    Number of events in \e events_wait_list.
+ *    Number of events in \p events_wait_list.
  * \param event_wait_list
  *    Specify events that need to complete before this particular command can
  *    be executed.
  *
- *    If \e event_wait_list is \c NULL, \e num_events_in_wait_list must be 0.
- *    If \e event_wait_list is not \c NULL, the list of events pointed to by
- *    \e event_wait_list must be valid and \e num_events_in_wait_list must be
- *    greater than \c 0. The events specified in \e event_wait_list act as
+ *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
+ *    If \p event_wait_list is not \c NULL, the list of events pointed to by
+ *    \p event_wait_list must be valid and \p num_events_in_wait_list must be
+ *    greater than \c 0. The events specified in \p event_wait_list act as
  *    synchronization points. The context associated with events in
- *    \e event_wait_list and command_queue must be the same. The memory
- *    associated with \e event_wait_list can be reused or freed after the
+ *    \p event_wait_list and command_queue must be the same. The memory
+ *    associated with \p event_wait_list can be reused or freed after the
  *    function returns.
  *
- *    If \e event_wait_list is NULL, then this particular command waits until
+ *    If \p event_wait_list is NULL, then this particular command waits until
  *    all previous enqueued commands to command_queue have completed.
  * \param event
  *    Returns an event object that identifies this particular command. Event
  *    objects are unique and can be used to identify this barrier command later
- *    on. \e event can be \c NULL in which case it will not be possible for the
+ *    on. \p event can be \c NULL in which case it will not be possible for the
  *    application to query the status of this command or queue a wait for this
- *    command to complete. If the \e event_wait_list and the \e event arguments
- *    are not \c NULL, the \e event argument should not refer to an element of
- *    the \e event_wait_list array.
+ *    command to complete. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the \p event argument should not refer to an element of
+ *    the \p event_wait_list array.
  *
  * \throw clerror_no<status_t::invalid_command_queue>
  *    When \c clEnqueueBarrierWithWaitList() returns \c CL_INVALID_COMMAND_QUEUE.
@@ -1796,8 +1796,8 @@ enqueue_copy_buffer(cl_command_queue command_queue,
  * \param src_origin
  *    The (x, y, z) offset in the memory region associated with \p src_buffer.
  *    For a 2D rectangle region, the \c z value given by \p src_origin[2]
- *    should be \c 0. The offset in bytes is computed as \p src_origin[2] * \p
- *    src_slice_pitch + \p src_origin[1] * \p src_row_pitch + \p src_origin[0].
+ *    should be \c 0. The offset in bytes is computed as \p src_origin[2] *
+ *    \p src_slice_pitch + \p src_origin[1] * \p src_row_pitch + \p src_origin[0].
  * \param dst_origin
  *    The (x, y, z) offset in the memory region associated with \p dst_buffer.
  *    For a 2D rectangle region, the \c z value given by \p dst_origin[2]
@@ -1813,16 +1813,16 @@ enqueue_copy_buffer(cl_command_queue command_queue,
  *    \p src_row_pitch is computed as \p region[0].
  * \param src_slice_pitch
  *    The length of each 2D slice in bytes to be used for the memory region
- *    associated with \p src_buffer. If \p src_slice_pitch is \c 0, \p
- *    src_slice_pitch is computed as \p region[1] * \p src_row_pitch.
+ *    associated with \p src_buffer. If \p src_slice_pitch is \c 0,
+ *    \p src_slice_pitch is computed as \p region[1] * \p src_row_pitch.
  * \param dst_row_pitch
  *    The length of each row in bytes to be used for the memory region
  *    associated with \p dst_buffer. If \p dst_row_pitch is \c 0,
  *    \p dst_row_pitch is computed as \p region[0].
  * \param dst_slice_pitch
  *    The length of each 2D slice in bytes to be used for the memory region
- *    associated with \p dst_buffer. If \p dst_slice_pitch is \c 0, \p
- *    dst_slice_pitch is computed as \p region[1] * \p dst_row_pitch.
+ *    associated with \p dst_buffer. If \p dst_slice_pitch is \c 0,
+ *    \p dst_slice_pitch is computed as \p region[1] * \p dst_row_pitch.
  * \param num_events_in_wait_list
  *    Number of events in the \p event_wait_list.
  *    If \p event_wait_list is \c NULL, \p num_events_in_wait_list must be 0.
@@ -2480,8 +2480,8 @@ enqueue_fill_image(cl_command_queue command_queue,
                     cl_event* event);
 #endif
 /** // doc: enqueue_map_buffer() {{{
- * \brief Enqueues a command to map a region of the buffer object given by \p
- *        buffer into the host address space and returns a pointer to this
+ * \brief Enqueues a command to map a region of the buffer object given by
+ *        \p buffer into the host address space and returns a pointer to this
  *        mapped region.
  *
  * This is a wrapper for \c clEnqueueMapBuffer(). The call to
@@ -4238,15 +4238,15 @@ flush(cl_command_queue command_queue);
  *    An enumeration constant that specifies the information to query. See
  *    \ref command_queue_info_t.
  * \param param_value_size
- *    Specifies the size in bytes of memory pointed to by \e param_value. This
+ *    Specifies the size in bytes of memory pointed to by \p param_value. This
  *    size must be grater than or equal to the size of return type for
- *    \e param_name as described in the OpenCL standard.
+ *    \p param_name as described in the OpenCL standard.
  * \param param_value
  *    A pointer to memory where the appropriate result being queried is
- *    returned. If \e param_value is \c NULL, it is ignored.
+ *    returned. If \p param_value is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data being queried by
- *    \e param_value. If \e param_value_size_ret is \c NULL, it is ignored.
+ *    \p param_value. If \p param_value_size_ret is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_command_queue>
  *    When \c clGetCommandQueueInfo() returns \c CL_INVALID_COMMAND_QUEUE.
@@ -4288,15 +4288,15 @@ get_command_queue_info(cl_command_queue command_queue,
  *    An enumeration constant that specifies the information to query. See \ref
  *    context_info_t.
  * \param param_value_size
- *    Specifies the size in bytes of memory pointed to by \e param_value. This
+ *    Specifies the size in bytes of memory pointed to by \p param_value. This
  *    size must be grater than or equal to the size of return type for
- *    \e param_name as described in the OpenCL standard.
+ *    \p param_name as described in the OpenCL standard.
  * \param param_value
  *    A pointer to memory where the appropriate result being queried is
  *    returned. if *param_value* is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data being queried by
- *    \e param_value. If \e param_value_size_ret is \c NULL, it is ignored.
+ *    \p param_value. If \p param_value_size_ret is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_context>
  *    When \c clGetContextInfo() returns \c CL_INVALID_CONTEXT.
@@ -4380,24 +4380,24 @@ get_device_and_host_timer(cl_device_id device,
  *
  * \param platform
  *        Refers to the platform ID returned by clxx::get_platform_ids() or can
- *        be \c NULL. If \e platform is \c NULL, the behavior is
+ *        be \c NULL. If \p platform is \c NULL, the behavior is
  *        implementation-defined.
  * \param device_type
  *        A bitfield that identifies the type of OpenCL device. The
- *        \e device_type can be used to query specific OpenCL devices or all
- *        OpenCL devices available. The valid values for \e device_type are
+ *        \p device_type can be used to query specific OpenCL devices or all
+ *        OpenCL devices available. The valid values for \p device_type are
  *        specified by clxx::device_type_t.
  * \param num_entries
- *        The number of \c cl_device_id entries that can be added to \e
- *        devices. If \e devices is not \c NULL, the \e num_entries must be
+ *        The number of \c cl_device_id entries that can be added to
+ *        \p devices. If \p devices is not \c NULL, the \p num_entries must be
  *        greater than zero.
  * \param devices
  *        A list of OpenCL devices found. The \c cl_device_id values returned
- *        in \e devices can be used to identify a specific OpenCL device. If
- *        \e devices argument is \c NULL, this argument is ignored. The number
+ *        in \p devices can be used to identify a specific OpenCL device. If
+ *        \p devices argument is \c NULL, this argument is ignored. The number
  *        of OpenCL devices returned is the minimum of the value specified by
- *        \e num_entries or the number of OpenCL devices whose type matches
- *        \e device_type.
+ *        \p num_entries or the number of OpenCL devices whose type matches
+ *        \p device_type.
  * \param num_devices
  *        Returns the number of OpenCL devices available. If \c num_devices is
  *        \c NULL, this argument is ignored.
@@ -4460,8 +4460,8 @@ get_device_ids(cl_platform_id platform,
  *    (\c clGetDeviceInfo()) will be returned. If \c param_value is \c NULL, it
  *    is ignored.
  * \param value_size_ret
- *    Returns the actual size in bytes of data being queried by \c
- *    param_value. If \c param_value_size_ret is \c NULL, it is ignored
+ *    Returns the actual size in bytes of data being queried by
+ *    \c param_value. If \c param_value_size_ret is \c NULL, it is ignored
  *
  * \throw  clxx::clerror_no<clxx::status_t::invalid_device>
  *    when \c clGetDeviceInfo() returns \c CL_INVALID_DEVICE,
@@ -5064,17 +5064,17 @@ get_pipe_info(cl_mem pipe,
  * This function is a C++ wrapper for \c clGetPlatformIDs().
  *
  * \param num_entries
- *    The number of \c cl_platform_id entries that can be added to \c
- *    platforms. If \c platforms is not \c NULL, the \c num_entries must be
+ *    The number of \c cl_platform_id entries that can be added to
+ *    \p platforms. If \p platforms is not \c NULL, the \p num_entries must be
  *    greater than zero
  * \param platforms
  *    Returns a list of OpenCL platforms found. The \c cl_platform_id values
- *    returned in \c platforms can be used to identify a specific OpenCL
+ *    returned in \p platforms can be used to identify a specific OpenCL
  *    platform. If platforms argument is \c NULL, this argument is ignored. The
  *    number ofOpenCL platforms returned is the mininum of the value specified
- *    by \c num_entries or the number of OpenCL platforms available
+ *    by \p num_entries or the number of OpenCL platforms available
  * \param num_platforms
- *    Returns the number of OpenCL platforms available. If \c num_platforms is
+ *    Returns the number of OpenCL platforms available. If \p num_platforms is
  *    \c NULL, this argument is ignored
  * \return void
  *
@@ -5164,7 +5164,7 @@ get_platform_info(cl_platform_id platform,
  * The main difference between \ref get_program_build_info() and
  * \c clGetProgramBuildInfo() is that it throws %clxx exceptions instead of
  * returning OpenCL error codes and accepts \ref clxx::program_build_info_t
- * "program_build_info_t" instead of \c cl_program_build_info as \e param_name.
+ * "program_build_info_t" instead of \c cl_program_build_info as \p param_name.
  *
  * A program binary (compiled binary, library binary or executable binary)
  * built for a parent device can be used by all its sub-devices. If a program
@@ -5179,10 +5179,10 @@ get_platform_info(cl_platform_id platform,
  * \param program
  *    Specifies the program object being queried.
  * \param device
- *    Specifies the device for which build information is being queried. \e
- *    device must be a valid device associated with \e program.
+ *    Specifies the device for which build information is being queried.
+ *    \p device must be a valid device associated with \p program.
  * \param param_name
- *    Specifies the information to query. The list of supported \e param_name
+ *    Specifies the information to query. The list of supported \p param_name
  *    types is documented in \ref clxx::program_build_info_t "program_build_info_t".
  * \param param_value_size
  *    Used to specify the size in bytes of memory pointed to by param_value.
@@ -5192,7 +5192,7 @@ get_platform_info(cl_platform_id platform,
  *    returned. If param_value is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data copied to param_value. If
- *    \e param_value_size_ret is \c NULL, it is ignored.
+ *    \p param_value_size_ret is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_device>
  *    When \c clGetProgramBuildInfo() returns CL_INVALID_DEVICE.
@@ -5230,12 +5230,12 @@ get_program_build_info(cl_program program,
  * The main difference between \ref get_program_info() and
  * \c clGetProgramInfo() is that it throws %clxx exceptions instead of
  * returning OpenCL error codes and accepts \ref clxx::program_info_t
- * "program_info_t" instead of \c cl_program_info as \e param_name.
+ * "program_info_t" instead of \c cl_program_info as \p param_name.
  *
  * \param program
  *    Specifies the program object being queried.
  * \param param_name
- *    Specifies the information to query. The list of supported \e param_name
+ *    Specifies the information to query. The list of supported \p param_name
  *    types is documented in \ref clxx::program_info_t "program_info_t".
  * \param param_value_size
  *    Used to specify the size in bytes of memory pointed to by param_value.
@@ -5245,7 +5245,7 @@ get_program_build_info(cl_program program,
  *    returned. If param_value is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data copied to param_value. If
- *    \e param_value_size_ret is \c NULL, it is ignored.
+ *    \p param_value_size_ret is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_value>
  *    When \c clGetProgramInfo() returns CL_INVALID_VALUE.
@@ -5283,12 +5283,12 @@ get_program_info(cl_program program,
  * The main difference between \ref get_sampler_info() and
  * \c clGetSamplerInfo() is that it throws %clxx exceptions instead of
  * returning OpenCL error codes and accepts \ref clxx::sampler_info_t
- * "sampler_info_t" instead of \c cl_sampler_info as \e param_name.
+ * "sampler_info_t" instead of \c cl_sampler_info as \p param_name.
  *
  * \param sampler
  *    Specifies the sampler object being queried.
  * \param param_name
- *    Specifies the information to query. The list of supported \e param_name
+ *    Specifies the information to query. The list of supported \p param_name
  *    types is documented in \ref clxx::sampler_info_t "sampler_info_t".
  * \param param_value_size
  *    Used to specify the size in bytes of memory pointed to by param_value.
@@ -5298,7 +5298,7 @@ get_program_info(cl_program program,
  *    returned. If param_value is \c NULL, it is ignored.
  * \param param_value_size_ret
  *    Returns the actual size in bytes of data copied to param_value. If
- *    \e param_value_size_ret is \c NULL, it is ignored.
+ *    \p param_value_size_ret is \c NULL, it is ignored.
  *
  * \throw clerror_no<status_t::invalid_value>
  *    When \c clGetSamplerInfo() returns CL_INVALID_VALUE.
@@ -5393,7 +5393,7 @@ get_supported_image_formats(cl_context context,
  * This function is a wrapper around \c clLinkProgram(). The call to this
  * function has same effect as
  *  - \c clLinkProgram(context, num_devices, device_list, options, num_input_programs, input_programs, pfn_notify, user_data, &errcode_ret)
- * with \e errcode_ret being defined internally in link_program().
+ * with \p errcode_ret being defined internally in link_program().
  *
  *
  * The main difference between \ref link_program() and
@@ -5406,8 +5406,8 @@ get_supported_image_formats(cl_context context,
  *  create_program_with_binary() to create a new program object.
  *
  *  The devices associated with the returned program object will be the list of
- *  devices specified by \e device_list or if \e device_list is \c NULL it will
- *  be the list of devices associated with \e context.
+ *  devices specified by \p device_list or if \p device_list is \c NULL it will
+ *  be the list of devices associated with \p context.
  *
  *  The linking operation can begin if the context, list of devices, input
  *  programs and linker options specified are all valid and appropriate host
@@ -5422,7 +5422,7 @@ get_supported_image_formats(cl_context context,
  * \param context
  *    Must be a valid OpenCL context.
  * \param num_devices
- *    The number of devices listed in \e device_list.
+ *    The number of devices listed in \p device_list.
  * \param device_list
  *    A pointer to a list of devices that are in context. If device_list is a
  *    NULL value, the link is performed for all devices associated with context
@@ -5433,13 +5433,13 @@ get_supported_image_formats(cl_context context,
  *    A pointer to a null-terminated string of characters that describes the
  *    link options to be used for building the program executable.
  * \param num_input_programs
- *    Specifies the number of programs in array referenced by \e input_programs.
+ *    Specifies the number of programs in array referenced by \p input_programs.
  * \param input_programs
  *    An array of program objects that are compiled binaries or libraries that
  *    are to be linked to create the program executable. For each device in
- *    \e device_list or if device_list is \c NULL the list of devices
- *    associated with \e context, the following cases occur:
- *      - All programs specified by \e input_programs contain a compiled binary
+ *    \p device_list or if device_list is \c NULL the list of devices
+ *    associated with \p context, the following cases occur:
+ *      - All programs specified by \p input_programs contain a compiled binary
  *        or library for the device. In this case, a link is performed to
  *        generate a program executable for this device.
  *      - None of the programs contain a compiled binary or library for that
@@ -5450,18 +5450,18 @@ get_supported_image_formats(cl_context context,
  *    A function pointer to a notification routine. The notification routine is
  *    a callback function that an application can register and which will be
  *    called when the program executable has been built (successfully or
- *    unsuccessfully). If \e pfn_notify is not \c NULL, link_program() does
+ *    unsuccessfully). If \p pfn_notify is not \c NULL, link_program() does
  *    not need to wait for the link to complete and can return immediately
  *    once the link operation can begin. The link operation can begin if the
  *    context, program whose sources are being linkd and linked, list of
  *    devices and link options specified are all valid and appropriate host
  *    and device resources needed to perform the link are available. If
- *    \e pfn_notify is \c NULL, link_program() does not return until the link
+ *    \p pfn_notify is \c NULL, link_program() does not return until the link
  *    has completed. This callback function may be called asynchronously by the
  *    OpenCL implementation. It is the application’s responsibility to ensure
  *    that the callback function is thread-safe.
  * \param user_data
- *    Passed as an argument when \e pfn_notify is called. \e user_data can be
+ *    Passed as an argument when \p pfn_notify is called. \p user_data can be
  *    \c NULL.
  *
  * \throw clerror_no<status_t::invalid_context>
@@ -5505,7 +5505,7 @@ link_program(cl_context context,
               void* user_data);
 #endif
 /** // doc: release_command_queue(...) {{{
- * \brief Decrement the \e command_queue reference count
+ * \brief Decrement the \p command_queue reference count
  *
  * This is a wrapper around \c clReleaseCommandQueue(). The call to this
  * function has same effect as call to
@@ -5569,7 +5569,7 @@ void
 release_context(cl_context context);
 #if CLXX_OPENCL_ALLOWED(clReleaseDevice)
 /** // doc: release_device(...) {{{
- * \brief Decrements the \e devices reference count
+ * \brief Decrements the \p devices reference count
  *
  * This function is a wrapper around \c clReleaseDevice(). The call to this
  * function has same effect as
@@ -5579,11 +5579,11 @@ release_context(cl_context context);
  * \c clReleaseDevice() is that it throws %clxx exceptions instead of returning
  * OpenCL error codes.
  *
- * The function decrements the \e device reference count if \e device is a
+ * The function decrements the \p device reference count if \p device is a
  * valid sub-device created by call to \ref create_sub_devices() or
- * \c clCreateSubDevices(). If \e device is a root level device i.e.
+ * \c clCreateSubDevices(). If \p device is a root level device i.e.
  * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
- * the \e device reference count remains unchanged.
+ * the \p device reference count remains unchanged.
  *
  * \param device
  *    The device to be released
@@ -5608,7 +5608,7 @@ void
 release_device(cl_device_id device);
 #endif
 /** // doc: release_event() {{{
- * \brief Decrements the \e event reference count
+ * \brief Decrements the \p event reference count
  *
  * This function is a wrapper around \c clReleaseEvent(). The call to this
  * function has same effect as
@@ -5644,7 +5644,7 @@ release_device(cl_device_id device);
 void
 release_event(cl_event event);
 /** // doc: release_kernel() {{{
- * \brief Decrements the \e kernel reference count
+ * \brief Decrements the \p kernel reference count
  *
  * This function is a wrapper around \c clReleaseKernel(). The call to this
  * function has same effect as
@@ -5712,7 +5712,7 @@ release_kernel(cl_kernel kernel);
 void
 release_mem_object(cl_mem memobj);
 /** // doc: release_program(...) {{{
- * \brief Decrements the \e program reference count
+ * \brief Decrements the \p program reference count
  *
  * This function is a wrapper around \c clReleaseProgram(). The call to this
  * function has same effect as
@@ -5747,7 +5747,7 @@ release_mem_object(cl_mem memobj);
 void
 release_program(cl_program program);
 /** // doc: release_sampler(...) {{{
- * \brief Decrements the \e sampler reference count
+ * \brief Decrements the \p sampler reference count
  *
  * This function is a wrapper around \c clReleaseSampler(). The call to this
  * function has same effect as
@@ -5787,7 +5787,7 @@ release_program(cl_program program);
 void
 release_sampler(cl_sampler sampler);
 /** // doc: retain_command_queue(...) {{{
- * \brief Increment the \e command_queue reference count
+ * \brief Increment the \p command_queue reference count
  *
  * This is a wrapper around \c clRetainCommandQueue(). The call to this
  * function has same effect as call to
@@ -5856,7 +5856,7 @@ void
 retain_context(cl_context context);
 #if CLXX_OPENCL_ALLOWED(clRetainDevice)
 /** // doc: retain_device(...) {{{
- * \brief Increments the \e devices reference count
+ * \brief Increments the \p devices reference count
  *
  * This function is a wrapper around \c clRetainDevice(). The call to this
  * function has same effect as
@@ -5866,11 +5866,11 @@ retain_context(cl_context context);
  * \c clRetainDevice() is that it throws %clxx exceptions instead of returning
  * OpenCL error codes.
  *
- * The function increments the \e device reference count if \e device is a
+ * The function increments the \p device reference count if \p device is a
  * valid sub-device created by call to \ref create_sub_devices() or
- * \c clCreateSubDevices(). If \e device is a root level device i.e.
+ * \c clCreateSubDevices(). If \p device is a root level device i.e.
  * a \c cl_device_id returned by \ref get_device_ids() or \c clGetDeviceIDs(),
- * the \e device reference count remains unchanged.
+ * the \p device reference count remains unchanged.
  *
  * \param device
  *    The device to be retained
@@ -5993,7 +5993,7 @@ retain_kernel(cl_kernel kernel);
 void
 retain_mem_object(cl_mem memobj);
 /** // doc: retain_program(...) {{{
- * \brief Increments the \e program reference count
+ * \brief Increments the \p program reference count
  *
  * This function is a wrapper around \c clRetainProgram(). The call to this
  * function has same effect as
@@ -6029,7 +6029,7 @@ retain_mem_object(cl_mem memobj);
 void
 retain_program(cl_program program);
 /** // doc: retain_sampler(...) {{{
- * \brief Increments the \e sampler reference count
+ * \brief Increments the \p sampler reference count
  *
  * This function is a wrapper around \c clRetainSampler(). The call to this
  * function has same effect as
@@ -6514,7 +6514,7 @@ unload_compiler();
 #if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
 /** // doc: unload_platform_compiler(...) {{{
  * \brief Allows the implementation to release the resources allocated by the
- *    OpenCL compiler for \e platform.
+ *    OpenCL compiler for \p platform.
  *
  * This function is a wrapper around \c clUnloadPlatformCompiler(). The call to
  * this function has same effect as
