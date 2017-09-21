@@ -165,7 +165,7 @@ parser.add_argument(
         type=str,
         nargs='*',
         default = all_packages,
-        help='package to download (cxxtest, opencl-lib, opencl-hdr, scons, scons-arguments, scons-arguments-gnuinstall)'
+        help='package to download (cxxtest, opencl-icd-ldr, opencl-hdr, scons, scons-arguments, scons-arguments-gnuinstall)'
         )
 
 args = parser.parse_args()
