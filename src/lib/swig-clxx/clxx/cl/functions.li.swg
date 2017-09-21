@@ -112,6 +112,8 @@
 %throws_clerror(clxx::set_kernel_exec_info(cl_kernel, kernel_exec_info_t, size_t, const void*))
 %throws_clerror(clxx::set_mem_object_destructor_callback(cl_mem, void (CL_CALLBACK*)(cl_mem, void*), void*))
 %throws_clerror(clxx::set_user_event_status(cl_event, cl_int))
+%throws_clerror(clxx::svm_alloc(cl_context, cl_svm_mem_flags, size_t, cl_uint))
+%throws_clerror(clxx::svm_free(cl_context, void*))
 %throws_clerror(clxx::unload_compiler())
 %throws_clerror(clxx::unload_platform_compiler(cl_platform_id))
 %throws_clerror(clxx::wait_for_events(cl_uint, const cl_event*))

@@ -1210,6 +1210,9 @@ public:
     TS_ASSERT_EQUALS(static_cast<cl_mem_flags>(mem_flags_t::host_read_only), (cl_mem_flags)CL_MEM_HOST_READ_ONLY);
     TS_ASSERT_EQUALS(static_cast<cl_mem_flags>(mem_flags_t::host_no_access), (cl_mem_flags)CL_MEM_HOST_NO_ACCESS);
 #endif
+#if CLXX_CL_H_VERSION_2_0
+    TS_ASSERT_EQUALS(static_cast<cl_mem_flags>(mem_flags_t::kernel_read_and_write), (cl_mem_flags)CL_MEM_KERNEL_READ_AND_WRITE);
+#endif
   }
   /** // doc: test_mem_flags_t__intval() {{{
    * \brief Test the mem_flags_t type with intval().
@@ -1231,6 +1234,9 @@ public:
     TS_ASSERT_EQUALS(intval(mem_flags_t::host_read_only), (cl_mem_flags)CL_MEM_HOST_READ_ONLY);
     TS_ASSERT_EQUALS(intval(mem_flags_t::host_no_access), (cl_mem_flags)CL_MEM_HOST_NO_ACCESS);
 #endif
+#if CLXX_CL_H_VERSION_2_0
+    TS_ASSERT_EQUALS(intval(mem_flags_t::kernel_read_and_write), (cl_mem_flags)CL_MEM_KERNEL_READ_AND_WRITE);
+#endif
   }
   /** // doc: test_mem_flags_t__bitops() {{{
    * \brief Ensure that bitwise operators work with mem_flags_t
@@ -1251,6 +1257,80 @@ public:
     TS_ASSERT_EQUALS(x, static_cast<mem_flags_t>(CL_MEM_READ_WRITE));
     x ^= mem_flags_t::read_only;
     TS_ASSERT_EQUALS(x, static_cast<mem_flags_t>(CL_MEM_READ_WRITE | CL_MEM_READ_ONLY));
+  }
+  /** // doc: test_svm_mem_flags_t() {{{
+   * \brief Test the svm_mem_flags_t type.
+   */ // }}}
+  void test_svm_mem_flags_t( )
+  {
+#if CLXX_CL_H_VERSION_2_0
+    //
+    // Check the underlying type
+    //
+    TS_ASSERT((std::is_same<std::underlying_type<svm_mem_flags_t>::type, cl_svm_mem_flags>::value));
+    //
+    // Check enum values
+    //
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::none), 0ul);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::read_write), (cl_svm_mem_flags)CL_MEM_READ_WRITE);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::write_only), (cl_svm_mem_flags)CL_MEM_WRITE_ONLY);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::read_only), (cl_svm_mem_flags)CL_MEM_READ_ONLY);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::use_host_ptr), (cl_svm_mem_flags)CL_MEM_USE_HOST_PTR);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::alloc_host_ptr), (cl_svm_mem_flags)CL_MEM_ALLOC_HOST_PTR);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::copy_host_ptr), (cl_svm_mem_flags)CL_MEM_COPY_HOST_PTR);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::host_write_only), (cl_svm_mem_flags)CL_MEM_HOST_WRITE_ONLY);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::host_read_only), (cl_svm_mem_flags)CL_MEM_HOST_READ_ONLY);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::host_no_access), (cl_svm_mem_flags)CL_MEM_HOST_NO_ACCESS);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::fine_grain_buffer), (cl_svm_mem_flags)CL_MEM_SVM_FINE_GRAIN_BUFFER);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::atomics), (cl_svm_mem_flags)CL_MEM_SVM_ATOMICS);
+    TS_ASSERT_EQUALS(static_cast<cl_svm_mem_flags>(svm_mem_flags_t::kernel_read_and_write), (cl_svm_mem_flags)CL_MEM_KERNEL_READ_AND_WRITE);
+#endif
+  }
+  /** // doc: test_svm_mem_flags_t__intval() {{{
+   * \brief Test the svm_mem_flags_t type with intval().
+   */ // }}}
+  void test_svm_mem_flags_t__intvall( )
+  {
+#if CLXX_CL_H_VERSION_2_0
+    //
+    // Check enum values
+    //
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::none), 0ul);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::read_write), (cl_svm_mem_flags)CL_MEM_READ_WRITE);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::write_only), (cl_svm_mem_flags)CL_MEM_WRITE_ONLY);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::read_only), (cl_svm_mem_flags)CL_MEM_READ_ONLY);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::use_host_ptr), (cl_svm_mem_flags)CL_MEM_USE_HOST_PTR);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::alloc_host_ptr), (cl_svm_mem_flags)CL_MEM_ALLOC_HOST_PTR);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::copy_host_ptr), (cl_svm_mem_flags)CL_MEM_COPY_HOST_PTR);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::host_write_only), (cl_svm_mem_flags)CL_MEM_HOST_WRITE_ONLY);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::host_read_only), (cl_svm_mem_flags)CL_MEM_HOST_READ_ONLY);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::host_no_access), (cl_svm_mem_flags)CL_MEM_HOST_NO_ACCESS);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::fine_grain_buffer), (cl_svm_mem_flags)CL_MEM_SVM_FINE_GRAIN_BUFFER);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::atomics), (cl_svm_mem_flags)CL_MEM_SVM_ATOMICS);
+    TS_ASSERT_EQUALS(intval(svm_mem_flags_t::kernel_read_and_write), (cl_svm_mem_flags)CL_MEM_KERNEL_READ_AND_WRITE);
+#endif
+  }
+  /** // doc: test_svm_mem_flags_t__bitops() {{{
+   * \brief Ensure that bitwise operators work with svm_mem_flags_t
+   */ // }}}
+  void test_svm_mem_flags_t__bitops( )
+  {
+#if CLXX_CL_H_VERSION_2_0
+    // Just ensure that certain expressions get compiled ...
+    TS_ASSERT_EQUALS(~(svm_mem_flags_t::read_write), static_cast<svm_mem_flags_t>(~CL_MEM_READ_WRITE));
+    TS_ASSERT_EQUALS((svm_mem_flags_t::read_write & svm_mem_flags_t::read_only), static_cast<svm_mem_flags_t>(CL_MEM_READ_WRITE & CL_MEM_READ_ONLY));
+    TS_ASSERT_EQUALS((svm_mem_flags_t::read_write | svm_mem_flags_t::read_only), static_cast<svm_mem_flags_t>(CL_MEM_READ_WRITE | CL_MEM_READ_ONLY));
+    TS_ASSERT_EQUALS((svm_mem_flags_t::read_write ^ svm_mem_flags_t::read_only), static_cast<svm_mem_flags_t>(CL_MEM_READ_WRITE ^ CL_MEM_READ_ONLY));
+
+    svm_mem_flags_t x(svm_mem_flags_t::read_write);
+
+    x |= svm_mem_flags_t::read_only;
+    TS_ASSERT_EQUALS(x, static_cast<svm_mem_flags_t>(CL_MEM_READ_WRITE | CL_MEM_READ_ONLY));
+    x &= ~svm_mem_flags_t::read_only;
+    TS_ASSERT_EQUALS(x, static_cast<svm_mem_flags_t>(CL_MEM_READ_WRITE));
+    x ^= svm_mem_flags_t::read_only;
+    TS_ASSERT_EQUALS(x, static_cast<svm_mem_flags_t>(CL_MEM_READ_WRITE | CL_MEM_READ_ONLY));
+#endif
   }
   /** // doc: test_mem_migration_flags_t() {{{
    * \brief Test the mem_migration_flags_t type.

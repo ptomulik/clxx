@@ -873,9 +873,61 @@ enum class mem_flags_t : cl_mem_flags {
   /// Corresponds to \c CL_MEM_HOST_NO_ACCESS
   host_no_access  = CL_MEM_HOST_NO_ACCESS
 #endif
+#if CLXX_CL_H_VERSION_2_0
+  ,
+  /// Corresponds to \c CL_MEM_KERNEL_READ_AND_WRITE
+  kernel_read_and_write = CL_MEM_KERNEL_READ_AND_WRITE
+#endif
 };
 
 CLXX_MAKE_BITMASK_ENUM(mem_flags_t, cl_mem_flags)
+
+#if CLXX_CL_H_VERSION_2_0
+/** // doc: svm_mem_flags_t {{{
+ * \brief Corresponds to OpenCL's \c cl_svm_mem_flags
+ *
+ * The OpenCL's \c cl_svm_mem_flags are used by \c clSVMAlloc().
+ * The \ref svm_mem_flags_t is a C++ equivalent of the \c cl_svm_mem_flags.
+ *
+ * \par Supported OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |
+ * | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |   \check  |  \check   |
+ *
+ * \todo Elaborate where and how the \ref clxx::svm_mem_flags_t are used.
+ *
+ */ // }}}
+enum class svm_mem_flags_t : cl_svm_mem_flags {
+  /// Zero
+  none            = 0ul,
+  /// Corresponds to \c CL_MEM_READ_WRITE
+  read_write      = CL_MEM_READ_WRITE,
+  /// Corresponds to \c CL_MEM_WRITE_ONLY
+  write_only      = CL_MEM_WRITE_ONLY,
+  /// Corresponds to \c CL_MEM_READ_ONLY
+  read_only       = CL_MEM_READ_ONLY,
+  /// Corresponds to \c CL_MEM_USE_HOST_PTR
+  use_host_ptr    = CL_MEM_USE_HOST_PTR,
+  /// Corresponds to \c CL_MEM_ALLOC_HOST_PTR
+  alloc_host_ptr  = CL_MEM_ALLOC_HOST_PTR,
+  /// Corresponds to \c CL_MEM_COPY_HOST_PTR
+  copy_host_ptr   = CL_MEM_COPY_HOST_PTR,
+  /// Corresponds to \c CL_MEM_HOST_WRITE_ONLY
+  host_write_only = CL_MEM_HOST_WRITE_ONLY,
+  /// Corresponds to \c CL_MEM_HOST_READ_ONLY
+  host_read_only  = CL_MEM_HOST_READ_ONLY,
+  /// Corresponds to \c CL_MEM_HOST_NO_ACCESS
+  host_no_access  = CL_MEM_HOST_NO_ACCESS,
+  /// Corresponds to \c CL_MEM_SVM_FINE_GRAIN_BUFFER
+  fine_grain_buffer = CL_MEM_SVM_FINE_GRAIN_BUFFER,
+  /// Corresponds to \c CL_MEM_SVM_ATOMICS
+  atomics         = CL_MEM_SVM_ATOMICS,
+  /// Corresponds to \c CL_MEM_KERNEL_READ_AND_WRITE
+  kernel_read_and_write = CL_MEM_KERNEL_READ_AND_WRITE
+};
+
+CLXX_MAKE_BITMASK_ENUM(svm_mem_flags_t, cl_svm_mem_flags)
+#endif
 
 #if CLXX_CL_H_VERSION_1_2
 /** // doc: mem_migration_flags_t {{{

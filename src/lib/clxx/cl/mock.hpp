@@ -899,6 +899,22 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+CXXTEST_MOCK_GLOBAL(void*,
+  clSVMAlloc,
+  ( cl_context context, cl_svm_mem_flags flags, size_t size, cl_uint alignment ),
+  ( context, flags, size, alignment )
+);
+#endif
+
+#if CLXX_OPENCL_ALLOWED(clSVMFree)
+CXXTEST_MOCK_VOID_GLOBAL(
+  clSVMFree,
+  ( cl_context context, void* svm_pointer ),
+  ( context, svm_pointer )
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clUnloadCompiler, (), ());

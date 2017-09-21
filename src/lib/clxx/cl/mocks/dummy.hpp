@@ -2653,6 +2653,47 @@ public:
   Dummy_clSetUserEventStatus(cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+/** // doc: Dummy_clCreateUserEvent {{{
+ * \brief Mock for clCreateUserEvent OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSVMAlloc
+  : public T::Base_clSVMAlloc,
+    public T::Dummy_CallArgs<cl_context, cl_svm_mem_flags, size_t, cl_uint>
+{
+  void* _ptr;
+  void* clSVMAlloc(cl_context context, cl_svm_mem_flags flags, size_t size, cl_uint alignment);
+public:
+  /** // doc: Dummy_clSVMAlloc() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSVMAlloc(void* ptr);
+};
+#endif
+#if CLXX_OPENCL_ALLOWED(clSVMFree)
+/** // doc: Dummy_clCreateUserEvent {{{
+ * \brief Mock for clCreateUserEvent OpenCL function.
+ *
+ * Does nothing except it returns a custom code defined by user.
+ */ // }}}
+class Dummy_clSVMFree
+  : public T::Base_clSVMFree,
+    public T::Dummy_CallArgs<cl_context, void*>
+{
+  void clSVMFree(cl_context context, void* svm_pointer);
+public:
+  /** // doc: Dummy_clSVMFree() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clSVMFree();
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
 /** // doc: Dummy_clUnloadCompiler {{{
  * \brief Default mock for clUnloadCompiler OpenCL function.
@@ -4697,6 +4738,32 @@ clSetUserEventStatus( cl_event event , cl_int execution_status )
 Dummy_clSetUserEventStatus::
 Dummy_clSetUserEventStatus(cl_int err)
   :_err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+void* Dummy_clSVMAlloc::
+clSVMAlloc(cl_context context, cl_svm_mem_flags flags, size_t size, cl_uint alignment)
+{
+  call_with(context, flags, size, alignment);
+  return _ptr;
+}
+Dummy_clSVMAlloc::
+Dummy_clSVMAlloc(void* ptr)
+  :_ptr(ptr)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clSVMFree)
+void Dummy_clSVMFree::
+clSVMFree(cl_context context, void* svm_pointer)
+{
+  call_with(context, svm_pointer);
+}
+Dummy_clSVMFree::
+Dummy_clSVMFree()
 {
 }
 #endif

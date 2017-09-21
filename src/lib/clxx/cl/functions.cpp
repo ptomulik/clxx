@@ -2421,6 +2421,26 @@ set_user_event_status(cl_event event, cl_int execution_status)
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+void*
+svm_alloc(cl_context context,
+          svm_mem_flags_t flags,
+          size_t size,
+          cl_uint alignment)
+{
+  return T::clSVMAlloc(context, static_cast<cl_svm_mem_flags>(flags), size, alignment);
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clSVMFree)
+void
+svm_free(cl_context context,
+         void* svm_pointer)
+{
+  T::clSVMFree(context, svm_pointer);
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
 void
 unload_compiler()

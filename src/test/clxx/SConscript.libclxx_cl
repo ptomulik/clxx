@@ -125,6 +125,8 @@ tests = [
     'cl/functions/set_kernel_exec_info.t.h',
     'cl/functions/set_mem_object_destructor_callback.t.h',
     'cl/functions/set_user_event_status.t.h',
+    'cl/functions/svm_alloc.t.h',
+    'cl/functions/svm_free.t.h',
     'cl/functions/unload_compiler.t.h',
     'cl/functions/unload_platform_compiler.t.h',
     'cl/functions/wait_for_events.t.h',

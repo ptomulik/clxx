@@ -7036,6 +7036,80 @@ set_mem_object_destructor_callback(cl_mem memobj,
 void
 set_user_event_status(cl_event event, cl_int execution_status);
 #endif
+#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+/** // doc: svm_alloc(...) {{{
+ * \brief Allocates a shared virtual memory (SVM) buffer that can be shared by
+ *        the host and all devices in an OpenCL context that support shared
+ *        virtual memory
+ *
+ * This function is a wrapper around \c clSVMAlloc(). The call to
+ * this function has same effect as
+ *  - \c clSVMAlloc(context, static_cast<cl_svm_mem_flags>(flags), size, alignment)
+ *
+ * The main difference between \ref svm_alloc() and
+ * \c clSVMAlloc() is that it uses %clxx enum instead of OpenCL constant
+ * to represent flags.
+ *
+ * \param context
+ *    A valid OpenCL context used to create the SVM buffer.
+ * \param flags
+ *    A bit-field that is used to specify allocation and usage information. The
+ *    possible flag values may be found in the documentation of
+ *    #svm_mem_flags_t.
+ * \param size
+ *    The size in bytes of the SVM buffer to be allocated.
+ * \param alignment
+ *    The minimum alignment in bytes that is required for the newly created
+ *    buffer’s memory region. It must be a power of two up to the largest data
+ *    type supported by the OpenCL device. For the full profile, the largest
+ *    data type is \c long16. For the embedded profile, it is \c long16 if the
+ *    device supports 64-bit integers; otherwise it is \c int16. If alignment
+ *    is \c 0, a default alignment will be used that is equal to the size of
+ *    largest data type supported by the OpenCL implementation.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSVMAlloc.html">clSVMAlloc()</a>
+ */ // }}}
+void*
+svm_alloc(cl_context context,
+          svm_mem_flags_t flags,
+          size_t size,
+          cl_uint alignment);
+#endif
+#if CLXX_OPENCL_ALLOWED(clSVMFree)
+/** // doc: svm_free(...) {{{
+ * \brief Frees a shared virtual memory buffer allocated using #svm_alloc
+ *        (\c clSVMAlloc)
+ *
+ * This function is a wrapper around \c clSVMFree(). The call to
+ * this function has same effect as
+ *  - \c clSVMFree(context, svm_pointer)
+ *
+ * There is actually no  difference between \ref svm_free() and
+ * \c clSVMFree(), the function is introduced only for consistency with the
+ * rest of the API.
+ *
+ * \param context
+ *    A valid OpenCL context used to create the SVM buffer.
+ * \param svm_pointer
+ *    Must be the value returned by a call to #svm_alloc (\c clSVMAlloc). If a
+ *    \c NULL pointer is passed in \p svm_pointer, no action occurs.
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSVMFree.html">clSVMFree()</a>
+ */ // }}}
+void
+svm_free(cl_context context,
+         void* svm_pointer);
+#endif
 #if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
 /** // doc: unload_compiler(...) {{{
  * \brief Allows the implementation to release the resources allocated by the
