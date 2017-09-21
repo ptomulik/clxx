@@ -37,8 +37,8 @@ CLXX_DISABLE_COMMENT_WARNING
 CLXX_DIAGNOSTIC_POP
 
 /////////////////////////////////////////////////////////////////////////////
-// The following prevens usage of clxx development headers without the required
-// version of CL/cl.h.
+// The following prevents usage of clxx development headers without the
+// required version of CL/cl.h.
 /////////////////////////////////////////////////////////////////////////////
 #if defined(CLXX_CL_H_VERSION_1_0) && !defined(CL_VERSION_1_0)
 # error "clxx must be compiled with CL/cl.h version at least 1.0"
