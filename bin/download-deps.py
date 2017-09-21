@@ -25,7 +25,8 @@ default_opencl_version = '2.1'
 default_egl_version = '1.5'
 all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig', 'scons',
                 'scons-arguments', 'scons-arguments-gnuinstall']
-scons_versions = [ 'tip',
+scons_versions = [ 'master',
+                   '3.0.0',
                    '2.5.1',
                    '2.5.0',
                    '2.4.1',
@@ -39,7 +40,7 @@ scons_versions = [ 'tip',
                    '2.3.0',
                    '2.2.0',
                    '2.1.0.final.0',
-                   'tip' ]
+                   'master' ]
 default_scons_version = scons_versions[0]
 
 scons_arguments_versions = [ 'master' ]
@@ -138,8 +139,8 @@ parser.add_argument(
         )
 
 parser.add_argument(
-        '--scons-from-bitbucket', action='store_true',
-        help='download scons from bitbucket.org instead of from sourceforge'
+        '--scons-from-github', action='store_true',
+        help='download scons from github.org instead of from sourceforge'
         )
 
 parser.add_argument(
@@ -572,7 +573,7 @@ def dload_swig(**kw):
         err = p.wait()
         if err != 0:
             cmdline = subprocess.list2cmdline(build_cmd)
-            warn('%s returned error code %d, aborting opencl-icd-ldr build' % (cmdline, err), **kw)
+            warn('%s returned error code %d, aborting SWIG build' % (cmdline, err), **kw)
             info("removing '%s'" % tmpdir, **kw)
             shutil.rmtree(tmpdir)
             return err
@@ -597,12 +598,12 @@ def dload_scons(**kw):
     try: ver = kw['scons_ver']
     except KeyError: pass
 
-    from_bitbucket = False
-    try: from_bitbucket = kw['scons_from_bitbucket']
+    from_github = False
+    try: from_github = kw['scons_from_github']
     except KeyError: pass
 
-    if not from_bitbucket:
-        from_bitbucket = (ver == 'tip')
+    if not from_github:
+        from_github = (ver == 'tip')
 
     try: destdir_mode = kw['destdir_mode']
     except KeyError: destdir_mode = 0755
@@ -614,13 +615,13 @@ def dload_scons(**kw):
     info("creating '%s'" % destdir, **kw)
     os.makedirs(destdir, mode=destdir_mode)
 
-    if not from_bitbucket:
+    if not from_github:
         url = "http://sourceforge.net/projects/scons/files/scons/%(ver)s/scons-%(ver)s.tar.gz/download" % locals()
         info("downloading '%s' to '%s'" % (url,destdir), **kw)
         hoarder.urluntar(url, path=destdir, strip_components=1)
     else:
         if ver is None: ver = 'tip'
-        url = "https://bitbucket.org/scons/scons/get/%s.tar.gz" % ver
+        url = "https://github.com/SConsProject/scons/archive/%s.tar.gz" % ver
 
         tmpdir = tempfile.mkdtemp()
         info("created '%s'" % tmpdir, **kw)
