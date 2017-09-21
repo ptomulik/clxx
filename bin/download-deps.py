@@ -22,6 +22,7 @@ topsrcdir = os.path.realpath(os.path.join(scriptdir, '..'))
 
 
 default_opencl_version = '2.1'
+default_opencl_hdr_ver_for_icd_ldr = '2.2'
 default_egl_version = '1.5'
 all_packages = ['cxxtest', 'opencl-hdr', 'opencl-icd-ldr', 'swig', 'scons',
                 'scons-arguments', 'scons-arguments-gnuinstall']
@@ -425,12 +426,17 @@ def dload_opencl_icd_ldr(**kw):
 
 
     ver = None
-    for k in ('opencl_icd_ldr_ver', 'opencl_ver'):
-        if ver is None:
-            try: ver = kw[k]
-            except KeyError: ver = None
-    if ver is None:
-        ver = default_opencl_version
+    if kw.get('opencl_icd_ldr_ver'):
+        warn('--opencl-icd-ldr-ver is not currently supported, ignoring')
+
+    hdr_ver = default_opencl_hdr_ver_for_icd_ldr
+
+##    for k in ('opencl_icd_ldr_ver', 'opencl_ver'):
+##        if ver is None:
+##            try: ver = kw[k]
+##            except KeyError: ver = None
+##    if ver is None:
+##        ver = default_opencl_version
 
     try: destdir_mode = kw['destdir_mode']
     except KeyError: destdir_mode = 0755
@@ -440,18 +446,6 @@ def dload_opencl_icd_ldr(**kw):
         return 2
 
     patchfile = None
-##    if ver == '1.0' or ver == '1.1':
-##        warn("ICD loader for OpenCL %s can't be downloaded, sorry" % ver, **kw)
-##        return 2
-##    elif ver == '1.2':
-##        url = "https://www.khronos.org/registry/cl/specs/opencl-icd-1.2.11.0.tgz"
-##        patchfile = 'opencl-icd-loader-1.2.11.0.patch'
-##    elif ver == '2.0':
-##        url = "http://www.khronos.org/registry/cl/icd/2.0/opengl-icd-2.0.5.0.tgz"
-##        patchfile = 'opencl-icd-loader-2.0.5.0.patch'
-##    else:
-##        warn("unsupported OpenCL version '%s', skipping opencl-icd-ldr download" % ver, **kw)
-##        return 2
     url = 'https://github.com/KhronosGroup/OpenCL-ICD-Loader/archive/master.tar.gz'
 
     tmpdir = tempfile.mkdtemp()
@@ -460,7 +454,7 @@ def dload_opencl_icd_ldr(**kw):
     info("downloading '%s' to '%s'" % (url,tmpdir), **kw)
     hoarder.urluntar(url, path=tmpdir, strip_components=1)
     # OpenCL headers must be downloaded separately, they're not included in ICD loader's tarball
-    dload_opencl_hdr(opencl_hdr_ver=ver, destdir=os.path.join(tmpdir,'inc','CL'))
+    dload_opencl_hdr(opencl_hdr_ver=hdr_ver, destdir=os.path.join(tmpdir,'inc','CL'))
     # EGL headers are required to build OpenCL ICD loader (at least on Windows)
     dload_egl_hdr(egl_hdr_ver=default_egl_version, destdir=os.path.join(tmpdir, 'inc', 'EGL'))
 
@@ -476,11 +470,11 @@ def dload_opencl_icd_ldr(**kw):
     if sysname == 'Linux':
         build_cmd = ['make']
         env['CFLAGS'] = '-Wno-deprecated-declarations -Wno-implicit-function-declaration'
-        files = ['bin/libOpenCL.so*']
+        files = ['bin/libOpenCL.so*', 'build/lib/libOpenCL.so*']
     elif sysname == 'Windows':
         vsnumbers = ['100', '110', '120', '130', '140']
         build_cmd = [os.path.join(tmpdir, 'build_using_cmake.bat')]
-        files = ['bin/OpenCL.dll']
+        files = ['bin/OpenCL.dll', 'build/lib/OpenCL.dll']
         # %VS90COMNTOOLS% is used by the build_using_cmake.bat, but these days
         # it's rather %VS140COMNTOOLS% (VS 14.0) or such
         try: env['VS90COMNTOOLS']
@@ -496,7 +490,7 @@ def dload_opencl_icd_ldr(**kw):
         build_cmd = ['make']
         env['CMAKE_LEGACY_CYGWIN_WIN32'] = '1'
         env['CFLAGS'] = '-mwin32 -Wno-deprecated-declarations -Wno-implicit-function-declaration'
-        files = [ 'bin/cygOpenCL-?.dll', 'libOpenCL.dll.a' ]
+        files = [ 'bin/cygOpenCL-?.dll', 'build/lib/cygOpenCL-?.dll', 'libOpenCL.dll.a', 'build/lib/libOpenCL.dll.a' ]
     else:
         warn('unsupported operating system "%s", aborting opencl-icd-ldr build' % sysname, **kw)
         info("removing '%s'" % tmpdir, **kw)
