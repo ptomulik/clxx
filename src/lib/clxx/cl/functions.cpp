@@ -1305,6 +1305,96 @@ enqueue_svm_map(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemFill)
+void
+enqueue_svm_mem_fill(cl_command_queue command_queue,
+                     void* svm_ptr,
+                     const void* pattern,
+                     size_t pattern_size,
+                     size_t size,
+                     cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list,
+                     cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueSVMMemFill(
+      command_queue,
+      svm_ptr,
+      pattern,
+      pattern_size,
+      size,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemcpy)
+void
+enqueue_svm_memcpy(cl_command_queue command_queue,
+                   cl_bool blocking_copy,
+                   void* dst_ptr,
+                   const void* src_ptr,
+                   size_t size,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueSVMMemcpy(
+      command_queue,
+      blocking_copy,
+      dst_ptr,
+      src_ptr,
+      size,
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMigrateMem)
+void
+enqueue_svm_migrate_mem(cl_command_queue command_queue,
+                        cl_uint num_svm_pointers,
+                        const void **svm_pointers,
+                        const size_t *sizes,
+                        const mem_migration_flags_t flags,
+                        cl_uint num_events_in_wait_list,
+                        const cl_event* event_wait_list,
+                        cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueSVMMigrateMem(
+      command_queue,
+      num_svm_pointers,
+      svm_pointers,
+      sizes,
+      static_cast<cl_mem_migration_flags>(flags),
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 void
 enqueue_task(cl_command_queue command_queue,

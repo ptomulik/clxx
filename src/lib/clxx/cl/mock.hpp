@@ -452,6 +452,40 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemFill)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueSVMMemFill,
+  ( cl_command_queue command_queue, void* svm_ptr, const void* pattern,
+    size_t pattern_size, size_t size, cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list, cl_event* event ),
+  ( command_queue, svm_ptr, pattern, pattern_size, size,
+    num_events_in_wait_list, event_wait_list, event )
+);
+#endif
+
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemcpy)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueSVMMemcpy,
+  ( cl_command_queue command_queue, cl_bool blocking_copy, void* dst_ptr,
+    const void* src_ptr, size_t size, cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list, cl_event* event ),
+  ( command_queue, blocking_copy, dst_ptr, src_ptr, size,
+    num_events_in_wait_list, event_wait_list, event )
+);
+#endif
+
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMigrateMem)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueSVMMigrateMem,
+  ( cl_command_queue command_queue, cl_uint num_svm_pointers,
+    const void** svm_pointers, const size_t* sizes,
+    cl_mem_migration_flags flags, cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list, cl_event* event ),
+  ( command_queue, num_svm_pointers, svm_pointers, sizes, flags,
+    num_events_in_wait_list, event_wait_list, event )
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueTask,

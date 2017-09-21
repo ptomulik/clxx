@@ -3732,6 +3732,293 @@ enqueue_svm_map(cl_command_queue command_queue,
                 const cl_event* event_wait_list,
                 cl_event* event);
 #endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemFill)
+/** // doc: enqueue_svm_mem_fill() {{{
+ * \brief Enqueues a command to fill a region in memory with a pattern of a
+ *        given pattern size
+ *
+ * This is a wrapper for \c clEnqueueSVMMemFill(). The call to
+ * #enqueue_svm_mem_fill() has same effect as a call to
+ *    - \c clEnqueueSVMMemFill(command_queue, svm_ptr, pattern, pattern_size, size, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_svm_mem_fill() and \c clEnqueueSVMMemFill()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Refers to the host command-queue in which the fill command will be
+ *    queued. The OpenCL context associated with \p command_queue and SVM
+ *    pointer referred to by \p svm_ptr must be the same.
+ * \param svm_ptr
+ *    A pointer to a memory region that will be filled with \p pattern. It must
+ *    be aligned to \p pattern_size bytes. If \p svm_ptr is allocated using
+ *    #svm_alloc (\c clSVMAlloc) then it must be allocated from the same
+ *    context from which \p command_queue was created. Otherwise the behavior
+ *    is undefined.
+ * \param pattern
+ *    A pointer to the data pattern of size \p pattern_size in bytes.
+ *    \p pattern will be used to fill a region in buffer starting at \p svm_ptr
+ *    and is \p size bytes in size. The data pattern must be a scalar or vector
+ *    integer or floating-point data type. For example, if region pointed to by
+ *    \p svm_ptr is to be filled with a pattern of \c float4 values, then
+ *    pattern will be a pointer to a \c cl_float4 value and \p pattern_size
+ *    will be \c sizeof(cl_float4). The maximum value of \p pattern_size is the
+ *    size of the largest integer or floating-point vector data type supported
+ *    by the OpenCL device. The memory associated with \p pattern can be reused
+ *    or freed after the function returns.
+ * \param pattern_size
+ *    Size in bytes of the data pointed to by \p pattern.
+ * \param size
+ *    The size in bytes of region being filled starting with \p svm_ptr and
+ *    must be a multiple of \p pattern_size.
+ * \param num_events_in_wait_list
+ *    Number of elements in \p event_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed. If \p event_wait_list is \c NULL, then this particular
+ *    command does not wait on any event to complete. If \p event_wait_list is
+ *    \c NULL, \p num_events_in_wait_list must be \c 0. If \p event_wait_list
+ *    is not \c NULL, the list of events pointed to by \p event_wait_list must
+ *    be valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization
+ *    points. The context associated with events in \p event_wait_list and
+ *    \p command_queue must be the same. The memory associated with
+ *    \p event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular command and can
+ *    be used to query or queue a wait for this particular command to complete.
+ *    \p event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. #enqueue_barrier_with_wait_list() can be used
+ *    instead. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueSVMMemFill() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueSVMMemFill() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueSVMMemFill() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueSVMMemFill() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueSVMMemFill() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueSVMMemFill() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueSVMMemFill() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMemFill.html">clEnqueueSVMMemFill()</a>
+ *
+ */ // }}}
+void
+enqueue_svm_mem_fill(cl_command_queue command_queue,
+                     void* svm_ptr,
+                     const void* pattern,
+                     size_t pattern_size,
+                     size_t size,
+                     cl_uint num_events_in_wait_list,
+                     const cl_event* event_wait_list,
+                     cl_event* event);
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemcpy)
+/** // doc: enqueue_svm_memcpy() {{{
+ * \brief Enqueues a command to do a memcpy operation
+ *
+ * This is a wrapper for \c clEnqueueSVMMemcpy(). The call to
+ * #enqueue_svm_memcpy() has same effect as a call to
+ *    - \c clEnqueueSVMMemcpy(command_queue, blocking_copy, dst_ptr, src_ptr, size, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_svm_memcpy() and \c clEnqueueSVMMemcpy()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    Refers to the host command-queue in which the read / write command will
+ *    be queued. If either \p dst_ptr or \p src_ptr is allocated using
+ *    #svm_alloc (\c clSVMAlloc) then the OpenCL context allocated against must
+ *    match that of \p command_queue.
+ * \param blocking_copy
+ *    Indicates if the copy operation is blocking or non-blocking.
+ *
+ *    If \p blocking_copy is \c CL_TRUE i.e. the copy command is blocking,
+ *    #enqueue_svm_memcpy (\c clEnqueueSVMMemcpy) does not return until the
+ *    buffer data has been copied into memory pointed to by \p dst_ptr.
+ *
+ *    If \p blocking_copy is \c CL_FALSE i.e. the copy command is non-blocking,
+ *    #enqueue_svm_memcpy (\c clEnqueueSVMMemcpy) queues a non-blocking copy
+ *    command and returns. The contents of the buffer that \p dst_ptr point to
+ *    cannot be used until the copy command has completed. The event argument
+ *    returns an event object which can be used to query the execution status
+ *    of the read command. When the copy command has completed, the contents of
+ *    the buffer that \p dst_ptr points to can be used by the application.
+ * \param dst_ptr
+ *    The pointer to a host or SVM memory allocation where data is copied to.
+ * \param src_ptr
+ *     The pointer to a memory region where data is copied from.
+ *
+ *     If the memory allocation(s) containing \p dst_ptr and/or \p src_ptr are
+ *     allocated using #svm_alloc (\c clSVMAlloc) and either is not allocated
+ *     from the same context from which command_queue was created the behavior
+ *     is undefined.
+ * \param size
+ *    The size in bytes of data being copied.
+ * \param num_events_in_wait_list
+ *    Number of elements in \p event_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed. If \p event_wait_list is \c NULL, then this particular
+ *    command does not wait on any event to complete. If \p event_wait_list is
+ *    \c NULL, \p num_events_in_wait_list must be \c 0. If \p event_wait_list
+ *    is not \c NULL, the list of events pointed to by \p event_wait_list must
+ *    be valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization
+ *    points. The context associated with events in \p event_wait_list and
+ *    \p command_queue must be the same. The memory associated with
+ *    \p event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular command and can
+ *    be used to query or queue a wait for this particular command to complete.
+ *    \p event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. #enqueue_barrier_with_wait_list() can be used
+ *    instead. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueSVMMemcpy() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueSVMMemcpy() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueSVMMemcpy() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueSVMMemcpy() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::exec_status_error_for_events_in_wait_list>
+ *    When \c clEnqueueSVMMap() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
+ * \throw clerror_no<status_t::mem_copy_overlap>
+ *    When \c clEnqueueSVMMap() returns \c CL_MEM_COPY_OVERLAP.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueSVMMemcpy() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueSVMMemcpy() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueSVMMemcpy() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">clEnqueueSVMMemcpy()</a>
+ *
+ */ // }}}
+void
+enqueue_svm_memcpy(cl_command_queue command_queue,
+                   cl_bool blocking_copy,
+                   void* dst_ptr,
+                   const void* src_ptr,
+                   size_t size,
+                   cl_uint num_events_in_wait_list,
+                   const cl_event* event_wait_list,
+                   cl_event* event);
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMigrateMem)
+/** // doc: enqueue_svm_migrate_mem() {{{
+ * \brief Enqueues a command to do a migrate_mem operation
+ *
+ * This is a wrapper for \c clEnqueueSVMMigrateMem(). The call to
+ * #enqueue_svm_migrate_mem() has same effect as a call to
+ *    - \c clEnqueueSVMMigrateMem(command_queue, num_svm_pointers, svm_pointers, sizes, static_cast<cl_mem_migration_flags>(flags), num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_svm_migrate_mem() and \c clEnqueueSVMMigrateMem()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes.
+ *
+ * \param command_queue
+ *    A valid host command queue. The specified set of allocation ranges will
+ *    be migrated to the OpenCL device associated with \p command_queue.
+ * \param num_svm_pointers
+ *    The number of pointers in the specified \p svm_pointers array, and the
+ *    number of sizes in the sizes array, if sizes is not \c NULL.
+ * \param svm_pointers
+ *    A pointer to an array of pointers. Each pointer in this array must be
+ *    within an allocation produced by a call to #svm_alloc (\c clSVMAlloc).
+ * \param sizes
+ *    An array of sizes. The pair \p svm_pointers[i] and \p sizes[i] together
+ *    define the starting address and number of bytes in a range to be
+ *    migrated. \p sizes may be NULL indicating that every allocation
+ *    containing any \p svm_pointer[i] is to be migrated. Also, if \p sizes[i]
+ *    is zero, then the entire allocation containing \p svm_pointer[i] is
+ *    migrated.
+ * \param flags
+ *    A bit-field that is used to specify migration options. See documentation
+ *    of #mem_migration_flags_t for possible values.
+ * \param num_events_in_wait_list
+ *    Number of elements in \p event_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed. If \p event_wait_list is \c NULL, then this particular
+ *    command does not wait on any event to complete. If \p event_wait_list is
+ *    \c NULL, \p num_events_in_wait_list must be \c 0. If \p event_wait_list
+ *    is not \c NULL, the list of events pointed to by \p event_wait_list must
+ *    be valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization
+ *    points. The context associated with events in \p event_wait_list and
+ *    \p command_queue must be the same. The memory associated with
+ *    \p event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular command and can
+ *    be used to query or queue a wait for this particular command to complete.
+ *    \p event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. #enqueue_barrier_with_wait_list() can be used
+ *    instead. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueSVMMigrateMem() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueSVMMigrateMem() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueSVMMigrateMem() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueSVMMigrateMem() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueSVMMigrateMem() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueSVMMigrateMem() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueSVMMigrateMem() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |           |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMigrateMem.html">clEnqueueSVMMigrateMem()</a>
+ *
+ */ // }}}
+void
+enqueue_svm_migrate_mem(cl_command_queue command_queue,
+                        cl_uint num_svm_pointers,
+                        const void **svm_pointers,
+                        const size_t *sizes,
+                        const mem_migration_flags_t flags,
+                        cl_uint num_events_in_wait_list,
+                        const cl_event* event_wait_list,
+                        cl_event* event);
+#endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 /** // doc: enqueue_task() {{{
  * \brief Enqueues a command to execute a kernel on a device.
