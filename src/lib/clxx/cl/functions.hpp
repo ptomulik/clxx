@@ -3618,7 +3618,7 @@ enqueue_read_image(cl_command_queue command_queue,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |  \check   |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMFree.html">clEnqueueSVMFree()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMFree.html">clEnqueueSVMFree()</a>
  *
  */ // }}}
 void
@@ -3719,7 +3719,7 @@ enqueue_svm_free(cl_command_queue command_queue,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |  \check   |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMap.html">clEnqueueSVMMap()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMap.html">clEnqueueSVMMap()</a>
  *
  */ // }}}
 void
@@ -3815,7 +3815,7 @@ enqueue_svm_map(cl_command_queue command_queue,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |  \check   |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMemFill.html">clEnqueueSVMMemFill()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemFill.html">clEnqueueSVMMemFill()</a>
  *
  */ // }}}
 void
@@ -3918,7 +3918,7 @@ enqueue_svm_mem_fill(cl_command_queue command_queue,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |  \check   |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">clEnqueueSVMMemcpy()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">clEnqueueSVMMemcpy()</a>
  *
  */ // }}}
 void
@@ -4006,7 +4006,7 @@ enqueue_svm_memcpy(cl_command_queue command_queue,
  * | --------- | --------- | --------- | --------- | --------- | --------- |
  * |           |           |           |           |  \check   |    ???    |
  *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueSVMMigrateMem.html">clEnqueueSVMMigrateMem()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMigrateMem.html">clEnqueueSVMMigrateMem()</a>
  *
  */ // }}}
 void
@@ -4014,10 +4014,86 @@ enqueue_svm_migrate_mem(cl_command_queue command_queue,
                         cl_uint num_svm_pointers,
                         const void **svm_pointers,
                         const size_t *sizes,
-                        const mem_migration_flags_t flags,
+                        mem_migration_flags_t flags,
                         cl_uint num_events_in_wait_list,
                         const cl_event* event_wait_list,
                         cl_event* event);
+#endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+/** // doc: enqueue_svm_unmap() {{{
+ * \brief Enqueues a command to indicate that the host has completed updating
+ *        the region given by \p svm_ptr and which was specified in a previous
+ *        call to #enqueue_svm_map (\c clEnqueueSVMMap)
+ *
+ * This is a wrapper for \c clEnqueueSVMUnmap(). The call to
+ * #enqueue_svm_unmap() has same effect as a call to
+ *    - \c clEnqueueSVMUnmap(command_queue, svm_ptr, num_events_in_wait_list, event_wait_list, event)
+ *
+ * The main difference between #enqueue_svm_unmap() and \c clEnqueueSVMUnmap()
+ * is that it throws %clxx exceptions instead of returning OpenCL error codes
+ * and uses enums instead of OpenCL constants.
+ *
+ * \param command_queue
+ *    Must be a valid host command-queue.
+ * \param svm_ptr
+ *    A pointer that was specified in a previous call to #enqueue_svm_map
+ *    (\c clEnqueueSVMMap). If \p svm_ptr is allocated using #svm_alloc
+ *    (\c clSVMAlloc) then it must be allocated from the same context from
+ *    which \p command_queue was created. Otherwise the behavior is undefined.
+ * \param num_events_in_wait_list
+ *    Number of elements in \p event_wait_list.
+ * \param event_wait_list
+ *    Specify events that need to complete before this particular command can
+ *    be executed. If \p event_wait_list is \c NULL, then this particular
+ *    command does not wait on any event to complete. If \p event_wait_list is \c NULL,
+ *    \p num_events_in_wait_list must be \c 0. If \p event_wait_list is not
+ *    \c NULL, the list of events pointed to by \p event_wait_list must be
+ *    valid and \p num_events_in_wait_list must be greater than \c 0. The
+ *    events specified in \p event_wait_list act as synchronization
+ *    points. The context associated with events in \p event_wait_list and
+ *    \p command_queue must be the same. The memory associated with
+ *    \p event_wait_list can be reused or freed after the function returns.
+ * \param event
+ *    Returns an event object that identifies this particular command and can
+ *    be used to query or queue a wait for this particular command to complete.
+ *    \p event can be \c NULL in which case it will not be possible for the
+ *    application to query the status of this command or queue a wait for this
+ *    command to complete. #enqueue_barrier_with_wait_list() can be used
+ *    instead. If the \p event_wait_list and the \p event arguments
+ *    are not \c NULL, the event argument should not refer to an element of the
+ *    \p event_wait_list array.
+ *
+ *
+ * \throw clerror_no<status_t::invalid_command_queue>
+ *    When \c clEnqueueSVMUnmap() returns \c CL_INVALID_COMMAND_QUEUE.
+ * \throw clerror_no<status_t::invalid_context>
+ *    When \c clEnqueueSVMUnmap() returns \c CL_INVALID_CONTEXT.
+ * \throw clerror_no<status_t::invalid_value>
+ *    When \c clEnqueueSVMUnmap() returns \c CL_INVALID_VALUE.
+ * \throw clerror_no<status_t::invalid_event_wait_list>
+ *    When \c clEnqueueSVMUnmap() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ * \throw clerror_no<status_t::out_of_resources>
+ *    When \c clEnqueueSVMUnmap() returns \c CL_OUT_OF_RESOURCES.
+ * \throw clerror_no<status_t::out_of_host_memory>
+ *    When \c clEnqueueSVMUnmap() returns \c CL_OUT_OF_HOST_MEMORY.
+ * \throw unexpected_clerror
+ *    When \c clEnqueueSVMUnmap() returns other error code.
+ *
+ *
+ * \par Available in OpenCL versions
+ * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
+ * | --------- | --------- | --------- | --------- | --------- | --------- |
+ * |           |           |           |  \check   |  \check   |    ???    |
+ *
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMUnmap.html">clEnqueueSVMUnmap()</a>
+ *
+ */ // }}}
+void
+enqueue_svm_unmap(cl_command_queue command_queue,
+                  void* svm_ptr,
+                  cl_uint num_events_in_wait_list,
+                  const cl_event* event_wait_list,
+                  cl_event* event);
 #endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 /** // doc: enqueue_task() {{{

@@ -1380,6 +1380,28 @@ public:
   Dummy_clEnqueueSVMMigrateMem(cl_int err);
 };
 #endif
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+/** // doc: Dummy_clEnqueueSVMUnmap {{{
+ * \brief Default mock for clEnqueueSVMUnmap OpenCL function.
+ */ // }}}
+class Dummy_clEnqueueSVMUnmap
+  : public T::Base_clEnqueueSVMUnmap,
+    public T::Dummy_CallArgs<cl_command_queue, void*, cl_uint, const cl_event*,
+                             cl_event*>
+{
+  cl_int _err;
+  cl_int clEnqueueSVMUnmap(cl_command_queue command_queue, void* svm_ptr,
+                         cl_uint num_events_in_wait_list,
+                         const cl_event* event_wait_list, cl_event* event );
+public:
+  /** // doc: Dummy_clEnqueueSVMUnmap() {{{
+   * \brief Constructor, initializes the mock object.
+   *
+   * \param err Error code to be returned by the mock
+   */ // }}}
+  Dummy_clEnqueueSVMUnmap(cl_int err);
+};
+#endif
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 /** // doc: Dummy_clEnqueueTask {{{
  * \brief Default mock for clEnqueueTask OpenCL function.
@@ -3696,6 +3718,23 @@ clEnqueueSVMMigrateMem(cl_command_queue command_queue,
 }
 Dummy_clEnqueueSVMMigrateMem::
 Dummy_clEnqueueSVMMigrateMem(cl_int err)
+  : _err(err)
+{
+}
+#endif
+/* ------------------------------------------------------------------------- */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+cl_int Dummy_clEnqueueSVMUnmap::
+clEnqueueSVMUnmap(cl_command_queue command_queue, void* svm_ptr,
+                  cl_uint num_events_in_wait_list,
+                  const cl_event* event_wait_list, cl_event* event )
+{
+  call_with(command_queue, svm_ptr, num_events_in_wait_list, event_wait_list,
+            event);
+  return _err;
+}
+Dummy_clEnqueueSVMUnmap::
+Dummy_clEnqueueSVMUnmap(cl_int err)
   : _err(err)
 {
 }

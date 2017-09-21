@@ -486,6 +486,16 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+CXXTEST_MOCK_GLOBAL(cl_int,
+  clEnqueueSVMUnmap,
+  ( cl_command_queue command_queue, void* svm_ptr,
+    cl_uint num_events_in_wait_list, const cl_event* event_wait_list,
+    cl_event* event ),
+  ( command_queue, svm_ptr, num_events_in_wait_list, event_wait_list, event )
+);
+#endif
+
 #if CLXX_OPENCL_ALLOWED(clEnqueueTask)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueTask,

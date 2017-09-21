@@ -68,6 +68,7 @@ tests = [
     'cl/functions/enqueue_svm_mem_fill.t.h',
     'cl/functions/enqueue_svm_memcpy.t.h',
     'cl/functions/enqueue_svm_migrate_mem.t.h',
+    'cl/functions/enqueue_svm_unmap.t.h',
     'cl/functions/enqueue_task.t.h',
     'cl/functions/enqueue_unmap_mem_object.t.h',
     'cl/functions/enqueue_wait_for_events.t.h',

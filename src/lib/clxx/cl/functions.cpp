@@ -1371,7 +1371,7 @@ enqueue_svm_migrate_mem(cl_command_queue command_queue,
                         cl_uint num_svm_pointers,
                         const void **svm_pointers,
                         const size_t *sizes,
-                        const mem_migration_flags_t flags,
+                        mem_migration_flags_t flags,
                         cl_uint num_events_in_wait_list,
                         const cl_event* event_wait_list,
                         cl_event* event)
@@ -1383,6 +1383,30 @@ enqueue_svm_migrate_mem(cl_command_queue command_queue,
       svm_pointers,
       sizes,
       static_cast<cl_mem_migration_flags>(flags),
+      num_events_in_wait_list,
+      event_wait_list,
+      event
+    )
+  );
+  if(is_error(s))
+    {
+      _throw_clerror_no(s);
+    }
+}
+#endif
+/* ------------------------------------------------------------------------ */
+#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+void
+enqueue_svm_unmap(cl_command_queue command_queue,
+                  void* svm_ptr,
+                  cl_uint num_events_in_wait_list,
+                  const cl_event* event_wait_list,
+                  cl_event* event)
+{
+  status_t s = static_cast<status_t>(
+    T::clEnqueueSVMUnmap(
+      command_queue,
+      svm_ptr,
       num_events_in_wait_list,
       event_wait_list,
       event

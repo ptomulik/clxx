@@ -57,6 +57,8 @@
 %throws_clerror(clxx::enqueue_svm_map(cl_command_queue, cl_bool, map_flags_t, void*, size_t, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_svm_mem_fill(cl_command_queue, void*, const void*, size_t, size_t, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_svm_memcpy(cl_command_queue, cl_bool, void*, const void*, size_t, cl_uint, const cl_event*, cl_event*))
+%throws_clerror(clxx::enqueue_svm_migrate_mem(cl_command_queue, cl_uint, const void**, const size_t*, mem_migration_flags_t, cl_uint, const cl_event*, cl_event*))
+%throws_clerror(clxx::enqueue_svm_unmap(cl_command_queue, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_task(cl_command_queue, cl_kernel, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_unmap_mem_object(cl_command_queue, cl_mem, void*, cl_uint, const cl_event*, cl_event*))
 %throws_clerror(clxx::enqueue_wait_for_events(cl_command_queue, cl_uint, const cl_event*))
