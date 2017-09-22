@@ -1,9 +1,9 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: clxx/b5d/real.cpp {{{
- * \file clxx/b5d/real.cpp
- * \todo Write documentation for file clxx/b5d/real.cpp
+/** // doc: clxx/b5d/mocks/real.cpp {{{
+ * \file clxx/b5d/mocks/real.cpp
+ * \todo Write documentation for file clxx/b5d/mocks/real.cpp
  */ // }}}
 #define CXXTEST_MOCK_REAL_SOURCE_FILE
 #include <clxx/common/config.hpp>

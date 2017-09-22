@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-/** // doc: clxx/b5d/mock.cpp {{{
- * \file clxx/b5d/mock.cpp
+/** // doc: clxx/b5d/mocks/mock.cpp {{{
+ * \file clxx/b5d/mocks/mock.cpp
  * \brief OpenCL mocks
- * \todo Write documentation for file clxx/b5d/mock.cpp
+ * \todo Write documentation for file clxx/b5d/mocks/mock.cpp
  */ // }}}
 #define CXXTEST_MOCK_TEST_SOURCE_FILE
 #include <clxx/common/config.hpp>

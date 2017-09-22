@@ -1,10 +1,10 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/b5d/functions.hpp
+// clxx/b5d/cl.hpp
 
-/** // doc: clxx/b5d/functions.hpp {{{
- * \file clxx/b5d/functions.hpp
+/** // doc: clxx/b5d/cl.hpp {{{
+ * \file clxx/b5d/cl.hpp
  * \brief Bare C++ wrappers around OpenCL functions.
  */ // }}}
 #ifndef CLXX_B5D_CL_HPP_INCLUDED
