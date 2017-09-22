@@ -33,9 +33,11 @@ public:
    */ // }}}
   void test__svm_alloc( )
   {
+#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
     T::Dummy_clSVMAlloc mock((void*)0x1234);
     TS_ASSERT(svm_alloc((cl_context)0x7654, svm_mem_flags_t::read_write, 123ul, 12u) == (void*)0x1234);
     TS_ASSERT(mock.called_once_with((cl_context)0x7654, (cl_svm_mem_flags)CL_MEM_READ_WRITE, 123ul, 12u));
+#endif
   }
 };
 

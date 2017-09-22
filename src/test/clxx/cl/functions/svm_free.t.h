@@ -33,9 +33,11 @@ public:
    */ // }}}
   void test__svm_free( )
   {
+#if CLXX_OPENCL_ALLOWED(clSVMFree)
     T::Dummy_clSVMFree mock;
     TS_ASSERT_THROWS_NOTHING(svm_free((cl_context)0x7654, (void*)0x1234));
     TS_ASSERT(mock.called_once_with((cl_context)0x7654, (void*)0x1234));
+#endif
   }
 };
 

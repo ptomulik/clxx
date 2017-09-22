@@ -26,6 +26,8 @@
 #define CLXX_B5D_OPENCL_PROVIDES(sym) \
     CLXX_B5D_OPENCL_DECLARES_ ## sym
 
+#define CLXX_B5D_PROVIDES(sym) CLXX_B5D_PROVIDES_ ## sym
+
 #ifdef __APPLE__
 # error Apple is not supported yet
 #else

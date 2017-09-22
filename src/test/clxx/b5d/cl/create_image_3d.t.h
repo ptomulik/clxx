@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/create_image_3d.t.h
+// clxx/b5d/cl/create_image_3d.t.h
 
-/** // doc: clxx/cl/functions/create_image_3d.t.h {{{
- * \file clxx/cl/functions/create_image_3d.t.h
+/** // doc: clxx/b5d/cl/create_image_3d.t.h {{{
+ * \file clxx/b5d/cl/create_image_3d.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_CREATE_IMAGE_3D_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_CREATE_IMAGE_3D_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_CREATE_IMAGE_3D_T_H_INCLUDED
+#define CLXX_B5D_CL_CREATE_IMAGE_3D_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_create_image_3d_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_create_image_3d_test_suite {{{
+namespace  clxx { class create_image_3d_test_suite; }
+
+/** // doc: class clxx::create_image_3d_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_create_image_3d_test_suite : public CxxTest::TestSuite
+class clxx::create_image_3d_test_suite : public CxxTest::TestSuite
 {
 public:
 
@@ -33,7 +36,7 @@ public:
    */ // }}}
   void test__create_image_3d( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)0x1234, CL_SUCCESS);
     TS_ASSERT(create_image_3d((cl_context)0x7654, mem_flags_t::read_write, (const cl_image_format*)0x4567, 1ul, 2ul, 3ul, 4ul, 5ul, (void*)0x2345) == (cl_mem)0x1234);
     TS_ASSERT(mock.called_once());
@@ -47,6 +50,8 @@ public:
     TS_ASSERT(std::get<7>(mock.calls().back()) == 5ul)
     TS_ASSERT(std::get<8>(mock.calls().back()) == (void*)0x2345)
     TS_ASSERT(std::get<9>(mock.calls().back()) != nullptr)
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__invalid_context() {{{
@@ -54,9 +59,11 @@ public:
    */ // }}}
   void test__create_image_3d__invalid_context( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_INVALID_CONTEXT);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::invalid_context>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__invalid_value() {{{
@@ -64,9 +71,11 @@ public:
    */ // }}}
   void test__create_image_3d__invalid_value( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_INVALID_VALUE);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::invalid_value>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__invalid_image_format_descriptor() {{{
@@ -74,9 +83,11 @@ public:
    */ // }}}
   void test__create_image_3d__invalid_image_format_descriptor( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_INVALID_IMAGE_FORMAT_DESCRIPTOR);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::invalid_image_format_descriptor>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__invalid_image_size() {{{
@@ -84,9 +95,11 @@ public:
    */ // }}}
   void test__create_image_3d__invalid_image_size( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_INVALID_IMAGE_SIZE);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::invalid_image_size>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__invalid_host_ptr() {{{
@@ -94,9 +107,11 @@ public:
    */ // }}}
   void test__create_image_3d__invalid_host_ptr( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_INVALID_HOST_PTR);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::invalid_host_ptr>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__image_format_not_supported() {{{
@@ -104,9 +119,11 @@ public:
    */ // }}}
   void test__create_image_3d__image_format_not_supported( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_IMAGE_FORMAT_NOT_SUPPORTED);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::image_format_not_supported>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__mem_object_allocation_failure() {{{
@@ -114,9 +131,11 @@ public:
    */ // }}}
   void test__create_image_3d__mem_object_allocation_failure( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_MEM_OBJECT_ALLOCATION_FAILURE);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::mem_object_allocation_failure>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__invalid_operation() {{{
@@ -124,9 +143,11 @@ public:
    */ // }}}
   void test__create_image_3d__invalid_operation( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_INVALID_OPERATION);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::invalid_operation>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__out_of_resources() {{{
@@ -134,9 +155,11 @@ public:
    */ // }}}
   void test__create_image_3d__out_of_resources( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__out_of_host_memory() {{{
@@ -144,9 +167,11 @@ public:
    */ // }}}
   void test__create_image_3d__out_of_host_memory( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
   /** // doc: test__create_image_3d__unexpected_clerror() {{{
@@ -154,13 +179,17 @@ public:
    */ // }}}
   void test__create_image_3d__unexpected_clerror( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
     T::Dummy_clCreateImage3D mock((cl_mem)NULL, -0x1234567);
     TS_ASSERT_THROWS(create_image_3d((cl_context)0,mem_flags_t::read_write,nullptr,0ul,0ul,0ul,0ul,0ul,nullptr), unexpected_clerror);
+#else
+    TS_SKIP("create_image_3d not implemented");
 #endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_CREATE_IMAGE_3D_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_CREATE_IMAGE_3D_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

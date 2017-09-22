@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/clone_kernel.t.h
+// clxx/b5d/cl/clone_kernel.t.h
 
-/** // doc: clxx/cl/functions/clone_kernel.t.h {{{
- * \file clxx/cl/functions/clone_kernel.t.h
+/** // doc: clxx/b5d/cl/clone_kernel.t.h {{{
+ * \file clxx/b5d/cl/clone_kernel.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_CLONE_KERNEL_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_CLONE_KERNEL_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_CLONE_KERNEL_T_H_INCLUDED
+#define CLXX_B5D_CL_CLONE_KERNEL_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_clone_kernel_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_clone_kernel_test_suite {{{
+namespace  clxx { class clone_kernel_test_suite; }
+
+/** // doc: class clxx::clone_kernel_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_clone_kernel_test_suite : public CxxTest::TestSuite
+class clxx::clone_kernel_test_suite : public CxxTest::TestSuite
 {
 public:
 
@@ -33,11 +36,13 @@ public:
    */ // }}}
   void test__clone_kernel( )
   {
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+#if CLXX_B5D_PROVIDES(clone_kernel)
     T::Dummy_clCloneKernel mock((cl_kernel)0x1234, CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(clxx::clone_kernel((cl_kernel)0x4321));
     TS_ASSERT(mock.called_once());
     TS_ASSERT(clxx::clone_kernel((cl_kernel)0x4321) == (cl_kernel)0x1234);
+#else
+    TS_SKIP("clone_kernel not implemented");
 #endif
   }
   /** // doc: test__clone_kernel__invalid_kernel() {{{
@@ -45,9 +50,11 @@ public:
    */ // }}}
   void test__clone_kernel__invalid_kernel( )
   {
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+#if CLXX_B5D_PROVIDES(clone_kernel)
     T::Dummy_clCloneKernel mock((cl_kernel)NULL, CL_INVALID_KERNEL);
     TS_ASSERT_THROWS(clxx::clone_kernel((cl_kernel)0x4321), clerror_no<status_t::invalid_kernel>);
+#else
+    TS_SKIP("clone_kernel not implemented");
 #endif
   }
   /** // doc: test__clone_kernel__out_of_resources() {{{
@@ -55,9 +62,11 @@ public:
    */ // }}}
   void test__clone_kernel__out_of_resources( )
   {
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+#if CLXX_B5D_PROVIDES(clone_kernel)
     T::Dummy_clCloneKernel mock((cl_kernel)NULL, CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(clxx::clone_kernel((cl_kernel)0x4321), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("clone_kernel not implemented");
 #endif
   }
   /** // doc: test__clone_kernel__out_of_host_memory() {{{
@@ -65,13 +74,17 @@ public:
    */ // }}}
   void test__clone_kernel__out_of_host_memory( )
   {
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+#if CLXX_B5D_PROVIDES(clone_kernel)
     T::Dummy_clCloneKernel mock((cl_kernel)NULL, CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(clxx::clone_kernel((cl_kernel)0x4321), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("clone_kernel not implemented");
 #endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_CLONE_KERNEL_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_CLONE_KERNEL_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/enqueue_wait_for_events.t.h
+// clxx/b5d/cl/enqueue_wait_for_events.t.h
 
-/** // doc: clxx/cl/functions/enqueue_wait_for_events.t.h {{{
- * \file clxx/cl/functions/enqueue_wait_for_events.t.h
+/** // doc: clxx/b5d/cl/enqueue_wait_for_events.t.h {{{
+ * \file clxx/b5d/cl/enqueue_wait_for_events.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_ENQUEUE_WAIT_FOR_EVENTS_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_ENQUEUE_WAIT_FOR_EVENTS_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_ENQUEUE_WAIT_FOR_EVENTS_T_H_INCLUDED
+#define CLXX_B5D_CL_ENQUEUE_WAIT_FOR_EVENTS_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_enqueue_wait_for_events_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_enqueue_wait_for_events_test_suite {{{
+namespace  clxx { class enqueue_wait_for_events_test_suite; }
+
+/** // doc: class clxx::enqueue_wait_for_events_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_enqueue_wait_for_events_test_suite : public CxxTest::TestSuite
+class clxx::enqueue_wait_for_events_test_suite : public CxxTest::TestSuite
 {
 public:
   ////////////////////////////////////////////////////////////////////////////
@@ -32,19 +35,17 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
     T::Dummy_clEnqueueWaitForEvents mock(CL_SUCCESS);
 
-    TS_ASSERT_THROWS_NOTHING(enqueue_wait_for_events(
-                                                  (cl_command_queue)0x123,
-                                                  12u,
-                                                  (const cl_event*)0x111);
-
+    TS_ASSERT_THROWS_NOTHING(enqueue_wait_for_events((cl_command_queue)0x123, 12u, (const cl_event*)0x111));
     TS_ASSERT(mock.called_once());
 
     TS_ASSERT(std::get<0>(mock.calls().back()) == (cl_command_queue)0x123);
     TS_ASSERT(std::get<1>(mock.calls().back()) == 12u);
     TS_ASSERT(std::get<2>(mock.calls().back()) == (const cl_event*)0x111);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
   /** // doc: test__enqueue_wait_for_events__invalid_command_queue() {{{
@@ -52,9 +53,11 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events__invalid_command_queue( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
     T::Dummy_clEnqueueWaitForEvents mock(CL_INVALID_COMMAND_QUEUE);
     TS_ASSERT_THROWS(enqueue_wait_for_events((cl_command_queue)NULL,0u,nullptr), clerror_no<status_t::invalid_command_queue>);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
   /** // doc: test__enqueue_wait_for_events__invalid_context() {{{
@@ -62,9 +65,11 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events__invalid_context( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
     T::Dummy_clEnqueueWaitForEvents mock(CL_INVALID_CONTEXT);
     TS_ASSERT_THROWS(enqueue_wait_for_events((cl_command_queue)NULL,0u,nullptr), clerror_no<status_t::invalid_context>);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
   /** // doc: test__enqueue_wait_for_events__invalid_value() {{{
@@ -72,9 +77,11 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events__invalid_value( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
-    T::Dummy_clEnqueueWaitForEvents mock(CL_INVALID_EVENT_VALUE);
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
+    T::Dummy_clEnqueueWaitForEvents mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(enqueue_wait_for_events((cl_command_queue)NULL,0u,nullptr), clerror_no<status_t::invalid_value>);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
   /** // doc: test__enqueue_wait_for_events__invalid_event() {{{
@@ -82,9 +89,11 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events__invalid_event( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
     T::Dummy_clEnqueueWaitForEvents mock(CL_INVALID_EVENT);
     TS_ASSERT_THROWS(enqueue_wait_for_events((cl_command_queue)NULL,0u,nullptr), clerror_no<status_t::invalid_event>);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
   /** // doc: test__enqueue_wait_for_events__out_of_resources() {{{
@@ -92,9 +101,11 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events__out_of_resources( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
     T::Dummy_clEnqueueWaitForEvents mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(enqueue_wait_for_events((cl_command_queue)NULL,0u,nullptr), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
   /** // doc: test__enqueue_wait_for_events__out_of_host_memory() {{{
@@ -102,9 +113,11 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events__out_of_host_memory( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
     T::Dummy_clEnqueueWaitForEvents mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(enqueue_wait_for_events((cl_command_queue)NULL,0u,nullptr), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
   /** // doc: test__enqueue_wait_for_events__unexpected_clerror() {{{
@@ -112,13 +125,17 @@ public:
    */ // }}}
   void test__enqueue_wait_for_events__unexpected_clerror( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
     T::Dummy_clEnqueueWaitForEvents mock(-0x1234567);
     TS_ASSERT_THROWS(enqueue_wait_for_events((cl_command_queue)NULL,0u,nullptr), unexpected_clerror);
+#else
+    TS_SKIP("enqueue_wait_for_events not implemented");
 #endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_ENQUEUE_WAIT_FOR_EVENTS_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_ENQUEUE_WAIT_FOR_EVENTS_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

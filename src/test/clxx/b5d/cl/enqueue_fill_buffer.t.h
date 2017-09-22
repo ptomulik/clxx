@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/enqueue_fill_buffer.t.h
+// clxx/b5d/cl/enqueue_fill_buffer.t.h
 
-/** // doc: clxx/cl/functions/enqueue_fill_buffer.t.h {{{
- * \file clxx/cl/functions/enqueue_fill_buffer.t.h
+/** // doc: clxx/b5d/cl/enqueue_fill_buffer.t.h {{{
+ * \file clxx/b5d/cl/enqueue_fill_buffer.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_ENQUEUE_FILL_BUFFER_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_ENQUEUE_FILL_BUFFER_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_ENQUEUE_FILL_BUFFER_T_H_INCLUDED
+#define CLXX_B5D_CL_ENQUEUE_FILL_BUFFER_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_enqueue_fill_buffer_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_enqueue_fill_buffer_test_suite {{{
+namespace  clxx { class enqueue_fill_buffer_test_suite; }
+
+/** // doc: class clxx::enqueue_fill_buffer_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_enqueue_fill_buffer_test_suite : public CxxTest::TestSuite
+class clxx::enqueue_fill_buffer_test_suite : public CxxTest::TestSuite
 {
 public:
   ////////////////////////////////////////////////////////////////////////////
@@ -32,7 +35,7 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_SUCCESS);
 
     TS_ASSERT_THROWS_NOTHING(enqueue_fill_buffer(
@@ -55,6 +58,8 @@ public:
                                       12u,
                                       (const cl_event*)0x890,
                                       (cl_event*)0x901) );
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__invalid_command_queue() {{{
@@ -62,9 +67,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__invalid_command_queue( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_INVALID_COMMAND_QUEUE);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::invalid_command_queue>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__invalid_context() {{{
@@ -72,9 +79,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__invalid_context( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_INVALID_CONTEXT);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::invalid_context>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__invalid_mem_object() {{{
@@ -82,9 +91,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__invalid_mem_object( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_INVALID_MEM_OBJECT);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::invalid_mem_object>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__invalid_value() {{{
@@ -92,9 +103,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__invalid_value( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__invalid_event_wait_list() {{{
@@ -102,9 +115,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__invalid_event_wait_list( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_INVALID_EVENT_WAIT_LIST);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::invalid_event_wait_list>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__misaligned_sub_buffer_offset() {{{
@@ -112,11 +127,13 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__misaligned_sub_buffer_offset( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
-#if CLXX_CL_H_VERSION_1_1
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
     T::Dummy_clEnqueueFillBuffer mock(CL_MISALIGNED_SUB_BUFFER_OFFSET);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::misaligned_sub_buffer_offset>);
 #endif
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__mem_object_allocation_failure() {{{
@@ -124,9 +141,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__mem_object_allocation_failure( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_MEM_OBJECT_ALLOCATION_FAILURE);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::mem_object_allocation_failure>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__out_of_resources() {{{
@@ -134,9 +153,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__out_of_resources( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__out_of_host_memory() {{{
@@ -144,9 +165,11 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__out_of_host_memory( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
   /** // doc: test__enqueue_fill_buffer__unexpected_clerror() {{{
@@ -154,13 +177,17 @@ public:
    */ // }}}
   void test__enqueue_fill_buffer__unexpected_clerror( )
   {
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
     T::Dummy_clEnqueueFillBuffer mock(-0x1234567);
     TS_ASSERT_THROWS(enqueue_fill_buffer((cl_command_queue)NULL, (cl_mem)NULL, nullptr, 0ul, 0ul, 0ul, 0u, nullptr, nullptr), unexpected_clerror);
+#else
+    TS_SKIP("enqueue_fill_buffer not implemented");
 #endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_ENQUEUE_FILL_BUFFER_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_ENQUEUE_FILL_BUFFER_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

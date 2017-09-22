@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/set_mem_object_destructor_callback.t.h
+// clxx/b5d/cl/set_mem_object_destructor_callback.t.h
 
-/** // doc: clxx/cl/functions/set_mem_object_destructor_callback.t.h {{{
- * \file clxx/cl/functions/set_mem_object_destructor_callback.t.h
+/** // doc: clxx/b5d/cl/set_mem_object_destructor_callback.t.h {{{
+ * \file clxx/b5d/cl/set_mem_object_destructor_callback.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_SET_MEM_OBJECT_DESTRUCTOR_CALLBACK_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_SET_MEM_OBJECT_DESTRUCTOR_CALLBACK_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_SET_MEM_OBJECT_DESTRUCTOR_CALLBACK_T_H_INCLUDED
+#define CLXX_B5D_CL_SET_MEM_OBJECT_DESTRUCTOR_CALLBACK_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_set_mem_object_destructor_callback_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_set_mem_object_destructor_callback_test_suite {{{
+namespace  clxx { class set_mem_object_destructor_callback_test_suite; }
+
+/** // doc: class clxx::set_mem_object_destructor_callback_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_set_mem_object_destructor_callback_test_suite : public CxxTest::TestSuite
+class clxx::set_mem_object_destructor_callback_test_suite : public CxxTest::TestSuite
 {
 public:
   ////////////////////////////////////////////////////////////////////////////
@@ -32,11 +35,13 @@ public:
    */ // }}}
   void test__set_mem_object_destructor_callback( )
   {
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_PROVIDES(set_mem_object_destructor_callback)
     typedef void (CL_CALLBACK* callback_t)(cl_mem, void*);
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(set_mem_object_destructor_callback((cl_mem)0x123, (callback_t)0x7654, (void*)0x9876));
     TS_ASSERT(mock.called_once_with((cl_mem)0x123, (callback_t)0x7654, (void*)0x9876));
+#else
+    TS_SKIP("set_mem_object_destructor_callback not implemented");
 #endif
   }
   /** // doc: test__set_mem_object_destructor_callback__invalid_mem_object() {{{
@@ -44,9 +49,11 @@ public:
    */ // }}}
   void test__set_mem_object_destructor_callback__invalid_mem_object( )
   {
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_PROVIDES(set_mem_object_destructor_callback)
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_INVALID_MEM_OBJECT);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::invalid_mem_object>);
+#else
+    TS_SKIP("set_mem_object_destructor_callback not implemented");
 #endif
   }
   /** // doc: test__set_mem_object_destructor_callback__invalid_value() {{{
@@ -54,9 +61,11 @@ public:
    */ // }}}
   void test__set_mem_object_destructor_callback__invalid_value( )
   {
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_PROVIDES(set_mem_object_destructor_callback)
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+#else
+    TS_SKIP("set_mem_object_destructor_callback not implemented");
 #endif
   }
   /** // doc: test__set_mem_object_destructor_callback__out_of_resources() {{{
@@ -64,9 +73,11 @@ public:
    */ // }}}
   void test__set_mem_object_destructor_callback__out_of_resources( )
   {
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_PROVIDES(set_mem_object_destructor_callback)
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("set_mem_object_destructor_callback not implemented");
 #endif
   }
   /** // doc: test__set_mem_object_destructor_callback__out_of_host_memory() {{{
@@ -74,9 +85,11 @@ public:
    */ // }}}
   void test__set_mem_object_destructor_callback__out_of_host_memory( )
   {
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_PROVIDES(set_mem_object_destructor_callback)
     T::Dummy_clSetMemObjectDestructorCallback mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("set_mem_object_destructor_callback not implemented");
 #endif
   }
   /** // doc: test__set_mem_object_destructor_callback__unexpected_clerror() {{{
@@ -84,13 +97,17 @@ public:
    */ // }}}
   void test__set_mem_object_destructor_callback__unexpected_clerror( )
   {
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_PROVIDES(set_mem_object_destructor_callback)
     T::Dummy_clSetMemObjectDestructorCallback mock(-0x1234567);
     TS_ASSERT_THROWS(set_mem_object_destructor_callback((cl_mem)NULL, nullptr, nullptr), unexpected_clerror);
+#else
+    TS_SKIP("set_mem_object_destructor_callback not implemented");
 #endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_SET_MEM_OBJECT_DESTRUCTOR_CALLBACK_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_SET_MEM_OBJECT_DESTRUCTOR_CALLBACK_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

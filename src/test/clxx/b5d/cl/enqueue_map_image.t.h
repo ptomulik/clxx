@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/enqueue_map_image.t.h
+// clxx/b5d/cl/enqueue_map_image.t.h
 
-/** // doc: clxx/cl/functions/enqueue_map_image.t.h {{{
- * \file clxx/cl/functions/enqueue_map_image.t.h
+/** // doc: clxx/b5d/cl/enqueue_map_image.t.h {{{
+ * \file clxx/b5d/cl/enqueue_map_image.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_ENQUEUE_MAP_IMAGE_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_ENQUEUE_MAP_IMAGE_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_ENQUEUE_MAP_IMAGE_T_H_INCLUDED
+#define CLXX_B5D_CL_ENQUEUE_MAP_IMAGE_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_enqueue_map_image_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_enqueue_map_image_test_suite {{{
+namespace  clxx { class enqueue_map_image_test_suite; }
+
+/** // doc: class clxx::enqueue_map_image_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_enqueue_map_image_test_suite : public CxxTest::TestSuite
+class clxx::enqueue_map_image_test_suite : public CxxTest::TestSuite
 {
 public:
   ////////////////////////////////////////////////////////////////////////////
@@ -32,6 +35,7 @@ public:
    */ // }}}
   void test__enqueue_map_image( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock((void*)0x7654, CL_SUCCESS);
 
     TS_ASSERT(enqueue_map_image(  (cl_command_queue)0x123,
@@ -59,79 +63,118 @@ public:
     TS_ASSERT(std::get<8>(mock.calls().back()) == 12u);
     TS_ASSERT(std::get<9>(mock.calls().back()) == (const cl_event*)0x890);
     TS_ASSERT(std::get<10>(mock.calls().back()) == (cl_event*)0x901);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__invalid_command_queue() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__invalid_command_queue( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_INVALID_COMMAND_QUEUE);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::invalid_command_queue>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__invalid_context() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__invalid_context( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_INVALID_CONTEXT);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::invalid_context>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__invalid_mem_object() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__invalid_mem_object( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_INVALID_MEM_OBJECT);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::invalid_mem_object>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__invalid_value() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__invalid_value( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_INVALID_VALUE);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::invalid_value>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__invalid_event_wait_list() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__invalid_event_wait_list( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_INVALID_EVENT_WAIT_LIST);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::invalid_event_wait_list>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__invalid_image_size() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__invalid_image_size( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_INVALID_IMAGE_SIZE);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::invalid_image_size>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__image_format_not_supported() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__image_format_not_supported( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_IMAGE_FORMAT_NOT_SUPPORTED);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::image_format_not_supported>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__map_failure() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__map_failure( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_MAP_FAILURE);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::map_failure>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__exec_status_error_for_events_in_wait_list() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__exec_status_error_for_events_in_wait_list( )
   {
-#if CLXX_CL_H_VERSION_1_1
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::exec_status_error_for_events_in_wait_list>);
+#endif
+#else
+    TS_SKIP("enqueue_map_image not implemented");
 #endif
   }
   /** // doc: test__enqueue_map_image__mem_object_allocation_failure() {{{
@@ -139,43 +182,65 @@ public:
    */ // }}}
   void test__enqueue_map_image__mem_object_allocation_failure( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_MEM_OBJECT_ALLOCATION_FAILURE);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::mem_object_allocation_failure>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__invalid_operation() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__invalid_operation( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_INVALID_OPERATION);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::invalid_operation>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__out_of_resources() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__out_of_resources( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__out_of_host_memory() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__out_of_host_memory( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
   /** // doc: test__enqueue_map_image__unexpected_clerror() {{{
    * \todo Write documentation
    */ // }}}
   void test__enqueue_map_image__unexpected_clerror( )
   {
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
     T::Dummy_clEnqueueMapImage mock(nullptr,-0x1234567);
     TS_ASSERT_THROWS(enqueue_map_image((cl_command_queue)NULL,(cl_mem)NULL,0,map_flags_t::read,nullptr,nullptr,nullptr,nullptr,0u,nullptr,nullptr), unexpected_clerror);
+#else
+    TS_SKIP("enqueue_map_image not implemented");
+#endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_ENQUEUE_MAP_IMAGE_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_ENQUEUE_MAP_IMAGE_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

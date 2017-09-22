@@ -114,6 +114,7 @@ build_program(
     void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
     void* user_data
 ) CLXX_B5D_API_SUFFIX(clBuildProgram);
+# define CLXX_B5D_PROVIDES_build_program 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCloneKernel)
 /** // doc: clone_kernel() {{{
@@ -146,6 +147,7 @@ extern CLXX_B5D_API_PREFIX(clCloneKernel) cl_kernel CLXX_B5D_API_CALL
 clone_kernel(
     cl_kernel source_kernel
 ) CLXX_B5D_API_SUFFIX(clCloneKernel);
+# define CLXX_B5D_PROVIDES_clone_kernel 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCompileProgram)
 /** // doc: compile_program(...) {{{
@@ -252,6 +254,7 @@ compile_program(
     void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
     void* user_data
 ) CLXX_B5D_API_SUFFIX(clCompileProgram);
+# define CLXX_B5D_PROVIDES_compile_program 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateBuffer)
 /** // doc: create_buffer() {{{
@@ -308,6 +311,7 @@ create_buffer(
     size_t size,
     void* host_ptr
 ) CLXX_B5D_API_SUFFIX(clCreateBuffer);
+# define CLXX_B5D_PROVIDES_create_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
 /** // doc: create_command_queue(...) {{{
@@ -372,6 +376,7 @@ create_command_queue(
     cl_device_id device,
     command_queue_properties_t properties
 ) CLXX_B5D_API_SUFFIX(clCreateCommandQueue);
+# define CLXX_B5D_PROVIDES_create_command_queue 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueueWithProperties)
 /** // doc: create_command_queue_with_properties(...) {{{
@@ -439,6 +444,7 @@ create_command_queue_with_properties(
     cl_device_id device,
     const cl_queue_properties* properties
 ) CLXX_B5D_API_SUFFIX(clCreateCommandQueueWithProperties);
+# define CLXX_B5D_PROVIDES_create_command_queue_with_properties 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateContext)
 /** // doc: create_context(...) {{{
@@ -524,6 +530,7 @@ create_context(
                                   size_t cb, void* user_data),
     void* user_data
 ) CLXX_B5D_API_SUFFIX(clCreateContext);
+# define CLXX_B5D_PROVIDES_create_context 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateContextFromType)
 /** // doc: create_context_from_type_from_type(...) {{{
@@ -608,6 +615,7 @@ create_context_from_type(
                                   void* user_data),
     void* user_data
 ) CLXX_B5D_API_SUFFIX(clCreateContextFromType);
+# define CLXX_B5D_PROVIDES_create_context_from_type 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateImage)
 /** // doc: create_image() {{{
@@ -679,6 +687,7 @@ create_image(
     const cl_image_desc *image_desc,
     void *host_ptr
 ) CLXX_B5D_API_SUFFIX(clCreateImage);
+# define CLXX_B5D_PROVIDES_create_image 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateImage2D)
 /** // doc: create_image_2d() {{{
@@ -758,6 +767,7 @@ create_image_2d(
     size_t image_row_pitch,
     void *host_ptr
 ) CLXX_B5D_API_SUFFIX(clCreateImage2D);
+# define CLXX_B5D_PROVIDES_create_image_2d 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateImage3D)
 /** // doc: create_image_3d() {{{
@@ -848,6 +858,7 @@ create_image_3d(
     size_t image_slice_pitch,
     void *host_ptr
 ) CLXX_B5D_API_SUFFIX(clCreateImage3D);
+# define CLXX_B5D_PROVIDES_create_image_3d 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateKernel)
 /** // doc: create_kernel() {{{
@@ -894,6 +905,7 @@ create_kernel(
     cl_program program,
     const char* kernel_name
 ) CLXX_B5D_API_SUFFIX(clCreateKernel);
+# define CLXX_B5D_PROVIDES_create_kernel 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateKernelsInProgram)
 /** // doc: create_kernels_in_program() {{{
@@ -943,6 +955,7 @@ create_kernels_in_program(
     cl_kernel* kernels,
     cl_uint* num_kernels_ret
 ) CLXX_B5D_API_SUFFIX(clCreateKernelsInProgram);
+# define CLXX_B5D_PROVIDES_create_kernels_in_program 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
 /** // doc: create_pipe() {{{
@@ -1001,6 +1014,7 @@ create_pipe(
     cl_uint pipe_max_packets,
     const cl_pipe_properties* properties
 ) CLXX_B5D_API_SUFFIX(clCreatePipe);
+# define CLXX_B5D_PROVIDES_create_pipe 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBinary)
 /** // doc: create_program_with_binary(...) {{{
@@ -1110,6 +1124,7 @@ create_program_with_binary(
     const unsigned char** binaries,
     cl_int* binary_status
 ) CLXX_B5D_API_SUFFIX(clCreateProgramWithBinary);
+# define CLXX_B5D_PROVIDES_create_program_with_binary 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBuiltInKernels)
 /** // doc: create_program_with_built_in_kernels(...) {{{
@@ -1161,6 +1176,7 @@ create_program_with_built_in_kernels(
     const cl_device_id* device_list,
     const char* kernel_names
 ) CLXX_B5D_API_SUFFIX(clCreateProgramWithBuiltInKernels);
+# define CLXX_B5D_PROVIDES_create_program_with_built_in_kernels 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithIL)
 /** // doc: create_program_with_il(...) {{{
@@ -1204,6 +1220,7 @@ create_program_with_il(
     const void* il,
     size_t length
 ) CLXX_B5D_API_SUFFIX(clCreateProgramWithIL);
+# define CLXX_B5D_PROVIDES_create_program_with_il 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithSource)
 /** // doc: create_program_with_source(...) {{{
@@ -1265,6 +1282,7 @@ create_program_with_source(
     const char** strings,
     const size_t* lengths
 ) CLXX_B5D_API_SUFFIX(clCreateProgramWithSource);
+# define CLXX_B5D_PROVIDES_create_program_with_source 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSampler)
 /** // doc: create_sampler() {{{
@@ -1320,6 +1338,7 @@ create_sampler(
     addressing_mode_t addressing_mode,
     filter_mode_t filter_mode
 ) CLXX_B5D_API_SUFFIX(clCreateSampler);
+# define CLXX_B5D_PROVIDES_create_sampler 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSamplerWithProperties)
 /** // doc: create_sampler_with_properties() {{{
@@ -1370,6 +1389,7 @@ create_sampler_with_properties(
     cl_context context,
     const cl_sampler_properties* sampler_properties
 ) CLXX_B5D_API_SUFFIX(clCreateSamplerWithProperties);
+# define CLXX_B5D_PROVIDES_create_sampler_with_properties 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSubBuffer)
 /** // doc: create_sub_buffer() {{{
@@ -1422,6 +1442,7 @@ create_sub_buffer(
     buffer_create_type_t buffer_create_type,
     const void* buffer_create_info
 ) CLXX_B5D_API_SUFFIX(clCreateSubBuffer);
+# define CLXX_B5D_PROVIDES_create_sub_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSubDevices)
 /** // doc: create_sub_devices(...) {{{
@@ -1480,6 +1501,7 @@ create_sub_devices(
     cl_device_id* out_devices,
     cl_uint *num_devices_ret
 ) CLXX_B5D_API_SUFFIX(clCreateSubDevices);
+# define CLXX_B5D_PROVIDES_create_sub_devices 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateUserEvent)
 /** // doc: create_user_event() {{{
@@ -1513,6 +1535,7 @@ extern CLXX_B5D_API_PREFIX(clCreateUserEvent) cl_event CLXX_B5D_API_CALL
 create_user_event(
     cl_context context
 ) CLXX_B5D_API_SUFFIX(clCreateUserEvent);
+# define CLXX_B5D_PROVIDES_create_user_event 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrier)
 /** // doc: enqueue_barrier() {{{
@@ -1546,6 +1569,7 @@ extern CLXX_B5D_API_PREFIX(clEnqueueBarrier) void CLXX_B5D_API_CALL
 enqueue_barrier(
     cl_command_queue command_queue
 ) CLXX_B5D_API_SUFFIX(clEnqueueBarrier);
+# define CLXX_B5D_PROVIDES_enqueue_barrier 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrierWithWaitList)
 /** // doc: enqueue_barrier_with_wait_list() {{{
@@ -1609,6 +1633,7 @@ enqueue_barrier_with_wait_list(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueBarrierWithWaitList);
+# define CLXX_B5D_PROVIDES_enqueue_barrier_with_wait_list 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBuffer)
 /** // doc: enqueue_copy_buffer() {{{
@@ -1701,6 +1726,7 @@ enqueue_copy_buffer(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueCopyBuffer);
+# define CLXX_B5D_PROVIDES_enqueue_copy_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferRect)
 /** // doc: enqueue_copy_buffer_rect() {{{
@@ -1820,6 +1846,7 @@ enqueue_copy_buffer_rect(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueCopyBufferRect);
+# define CLXX_B5D_PROVIDES_enqueue_copy_buffer_rect 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferToImage)
 /** // doc: enqueue_copy_buffer_to_image() {{{
@@ -1936,6 +1963,7 @@ enqueue_copy_buffer_to_image(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueCopyBufferToImage);
+# define CLXX_B5D_PROVIDES_enqueue_copy_buffer_to_image 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImage)
 /** // doc: enqueue_copy_image() {{{
@@ -2059,6 +2087,7 @@ enqueue_copy_image(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueCopyImage);
+# define CLXX_B5D_PROVIDES_enqueue_copy_image 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImageToBuffer)
 /** // doc: enqueue_copy_image_to_buffer() {{{
@@ -2175,6 +2204,7 @@ enqueue_copy_image_to_buffer(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueCopyImageToBuffer);
+# define CLXX_B5D_PROVIDES_enqueue_copy_image_to_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillBuffer)
 /** // doc: enqueue_fill_buffer() {{{
@@ -2276,6 +2306,7 @@ enqueue_fill_buffer(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueFillBuffer);
+# define CLXX_B5D_PROVIDES_enqueue_fill_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillImage)
 /** // doc: enqueue_fill_image() {{{
@@ -2390,6 +2421,7 @@ enqueue_fill_image(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueFillImage);
+# define CLXX_B5D_PROVIDES_enqueue_fill_image 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapBuffer)
 /** // doc: enqueue_map_buffer() {{{
@@ -2500,6 +2532,7 @@ enqueue_map_buffer(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueMapBuffer);
+# define CLXX_B5D_PROVIDES_enqueue_map_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapImage)
 /** // doc: enqueue_map_image() {{{
@@ -2636,6 +2669,7 @@ enqueue_map_image(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueMapImage);
+# define CLXX_B5D_PROVIDES_enqueue_map_image 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarker)
 /** // doc: enqueue_marker() {{{
@@ -2682,6 +2716,7 @@ enqueue_marker(
     cl_command_queue command_queue,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueMarker);
+# define CLXX_B5D_PROVIDES_enqueue_marker 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarkerWithWaitList)
 /** // doc: enqueue_marker_with_wait_list() {{{
@@ -2756,6 +2791,7 @@ enqueue_marker_with_wait_list(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueMarkerWithWaitList);
+# define CLXX_B5D_PROVIDES_enqueue_marker_with_wait_list 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMigrateMemObjects)
 /** // doc: enqueue_migrate_mem_objects() {{{
@@ -2840,6 +2876,7 @@ enqueue_migrate_mem_objects(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueMigrateMemObjects);
+# define CLXX_B5D_PROVIDES_enqueue_migrate_mem_objects 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNativeKernel)
 /** // doc: enqueue_native_kernel() {{{
@@ -2937,6 +2974,7 @@ enqueue_native_kernel(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueNativeKernel);
+# define CLXX_B5D_PROVIDES_enqueue_native_kernel 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNDRangeKernel)
 /** // doc: enqueue_ndrange_kernel() {{{
@@ -3052,6 +3090,7 @@ enqueue_ndrange_kernel(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueNDRangeKernel);
+# define CLXX_B5D_PROVIDES_enqueue_ndrange_kernel 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBuffer)
 /** // doc: enqueue_read_buffer() {{{
@@ -3153,6 +3192,7 @@ enqueue_read_buffer(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueReadBuffer);
+# define CLXX_B5D_PROVIDES_enqueue_read_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBufferRect)
 /** // doc: enqueue_read_buffer_rect() {{{
@@ -3291,6 +3331,7 @@ enqueue_read_buffer_rect(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueReadBufferRect);
+# define CLXX_B5D_PROVIDES_enqueue_read_buffer_rect 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadImage)
 /** // doc: enqueue_read_image() {{{
@@ -3424,6 +3465,7 @@ enqueue_read_image(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueReadImage);
+# define CLXX_B5D_PROVIDES_enqueue_read_image 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMFree)
 /** // doc: enqueue_svm_free() {{{
@@ -3516,6 +3558,7 @@ enqueue_svm_free(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueSVMFree);
+# define CLXX_B5D_PROVIDES_enqueue_svm_free 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMap)
 /** // doc: enqueue_svm_map() {{{
@@ -3610,6 +3653,7 @@ enqueue_svm_map(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueSVMMap);
+# define CLXX_B5D_PROVIDES_enqueue_svm_map 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemFill)
 /** // doc: enqueue_svm_mem_fill() {{{
@@ -3702,6 +3746,7 @@ enqueue_svm_mem_fill(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueSVMMemFill);
+# define CLXX_B5D_PROVIDES_enqueue_svm_mem_fill 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemcpy)
 /** // doc: enqueue_svm_memcpy() {{{
@@ -3801,6 +3846,7 @@ enqueue_svm_memcpy(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueSVMMemcpy);
+# define CLXX_B5D_PROVIDES_enqueue_svm_memcpy 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMigrateMem)
 /** // doc: enqueue_svm_migrate_mem() {{{
@@ -3885,6 +3931,7 @@ enqueue_svm_migrate_mem(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueSVMMigrateMem);
+# define CLXX_B5D_PROVIDES_enqueue_svm_migrate_mem 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMUnmap)
 /** // doc: enqueue_svm_unmap() {{{
@@ -3957,6 +4004,7 @@ enqueue_svm_unmap(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueSVMUnmap);
+# define CLXX_B5D_PROVIDES_enqueue_svm_unmap 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueTask)
 /** // doc: enqueue_task() {{{
@@ -4043,6 +4091,7 @@ enqueue_task(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueTask);
+# define CLXX_B5D_PROVIDES_enqueue_task 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueUnmapMemObject)
 /** // doc: enqueue_unmap_mem_object() {{{
@@ -4118,6 +4167,7 @@ enqueue_unmap_mem_object(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueUnmapMemObject);
+# define CLXX_B5D_PROVIDES_enqueue_unmap_mem_object 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWaitForEvents)
 /** // doc: enqueue_wait_for_events() {{{
@@ -4184,6 +4234,7 @@ enqueue_wait_for_events(
     cl_uint num_events,
     const cl_event* event_list
 ) CLXX_B5D_API_SUFFIX(clEnqueueWaitForEvents);
+# define CLXX_B5D_PROVIDES_enqueue_wait_for_events 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBuffer)
 /** // doc: enqueue_write_buffer() {{{
@@ -4287,6 +4338,7 @@ enqueue_write_buffer(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueWriteBuffer);
+# define CLXX_B5D_PROVIDES_enqueue_write_buffer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBufferRect)
 /** // doc: enqueue_write_buffer_rect() {{{
@@ -4427,6 +4479,7 @@ enqueue_write_buffer_rect(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueWriteBufferRect);
+# define CLXX_B5D_PROVIDES_enqueue_write_buffer_rect 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteImage)
 /** // doc: enqueue_write_image() {{{
@@ -4563,6 +4616,7 @@ enqueue_write_image(
     const cl_event* event_wait_list,
     cl_event* event
 ) CLXX_B5D_API_SUFFIX(clEnqueueWriteImage);
+# define CLXX_B5D_PROVIDES_enqueue_write_image 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clFinish)
 /** // doc: finish() {{{
@@ -4594,6 +4648,7 @@ extern CLXX_B5D_API_PREFIX(clFinish) void CLXX_B5D_API_CALL
 finish(
     cl_command_queue command_queue
 ) CLXX_B5D_API_SUFFIX(clFinish);
+# define CLXX_B5D_PROVIDES_finish 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clFlush)
 /** // doc: flush() {{{
@@ -4625,6 +4680,7 @@ extern CLXX_B5D_API_PREFIX(clFlush) void CLXX_B5D_API_CALL
 flush(
     cl_command_queue command_queue
 ) CLXX_B5D_API_SUFFIX(clFlush);
+# define CLXX_B5D_PROVIDES_flush 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetCommandQueueInfo)
 /** // doc: get_command_queue_info(...) {{{
@@ -4675,6 +4731,7 @@ get_command_queue_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetCommandQueueInfo);
+# define CLXX_B5D_PROVIDES_get_command_queue_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetContextInfo)
 /** // doc: get_context_info(...) {{{
@@ -4724,6 +4781,7 @@ get_context_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetContextInfo);
+# define CLXX_B5D_PROVIDES_get_context_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceAndHostTimer)
 /** // doc: get_device_and_host_timer(...) {{{
@@ -4770,6 +4828,7 @@ get_device_and_host_timer(
     cl_ulong* device_timestamp,
     cl_ulong* host_timestamp
 ) CLXX_B5D_API_SUFFIX(clGetDeviceAndHostTimer);
+# define CLXX_B5D_PROVIDES_get_device_and_host_timer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceIDs)
 /** // doc: get_device_ids() {{{
@@ -4832,6 +4891,7 @@ get_device_ids(
     cl_device_id* devices,
     cl_uint* num_devices
 ) CLXX_B5D_API_SUFFIX(clGetDeviceIDs);
+# define CLXX_B5D_PROVIDES_get_device_ids 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceInfo)
 /** // doc: get_device_info(...) {{{
@@ -4884,6 +4944,7 @@ get_device_info(
     void* value,
     size_t* value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetDeviceInfo);
+# define CLXX_B5D_PROVIDES_get_device_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetEventInfo)
 /** // doc: get_event_info() {{{
@@ -4932,6 +4993,7 @@ get_event_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetEventInfo);
+# define CLXX_B5D_PROVIDES_get_event_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetEventProfilingInfo)
 /** // doc: get_event_profiling_info() {{{
@@ -4983,6 +5045,7 @@ get_event_profiling_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetEventProfilingInfo);
+# define CLXX_B5D_PROVIDES_get_event_profiling_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddress)
 /** // doc: get_extension_function_address() {{{
@@ -5001,6 +5064,7 @@ extern CLXX_B5D_API_PREFIX(clGetExtensionFunctionAddress) void* CLXX_B5D_API_CAL
 get_extension_function_address(
     const char* funcname
 ) CLXX_B5D_API_SUFFIX(clGetExtensionFunctionAddress);
+# define CLXX_B5D_PROVIDES_get_extension_function_address 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddressForPlatform)
 /** // doc: get_extension_function_address_for_platform() {{{
@@ -5021,6 +5085,7 @@ get_extension_function_address_for_platform(
     cl_platform_id platform,
     const char* funcname
 ) CLXX_B5D_API_SUFFIX(clGetExtensionFunctionAddressForPlatform);
+# define CLXX_B5D_PROVIDES_get_extension_function_address_for_platform 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetHostTimer)
 /** // doc: get_host_timer(...) {{{
@@ -5059,6 +5124,7 @@ get_host_timer(
     cl_device_id device,
     cl_ulong* host_timestamp
 ) CLXX_B5D_API_SUFFIX(clGetHostTimer);
+# define CLXX_B5D_PROVIDES_get_host_timer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetImageInfo)
 /** // doc: get_image_info() {{{
@@ -5107,6 +5173,7 @@ get_image_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetImageInfo);
+# define CLXX_B5D_PROVIDES_get_image_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
 /** // doc: get_kernel_arg_info() {{{
@@ -5162,6 +5229,7 @@ get_kernel_arg_info(
     size_t param_value_size, void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetKernelArgInfo);
+# define CLXX_B5D_PROVIDES_get_kernel_arg_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelInfo)
 /** // doc: get_kernel_info() {{{
@@ -5209,6 +5277,7 @@ get_kernel_info(
     size_t param_value_size, void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetKernelInfo);
+# define CLXX_B5D_PROVIDES_get_kernel_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelSubGroupInfo)
 /** // doc: get_kernel_sub_group_info() {{{
@@ -5278,6 +5347,7 @@ get_kernel_sub_group_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetKernelSubGroupInfo);
+# define CLXX_B5D_PROVIDES_get_kernel_sub_group_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelWorkGroupInfo)
 /** // doc: get_kernel_work_group_info() {{{
@@ -5338,6 +5408,7 @@ get_kernel_work_group_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetKernelWorkGroupInfo);
+# define CLXX_B5D_PROVIDES_get_kernel_work_group_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetMemObjectInfo)
 /** // doc: get_mem_object_info() {{{
@@ -5388,6 +5459,7 @@ get_mem_object_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetMemObjectInfo);
+# define CLXX_B5D_PROVIDES_get_mem_object_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetPipeInfo)
 /** // doc: get_pipe_info() {{{
@@ -5437,6 +5509,7 @@ get_pipe_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetPipeInfo);
+# define CLXX_B5D_PROVIDES_get_pipe_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformIDs)
 /** // {{{ doc: get_platform_ids(...)
@@ -5478,6 +5551,7 @@ get_platform_ids(
     cl_platform_id* platforms,
     cl_uint* num_platforms
 ) CLXX_B5D_API_SUFFIX(clGetPlatformIDs);
+# define CLXX_B5D_PROVIDES_get_platform_ids 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformInfo)
 /** // doc: get_platform_info(...) {{{
@@ -5531,6 +5605,7 @@ get_platform_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetPlatformInfo);
+# define CLXX_B5D_PROVIDES_get_platform_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetProgramBuildInfo)
 /** // doc: get_program_build_info {{{
@@ -5596,6 +5671,7 @@ get_program_build_info(
     size_t param_value_size, void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetProgramBuildInfo);
+# define CLXX_B5D_PROVIDES_get_program_build_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetProgramInfo)
 /** // doc: get_program_info {{{
@@ -5648,6 +5724,7 @@ get_program_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetProgramInfo);
+# define CLXX_B5D_PROVIDES_get_program_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetSamplerInfo)
 /** // doc: get_sampler_info {{{
@@ -5698,6 +5775,7 @@ get_sampler_info(
     void* param_value,
     size_t* param_value_size_ret
 ) CLXX_B5D_API_SUFFIX(clGetSamplerInfo);
+# define CLXX_B5D_PROVIDES_get_sampler_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetSupportedImageFormats)
 /** // doc: get_supported_image_formats() {{{
@@ -5756,6 +5834,7 @@ get_supported_image_formats(
     cl_image_format* image_formats,
     cl_uint* num_image_formats
 ) CLXX_B5D_API_SUFFIX(clGetSupportedImageFormats);
+# define CLXX_B5D_PROVIDES_get_supported_image_formats 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clLinkProgram)
 /** // doc: link_program(...) {{{
@@ -5873,6 +5952,7 @@ link_program(
     void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
     void* user_data
 ) CLXX_B5D_API_SUFFIX(clLinkProgram);
+# define CLXX_B5D_PROVIDES_link_program 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseCommandQueue)
 /** // doc: release_command_queue(...) {{{
@@ -5904,6 +5984,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseCommandQueue) void CLXX_B5D_API_CALL
 release_command_queue(
     cl_command_queue command_queue
 ) CLXX_B5D_API_SUFFIX(clReleaseCommandQueue);
+# define CLXX_B5D_PROVIDES_release_command_queue 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseContext)
 /** // doc: release_context(...) {{{
@@ -5934,6 +6015,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseContext) void CLXX_B5D_API_CALL
 release_context(
     cl_context context
 ) CLXX_B5D_API_SUFFIX(clReleaseContext);
+# define CLXX_B5D_PROVIDES_release_context 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
 /** // doc: release_device(...) {{{
@@ -5971,6 +6053,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseDevice) void CLXX_B5D_API_CALL
 release_device(
     cl_device_id device
 ) CLXX_B5D_API_SUFFIX(clReleaseDevice);
+# define CLXX_B5D_PROVIDES_release_device 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseEvent)
 /** // doc: release_event() {{{
@@ -6006,6 +6089,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseEvent) void CLXX_B5D_API_CALL
 release_event(
     cl_event event
 ) CLXX_B5D_API_SUFFIX(clReleaseEvent);
+# define CLXX_B5D_PROVIDES_release_event 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseKernel)
 /** // doc: release_kernel() {{{
@@ -6041,6 +6125,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseKernel) void CLXX_B5D_API_CALL
 release_kernel(
     cl_kernel kernel
 ) CLXX_B5D_API_SUFFIX(clReleaseKernel);
+# define CLXX_B5D_PROVIDES_release_kernel 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseMemObject)
 /** // doc: release_mem_object() {{{
@@ -6072,6 +6157,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseMemObject) void CLXX_B5D_API_CALL
 release_mem_object(
     cl_mem memobj
 ) CLXX_B5D_API_SUFFIX(clReleaseMemObject);
+# define CLXX_B5D_PROVIDES_release_mem_object 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseProgram)
 /** // doc: release_program(...) {{{
@@ -6106,6 +6192,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseProgram) void CLXX_B5D_API_CALL
 release_program(
     cl_program program
 ) CLXX_B5D_API_SUFFIX(clReleaseProgram);
+# define CLXX_B5D_PROVIDES_release_program 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseSampler)
 /** // doc: release_sampler(...) {{{
@@ -6145,6 +6232,7 @@ extern CLXX_B5D_API_PREFIX(clReleaseSampler) void CLXX_B5D_API_CALL
 release_sampler(
     cl_sampler sampler
 ) CLXX_B5D_API_SUFFIX(clReleaseSampler);
+# define CLXX_B5D_PROVIDES_release_sampler 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainCommandQueue)
 /** // doc: retain_command_queue(...) {{{
@@ -6178,6 +6266,7 @@ extern CLXX_B5D_API_PREFIX(clRetainCommandQueue) void CLXX_B5D_API_CALL
 retain_command_queue(
     cl_command_queue command_queue
 ) CLXX_B5D_API_SUFFIX(clRetainCommandQueue);
+# define CLXX_B5D_PROVIDES_retain_command_queue 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainContext)
 /** // doc: retain_context(...) {{{
@@ -6211,6 +6300,7 @@ extern CLXX_B5D_API_PREFIX(clRetainContext) void CLXX_B5D_API_CALL
 retain_context(
     cl_context context
 ) CLXX_B5D_API_SUFFIX(clRetainContext);
+# define CLXX_B5D_PROVIDES_retain_context 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainDevice)
 /** // doc: retain_device(...) {{{
@@ -6248,6 +6338,7 @@ extern CLXX_B5D_API_PREFIX(clRetainDevice) void CLXX_B5D_API_CALL
 retain_device(
     cl_device_id device
 ) CLXX_B5D_API_SUFFIX(clRetainDevice);
+# define CLXX_B5D_PROVIDES_retain_device 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainEvent)
 /** // doc: retain_event() {{{
@@ -6280,6 +6371,7 @@ extern CLXX_B5D_API_PREFIX(clRetainEvent) void CLXX_B5D_API_CALL
 retain_event(
     cl_event event
 ) CLXX_B5D_API_SUFFIX(clRetainEvent);
+# define CLXX_B5D_PROVIDES_retain_event 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainKernel)
 /** // doc: retain_kernel() {{{
@@ -6312,6 +6404,7 @@ extern CLXX_B5D_API_PREFIX(clRetainKernel) void CLXX_B5D_API_CALL
 retain_kernel(
     cl_kernel kernel
 ) CLXX_B5D_API_SUFFIX(clRetainKernel);
+# define CLXX_B5D_PROVIDES_retain_kernel 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainMemObject)
 /** // doc: retain_mem_object() {{{
@@ -6343,6 +6436,7 @@ extern CLXX_B5D_API_PREFIX(clRetainMemObject) void CLXX_B5D_API_CALL
 retain_mem_object(
     cl_mem memobj
 ) CLXX_B5D_API_SUFFIX(clRetainMemObject);
+# define CLXX_B5D_PROVIDES_retain_mem_object 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainProgram)
 /** // doc: retain_program(...) {{{
@@ -6378,6 +6472,7 @@ extern CLXX_B5D_API_PREFIX(clRetainProgram) void CLXX_B5D_API_CALL
 retain_program(
     cl_program program
 ) CLXX_B5D_API_SUFFIX(clRetainProgram);
+# define CLXX_B5D_PROVIDES_retain_program 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainSampler)
 /** // doc: retain_sampler(...) {{{
@@ -6413,6 +6508,7 @@ extern CLXX_B5D_API_PREFIX(clRetainSampler) void CLXX_B5D_API_CALL
 retain_sampler(
     cl_sampler sampler
 ) CLXX_B5D_API_SUFFIX(clRetainSampler);
+# define CLXX_B5D_PROVIDES_retain_sampler 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetCommandQueueProperty)
 /** // doc: set_command_queue_property() {{{
@@ -6461,6 +6557,7 @@ set_command_queue_property(
     cl_bool enable,
     cl_command_queue_properties* old_properties
 ) CLXX_B5D_API_SUFFIX(clSetCommandQueueProperty);
+# define CLXX_B5D_PROVIDES_set_command_queue_property 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetDefaultDeviceCommandQueue)
 /** // doc: set_default_device_command_queue() {{{
@@ -6499,6 +6596,7 @@ set_default_device_command_queue(
     cl_device_id device,
     cl_command_queue command_queue
 ) CLXX_B5D_API_SUFFIX(clSetDefaultDeviceCommandQueue);
+# define CLXX_B5D_PROVIDES_set_default_device_command_queue 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetEventCallback)
 /** // doc: set_event_callback() {{{
@@ -6547,6 +6645,7 @@ set_event_callback(
     void(CL_CALLBACK* pfn_event_notify)(cl_event, cl_int, void*),
     void* user_data
 ) CLXX_B5D_API_SUFFIX(clSetEventCallback);
+# define CLXX_B5D_PROVIDES_set_event_callback 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArg)
 /** // doc: set_kernel_arg() {{{
@@ -6616,6 +6715,7 @@ set_kernel_arg(
     size_t arg_size,
     const void* arg_value
 ) CLXX_B5D_API_SUFFIX(clSetKernelArg);
+# define CLXX_B5D_PROVIDES_set_kernel_arg 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArgSVMPointer)
 /** // doc: set_kernel_arg_svm_pointer() {{{
@@ -6670,6 +6770,7 @@ set_kernel_arg_svm_pointer(
     cl_uint arg_index,
     const void* arg_value
 ) CLXX_B5D_API_SUFFIX(clSetKernelArgSVMPointer);
+# define CLXX_B5D_PROVIDES_set_kernel_arg_svm_pointer 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetKernelExecInfo)
 /** // doc: set_kernel_exec_info() {{{
@@ -6718,6 +6819,7 @@ set_kernel_exec_info(
     size_t param_value_size,
     const void* param_value
 ) CLXX_B5D_API_SUFFIX(clSetKernelExecInfo);
+# define CLXX_B5D_PROVIDES_set_kernel_exec_info 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetMemObjectDestructorCallback)
 /** // doc: set_mem_object_destructor_callback() {{{
@@ -6766,6 +6868,7 @@ set_mem_object_destructor_callback(
     void (CL_CALLBACK* pfn_notify)(cl_mem, void*),
     void* user_data
 ) CLXX_B5D_API_SUFFIX(clSetMemObjectDestructorCallback);
+# define CLXX_B5D_PROVIDES_set_mem_object_destructor_callback 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSetUserEventStatus)
 /** // doc: set_user_event_status() {{{
@@ -6808,6 +6911,7 @@ set_user_event_status(
     cl_event event,
     cl_int execution_status
 ) CLXX_B5D_API_SUFFIX(clSetUserEventStatus);
+# define CLXX_B5D_PROVIDES_set_user_event_status 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSVMAlloc)
 /** // doc: svm_alloc(...) {{{
@@ -6849,6 +6953,7 @@ svm_alloc(
     size_t size,
     cl_uint alignment
 ) CLXX_B5D_API_SUFFIX(clSVMAlloc);
+# define CLXX_B5D_PROVIDES_svm_alloc 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)
 /** // doc: svm_free(...) {{{
@@ -6876,6 +6981,7 @@ svm_free(
     cl_context context,
     void* svm_pointer
 ) CLXX_B5D_API_SUFFIX(clSVMFree);
+# define CLXX_B5D_PROVIDES_svm_free 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clUnloadCompiler)
 /** // doc: unload_compiler(...) {{{
@@ -6904,6 +7010,7 @@ svm_free(
 extern CLXX_B5D_API_PREFIX(clUnloadCompiler) void CLXX_B5D_API_CALL
 unload_compiler(
 ) CLXX_B5D_API_SUFFIX(clUnloadCompiler);
+# define CLXX_B5D_PROVIDES_unload_compiler 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clUnloadPlatformCompiler)
 /** // doc: unload_platform_compiler(...) {{{
@@ -6938,6 +7045,7 @@ extern CLXX_B5D_API_PREFIX(clUnloadPlatformCompiler) void CLXX_B5D_API_CALL
 unload_platform_compiler(
     cl_platform_id platform
 ) CLXX_B5D_API_SUFFIX(clUnloadPlatformCompiler);
+# define CLXX_B5D_PROVIDES_unload_platform_compiler 1
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clWaitForEvents)
 /** // doc: wait_for_events() {{{
@@ -6976,6 +7084,7 @@ wait_for_events(
     cl_uint num_events,
     const cl_event* event_list
 ) CLXX_B5D_API_SUFFIX(clWaitForEvents);
+# define CLXX_B5D_PROVIDES_wait_for_events 1
 #endif
 /** @} */
 } // end namespace clxx

@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/unload_compiler.t.h
+// clxx/b5d/cl/unload_compiler.t.h
 
-/** // doc: clxx/cl/functions/unload_compiler.t.h {{{
- * \file clxx/cl/functions/unload_compiler.t.h
+/** // doc: clxx/b5d/cl/unload_compiler.t.h {{{
+ * \file clxx/b5d/cl/unload_compiler.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_UNLOAD_COMPILER_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_UNLOAD_COMPILER_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_UNLOAD_COMPILER_T_H_INCLUDED
+#define CLXX_B5D_CL_UNLOAD_COMPILER_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_unload_compiler_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_unload_compiler_test_suite {{{
+namespace  clxx { class unload_compiler_test_suite; }
+
+/** // doc: class clxx::unload_compiler_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_unload_compiler_test_suite : public CxxTest::TestSuite
+class clxx::unload_compiler_test_suite : public CxxTest::TestSuite
 {
 public:
 
@@ -33,21 +36,27 @@ public:
    */ // }}}
   void test__unload_compiler( )
   {
-#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#if CLXX_B5D_PROVIDES(unload_compiler)
     T::Dummy_clUnloadCompiler mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(unload_compiler());
     TS_ASSERT(mock.called_once_with());
-#endif // CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#else
+    TS_SKIP("unload_compiler not implemented");
+#endif
   }
   void test__unload_compiler__unexpected_clerror( )
   {
-#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#if CLXX_B5D_PROVIDES(unload_compiler)
     T::Dummy_clUnloadCompiler mock(-0x1234567);
     TS_ASSERT_THROWS(unload_compiler(), unexpected_clerror);
-#endif // CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#else
+    TS_SKIP("unload_compiler not implemented");
+#endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_UNLOAD_COMPILER_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_UNLOAD_COMPILER_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

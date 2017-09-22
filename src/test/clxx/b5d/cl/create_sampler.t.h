@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/create_sampler.t.h
+// clxx/b5d/cl/create_sampler.t.h
 
-/** // doc: clxx/cl/functions/create_sampler.t.h {{{
- * \file clxx/cl/functions/create_sampler.t.h
+/** // doc: clxx/b5d/cl/create_sampler.t.h {{{
+ * \file clxx/b5d/cl/create_sampler.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_CREATE_SAMPLER_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_CREATE_SAMPLER_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_CREATE_SAMPLER_T_H_INCLUDED
+#define CLXX_B5D_CL_CREATE_SAMPLER_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_create_sampler_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_create_sampler_test_suite {{{
+namespace  clxx { class create_sampler_test_suite; }
+
+/** // doc: class clxx::create_sampler_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_create_sampler_test_suite : public CxxTest::TestSuite
+class clxx::create_sampler_test_suite : public CxxTest::TestSuite
 {
 public:
 
@@ -33,7 +36,7 @@ public:
    */ // }}}
   void test__create_sampler( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
     T::Dummy_clCreateSampler mock((cl_sampler)0x1234, CL_SUCCESS);
     TS_ASSERT(create_sampler((cl_context)0x7654, CL_TRUE, addressing_mode_t::clamp, filter_mode_t::linear) == (cl_sampler)0x1234);
     TS_ASSERT(mock.called_once());
@@ -41,6 +44,8 @@ public:
     TS_ASSERT(std::get<1>(mock.calls().back()) == (cl_bool)CL_TRUE)
     TS_ASSERT(std::get<2>(mock.calls().back()) == (cl_addressing_mode)CL_ADDRESS_CLAMP)
     TS_ASSERT(std::get<3>(mock.calls().back()) == (cl_filter_mode)CL_FILTER_LINEAR)
+#else
+    TS_SKIP("create_sampler not implemented");
 #endif
   }
   /** // doc: test__create_sampler__invalid_context() {{{
@@ -48,9 +53,11 @@ public:
    */ // }}}
   void test__create_sampler__invalid_context( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
     T::Dummy_clCreateSampler mock((cl_sampler)NULL, CL_INVALID_CONTEXT);
     TS_ASSERT_THROWS(create_sampler((cl_context)0,CL_FALSE,addressing_mode_t::none,filter_mode_t::nearest), clerror_no<status_t::invalid_context>);
+#else
+    TS_SKIP("create_sampler not implemented");
 #endif
   }
   /** // doc: test__create_sampler__invalid_value() {{{
@@ -58,9 +65,11 @@ public:
    */ // }}}
   void test__create_sampler__invalid_value( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
     T::Dummy_clCreateSampler mock((cl_sampler)NULL, CL_INVALID_VALUE);
     TS_ASSERT_THROWS(create_sampler((cl_context)0,CL_FALSE,addressing_mode_t::none,filter_mode_t::nearest), clerror_no<status_t::invalid_value>);
+#else
+    TS_SKIP("create_sampler not implemented");
 #endif
   }
   /** // doc: test__create_sampler__invalid_operation() {{{
@@ -68,9 +77,11 @@ public:
    */ // }}}
   void test__create_sampler__invalid_operation( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
     T::Dummy_clCreateSampler mock((cl_sampler)NULL, CL_INVALID_OPERATION);
     TS_ASSERT_THROWS(create_sampler((cl_context)0,CL_FALSE,addressing_mode_t::none,filter_mode_t::nearest), clerror_no<status_t::invalid_operation>);
+#else
+    TS_SKIP("create_sampler not implemented");
 #endif
   }
   /** // doc: test__create_sampler__out_of_resources() {{{
@@ -78,9 +89,11 @@ public:
    */ // }}}
   void test__create_sampler__out_of_resources( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
     T::Dummy_clCreateSampler mock((cl_sampler)NULL, CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(create_sampler((cl_context)0,CL_FALSE,addressing_mode_t::none,filter_mode_t::nearest), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("create_sampler not implemented");
 #endif
   }
   /** // doc: test__create_sampler__out_of_host_memory() {{{
@@ -88,9 +101,11 @@ public:
    */ // }}}
   void test__create_sampler__out_of_host_memory( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
     T::Dummy_clCreateSampler mock((cl_sampler)NULL, CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(create_sampler((cl_context)0,CL_FALSE,addressing_mode_t::none,filter_mode_t::nearest), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("create_sampler not implemented");
 #endif
   }
   /** // doc: test__create_sampler__unexpected_clerror() {{{
@@ -98,13 +113,17 @@ public:
    */ // }}}
   void test__create_sampler__unexpected_clerror( )
   {
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
     T::Dummy_clCreateSampler mock((cl_sampler)NULL, -0x1234567);
     TS_ASSERT_THROWS(create_sampler((cl_context)0,CL_FALSE,addressing_mode_t::none,filter_mode_t::nearest), unexpected_clerror);
+#else
+    TS_SKIP("create_sampler not implemented");
 #endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_CREATE_SAMPLER_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_CREATE_SAMPLER_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

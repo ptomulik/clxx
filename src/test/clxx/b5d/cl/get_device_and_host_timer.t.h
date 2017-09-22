@@ -1,26 +1,29 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/functions/get_device_and_host_timer.t.h
+// clxx/b5d/cl/get_device_and_host_timer.t.h
 
-/** // doc: clxx/cl/functions/get_device_and_host_timer.t.h {{{
- * \file clxx/cl/functions/get_device_and_host_timer.t.h
+/** // doc: clxx/b5d/cl/get_device_and_host_timer.t.h {{{
+ * \file clxx/b5d/cl/get_device_and_host_timer.t.h
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_CL_FUNCTIONS_GET_DEVICE_AND_HOST_TIMER_T_H_INCLUDED
-#define CLXX_CL_FUNCTIONS_GET_DEVICE_AND_HOST_TIMER_T_H_INCLUDED
+#ifndef CLXX_B5D_CL_GET_DEVICE_AND_HOST_TIMER_T_H_INCLUDED
+#define CLXX_B5D_CL_GET_DEVICE_AND_HOST_TIMER_T_H_INCLUDED
 
 #include <cxxtest/TestSuite.h>
-#include <clxx/cl/functions.hpp>
+#include <clxx/b5d/cl.hpp>
 #include <clxx/common/exceptions.hpp>
-#include <clxx/cl/mock.hpp>
+#include <clxx/b5d/mocks/cl.hpp>
 
-namespace clxx { class functions_get_device_and_host_timer_test_suite; }
+CLXX_DIAGNOSTIC_PUSH
+CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 
-/** // doc: class clxx::functions_get_device_and_host_timer_test_suite {{{
+namespace  clxx { class get_device_and_host_timer_test_suite; }
+
+/** // doc: class clxx::get_device_and_host_timer_test_suite {{{
  * \todo Write documentation
  */ // }}}
-class clxx::functions_get_device_and_host_timer_test_suite : public CxxTest::TestSuite
+class clxx::get_device_and_host_timer_test_suite : public CxxTest::TestSuite
 {
 public:
   ////////////////////////////////////////////////////////////////////////////
@@ -32,10 +35,12 @@ public:
    */ // }}}
   void test__get_device_and_host_timer()
   {
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_PROVIDES(get_device_and_host_timer)
     T::Dummy_clGetDeviceAndHostTimer mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(get_device_and_host_timer((cl_device_id)0x1234, (cl_ulong*)0x1111, (cl_ulong*)0x2222));
     TS_ASSERT(mock.called_once_with((cl_device_id)0x1234, (cl_ulong*)0x1111, (cl_ulong*)0x2222));
+#else
+    TS_SKIP("get_device_and_host_timer not implemented");
 #endif
   }
   /** // doc: test__get_device_and_host_timer__invalid_device() {{{
@@ -43,9 +48,11 @@ public:
    */ // }}}
   void test__get_device_and_host_timer__invalid_device()
   {
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_PROVIDES(get_device_and_host_timer)
     T::Dummy_clGetDeviceAndHostTimer mock(CL_INVALID_DEVICE);
     TS_ASSERT_THROWS(get_device_and_host_timer((cl_device_id)NULL, nullptr, nullptr), clerror_no<status_t::invalid_device>);
+#else
+    TS_SKIP("get_device_and_host_timer not implemented");
 #endif
   }
   /** // doc: test__get_device_and_host_timer__invalid_value() {{{
@@ -53,9 +60,11 @@ public:
    */ // }}}
   void test__get_device_and_host_timer__invalid_value()
   {
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_PROVIDES(get_device_and_host_timer)
     T::Dummy_clGetDeviceAndHostTimer mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(get_device_and_host_timer((cl_device_id)NULL, nullptr, nullptr), clerror_no<status_t::invalid_value>);
+#else
+    TS_SKIP("get_device_and_host_timer not implemented");
 #endif
   }
   /** // doc: test__get_device_and_host_timer__out_of_resources() {{{
@@ -63,9 +72,11 @@ public:
    */ // }}}
   void test__get_device_and_host_timer__out_of_resources()
   {
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_PROVIDES(get_device_and_host_timer)
     T::Dummy_clGetDeviceAndHostTimer mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(get_device_and_host_timer((cl_device_id)NULL, nullptr, nullptr), clerror_no<status_t::out_of_resources>);
+#else
+    TS_SKIP("get_device_and_host_timer not implemented");
 #endif
   }
   /** // doc: test__get_device_and_host_timer__out_of_host_memory() {{{
@@ -73,9 +84,11 @@ public:
    */ // }}}
   void test__get_device_and_host_timer__out_of_host_memory()
   {
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_PROVIDES(get_device_and_host_timer)
     T::Dummy_clGetDeviceAndHostTimer mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(get_device_and_host_timer((cl_device_id)NULL, nullptr, nullptr), clerror_no<status_t::out_of_host_memory>);
+#else
+    TS_SKIP("get_device_and_host_timer not implemented");
 #endif
   }
   /** // doc: test__get_device_and_host_timer__other_error() {{{
@@ -83,13 +96,17 @@ public:
    */ // }}}
   void test__get_device_and_host_timer__other_error()
   {
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_PROVIDES(get_device_and_host_timer)
     T::Dummy_clGetDeviceAndHostTimer mock(-0x3456);
     TS_ASSERT_THROWS(get_device_and_host_timer((cl_device_id)NULL, nullptr, nullptr), unexpected_clerror);
+#else
+    TS_SKIP("get_device_and_host_timer not implemented");
 #endif
   }
 };
 
-#endif /* CLXX_CL_FUNCTIONS_GET_DEVICE_AND_HOST_TIMER_T_H_INCLUDED */
+CLXX_DIAGNOSTIC_POP
+
+#endif /* CLXX_B5D_CL_GET_DEVICE_AND_HOST_TIMER_T_H_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
