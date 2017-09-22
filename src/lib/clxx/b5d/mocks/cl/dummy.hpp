@@ -157,6 +157,7 @@ protected:
    */ // }}}
   std::vector<args_tuple> _calls;
 };
+#if CLXX_B5D_OPENCL_PROVIDES(clBuildProgram)
 /** // doc: Dummy_clBuildProgram {{{
  * \brief Default mock for clBuildProgram OpenCL function.
  */ // }}}
@@ -180,7 +181,8 @@ public:
    */ // }}}
   Dummy_clBuildProgram(cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCloneKernel)
 /** // doc: Dummy_clCloneKernel {{{
  * \brief Default mock for clCloneKernel OpenCL function.
  */ // }}}
@@ -200,7 +202,7 @@ public:
   Dummy_clCloneKernel(cl_kernel kern, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCompileProgram)
+#if CLXX_B5D_OPENCL_PROVIDES(clCompileProgram)
 /** // doc: Dummy_clCompileProgram {{{
  * \brief Default mock for clCompileProgram OpenCL function.
  */ // }}}
@@ -229,6 +231,7 @@ public:
   Dummy_clCompileProgram(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateBuffer)
 /** // doc: Dummy_clCreateBuffer {{{
  * \brief Default mock for clCreateBuffer OpenCL function.
  */ // }}}
@@ -249,7 +252,8 @@ public:
    */ // }}}
   Dummy_clCreateBuffer(cl_mem mem, cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
 /** // doc: Dummy_clCreateCommandQueue {{{
  * \brief Default mock for clCreateCommandQueue OpenCL function.
  */ // }}}
@@ -276,7 +280,7 @@ public:
   Dummy_clCreateCommandQueue(cl_command_queue queue, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueueWithProperties)
 /** // doc: Dummy_clCreateCommandQueueWithProperties {{{
  * \brief Default mock for clCreateCommandQueueWithProperties OpenCL function.
  */ // }}}
@@ -303,6 +307,7 @@ public:
   Dummy_clCreateCommandQueueWithProperties(cl_command_queue queue, cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContext)
 /** // doc: Dummy_clCreateContext {{{
  * \brief Default mock for clCreateContext OpenCL function.
  */ // }}}
@@ -330,6 +335,8 @@ public:
    */ // }}}
   Dummy_clCreateContext(cl_context ctx, cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContextFromType)
 /** // doc: Dummy_clCreateContextFromType {{{
  * \brief Default mock for clCreateContextFromType OpenCL function.
  */ // }}}
@@ -357,7 +364,8 @@ public:
    */ // }}}
   Dummy_clCreateContextFromType(cl_context ctx, cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clCreateImage)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage)
 /** // doc: Dummy_clCreateImage {{{
  * \brief Default mock for clCreateImage OpenCL function.
  */ // }}}
@@ -382,7 +390,7 @@ public:
   Dummy_clCreateImage(cl_mem mem, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage2D)
 /** // doc: Dummy_clCreateImage2D {{{
  * \brief Default mock for clCreateImage2D OpenCL function.
  */ // }}}
@@ -408,7 +416,7 @@ public:
   Dummy_clCreateImage2D(cl_mem mem, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage3D)
 /** // doc: Dummy_clCreateImage3D {{{
  * \brief Default mock for clCreateImage3D OpenCL function.
  */ // }}}
@@ -436,6 +444,7 @@ public:
   Dummy_clCreateImage3D(cl_mem mem, cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernel)
 /** // doc: Dummy_clCreateKernel {{{
  * \brief Default mock for clCreateKernel OpenCL function.
  */ // }}}
@@ -459,6 +468,8 @@ public:
    */ // }}}
   Dummy_clCreateKernel(cl_kernel kern, cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernelsInProgram)
 /** // doc: Dummy_clCreateKernelsInProgram {{{
  * \brief Default mock for clCreateKernelsInProgram OpenCL function.
  */ // }}}
@@ -485,7 +496,8 @@ public:
    */ // }}}
   Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels = nullptr, cl_uint* num_kernels_ret = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
 /** // doc: Dummy_clCreatePipe {{{
  * \brief Default mock for clCreatePipe OpenCL function.
  */ // }}}
@@ -510,6 +522,7 @@ public:
   Dummy_clCreatePipe(cl_mem mem, cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBinary)
 /** // doc: Dummy_clCreateProgramWithBinary {{{
  * \brief Default mock for clCreateProgramWithBinary OpenCL function.
  */ // }}}
@@ -537,7 +550,8 @@ public:
    */ // }}}
   Dummy_clCreateProgramWithBinary(cl_program program, cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBuiltInKernels)
 /** // doc: Dummy_clCreateProgramWithBuiltInKernels {{{
  * \brief Default mock for clCreateProgramWithBuiltInKernels OpenCL function.
  */ // }}}
@@ -563,7 +577,7 @@ public:
   Dummy_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithIL)
 /** // doc: Dummy_clCreateProgramWithIL {{{
  * \brief Default mock for clCreateProgramWithIL OpenCL function.
  */ // }}}
@@ -587,6 +601,7 @@ public:
   Dummy_clCreateProgramWithIL(cl_program program, cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithSource)
 /** // doc: Dummy_clCreateProgramWithSource {{{
  * \brief Default mock for clCreateProgramWithSource OpenCL function.
  */ // }}}
@@ -610,7 +625,8 @@ public:
    */ // }}}
   Dummy_clCreateProgramWithSource(cl_program program, cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSampler)
 /** // doc: Dummy_clCreateSampler {{{
  * \brief Default mock for clCreateSampler OpenCL function.
  */ // }}}
@@ -634,7 +650,7 @@ public:
   Dummy_clCreateSampler(cl_sampler sampler, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSamplerWithProperties)
 /** // doc: Dummy_clCreateSamplerWithProperties {{{
  * \brief Default mock for clCreateSamplerWithProperties OpenCL function.
  */ // }}}
@@ -657,7 +673,7 @@ public:
   Dummy_clCreateSamplerWithProperties(cl_sampler sampler, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubBuffer)
 /** // doc: Dummy_clCreateSubBuffer {{{
  * \brief Default mock for clCreateSubBuffer OpenCL function.
  */ // }}}
@@ -681,7 +697,7 @@ public:
   Dummy_clCreateSubBuffer(cl_mem mem, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubDevices)
 /** // doc: Dummy_clCreateSubDevices {{{
  * \brief Default mock for clCreateSubDevices OpenCL function.
  */ // }}}
@@ -708,7 +724,7 @@ public:
   Dummy_clCreateSubDevices(cl_int err, cl_device_id const* out_devices = nullptr, cl_uint const* num_devices_ret = nullptr);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateUserEvent)
 /** // doc: Dummy_clCreateUserEvent {{{
  * \brief Mock for clCreateUserEvent OpenCL function.
  *
@@ -731,7 +747,7 @@ public:
   Dummy_clCreateUserEvent(cl_event event, cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrier)
 /** // doc: Dummy_clEnqueueBarrier {{{
  * \brief Default mock for clEnqueueBarrier OpenCL function.
  */ // }}}
@@ -750,7 +766,7 @@ public:
   Dummy_clEnqueueBarrier(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrierWithWaitList)
 /** // doc: Dummy_clEnqueueBarrierWithWaitList {{{
  * \brief Default mock for clEnqueueBarrierWithWaitList OpenCL function.
  */ // }}}
@@ -772,6 +788,7 @@ public:
   Dummy_clEnqueueBarrierWithWaitList(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBuffer)
 /** // doc: Dummy_clEnqueueCopyBuffer {{{
  * \brief Default mock for clEnqueueCopyBuffer OpenCL function.
  */ // }}}
@@ -797,7 +814,8 @@ public:
    */ // }}}
   Dummy_clEnqueueCopyBuffer(cl_int err, const cl_event* event = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferRect)
 /** // doc: Dummy_clEnqueueCopyBuffer {{{
  * \brief Default mock for clEnqueueCopyBuffer OpenCL function.
  */ // }}}
@@ -833,6 +851,7 @@ public:
   Dummy_clEnqueueCopyBufferRect(cl_int err, const cl_event* event = nullptr);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferToImage)
 /** // doc: Dummy_clEnqueueCopyBufferToImage {{{
  * \brief Default mock for clEnqueueCopyBufferToImage OpenCL function.
  */ // }}}
@@ -862,6 +881,8 @@ public:
    */ // }}}
   Dummy_clEnqueueCopyBufferToImage(cl_int err, const cl_event* event = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImage)
 /** // doc: Dummy_clEnqueueCopyImage {{{
  * \brief Default mock for clEnqueueCopyImage OpenCL function.
  */ // }}}
@@ -888,6 +909,8 @@ public:
    */ // }}}
   Dummy_clEnqueueCopyImage(cl_int err, const cl_event* event = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImageToBuffer)
 /** // doc: Dummy_clEnqueueCopyImageToBuffer {{{
  * \brief Default mock for clEnqueueCopyImageToBuffer OpenCL function.
  */ // }}}
@@ -917,7 +940,8 @@ public:
    */ // }}}
   Dummy_clEnqueueCopyImageToBuffer(cl_int err, const cl_event* event = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillBuffer)
 /** // doc: Dummy_clEnqueueFillBuffer {{{
  * \brief Default mock for clEnqueueFillBuffer OpenCL function.
  */ // }}}
@@ -943,7 +967,7 @@ public:
   Dummy_clEnqueueFillBuffer(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillImage)
 /** // doc: Dummy_clEnqueueFillImage {{{
  * \brief Default mock for clEnqueueFillImage OpenCL function.
  */ // }}}
@@ -971,6 +995,7 @@ public:
   Dummy_clEnqueueFillImage(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapBuffer)
 /** // doc: Dummy_clEnqueueMapBuffer {{{
  * \brief Default mock for clEnqueueMapBuffer OpenCL function.
  */ // }}}
@@ -999,6 +1024,8 @@ public:
    */ // }}}
   Dummy_clEnqueueMapBuffer(void* result, cl_int err, const cl_event* event = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapImage)
 /** // doc: Dummy_clEnqueueMapImage {{{
  * \brief Default mock for clEnqueueMapImage OpenCL function.
  */ // }}}
@@ -1033,7 +1060,8 @@ public:
    */ // }}}
   Dummy_clEnqueueMapImage(void* result, cl_int err, const cl_event* event = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarker)
 /** // doc: Dummy_clEnqueueMarker {{{
  * \brief Default mock for clEnqueueMarker OpenCL function.
  */ // }}}
@@ -1053,7 +1081,7 @@ public:
   Dummy_clEnqueueMarker(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarkerWithWaitList)
 /** // doc: Dummy_clEnqueueMarkerWithWaitList {{{
  * \brief Default mock for clEnqueueMarkerWithWaitList OpenCL function.
  */ // }}}
@@ -1076,7 +1104,7 @@ public:
   Dummy_clEnqueueMarkerWithWaitList(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMigrateMemObjects)
 /** // doc: Dummy_clEnqueueMigrateMemObjects {{{
  * \brief Default mock for clEnqueueMigrateMemObjects OpenCL function.
  */ // }}}
@@ -1105,6 +1133,7 @@ public:
   Dummy_clEnqueueMigrateMemObjects(cl_int err, const cl_event* event = nullptr);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNativeKernel)
 /** // doc: Dummy_clEnqueueNativeKernel {{{
  * \brief Mock for clEnqueueNativeKernel OpenCL function.
  *
@@ -1137,6 +1166,8 @@ public:
    */ // }}}
   Dummy_clEnqueueNativeKernel(cl_int err, cl_event* event = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNDRangeKernel)
 /** // doc: Dummy_clEnqueueNDRangeKernel {{{
  * \brief Mock for clEnqueueNDRangeKernel OpenCL function.
  *
@@ -1168,6 +1199,8 @@ public:
    */ // }}}
   Dummy_clEnqueueNDRangeKernel(cl_int err, cl_event* event = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBuffer)
 /** // doc: Dummy_clEnqueueReadBuffer {{{
  * \brief Default mock for clEnqueueReadBuffer OpenCL function.
  */ // }}}
@@ -1193,7 +1226,8 @@ public:
    */ // }}}
   Dummy_clEnqueueReadBuffer(cl_int err, const cl_event* event = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBufferRect)
 /** // doc: Dummy_clEnqueueReadBufferRect {{{
  * \brief Default mock for clEnqueueReadBufferRect OpenCL function.
  */ // }}}
@@ -1227,6 +1261,7 @@ public:
   Dummy_clEnqueueReadBufferRect(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadImage)
 /** // doc: Dummy_clEnqueueReadImage {{{
  * \brief Default mock for clEnqueueReadImage OpenCL function.
  */ // }}}
@@ -1258,7 +1293,8 @@ public:
    */ // }}}
   Dummy_clEnqueueReadImage(cl_int err, const cl_event* event = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMFree)
 /** // doc: Dummy_clEnqueueSVMFree {{{
  * \brief Default mock for clEnqueueSVMFree OpenCL function.
  */ // }}}
@@ -1283,7 +1319,7 @@ public:
   Dummy_clEnqueueSVMFree(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMap)
 /** // doc: Dummy_clEnqueueSVMMap {{{
  * \brief Default mock for clEnqueueSVMMap OpenCL function.
  */ // }}}
@@ -1306,7 +1342,7 @@ public:
   Dummy_clEnqueueSVMMap(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemFill)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemFill)
 /** // doc: Dummy_clEnqueueSVMMemFill {{{
  * \brief Default mock for clEnqueueSVMMemFill OpenCL function.
  */ // }}}
@@ -1329,7 +1365,7 @@ public:
   Dummy_clEnqueueSVMMemFill(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemcpy)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemcpy)
 /** // doc: Dummy_clEnqueueSVMMemcpy {{{
  * \brief Default mock for clEnqueueSVMMemcpy OpenCL function.
  */ // }}}
@@ -1353,7 +1389,7 @@ public:
   Dummy_clEnqueueSVMMemcpy(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMigrateMem)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMigrateMem)
 /** // doc: Dummy_clEnqueueSVMMigrateMem {{{
  * \brief Default mock for clEnqueueSVMMigrateMem OpenCL function.
  */ // }}}
@@ -1380,7 +1416,7 @@ public:
   Dummy_clEnqueueSVMMigrateMem(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMUnmap)
 /** // doc: Dummy_clEnqueueSVMUnmap {{{
  * \brief Default mock for clEnqueueSVMUnmap OpenCL function.
  */ // }}}
@@ -1402,7 +1438,7 @@ public:
   Dummy_clEnqueueSVMUnmap(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueTask)
 /** // doc: Dummy_clEnqueueTask {{{
  * \brief Default mock for clEnqueueTask OpenCL function.
  */ // }}}
@@ -1426,6 +1462,7 @@ public:
   Dummy_clEnqueueTask(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueUnmapMemObject)
 /** // doc: Dummy_clEnqueueUnmapMemObject {{{
  * \brief Default mock for clEnqueueUnmapMemObject OpenCL function.
  */ // }}}
@@ -1451,7 +1488,8 @@ public:
    */ // }}}
   Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWaitForEvents)
 /** // doc: Dummy_clEnqueueWaitForEvents {{{
  * \brief Default mock for clEnqueueWaitForEvents OpenCL function.
  */ // }}}
@@ -1472,6 +1510,7 @@ public:
   Dummy_clEnqueueWaitForEvents(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBuffer)
 /** // doc: Dummy_clEnqueueWriteBuffer {{{
  * \brief Default mock for clEnqueueWriteBuffer OpenCL function.
  */ // }}}
@@ -1497,7 +1536,8 @@ public:
    */ // }}}
   Dummy_clEnqueueWriteBuffer(cl_int err, const cl_event* event = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBufferRect)
 /** // doc: Dummy_clEnqueueWriteBufferRect {{{
  * \brief Default mock for clEnqueueWriteBufferRect OpenCL function.
  */ // }}}
@@ -1531,6 +1571,7 @@ public:
   Dummy_clEnqueueWriteBufferRect(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteImage)
 /** // doc: Dummy_clEnqueueWriteImage {{{
  * \brief Default mock for clEnqueueWriteImage OpenCL function.
  */ // }}}
@@ -1562,6 +1603,8 @@ public:
    */ // }}}
   Dummy_clEnqueueWriteImage(cl_int err, const cl_event* event = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clFinish)
 /** // doc: Dummy_clFinish {{{
  * \brief Default mock for clFinish OpenCL function.
  */ // }}}
@@ -1579,6 +1622,8 @@ public:
    */ // }}}
   Dummy_clFinish(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clFlush)
 /** // doc: Dummy_clFlush {{{
  * \brief Default mock for clFlush OpenCL function.
  */ // }}}
@@ -1596,6 +1641,8 @@ public:
    */ // }}}
   Dummy_clFlush(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetCommandQueueInfo)
 /** // doc: Dummy_clGetCommandQueueInfo {{{
  * \brief Default mock for clGetCommandQueueInfo OpenCL function.
  */ // }}}
@@ -1620,6 +1667,8 @@ public:
    */ // }}}
   Dummy_clGetCommandQueueInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetContextInfo)
 /** // doc: Dummy_clGetContextInfo {{{
  * \brief Default mock for clGetContextInfo OpenCL function.
  */ // }}}
@@ -1643,7 +1692,8 @@ public:
    */ // }}}
   Dummy_clGetContextInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceAndHostTimer)
 /** // doc: Dummy_clGetDeviceAndHostTimer {{{
  * \brief Default mock for clGetDeviceAndHostTimer OpenCL function.
  */ // }}}
@@ -1663,6 +1713,7 @@ public:
   Dummy_clGetDeviceAndHostTimer(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceIDs)
 /** // doc: Dummy_clGetDeviceIDs {{{
  * \brief Mock for clGetDeviceIDs OpenCL function.
  *
@@ -1691,6 +1742,8 @@ public:
    */ // }}}
   Dummy_clGetDeviceIDs(cl_int err, cl_device_id const* devices = nullptr, cl_uint const* num_devices = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceInfo)
 /** // doc: Dummy_clGetDeviceInfo {{{
  * \brief Mock for clGetDeviceInfo OpenCL function.
  *
@@ -1716,6 +1769,8 @@ public:
    */ // }}}
   Dummy_clGetDeviceInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventInfo)
 /** // doc: Dummy_clGetEventInfo {{{
  * \brief Mock for clGetEventInfo OpenCL function.
  *
@@ -1741,6 +1796,8 @@ public:
    */ // }}}
   Dummy_clGetEventInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventProfilingInfo)
 /** // doc: Dummy_clGetEventProfilingInfo {{{
  * \brief Mock for clGetEventProfilingInfo OpenCL function.
  *
@@ -1766,7 +1823,8 @@ public:
    */ // }}}
   Dummy_clGetEventProfilingInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddress)
 /** // doc: Dummy_clGetExtensionFunctionAddress {{{
  * \brief Mock for clGetExtensionFunctionAddress OpenCL function.
  *
@@ -1789,7 +1847,7 @@ public:
   Dummy_clGetExtensionFunctionAddress(void * ptr);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddressForPlatform)
 /** // doc: Dummy_clGetExtensionFunctionAddressForPlatform {{{
  * \brief Mock for clGetExtensionFunctionAddressForPlatform OpenCL function.
  *
@@ -1813,7 +1871,7 @@ public:
   Dummy_clGetExtensionFunctionAddressForPlatform(void * ptr);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetHostTimer)
 /** // doc: Dummy_clGetHostTimer {{{
  * \brief Default mock for clGetHostTimer OpenCL function.
  */ // }}}
@@ -1832,6 +1890,7 @@ public:
   Dummy_clGetHostTimer(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetImageInfo)
 /** // doc: Dummy_clGetImageInfo {{{
  * \brief Mock for clGetImageInfo OpenCL function.
  *
@@ -1857,7 +1916,8 @@ public:
    */ // }}}
   Dummy_clGetImageInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
 /** // doc: Dummy_clGetKernelArgInfo {{{
  * \brief Mock for clGetKernelArgInfo OpenCL function.
  *
@@ -1885,6 +1945,7 @@ public:
   Dummy_clGetKernelArgInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelInfo)
 /** // doc: Dummy_clGetKernelInfo {{{
  * \brief Mock for clGetKernelInfo OpenCL function.
  *
@@ -1910,6 +1971,8 @@ public:
    */ // }}}
   Dummy_clGetKernelInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelWorkGroupInfo)
 /** // doc: Dummy_clGetKernelWorkGroupInfo {{{
  * \brief Mock for clGetKernelWorkGroupInfo OpenCL function.
  *
@@ -1936,7 +1999,8 @@ public:
    */ // }}}
   Dummy_clGetKernelWorkGroupInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelSubGroupInfo)
 /** // doc: Dummy_clGetKernelSubGroupInfo {{{
  * \brief Mock for clGetKernelSubGroupInfo OpenCL function.
  *
@@ -1963,6 +2027,7 @@ public:
   Dummy_clGetKernelSubGroupInfo(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetMemObjectInfo)
 /** // doc: Dummy_clGetMemObjectInfo {{{
  * \brief Mock for clGetMemObjectInfo OpenCL function.
  *
@@ -1988,7 +2053,8 @@ public:
    */ // }}}
   Dummy_clGetMemObjectInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPipeInfo)
 /** // doc: Dummy_clGetPipeInfo {{{
  * \brief Mock for clGetPipeInfo OpenCL function.
  *
@@ -2013,6 +2079,7 @@ public:
   Dummy_clGetPipeInfo(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformIDs)
 /** // doc: Dummy_clGetPlatformIDs {{{
  * \brief Mock for clGetPlatformIDs OpenCL function.
  *
@@ -2040,6 +2107,8 @@ public:
    */ // }}}
   Dummy_clGetPlatformIDs(cl_int err, cl_platform_id const* platforms = nullptr, cl_uint const* num_platforms = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformInfo)
 /** // doc: Dummy_clGetPlatformInfo {{{
  * \brief Mock for clGetPlatformInfo OpenCL function.
  *
@@ -2065,6 +2134,8 @@ public:
    */ // }}}
   Dummy_clGetPlatformInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramBuildInfo)
 /** // doc: Dummy_clGetProgramBuildInfo {{{
  * \brief Mock for clGetProgramBuildInfo OpenCL function.
  *
@@ -2094,6 +2165,8 @@ public:
    */ // }}}
   Dummy_clGetProgramBuildInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramInfo)
 /** // doc: Dummy_clGetProgramInfo {{{
  * \brief Mock for clGetProgramInfo OpenCL function.
  *
@@ -2119,6 +2192,8 @@ public:
    */ // }}}
   Dummy_clGetProgramInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSamplerInfo)
 /** // doc: Dummy_clGetSamplerInfo {{{
  * \brief Mock for clGetSamplerInfo OpenCL function.
  *
@@ -2142,6 +2217,8 @@ public:
    */ // }}}
   Dummy_clGetSamplerInfo(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSupportedImageFormats)
 /** // doc: Dummy_clGetSupportedImageFormats {{{
  * \brief Default mock for clGetSupportedImageFormats OpenCL function.
  */ // }}}
@@ -2170,7 +2247,8 @@ public:
                                    const cl_image_format* image_formats = nullptr,
                                    const cl_uint* num_image_formats = nullptr);
 };
-#if CLXX_OPENCL_ALLOWED(clLinkProgram)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clLinkProgram)
 /** // doc: Dummy_clLinkProgram {{{
  * \brief Default mock for clLinkProgram OpenCL function.
  */ // }}}
@@ -2202,6 +2280,7 @@ public:
   Dummy_clLinkProgram(cl_program program, cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseCommandQueue)
 /** // doc: Dummy_clReleaseCommandQueue {{{
  * \brief Default mock for clReleaseCommandQueue OpenCL function.
  */ // }}}
@@ -2219,6 +2298,8 @@ public:
    */ // }}}
   Dummy_clReleaseCommandQueue(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseContext)
 /** // doc: Dummy_clReleaseContext {{{
  * \brief Default mock for clReleaseContext OpenCL function.
  */ // }}}
@@ -2236,7 +2317,8 @@ public:
    */ // }}}
   Dummy_clReleaseContext(cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
 /** // doc: Dummy_clReleaseDevice {{{
  * \brief Default mock for clReleaseDevice OpenCL function.
  */ // }}}
@@ -2255,6 +2337,7 @@ public:
   Dummy_clReleaseDevice(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseEvent)
 /** // doc: Dummy_clReleaseEvent {{{
  * \brief Default mock for clReleaseEvent OpenCL function.
  */ // }}}
@@ -2272,6 +2355,8 @@ public:
    */ // }}}
   Dummy_clReleaseEvent(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseKernel)
 /** // doc: Dummy_clReleaseKernel {{{
  * \brief Default mock for clReleaseKernel OpenCL function.
  */ // }}}
@@ -2289,6 +2374,8 @@ public:
    */ // }}}
   Dummy_clReleaseKernel(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseMemObject)
 /** // doc: Dummy_clReleaseMemObject {{{
  * \brief Default mock for clReleaseMemObject OpenCL function.
  */ // }}}
@@ -2306,6 +2393,8 @@ public:
    */ // }}}
   Dummy_clReleaseMemObject(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseProgram)
 /** // doc: Dummy_clReleaseProgram {{{
  * \brief Default mock for clReleaseProgram OpenCL function.
  */ // }}}
@@ -2323,6 +2412,8 @@ public:
    */ // }}}
   Dummy_clReleaseProgram(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseSampler)
 /** // doc: Dummy_clReleaseSampler {{{
  * \brief Default mock for clReleaseSampler OpenCL function.
  */ // }}}
@@ -2340,6 +2431,8 @@ public:
    */ // }}}
   Dummy_clReleaseSampler(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainCommandQueue)
 /** // doc: Dummy_clRetainCommandQueue {{{
  * \brief Default mock for clRetainCommandQueue OpenCL function.
  */ // }}}
@@ -2357,6 +2450,8 @@ public:
    */ // }}}
   Dummy_clRetainCommandQueue(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainContext)
 /** // doc: Dummy_clRetainContext {{{
  * \brief Default mock for clRetainContext OpenCL function.
  */ // }}}
@@ -2374,7 +2469,8 @@ public:
    */ // }}}
   Dummy_clRetainContext(cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainDevice)
 /** // doc: Dummy_clRetainDevice {{{
  * \brief Default mock for clRetainDevice OpenCL function.
  */ // }}}
@@ -2393,6 +2489,7 @@ public:
   Dummy_clRetainDevice(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainEvent)
 /** // doc: Dummy_clRetainEvent {{{
  * \brief Default mock for clRetainEvent OpenCL function.
  */ // }}}
@@ -2410,6 +2507,8 @@ public:
    */ // }}}
   Dummy_clRetainEvent(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainKernel)
 /** // doc: Dummy_clRetainKernel {{{
  * \brief Default mock for clRetainKernel OpenCL function.
  */ // }}}
@@ -2427,6 +2526,8 @@ public:
    */ // }}}
   Dummy_clRetainKernel(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainMemObject)
 /** // doc: Dummy_clRetainMemObject {{{
  * \brief Default mock for clRetainMemObject OpenCL function.
  */ // }}}
@@ -2444,6 +2545,8 @@ public:
    */ // }}}
   Dummy_clRetainMemObject(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainProgram)
 /** // doc: Dummy_clRetainProgram {{{
  * \brief Default mock for clRetainProgram OpenCL function.
  */ // }}}
@@ -2461,6 +2564,8 @@ public:
    */ // }}}
   Dummy_clRetainProgram(cl_int err);
 };
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainSampler)
 /** // doc: Dummy_clRetainSampler {{{
  * \brief Default mock for clRetainSampler OpenCL function.
  */ // }}}
@@ -2478,7 +2583,8 @@ public:
    */ // }}}
   Dummy_clRetainSampler(cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clSetCommandQueueProperty)
 /** // doc: Dummy_clSetCommandQueueProperty {{{
  * \brief Mock for clSetCommandQueueProperty OpenCL function.
  *
@@ -2502,7 +2608,7 @@ public:
   Dummy_clSetCommandQueueProperty(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetDefaultDeviceCommandQueue)
 /** // doc: Dummy_clSetDefaultDeviceCommandQueue {{{
  * \brief Mock for clSetDefaultDeviceCommandQueue OpenCL function.
  *
@@ -2524,7 +2630,7 @@ public:
   Dummy_clSetDefaultDeviceCommandQueue(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetEventCallback)
 /** // doc: Dummy_clSetEventCallback {{{
  * \brief Mock for clSetEventCallback OpenCL function.
  *
@@ -2547,6 +2653,7 @@ public:
   Dummy_clSetEventCallback(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArg)
 /** // doc: Dummy_clSetKernelArg {{{
  * \brief Mock for clSetKernelArg OpenCL function.
  *
@@ -2567,7 +2674,8 @@ public:
    */ // }}}
   Dummy_clSetKernelArg(cl_int err);
 };
-#if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArgSVMPointer)
 /** // doc: Dummy_clSetKernelArgSVMPointer {{{
  * \brief Mock for clSetKernelArgSVMPointer OpenCL function.
  *
@@ -2588,7 +2696,7 @@ public:
   Dummy_clSetKernelArgSVMPointer(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetKernelExecInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelExecInfo)
 /** // doc: Dummy_clSetKernelExecInfo {{{
  * \brief Mock for clSetKernelExecInfo OpenCL function.
  *
@@ -2609,7 +2717,7 @@ public:
   Dummy_clSetKernelExecInfo(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetMemObjectDestructorCallback)
 /** // doc: Dummy_clSetMemObjectDestructorCallback {{{
  * \brief Mock for clSetMemObjectDestructorCallback OpenCL function.
  *
@@ -2632,7 +2740,7 @@ public:
   Dummy_clSetMemObjectDestructorCallback(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetUserEventStatus)
 /** // doc: Dummy_clCreateUserEvent {{{
  * \brief Mock for clCreateUserEvent OpenCL function.
  *
@@ -2653,7 +2761,7 @@ public:
   Dummy_clSetUserEventStatus(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMAlloc)
 /** // doc: Dummy_clCreateUserEvent {{{
  * \brief Mock for clCreateUserEvent OpenCL function.
  *
@@ -2674,7 +2782,7 @@ public:
   Dummy_clSVMAlloc(void* ptr);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clSVMFree)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)
 /** // doc: Dummy_clCreateUserEvent {{{
  * \brief Mock for clCreateUserEvent OpenCL function.
  *
@@ -2694,7 +2802,7 @@ public:
   Dummy_clSVMFree();
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadCompiler)
 /** // doc: Dummy_clUnloadCompiler {{{
  * \brief Default mock for clUnloadCompiler OpenCL function.
  */ // }}}
@@ -2713,7 +2821,7 @@ public:
   Dummy_clUnloadCompiler(cl_int err);
 };
 #endif
-#if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadPlatformCompiler)
 /** // doc: Dummy_clUnloadPlatformCompiler {{{
  * \brief Default mock for clUnloadPlatformCompiler OpenCL function.
  */ // }}}
@@ -2732,6 +2840,7 @@ public:
   Dummy_clUnloadPlatformCompiler(cl_int err);
 };
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clWaitForEvents)
 /** // doc: Dummy_clWaitForEvents {{{
  * \brief Mock for clWaitForEvents OpenCL function.
  *
@@ -2751,6 +2860,7 @@ public:
    */ // }}}
   Dummy_clWaitForEvents(cl_int err);
 };
+#endif
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -2758,6 +2868,7 @@ public:
 #if defined(CXXTEST_MOCK_TEST_SOURCE_FILE)
 namespace T {
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clBuildProgram)
 cl_int Dummy_clBuildProgram::
 clBuildProgram(cl_program program,
                cl_uint num_devices,
@@ -2774,8 +2885,9 @@ Dummy_clBuildProgram(cl_int err)
   :_err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+#if CLXX_B5D_OPENCL_PROVIDES(clCloneKernel)
 cl_kernel Dummy_clCloneKernel::
 clCloneKernel(cl_kernel source_kernel, cl_int* errcode_ret)
 {
@@ -2793,7 +2905,7 @@ Dummy_clCloneKernel(cl_kernel kern, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCompileProgram)
+#if CLXX_B5D_OPENCL_PROVIDES(clCompileProgram)
 cl_int Dummy_clCompileProgram::
 clCompileProgram(cl_program program,
                  cl_uint num_devices,
@@ -2816,6 +2928,7 @@ Dummy_clCompileProgram(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateBuffer)
 cl_mem Dummy_clCreateBuffer::
 clCreateBuffer( cl_context context, cl_mem_flags flags, size_t size,
                 void* host_ptr, cl_int* errcode_ret )
@@ -2832,8 +2945,9 @@ Dummy_clCreateBuffer(cl_mem mem, cl_int err)
   :_mem(mem), _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
 cl_command_queue Dummy_clCreateCommandQueue::
 clCreateCommandQueue(cl_context context, cl_device_id device,
                      cl_command_queue_properties properties,
@@ -2853,7 +2967,7 @@ Dummy_clCreateCommandQueue(cl_command_queue queue, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueueWithProperties)
 cl_command_queue Dummy_clCreateCommandQueueWithProperties::
 clCreateCommandQueueWithProperties(cl_context context, cl_device_id device,
                                    const cl_queue_properties* properties,
@@ -2873,6 +2987,7 @@ Dummy_clCreateCommandQueueWithProperties(cl_command_queue queue, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContext)
 cl_context Dummy_clCreateContext::
 clCreateContext(const cl_context_properties* properties,
                 cl_uint num_devices,
@@ -2893,7 +3008,9 @@ Dummy_clCreateContext(cl_context ctx, cl_int err)
   : _ctx(ctx), _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContextFromType)
 cl_context Dummy_clCreateContextFromType::
 clCreateContextFromType(const cl_context_properties* properties,
                         cl_device_type device_type,
@@ -2913,8 +3030,9 @@ Dummy_clCreateContextFromType(cl_context ctx, cl_int err)
   : _ctx(ctx), _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateImage)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage)
 cl_mem Dummy_clCreateImage::
 clCreateImage( cl_context context, cl_mem_flags flags,
                const cl_image_format* image_format,
@@ -2935,7 +3053,7 @@ Dummy_clCreateImage(cl_mem mem, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage2D)
 cl_mem Dummy_clCreateImage2D::
 clCreateImage2D( cl_context context, cl_mem_flags flags,
                const cl_image_format* image_format,
@@ -2957,7 +3075,7 @@ Dummy_clCreateImage2D(cl_mem mem, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage3D)
 cl_mem Dummy_clCreateImage3D::
 clCreateImage3D( cl_context context, cl_mem_flags flags,
                const cl_image_format* image_format,
@@ -2981,6 +3099,7 @@ Dummy_clCreateImage3D(cl_mem mem, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernel)
 cl_kernel Dummy_clCreateKernel::
 clCreateKernel(cl_program program, const char* kernel_name, cl_int* errcode_ret)
 {
@@ -2996,7 +3115,9 @@ Dummy_clCreateKernel(cl_kernel kern, cl_int err)
   : _kern(kern), _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernelsInProgram)
 cl_int Dummy_clCreateKernelsInProgram::
 clCreateKernelsInProgram(cl_program program, cl_uint num_kernels, cl_kernel* kernels,
                          cl_uint* num_kernels_ret)
@@ -3017,8 +3138,9 @@ Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels, cl_uint* num_kern
   : _err(err), _kernels(kernels), _num_kernels_ret(num_kernels_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
 cl_mem Dummy_clCreatePipe::
 clCreatePipe( cl_context context, cl_mem_flags flags,
               cl_uint pipe_packet_size, cl_uint pipe_max_packets,
@@ -3039,6 +3161,7 @@ Dummy_clCreatePipe(cl_mem mem, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBinary)
 cl_program Dummy_clCreateProgramWithBinary::
 clCreateProgramWithBinary(cl_context context,
                           cl_uint num_devices,
@@ -3058,8 +3181,9 @@ Dummy_clCreateProgramWithBinary(cl_program program, cl_int err)
   : _program(program), _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBuiltInKernels)
 cl_program Dummy_clCreateProgramWithBuiltInKernels::
 clCreateProgramWithBuiltInKernels(cl_context context,
                                   cl_uint num_devices,
@@ -3079,7 +3203,7 @@ Dummy_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithIL)
 cl_program Dummy_clCreateProgramWithIL::
 clCreateProgramWithIL(cl_context context,
                       const void* il,
@@ -3098,6 +3222,7 @@ Dummy_clCreateProgramWithIL(cl_program program, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithSource)
 cl_program Dummy_clCreateProgramWithSource::
 clCreateProgramWithSource(cl_context context,
                           cl_uint count,
@@ -3115,8 +3240,9 @@ Dummy_clCreateProgramWithSource(cl_program program, cl_int err)
   :_program(program), _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSampler)
 cl_sampler Dummy_clCreateSampler::
 clCreateSampler( cl_context context, cl_bool normalized_coords,
                  cl_addressing_mode addressing_mode, cl_filter_mode filter_mode,
@@ -3136,7 +3262,7 @@ Dummy_clCreateSampler(cl_sampler sampler, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSamplerWithProperties)
 cl_sampler Dummy_clCreateSamplerWithProperties::
 clCreateSamplerWithProperties( cl_context context,
                                const cl_sampler_properties* sampler_properties,
@@ -3156,7 +3282,7 @@ Dummy_clCreateSamplerWithProperties(cl_sampler sampler, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubBuffer)
 cl_mem Dummy_clCreateSubBuffer::
 clCreateSubBuffer( cl_mem buffer, cl_mem_flags flags,
                    cl_buffer_create_type buffer_create_type,
@@ -3176,7 +3302,7 @@ Dummy_clCreateSubBuffer(cl_mem mem, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubDevices)
 cl_int Dummy_clCreateSubDevices::
 clCreateSubDevices(cl_device_id in_device,
                    const cl_device_partition_property* properties,
@@ -3202,7 +3328,7 @@ Dummy_clCreateSubDevices(cl_int err, cl_device_id const* out_devices, cl_uint co
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateUserEvent)
 cl_event Dummy_clCreateUserEvent::
 clCreateUserEvent( cl_context context, cl_int* errcode_ret )
 {
@@ -3220,7 +3346,7 @@ Dummy_clCreateUserEvent(cl_event event, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrier)
 cl_int Dummy_clEnqueueBarrier::
 clEnqueueBarrier( cl_command_queue command_queue )
 {
@@ -3234,7 +3360,7 @@ Dummy_clEnqueueBarrier(cl_int err )
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrierWithWaitList)
 cl_int Dummy_clEnqueueBarrierWithWaitList::
 clEnqueueBarrierWithWaitList( cl_command_queue command_queue,
                               cl_uint num_events_in_wait_list,
@@ -3251,6 +3377,7 @@ Dummy_clEnqueueBarrierWithWaitList(cl_int err )
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBuffer)
 cl_int Dummy_clEnqueueCopyBuffer::
 clEnqueueCopyBuffer( cl_command_queue command_queue,
                      cl_mem src_buffer, cl_mem dst_buffer,
@@ -3272,8 +3399,9 @@ Dummy_clEnqueueCopyBuffer(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferRect)
 cl_int Dummy_clEnqueueCopyBufferRect::
 clEnqueueCopyBufferRect( cl_command_queue command_queue,
                          cl_mem src_buffer,
@@ -3305,6 +3433,7 @@ Dummy_clEnqueueCopyBufferRect(cl_int err, const cl_event* event)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferToImage)
 cl_int Dummy_clEnqueueCopyBufferToImage::
 clEnqueueCopyBufferToImage( cl_command_queue command_queue,
                             cl_mem src_buffer,
@@ -3329,7 +3458,9 @@ Dummy_clEnqueueCopyBufferToImage(cl_int err, const cl_event* event)
   : _err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImage)
 cl_int Dummy_clEnqueueCopyImage::
 clEnqueueCopyImage( cl_command_queue command_queue, cl_mem src_image,
                     cl_mem dst_image, const size_t* src_origin,
@@ -3351,7 +3482,9 @@ Dummy_clEnqueueCopyImage(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImageToBuffer)
 cl_int Dummy_clEnqueueCopyImageToBuffer::
 clEnqueueCopyImageToBuffer( cl_command_queue command_queue,
                             cl_mem src_image,
@@ -3376,8 +3509,9 @@ Dummy_clEnqueueCopyImageToBuffer(cl_int err, const cl_event* event)
   : _err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillBuffer)
 cl_int Dummy_clEnqueueFillBuffer::
 clEnqueueFillBuffer( cl_command_queue command_queue, cl_mem buffer,
                      const void *pattern, size_t pattern_size,
@@ -3397,7 +3531,7 @@ Dummy_clEnqueueFillBuffer(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillImage)
 cl_int Dummy_clEnqueueFillImage::
 clEnqueueFillImage( cl_command_queue command_queue,
                     cl_mem image,
@@ -3419,6 +3553,7 @@ Dummy_clEnqueueFillImage(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapBuffer)
 void* Dummy_clEnqueueMapBuffer::
 clEnqueueMapBuffer( cl_command_queue command_queue, cl_mem buffer,
                     cl_bool blocking_map, cl_map_flags map_flags,
@@ -3444,7 +3579,9 @@ Dummy_clEnqueueMapBuffer(void* result, cl_int err, const cl_event* event)
   : _result(result), _err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapImage)
 void* Dummy_clEnqueueMapImage::
 clEnqueueMapImage( cl_command_queue command_queue,
                    cl_mem image,
@@ -3477,8 +3614,9 @@ Dummy_clEnqueueMapImage(void* result, cl_int err, const cl_event* event)
   : _result(result), _err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarker)
 cl_int Dummy_clEnqueueMarker::
 clEnqueueMarker( cl_command_queue command_queue,
                  cl_event* event )
@@ -3493,7 +3631,7 @@ Dummy_clEnqueueMarker(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarkerWithWaitList)
 cl_int Dummy_clEnqueueMarkerWithWaitList::
 clEnqueueMarkerWithWaitList( cl_command_queue command_queue,
                              cl_uint num_events_in_wait_list,
@@ -3510,7 +3648,7 @@ Dummy_clEnqueueMarkerWithWaitList(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMigrateMemObjects)
 cl_int Dummy_clEnqueueMigrateMemObjects::
 clEnqueueMigrateMemObjects( cl_command_queue command_queue,
                             cl_uint num_mem_objects,
@@ -3535,6 +3673,7 @@ Dummy_clEnqueueMigrateMemObjects(cl_int err, const cl_event* event)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNativeKernel)
 cl_int Dummy_clEnqueueNativeKernel::
 clEnqueueNativeKernel( cl_command_queue command_queue,
                        void (CL_CALLBACK* user_func)(void*),
@@ -3561,7 +3700,9 @@ Dummy_clEnqueueNativeKernel(cl_int err, cl_event* event)
   : _err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNDRangeKernel)
 cl_int Dummy_clEnqueueNDRangeKernel::
 clEnqueueNDRangeKernel( cl_command_queue command_queue,
                         cl_kernel kernel,
@@ -3587,7 +3728,9 @@ Dummy_clEnqueueNDRangeKernel(cl_int err, cl_event* event)
   : _err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBuffer)
 cl_int Dummy_clEnqueueReadBuffer::
 clEnqueueReadBuffer( cl_command_queue command_queue,
                      cl_mem buffer, cl_bool blocking_read,
@@ -3609,8 +3752,9 @@ Dummy_clEnqueueReadBuffer(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBufferRect)
 cl_int Dummy_clEnqueueReadBufferRect::
 clEnqueueReadBufferRect( cl_command_queue command_queue,
                          cl_mem buffer, cl_bool blocking_read,
@@ -3639,6 +3783,7 @@ Dummy_clEnqueueReadBufferRect(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadImage)
 cl_int Dummy_clEnqueueReadImage::
 clEnqueueReadImage( cl_command_queue command_queue,
                     cl_mem image,
@@ -3666,8 +3811,9 @@ Dummy_clEnqueueReadImage(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMFree)
 cl_int Dummy_clEnqueueSVMFree::
 clEnqueueSVMFree(cl_command_queue command_queue,
                  cl_uint num_svm_pointers, void* svm_pointers[],
@@ -3689,7 +3835,7 @@ Dummy_clEnqueueSVMFree(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMap)
 cl_int Dummy_clEnqueueSVMMap::
 clEnqueueSVMMap(cl_command_queue command_queue, cl_bool blocking_map,
                 cl_map_flags map_flags, void* svm_ptr, size_t size,
@@ -3707,7 +3853,7 @@ Dummy_clEnqueueSVMMap(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemFill)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemFill)
 cl_int Dummy_clEnqueueSVMMemFill::
 clEnqueueSVMMemFill(cl_command_queue command_queue, void* svm_ptr,
                     const void* pattern, size_t pattern_size, size_t size,
@@ -3725,7 +3871,7 @@ Dummy_clEnqueueSVMMemFill(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemcpy)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemcpy)
 cl_int Dummy_clEnqueueSVMMemcpy::
 clEnqueueSVMMemcpy(cl_command_queue command_queue, cl_bool blocking_copy,
                    void* dst_ptr, const void* src_ptr, size_t size,
@@ -3743,7 +3889,7 @@ Dummy_clEnqueueSVMMemcpy(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMigrateMem)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMigrateMem)
 cl_int Dummy_clEnqueueSVMMigrateMem::
 clEnqueueSVMMigrateMem(cl_command_queue command_queue,
                        cl_uint num_svm_pointers,
@@ -3764,7 +3910,7 @@ Dummy_clEnqueueSVMMigrateMem(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMUnmap)
 cl_int Dummy_clEnqueueSVMUnmap::
 clEnqueueSVMUnmap(cl_command_queue command_queue, void* svm_ptr,
                   cl_uint num_events_in_wait_list,
@@ -3781,7 +3927,7 @@ Dummy_clEnqueueSVMUnmap(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueTask)
 cl_int Dummy_clEnqueueTask::
 clEnqueueTask( cl_command_queue command_queue,
                cl_kernel kernel,
@@ -3800,6 +3946,7 @@ Dummy_clEnqueueTask(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueUnmapMemObject)
 cl_int Dummy_clEnqueueUnmapMemObject::
 clEnqueueUnmapMemObject( cl_command_queue command_queue,
                          cl_mem memobj,
@@ -3821,8 +3968,9 @@ Dummy_clEnqueueUnmapMemObject(cl_int err, const cl_event* event)
   : _err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWaitForEvents)
 cl_int Dummy_clEnqueueWaitForEvents::
 clEnqueueWaitForEvents( cl_command_queue command_queue,
                         cl_uint num_events,
@@ -3838,6 +3986,7 @@ Dummy_clEnqueueWaitForEvents(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBuffer)
 cl_int Dummy_clEnqueueWriteBuffer::
 clEnqueueWriteBuffer( cl_command_queue command_queue,
                       cl_mem buffer, cl_bool blocking_write,
@@ -3859,8 +4008,9 @@ Dummy_clEnqueueWriteBuffer(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBufferRect)
 cl_int Dummy_clEnqueueWriteBufferRect::
 clEnqueueWriteBufferRect( cl_command_queue command_queue,
                              cl_mem buffer, cl_bool blocking_read,
@@ -3889,6 +4039,7 @@ Dummy_clEnqueueWriteBufferRect(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteImage)
 cl_int Dummy_clEnqueueWriteImage::
 clEnqueueWriteImage( cl_command_queue command_queue,
                     cl_mem image,
@@ -3916,7 +4067,9 @@ Dummy_clEnqueueWriteImage(cl_int err, const cl_event* event)
   :_err(err), _event(event)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clFinish)
 cl_int Dummy_clFinish::
 clFinish(cl_command_queue command_queue)
 {
@@ -3928,7 +4081,9 @@ Dummy_clFinish(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clFlush)
 cl_int Dummy_clFlush::
 clFlush(cl_command_queue command_queue)
 {
@@ -3940,7 +4095,9 @@ Dummy_clFlush(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetCommandQueueInfo)
 cl_int Dummy_clGetCommandQueueInfo::
 clGetCommandQueueInfo(cl_command_queue command_queue, cl_command_queue_info param_name,
                  size_t param_value_size, void* param_value,
@@ -3962,7 +4119,9 @@ Dummy_clGetCommandQueueInfo(cl_int err, void const* param_value, size_t const* p
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetContextInfo)
 cl_int Dummy_clGetContextInfo::
 clGetContextInfo(cl_context context, cl_context_info param_name,
                  size_t param_value_size, void* param_value,
@@ -3984,8 +4143,9 @@ Dummy_clGetContextInfo(cl_int err, void const* param_value, size_t const* param_
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceAndHostTimer)
 cl_int Dummy_clGetDeviceAndHostTimer::
 clGetDeviceAndHostTimer(cl_device_id device, cl_ulong* device_timestamp,
                         cl_ulong* host_timestamp)
@@ -4000,6 +4160,7 @@ Dummy_clGetDeviceAndHostTimer(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceIDs)
 cl_int Dummy_clGetDeviceIDs::
 clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,
                cl_uint num_entries, cl_device_id* devices,
@@ -4021,7 +4182,9 @@ Dummy_clGetDeviceIDs(cl_int err, cl_device_id const* devices, cl_uint const* num
   : _err(err), _devices(devices), _num_devices(num_devices)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceInfo)
 cl_int Dummy_clGetDeviceInfo::
 clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
                 size_t param_value_size, void* param_value,
@@ -4044,7 +4207,9 @@ Dummy_clGetDeviceInfo(cl_int err, void const* param_value, size_t const* param_v
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventInfo)
 cl_int Dummy_clGetEventInfo::
 clGetEventInfo(cl_event event, cl_event_info param_name,
                 size_t param_value_size, void* param_value,
@@ -4066,7 +4231,9 @@ Dummy_clGetEventInfo(cl_int err, void const* param_value, size_t const* param_va
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventProfilingInfo)
 cl_int Dummy_clGetEventProfilingInfo::
 clGetEventProfilingInfo(cl_event event, cl_profiling_info param_name,
                 size_t param_value_size, void* param_value,
@@ -4088,8 +4255,9 @@ Dummy_clGetEventProfilingInfo(cl_int err, void const* param_value, size_t const*
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddress)
 void* Dummy_clGetExtensionFunctionAddress::
 clGetExtensionFunctionAddress(const char* funcname)
 {
@@ -4103,7 +4271,7 @@ Dummy_clGetExtensionFunctionAddress(void* ptr)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddressForPlatform)
 void* Dummy_clGetExtensionFunctionAddressForPlatform::
 clGetExtensionFunctionAddressForPlatform(cl_platform_id platform, const char* funcname)
 {
@@ -4117,7 +4285,7 @@ Dummy_clGetExtensionFunctionAddressForPlatform(void* ptr)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetHostTimer)
 cl_int Dummy_clGetHostTimer::
 clGetHostTimer(cl_device_id device, cl_ulong* host_timestamp)
 {
@@ -4131,6 +4299,7 @@ Dummy_clGetHostTimer(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetImageInfo)
 cl_int Dummy_clGetImageInfo::
 clGetImageInfo(cl_mem image, cl_image_info param_name,
                size_t param_value_size, void* param_value,
@@ -4152,8 +4321,9 @@ Dummy_clGetImageInfo(cl_int err, void const* param_value, size_t const* param_va
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
 cl_int Dummy_clGetKernelArgInfo::
 clGetKernelArgInfo(cl_kernel kernel, cl_uint arg_index, cl_kernel_arg_info param_name,
                    size_t param_value_size, void* param_value,
@@ -4177,6 +4347,7 @@ Dummy_clGetKernelArgInfo(cl_int err, void const* param_value, size_t const* para
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelInfo)
 cl_int Dummy_clGetKernelInfo::
 clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name,
                 size_t param_value_size, void* param_value,
@@ -4198,7 +4369,9 @@ Dummy_clGetKernelInfo(cl_int err, void const* param_value, size_t const* param_v
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelWorkGroupInfo)
 cl_int Dummy_clGetKernelWorkGroupInfo::
 clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_group_info param_name,
                          size_t param_value_size, void* param_value,
@@ -4220,8 +4393,9 @@ Dummy_clGetKernelWorkGroupInfo(cl_int err, void const* param_value, size_t const
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
-#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelSubGroupInfo)
 cl_int Dummy_clGetKernelSubGroupInfo::
 clGetKernelSubGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_group_info param_name,
                          size_t input_value_size, const void* input_value,
@@ -4238,6 +4412,7 @@ Dummy_clGetKernelSubGroupInfo(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetMemObjectInfo)
 cl_int Dummy_clGetMemObjectInfo::
 clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,
                    size_t param_value_size, void* param_value,
@@ -4259,8 +4434,9 @@ Dummy_clGetMemObjectInfo(cl_int err, void const* param_value, size_t const* para
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPipeInfo)
 cl_int Dummy_clGetPipeInfo::
 clGetPipeInfo(cl_mem pipe, cl_pipe_info param_name,
               size_t param_value_size, void* param_value,
@@ -4276,6 +4452,7 @@ Dummy_clGetPipeInfo(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformIDs)
 cl_int Dummy_clGetPlatformIDs::
 clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,
                  cl_uint* num_platforms)
@@ -4296,7 +4473,9 @@ Dummy_clGetPlatformIDs(cl_int err, cl_platform_id const* platforms, cl_uint cons
   : _err(err), _platforms(platforms), _num_platforms(num_platforms)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformInfo)
 cl_int Dummy_clGetPlatformInfo::
 clGetPlatformInfo(cl_platform_id platform, cl_platform_info param_name,
                   size_t param_value_size, void* param_value,
@@ -4318,7 +4497,9 @@ Dummy_clGetPlatformInfo(cl_int err, void const* param_value, size_t const* param
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramBuildInfo)
 cl_int Dummy_clGetProgramBuildInfo::
 clGetProgramBuildInfo(cl_program program, cl_device_id device,
                       cl_program_build_info param_name, size_t param_value_size,
@@ -4340,7 +4521,9 @@ Dummy_clGetProgramBuildInfo(cl_int err, void const* param_value, size_t const* p
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramInfo)
 cl_int Dummy_clGetProgramInfo::
 clGetProgramInfo(cl_program program, cl_program_info param_name,
                 size_t param_value_size, void* param_value,
@@ -4362,7 +4545,9 @@ Dummy_clGetProgramInfo(cl_int err, void const* param_value, size_t const* param_
   : _err(err), _param_value(param_value), _param_value_size_ret(param_value_size_ret)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSamplerInfo)
 cl_int Dummy_clGetSamplerInfo::
 clGetSamplerInfo(cl_sampler sampler, cl_sampler_info param_name,
                  size_t param_value_size, void* param_value,
@@ -4376,7 +4561,9 @@ Dummy_clGetSamplerInfo(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSupportedImageFormats)
 cl_int Dummy_clGetSupportedImageFormats::
 clGetSupportedImageFormats( cl_context context, cl_mem_flags flags,
                             cl_mem_object_type image_type,
@@ -4402,8 +4589,9 @@ Dummy_clGetSupportedImageFormats(cl_int err,
   : _err(err), _image_formats(image_formats), _num_image_formats(num_image_formats)
 {
 }
-#if CLXX_OPENCL_ALLOWED(clLinkProgram)
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clLinkProgram)
 cl_program Dummy_clLinkProgram::
 clLinkProgram(cl_context context,
               cl_uint num_devices,
@@ -4428,6 +4616,7 @@ Dummy_clLinkProgram(cl_program program, cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseCommandQueue)
 cl_int Dummy_clReleaseCommandQueue::
 clReleaseCommandQueue(cl_command_queue command_queue)
 {
@@ -4439,7 +4628,9 @@ Dummy_clReleaseCommandQueue(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseContext)
 cl_int Dummy_clReleaseContext::
 clReleaseContext(cl_context context)
 {
@@ -4451,8 +4642,9 @@ Dummy_clReleaseContext(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
 cl_int Dummy_clReleaseDevice::
 clReleaseDevice(cl_device_id device)
 {
@@ -4466,6 +4658,7 @@ Dummy_clReleaseDevice(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseEvent)
 cl_int Dummy_clReleaseEvent::
 clReleaseEvent(cl_event event)
 {
@@ -4477,7 +4670,9 @@ Dummy_clReleaseEvent(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseKernel)
 cl_int Dummy_clReleaseKernel::
 clReleaseKernel(cl_kernel kernel)
 {
@@ -4489,7 +4684,9 @@ Dummy_clReleaseKernel(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseMemObject)
 cl_int Dummy_clReleaseMemObject::
 clReleaseMemObject(cl_mem memobj)
 {
@@ -4501,7 +4698,9 @@ Dummy_clReleaseMemObject(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseProgram)
 cl_int Dummy_clReleaseProgram::
 clReleaseProgram(cl_program program)
 {
@@ -4513,7 +4712,9 @@ Dummy_clReleaseProgram(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseSampler)
 cl_int Dummy_clReleaseSampler::
 clReleaseSampler(cl_sampler sampler)
 {
@@ -4525,7 +4726,9 @@ Dummy_clReleaseSampler(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainCommandQueue)
 cl_int Dummy_clRetainCommandQueue::
 clRetainCommandQueue(cl_command_queue command_queue)
 {
@@ -4537,7 +4740,9 @@ Dummy_clRetainCommandQueue(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainContext)
 cl_int Dummy_clRetainContext::
 clRetainContext(cl_context context)
 {
@@ -4549,8 +4754,9 @@ Dummy_clRetainContext(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainDevice)
 cl_int Dummy_clRetainDevice::
 clRetainDevice(cl_device_id device)
 {
@@ -4564,6 +4770,7 @@ Dummy_clRetainDevice(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainEvent)
 cl_int Dummy_clRetainEvent::
 clRetainEvent(cl_event event)
 {
@@ -4575,7 +4782,9 @@ Dummy_clRetainEvent(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainKernel)
 cl_int Dummy_clRetainKernel::
 clRetainKernel(cl_kernel kernel)
 {
@@ -4587,7 +4796,9 @@ Dummy_clRetainKernel(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainMemObject)
 cl_int Dummy_clRetainMemObject::
 clRetainMemObject(cl_mem memobj)
 {
@@ -4599,7 +4810,9 @@ Dummy_clRetainMemObject(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainProgram)
 cl_int Dummy_clRetainProgram::
 clRetainProgram(cl_program program)
 {
@@ -4611,7 +4824,9 @@ Dummy_clRetainProgram(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainSampler)
 cl_int Dummy_clRetainSampler::
 clRetainSampler(cl_sampler sampler)
 {
@@ -4623,8 +4838,9 @@ Dummy_clRetainSampler(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetCommandQueueProperty)
 cl_int Dummy_clSetCommandQueueProperty::
 clSetCommandQueueProperty(cl_command_queue command_queue,
                           cl_command_queue_properties properties,
@@ -4641,7 +4857,7 @@ Dummy_clSetCommandQueueProperty(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetDefaultDeviceCommandQueue)
 cl_int Dummy_clSetDefaultDeviceCommandQueue::
 clSetDefaultDeviceCommandQueue(cl_context context, cl_device_id device,
                                cl_command_queue command_queue)
@@ -4656,7 +4872,7 @@ Dummy_clSetDefaultDeviceCommandQueue(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetEventCallback)
 cl_int Dummy_clSetEventCallback::
 clSetEventCallback(cl_event event, cl_int command_exec_callback_type,
                    void(CL_CALLBACK *pfn_event_notify)(cl_event, cl_int, void*),
@@ -4672,6 +4888,7 @@ Dummy_clSetEventCallback(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArg)
 cl_int Dummy_clSetKernelArg::
 clSetKernelArg(cl_kernel kernel, cl_uint arg_index, size_t arg_size, const void* arg_value)
 {
@@ -4683,8 +4900,9 @@ Dummy_clSetKernelArg(cl_int err)
   : _err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArgSVMPointer)
 cl_int Dummy_clSetKernelArgSVMPointer::
 clSetKernelArgSVMPointer(cl_kernel kernel, cl_uint arg_index, const void* arg_value)
 {
@@ -4698,7 +4916,7 @@ Dummy_clSetKernelArgSVMPointer(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSetKernelExecInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelExecInfo)
 cl_int Dummy_clSetKernelExecInfo::
 clSetKernelExecInfo(cl_kernel kernel, cl_kernel_info param_name, size_t param_value_size, const void* param_value)
 {
@@ -4712,7 +4930,7 @@ Dummy_clSetKernelExecInfo(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetMemObjectDestructorCallback)
 cl_int Dummy_clSetMemObjectDestructorCallback::
 clSetMemObjectDestructorCallback(cl_mem memobj,
                                  void(CL_CALLBACK* pfn_notify)(cl_mem, void*),
@@ -4728,7 +4946,7 @@ Dummy_clSetMemObjectDestructorCallback(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetUserEventStatus)
 cl_int Dummy_clSetUserEventStatus::
 clSetUserEventStatus( cl_event event , cl_int execution_status )
 {
@@ -4742,7 +4960,7 @@ Dummy_clSetUserEventStatus(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMAlloc)
 void* Dummy_clSVMAlloc::
 clSVMAlloc(cl_context context, cl_svm_mem_flags flags, size_t size, cl_uint alignment)
 {
@@ -4756,7 +4974,7 @@ Dummy_clSVMAlloc(void* ptr)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clSVMFree)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)
 void Dummy_clSVMFree::
 clSVMFree(cl_context context, void* svm_pointer)
 {
@@ -4768,7 +4986,7 @@ Dummy_clSVMFree()
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadCompiler)
 cl_int Dummy_clUnloadCompiler::
 clUnloadCompiler()
 {
@@ -4782,7 +5000,7 @@ Dummy_clUnloadCompiler(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadPlatformCompiler)
 cl_int Dummy_clUnloadPlatformCompiler::
 clUnloadPlatformCompiler(cl_platform_id platform)
 {
@@ -4796,6 +5014,7 @@ Dummy_clUnloadPlatformCompiler(cl_int err)
 }
 #endif
 /* ------------------------------------------------------------------------- */
+#if CLXX_B5D_OPENCL_PROVIDES(clWaitForEvents)
 cl_int Dummy_clWaitForEvents::
 clWaitForEvents(cl_uint num_events, const cl_event* event_list)
 {
@@ -4807,6 +5026,7 @@ Dummy_clWaitForEvents(cl_int err)
   :_err(err)
 {
 }
+#endif
 /* ------------------------------------------------------------------------- */
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */

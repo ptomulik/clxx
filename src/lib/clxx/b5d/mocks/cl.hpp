@@ -15,9 +15,11 @@
 #define CLXX_B5D_MOCKS_CL_HPP_INCLUDED
 
 #include <clxx/common/opencl.h>
+#include <clxx/b5d/config.hpp>
 #include <cxxtest/Mock.h>
 
 /** \cond SHOW_IGNORED_COMPOUNDS */
+#if CLXX_B5D_OPENCL_PROVIDES(clBuildProgram)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clBuildProgram,
   ( cl_program program, cl_uint num_devices, const cl_device_id* device_list,
@@ -25,8 +27,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
     void* user_data ),
   ( program, num_devices, device_list, options, pfn_notify, user_data )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+#if CLXX_B5D_OPENCL_PROVIDES(clCloneKernel)
 CXXTEST_MOCK_GLOBAL(cl_kernel,
   clCloneKernel,
   (cl_kernel source_kernel, cl_int* errcode_ret),
@@ -34,7 +37,7 @@ CXXTEST_MOCK_GLOBAL(cl_kernel,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCompileProgram)
+#if CLXX_B5D_OPENCL_PROVIDES(clCompileProgram)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clCompileProgram,
   ( cl_program program, cl_uint num_devices, const cl_device_id* device_list,
@@ -46,26 +49,25 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateBuffer)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreateBuffer,
   ( cl_context context, cl_mem_flags flags, size_t size, void* host_ptr,
     cl_int* errcode_ret ),
   ( context, flags, size, host_ptr, errcode_ret )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
-CLXX_DIAGNOSTIC_PUSH
-CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
 CXXTEST_MOCK_GLOBAL(cl_command_queue,
   clCreateCommandQueue,
   ( cl_context context, cl_device_id device,
     cl_command_queue_properties properties, cl_int* errcode_ret ),
   ( context, device, properties, errcode_ret )
 );
-CLXX_DIAGNOSTIC_POP
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueueWithProperties)
 CXXTEST_MOCK_GLOBAL(cl_command_queue,
   clCreateCommandQueueWithProperties,
   ( cl_context context, cl_device_id device,
@@ -74,6 +76,7 @@ CXXTEST_MOCK_GLOBAL(cl_command_queue,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContext)
 CXXTEST_MOCK_GLOBAL(cl_context,
   clCreateContext,
   ( const cl_context_properties *properties, cl_uint num_devices,
@@ -84,7 +87,9 @@ CXXTEST_MOCK_GLOBAL(cl_context,
     cl_int* errcode_ret ),
   ( properties, num_devices, devices, pfn_notify, user_data, errcode_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContextFromType)
 CXXTEST_MOCK_GLOBAL(cl_context,
   clCreateContextFromType,
   ( const cl_context_properties *properties, const cl_device_type device_type,
@@ -94,8 +99,9 @@ CXXTEST_MOCK_GLOBAL(cl_context,
     cl_int* errcode_ret ),
   ( properties, device_type, pfn_notify, user_data, errcode_ret)
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateImage)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreateImage,
   ( cl_context context, cl_mem_flags flags, const cl_image_format* image_format,
@@ -104,7 +110,7 @@ CXXTEST_MOCK_GLOBAL(cl_mem,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage2D)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreateImage2D,
   ( cl_context context, cl_mem_flags flags, const cl_image_format* image_format,
@@ -115,7 +121,7 @@ CXXTEST_MOCK_GLOBAL(cl_mem,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage3D)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreateImage3D,
   ( cl_context context, cl_mem_flags flags, const cl_image_format* image_format,
@@ -127,19 +133,23 @@ CXXTEST_MOCK_GLOBAL(cl_mem,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernel)
 CXXTEST_MOCK_GLOBAL(cl_kernel,
   clCreateKernel,
   ( cl_program program, const char* kernel_name, cl_int* errcode_ret),
   ( program, kernel_name, errcode_ret )
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernelsInProgram)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clCreateKernelsInProgram,
   ( cl_program program, cl_uint num_kernels, cl_kernel* kernels, cl_uint* num_kernels_ret),
   ( program, num_kernels, kernels, num_kernels_ret )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreatePipe,
   ( cl_context context, cl_mem_flags flags, cl_uint pipe_packet_size,
@@ -149,6 +159,7 @@ CXXTEST_MOCK_GLOBAL(cl_mem,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBinary)
 CXXTEST_MOCK_GLOBAL(cl_program,
   clCreateProgramWithBinary,
   ( cl_context context, cl_uint num_devices, const cl_device_id* device_list,
@@ -157,8 +168,9 @@ CXXTEST_MOCK_GLOBAL(cl_program,
   ( context, num_devices, device_list, lengths, binaries, binary_status,
     errcode_ret)
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBuiltInKernels)
 CXXTEST_MOCK_GLOBAL(cl_program,
   clCreateProgramWithBuiltInKernels,
   ( cl_context context, cl_uint num_devices, const cl_device_id* device_list,
@@ -167,7 +179,7 @@ CXXTEST_MOCK_GLOBAL(cl_program,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithIL)
 CXXTEST_MOCK_GLOBAL(cl_program,
   clCreateProgramWithIL,
   ( cl_context context, const void* il, size_t length, cl_int* errcode_ret),
@@ -175,14 +187,16 @@ CXXTEST_MOCK_GLOBAL(cl_program,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithSource)
 CXXTEST_MOCK_GLOBAL(cl_program,
   clCreateProgramWithSource,
   ( cl_context context, cl_uint count, const char** strings,
     const size_t* lengths, cl_int* errcode_ret),
   ( context, count, strings, lengths, errcode_ret )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSampler)
 CXXTEST_MOCK_GLOBAL(cl_sampler,
   clCreateSampler,
   ( cl_context context, cl_bool normalized_coords,
@@ -192,7 +206,7 @@ CXXTEST_MOCK_GLOBAL(cl_sampler,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSamplerWithProperties)
 CXXTEST_MOCK_GLOBAL(cl_sampler,
   clCreateSamplerWithProperties,
   ( cl_context context, const cl_sampler_properties* sampler_properties,
@@ -201,7 +215,7 @@ CXXTEST_MOCK_GLOBAL(cl_sampler,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubBuffer)
 CXXTEST_MOCK_GLOBAL(cl_mem,
   clCreateSubBuffer,
   ( cl_mem buffer, cl_mem_flags flags, cl_buffer_create_type buffer_create_type,
@@ -210,7 +224,7 @@ CXXTEST_MOCK_GLOBAL(cl_mem,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubDevices)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clCreateSubDevices,
   ( cl_device_id in_device, const cl_device_partition_property* properties,
@@ -219,7 +233,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateUserEvent)
 CXXTEST_MOCK_GLOBAL(cl_event,
   clCreateUserEvent,
   ( cl_context context, cl_int* errcode_ret ),
@@ -227,7 +241,7 @@ CXXTEST_MOCK_GLOBAL(cl_event,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrier)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueBarrier,
   ( cl_command_queue command_queue),
@@ -235,7 +249,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrierWithWaitList)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueBarrierWithWaitList,
   ( cl_command_queue command_queue, cl_uint num_events_in_wait_list,
@@ -245,6 +259,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 #endif
 
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBuffer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueCopyBuffer,
   ( cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer,
@@ -254,8 +269,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, src_buffer, dst_buffer, src_offset, dst_offset, size,
     num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferRect)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueCopyBufferRect,
   ( cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_buffer,
@@ -269,6 +285,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferToImage)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueCopyBufferToImage,
   ( cl_command_queue command_queue, cl_mem src_buffer, cl_mem dst_image,
@@ -278,7 +295,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, src_buffer, dst_image, src_offset, dst_origin, region,
     num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImage)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueCopyImage,
   ( cl_command_queue command_queue, cl_mem src_image, cl_mem dst_image,
@@ -288,7 +307,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, src_image, dst_image, src_origin, dst_origin, region,
     num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImageToBuffer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueCopyImageToBuffer,
   ( cl_command_queue command_queue, cl_mem src_image, cl_mem dst_buffer,
@@ -298,8 +319,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, src_image, dst_buffer, src_origin, region, dst_offset,
     num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillBuffer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueFillBuffer,
   ( cl_command_queue command_queue, cl_mem buffer, const void *pattern,
@@ -311,7 +333,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillImage)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueFillImage,
   ( cl_command_queue command_queue, cl_mem image, const void *fill_color,
@@ -322,6 +344,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapBuffer)
 CXXTEST_MOCK_GLOBAL(void*,
   clEnqueueMapBuffer,
   ( cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_map,
@@ -331,7 +354,9 @@ CXXTEST_MOCK_GLOBAL(void*,
   ( command_queue, buffer, blocking_map, map_flags, offset, size,
     num_events_in_wait_list, event_wait_list, event, errcode_ret )
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapImage)
 CXXTEST_MOCK_GLOBAL(void*,
   clEnqueueMapImage,
   ( cl_command_queue command_queue, cl_mem image, cl_bool blocking_map,
@@ -343,8 +368,9 @@ CXXTEST_MOCK_GLOBAL(void*,
     image_row_pitch, image_slice_pitch, num_events_in_wait_list,
     event_wait_list, event, errcode_ret )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarker)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueMarker,
   ( cl_command_queue command_queue, cl_event* event ),
@@ -352,7 +378,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarkerWithWaitList)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueMarkerWithWaitList,
   ( cl_command_queue command_queue, cl_uint num_events_in_wait_list,
@@ -361,7 +387,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMigrateMemObjects)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueMigrateMemObjects,
   ( cl_command_queue command_queue, cl_uint num_mem_objects,
@@ -373,6 +399,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNativeKernel)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueNativeKernel,
   ( cl_command_queue command_queue, void (CL_CALLBACK* user_func)(void*),
@@ -382,7 +409,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, user_func, args, cb_args, num_mem_objects, mem_list,
     args_mem_loc, num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNDRangeKernel)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueNDRangeKernel,
   ( cl_command_queue command_queue, cl_kernel kernel, cl_uint work_dim,
@@ -392,7 +421,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, kernel, work_dim, global_work_offset, global_work_size,
     local_work_size, num_events_in_wait_list, event_wait_list, event)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBuffer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueReadBuffer,
   ( cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_read,
@@ -401,8 +432,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, buffer, blocking_read, offset, size, ptr,
     num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBufferRect)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueReadBufferRect,
   ( cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_read,
@@ -416,6 +448,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadImage)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueReadImage,
   ( cl_command_queue command_queue, cl_mem image, cl_bool blocking_read,
@@ -425,8 +458,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, image, blocking_read, origin, region, row_pitch,
     slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMFree)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueSVMFree,
   ( cl_command_queue command_queue, cl_uint num_svm_pointers,
@@ -441,7 +475,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMap)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueSVMMap,
   ( cl_command_queue command_queue, cl_bool blocking_map, cl_map_flags map_flags,
@@ -452,7 +486,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemFill)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemFill)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueSVMMemFill,
   ( cl_command_queue command_queue, void* svm_ptr, const void* pattern,
@@ -463,7 +497,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemcpy)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemcpy)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueSVMMemcpy,
   ( cl_command_queue command_queue, cl_bool blocking_copy, void* dst_ptr,
@@ -474,7 +508,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMigrateMem)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMigrateMem)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueSVMMigrateMem,
   ( cl_command_queue command_queue, cl_uint num_svm_pointers,
@@ -486,7 +520,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMUnmap)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueSVMUnmap,
   ( cl_command_queue command_queue, void* svm_ptr,
@@ -496,7 +530,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueTask)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueTask,
   ( cl_command_queue command_queue, cl_kernel kernel,
@@ -506,6 +540,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueUnmapMemObject)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueUnmapMemObject,
   ( cl_command_queue command_queue, cl_mem memobj, void* mapped_ptr,
@@ -514,8 +549,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, memobj, mapped_ptr, num_events_in_wait_list,
     event_wait_list, event )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWaitForEvents)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueWaitForEvents,
   ( cl_command_queue command_queue, cl_uint num_events,
@@ -524,6 +560,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBuffer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueWriteBuffer,
   ( cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_write,
@@ -532,8 +569,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, buffer, blocking_write, offset, size, ptr,
     num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBufferRect)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueWriteBufferRect,
   ( cl_command_queue command_queue, cl_mem buffer, cl_bool blocking_write,
@@ -547,6 +585,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteImage)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clEnqueueWriteImage,
   ( cl_command_queue command_queue, cl_mem image, cl_bool blocking_write,
@@ -556,32 +595,43 @@ CXXTEST_MOCK_GLOBAL(cl_int,
   ( command_queue, image, blocking_write, origin, region, input_row_pitch,
     input_slice_pitch, ptr, num_events_in_wait_list, event_wait_list, event )
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clFinish)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clFinish,
   (cl_command_queue command_queue),
-  (command_queue));
+  (command_queue)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clFlush)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clFlush,
   (cl_command_queue command_queue),
-  (command_queue));
+  (command_queue)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetCommandQueueInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetCommandQueueInfo,
   ( cl_command_queue command_queue, cl_command_queue_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( command_queue, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetContextInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetContextInfo,
   ( cl_context context, cl_context_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( context, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceAndHostTimer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetDeviceAndHostTimer,
   ( cl_device_id device, cl_ulong* device_timestamp, cl_ulong* host_timestamp ),
@@ -589,34 +639,43 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceIDs)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetDeviceIDs,
   (cl_platform_id platform, cl_device_type device_type, cl_uint num_entries,
    cl_device_id* devices, cl_uint *num_devices),
   (platform, device_type, num_entries, devices, num_devices)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetDeviceInfo,
   ( cl_device_id device, cl_device_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( device, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetEventInfo,
   ( cl_event event, cl_event_info param_name, size_t param_value_size,
     void* param_value, size_t* param_value_size_ret),
   ( event, param_name, param_value_size, param_value, param_value_size_ret )
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventProfilingInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetEventProfilingInfo,
   (cl_event event, cl_profiling_info param_name, size_t param_value_size,
    void* param_value, size_t* param_value_size_ret),
-  (event, param_name, param_value_size, param_value, param_value_size_ret));
+  (event, param_name, param_value_size, param_value, param_value_size_ret)
+);
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddress)
 CXXTEST_MOCK_GLOBAL(void*,
   clGetExtensionFunctionAddress,
   ( const char* funcname ),
@@ -624,7 +683,7 @@ CXXTEST_MOCK_GLOBAL(void*,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddressForPlatform)
 CXXTEST_MOCK_GLOBAL(void*,
   clGetExtensionFunctionAddressForPlatform,
   ( cl_platform_id platform, const char* funcname ),
@@ -632,7 +691,7 @@ CXXTEST_MOCK_GLOBAL(void*,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetHostTimer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetHostTimer,
   ( cl_device_id device, cl_ulong* host_timestamp ),
@@ -640,14 +699,16 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetImageInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetImageInfo,
   ( cl_mem image, cl_image_info param_name, size_t param_value_size,
     void* param_value, size_t* param_value_size_ret),
   ( image, param_name, param_value_size, param_value, param_value_size_ret )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetKernelArgInfo,
   ( cl_kernel kernel, cl_uint arg_index, cl_kernel_arg_info param_name,
@@ -656,14 +717,16 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetKernelInfo,
   ( cl_kernel kernel, cl_kernel_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( kernel, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelSubGroupInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetKernelSubGroupInfo,
   ( cl_kernel kernel, cl_device_id device, cl_kernel_sub_group_info param_name,
@@ -674,21 +737,25 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelWorkGroupInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetKernelWorkGroupInfo,
   ( cl_kernel kernel, cl_device_id device, cl_kernel_work_group_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( kernel, device, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetMemObjectInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetMemObjectInfo,
   ( cl_mem memobj, cl_mem_info param_name, size_t param_value_size,
     void* param_value, size_t* param_value_size_ret),
   ( memobj, param_name, param_value_size, param_value, param_value_size_ret )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPipeInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetPipeInfo,
   ( cl_mem pipe, cl_pipe_info param_name, size_t param_value_size,
@@ -697,40 +764,51 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformIDs)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetPlatformIDs,
   (cl_uint num_entries, cl_platform_id* platforms, cl_uint *num_platforms),
   (num_entries, platforms, num_platforms)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetPlatformInfo,
   ( cl_platform_id platform, cl_platform_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( platform, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramBuildInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetProgramBuildInfo,
   ( cl_program program, cl_device_id device, cl_program_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( program, device, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetProgramInfo,
   ( cl_program program, cl_program_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( program, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSamplerInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetSamplerInfo,
   ( cl_sampler sampler, cl_sampler_info param_name,
     size_t param_value_size, void* param_value, size_t* param_value_size_ret),
   ( sampler, param_name, param_value_size, param_value, param_value_size_ret)
 );
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSupportedImageFormats)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clGetSupportedImageFormats,
   ( cl_context context, cl_mem_flags flags, cl_mem_object_type image_type,
@@ -738,8 +816,9 @@ CXXTEST_MOCK_GLOBAL(cl_int,
     cl_uint* num_image_formats),
   ( context, flags, image_type, num_entries, image_formats, num_image_formats)
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clLinkProgram)
+#if CLXX_B5D_OPENCL_PROVIDES(clLinkProgram)
 CXXTEST_MOCK_GLOBAL(cl_program,
   clLinkProgram,
   ( cl_context context, cl_uint num_devices, const cl_device_id* device_list,
@@ -751,89 +830,131 @@ CXXTEST_MOCK_GLOBAL(cl_program,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseCommandQueue)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseCommandQueue,
-  (cl_command_queue command_queue), (command_queue));
+  (cl_command_queue command_queue), (command_queue)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseContext)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseContext,
   (cl_context context),
-  (context));
+  (context)
+);
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseDevice,
   (cl_device_id device),
   (device));
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseEvent)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseEvent,
   (cl_event event),
-  (event));
+  (event)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseKernel)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseKernel,
   (cl_kernel kernel),
-  (kernel));
+  (kernel)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseMemObject)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseMemObject,
   (cl_mem memobj),
-  (memobj));
+  (memobj)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseProgram)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseProgram,
   (cl_program program),
-  (program));
+  (program)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseSampler)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clReleaseSampler,
   (cl_sampler sampler),
-  (sampler));
+  (sampler)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainCommandQueue)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainCommandQueue,
-  (cl_command_queue command_queue), (command_queue));
+  (cl_command_queue command_queue), (command_queue)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainContext)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainContext,
   (cl_context context),
-  (context));
+  (context)
+);
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainDevice)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainDevice,
   (cl_device_id device),
   (device));
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainEvent)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainEvent,
   (cl_event event),
-  (event));
+  (event)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainKernel)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainKernel,
   (cl_kernel kernel),
-  (kernel));
+  (kernel)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainMemObject)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainMemObject,
   (cl_mem memobj),
-  (memobj));
+  (memobj)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainProgram)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainProgram,
   (cl_program program),
-  (program));
+  (program)
+);
+#endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainSampler)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clRetainSampler,
   (cl_sampler sampler),
-  (sampler));
+  (sampler)
+);
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetCommandQueueProperty)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetCommandQueueProperty,
   ( cl_command_queue command_queue, cl_command_queue_properties properties,
@@ -842,7 +963,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetDefaultDeviceCommandQueue)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetDefaultDeviceCommandQueue,
   ( cl_context context, cl_device_id device, cl_command_queue command_queue ),
@@ -851,7 +972,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 #endif
 
 
-#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetEventCallback)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetEventCallback,
   ( cl_event event, cl_int command_exec_callback_type,
@@ -861,13 +982,15 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArg)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetKernelArg,
   ( cl_kernel kernel, cl_uint arg_index, size_t arg_size, const void* arg_value),
   ( kernel, arg_index, arg_size, arg_value )
 );
+#endif
 
-#if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArgSVMPointer)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetKernelArgSVMPointer,
   ( cl_kernel kernel, cl_uint arg_index, const void* arg_value),
@@ -875,7 +998,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clSetKernelExecInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelExecInfo)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetKernelExecInfo,
   ( cl_kernel kernel, cl_kernel_exec_info param_name, size_t param_value_size, const void* param_value),
@@ -883,7 +1006,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetMemObjectDestructorCallback)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetMemObjectDestructorCallback,
   (cl_mem memobj, void(CL_CALLBACK* pfn_notify)(cl_mem, void*), void* user_data),
@@ -891,7 +1014,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetUserEventStatus)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clSetUserEventStatus,
   ( cl_event event, cl_int execution_status ),
@@ -899,7 +1022,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMAlloc)
 CXXTEST_MOCK_GLOBAL(void*,
   clSVMAlloc,
   ( cl_context context, cl_svm_mem_flags flags, size_t size, cl_uint alignment ),
@@ -907,7 +1030,7 @@ CXXTEST_MOCK_GLOBAL(void*,
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clSVMFree)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)
 CXXTEST_MOCK_VOID_GLOBAL(
   clSVMFree,
   ( cl_context context, void* svm_pointer ),
@@ -915,21 +1038,23 @@ CXXTEST_MOCK_VOID_GLOBAL(
 );
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadCompiler)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clUnloadCompiler, (), ());
 #endif
 
-#if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadPlatformCompiler)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clUnloadPlatformCompiler, (cl_platform_id platform), (platform));
 #endif
 
+#if CLXX_B5D_OPENCL_PROVIDES(clWaitForEvents)
 CXXTEST_MOCK_GLOBAL(cl_int,
   clWaitForEvents,
   ( cl_uint num_events, const cl_event *event_list),
   ( num_events, event_list )
 );
+#endif
 /** \endcond */
 
 #include <clxx/b5d/mocks/cl/dummy.hpp>

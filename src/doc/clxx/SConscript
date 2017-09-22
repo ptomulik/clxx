@@ -32,6 +32,12 @@ doxyfile = env.Doxyfile(
                                 'CLXX_CL_H_VERSION_1_1',
                                 'CLXX_CL_H_VERSION_1_2',
                                 'CLXX_CL_H_VERSION_2_0',
+                                'CLXX_B5D_OPENCL_CL_H_VERSION_1_0',
+                                'CLXX_B5D_OPENCL_CL_H_VERSION_1_1',
+                                'CLXX_B5D_OPENCL_CL_H_VERSION_1_2',
+                                'CLXX_B5D_OPENCL_CL_H_VERSION_2_0',
+                                'CLXX_B5D_OPENCL_CL_H_VERSION_2_1',
+                                'CLXX_B5D_OPENCL_CL_H_VERSION_2_2',
                                 'CL_CALLBACK=\"\"',
                                 'BOOST_CLASS_VERSION(__klass,__ver)=',
                                 'cl_khr_gl_sharing',
@@ -39,6 +45,10 @@ doxyfile = env.Doxyfile(
                                 'cl_khr_d3d10_sharing',
                                 'cl_khr_d3d11_sharing',
                                 'CLXX_OPENCL_ALLOWED',
+                                'CLXX_B5D_OPENCL_PROVIDES',
+                                'CLXX_B5D_OPENCL_PROVIDES',
+                                'CLXX_B5D_API_PREFIX(f)=',
+                                'CLXX_B5D_API_SUFFIX(f)=',
                                 '_WIN32' ]
 )
 

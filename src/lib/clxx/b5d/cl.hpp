@@ -11,11 +11,13 @@
 #define CLXX_B5D_CL_HPP_INCLUDED
 
 #include <clxx/common/types.hpp>
+#include <clxx/b5d/config.hpp>
 
 namespace clxx {
 
 /** \ingroup clxx_b5d_functions
  *  @{ */
+#if CLXX_B5D_OPENCL_PROVIDES(clBuildProgram)
 /** // doc: build_program(...) {{{
  * \brief Builds (compiles and links) a program executable from the program
  *    source or binary
@@ -101,21 +103,19 @@ namespace clxx {
  * \throw unexpected_clerror
  *    When \c clBuildProgram() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clBuildProgram.html">clBuildProgram()</a>
  */ // }}}
-void
-build_program(cl_program program,
-              cl_uint num_devices,
-              const cl_device_id* device_list,
-              const char* options,
-              void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
-              void* user_data);
-#if CLXX_OPENCL_ALLOWED(clCloneKernel)
+extern CLXX_B5D_API_PREFIX(clBuildProgram) void CLXX_B5D_API_CALL
+build_program(
+    cl_program program,
+    cl_uint num_devices,
+    const cl_device_id* device_list,
+    const char* options,
+    void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+    void* user_data
+) CLXX_B5D_API_SUFFIX(clBuildProgram);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCloneKernel)
 /** // doc: clone_kernel() {{{
  * \brief Make a shallow copy of the kernel object.
  *
@@ -140,17 +140,14 @@ build_program(cl_program program,
  * \throw unexpected_clerror
  *    When \c clCloneKernel() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |           |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCloneKernel.html">clCloneKernel()</a>
  */ // }}}
-cl_kernel
-clone_kernel(cl_kernel source_kernel);
+extern CLXX_B5D_API_PREFIX(clCloneKernel) cl_kernel CLXX_B5D_API_CALL
+clone_kernel(
+    cl_kernel source_kernel
+) CLXX_B5D_API_SUFFIX(clCloneKernel);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCompileProgram)
+#if CLXX_B5D_OPENCL_PROVIDES(clCompileProgram)
 /** // doc: compile_program(...) {{{
  * \brief Compiles a program’s source for all the devices or a specific
  *    device(s) in the OpenCL context associated with program.
@@ -241,24 +238,22 @@ clone_kernel(cl_kernel source_kernel);
  * \throw unexpected_clerror
  *    When \c clCompileProgram() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCompileProgram.html">clCompileProgram()</a>
  */ // }}}
-void
-compile_program(cl_program program,
-                cl_uint num_devices,
-                const cl_device_id* device_list,
-                const char* options,
-                cl_uint num_input_headers,
-                const cl_program* input_headers,
-                const char** header_include_names,
-                void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
-                void* user_data);
+extern CLXX_B5D_API_PREFIX(clCompileProgram) void CLXX_B5D_API_CALL
+compile_program(
+    cl_program program,
+    cl_uint num_devices,
+    const cl_device_id* device_list,
+    const char* options,
+    cl_uint num_input_headers,
+    const cl_program* input_headers,
+    const char** header_include_names,
+    void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+    void* user_data
+) CLXX_B5D_API_SUFFIX(clCompileProgram);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateBuffer)
 /** // doc: create_buffer() {{{
  * \brief Creates a buffer object
  *
@@ -304,19 +299,17 @@ compile_program(cl_program program,
  * \throw unexpected_clerror
  *    When \c clCreateBuffer() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateBuffer.html">clCreateBuffer()</a>
  */ // }}}
-cl_mem
-create_buffer(cl_context context,
-              mem_flags_t flags,
-              size_t size,
-              void* host_ptr);
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueue)
+extern CLXX_B5D_API_PREFIX(clCreateBuffer) cl_mem CLXX_B5D_API_CALL
+create_buffer(
+    cl_context context,
+    mem_flags_t flags,
+    size_t size,
+    void* host_ptr
+) CLXX_B5D_API_SUFFIX(clCreateBuffer);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
 /** // doc: create_command_queue(...) {{{
  * \brief Create a command-queue on a specific device
  *
@@ -371,25 +364,16 @@ create_buffer(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateCommandQueue() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \cross  |  \cross   |    ???    |
- *
- * \cross - \c clCreateCommandQueue() has been removed from OpenCL in the
- * version 2.0, however <tt>CL/cl.h</tt> header still declares it (but
- * marks it as deprecated); as long as \c clCreateCommandQueue() is
- * physically available at the library built time (in both, CL/cl.h and
- * libOpenCL.so), the create_command_queue() will also be present.
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueue.html">clCreateCommandQueue()</a>
  */ // }}}
-cl_command_queue
-create_command_queue(cl_context context,
-                     cl_device_id device,
-                     command_queue_properties_t properties);
+extern CLXX_B5D_API_PREFIX(clCreateCommandQueue) cl_command_queue CLXX_B5D_API_CALL
+create_command_queue(
+    cl_context context,
+    cl_device_id device,
+    command_queue_properties_t properties
+) CLXX_B5D_API_SUFFIX(clCreateCommandQueue);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateCommandQueueWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueueWithProperties)
 /** // doc: create_command_queue_with_properties(...) {{{
  * \brief Create a host or device command-queue on a specific device
  *
@@ -447,18 +431,16 @@ create_command_queue(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateCommandQueueWithProperties() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueueWithProperties.html">clCreateCommandQueueWithProperties()</a>
  */ // }}}
-cl_command_queue
-create_command_queue_with_properties(cl_context context,
-                                     cl_device_id device,
-                                     const cl_queue_properties* properties);
+extern CLXX_B5D_API_PREFIX(clCreateCommandQueueWithProperties) cl_command_queue CLXX_B5D_API_CALL
+create_command_queue_with_properties(
+    cl_context context,
+    cl_device_id device,
+    const cl_queue_properties* properties
+) CLXX_B5D_API_SUFFIX(clCreateCommandQueueWithProperties);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContext)
 /** // doc: create_context(...) {{{
  * \brief Create OpenCL context
  *
@@ -531,20 +513,19 @@ create_command_queue_with_properties(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateContext() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContext.html">clCreateContext()</a>
  */ // }}}
-cl_context
-create_context(const cl_context_properties* properties,
-               cl_uint num_devices, const cl_device_id* devices,
-               void(CL_CALLBACK *pfn_notify)(const char* errinfo,
-                                 const void* private_info,
-                                 size_t cb, void* user_data),
-               void* user_data);
+extern CLXX_B5D_API_PREFIX(clCreateContext) cl_context CLXX_B5D_API_CALL
+create_context(
+    const cl_context_properties* properties,
+    cl_uint num_devices, const cl_device_id* devices,
+    void(CL_CALLBACK *pfn_notify)(const char* errinfo,
+                                  const void* private_info,
+                                  size_t cb, void* user_data),
+    void* user_data
+) CLXX_B5D_API_SUFFIX(clCreateContext);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateContextFromType)
 /** // doc: create_context_from_type_from_type(...) {{{
  * \brief Create OpenCL context
  *
@@ -615,22 +596,20 @@ create_context(const cl_context_properties* properties,
  * \throw unexpected_clerror
  *    When \c clCreateContextFromType() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContextFromType.html">clCreateContextFromType()</a>
  */ // }}}
-cl_context
-create_context_from_type(const cl_context_properties* properties,
-                         device_type_t device_type,
-                         void(CL_CALLBACK *pfn_notify)(const char* errinfo,
-                                           const void* private_info,
-                                           size_t cb,
-                                           void* user_data),
-                         void* user_data);
-#if CLXX_OPENCL_ALLOWED(clCreateImage)
+extern CLXX_B5D_API_PREFIX(clCreateContextFromType) cl_context CLXX_B5D_API_CALL
+create_context_from_type(
+    const cl_context_properties* properties,
+    device_type_t device_type,
+    void(CL_CALLBACK *pfn_notify)(const char* errinfo,
+                                  const void* private_info,
+                                  size_t cb,
+                                  void* user_data),
+    void* user_data
+) CLXX_B5D_API_SUFFIX(clCreateContextFromType);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage)
 /** // doc: create_image() {{{
  * \brief Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D
  *        image array or 3D image object
@@ -689,23 +668,19 @@ create_context_from_type(const cl_context_properties* properties,
  * \throw unexpected_clerror
  *    When \c clCreateImage() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateImage.html">clCreateImage()</a>
  *
  */ // }}}
-cl_mem
-create_image(cl_context context,
-             mem_flags_t flags,
-             const cl_image_format *image_format,
-             const cl_image_desc *image_desc,
-             void *host_ptr);
+extern CLXX_B5D_API_PREFIX(clCreateImage) cl_mem CLXX_B5D_API_CALL
+create_image(
+    cl_context context,
+    mem_flags_t flags,
+    const cl_image_format *image_format,
+    const cl_image_desc *image_desc,
+    void *host_ptr
+) CLXX_B5D_API_SUFFIX(clCreateImage);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateImage2D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage2D)
 /** // doc: create_image_2d() {{{
  * \brief Creates a 2D image object.
  *
@@ -770,25 +745,21 @@ create_image(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateImage2D() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |  \check   |  \check   |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">clCreateImage2D()</a>
  *
  */ // }}}
-cl_mem
-create_image_2d(cl_context context,
-             mem_flags_t flags,
-             const cl_image_format *image_format,
-             size_t image_width,
-             size_t image_height,
-             size_t image_row_pitch,
-             void *host_ptr);
+extern CLXX_B5D_API_PREFIX(clCreateImage2D) cl_mem CLXX_B5D_API_CALL
+create_image_2d(
+    cl_context context,
+    mem_flags_t flags,
+    const cl_image_format *image_format,
+    size_t image_width,
+    size_t image_height,
+    size_t image_row_pitch,
+    void *host_ptr
+) CLXX_B5D_API_SUFFIX(clCreateImage2D);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateImage3D)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage3D)
 /** // doc: create_image_3d() {{{
  * \brief Creates a 3D image object.
  *
@@ -862,26 +833,23 @@ create_image_2d(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateImage3D() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |  \check   |  \check   |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">clCreateImage3D()</a>
  *
  */ // }}}
-cl_mem
-create_image_3d(cl_context context,
-                mem_flags_t flags,
-                const cl_image_format *image_format,
-                size_t image_width,
-                size_t image_height,
-                size_t image_depth,
-                size_t image_row_pitch,
-                size_t image_slice_pitch,
-                void *host_ptr);
+extern CLXX_B5D_API_PREFIX(clCreateImage3D) cl_mem CLXX_B5D_API_CALL
+create_image_3d(
+    cl_context context,
+    mem_flags_t flags,
+    const cl_image_format *image_format,
+    size_t image_width,
+    size_t image_height,
+    size_t image_depth,
+    size_t image_row_pitch,
+    size_t image_slice_pitch,
+    void *host_ptr
+) CLXX_B5D_API_SUFFIX(clCreateImage3D);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernel)
 /** // doc: create_kernel() {{{
  * \brief Creates OpenCL kernel
  *
@@ -919,16 +887,15 @@ create_image_3d(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateKernel() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCreateKernel.html">clCreateKernel()</a>
  */ // }}}
-cl_kernel
-create_kernel(cl_program program,
-              const char* kernel_name);
+extern CLXX_B5D_API_PREFIX(clCreateKernel) cl_kernel CLXX_B5D_API_CALL
+create_kernel(
+    cl_program program,
+    const char* kernel_name
+) CLXX_B5D_API_SUFFIX(clCreateKernel);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernelsInProgram)
 /** // doc: create_kernels_in_program() {{{
  * \brief Create kernel objects for all kernel functions in \em program
  *
@@ -967,19 +934,17 @@ create_kernel(cl_program program,
  * \throw unexpected_clerror
  *    When \c clCreateKernelsInProgram() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateKernelsInProgram.html">clCreateKernelsInProgram()</a>
  */ // }}}
-void
-create_kernels_in_program(cl_program program,
-                          cl_uint num_kernels,
-                          cl_kernel* kernels,
-                          cl_uint* num_kernels_ret);
-#if CLXX_OPENCL_ALLOWED(clCreatePipe)
+extern CLXX_B5D_API_PREFIX(clCreateKernelsInProgram) void CLXX_B5D_API_CALL
+create_kernels_in_program(
+    cl_program program,
+    cl_uint num_kernels,
+    cl_kernel* kernels,
+    cl_uint* num_kernels_ret
+) CLXX_B5D_API_SUFFIX(clCreateKernelsInProgram);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
 /** // doc: create_pipe() {{{
  * \brief Creates a pipe object.
  *
@@ -1025,22 +990,19 @@ create_kernels_in_program(cl_program program,
  * \throw unexpected_clerror
  *    When \c clCreatePipe() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCreatePipe.html">clCreatePipe()</a>
  *
  */ // }}}
-cl_mem
-create_pipe(cl_context context,
-             mem_flags_t flags,
-             cl_uint pipe_packet_size,
-             cl_uint pipe_max_packets,
-             const cl_pipe_properties* properties);
+extern CLXX_B5D_API_PREFIX(clCreatePipe) cl_mem CLXX_B5D_API_CALL
+create_pipe(
+    cl_context context,
+    mem_flags_t flags,
+    cl_uint pipe_packet_size,
+    cl_uint pipe_max_packets,
+    const cl_pipe_properties* properties
+) CLXX_B5D_API_SUFFIX(clCreatePipe);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBinary)
 /** // doc: create_program_with_binary(...) {{{
  * \brief Creates a program object for a context, and loads the binary bits
  *    specified by binary into the program object
@@ -1131,27 +1093,25 @@ create_pipe(cl_context context,
  *      cl_int binary_status[SIZE]; // the array declared in the outer scope
  *      cl_program program = NULL;
  *      try {
- *        program = create_program_with_binary( ..., binary_status );
+ *        program = create_program_with_binary( ..., binary_status);
  *      } catch(clerror_no<status_t::invalid_binary> const& e) {
  *        // scan binary_status to find out which binary caused the problem ...
  *      }
  *    \endcode
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBinary.html">clCreateProgramWithBinary()</a>
  */ // }}}
-cl_program
-create_program_with_binary(cl_context context,
-                           cl_uint num_devices,
-                           const cl_device_id* device_list,
-                           const size_t* lengths,
-                           const unsigned char** binaries,
-                           cl_int* binary_status);
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithBuiltInKernels)
+extern CLXX_B5D_API_PREFIX(clCreateProgramWithBinary) cl_program CLXX_B5D_API_CALL
+create_program_with_binary(
+    cl_context context,
+    cl_uint num_devices,
+    const cl_device_id* device_list,
+    const size_t* lengths,
+    const unsigned char** binaries,
+    cl_int* binary_status
+) CLXX_B5D_API_SUFFIX(clCreateProgramWithBinary);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBuiltInKernels)
 /** // doc: create_program_with_built_in_kernels(...) {{{
  * \brief  Creates a program object for a context, and loads the information
  * related to the built-in kernels into a program object.
@@ -1192,20 +1152,17 @@ create_program_with_binary(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateProgramWithBuiltInKernels() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBuiltInKernels.html">clCreateProgramWithBuiltInKernels()</a>
  */ // }}}
-cl_program
-create_program_with_built_in_kernels(cl_context context,
-                                     cl_uint num_devices,
-                                     const cl_device_id* device_list,
-                                     const char* kernel_names);
+extern CLXX_B5D_API_PREFIX(clCreateProgramWithBuiltInKernels) cl_program CLXX_B5D_API_CALL
+create_program_with_built_in_kernels(
+    cl_context context,
+    cl_uint num_devices,
+    const cl_device_id* device_list,
+    const char* kernel_names
+) CLXX_B5D_API_SUFFIX(clCreateProgramWithBuiltInKernels);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateProgramWithIL)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithIL)
 /** // doc: create_program_with_il(...) {{{
  * \brief Creates a program object for a context, and loads the IL into the
  *        program object.
@@ -1239,18 +1196,16 @@ create_program_with_built_in_kernels(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateProgramWithIL() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |           |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithIL.html">clCreateProgramWithIL()</a>
  */ // }}}
-cl_program
-create_program_with_il(cl_context context,
-                       const void* il,
-                       size_t length);
+extern CLXX_B5D_API_PREFIX(clCreateProgramWithIL) cl_program CLXX_B5D_API_CALL
+create_program_with_il(
+    cl_context context,
+    const void* il,
+    size_t length
+) CLXX_B5D_API_SUFFIX(clCreateProgramWithIL);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithSource)
 /** // doc: create_program_with_source(...) {{{
  * \brief Creates a program object for a context, and loads the source
  *    code specified by the text strings in the \p strings array into the program
@@ -1301,19 +1256,17 @@ create_program_with_il(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateProgramWithSource() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithSource.html">clCreateProgramWithSource()</a>
  */ // }}}
-cl_program
-create_program_with_source(cl_context context,
-                           cl_uint count,
-                           const char** strings,
-                           const size_t* lengths);
-#if CLXX_OPENCL_ALLOWED(clCreateSampler)
+extern CLXX_B5D_API_PREFIX(clCreateProgramWithSource) cl_program CLXX_B5D_API_CALL
+create_program_with_source(
+    cl_context context,
+    cl_uint count,
+    const char** strings,
+    const size_t* lengths
+) CLXX_B5D_API_SUFFIX(clCreateProgramWithSource);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSampler)
 /** // doc: create_sampler() {{{
  * \brief Creates a sampler object
  *
@@ -1358,20 +1311,17 @@ create_program_with_source(cl_context context,
  *    When \c clCreateSampler() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |  \check   |   \check  |   \check  |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSampler.html">clCreateSampler()</a>
  */ // }}}
-cl_sampler
-create_sampler(cl_context context,
-               cl_bool normalized_coords,
-               addressing_mode_t addressing_mode,
-               filter_mode_t filter_mode);
+extern CLXX_B5D_API_PREFIX(clCreateSampler) cl_sampler CLXX_B5D_API_CALL
+create_sampler(
+    cl_context context,
+    cl_bool normalized_coords,
+    addressing_mode_t addressing_mode,
+    filter_mode_t filter_mode
+) CLXX_B5D_API_SUFFIX(clCreateSampler);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateSamplerWithProperties)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSamplerWithProperties)
 /** // doc: create_sampler_with_properties() {{{
  * \brief Creates a sampler object
  *
@@ -1413,18 +1363,15 @@ create_sampler(cl_context context,
  *    When \c clCreateSamplerWithProperties() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSamplerWithProperties.html">clCreateSamplerWithProperties()</a>
  */ // }}}
-cl_sampler
-create_sampler_with_properties(cl_context context,
-                               const cl_sampler_properties* sampler_properties);
+extern CLXX_B5D_API_PREFIX(clCreateSamplerWithProperties) cl_sampler CLXX_B5D_API_CALL
+create_sampler_with_properties(
+    cl_context context,
+    const cl_sampler_properties* sampler_properties
+) CLXX_B5D_API_SUFFIX(clCreateSamplerWithProperties);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateSubBuffer)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubBuffer)
 /** // doc: create_sub_buffer() {{{
  * \brief Creates a buffer object (referred to as a sub-buffer object) from an
  *        existing buffer object
@@ -1466,21 +1413,17 @@ create_sampler_with_properties(cl_context context,
  * \throw unexpected_clerror
  *    When \c clCreateSubBuffer() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSubBuffer.html">clCreateSubBuffer()</a>
  */ // }}}
-cl_mem
-create_sub_buffer(cl_mem buffer,
-                  mem_flags_t flags,
-                  buffer_create_type_t buffer_create_type,
-                  const void* buffer_create_info);
+extern CLXX_B5D_API_PREFIX(clCreateSubBuffer) cl_mem CLXX_B5D_API_CALL
+create_sub_buffer(
+    cl_mem buffer,
+    mem_flags_t flags,
+    buffer_create_type_t buffer_create_type,
+    const void* buffer_create_info
+) CLXX_B5D_API_SUFFIX(clCreateSubBuffer);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateSubDevices)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubDevices)
 /** // doc: create_sub_devices(...) {{{
  * \brief Creates an array of sub-devices that each reference
  *    a non-intersecting set of compute units within \p in_device.
@@ -1527,21 +1470,18 @@ create_sub_buffer(cl_mem buffer,
  * \throw unexpected_clerror
  *    When \c clCreateSubDevices() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSubDevices.html">clCreateSubDevices()</a>
  */ // }}}
-void
-create_sub_devices(cl_device_id in_device,
-                   const cl_device_partition_property* properties,
-                   cl_uint num_devices,
-                   cl_device_id* out_devices,
-                   cl_uint *num_devices_ret);
+extern CLXX_B5D_API_PREFIX(clCreateSubDevices) void CLXX_B5D_API_CALL
+create_sub_devices(
+    cl_device_id in_device,
+    const cl_device_partition_property* properties,
+    cl_uint num_devices,
+    cl_device_id* out_devices,
+    cl_uint *num_devices_ret
+) CLXX_B5D_API_SUFFIX(clCreateSubDevices);
 #endif
-#if CLXX_OPENCL_ALLOWED(clCreateUserEvent)
+#if CLXX_B5D_OPENCL_PROVIDES(clCreateUserEvent)
 /** // doc: create_user_event() {{{
  * \brief Creates an OpenCL user event object
  *
@@ -1567,17 +1507,14 @@ create_sub_devices(cl_device_id in_device,
  * \throw unexpected_clerror
  *    When \c clCreateUserEvent() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateUserEvent.html">clCreateUserEvent()</a>
  */ // }}}
-cl_event
-create_user_event(cl_context context);
+extern CLXX_B5D_API_PREFIX(clCreateUserEvent) cl_event CLXX_B5D_API_CALL
+create_user_event(
+    cl_context context
+) CLXX_B5D_API_SUFFIX(clCreateUserEvent);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrier)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrier)
 /** // doc: enqueue_barrier() {{{
  * \brief A synchronization point that enqueues a barrier operation.
  *
@@ -1602,18 +1539,15 @@ create_user_event(cl_context context);
  *    When \c clEnqueueBarrier() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueBarrier.html">clEnqueueBarrier()</a>
  *
  */ // }}}
-void
-enqueue_barrier(cl_command_queue command_queue);
+extern CLXX_B5D_API_PREFIX(clEnqueueBarrier) void CLXX_B5D_API_CALL
+enqueue_barrier(
+    cl_command_queue command_queue
+) CLXX_B5D_API_SUFFIX(clEnqueueBarrier);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueBarrierWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrierWithWaitList)
 /** // doc: enqueue_barrier_with_wait_list() {{{
  * \brief A synchronization point that enqueues a barrier operation.
  *
@@ -1665,21 +1599,18 @@ enqueue_barrier(cl_command_queue command_queue);
  * \throw unexpected_clerror
  *    When \c clEnqueueBarrierWithWaitList() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |  \check   |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueBarrierWithWaitList.html">clEnqueueBarrierWithWaitList()</a>
  *
  */ // }}}
-void
-enqueue_barrier_with_wait_list(cl_command_queue command_queue,
-                               cl_uint num_events_in_wait_list,
-                               const cl_event* event_wait_list,
-                               cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueBarrierWithWaitList) void CLXX_B5D_API_CALL
+enqueue_barrier_with_wait_list(
+    cl_command_queue command_queue,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueBarrierWithWaitList);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBuffer)
 /** // doc: enqueue_copy_buffer() {{{
  * \brief Enqueues a command to copy from one buffer object to another
  *
@@ -1755,25 +1686,23 @@ enqueue_barrier_with_wait_list(cl_command_queue command_queue,
  *    When \c clEnqueueCopyBuffer() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBuffer.html">clEnqueueCopyBuffer()</a>
  *
  */ // }}}
-void
-enqueue_copy_buffer(cl_command_queue command_queue,
-                    cl_mem src_buffer,
-                    cl_mem dst_buffer,
-                    size_t src_offset,
-                    size_t dst_offset,
-                    size_t size,
-                    cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list,
-                    cl_event* event);
-#if CLXX_OPENCL_ALLOWED(clEnqueueCopyBufferRect)
+extern CLXX_B5D_API_PREFIX(clEnqueueCopyBuffer) void CLXX_B5D_API_CALL
+enqueue_copy_buffer(
+    cl_command_queue command_queue,
+    cl_mem src_buffer,
+    cl_mem dst_buffer,
+    size_t src_offset,
+    size_t dst_offset,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueCopyBuffer);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferRect)
 /** // doc: enqueue_copy_buffer_rect() {{{
  * \brief Enqueues a command to copy a 2D or 3D rectangular region from a
  *        buffer object to another buffer object.
@@ -1872,29 +1801,27 @@ enqueue_copy_buffer(cl_command_queue command_queue,
  *    When \c clEnqueueCopyBufferRect() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBufferRect.html">clEnqueueCopyBufferRect()</a>
  *
  */ // }}}
-void
-enqueue_copy_buffer_rect(cl_command_queue command_queue,
-                    cl_mem src_buffer,
-                    cl_mem dst_buffer,
-                    const size_t* src_origin,
-                    const size_t* dst_origin,
-                    const size_t* region,
-                    size_t src_row_pitch,
-                    size_t src_slice_pitch,
-                    size_t dst_row_pitch,
-                    size_t dst_slice_pitch,
-                    cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list,
-                    cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueCopyBufferRect) void CLXX_B5D_API_CALL
+enqueue_copy_buffer_rect(
+    cl_command_queue command_queue,
+    cl_mem src_buffer,
+    cl_mem dst_buffer,
+    const size_t* src_origin,
+    const size_t* dst_origin,
+    const size_t* region,
+    size_t src_row_pitch,
+    size_t src_slice_pitch,
+    size_t dst_row_pitch,
+    size_t dst_slice_pitch,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueCopyBufferRect);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferToImage)
 /** // doc: enqueue_copy_buffer_to_image() {{{
  * \brief Enqueues a command to copy an image object to a buffer object
  *
@@ -1994,25 +1921,23 @@ enqueue_copy_buffer_rect(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueCopyBufferToImage() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBufferToImage.html">clEnqueueCopyBufferToImage()</a>
  *
  */ // }}}
-void
-enqueue_copy_buffer_to_image(cl_command_queue command_queue,
-                             cl_mem src_buffer,
-                             cl_mem dst_image,
-                             size_t src_offset,
-                             const size_t* dst_origin,
-                             const size_t* region,
-                             cl_uint num_events_in_wait_list,
-                             const cl_event* event_wait_list,
-                             cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueCopyBufferToImage) void CLXX_B5D_API_CALL
+enqueue_copy_buffer_to_image(
+    cl_command_queue command_queue,
+    cl_mem src_buffer,
+    cl_mem dst_image,
+    size_t src_offset,
+    const size_t* dst_origin,
+    const size_t* region,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueCopyBufferToImage);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImage)
 /** // doc: enqueue_copy_image() {{{
  * \brief Enqueues a command to copy image objects
  *
@@ -2119,25 +2044,23 @@ enqueue_copy_buffer_to_image(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueCopyImage() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyImage.html">clEnqueueCopyImage()</a>
  *
  */ // }}}
-void
-enqueue_copy_image(cl_command_queue command_queue,
-                   cl_mem src_image,
-                   cl_mem dst_image,
-                   const size_t* src_origin,
-                   const size_t* dst_origin,
-                   const size_t* region,
-                   cl_uint num_events_in_wait_list,
-                   const cl_event* event_wait_list,
-                   cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueCopyImage) void CLXX_B5D_API_CALL
+enqueue_copy_image(
+    cl_command_queue command_queue,
+    cl_mem src_image,
+    cl_mem dst_image,
+    const size_t* src_origin,
+    const size_t* dst_origin,
+    const size_t* region,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueCopyImage);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImageToBuffer)
 /** // doc: enqueue_copy_image_to_buffer() {{{
  * \brief Enqueues a command to copy an image object to a buffer object
  *
@@ -2237,26 +2160,23 @@ enqueue_copy_image(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueFillBuffer() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueFillBuffer.html">clEnqueueFillBuffer()</a>
  *
  */ // }}}
-void
-enqueue_copy_image_to_buffer(cl_command_queue command_queue,
-                             cl_mem src_image,
-                             cl_mem dst_buffer,
-                             const size_t* src_origin,
-                             const size_t* region,
-                             size_t dst_offset,
-                             cl_uint num_events_in_wait_list,
-                             const cl_event* event_wait_list,
-                             cl_event* event);
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillBuffer)
+extern CLXX_B5D_API_PREFIX(clEnqueueCopyImageToBuffer) void CLXX_B5D_API_CALL
+enqueue_copy_image_to_buffer(
+    cl_command_queue command_queue,
+    cl_mem src_image,
+    cl_mem dst_buffer,
+    const size_t* src_origin,
+    const size_t* region,
+    size_t dst_offset,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueCopyImageToBuffer);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillBuffer)
 /** // doc: enqueue_fill_buffer() {{{
  * \brief Enqueues a command to fill a buffer object with a pattern of a given
  *        pattern size
@@ -2341,27 +2261,23 @@ enqueue_copy_image_to_buffer(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueFillBuffer() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueFillBuffer.html">clEnqueueFillBuffer()</a>
  *
  */ // }}}
-void
-enqueue_fill_buffer(cl_command_queue command_queue,
-                    cl_mem buffer,
-                    const void* pattern,
-                    size_t pattern_size,
-                    size_t offset,
-                    size_t size,
-                    cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list,
-                    cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueFillBuffer) void CLXX_B5D_API_CALL
+enqueue_fill_buffer(
+    cl_command_queue command_queue,
+    cl_mem buffer,
+    const void* pattern,
+    size_t pattern_size,
+    size_t offset,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueFillBuffer);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueFillImage)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillImage)
 /** // doc: enqueue_fill_image() {{{
  * \brief Enqueues a command to fill an image object with a specified color.
  *
@@ -2460,25 +2376,22 @@ enqueue_fill_buffer(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueFillImage() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueFillImage.html">clEnqueueFillImage()</a>
  *
  */ // }}}
-void
-enqueue_fill_image(cl_command_queue command_queue,
-                    cl_mem image,
-                    const void* fill_color,
-                    const size_t* origin,
-                    const size_t* region,
-                    cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list,
-                    cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueFillImage) void CLXX_B5D_API_CALL
+enqueue_fill_image(
+    cl_command_queue command_queue,
+    cl_mem image,
+    const void* fill_color,
+    const size_t* origin,
+    const size_t* region,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueFillImage);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapBuffer)
 /** // doc: enqueue_map_buffer() {{{
  * \brief Enqueues a command to map a region of the buffer object given by
  *        \p buffer into the host address space and returns a pointer to this
@@ -2572,25 +2485,23 @@ enqueue_fill_image(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueCopyBuffer() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBuffer.html">clEnqueueCopyBuffer()</a>
  *
  */ // }}}
-void*
-enqueue_map_buffer(cl_command_queue command_queue,
-                   cl_mem buffer,
-                   cl_bool blocking_map,
-                   map_flags_t map_flags,
-                   size_t offset,
-                   size_t size,
-                   cl_uint num_events_in_wait_list,
-                   const cl_event* event_wait_list,
-                   cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueMapBuffer) void* CLXX_B5D_API_CALL
+enqueue_map_buffer(
+    cl_command_queue command_queue,
+    cl_mem buffer,
+    cl_bool blocking_map,
+    map_flags_t map_flags,
+    size_t offset,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueMapBuffer);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapImage)
 /** // doc: enqueue_map_image() {{{
  * \brief Enqueues a command to map a region of an image object into the host
  *        address space and returns a pointer to this mapped region
@@ -2708,28 +2619,25 @@ enqueue_map_buffer(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueMapImage() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueMapImage.html">clEnqueueMapImage()</a>
  *
  */ // }}}
-void*
-enqueue_map_image(cl_command_queue command_queue,
-                  cl_mem image,
-                  cl_bool blocking_map,
-                  map_flags_t map_flags,
-                  const size_t* origin,
-                  const size_t* region,
-                  size_t* image_row_pitch,
-                  size_t* image_slice_pitch,
-                  cl_uint num_events_in_wait_list,
-                  const cl_event* event_wait_list,
-                  cl_event* event);
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarker)
+extern CLXX_B5D_API_PREFIX(clEnqueueMapImage) void* CLXX_B5D_API_CALL
+enqueue_map_image(
+    cl_command_queue command_queue,
+    cl_mem image,
+    cl_bool blocking_map,
+    map_flags_t map_flags,
+    const size_t* origin,
+    const size_t* region,
+    size_t* image_row_pitch,
+    size_t* image_slice_pitch,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueMapImage);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarker)
 /** // doc: enqueue_marker() {{{
  * \brief Enqueues a marker command.
  *
@@ -2766,20 +2674,16 @@ enqueue_map_image(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueMarker() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueMarker.html">clEnqueueMarker()</a>
  *
  */ // }}}
-void
-enqueue_marker(cl_command_queue command_queue,
-               cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueMarker) void CLXX_B5D_API_CALL
+enqueue_marker(
+    cl_command_queue command_queue,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueMarker);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueMarkerWithWaitList)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarkerWithWaitList)
 /** // doc: enqueue_marker_with_wait_list() {{{
  * \brief Enqueues a marker command which waits for either a list of events to
  *        complete, or all previously enqueued commands to complete.
@@ -2842,22 +2746,18 @@ enqueue_marker(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueMarkerWithWaitList() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |  \check   |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueMarkerWithWaitList.html">clEnqueueMarkerWithWaitList()</a>
  *
  */ // }}}
-void
-enqueue_marker_with_wait_list(cl_command_queue command_queue,
-                              cl_uint num_events_in_wait_list,
-                              const cl_event* event_wait_list,
-                              cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueMarkerWithWaitList) void CLXX_B5D_API_CALL
+enqueue_marker_with_wait_list(
+    cl_command_queue command_queue,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueMarkerWithWaitList);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueMigrateMemObjects)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMigrateMemObjects)
 /** // doc: enqueue_migrate_mem_objects() {{{
  * \brief Enqueues a command to indicate which device a set of memory objects
  *        should be associated with
@@ -2927,23 +2827,21 @@ enqueue_marker_with_wait_list(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueMigrateMemObjects() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueMigrateMemObjects.html">clEnqueueMigrateMemObjects()</a>
  *
  */ // }}}
-void
-enqueue_migrate_mem_objects(cl_command_queue command_queue,
-                            cl_uint num_mem_objects,
-                            const cl_mem* mem_objects,
-                            mem_migration_flags_t flags,
-                            cl_uint num_events_in_wait_list,
-                            const cl_event* event_wait_list,
-                            cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueMigrateMemObjects) void CLXX_B5D_API_CALL
+enqueue_migrate_mem_objects(
+    cl_command_queue command_queue,
+    cl_uint num_mem_objects,
+    const cl_mem* mem_objects,
+    mem_migration_flags_t flags,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueMigrateMemObjects);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNativeKernel)
 /** // doc: enqueue_native_kernel() {{{
  * \brief Enqueues a command to execute a native C/C++ function
  *
@@ -3024,24 +2922,23 @@ enqueue_migrate_mem_objects(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueNativeKernel returns other error code
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNativeKernel.html">clEnqueueNativeKernel()</a>
  */ // }}}
-void
-enqueue_native_kernel(cl_command_queue command_queue,
-                      void (CL_CALLBACK* user_func)(void*),
-                      void* args,
-                      size_t cb_args,
-                      cl_uint num_mem_objects,
-                      const cl_mem* mem_list,
-                      const void** args_mem_loc,
-                      cl_uint num_events_in_wait_list,
-                      const cl_event* event_wait_list,
-                      cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueNativeKernel) void CLXX_B5D_API_CALL
+enqueue_native_kernel(
+    cl_command_queue command_queue,
+    void (CL_CALLBACK* user_func)(void*),
+    void* args,
+    size_t cb_args,
+    cl_uint num_mem_objects,
+    const cl_mem* mem_list,
+    const void** args_mem_loc,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueNativeKernel);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNDRangeKernel)
 /** // doc: enqueue_ndrange_kernel() {{{
  * \brief Enqueues a command to execute a kernel on a device
  *
@@ -3141,23 +3038,22 @@ enqueue_native_kernel(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When other error code is returned
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNDRangeKernel.html">clEnqueueNDRangeKernel()</a>
  */ // }}}
-void
-enqueue_ndrange_kernel(cl_command_queue command_queue,
-                        cl_kernel kernel,
-                        cl_uint work_dim,
-                        const size_t* global_work_offset,
-                        const size_t* global_work_size,
-                        const size_t* local_work_size,
-                        cl_uint num_events_in_wait_list,
-                        const cl_event* event_wait_list,
-                        cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueNDRangeKernel) void CLXX_B5D_API_CALL
+enqueue_ndrange_kernel(
+    cl_command_queue command_queue,
+    cl_kernel kernel,
+    cl_uint work_dim,
+    const size_t* global_work_offset,
+    const size_t* global_work_size,
+    const size_t* local_work_size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueNDRangeKernel);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBuffer)
 /** // doc: enqueue_read_buffer() {{{
  * \brief Enqueue commands to read from a buffer object to host memory
  *
@@ -3242,26 +3138,23 @@ enqueue_ndrange_kernel(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueReadBuffer() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueReadBuffer.html">clEnqueueReadBuffer()</a>
  *
  */ // }}}
-void
-enqueue_read_buffer(cl_command_queue command_queue,
-                    cl_mem buffer,
-                    cl_bool blocking_read,
-                    size_t offset,
-                    size_t size,
-                    void* ptr,
-                    cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list,
-                    cl_event* event);
-#if CLXX_OPENCL_ALLOWED(clEnqueueReadBufferRect)
+extern CLXX_B5D_API_PREFIX(clEnqueueReadBuffer) void CLXX_B5D_API_CALL
+enqueue_read_buffer(
+    cl_command_queue command_queue,
+    cl_mem buffer,
+    cl_bool blocking_read,
+    size_t offset,
+    size_t size,
+    void* ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueReadBuffer);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBufferRect)
 /** // doc: enqueue_read_buffer_rect() {{{
  * \brief Enqueue command to read from a 2D or 3D rectangular region from a
  *        buffer object to host memory.
@@ -3378,31 +3271,28 @@ enqueue_read_buffer(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueReadBufferRect() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">clEnqueueReadBufferRect()</a>
  *
  */ // }}}
-void
-enqueue_read_buffer_rect(cl_command_queue command_queue,
-                         cl_mem buffer,
-                         cl_bool blocking_read,
-                         const size_t* buffer_origin,
-                         const size_t* host_origin,
-                         const size_t* region,
-                         size_t buffer_row_pitch,
-                         size_t buffer_slice_pitch,
-                         size_t host_row_pitch,
-                         size_t host_slice_pitch,
-                         void* ptr,
-                         cl_uint num_events_in_wait_list,
-                         const cl_event* event_wait_list,
-                         cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueReadBufferRect) void CLXX_B5D_API_CALL
+enqueue_read_buffer_rect(
+    cl_command_queue command_queue,
+    cl_mem buffer,
+    cl_bool blocking_read,
+    const size_t* buffer_origin,
+    const size_t* host_origin,
+    const size_t* region,
+    size_t buffer_row_pitch,
+    size_t buffer_slice_pitch,
+    size_t host_row_pitch,
+    size_t host_slice_pitch,
+    void* ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueReadBufferRect);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadImage)
 /** // doc: enqueue_read_image() {{{
  * \brief Enqueue commands to read from an image or image array object to host memory.
  *
@@ -3491,54 +3381,51 @@ enqueue_read_buffer_rect(cl_command_queue command_queue,
  *
  *
  * \throw clerror_no<status_t::invalid_command_queue>
- *    When \c clEnqueueReadBuffer() returns \c CL_INVALID_COMMAND_QUEUE.
+ *    When \c clEnqueueReadImage() returns \c CL_INVALID_COMMAND_QUEUE.
  * \throw clerror_no<status_t::invalid_context>
- *    When \c clEnqueueReadBuffer() returns \c CL_INVALID_CONTEXT.
+ *    When \c clEnqueueReadImage() returns \c CL_INVALID_CONTEXT.
  * \throw clerror_no<status_t::invalid_mem_object>
- *    When \c clEnqueueReadBuffer() returns \c CL_INVALID_MEM_OBJECT.
+ *    When \c clEnqueueReadImage() returns \c CL_INVALID_MEM_OBJECT.
  * \throw clerror_no<status_t::invalid_value>
- *    When \c clEnqueueReadBuffer() returns \c CL_INVALID_VALUE.
+ *    When \c clEnqueueReadImage() returns \c CL_INVALID_VALUE.
  * \throw clerror_no<status_t::invalid_event_wait_list>
- *    When \c clEnqueueReadBuffer() returns \c CL_INVALID_EVENT_WAIT_LIST.
+ *    When \c clEnqueueReadImage() returns \c CL_INVALID_EVENT_WAIT_LIST.
  * \throw clerror_no<status_t::invalid_image_size>
- *    When \c clEnqueueReadBuffer() returns \c CL_INVALID_IMAGE_SIZE.
+ *    When \c clEnqueueReadImage() returns \c CL_INVALID_IMAGE_SIZE.
  * \throw clerror_no<status_t::image_format_not_supported>
- *    When \c clEnqueueReadBuffer() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
+ *    When \c clEnqueueReadImage() returns \c CL_IMAGE_FORMAT_NOT_SUPPORTED.
  * \throw clerror_no<status_t::exec_status_error_for_events_in_wait_list>
- *    When \c clEnqueueReadBuffer() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
+ *    When \c clEnqueueReadImage() returns \c CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST.
  * \throw clerror_no<status_t::mem_object_allocation_failure>
- *    When \c clEnqueueReadBuffer() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
+ *    When \c clEnqueueReadImage() returns \c CL_MEM_OBJECT_ALLOCATION_FAILURE.
  * \throw clerror_no<status_t::invalid_operation>
- *    When \c clEnqueueReadBuffer() returns \c CL_INVALID_OPERATION.
+ *    When \c clEnqueueReadImage() returns \c CL_INVALID_OPERATION.
  * \throw clerror_no<status_t::out_of_resources>
- *    When \c clEnqueueReadBuffer() returns \c CL_OUT_OF_RESOURCES.
+ *    When \c clEnqueueReadImage() returns \c CL_OUT_OF_RESOURCES.
  * \throw clerror_no<status_t::out_of_host_memory>
- *    When \c clEnqueueReadBuffer() returns \c CL_OUT_OF_HOST_MEMORY.
+ *    When \c clEnqueueReadImage() returns \c CL_OUT_OF_HOST_MEMORY.
  * \throw unexpected_clerror
- *    When \c clEnqueueReadBuffer() returns other error code.
+ *    When \c clEnqueueReadImage() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
- * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueReadBuffer.html">clEnqueueReadBuffer()</a>
+ * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueReadImage.html">clEnqueueReadImage()</a>
  *
  */ // }}}
-void
-enqueue_read_image(cl_command_queue command_queue,
-                   cl_mem image,
-                   cl_bool blocking_read,
-                   const size_t* origin,
-                   const size_t* region,
-                   size_t row_pitch,
-                   size_t slice_pitch,
-                   void* ptr,
-                   cl_uint num_events_in_wait_list,
-                   const cl_event* event_wait_list,
-                   cl_event* event);
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMFree)
+extern CLXX_B5D_API_PREFIX(clEnqueueReadImage) void CLXX_B5D_API_CALL
+enqueue_read_image(
+    cl_command_queue command_queue,
+    cl_mem image,
+    cl_bool blocking_read,
+    const size_t* origin,
+    const size_t* region,
+    size_t row_pitch,
+    size_t slice_pitch,
+    void* ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueReadImage);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMFree)
 /** // doc: enqueue_svm_free() {{{
  * \brief Enqueues a command to free the shared virtual memory allocated using
  *        #svm_alloc() or a shared system memory pointer
@@ -3612,29 +3499,25 @@ enqueue_read_image(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueSVMFree() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMFree.html">clEnqueueSVMFree()</a>
  *
  */ // }}}
-void
-enqueue_svm_free(cl_command_queue command_queue,
-                 cl_uint num_svm_pointers,
-                 void* svm_pointers[],
-                 void (CL_CALLBACK* pfn_free_func)(cl_command_queue queue,
-                                                   cl_uint num_svm_pointers,
-                                                   void *svm_pointers[],
-                                                   void *user_data),
-                 void* user_data,
-                 cl_uint num_events_in_wait_list,
-                 const cl_event* event_wait_list,
-                 cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueSVMFree) void CLXX_B5D_API_CALL
+enqueue_svm_free(
+    cl_command_queue command_queue,
+    cl_uint num_svm_pointers,
+    void* svm_pointers[],
+    void (CL_CALLBACK* pfn_free_func)(cl_command_queue queue,
+                                      cl_uint num_svm_pointers,
+                                      void *svm_pointers[],
+                                      void *user_data),
+    void* user_data,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueSVMFree);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMap)
 /** // doc: enqueue_svm_map() {{{
  * \brief Enqueues a command that will allow the host to update a region of a
  *        SVM buffer
@@ -3713,26 +3596,22 @@ enqueue_svm_free(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueSVMMap() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMap.html">clEnqueueSVMMap()</a>
  *
  */ // }}}
-void
-enqueue_svm_map(cl_command_queue command_queue,
-                cl_bool blocking_map,
-                map_flags_t map_flags,
-                void* svm_ptr,
-                size_t size,
-                cl_uint num_events_in_wait_list,
-                const cl_event* event_wait_list,
-                cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueSVMMap) void CLXX_B5D_API_CALL
+enqueue_svm_map(
+    cl_command_queue command_queue,
+    cl_bool blocking_map,
+    map_flags_t map_flags,
+    void* svm_ptr,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueSVMMap);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemFill)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemFill)
 /** // doc: enqueue_svm_mem_fill() {{{
  * \brief Enqueues a command to fill a region in memory with a pattern of a
  *        given pattern size
@@ -3809,26 +3688,22 @@ enqueue_svm_map(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueSVMMemFill() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemFill.html">clEnqueueSVMMemFill()</a>
  *
  */ // }}}
-void
-enqueue_svm_mem_fill(cl_command_queue command_queue,
-                     void* svm_ptr,
-                     const void* pattern,
-                     size_t pattern_size,
-                     size_t size,
-                     cl_uint num_events_in_wait_list,
-                     const cl_event* event_wait_list,
-                     cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueSVMMemFill) void CLXX_B5D_API_CALL
+enqueue_svm_mem_fill(
+    cl_command_queue command_queue,
+    void* svm_ptr,
+    const void* pattern,
+    size_t pattern_size,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueSVMMemFill);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMemcpy)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemcpy)
 /** // doc: enqueue_svm_memcpy() {{{
  * \brief Enqueues a command to do a memcpy operation
  *
@@ -3912,26 +3787,22 @@ enqueue_svm_mem_fill(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueSVMMemcpy() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">clEnqueueSVMMemcpy()</a>
  *
  */ // }}}
-void
-enqueue_svm_memcpy(cl_command_queue command_queue,
-                   cl_bool blocking_copy,
-                   void* dst_ptr,
-                   const void* src_ptr,
-                   size_t size,
-                   cl_uint num_events_in_wait_list,
-                   const cl_event* event_wait_list,
-                   cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueSVMMemcpy) void CLXX_B5D_API_CALL
+enqueue_svm_memcpy(
+    cl_command_queue command_queue,
+    cl_bool blocking_copy,
+    void* dst_ptr,
+    const void* src_ptr,
+    size_t size,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueSVMMemcpy);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMMigrateMem)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMigrateMem)
 /** // doc: enqueue_svm_migrate_mem() {{{
  * \brief Enqueues a command to do a migrate_mem operation
  *
@@ -4000,26 +3871,22 @@ enqueue_svm_memcpy(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueSVMMigrateMem() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |           |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMigrateMem.html">clEnqueueSVMMigrateMem()</a>
  *
  */ // }}}
-void
-enqueue_svm_migrate_mem(cl_command_queue command_queue,
-                        cl_uint num_svm_pointers,
-                        const void **svm_pointers,
-                        const size_t *sizes,
-                        mem_migration_flags_t flags,
-                        cl_uint num_events_in_wait_list,
-                        const cl_event* event_wait_list,
-                        cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueSVMMigrateMem) void CLXX_B5D_API_CALL
+enqueue_svm_migrate_mem(
+    cl_command_queue command_queue,
+    cl_uint num_svm_pointers,
+    const void **svm_pointers,
+    const size_t *sizes,
+    mem_migration_flags_t flags,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueSVMMigrateMem);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueSVMUnmap)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMUnmap)
 /** // doc: enqueue_svm_unmap() {{{
  * \brief Enqueues a command to indicate that the host has completed updating
  *        the region given by \p svm_ptr and which was specified in a previous
@@ -4079,23 +3946,19 @@ enqueue_svm_migrate_mem(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueSVMUnmap() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMUnmap.html">clEnqueueSVMUnmap()</a>
  *
  */ // }}}
-void
-enqueue_svm_unmap(cl_command_queue command_queue,
-                  void* svm_ptr,
-                  cl_uint num_events_in_wait_list,
-                  const cl_event* event_wait_list,
-                  cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueSVMUnmap) void CLXX_B5D_API_CALL
+enqueue_svm_unmap(
+    cl_command_queue command_queue,
+    void* svm_ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueSVMUnmap);
 #endif
-#if CLXX_OPENCL_ALLOWED(clEnqueueTask)
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueTask)
 /** // doc: enqueue_task() {{{
  * \brief Enqueues a command to execute a kernel on a device.
  *
@@ -4169,21 +4032,19 @@ enqueue_svm_unmap(cl_command_queue command_queue,
  *    When \c clEnqueueTask() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clEnqueueTask.html">clEnqueueTask()</a>
  *
  */ // }}}
-void
-enqueue_task(cl_command_queue command_queue,
-             cl_kernel kernel,
-             cl_uint num_events_in_wait_list,
-             const cl_event* event_wait_list,
-             cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueTask) void CLXX_B5D_API_CALL
+enqueue_task(
+    cl_command_queue command_queue,
+    cl_kernel kernel,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueTask);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueUnmapMemObject)
 /** // doc: enqueue_unmap_mem_object() {{{
  * \brief Enqueues a command to unmap a previously mapped region of a memory object
  *
@@ -4245,22 +4106,20 @@ enqueue_task(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueUnmapMemObject() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueUnmapMemObject.html">clEnqueueUnmapMemObject()</a>
  *
  */ // }}}
-void
-enqueue_unmap_mem_object(cl_command_queue command_queue,
-                         cl_mem memobj,
-                         void* mapped_ptr,
-                         cl_uint num_events_in_wait_list,
-                         const cl_event* event_wait_list,
-                         cl_event* event);
-#if CLXX_OPENCL_ALLOWED(clEnqueueWaitForEvents)
+extern CLXX_B5D_API_PREFIX(clEnqueueUnmapMemObject) void CLXX_B5D_API_CALL
+enqueue_unmap_mem_object(
+    cl_command_queue command_queue,
+    cl_mem memobj,
+    void* mapped_ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueUnmapMemObject);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWaitForEvents)
 /** // doc: enqueue_wait_for_events() {{{
  * \brief Enqueues a wait for a specific event or a list of events to complete
  *        before any future commands queued in the command-queue are executed.
@@ -4316,19 +4175,17 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueWaitForEvents() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueWaitForEvents.html">clEnqueueWaitForEvents()</a>
  *
  */ // }}}
-void
-enqueue_wait_for_events(cl_command_queue command_queue,
-                        cl_uint num_events,
-                        const cl_event* event_list);
+extern CLXX_B5D_API_PREFIX(clEnqueueWaitForEvents) void CLXX_B5D_API_CALL
+enqueue_wait_for_events(
+    cl_command_queue command_queue,
+    cl_uint num_events,
+    const cl_event* event_list
+) CLXX_B5D_API_SUFFIX(clEnqueueWaitForEvents);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBuffer)
 /** // doc: enqueue_write_buffer() {{{
  * \brief Enqueue commands to write to a buffer object from host memory
  *
@@ -4415,26 +4272,23 @@ enqueue_wait_for_events(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clEnqueueWriteBuffer() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWriteBuffer.html">clEnqueueWriteBuffer()</a>
  *
  */ // }}}
-void
-enqueue_write_buffer(cl_command_queue command_queue,
-                     cl_mem buffer,
-                     cl_bool blocking_write,
-                     size_t offset,
-                     size_t size,
-                     const void* ptr,
-                     cl_uint num_events_in_wait_list,
-                     const cl_event* event_wait_list,
-                     cl_event* event);
-#if CLXX_OPENCL_ALLOWED(clEnqueueWriteBufferRect)
+extern CLXX_B5D_API_PREFIX(clEnqueueWriteBuffer) void CLXX_B5D_API_CALL
+enqueue_write_buffer(
+    cl_command_queue command_queue,
+    cl_mem buffer,
+    cl_bool blocking_write,
+    size_t offset,
+    size_t size,
+    const void* ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueWriteBuffer);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBufferRect)
 /** // doc: enqueue_write_buffer_rect() {{{
  * \brief Enqueue command to write a 2D or 3D rectangular region to a buffer
  *        object from host memory.
@@ -4553,30 +4407,28 @@ enqueue_write_buffer(cl_command_queue command_queue,
  *    When \c clEnqueueWriteBufferRect() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">clEnqueueWriteBufferRect()</a>
  *
  */ // }}}
-void
-enqueue_write_buffer_rect(cl_command_queue command_queue,
-                          cl_mem buffer,
-                          cl_bool blocking_write,
-                          const size_t* buffer_origin,
-                          const size_t* host_origin,
-                          const size_t* region,
-                          size_t buffer_row_pitch,
-                          size_t buffer_slice_pitch,
-                          size_t host_row_pitch,
-                          size_t host_slice_pitch,
-                          const void* ptr,
-                          cl_uint num_events_in_wait_list,
-                          const cl_event* event_wait_list,
-                          cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueWriteBufferRect) void CLXX_B5D_API_CALL
+enqueue_write_buffer_rect(
+    cl_command_queue command_queue,
+    cl_mem buffer,
+    cl_bool blocking_write,
+    const size_t* buffer_origin,
+    const size_t* host_origin,
+    const size_t* region,
+    size_t buffer_row_pitch,
+    size_t buffer_slice_pitch,
+    size_t host_row_pitch,
+    size_t host_slice_pitch,
+    const void* ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueWriteBufferRect);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteImage)
 /** // doc: enqueue_write_image() {{{
  * \brief Enqueue commands to write to an image or image array object from host memory.
  *
@@ -4694,26 +4546,25 @@ enqueue_write_buffer_rect(cl_command_queue command_queue,
  *    When \c clEnqueueWriteImage() returns other error code.
  *
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWriteImage.html">clEnqueueWriteImage()</a>
  *
  */ // }}}
-void
-enqueue_write_image(cl_command_queue command_queue,
-                    cl_mem image,
-                    cl_bool blocking_write,
-                    const size_t* origin,
-                    const size_t* region,
-                    size_t input_row_pitch,
-                    size_t input_slice_pitch,
-                    const void* ptr,
-                    cl_uint num_events_in_wait_list,
-                    const cl_event* event_wait_list,
-                    cl_event* event);
+extern CLXX_B5D_API_PREFIX(clEnqueueWriteImage) void CLXX_B5D_API_CALL
+enqueue_write_image(
+    cl_command_queue command_queue,
+    cl_mem image,
+    cl_bool blocking_write,
+    const size_t* origin,
+    const size_t* region,
+    size_t input_row_pitch,
+    size_t input_slice_pitch,
+    const void* ptr,
+    cl_uint num_events_in_wait_list,
+    const cl_event* event_wait_list,
+    cl_event* event
+) CLXX_B5D_API_SUFFIX(clEnqueueWriteImage);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clFinish)
 /** // doc: finish() {{{
  * \brief Blocks until all previously queued OpenCL commands in a command-queue
  *        are issued to the associated device and have completed
@@ -4737,15 +4588,14 @@ enqueue_write_image(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clFinish() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clFinish.html">clFinish()</a>
  */ // }}}
-void
-finish(cl_command_queue command_queue);
+extern CLXX_B5D_API_PREFIX(clFinish) void CLXX_B5D_API_CALL
+finish(
+    cl_command_queue command_queue
+) CLXX_B5D_API_SUFFIX(clFinish);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clFlush)
 /** // doc: flush() {{{
  * \brief Issues all previously queued OpenCL commands in a command-queue to
  *        the device associated with the command-queue
@@ -4769,15 +4619,14 @@ finish(cl_command_queue command_queue);
  * \throw unexpected_clerror
  *    When \c clFlush() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clFlush.html">clFlush()</a>
  */ // }}}
-void
-flush(cl_command_queue command_queue);
+extern CLXX_B5D_API_PREFIX(clFlush) void CLXX_B5D_API_CALL
+flush(
+    cl_command_queue command_queue
+) CLXX_B5D_API_SUFFIX(clFlush);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetCommandQueueInfo)
 /** // doc: get_command_queue_info(...) {{{
  * \brief Query information about a command-queue.
  *
@@ -4816,19 +4665,18 @@ flush(cl_command_queue command_queue);
  * \throw unexpected_clerror
  *    When \c clGetCommandQueueInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetCommandQueueInfo.html">clGetCommandQueueInfo()</a>
  */ // }}}
-void
-get_command_queue_info(cl_command_queue command_queue,
-                       command_queue_info_t param_name,
-                       size_t param_value_size,
-                       void* param_value,
-                       size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetCommandQueueInfo) void CLXX_B5D_API_CALL
+get_command_queue_info(
+    cl_command_queue command_queue,
+    command_queue_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetCommandQueueInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetContextInfo)
 /** // doc: get_context_info(...) {{{
  * \brief Query information about a context.
  *
@@ -4866,20 +4714,18 @@ get_command_queue_info(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clGetContextInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetContextInfo.html">clGetContextInfo()</a>
  */ // }}}
-void
-get_context_info(cl_context context,
-                 context_info_t param_name,
-                 size_t param_value_size,
-                 void* param_value,
-                 size_t* param_value_size_ret);
-#if CLXX_OPENCL_ALLOWED(clGetDeviceAndHostTimer)
+extern CLXX_B5D_API_PREFIX(clGetContextInfo) void CLXX_B5D_API_CALL
+get_context_info(
+    cl_context context,
+    context_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetContextInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceAndHostTimer)
 /** // doc: get_device_and_host_timer(...) {{{
  * \brief Returns a reasonably synchronized pair of timestamps from the device
  * timer and the host timer as seen by device.
@@ -4916,18 +4762,16 @@ get_context_info(cl_context context,
  * \throw unexpected_clerror
  *    When \c clGetDeviceAndHostTimer() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |           |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetDeviceAndHostTimer.html">clGetDeviceAndHostTimer()</a>
  */ // }}}
-void
-get_device_and_host_timer(cl_device_id device,
-                          cl_ulong* device_timestamp,
-                          cl_ulong* host_timestamp);
+extern CLXX_B5D_API_PREFIX(clGetDeviceAndHostTimer) void CLXX_B5D_API_CALL
+get_device_and_host_timer(
+    cl_device_id device,
+    cl_ulong* device_timestamp,
+    cl_ulong* host_timestamp
+) CLXX_B5D_API_SUFFIX(clGetDeviceAndHostTimer);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceIDs)
 /** // doc: get_device_ids() {{{
  * \brief Retrieve device identifiers of locally available OpenCL devices.
  *
@@ -4978,19 +4822,18 @@ get_device_and_host_timer(cl_device_id device,
  * implementation is not standard conformant, its version is not supported by
  * %clxx, or when get_platform_ids() has a bug.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceIDs.html">clGetDeviceIDs()</a>
  */ // }}}
-void
-get_device_ids(cl_platform_id platform,
-               device_type_t device_type,
-               cl_uint num_entries,
-               cl_device_id* devices,
-               cl_uint* num_devices);
+extern CLXX_B5D_API_PREFIX(clGetDeviceIDs) void CLXX_B5D_API_CALL
+get_device_ids(
+    cl_platform_id platform,
+    device_type_t device_type,
+    cl_uint num_entries,
+    cl_device_id* devices,
+    cl_uint* num_devices
+) CLXX_B5D_API_SUFFIX(clGetDeviceIDs);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceInfo)
 /** // doc: get_device_info(...) {{{
  * \brief Get certain information from device.
  *
@@ -5031,19 +4874,18 @@ get_device_ids(cl_platform_id platform,
  * \throw  clxx::unexpected_clerror
  *    when \c clGetDeviceInfo() returns any other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceInfo.html">clGetDeviceInfo()</a>
  */ // }}}
-void
-get_device_info(cl_device_id device,
-                device_info_t name,
-                size_t value_size,
-                void* value,
-                size_t* value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetDeviceInfo) void CLXX_B5D_API_CALL
+get_device_info(
+    cl_device_id device,
+    device_info_t name,
+    size_t value_size,
+    void* value,
+    size_t* value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetDeviceInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventInfo)
 /** // doc: get_event_info() {{{
  * \brief Returns information about the event object
  *
@@ -5080,17 +4922,18 @@ get_device_info(cl_device_id device,
  * \throw unexpected_clerror
  *    When \c clGetEventInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetEventInfo.html">clGetEventInfo()</a>
  */ // }}}
-void
-get_event_info(cl_event event, event_info_t param_name,
-               size_t param_value_size, void* param_value,
-               size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetEventInfo) void CLXX_B5D_API_CALL
+get_event_info(
+    cl_event event,
+    event_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetEventInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetEventProfilingInfo)
 /** // doc: get_event_profiling_info() {{{
  * \brief Returns profiling information for the command associated with event
  *        if profiling is enabled
@@ -5130,19 +4973,18 @@ get_event_info(cl_event event, event_info_t param_name,
  * \throw unexpected_clerror
  *    When \c clGetEventProfilingInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetEventProfilingInfo.html">clGetEventProfilingInfo()</a>
  */ // }}}
-void
-get_event_profiling_info(cl_event event,
-                         profiling_info_t param_name,
-                         size_t param_value_size, void* param_value,
-                         size_t* param_value_size_ret);
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddress)
+extern CLXX_B5D_API_PREFIX(clGetEventProfilingInfo) void CLXX_B5D_API_CALL
+get_event_profiling_info(
+    cl_event event,
+    profiling_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetEventProfilingInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddress)
 /** // doc: get_extension_function_address() {{{
  * \brief Returns the address of the extension function named by \p funcname.
  *
@@ -5153,17 +4995,14 @@ get_event_profiling_info(cl_event event,
  * \param funcname
  *    Name of an extension function.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clGetExtensionFunctionAddress.html">clGetExtensionFunctionAddress()</a>
  */ // }}}
-void*
-get_extension_function_address(const char* funcname);
+extern CLXX_B5D_API_PREFIX(clGetExtensionFunctionAddress) void* CLXX_B5D_API_CALL
+get_extension_function_address(
+    const char* funcname
+) CLXX_B5D_API_SUFFIX(clGetExtensionFunctionAddress);
 #endif
-#if CLXX_OPENCL_ALLOWED(clGetExtensionFunctionAddressForPlatform)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddressForPlatform)
 /** // doc: get_extension_function_address_for_platform() {{{
  * \brief Returns the address of the extension function named by \p funcname
  *        for a given \p platform
@@ -5175,18 +5014,15 @@ get_extension_function_address(const char* funcname);
  * \param funcname
  *    Name of an extension function.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |  \check   |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clGetExtensionFunctionAddressForPlatform.html">clGetExtensionFunctionAddressForPlatform()</a>
  */ // }}}
-void*
-get_extension_function_address_for_platform(cl_platform_id platform,
-                                            const char* funcname);
+extern CLXX_B5D_API_PREFIX(clGetExtensionFunctionAddressForPlatform) void* CLXX_B5D_API_CALL
+get_extension_function_address_for_platform(
+    cl_platform_id platform,
+    const char* funcname
+) CLXX_B5D_API_SUFFIX(clGetExtensionFunctionAddressForPlatform);
 #endif
-#if CLXX_OPENCL_ALLOWED(clGetHostTimer)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetHostTimer)
 /** // doc: get_host_timer(...) {{{
  * \brief Return the current value of the host clock as seen by device.
  *
@@ -5216,17 +5052,15 @@ get_extension_function_address_for_platform(cl_platform_id platform,
  * \throw unexpected_clerror
  *    When \c clGetHostTimer() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |           |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetHostTimer.html">clGetHostTimer()</a>
  */ // }}}
-void
-get_host_timer(cl_device_id device,
-               cl_ulong* host_timestamp);
+extern CLXX_B5D_API_PREFIX(clGetHostTimer) void CLXX_B5D_API_CALL
+get_host_timer(
+    cl_device_id device,
+    cl_ulong* host_timestamp
+) CLXX_B5D_API_SUFFIX(clGetHostTimer);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetImageInfo)
 /** // doc: get_image_info() {{{
  * \brief Get information specific to an image object created with #create_image()
  *
@@ -5263,20 +5097,18 @@ get_host_timer(cl_device_id device,
  * \throw unexpected_clerror
  *    When \c clGetImageInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetImageInfo.html">clGetImageInfo()</a>
  */ // }}}
-void
-get_image_info(cl_mem image,
-               image_info_t param_name,
-               size_t param_value_size,
-               void* param_value,
-               size_t* param_value_size_ret);
-#if CLXX_OPENCL_ALLOWED(clGetKernelArgInfo)
+extern CLXX_B5D_API_PREFIX(clGetImageInfo) void CLXX_B5D_API_CALL
+get_image_info(
+    cl_mem image,
+    image_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetImageInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
 /** // doc: get_kernel_arg_info() {{{
  * \brief Returns information about the arguments of a kernel.
  *
@@ -5320,20 +5152,18 @@ get_image_info(cl_mem image,
  * \throw unexpected_clerror
  *    When \c clGetKernelArgInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelArgInfo.html">clGetKernelArgInfo()</a>
  */ // }}}
-void
-get_kernel_arg_info(cl_kernel kernel,
-                    cl_uint arg_index,
-                    kernel_arg_info_t param_name,
-                    size_t param_value_size, void* param_value,
-                    size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetKernelArgInfo) void CLXX_B5D_API_CALL
+get_kernel_arg_info(
+    cl_kernel kernel,
+    cl_uint arg_index,
+    kernel_arg_info_t param_name,
+    size_t param_value_size, void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetKernelArgInfo);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelInfo)
 /** // doc: get_kernel_info() {{{
  * \brief Returns information about the kernel object
  *
@@ -5370,19 +5200,17 @@ get_kernel_arg_info(cl_kernel kernel,
  * \throw unexpected_clerror
  *    When \c clGetKernelInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelInfo.html">clGetKernelInfo()</a>
  */ // }}}
-void
-get_kernel_info(cl_kernel kernel,
-                kernel_info_t param_name,
-                size_t param_value_size, void* param_value,
-                size_t* param_value_size_ret);
-#if CLXX_OPENCL_ALLOWED(clGetKernelSubGroupInfo)
+extern CLXX_B5D_API_PREFIX(clGetKernelInfo) void CLXX_B5D_API_CALL
+get_kernel_info(
+    cl_kernel kernel,
+    kernel_info_t param_name,
+    size_t param_value_size, void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetKernelInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelSubGroupInfo)
 /** // doc: get_kernel_sub_group_info() {{{
  * \brief Returns information about the kernel object
  *
@@ -5437,21 +5265,21 @@ get_kernel_info(cl_kernel kernel,
  * \throw unexpected_clerror
  *    When \c clGetKernelSubGroupInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |           |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html">clGetKernelSubGroupInfo()</a>
  */ // }}}
-void
-get_kernel_sub_group_info(cl_kernel kernel,
-                          cl_device_id device,
-                          kernel_sub_group_info_t param_name,
-                          size_t input_value_size, const void* input_value,
-                          size_t param_value_size, void* param_value,
-                          size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetKernelSubGroupInfo) void CLXX_B5D_API_CALL
+get_kernel_sub_group_info(
+    cl_kernel kernel,
+    cl_device_id device,
+    kernel_sub_group_info_t param_name,
+    size_t input_value_size,
+    const void* input_value,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetKernelSubGroupInfo);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelWorkGroupInfo)
 /** // doc: get_kernel_work_group_info() {{{
  * \brief Returns information about the kernel object that may be specific to a device.
  *
@@ -5499,19 +5327,19 @@ get_kernel_sub_group_info(cl_kernel kernel,
  * \throw unexpected_clerror
  *    When \c clGetKernelWorkGroupInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelWorkGroupInfo.html">clGetKernelWorkGroupInfo()</a>
  */ // }}}
-void
-get_kernel_work_group_info(cl_kernel kernel,
-                           cl_device_id device,
-                           kernel_work_group_info_t param_name,
-                           size_t param_value_size, void* param_value,
-                           size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetKernelWorkGroupInfo) void CLXX_B5D_API_CALL
+get_kernel_work_group_info(
+    cl_kernel kernel,
+    cl_device_id device,
+    kernel_work_group_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetKernelWorkGroupInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetMemObjectInfo)
 /** // doc: get_mem_object_info() {{{
  * \brief Get information that is common to all memory objects (buffer and
  *        image objects).
@@ -5549,21 +5377,19 @@ get_kernel_work_group_info(cl_kernel kernel,
  * \throw unexpected_clerror
  *    When \c clGetMemObjectInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetMemObjectInfo.html">clGetMemObjectInfo()</a>
  *
  */ // }}}
-void
-get_mem_object_info(cl_mem memobj,
-                    mem_info_t param_name,
-                    size_t param_value_size,
-                    void* param_value,
-                    size_t* param_value_size_ret);
-#if CLXX_OPENCL_ALLOWED(clGetPipeInfo)
+extern CLXX_B5D_API_PREFIX(clGetMemObjectInfo) void CLXX_B5D_API_CALL
+get_mem_object_info(
+    cl_mem memobj,
+    mem_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetMemObjectInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPipeInfo)
 /** // doc: get_pipe_info() {{{
  * \brief Get information specific to a pipe object created with #create_pipe
  *
@@ -5600,21 +5426,19 @@ get_mem_object_info(cl_mem memobj,
  * \throw unexpected_clerror
  *    When \c clGetPipeInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">clGetPipeInfo()</a>
  *
  */ // }}}
-void
-get_pipe_info(cl_mem pipe,
-              pipe_info_t param_name,
-              size_t param_value_size,
-              void* param_value,
-              size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetPipeInfo) void CLXX_B5D_API_CALL
+get_pipe_info(
+    cl_mem pipe,
+    pipe_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetPipeInfo);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformIDs)
 /** // {{{ doc: get_platform_ids(...)
  * \brief Retrieve platform identifiers of locally available OpenCL platforms.
  *
@@ -5646,17 +5470,16 @@ get_pipe_info(cl_mem pipe,
  * implementation is not standard conformant, its version is not supported by
  * CLXX, or when get_platform_ids() has a bug.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |  \check   |  \check   |  \check   |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformIDs.html">clGetPlatformIDs()</a>
  */ // }}}
-void
-get_platform_ids(cl_uint num_entries,
-                 cl_platform_id* platforms,
-                 cl_uint* num_platforms);
+extern CLXX_B5D_API_PREFIX(clGetPlatformIDs) void CLXX_B5D_API_CALL
+get_platform_ids(
+    cl_uint num_entries,
+    cl_platform_id* platforms,
+    cl_uint* num_platforms
+) CLXX_B5D_API_SUFFIX(clGetPlatformIDs);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformInfo)
 /** // doc: get_platform_info(...) {{{
  *
  * \brief Query OpenCL platform layer for platform information.
@@ -5698,19 +5521,18 @@ get_platform_ids(cl_uint num_entries,
  * implementation is not standard conformant, its version is not supported by
  * CLXX, or when get_platform_info() has a bug.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformInfo.html">clGetPlatformInfo()</a>
  */ // }}}
-void
-get_platform_info(cl_platform_id platform,
-                  platform_info_t param_name,
-                  size_t param_value_size,
-                  void* param_value,
-                  size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetPlatformInfo) void CLXX_B5D_API_CALL
+get_platform_info(
+    cl_platform_id platform,
+    platform_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetPlatformInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramBuildInfo)
 /** // doc: get_program_build_info {{{
  * \brief Returns build information for each device in the program object.
  *
@@ -5764,19 +5586,18 @@ get_platform_info(cl_platform_id platform,
  * \throw unexpected_clerror
  *    When \c clGetProgramBuildInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramBuildInfo.html">clGetProgramBuildInfo()</a>
  */ // }}}
-void
-get_program_build_info(cl_program program,
-                       cl_device_id device,
-                       program_build_info_t param_name,
-                       size_t param_value_size, void* param_value,
-                       size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetProgramBuildInfo) void CLXX_B5D_API_CALL
+get_program_build_info(
+    cl_program program,
+    cl_device_id device,
+    program_build_info_t param_name,
+    size_t param_value_size, void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetProgramBuildInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramInfo)
 /** // doc: get_program_info {{{
  * \brief Returns information about the program object.
  *
@@ -5817,19 +5638,18 @@ get_program_build_info(cl_program program,
  * \throw unexpected_clerror
  *    When \c clGetProgramInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramInfo.html">clGetProgramInfo()</a>
  */ // }}}
-void
-get_program_info(cl_program program,
-                 program_info_t param_name,
-                 size_t param_value_size,
-                 void* param_value,
-                 size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetProgramInfo) void CLXX_B5D_API_CALL
+get_program_info(
+    cl_program program,
+    program_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetProgramInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSamplerInfo)
 /** // doc: get_sampler_info {{{
  * \brief Returns information about the sampler object.
  *
@@ -5868,19 +5688,18 @@ get_program_info(cl_program program,
  * \throw unexpected_clerror
  *    When \c clGetSamplerInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetSamplerInfo.html">clGetSamplerInfo()</a>
  */ // }}}
-void
-get_sampler_info(cl_sampler sampler,
-                 sampler_info_t param_name,
-                 size_t param_value_size,
-                 void* param_value,
-                 size_t* param_value_size_ret);
+extern CLXX_B5D_API_PREFIX(clGetSamplerInfo) void CLXX_B5D_API_CALL
+get_sampler_info(
+    cl_sampler sampler,
+    sampler_info_t param_name,
+    size_t param_value_size,
+    void* param_value,
+    size_t* param_value_size_ret
+) CLXX_B5D_API_SUFFIX(clGetSamplerInfo);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clGetSupportedImageFormats)
 /** // doc: get_supported_image_formats() {{{
  * \brief Get the list of image formats supported by an OpenCL implementation
  *
@@ -5925,23 +5744,20 @@ get_sampler_info(cl_sampler sampler,
  * \throw unexpected_clerror
  *    When \c clGetSupportedImageFormats() returns other error code.
  *
- *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetSupportedImageFormats.html">clGetSupportedImageFormats()</a>
  *
  */ // }}}
-void
-get_supported_image_formats(cl_context context,
-                            mem_flags_t flags,
-                            mem_object_type_t image_type,
-                            cl_uint num_entries,
-                            cl_image_format* image_formats,
-                            cl_uint* num_image_formats);
-#if CLXX_OPENCL_ALLOWED(clLinkProgram)
+extern CLXX_B5D_API_PREFIX(clGetSupportedImageFormats) void CLXX_B5D_API_CALL
+get_supported_image_formats(
+    cl_context context,
+    mem_flags_t flags,
+    mem_object_type_t image_type,
+    cl_uint num_entries,
+    cl_image_format* image_formats,
+    cl_uint* num_image_formats
+) CLXX_B5D_API_SUFFIX(clGetSupportedImageFormats);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clLinkProgram)
 /** // doc: link_program(...) {{{
  * \brief Links a set of compiled program objects and libraries for all the
  *    devices or a specific device(s) in the OpenCL context and creates an
@@ -6044,23 +5860,21 @@ get_supported_image_formats(cl_context context,
  * \throw unexpected_clerror
  *    When \c clLinkProgram() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clLinkProgram.html">clLinkProgram()</a>
  */ // }}}
-cl_program
-link_program(cl_context context,
-             cl_uint num_devices,
-             const cl_device_id* device_list,
-             const char* options,
-              cl_uint num_input_programs,
-              const cl_program* input_programs,
-              void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
-              void* user_data);
+extern CLXX_B5D_API_PREFIX(clLinkProgram) cl_program CLXX_B5D_API_CALL
+link_program(
+    cl_context context,
+    cl_uint num_devices,
+    const cl_device_id* device_list,
+    const char* options,
+    cl_uint num_input_programs,
+    const cl_program* input_programs,
+    void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
+    void* user_data
+) CLXX_B5D_API_SUFFIX(clLinkProgram);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseCommandQueue)
 /** // doc: release_command_queue(...) {{{
  * \brief Decrement the \p command_queue reference count
  *
@@ -6084,15 +5898,14 @@ link_program(cl_context context,
  * \throw unexpeced_clerror
  *    When \c clReleaseCommandQueue() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseCommandQueue.html">clReleaseCommandQueue()</a>
  */ // }}}
-void
-release_command_queue(cl_command_queue command_queue);
+extern CLXX_B5D_API_PREFIX(clReleaseCommandQueue) void CLXX_B5D_API_CALL
+release_command_queue(
+    cl_command_queue command_queue
+) CLXX_B5D_API_SUFFIX(clReleaseCommandQueue);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseContext)
 /** // doc: release_context(...) {{{
  * \brief Decrement the context reference count
  *
@@ -6115,16 +5928,14 @@ release_command_queue(cl_command_queue command_queue);
  * \throw unexpeced_clerror
  *    When \c clReleaseContext() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseContext.html">clReleaseContext()</a>
  */ // }}}
-void
-release_context(cl_context context);
-#if CLXX_OPENCL_ALLOWED(clReleaseDevice)
+extern CLXX_B5D_API_PREFIX(clReleaseContext) void CLXX_B5D_API_CALL
+release_context(
+    cl_context context
+) CLXX_B5D_API_SUFFIX(clReleaseContext);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
 /** // doc: release_device(...) {{{
  * \brief Decrements the \p devices reference count
  *
@@ -6154,16 +5965,14 @@ release_context(cl_context context);
  * \throw unexpected_clerror
  *    When \c clReleaseDevice() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseDevice.html">clReleaseDevice()</a>
  */ // }}}
-void
-release_device(cl_device_id device);
+extern CLXX_B5D_API_PREFIX(clReleaseDevice) void CLXX_B5D_API_CALL
+release_device(
+    cl_device_id device
+) CLXX_B5D_API_SUFFIX(clReleaseDevice);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseEvent)
 /** // doc: release_event() {{{
  * \brief Decrements the \p event reference count
  *
@@ -6191,15 +6000,14 @@ release_device(cl_device_id device);
  * \throw unexpected_clerror
  *    When \c clReleaseEvent() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseEvent.html">clReleaseEvent()</a>
  */ // }}}
-void
-release_event(cl_event event);
+extern CLXX_B5D_API_PREFIX(clReleaseEvent) void CLXX_B5D_API_CALL
+release_event(
+    cl_event event
+) CLXX_B5D_API_SUFFIX(clReleaseEvent);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseKernel)
 /** // doc: release_kernel() {{{
  * \brief Decrements the \p kernel reference count
  *
@@ -6227,15 +6035,14 @@ release_event(cl_event event);
  * \throw unexpected_clerror
  *    When \c clReleaseKernel() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseKernel.html">clReleaseKernel()</a>
  */ // }}}
-void
-release_kernel(cl_kernel kernel);
+extern CLXX_B5D_API_PREFIX(clReleaseKernel) void CLXX_B5D_API_CALL
+release_kernel(
+    cl_kernel kernel
+) CLXX_B5D_API_SUFFIX(clReleaseKernel);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseMemObject)
 /** // doc: release_mem_object() {{{
  * \brief Decrements the memory object reference count
  *
@@ -6258,16 +6065,15 @@ release_kernel(cl_kernel kernel);
  * \throw unexpected_clerror
  *    When \c clReleaseMemObject() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseMemObject.html">clReleaseMemObject()</a>
  *
  */ // }}}
-void
-release_mem_object(cl_mem memobj);
+extern CLXX_B5D_API_PREFIX(clReleaseMemObject) void CLXX_B5D_API_CALL
+release_mem_object(
+    cl_mem memobj
+) CLXX_B5D_API_SUFFIX(clReleaseMemObject);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseProgram)
 /** // doc: release_program(...) {{{
  * \brief Decrements the \p program reference count
  *
@@ -6294,15 +6100,14 @@ release_mem_object(cl_mem memobj);
  * \throw unexpected_clerror
  *    When \c clReleaseProgram() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseProgram.html">clReleaseProgram()</a>
  */ // }}}
-void
-release_program(cl_program program);
+extern CLXX_B5D_API_PREFIX(clReleaseProgram) void CLXX_B5D_API_CALL
+release_program(
+    cl_program program
+) CLXX_B5D_API_SUFFIX(clReleaseProgram);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clReleaseSampler)
 /** // doc: release_sampler(...) {{{
  * \brief Decrements the \p sampler reference count
  *
@@ -6334,15 +6139,14 @@ release_program(cl_program program);
  * \throw unexpected_clerror
  *    When \c clReleaseSampler() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseSampler.html">clReleaseSampler()</a>
  */ // }}}
-void
-release_sampler(cl_sampler sampler);
+extern CLXX_B5D_API_PREFIX(clReleaseSampler) void CLXX_B5D_API_CALL
+release_sampler(
+    cl_sampler sampler
+) CLXX_B5D_API_SUFFIX(clReleaseSampler);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainCommandQueue)
 /** // doc: retain_command_queue(...) {{{
  * \brief Increment the \p command_queue reference count
  *
@@ -6368,15 +6172,14 @@ release_sampler(cl_sampler sampler);
  *
  * \note \ref create_command_queue() performs an implicit retain.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainCommandQueue.html">clRetainCommandQueue()</a>
  */ // }}}
-void
-retain_command_queue(cl_command_queue command_queue);
+extern CLXX_B5D_API_PREFIX(clRetainCommandQueue) void CLXX_B5D_API_CALL
+retain_command_queue(
+    cl_command_queue command_queue
+) CLXX_B5D_API_SUFFIX(clRetainCommandQueue);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainContext)
 /** // doc: retain_context(...) {{{
  * \brief Increment the context reference count
  *
@@ -6402,16 +6205,14 @@ retain_command_queue(cl_command_queue command_queue);
  * \note \ref create_context() and \ref create_context_from_type() perform an
  *    implicit retain.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainContext.html">clRetainContext()</a>
  */ // }}}
-void
-retain_context(cl_context context);
-#if CLXX_OPENCL_ALLOWED(clRetainDevice)
+extern CLXX_B5D_API_PREFIX(clRetainContext) void CLXX_B5D_API_CALL
+retain_context(
+    cl_context context
+) CLXX_B5D_API_SUFFIX(clRetainContext);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainDevice)
 /** // doc: retain_device(...) {{{
  * \brief Increments the \p devices reference count
  *
@@ -6441,16 +6242,14 @@ retain_context(cl_context context);
  * \throw unexpected_clerror
  *    When \c clRetainDevice() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainDevice.html">clRetainDevice()</a>
  */ // }}}
-void
-retain_device(cl_device_id device);
+extern CLXX_B5D_API_PREFIX(clRetainDevice) void CLXX_B5D_API_CALL
+retain_device(
+    cl_device_id device
+) CLXX_B5D_API_SUFFIX(clRetainDevice);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainEvent)
 /** // doc: retain_event() {{{
  * \brief Increments the event object reference count.
  *
@@ -6475,15 +6274,14 @@ retain_device(cl_device_id device);
  * \throw unexpected_clerror
  *    When \c clRetainEvent() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainEvent.html">clRetainEvent()</a>
  */ // }}}
-void
-retain_event(cl_event event);
+extern CLXX_B5D_API_PREFIX(clRetainEvent) void CLXX_B5D_API_CALL
+retain_event(
+    cl_event event
+) CLXX_B5D_API_SUFFIX(clRetainEvent);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainKernel)
 /** // doc: retain_kernel() {{{
  * \brief Increments the kernel object reference count.
  *
@@ -6508,15 +6306,14 @@ retain_event(cl_event event);
  * \throw unexpected_clerror
  *    When \c clRetainKernel() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainKernel.html">clRetainKernel()</a>
  */ // }}}
-void
-retain_kernel(cl_kernel kernel);
+extern CLXX_B5D_API_PREFIX(clRetainKernel) void CLXX_B5D_API_CALL
+retain_kernel(
+    cl_kernel kernel
+) CLXX_B5D_API_SUFFIX(clRetainKernel);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainMemObject)
 /** // doc: retain_mem_object() {{{
  * \brief Increments the memory object reference count
  *
@@ -6539,16 +6336,15 @@ retain_kernel(cl_kernel kernel);
  * \throw unexpected_clerror
  *    When \c clRetainMemObject() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainMemObject.html">clRetainMemObject()</a>
  *
  */ // }}}
-void
-retain_mem_object(cl_mem memobj);
+extern CLXX_B5D_API_PREFIX(clRetainMemObject) void CLXX_B5D_API_CALL
+retain_mem_object(
+    cl_mem memobj
+) CLXX_B5D_API_SUFFIX(clRetainMemObject);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainProgram)
 /** // doc: retain_program(...) {{{
  * \brief Increments the \p program reference count
  *
@@ -6576,15 +6372,14 @@ retain_mem_object(cl_mem memobj);
  * \throw unexpected_clerror
  *    When \c clRetainProgram() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainProgram.html">clRetainProgram()</a>
  */ // }}}
-void
-retain_program(cl_program program);
+extern CLXX_B5D_API_PREFIX(clRetainProgram) void CLXX_B5D_API_CALL
+retain_program(
+    cl_program program
+) CLXX_B5D_API_SUFFIX(clRetainProgram);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clRetainSampler)
 /** // doc: retain_sampler(...) {{{
  * \brief Increments the \p sampler reference count
  *
@@ -6612,16 +6407,14 @@ retain_program(cl_program program);
  * \throw unexpected_clerror
  *    When \c clRetainSampler() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clRetainSampler.html">clRetainSampler()</a>
  */ // }}}
-void
-retain_sampler(cl_sampler sampler);
-#if CLXX_OPENCL_ALLOWED(clSetCommandQueueProperty)
+extern CLXX_B5D_API_PREFIX(clRetainSampler) void CLXX_B5D_API_CALL
+retain_sampler(
+    cl_sampler sampler
+) CLXX_B5D_API_SUFFIX(clRetainSampler);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clSetCommandQueueProperty)
 /** // doc: set_command_queue_property() {{{
  * \brief Enable or disable the properties of a command-queue
  *
@@ -6659,20 +6452,17 @@ retain_sampler(cl_sampler sampler);
  * \throw unexpected_clerror
  *    When \c clSetCommandQueueProperty() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |  \check   |           |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clSetCommandQueueProperty.html">clSetCommandQueueProperty()</a>
  */ // }}}
-void
-set_command_queue_property(cl_command_queue command_queue,
-                           command_queue_properties_t properties,
-                           cl_bool enable,
-                           cl_command_queue_properties* old_properties);
+extern CLXX_B5D_API_PREFIX(clSetCommandQueueProperty) void CLXX_B5D_API_CALL
+set_command_queue_property(
+    cl_command_queue command_queue,
+    command_queue_properties_t properties,
+    cl_bool enable,
+    cl_command_queue_properties* old_properties
+) CLXX_B5D_API_SUFFIX(clSetCommandQueueProperty);
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetDefaultDeviceCommandQueue)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetDefaultDeviceCommandQueue)
 /** // doc: set_default_device_command_queue() {{{
  * \brief Replaces the default command queue on the device.
  *
@@ -6701,19 +6491,16 @@ set_command_queue_property(cl_command_queue command_queue,
  * \throw unexpected_clerror
  *    When \c clSetDefaultDeviceCommandQueue() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |           |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSetDefaultDeviceCommandQueue.html">clSetDefaultDeviceCommandQueue()</a>
  */ // }}}
-void
-set_default_device_command_queue(cl_context context,
-                                 cl_device_id device,
-                                 cl_command_queue command_queue);
+extern CLXX_B5D_API_PREFIX(clSetDefaultDeviceCommandQueue) void CLXX_B5D_API_CALL
+set_default_device_command_queue(
+    cl_context context,
+    cl_device_id device,
+    cl_command_queue command_queue
+) CLXX_B5D_API_SUFFIX(clSetDefaultDeviceCommandQueue);
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetEventCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetEventCallback)
 /** // doc: set_event_callback() {{{
  * \brief Registers a user callback function for a specific command execution status
  *
@@ -6751,18 +6538,17 @@ set_default_device_command_queue(cl_context context,
  * \throw unexpected_clerror
  *    When \c clSetEventCallback() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetEventCallback.html">clSetEventCallback()</a>
  */ // }}}
-void
-set_event_callback(cl_event event, cl_int command_exec_callback_type,
-                   void(CL_CALLBACK* pfn_event_notify)(cl_event, cl_int, void*),
-                   void* user_data);
+extern CLXX_B5D_API_PREFIX(clSetEventCallback) void CLXX_B5D_API_CALL
+set_event_callback(
+    cl_event event,
+    cl_int command_exec_callback_type,
+    void(CL_CALLBACK* pfn_event_notify)(cl_event, cl_int, void*),
+    void* user_data
+) CLXX_B5D_API_SUFFIX(clSetEventCallback);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArg)
 /** // doc: set_kernel_arg() {{{
  * \brief Used to set the argument value for a specific argument of a kernel
  *
@@ -6821,19 +6607,17 @@ set_event_callback(cl_event event, cl_int command_exec_callback_type,
  * \throw unexpected_clerror
  *    When \c clSetKernelArg() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArg.html">clSetKernelArg()</a>
  */ // }}}
-void
-set_kernel_arg(cl_kernel kernel,
-               cl_uint arg_index,
-               size_t arg_size,
-               const void* arg_value);
-#if CLXX_OPENCL_ALLOWED(clSetKernelArgSVMPointer)
+extern CLXX_B5D_API_PREFIX(clSetKernelArg) void CLXX_B5D_API_CALL
+set_kernel_arg(
+    cl_kernel kernel,
+    cl_uint arg_index,
+    size_t arg_size,
+    const void* arg_value
+) CLXX_B5D_API_SUFFIX(clSetKernelArg);
+#endif
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArgSVMPointer)
 /** // doc: set_kernel_arg_svm_pointer() {{{
  * \brief Used to set a SVM pointer as the argument value for a specific
  *        argument of a kernel
@@ -6878,19 +6662,16 @@ set_kernel_arg(cl_kernel kernel,
  * \throw unexpected_clerror
  *    When \c clSetKernelArgSVMPointer() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArgSVMPointer.html">clSetKernelArgSVMPointer()</a>
  */ // }}}
-void
-set_kernel_arg_svm_pointer(cl_kernel kernel,
-                           cl_uint arg_index,
-                           const void* arg_value);
+extern CLXX_B5D_API_PREFIX(clSetKernelArgSVMPointer) void CLXX_B5D_API_CALL
+set_kernel_arg_svm_pointer(
+    cl_kernel kernel,
+    cl_uint arg_index,
+    const void* arg_value
+) CLXX_B5D_API_SUFFIX(clSetKernelArgSVMPointer);
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetKernelExecInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelExecInfo)
 /** // doc: set_kernel_exec_info() {{{
  * \brief Used to pass additional information other than argument values to a kernel
  *
@@ -6928,20 +6709,17 @@ set_kernel_arg_svm_pointer(cl_kernel kernel,
  * \throw unexpected_clerror
  *    When \c clSetKernelExecInfo() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelExecInfo.html">clSetKernelExecInfo()</a>
  */ // }}}
-void
-set_kernel_exec_info(cl_kernel kernel,
-                     kernel_exec_info_t param_name,
-                     size_t param_value_size,
-                     const void* param_value);
+extern CLXX_B5D_API_PREFIX(clSetKernelExecInfo) void CLXX_B5D_API_CALL
+set_kernel_exec_info(
+    cl_kernel kernel,
+    kernel_exec_info_t param_name,
+    size_t param_value_size,
+    const void* param_value
+) CLXX_B5D_API_SUFFIX(clSetKernelExecInfo);
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetMemObjectDestructorCallback)
 /** // doc: set_mem_object_destructor_callback() {{{
  * \brief Registers a user callback function with a memory object.
  *
@@ -6980,19 +6758,16 @@ set_kernel_exec_info(cl_kernel kernel,
  * \throw unexpected_clerror
  *    When \c clSetMemObjectDestructorCallback() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetMemObjectDestructorCallback.html">clSetMemObjectDestructorCallback()</a>
  */ // }}}
-void
-set_mem_object_destructor_callback(cl_mem memobj,
-                                   void (CL_CALLBACK* pfn_notify)(cl_mem, void*),
-                                   void* user_data);
+extern CLXX_B5D_API_PREFIX(clSetMemObjectDestructorCallback) void CLXX_B5D_API_CALL
+set_mem_object_destructor_callback(
+    cl_mem memobj,
+    void (CL_CALLBACK* pfn_notify)(cl_mem, void*),
+    void* user_data
+) CLXX_B5D_API_SUFFIX(clSetMemObjectDestructorCallback);
 #endif
-#if CLXX_OPENCL_ALLOWED(clSetUserEventStatus)
+#if CLXX_B5D_OPENCL_PROVIDES(clSetUserEventStatus)
 /** // doc: set_user_event_status() {{{
  * \brief Sets the execution status of a user event object
  *
@@ -7026,17 +6801,15 @@ set_mem_object_destructor_callback(cl_mem memobj,
  * \throw unexpected_clerror
  *    When \c clSetUserEventStatus() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetUserEventStatus.html">clSetUserEventStatus()</a>
  */ // }}}
-void
-set_user_event_status(cl_event event, cl_int execution_status);
+extern CLXX_B5D_API_PREFIX(clSetUserEventStatus) void CLXX_B5D_API_CALL
+set_user_event_status(
+    cl_event event,
+    cl_int execution_status
+) CLXX_B5D_API_SUFFIX(clSetUserEventStatus);
 #endif
-#if CLXX_OPENCL_ALLOWED(clSVMAlloc)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMAlloc)
 /** // doc: svm_alloc(...) {{{
  * \brief Allocates a shared virtual memory (SVM) buffer that can be shared by
  *        the host and all devices in an OpenCL context that support shared
@@ -7067,20 +6840,17 @@ set_user_event_status(cl_event event, cl_int execution_status);
  *    is \c 0, a default alignment will be used that is equal to the size of
  *    largest data type supported by the OpenCL implementation.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSVMAlloc.html">clSVMAlloc()</a>
  */ // }}}
-void*
-svm_alloc(cl_context context,
-          svm_mem_flags_t flags,
-          size_t size,
-          cl_uint alignment);
+extern CLXX_B5D_API_PREFIX(clSVMAlloc) void* CLXX_B5D_API_CALL
+svm_alloc(
+    cl_context context,
+    svm_mem_flags_t flags,
+    size_t size,
+    cl_uint alignment
+) CLXX_B5D_API_SUFFIX(clSVMAlloc);
 #endif
-#if CLXX_OPENCL_ALLOWED(clSVMFree)
+#if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)
 /** // doc: svm_free(...) {{{
  * \brief Frees a shared virtual memory buffer allocated using #svm_alloc
  *        (\c clSVMAlloc)
@@ -7099,18 +6869,15 @@ svm_alloc(cl_context context,
  *    Must be the value returned by a call to #svm_alloc (\c clSVMAlloc). If a
  *    \c NULL pointer is passed in \p svm_pointer, no action occurs.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |           |  \check   |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSVMFree.html">clSVMFree()</a>
  */ // }}}
-void
-svm_free(cl_context context,
-         void* svm_pointer);
+extern CLXX_B5D_API_PREFIX(clSVMFree) void CLXX_B5D_API_CALL
+svm_free(
+    cl_context context,
+    void* svm_pointer
+) CLXX_B5D_API_SUFFIX(clSVMFree);
 #endif
-#if CLXX_OPENCL_ALLOWED(clUnloadCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadCompiler)
 /** // doc: unload_compiler(...) {{{
  * \brief Allows the implementation to release the resources allocated by the
  *        OpenCL compiler
@@ -7132,17 +6899,13 @@ svm_free(cl_context context,
  * \throw unexpected_clerror
  *    When \c clUnloadCompiler() returns an error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |  \check   |  \check   |           |           |           |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clUnloadCompiler.html">clUnloadCompiler()</a>
  */ // }}}
-void
-unload_compiler();
+extern CLXX_B5D_API_PREFIX(clUnloadCompiler) void CLXX_B5D_API_CALL
+unload_compiler(
+) CLXX_B5D_API_SUFFIX(clUnloadCompiler);
 #endif
-#if CLXX_OPENCL_ALLOWED(clUnloadPlatformCompiler)
+#if CLXX_B5D_OPENCL_PROVIDES(clUnloadPlatformCompiler)
 /** // doc: unload_platform_compiler(...) {{{
  * \brief Allows the implementation to release the resources allocated by the
  *    OpenCL compiler for \p platform.
@@ -7169,16 +6932,14 @@ unload_compiler();
  * \throw unexpected_clerror
  *    When \c clUnloadPlatformCompiler() returns other error code.
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |           |           |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clUnloadPlatformCompiler.html">clUnloadPlatformCompiler()</a>
  */ // }}}
-void
-unload_platform_compiler(cl_platform_id platform);
+extern CLXX_B5D_API_PREFIX(clUnloadPlatformCompiler) void CLXX_B5D_API_CALL
+unload_platform_compiler(
+    cl_platform_id platform
+) CLXX_B5D_API_SUFFIX(clUnloadPlatformCompiler);
 #endif
+#if CLXX_B5D_OPENCL_PROVIDES(clWaitForEvents)
 /** // doc: wait_for_events() {{{
  * \brief Waits on the host thread for commands identified by event objects to complete
  *
@@ -7208,15 +6969,14 @@ unload_platform_compiler(cl_platform_id platform);
  * \throw clerror_no<status_t::out_of_host_memory>
  *    When \c clWaitForEvents returns CL_OUT_OF_HOST_MEMORY
  *
- * \par Available in OpenCL versions
- * |    1.0    |    1.1    |    1.2    |    2.0    |    2.1    |    2.2    |
- * | --------- | --------- | --------- | --------- | --------- | --------- |
- * |   \check  |   \check  |   \check  |   \check  |  \check   |    ???    |
- *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clWaitForEvents.html">clWaitForEvents()</a>
  */ // }}}
-void
-wait_for_events(cl_uint num_events, const cl_event* event_list);
+extern CLXX_B5D_API_PREFIX(clWaitForEvents) void CLXX_B5D_API_CALL
+wait_for_events(
+    cl_uint num_events,
+    const cl_event* event_list
+) CLXX_B5D_API_SUFFIX(clWaitForEvents);
+#endif
 /** @} */
 } // end namespace clxx
 

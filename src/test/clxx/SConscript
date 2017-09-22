@@ -8,6 +8,7 @@ from SCons.Util import CLVar
 
 SConscript('SConscript.libclxx_app', exports = ['env'])
 SConscript('SConscript.libclxx_app_clinfo', exports = ['env'])
+SConscript('SConscript.libclxx_b5d', exports = ['env'])
 SConscript('SConscript.libclxx_cl', exports = ['env'])
 SConscript('SConscript.libclxx_common', exports = ['env'])
 SConscript('SConscript.libclxx_info', exports = ['env'])
