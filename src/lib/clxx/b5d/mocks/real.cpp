@@ -9,7 +9,7 @@
 #include <clxx/common/config.hpp>
 CLXX_DIAGNOSTIC_PUSH
 CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
-#include <clxx/b5d/mocks/cl.hpp>
+#include <clxx/b5d/mocks/cl_fcn.hpp>
 CLXX_DIAGNOSTIC_POP
 
 // vim: set expandtab tabstop=2 shiftwidth=2:
