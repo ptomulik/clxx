@@ -7,6 +7,9 @@ Import(['env'])
 from SCons.Util import CLVar
 
 tests = [
+    # Types
+    'b5d/cl_types.t.h',
+    # Functions
     'b5d/cl_fcn/build_program.t.h',
     'b5d/cl_fcn/clone_kernel.t.h',
     'b5d/cl_fcn/compile_program.t.h',

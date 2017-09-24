@@ -1,17 +1,17 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/b5d/config.hpp
+// clxx/b5d/cl_config.hpp
 
-/** // doc: clxx/b5d/config.hpp {{{
- * \file clxx/b5d/config.hpp
+/** // doc: clxx/b5d/cl_config.hpp {{{
+ * \file clxx/b5d/cl_config.hpp
  * \todo Write documentation
  */ // }}}
-#ifndef CLXX_B5D_CONFIG_HPP_INCLUDED
-#define CLXX_B5D_CONFIG_HPP_INCLUDED
+#ifndef CLXX_B5D_CL_CONFIG_HPP_INCLUDED
+#define CLXX_B5D_CL_CONFIG_HPP_INCLUDED
 
-#include <clxx/b5d/config_params.hpp>
-#include <clxx/b5d/config_cl_fcn.hpp>
+#include <clxx/b5d/cl_config_params.hpp>
+#include <clxx/b5d/cl_fcn_config.hpp>
 
 #if defined(_WIN32)
 # define CLXX_B5D_API_ENTRY
@@ -48,6 +48,6 @@
 #define CLXX_B5D_API_PREFIX(f) CLXX_B5D_API_ENTRY CLXX_B5D_PREFIX_DEPRECATED(f)
 #define CLXX_B5D_API_SUFFIX(f) CLXX_B5D_SUFFIX_DEPRECATED(f)
 
-#endif /* CLXX_B5D_CONFIG_HPP_INCLUDED */
+#endif /* CLXX_B5D_CL_CONFIG_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

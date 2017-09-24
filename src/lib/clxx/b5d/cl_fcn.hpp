@@ -10,8 +10,8 @@
 #ifndef CLXX_B4D_CL_FCN_HPP_INCLUDED
 #define CLXX_B4D_CL_FCN_HPP_INCLUDED
 
-#include <clxx/common/types.hpp>
-#include <clxx/b5d/config.hpp>
+#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/cl_config.hpp>
 
 namespace clxx {
 

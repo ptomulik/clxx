@@ -161,7 +161,7 @@ functions_to_check = cl_h_functions + cl_gl_h_functions
 
 
 parser = argparse.ArgumentParser(
-        prog='config-cl-fcn.py',
+        prog='cl-fcn-config.py',
         description="""\
         Builds a matrix of availability of OpenCL functions in particular
         versions of the OpenCL standard. The information is extracted from
@@ -500,19 +500,19 @@ def prepare_cpp_output(resultdict, **kw):
     outputlist.append(r'// @COPYRIGHT@')
     outputlist.append(r'// Licensed under MIT license (LICENSE.txt)')
     outputlist.append(r'')
-    outputlist.append(r'// clxx/b5d/config_cl_fcn.hpp')
+    outputlist.append(r'// clxx/b5d/cl_fcn_config.hpp')
     outputlist.append(r'')
-    outputlist.append(r'/** // doc: clxx/b5d/config_cl_fcn.hpp {{{')
-    outputlist.append(r'* \file clxx/b5d/config_cl_fcn.hpp')
-    outputlist.append(r'* \todo Write documentation for clxx/b5d/config_cl_fcn.hpp')
+    outputlist.append(r'/** // doc: clxx/b5d/cl_fcn_config.hpp {{{')
+    outputlist.append(r'* \file clxx/b5d/cl_fcn_config.hpp')
+    outputlist.append(r'* \todo Write documentation for clxx/b5d/cl_fcn_config.hpp')
     outputlist.append(r'*/ // }}}')
-    outputlist.append(r'#ifndef CLXX_B5D_CONFIG_CL_FCN_HPP_INCLUDED')
-    outputlist.append(r'#define CLXX_B5D_CONFIG_CL_FCN_HPP_INCLUDED')
+    outputlist.append(r'#ifndef CLXX_B5D_CL_FCN_CONFIG_HPP_INCLUDED')
+    outputlist.append(r'#define CLXX_B5D_CL_FCN_CONFIG_HPP_INCLUDED')
     outputlist.append(r'')
     outputlist.append(r'#include <clxx/b5d/config_params.hpp>')
     outputlist.append(r'')
     outputlist.append(r'/* !!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */')
-    outputlist.append(r'/*    FILE GENERATED WITH bin/config-cl-fcn.py. DO NOT MODIFY    */')
+    outputlist.append(r'/*    FILE GENERATED WITH bin/cl-fcn-config.py. DO NOT MODIFY    */')
     outputlist.append(r'/* !!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */')
     outputlist.append(r'')
     exists = []
@@ -569,7 +569,7 @@ def prepare_cpp_output(resultdict, **kw):
         outputlist.append('# define CLXX_B5D_SUFFIX_DEPRECATED_%s' % fcn)
         outputlist.append('#endif')
     outputlist.append(r'')
-    outputlist.append(r'#endif /* CLXX_B5D_CONFIG_CL_FCN_HPP_INCLUDED */')
+    outputlist.append(r'#endif /* CLXX_B5D_CL_FCN_CONFIG_HPP_INCLUDED */')
     outputlist.append(r'// vim: set expandtab tabstop=2 shiftwidth=2:')
     outputlist.append(r'// vim: set foldmethod=marker foldcolumn=4:')
     return '\n'.join(outputlist)
@@ -610,7 +610,7 @@ else:
         exit(1)
     tmpdir = tempfile.mkdtemp()
     info("created '%s'" % tmpdir, **vars(args))
-default_logfile = os.path.join(tmpdir, 'config-cl-fcn.log')
+default_logfile = os.path.join(tmpdir, 'cl-fcn-config.log')
 
 jsoninput = vars(args).get('input')
 if not jsoninput:

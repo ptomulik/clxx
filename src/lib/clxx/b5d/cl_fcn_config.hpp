@@ -1,16 +1,16 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/b5d/config_cl_fcn.hpp
+// clxx/b5d/cl_fcn_config.hpp
 
-/** // doc: clxx/b5d/config_cl_fcn.hpp {{{
-* \file clxx/b5d/config_cl_fcn.hpp
-* \todo Write documentation for clxx/b5d/config_cl_fcn.hpp
+/** // doc: clxx/b5d/cl_fcn_config.hpp {{{
+* \file clxx/b5d/cl_fcn_config.hpp
+* \todo Write documentation for clxx/b5d/cl_fcn_config.hpp
 */ // }}}
-#ifndef CLXX_B5D_CONFIG_CL_FCN_HPP_INCLUDED
-#define CLXX_B5D_CONFIG_CL_FCN_HPP_INCLUDED
+#ifndef CLXX_B5D_CL_FCN_CONFIG_HPP_INCLUDED
+#define CLXX_B5D_CL_FCN_CONFIG_HPP_INCLUDED
 
-#include <clxx/b5d/config_params.hpp>
+#include <clxx/b5d/cl_config_params.hpp>
 
 /* !!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 /*    FILE GENERATED WITH bin/config-cl-functions.py. DO NOT MODIFY    */
@@ -1249,6 +1249,6 @@
 # define CLXX_B5D_SUFFIX_DEPRECATED_clWaitForEvents
 #endif
 
-#endif /* CLXX_B5D_CONFIG_CL_FCN_HPP_INCLUDED */
+#endif /* CLXX_B5D_CL_FCN_CONFIG_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

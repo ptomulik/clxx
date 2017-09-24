@@ -15,7 +15,7 @@
 #define CLXX_B5D_MOCKS_CL_FCN_HPP_INCLUDED
 
 #include <clxx/common/opencl.h>
-#include <clxx/b5d/config.hpp>
+#include <clxx/b5d/cl_config.hpp>
 #include <cxxtest/Mock.h>
 
 /** \cond SHOW_IGNORED_COMPOUNDS */
