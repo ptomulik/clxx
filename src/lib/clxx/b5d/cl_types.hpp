@@ -17,7 +17,223 @@
 
 #include <clxx/b5d/cl_config.hpp>
 #include <clxx/common/opencl.h>
-#include <clxx/common/macros.hpp>
+
+#if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_BITOPS
+# define CLXX_B5D_DEFINE_ENUM_BITOPS(t__, ut__)
+#else
+/** // doc: CLXX_B5D_DEFINE_ENUM_BITOPS {{{
+ * \brief Overload bitwise operators for an (enum) type.
+ *
+ * The macro defines all the bitwise operators necessary for a given (enum)
+ * type to behave as a bitmask. The macro implementation follows guidelines
+ * given in the \c 17.5.2.1.3 of
+ * <a href="https://isocpp.org/files/papers/N3690.pdf">C++11 standard draft (N3690)</a>.
+ *
+ * \param [in] t__ enum type,
+ * \param [in] ut__ underlying type.
+ *
+ * \note Do not put a semicolon \c ; after the macro.
+ * \note Put the macro in an appropriate namespace.
+ *
+ * **Example**:
+ *
+ * \code
+ * enum class flags_t : int
+ *   {
+ *     f1 = 1,
+ *     f2 = 2,
+ *     f3 = 4
+ *   };
+ * CLXX_B5D_DEFINE_ENUM_BITOPS(flags_t, int)
+ *
+ * flags_t f = flags_t::f1 | flags_t::f3;
+ * \endcode
+ *
+ * \see CLXX_B5D_MAKE_BITMASK_ENUM
+ * \hideinitializer
+ */ // }}}
+# define CLXX_B5D_DEFINE_ENUM_BITOPS(t__, ut__) \
+  constexpr t__ operator&(t__ x, t__ y) noexcept \
+  { return static_cast<t__>(static_cast<ut__>(x) & static_cast<ut__>(y)); } \
+  constexpr t__ operator|(t__ x, t__ y) noexcept \
+  { return static_cast<t__>(static_cast<ut__>(x) | static_cast<ut__>(y)); } \
+  constexpr t__ operator^(t__ x, t__ y) noexcept \
+  { return static_cast<t__>(static_cast<ut__>(x) ^ static_cast<ut__>(y)); } \
+  constexpr t__ operator~(t__ x) noexcept \
+  { return static_cast<t__>(~static_cast<ut__>(x)); } \
+  inline t__& operator&=(t__& x, t__ y) noexcept \
+  { x = x & y; return x; } \
+  inline t__& operator|=(t__& x, t__ y) noexcept \
+  { x = x | y; return x; } \
+  inline t__& operator^=(t__& x, t__ y) noexcept \
+  { x = x ^ y; return x; }
+#endif
+
+#if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_BOOLVAL
+# define CLXX_B5D_DEFINE_ENUM_BOOLVAL(t__, ut__)
+#else
+/** // doc: CLXX_B5D_DEFINE_ENUM_BOOLVAL {{{
+ * \brief Define functions that convert an enum to a boolean value.
+ *
+ * This macro defines for a given type \b t__ a function named \c boolval(),
+ * which converts an enum to a boolean value.
+ *
+ * \param [in] t__ enum type,
+ * \param [in] ut__ underlying type.
+ *
+ * \note Do not put a semicolon \c ; after the macro.
+ * \note Put the macro in an appropriate namespace.
+ *
+ * **Example**:
+ * \code
+ * enum class flags_t : int
+ *   {
+ *     f0 = 0,
+ *     f1 = 1,
+ *     f2 = 2,
+ *     f3 = 4
+ *   };
+ * CLXX_B5D_DEFINE_ENUM_BOOLVAL(flags_t, int)
+ *
+ * flags_t f;
+ * // ...
+ * if(boolval(f))
+ *   {
+ *     // ...
+ *   }
+ * \endcode
+ *
+ * \see CLXX_B5D_MAKE_BITMASK_ENUM
+ * \hideinitializer
+ */ // }}}
+# define CLXX_B5D_DEFINE_ENUM_BOOLVAL(t__, ut__) \
+  constexpr bool boolval(t__ x) noexcept \
+  { return static_cast<bool>(x); }
+#endif
+
+#if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_INTVAL
+# define CLXX_B5D_DEFINE_ENUM_INTVAL(t__, ut__)
+#else
+/** // doc: CLXX_B5D_DEFINE_ENUM_INTVAL {{{
+ * \brief Define functions converting an enum to its underlying integer.
+ *
+ * This macro defines for a given type \b t__ a function named \c intval(),
+ * which converts a value of an enumerated integer to its underlying integer.
+ *
+ * \param [in] t__ enum type,
+ * \param [in] ut__ underlying type.
+ *
+ * \note Do not put a semicolon \c ; after the macro.
+ * \note Put the macro in an appropriate namespace.
+ *
+ * **Example**:
+ * \code
+ * enum class flags_t : int
+ *   {
+ *     f0 = 0,
+ *     f1 = 1,
+ *     f2 = 2,
+ *     f3 = 4
+ *   };
+ * CLXX_B5D_DEFINE_ENUM_INTVAL(flags_t, int)
+ *
+ * int x = intval(flags_t::f2)
+ * \endcode
+ *
+ * \see CLXX_B5D_MAKE_BITMASK_ENUM
+ * \hideinitializer
+ */ // }}}
+# define CLXX_B5D_DEFINE_ENUM_INTVAL(t__, ut__) \
+  constexpr ut__ intval(t__ x) noexcept \
+  { return static_cast<ut__>(x); }
+#endif
+
+/** // doc: CLXX_B5D_MAKE_BITMASK_ENUM {{{
+ * \brief Implement bitmask operations for a strongly typed enum.
+ *
+ * For given enum type \b t__ a set of bitwise operators as well as additional
+ * functions is implemented, such that most of the standard bitwise operations
+ * gets available. Particularly, this macro invokes:
+ *
+ * - CLXX_B5D_DEFINE_ENUM_BITOPS,
+ * - CLXX_B5D_DEFINE_ENUM_BOOLVAL,
+ * - CLXX_B5D_DEFINE_ENUM_INTVAL,
+ *
+ * \param [in] t__ enum type,
+ * \param [in] ut__ underlying type.
+ *
+ * \note Do not put a semicolon \c ; after the macro.
+ * \note Put the macro in an appropriate namespace.
+ *
+ * **Example**:
+ * \code
+ * enum class flags_t : int
+ *   {
+ *     f0 = 0,
+ *     f1 = 1,
+ *     f2 = 2,
+ *     f3 = 4
+ *   };
+ * CLXX_B5D_MAKE_BITMASK_ENUM(flags_t, int)
+ *
+ * int x = intval(flags_t::f1 | flags_t::f2)
+ * x |= flags_t::f3;
+ * x &= ~flags_t::f1;
+ *
+ * if(boolval(x))
+ *   {
+ *     int y = intval(x);
+ *     // ...
+ *   }
+ * \endcode
+ *
+ * \hideinitializer
+ */ // }}}
+#define CLXX_B5D_MAKE_BITMASK_ENUM(t__, ut__) \
+  CLXX_B5D_DEFINE_ENUM_BITOPS(t__, ut__) \
+  CLXX_B5D_DEFINE_ENUM_BOOLVAL(t__, ut__) \
+  CLXX_B5D_DEFINE_ENUM_INTVAL(t__, ut__)
+
+/** // doc: CLXX_B5D_MAKE_INTEGER_ENUM {{{
+ * \brief Implement functions for converting a strongly typed enum to its
+ * underlying integer and to bool
+ *
+ * For given enum type \b t__ functions are implemented which convert the enum
+ * values to underlying integer type and to bool. Particularly, this macro
+ * invokes:
+ *
+ * - CLXX_B5D_DEFINE_ENUM_INTVAL,
+ * - CLXX_B5D_DEFINE_ENUM_BOOLVAL.
+ *
+ * \param [in] t__ enum type,
+ * \param [in] ut__ underlying type.
+ *
+ * \note Do not put a semicolon \c ; after the macro.
+ * \note Put the macro in an appropriate namespace.
+ *
+ * **Example**:
+ * \code
+ * enum class flags_t : int
+ *   {
+ *     f0 = 0,
+ *     f1 = 1,
+ *     f2 = 2,
+ *     f3 = 4
+ *   };
+ * CLXX_B5D_MAKE_INTEGER_ENUM(flags_t, int)
+ *
+ * int x = intval(flags_t::f1 | flags_t::f2)
+ * if(boolval(x))
+ *   {
+ *     // ...
+ *   }
+ * \endcode
+ *
+ * \hideinitializer
+ */ // }}}
+#define CLXX_B5D_MAKE_INTEGER_ENUM(t__, ut__) \
+  CLXX_B5D_DEFINE_ENUM_BOOLVAL(t__, ut__) \
+  CLXX_B5D_DEFINE_ENUM_INTVAL(t__, ut__)
 
 namespace clxx {
 /** \ingroup clxx_common_types
@@ -231,7 +447,7 @@ enum class status_t : cl_int {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(status_t, cl_int)
+CLXX_B5D_MAKE_INTEGER_ENUM(status_t, cl_int)
 
 /** // doc: is_success() {{{
  * \brief Check if the given result code represents a success.
@@ -282,7 +498,7 @@ enum class platform_info_t : cl_platform_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(platform_info_t, cl_platform_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(platform_info_t, cl_platform_info)
 
 /** // doc: device_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_type.
@@ -317,7 +533,7 @@ enum class device_type_t : cl_device_type {
   all         = CL_DEVICE_TYPE_ALL
 };
 
-CLXX_MAKE_BITMASK_ENUM(device_type_t, cl_device_type)
+CLXX_B5D_MAKE_BITMASK_ENUM(device_type_t, cl_device_type)
 
 /** // doc: device_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_info
@@ -495,7 +711,7 @@ enum class device_info_t : cl_device_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(device_info_t, cl_device_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(device_info_t, cl_device_info)
 
 /** // doc: device_fp_config_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_fp_config
@@ -539,7 +755,7 @@ enum class device_fp_config_t : cl_device_fp_config {
 #endif
 };
 
-CLXX_MAKE_BITMASK_ENUM(device_fp_config_t, cl_device_fp_config)
+CLXX_B5D_MAKE_BITMASK_ENUM(device_fp_config_t, cl_device_fp_config)
 
 /** // doc: device_mem_cache_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_mem_cache_type
@@ -565,7 +781,7 @@ enum class device_mem_cache_type_t : cl_device_mem_cache_type {
   read_write_cache  = CL_READ_WRITE_CACHE
 };
 
-CLXX_MAKE_INTEGER_ENUM(device_mem_cache_type_t, cl_device_mem_cache_type)
+CLXX_B5D_MAKE_INTEGER_ENUM(device_mem_cache_type_t, cl_device_mem_cache_type)
 
 /** // doc: device_local_mem_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_local_mem_type
@@ -589,7 +805,7 @@ enum class device_local_mem_type_t : cl_device_local_mem_type {
   global  = CL_GLOBAL
 };
 
-CLXX_MAKE_INTEGER_ENUM(device_local_mem_type_t, cl_device_local_mem_type)
+CLXX_B5D_MAKE_INTEGER_ENUM(device_local_mem_type_t, cl_device_local_mem_type)
 
 /** // doc: device_exec_capabilities_t {{{
  * \brief Corresponds to OpenCL's \c cl_device_exec_capabilities
@@ -615,7 +831,7 @@ enum class device_exec_capabilities_t : cl_device_exec_capabilities {
   native_kernel  = CL_EXEC_NATIVE_KERNEL
 };
 
-CLXX_MAKE_BITMASK_ENUM(device_exec_capabilities_t, cl_device_exec_capabilities)
+CLXX_B5D_MAKE_BITMASK_ENUM(device_exec_capabilities_t, cl_device_exec_capabilities)
 
 /** // doc: device_command_queue_proerties_t {{{
  * \brief Corresponds to OpenCL's \c cl_command_queue_properties
@@ -643,7 +859,7 @@ enum class command_queue_properties_t : cl_command_queue_properties {
   profiling_enable              = CL_QUEUE_PROFILING_ENABLE
 };
 
-CLXX_MAKE_BITMASK_ENUM(command_queue_properties_t, cl_command_queue_properties)
+CLXX_B5D_MAKE_BITMASK_ENUM(command_queue_properties_t, cl_command_queue_properties)
 
 /** // doc: context_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_context_info
@@ -673,7 +889,7 @@ enum class context_info_t : cl_context_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(context_info_t, cl_context_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(context_info_t, cl_context_info)
 
 /** // doc: context_properties_t {{{
  * \brief Correspons to OpenCL's \c cl_context_properties
@@ -731,7 +947,7 @@ enum class context_properties_t : cl_context_properties {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(context_properties_t, cl_context_properties)
+CLXX_B5D_MAKE_INTEGER_ENUM(context_properties_t, cl_context_properties)
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
 /** // doc: device_partition_property_t {{{
@@ -764,7 +980,7 @@ enum class device_partition_property_t : cl_device_partition_property {
   by_affinity_domain = CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN
 };
 
-CLXX_MAKE_INTEGER_ENUM(device_partition_property_t, cl_device_partition_property)
+CLXX_B5D_MAKE_INTEGER_ENUM(device_partition_property_t, cl_device_partition_property)
 #endif
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
@@ -804,7 +1020,7 @@ enum class device_affinity_domain_t : cl_device_affinity_domain {
   next_partitionable = CL_DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE
 };
 
-CLXX_MAKE_BITMASK_ENUM(device_affinity_domain_t, cl_device_affinity_domain)
+CLXX_B5D_MAKE_BITMASK_ENUM(device_affinity_domain_t, cl_device_affinity_domain)
 #endif
 
 /** // doc: command_queue_info_t {{{
@@ -832,7 +1048,7 @@ enum class command_queue_info_t : cl_command_queue_info {
   properties      = CL_QUEUE_PROPERTIES
 };
 
-CLXX_MAKE_INTEGER_ENUM(command_queue_info_t, cl_command_queue_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(command_queue_info_t, cl_command_queue_info)
 
 /** // doc: mem_flags_t {{{
  * \brief Corresponds to OpenCL's \c cl_mem_flags
@@ -881,7 +1097,7 @@ enum class mem_flags_t : cl_mem_flags {
 #endif
 };
 
-CLXX_MAKE_BITMASK_ENUM(mem_flags_t, cl_mem_flags)
+CLXX_B5D_MAKE_BITMASK_ENUM(mem_flags_t, cl_mem_flags)
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_2_0
 /** // doc: svm_mem_flags_t {{{
@@ -927,7 +1143,7 @@ enum class svm_mem_flags_t : cl_svm_mem_flags {
   kernel_read_and_write = CL_MEM_KERNEL_READ_AND_WRITE
 };
 
-CLXX_MAKE_BITMASK_ENUM(svm_mem_flags_t, cl_svm_mem_flags)
+CLXX_B5D_MAKE_BITMASK_ENUM(svm_mem_flags_t, cl_svm_mem_flags)
 #endif
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
@@ -955,7 +1171,7 @@ enum class mem_migration_flags_t : cl_mem_migration_flags {
   mem_object_content_undefined = CL_MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED
 };
 
-CLXX_MAKE_BITMASK_ENUM(mem_migration_flags_t, cl_mem_migration_flags)
+CLXX_B5D_MAKE_BITMASK_ENUM(mem_migration_flags_t, cl_mem_migration_flags)
 #endif
 
 /** // doc: channel_order_t {{{
@@ -1012,7 +1228,7 @@ enum class channel_order_t : cl_channel_order {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(channel_order_t, cl_channel_order)
+CLXX_B5D_MAKE_INTEGER_ENUM(channel_order_t, cl_channel_order)
 
 /** // doc: channel_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_channel_type
@@ -1067,7 +1283,7 @@ enum class channel_type_t : cl_channel_type {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(channel_type_t, cl_channel_type)
+CLXX_B5D_MAKE_INTEGER_ENUM(channel_type_t, cl_channel_type)
 
 /** // doc: mem_object_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_mem_object_type
@@ -1106,7 +1322,7 @@ enum class mem_object_type_t : cl_mem_object_type {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(mem_object_type_t, cl_mem_object_type)
+CLXX_B5D_MAKE_INTEGER_ENUM(mem_object_type_t, cl_mem_object_type)
 
 /** // doc: mem_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_mem_info
@@ -1151,7 +1367,7 @@ enum class mem_info_t : cl_mem_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(mem_info_t, cl_mem_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(mem_info_t, cl_mem_info)
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_2_0
 /** // doc: pipe_info_t {{{
@@ -1175,7 +1391,7 @@ enum class pipe_info_t : cl_pipe_info {
   max_packets           = CL_PIPE_MAX_PACKETS
 };
 
-CLXX_MAKE_INTEGER_ENUM(pipe_info_t, cl_pipe_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(pipe_info_t, cl_pipe_info)
 #endif
 
 /** // doc: image_info_t {{{
@@ -1220,7 +1436,7 @@ enum class image_info_t : cl_image_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(image_info_t, cl_image_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(image_info_t, cl_image_info)
 
 /** // doc: addressing_mode_t {{{
  * \brief Corresponds to OpenCL's cl_addressing_mode
@@ -1252,7 +1468,7 @@ enum class addressing_mode_t : cl_addressing_mode {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(addressing_mode_t, cl_addressing_mode)
+CLXX_B5D_MAKE_INTEGER_ENUM(addressing_mode_t, cl_addressing_mode)
 
 /** // doc: filter_mode_t {{{
  * \brief Corresponds to OpenCL's \c cl_filter_mode
@@ -1278,7 +1494,7 @@ enum class filter_mode_t : cl_filter_mode {
   linear   = CL_FILTER_LINEAR
 };
 
-CLXX_MAKE_INTEGER_ENUM(filter_mode_t, cl_filter_mode)
+CLXX_B5D_MAKE_INTEGER_ENUM(filter_mode_t, cl_filter_mode)
 
 /** // doc: sampler_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_sampler_info
@@ -1307,7 +1523,7 @@ enum class sampler_info_t : cl_sampler_info {
   filter_mode       = CL_SAMPLER_FILTER_MODE
 };
 
-CLXX_MAKE_INTEGER_ENUM(sampler_info_t, cl_sampler_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(sampler_info_t, cl_sampler_info)
 
 /** // doc: map_flags_t {{{
  * \brief Corresponds to OpenCL's cl_map_flags
@@ -1338,7 +1554,7 @@ enum class map_flags_t : cl_map_flags {
 #endif
 };
 
-CLXX_MAKE_BITMASK_ENUM(map_flags_t, cl_map_flags)
+CLXX_B5D_MAKE_BITMASK_ENUM(map_flags_t, cl_map_flags)
 
 /** // doc: program_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_program_info
@@ -1378,7 +1594,7 @@ enum class program_info_t : cl_program_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(program_info_t, cl_program_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(program_info_t, cl_program_info)
 
 /** // doc: program_build_info_t {{{
  * \brief Corresponds to OpenCL's \c cl_program_build_info
@@ -1409,7 +1625,7 @@ enum class program_build_info_t : cl_program_build_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(program_build_info_t, cl_program_build_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(program_build_info_t, cl_program_build_info)
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
 /** // doc: program_binary_type_t {{{
@@ -1438,7 +1654,7 @@ enum class program_binary_type_t : cl_program_binary_type {
   executable      = CL_PROGRAM_BINARY_TYPE_EXECUTABLE
 };
 
-CLXX_MAKE_BITMASK_ENUM(program_binary_type_t, cl_program_binary_type)
+CLXX_B5D_MAKE_BITMASK_ENUM(program_binary_type_t, cl_program_binary_type)
 #endif
 
 /** // doc: build_status_t {{{
@@ -1466,7 +1682,7 @@ enum class build_status_t : cl_build_status {
   in_progress = CL_BUILD_IN_PROGRESS
 };
 
-CLXX_MAKE_INTEGER_ENUM(build_status_t, cl_build_status)
+CLXX_B5D_MAKE_INTEGER_ENUM(build_status_t, cl_build_status)
 
 /** // doc: is_success {{{
  * \brief Check if the given build status represents a success.
@@ -1519,7 +1735,7 @@ enum class kernel_info_t : cl_kernel_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(kernel_info_t, cl_kernel_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(kernel_info_t, cl_kernel_info)
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
 /** // doc: kernel_arg_info_t {{{
@@ -1549,7 +1765,7 @@ enum class kernel_arg_info_t : cl_kernel_arg_info {
   name               = CL_KERNEL_ARG_NAME
 };
 
-CLXX_MAKE_INTEGER_ENUM(kernel_arg_info_t, cl_kernel_arg_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(kernel_arg_info_t, cl_kernel_arg_info)
 #endif
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_2_0
@@ -1573,7 +1789,7 @@ enum class kernel_exec_info_t : cl_kernel_exec_info {
   svm_fine_grain_system = CL_KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM
 };
 
-CLXX_MAKE_INTEGER_ENUM(kernel_exec_info_t, cl_kernel_exec_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(kernel_exec_info_t, cl_kernel_exec_info)
 #endif
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
@@ -1604,7 +1820,7 @@ enum class kernel_arg_address_qualifier_t : cl_kernel_arg_address_qualifier {
   private_  = CL_KERNEL_ARG_ADDRESS_PRIVATE
 };
 
-CLXX_MAKE_INTEGER_ENUM(kernel_arg_address_qualifier_t, cl_kernel_arg_address_qualifier)
+CLXX_B5D_MAKE_INTEGER_ENUM(kernel_arg_address_qualifier_t, cl_kernel_arg_address_qualifier)
 #endif
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
@@ -1635,7 +1851,7 @@ enum class kernel_arg_access_qualifier_t : cl_kernel_arg_access_qualifier {
   none        = CL_KERNEL_ARG_ACCESS_NONE
 };
 
-CLXX_MAKE_INTEGER_ENUM(kernel_arg_access_qualifier_t, cl_kernel_arg_access_qualifier)
+CLXX_B5D_MAKE_INTEGER_ENUM(kernel_arg_access_qualifier_t, cl_kernel_arg_access_qualifier)
 #endif
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
@@ -1666,7 +1882,7 @@ enum class kernel_arg_type_qualifier_t : cl_kernel_arg_type_qualifier {
   volatile_  = CL_KERNEL_ARG_TYPE_VOLATILE
 };
 
-CLXX_MAKE_BITMASK_ENUM(kernel_arg_type_qualifier_t, cl_kernel_arg_type_qualifier)
+CLXX_B5D_MAKE_BITMASK_ENUM(kernel_arg_type_qualifier_t, cl_kernel_arg_type_qualifier)
 #endif
 
 /** // doc: kernel_work_group_info_t {{{
@@ -1705,7 +1921,7 @@ enum class kernel_work_group_info_t : cl_kernel_work_group_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(kernel_work_group_info_t, cl_kernel_work_group_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(kernel_work_group_info_t, cl_kernel_work_group_info)
 
 #if CLXX_B5D_OPENCL_CL_H_VERSION_2_1
 /** // doc: kernel_sub_group_info_t {{{
@@ -1732,7 +1948,7 @@ enum class kernel_sub_group_info_t : cl_kernel_sub_group_info {
   local_size_for_sub_group_count    = CL_KERNEL_LOCAL_SIZE_FOR_SUB_GROUP_COUNT
 };
 
-CLXX_MAKE_INTEGER_ENUM(kernel_sub_group_info_t, cl_kernel_sub_group_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(kernel_sub_group_info_t, cl_kernel_sub_group_info)
 #endif
 
 /** // doc: event_info_t {{{
@@ -1767,7 +1983,7 @@ enum class event_info_t : cl_event_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(event_info_t, cl_event_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(event_info_t, cl_event_info)
 
 /** // doc: command_type_t {{{
  * \brief Corresponds to OpenCL's \c cl_commant_type
@@ -1842,7 +2058,7 @@ enum class command_type_t : cl_command_type {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(command_type_t, cl_command_type)
+CLXX_B5D_MAKE_INTEGER_ENUM(command_type_t, cl_command_type)
 
 /** // doc: command_exec_status_t {{{
  * \brief Corresponds to OpenCL's command execution status
@@ -1867,7 +2083,7 @@ enum class command_exec_status_t : cl_int {
   queued    = CL_QUEUED
 };
 
-CLXX_MAKE_INTEGER_ENUM(command_exec_status_t, cl_int)
+CLXX_B5D_MAKE_INTEGER_ENUM(command_exec_status_t, cl_int)
 
 /** // doc: is_error(command_exec_status_t) {{{
  * \brief Check if a command execution status represents an error.
@@ -2066,7 +2282,7 @@ enum class buffer_create_type_t : cl_buffer_create_type {
   region = CL_BUFFER_CREATE_TYPE_REGION
 };
 
-CLXX_MAKE_INTEGER_ENUM(buffer_create_type_t, cl_buffer_create_type)
+CLXX_B5D_MAKE_INTEGER_ENUM(buffer_create_type_t, cl_buffer_create_type)
 #endif
 
 /** // doc: profiling_info_t {{{
@@ -2099,7 +2315,7 @@ enum class profiling_info_t : cl_profiling_info {
 #endif
 };
 
-CLXX_MAKE_INTEGER_ENUM(profiling_info_t, cl_profiling_info)
+CLXX_B5D_MAKE_INTEGER_ENUM(profiling_info_t, cl_profiling_info)
 
 /** // doc: cl_object_info_type {{{
  * \brief Return the appropriate xyz_info_t type for a particular OpenCL object
@@ -2112,20 +2328,20 @@ CLXX_MAKE_INTEGER_ENUM(profiling_info_t, cl_profiling_info)
 template< typename ClObjT >
   struct cl_object_info_type;
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
-#define CLXX_SPECIALIZE_cl_object_info_type(ClObjT,InfoT) \
+#define CLXX_B5D_SPECIALIZE_cl_object_info_type(ClObjT,InfoT) \
 template< > \
   struct cl_object_info_type<ClObjT> \
   { typedef InfoT type; }
 
-CLXX_SPECIALIZE_cl_object_info_type(cl_command_queue, command_queue_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_context, context_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_device_id, device_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_event, event_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_kernel, kernel_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_mem, mem_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_platform_id, platform_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_program, program_info_t);
-CLXX_SPECIALIZE_cl_object_info_type(cl_sampler, sampler_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_command_queue, command_queue_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_context, context_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_device_id, device_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_event, event_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_kernel, kernel_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_mem, mem_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_platform_id, platform_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_program, program_info_t);
+CLXX_B5D_SPECIALIZE_cl_object_info_type(cl_sampler, sampler_info_t);
 /** \endcond */
 
 /** // doc: invalid_cl_object_errcode {{{
@@ -2142,20 +2358,20 @@ CLXX_SPECIALIZE_cl_object_info_type(cl_sampler, sampler_info_t);
 template< typename Handle >
   struct invalid_cl_object_errcode;
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
-#define CLXX_SPECIALIZE_invalid_cl_object_errcode(ClObjT,ErrCode) \
+#define CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(ClObjT,ErrCode) \
 template< > \
   struct invalid_cl_object_errcode<ClObjT> \
   { static constexpr status_t value = status_t::ErrCode; }
 
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_command_queue, invalid_command_queue);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_context, invalid_context);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_device_id, invalid_device);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_event, invalid_event);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_kernel, invalid_kernel);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_mem, invalid_mem_object);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_platform_id, invalid_platform);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_program, invalid_program);
-CLXX_SPECIALIZE_invalid_cl_object_errcode(cl_sampler, invalid_sampler);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_command_queue, invalid_command_queue);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_context, invalid_context);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_device_id, invalid_device);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_event, invalid_event);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_kernel, invalid_kernel);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_mem, invalid_mem_object);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_platform_id, invalid_platform);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_program, invalid_program);
+CLXX_B5D_SPECIALIZE_invalid_cl_object_errcode(cl_sampler, invalid_sampler);
 /** \endcond */
 
 /** @} */

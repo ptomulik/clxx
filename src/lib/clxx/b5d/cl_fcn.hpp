@@ -7,8 +7,8 @@
  * \file clxx/b5d/cl_fcn.hpp
  * \brief Bare C++ wrappers around OpenCL functions.
  */ // }}}
-#ifndef CLXX_B4D_CL_FCN_HPP_INCLUDED
-#define CLXX_B4D_CL_FCN_HPP_INCLUDED
+#ifndef CLXX_B5D_CL_FCN_HPP_INCLUDED
+#define CLXX_B5D_CL_FCN_HPP_INCLUDED
 
 #include <clxx/b5d/cl_types.hpp>
 #include <clxx/b5d/cl_config.hpp>
@@ -7089,6 +7089,6 @@ wait_for_events(
 /** @} */
 } // end namespace clxx
 
-#endif /* CLXX_B4D_CL_FCN_HPP_INCLUDED */
+#endif /* CLXX_B5D_CL_FCN_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
