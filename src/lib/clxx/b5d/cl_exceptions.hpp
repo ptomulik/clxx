@@ -10,9 +10,13 @@
 #ifndef CLXX_B5D_CL_EXCEPTIONS_HPP_INCLUDED
 #define CLXX_B5D_CL_EXCEPTIONS_HPP_INCLUDED
 
+#include <clxx/common/exception.hpp>
 #include <clxx/common/exception_base.hpp>
 #include <clxx/b5d/cl_types.hpp>
 #include <clxx/b5d/detail/cl_enum2cstr.hpp>
+#include <clxx/b5d/detail/cl_to_string.hpp>
+
+#include <string>
 #include <stdexcept>
 
 namespace clxx { namespace detail {
@@ -33,9 +37,7 @@ namespace clxx { namespace detail {
  *
  */ // }}}
 template<status_t Code> struct clerror_stdexcept { };
-} } // end namespace clxx::detail
 
-namespace clxx { namespace detail {
 /** \cond SHOW_TEMPLATE_SPECIALIZATIONS */
 template<>
   struct clerror_stdexcept<status_t::device_not_found>
@@ -293,10 +295,6 @@ template<>
 /** \endcond */
 } } // end namespace clxx::detail
 
-#include <clxx/common/exception.hpp>
-#include <clxx/b5d/detail/cl_to_string.hpp>
-#include <clxx/b5d/cl_types.hpp>
-
 namespace clxx {
 
 /** // doc: clerror {{{
@@ -324,10 +322,6 @@ struct clerror
      */ // }}}
     virtual status_t code() const noexcept = 0;
   };
-
-} // end namespace clxx
-
-namespace clxx {
 
 /** // clerror_base {{{
  * \ingroup clxx_common_exceptions
@@ -542,8 +536,6 @@ template <status_t Code, class StdExcept>
 /** \endcond **/
 } // end namespace clxx
 
-#include <clxx/b5d/detail/cl_to_string.hpp>
-#include <string>
 
 namespace clxx {
 
