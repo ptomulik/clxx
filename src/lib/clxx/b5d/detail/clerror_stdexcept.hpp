@@ -70,7 +70,7 @@ template<>
 template<>
   struct clerror_stdexcept<status_t::map_failure>
   { typedef std::runtime_error type; };
-#if CLXX_CL_H_VERSION_1_1
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
 template<>
   struct clerror_stdexcept<status_t::misaligned_sub_buffer_offset>
   { typedef std::invalid_argument type; };
@@ -78,7 +78,7 @@ template<>
   struct clerror_stdexcept<status_t::exec_status_error_for_events_in_wait_list>
   { typedef std::invalid_argument type; };
 #endif
-#if CLXX_CL_H_VERSION_1_2
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
 template<>
   struct clerror_stdexcept<status_t::compile_program_failure>
   { typedef std::runtime_error type; };
@@ -197,12 +197,12 @@ template<>
 template<>
   struct clerror_stdexcept<status_t::invalid_global_work_size>
   { typedef std::invalid_argument type; };
-#if CLXX_CL_H_VERSION_1_1
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
 template<>
   struct clerror_stdexcept<status_t::invalid_property>
   { typedef std::invalid_argument type; };
 #endif
-#if CLXX_CL_H_VERSION_1_2
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
 template<>
   struct clerror_stdexcept<status_t::invalid_image_descriptor>
   { typedef std::invalid_argument type; };
@@ -216,7 +216,7 @@ template<>
   struct clerror_stdexcept<status_t::invalid_device_partition_count>
   { typedef std::invalid_argument type; };
 #endif
-#if CLXX_CL_H_VERSION_2_0
+#if CLXX_B5D_OPENCL_CL_H_VERSION_2_0
 template<>
   struct clerror_stdexcept<status_t::invalid_pipe_size>
   { typedef std::invalid_argument type; };

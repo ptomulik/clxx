@@ -12,7 +12,7 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/b5d/cl_fcn.hpp>
-#include <clxx/common/exceptions.hpp>
+#include <clxx/b5d/cl_exceptions.hpp>
 #include <clxx/b5d/mocks/cl_fcn.hpp>
 
 CLXX_DIAGNOSTIC_PUSH

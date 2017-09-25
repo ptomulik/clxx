@@ -12,6 +12,7 @@
 
 #include <clxx/common/exception_base.hpp>
 #include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/detail/cl_enum2cstr.hpp>
 #include <stdexcept>
 
 namespace clxx { namespace detail {
@@ -293,7 +294,7 @@ template<>
 } } // end namespace clxx::detail
 
 #include <clxx/common/exception.hpp>
-#include <clxx/common/detail/to_string.hpp>
+#include <clxx/b5d/detail/cl_to_string.hpp>
 #include <clxx/b5d/cl_types.hpp>
 
 namespace clxx {
@@ -541,7 +542,7 @@ template <status_t Code, class StdExcept>
 /** \endcond **/
 } // end namespace clxx
 
-#include <clxx/common/detail/to_string.hpp>
+#include <clxx/b5d/detail/cl_to_string.hpp>
 #include <string>
 
 namespace clxx {
