@@ -1,0 +1,121 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import('env')
+
+from SCons.Util import CLVar, NodeList
+import os
+
+sources =  [
+    'b3c/command_queue.cpp',
+##    'b3c/context.cpp',
+##    'b3c/context_properties.cpp',
+##    'b3c/device.cpp',
+##    'b3c/device_partition.cpp',
+##    'b3c/device_partition_properties.cpp',
+##    'b3c/devices.cpp',
+##    'b3c/event.cpp',
+##    'b3c/events.cpp',
+##    'b3c/functions.cpp',
+##    'b3c/kernel.cpp',
+##    'b3c/kernel_fcn.cpp',
+##    'b3c/mem.cpp',
+##    'b3c/mem_fcn.cpp',
+##    'b3c/platform.cpp',
+##    'b3c/platform_layer.cpp',
+##    'b3c/platforms.cpp',
+##    'b3c/program.cpp',
+##    'b3c/program_fcn.cpp',
+##    'b3c/program_observer.cpp',
+]
+
+headers = [
+##    #
+##    # b3c/*.hpp
+##    #
+##    'b3c/clobj.hpp',
+##    'b3c/clobj_fcn.hpp',
+##    'b3c/clobj_impl.hpp',
+##    'b3c/command_queue.hpp',
+##    'b3c/command_queue_fwd.hpp',
+##    'b3c/context.hpp',
+##    'b3c/context_fwd.hpp',
+##    'b3c/context_properties.hpp',
+##    'b3c/context_property.hpp',
+##    'b3c/device.hpp',
+##    'b3c/device_fwd.hpp',
+##    'b3c/device_partition.hpp',
+##    'b3c/device_partition_properties.hpp',
+##    'b3c/device_partition_property.hpp',
+##    'b3c/devices.hpp',
+##    'b3c/event.hpp',
+##    'b3c/event_fwd.hpp',
+##    'b3c/events.hpp',
+##    'b3c/functions.hpp',
+##    'b3c/kernel.hpp',
+##    'b3c/kernel_fcn.hpp',
+##    'b3c/kernel_fwd.hpp',
+##    'b3c/kernels.hpp',
+##    'b3c/mem.hpp',
+##    'b3c/mem_fcn.hpp',
+##    'b3c/mem_fwd.hpp',
+##    'b3c/platform.hpp',
+##    'b3c/platform_fwd.hpp',
+##    'b3c/platform_layer.hpp',
+##    'b3c/platforms.hpp',
+##    'b3c/program.hpp',
+##    'b3c/program_fcn.hpp',
+##    'b3c/program_fwd.hpp',
+##    'b3c/program_observer.hpp',
+##    'b3c/programs.hpp',
+##    'b3c/detail/obj2cl.hpp',
+##    #
+##    # b3c/detail/*.hpp
+##    #
+##    'b3c/detail/obj2cl.hpp',
+]
+
+headers += [
+##    'cl.hpp'
+]
+
+env['CLXX_PACKAGES']['libclxx_b3c'] = {
+    'version' : env.subst('$CLXX_VERSION'),
+    'libdeps' : CLVar('clxx_b5d clxx_info')
+}
+
+objects = env.SharedObject(sources)
+
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_b3c']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_b3c']['libdeps']
+}
+
+lib = env.SharedLibrary('../clxx_b3c', objects, **overrides)
+
+### tlib - library for testing (OpenCL functions replaced with mocks)
+##tlib = env.SharedLibrary('../clxx_b3c_test', objects + ['b3c/mock.cpp'], **overrides)
+##env.Ignore('../..', tlib)
+
+ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
+for f in ilib: env.Ignore(f.dir, f)
+
+iheaders = NodeList()
+for header in headers:
+    [head, tail] = os.path.split(header)
+    idir = os.path.join(env.subst("${includedir}"), "clxx", head);
+    iheader = env.Install(idir, header)
+    env.Ignore(idir, iheader)
+    iheaders += iheader
+
+env.Alias('install-libclxx_b3c-headers', iheaders)
+env.Alias('install-libclxx_b3c-lib', ilib)
+env.Alias('install-libclxx_b3c-dev', ['install-libclxx_b3c-headers', 'install-libclxx_b3c-lib' ])
+env.Alias('install','install-libclxx_b3c-dev')
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:
