@@ -27,13 +27,13 @@
 CLXX_DIAGNOSTIC_PUSH
 CLXX_DISABLE_COMMENT_WARNING
 #if defined(__CYGWIN__)
-# define CLXX_UNDEF_WIN32 1
+# define CLXX_B5D_UNDEF_WIN32 1
 # define _WIN32 1
 #endif
 #include <CL/cl.h>
-#if defined(CLXX_UNDEF_WIN32)
+#if defined(CLXX_B5D_UNDEF_WIN32)
 # undef _WIN32
-# undef CLXX_UNDEF_WIN32
+# undef CLXX_B5D_UNDEF_WIN32
 #endif
 CLXX_DIAGNOSTIC_POP
 
@@ -54,7 +54,10 @@ CLXX_DIAGNOSTIC_POP
 # error "clxx must be compiled with CL/cl.h version at least 2.0"
 #endif
 #if defined(CLXX_B5D_OPENCL_CL_H_VERSION_2_1) && !defined(CL_VERSION_2_1)
-# error "clxx must be compiled with CL/cl.h version at least 2.0"
+# error "clxx must be compiled with CL/cl.h version at least 2.1"
+#endif
+#if defined(CLXX_B5D_OPENCL_CL_H_VERSION_2_2) && !defined(CL_VERSION_2_2)
+# error "clxx must be compiled with CL/cl.h version at least 2.2"
 #endif
 
 CLXX_DIAGNOSTIC_PUSH
