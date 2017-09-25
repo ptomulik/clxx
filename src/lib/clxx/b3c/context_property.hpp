@@ -11,9 +11,9 @@
 #ifndef CLXX_B3C_CONTEXT_PROPERTY_HPP_INCLUDED
 #define CLXX_B3C_CONTEXT_PROPERTY_HPP_INCLUDED
 
-#include <clxx/common/detail/context_property_type.hpp>
-#include <clxx/b5d/types.hpp>
+#include <clxx/b3c/detail/context_property_type.hpp>
 #include <clxx/b3c/platform.hpp>
+#include <clxx/b5d/cl_types.hpp>
 
 namespace clxx {
 

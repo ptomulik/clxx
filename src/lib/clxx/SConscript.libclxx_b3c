@@ -8,10 +8,10 @@ from SCons.Util import CLVar, NodeList
 import os
 
 sources =  [
-    'b3c/command_queue.cpp',
+##    'b3c/command_queue.cpp',
 ##    'b3c/context.cpp',
 ##    'b3c/context_properties.cpp',
-##    'b3c/device.cpp',
+    'b3c/device.cpp',
 ##    'b3c/device_partition.cpp',
 ##    'b3c/device_partition_properties.cpp',
 ##    'b3c/devices.cpp',
@@ -22,7 +22,7 @@ sources =  [
 ##    'b3c/kernel_fcn.cpp',
 ##    'b3c/mem.cpp',
 ##    'b3c/mem_fcn.cpp',
-##    'b3c/platform.cpp',
+    'b3c/platform.cpp',
 ##    'b3c/platform_layer.cpp',
 ##    'b3c/platforms.cpp',
 ##    'b3c/program.cpp',
