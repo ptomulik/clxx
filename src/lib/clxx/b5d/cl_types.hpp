@@ -16,7 +16,7 @@
 #define CLXX_B5D_CL_TYPES_HPP_INCLUDED
 
 #include <clxx/b5d/cl_config.hpp>
-#include <clxx/common/opencl.h>
+#include <clxx/b5d/opencl.h>
 
 #if defined(SWIG) && CLXX_SWIG_NO_CLASS_ENUM_BITOPS
 # define CLXX_B5D_DEFINE_ENUM_BITOPS(t__, ut__)

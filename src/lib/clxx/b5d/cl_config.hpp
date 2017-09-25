@@ -11,7 +11,7 @@
 #define CLXX_B5D_CL_CONFIG_HPP_INCLUDED
 
 #include <clxx/b5d/cl_config_params.hpp>
-#include <clxx/b5d/cl_fcn_config.hpp>
+#include <clxx/b5d/cl_functions_config.hpp>
 
 #if defined(_WIN32)
 # define CLXX_B5D_API_ENTRY
