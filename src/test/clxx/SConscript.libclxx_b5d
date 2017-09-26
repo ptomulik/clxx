@@ -9,6 +9,8 @@ from SCons.Util import CLVar
 tests = [
     # Types
     'b5d/cl_types.t.h',
+    # Functions config
+    'b5d/cl_functions_config.t.h',
     # Functions
     'b5d/cl_functions/build_program.t.h',
     'b5d/cl_functions/clone_kernel.t.h',

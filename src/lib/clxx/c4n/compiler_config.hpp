@@ -76,12 +76,6 @@
 # define CLXX_DISABLE_IGNORED_ATTRIBUTES_WARNING
 #endif
 
-#if defined(_WIN32)
-# define CLXX_WINDOWS_API
-#else
-# define CLXX_POSIX_API
-#endif
-
 #endif /* CLXX_C4N_COMPILER_CONFIG_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

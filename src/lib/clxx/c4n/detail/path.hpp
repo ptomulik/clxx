@@ -12,7 +12,7 @@
 
 #include <string>
 #include <boost/algorithm/string.hpp>
-#include <clxx/c4n/compiler_config.hpp>
+#include <clxx/c4n/config.hpp>
 
 namespace clxx { namespace detail {
 #ifdef CLXX_WINDOWS_API

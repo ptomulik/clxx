@@ -11,6 +11,7 @@
 #define CLXX_C4N_DETAIL_SEARCH_PATH_HPP_INCLUDED
 
 #include <clxx/c4n/detail/path.hpp>
+#include <clxx/c4n/config.hpp>
 
 namespace clxx { namespace detail {
 /** // doc: search_path_delimiter() {{{
