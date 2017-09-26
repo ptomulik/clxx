@@ -10,8 +10,9 @@
 #ifndef CLXX_B3C_EXCEPTIONS_HPP_INCLUDED
 #define CLXX_B3C_EXCEPTIONS_HPP_INCLUDED
 
-#include <clxx/common/exception.hpp>
-#include <clxx/common/exception_base.hpp>
+#include <clxx/c4n/exception.hpp>
+#include <clxx/c4n/exception_base.hpp>
+#include <clxx/c4n/exceptions.hpp>
 #include <string>
 
 namespace clxx {
@@ -291,77 +292,6 @@ struct uninitialized_sampler_error
      * \brief Constructor
      */ // }}}
     uninitialized_sampler_error(char const* what_arg) noexcept
-      : Base(what_arg)
-    { }
-  };
-/** // doc: uninitialized_value_error {{{
- * \ingroup clxx_common_exceptions
- * \brief An exception begin thrown when a user tries to access a value which
- *        was not initialized
- *
- * This is used mainly by the \ref clxx::platform_info "platform_info" and
- * \ref clxx::device_info "device_info" object, which contain attributes that
- * may have a value but may also be in uninitialized state.
- */ // }}}
-struct uninitialized_value_error
-    : public exception_base<clxx::exception, std::logic_error>
-  {
-    /** // doc: Base {{{
-     * \brief Typedef for base class
-     */ // }}}
-    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
-    /** // doc: uninitialized_value_error() {{{
-     * \brief Default constructor
-     */ // }}}
-    uninitialized_value_error() noexcept
-      : Base("attempted to access uninitialized value")
-    { }
-    /** // doc: uninitialized_value_error() {{{
-     * \brief Constructor
-     */ // }}}
-    uninitialized_value_error(std::string const& what_arg) noexcept
-      : Base(what_arg)
-    { }
-    /** // doc: uninitialized_value_error() {{{
-     * \brief Constructor
-     */ // }}}
-    uninitialized_value_error(char const* what_arg) noexcept
-      : Base(what_arg)
-    { }
-  };
-/** // doc: value_access_error {{{
- * \ingroup clxx_common_exceptions
- * \brief An exception being thrown when there is an error in a value access
- *        logic
- *
- *  This is used, for example, by a \ref clxx::device_partition_property
- *  "device_partition_property". If, for example, it is of a non-sequence type
- *  and user tries to access its value as a sequence, then the
- *  #value_access_error is thrown.
- */ // }}}
-struct value_access_error
-    : public exception_base<clxx::exception, std::logic_error>
-  {
-    /** // doc: Base {{{
-     * \brief Typedef for base class
-     */ // }}}
-    typedef clxx::exception_base<clxx::exception, std::logic_error> Base;
-    /** // doc: value_access_error() {{{
-     * \brief Default constructor
-     */ // }}}
-    value_access_error() noexcept
-      : Base("attempted to access value in a wrong way")
-    { }
-    /** // doc: value_access_error() {{{
-     * \brief Constructor
-     */ // }}}
-    value_access_error(std::string const& what_arg) noexcept
-      : Base(what_arg)
-    { }
-    /** // doc: value_access_error() {{{
-     * \brief Constructor
-     */ // }}}
-    value_access_error(char const* what_arg) noexcept
       : Base(what_arg)
     { }
   };

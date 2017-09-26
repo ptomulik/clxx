@@ -17,7 +17,7 @@ namespace clxx {
 
 /** \ingroup clxx_b5d_functions
  *  @{ */
-#if CLXX_B5D_OPENCL_PROVIDES(clBuildProgram)
+#if CLXX_B5D_PROVIDES(build_program)
 /** // doc: build_program(...) {{{
  * \brief Builds (compiles and links) a program executable from the program
  *    source or binary
@@ -105,7 +105,7 @@ namespace clxx {
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clBuildProgram.html">clBuildProgram()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clBuildProgram) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(build_program) void CLXX_B5D_API_CALL
 build_program(
     cl_program program,
     cl_uint num_devices,
@@ -113,10 +113,9 @@ build_program(
     const char* options,
     void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
     void* user_data
-) CLXX_B5D_API_SUFFIX(clBuildProgram);
-# define CLXX_B5D_PROVIDES_build_program 1
+) CLXX_B5D_API_SUFFIX(build_program);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCloneKernel)
+#if CLXX_B5D_PROVIDES(clone_kernel)
 /** // doc: clone_kernel() {{{
  * \brief Make a shallow copy of the kernel object.
  *
@@ -143,13 +142,12 @@ build_program(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCloneKernel.html">clCloneKernel()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCloneKernel) cl_kernel CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(clone_kernel) cl_kernel CLXX_B5D_API_CALL
 clone_kernel(
     cl_kernel source_kernel
-) CLXX_B5D_API_SUFFIX(clCloneKernel);
-# define CLXX_B5D_PROVIDES_clone_kernel 1
+) CLXX_B5D_API_SUFFIX(clone_kernel);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCompileProgram)
+#if CLXX_B5D_PROVIDES(compile_program)
 /** // doc: compile_program(...) {{{
  * \brief Compiles a program’s source for all the devices or a specific
  *    device(s) in the OpenCL context associated with program.
@@ -242,7 +240,7 @@ clone_kernel(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCompileProgram.html">clCompileProgram()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCompileProgram) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(compile_program) void CLXX_B5D_API_CALL
 compile_program(
     cl_program program,
     cl_uint num_devices,
@@ -253,10 +251,9 @@ compile_program(
     const char** header_include_names,
     void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
     void* user_data
-) CLXX_B5D_API_SUFFIX(clCompileProgram);
-# define CLXX_B5D_PROVIDES_compile_program 1
+) CLXX_B5D_API_SUFFIX(compile_program);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateBuffer)
+#if CLXX_B5D_PROVIDES(create_buffer)
 /** // doc: create_buffer() {{{
  * \brief Creates a buffer object
  *
@@ -304,16 +301,15 @@ compile_program(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateBuffer.html">clCreateBuffer()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateBuffer) cl_mem CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_buffer) cl_mem CLXX_B5D_API_CALL
 create_buffer(
     cl_context context,
     mem_flags_t flags,
     size_t size,
     void* host_ptr
-) CLXX_B5D_API_SUFFIX(clCreateBuffer);
-# define CLXX_B5D_PROVIDES_create_buffer 1
+) CLXX_B5D_API_SUFFIX(create_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
+#if CLXX_B5D_PROVIDES(create_command_queue)
 /** // doc: create_command_queue(...) {{{
  * \brief Create a command-queue on a specific device
  *
@@ -370,15 +366,14 @@ create_buffer(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueue.html">clCreateCommandQueue()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateCommandQueue) cl_command_queue CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_command_queue) cl_command_queue CLXX_B5D_API_CALL
 create_command_queue(
     cl_context context,
     cl_device_id device,
     command_queue_properties_t properties
-) CLXX_B5D_API_SUFFIX(clCreateCommandQueue);
-# define CLXX_B5D_PROVIDES_create_command_queue 1
+) CLXX_B5D_API_SUFFIX(create_command_queue);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueueWithProperties)
+#if CLXX_B5D_PROVIDES(create_command_queue_with_properties)
 /** // doc: create_command_queue_with_properties(...) {{{
  * \brief Create a host or device command-queue on a specific device
  *
@@ -438,15 +433,14 @@ create_command_queue(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateCommandQueueWithProperties.html">clCreateCommandQueueWithProperties()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateCommandQueueWithProperties) cl_command_queue CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_command_queue_with_properties) cl_command_queue CLXX_B5D_API_CALL
 create_command_queue_with_properties(
     cl_context context,
     cl_device_id device,
     const cl_queue_properties* properties
-) CLXX_B5D_API_SUFFIX(clCreateCommandQueueWithProperties);
-# define CLXX_B5D_PROVIDES_create_command_queue_with_properties 1
+) CLXX_B5D_API_SUFFIX(create_command_queue_with_properties);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateContext)
+#if CLXX_B5D_PROVIDES(create_context)
 /** // doc: create_context(...) {{{
  * \brief Create OpenCL context
  *
@@ -521,7 +515,7 @@ create_command_queue_with_properties(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContext.html">clCreateContext()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateContext) cl_context CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_context) cl_context CLXX_B5D_API_CALL
 create_context(
     const cl_context_properties* properties,
     cl_uint num_devices, const cl_device_id* devices,
@@ -529,10 +523,9 @@ create_context(
                                   const void* private_info,
                                   size_t cb, void* user_data),
     void* user_data
-) CLXX_B5D_API_SUFFIX(clCreateContext);
-# define CLXX_B5D_PROVIDES_create_context 1
+) CLXX_B5D_API_SUFFIX(create_context);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateContextFromType)
+#if CLXX_B5D_PROVIDES(create_context_from_type)
 /** // doc: create_context_from_type_from_type(...) {{{
  * \brief Create OpenCL context
  *
@@ -605,7 +598,7 @@ create_context(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateContextFromType.html">clCreateContextFromType()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateContextFromType) cl_context CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_context_from_type) cl_context CLXX_B5D_API_CALL
 create_context_from_type(
     const cl_context_properties* properties,
     device_type_t device_type,
@@ -614,10 +607,9 @@ create_context_from_type(
                                   size_t cb,
                                   void* user_data),
     void* user_data
-) CLXX_B5D_API_SUFFIX(clCreateContextFromType);
-# define CLXX_B5D_PROVIDES_create_context_from_type 1
+) CLXX_B5D_API_SUFFIX(create_context_from_type);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage)
+#if CLXX_B5D_PROVIDES(create_image)
 /** // doc: create_image() {{{
  * \brief Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D
  *        image array or 3D image object
@@ -679,17 +671,16 @@ create_context_from_type(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateImage.html">clCreateImage()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateImage) cl_mem CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_image) cl_mem CLXX_B5D_API_CALL
 create_image(
     cl_context context,
     mem_flags_t flags,
     const cl_image_format *image_format,
     const cl_image_desc *image_desc,
     void *host_ptr
-) CLXX_B5D_API_SUFFIX(clCreateImage);
-# define CLXX_B5D_PROVIDES_create_image 1
+) CLXX_B5D_API_SUFFIX(create_image);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage2D)
+#if CLXX_B5D_PROVIDES(create_image_2d)
 /** // doc: create_image_2d() {{{
  * \brief Creates a 2D image object.
  *
@@ -757,7 +748,7 @@ create_image(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateImage2D.html">clCreateImage2D()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateImage2D) cl_mem CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_image_2d) cl_mem CLXX_B5D_API_CALL
 create_image_2d(
     cl_context context,
     mem_flags_t flags,
@@ -766,10 +757,9 @@ create_image_2d(
     size_t image_height,
     size_t image_row_pitch,
     void *host_ptr
-) CLXX_B5D_API_SUFFIX(clCreateImage2D);
-# define CLXX_B5D_PROVIDES_create_image_2d 1
+) CLXX_B5D_API_SUFFIX(create_image_2d);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateImage3D)
+#if CLXX_B5D_PROVIDES(create_image_3d)
 /** // doc: create_image_3d() {{{
  * \brief Creates a 3D image object.
  *
@@ -846,7 +836,7 @@ create_image_2d(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clCreateImage3D.html">clCreateImage3D()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateImage3D) cl_mem CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_image_3d) cl_mem CLXX_B5D_API_CALL
 create_image_3d(
     cl_context context,
     mem_flags_t flags,
@@ -857,10 +847,9 @@ create_image_3d(
     size_t image_row_pitch,
     size_t image_slice_pitch,
     void *host_ptr
-) CLXX_B5D_API_SUFFIX(clCreateImage3D);
-# define CLXX_B5D_PROVIDES_create_image_3d 1
+) CLXX_B5D_API_SUFFIX(create_image_3d);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernel)
+#if CLXX_B5D_PROVIDES(create_kernel)
 /** // doc: create_kernel() {{{
  * \brief Creates OpenCL kernel
  *
@@ -900,14 +889,13 @@ create_image_3d(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCreateKernel.html">clCreateKernel()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateKernel) cl_kernel CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_kernel) cl_kernel CLXX_B5D_API_CALL
 create_kernel(
     cl_program program,
     const char* kernel_name
-) CLXX_B5D_API_SUFFIX(clCreateKernel);
-# define CLXX_B5D_PROVIDES_create_kernel 1
+) CLXX_B5D_API_SUFFIX(create_kernel);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateKernelsInProgram)
+#if CLXX_B5D_PROVIDES(create_kernels_in_program)
 /** // doc: create_kernels_in_program() {{{
  * \brief Create kernel objects for all kernel functions in \em program
  *
@@ -948,16 +936,15 @@ create_kernel(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateKernelsInProgram.html">clCreateKernelsInProgram()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateKernelsInProgram) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_kernels_in_program) void CLXX_B5D_API_CALL
 create_kernels_in_program(
     cl_program program,
     cl_uint num_kernels,
     cl_kernel* kernels,
     cl_uint* num_kernels_ret
-) CLXX_B5D_API_SUFFIX(clCreateKernelsInProgram);
-# define CLXX_B5D_PROVIDES_create_kernels_in_program 1
+) CLXX_B5D_API_SUFFIX(create_kernels_in_program);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
+#if CLXX_B5D_PROVIDES(create_pipe)
 /** // doc: create_pipe() {{{
  * \brief Creates a pipe object.
  *
@@ -1006,17 +993,16 @@ create_kernels_in_program(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clCreatePipe.html">clCreatePipe()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreatePipe) cl_mem CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_pipe) cl_mem CLXX_B5D_API_CALL
 create_pipe(
     cl_context context,
     mem_flags_t flags,
     cl_uint pipe_packet_size,
     cl_uint pipe_max_packets,
     const cl_pipe_properties* properties
-) CLXX_B5D_API_SUFFIX(clCreatePipe);
-# define CLXX_B5D_PROVIDES_create_pipe 1
+) CLXX_B5D_API_SUFFIX(create_pipe);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBinary)
+#if CLXX_B5D_PROVIDES(create_program_with_binary)
 /** // doc: create_program_with_binary(...) {{{
  * \brief Creates a program object for a context, and loads the binary bits
  *    specified by binary into the program object
@@ -1115,7 +1101,7 @@ create_pipe(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBinary.html">clCreateProgramWithBinary()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateProgramWithBinary) cl_program CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_program_with_binary) cl_program CLXX_B5D_API_CALL
 create_program_with_binary(
     cl_context context,
     cl_uint num_devices,
@@ -1123,10 +1109,9 @@ create_program_with_binary(
     const size_t* lengths,
     const unsigned char** binaries,
     cl_int* binary_status
-) CLXX_B5D_API_SUFFIX(clCreateProgramWithBinary);
-# define CLXX_B5D_PROVIDES_create_program_with_binary 1
+) CLXX_B5D_API_SUFFIX(create_program_with_binary);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBuiltInKernels)
+#if CLXX_B5D_PROVIDES(create_program_with_built_in_kernels)
 /** // doc: create_program_with_built_in_kernels(...) {{{
  * \brief  Creates a program object for a context, and loads the information
  * related to the built-in kernels into a program object.
@@ -1169,16 +1154,15 @@ create_program_with_binary(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithBuiltInKernels.html">clCreateProgramWithBuiltInKernels()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateProgramWithBuiltInKernels) cl_program CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_program_with_built_in_kernels) cl_program CLXX_B5D_API_CALL
 create_program_with_built_in_kernels(
     cl_context context,
     cl_uint num_devices,
     const cl_device_id* device_list,
     const char* kernel_names
-) CLXX_B5D_API_SUFFIX(clCreateProgramWithBuiltInKernels);
-# define CLXX_B5D_PROVIDES_create_program_with_built_in_kernels 1
+) CLXX_B5D_API_SUFFIX(create_program_with_built_in_kernels);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithIL)
+#if CLXX_B5D_PROVIDES(create_program_with_il)
 /** // doc: create_program_with_il(...) {{{
  * \brief Creates a program object for a context, and loads the IL into the
  *        program object.
@@ -1214,15 +1198,14 @@ create_program_with_built_in_kernels(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithIL.html">clCreateProgramWithIL()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateProgramWithIL) cl_program CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_program_with_il) cl_program CLXX_B5D_API_CALL
 create_program_with_il(
     cl_context context,
     const void* il,
     size_t length
-) CLXX_B5D_API_SUFFIX(clCreateProgramWithIL);
-# define CLXX_B5D_PROVIDES_create_program_with_il 1
+) CLXX_B5D_API_SUFFIX(create_program_with_il);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithSource)
+#if CLXX_B5D_PROVIDES(create_program_with_source)
 /** // doc: create_program_with_source(...) {{{
  * \brief Creates a program object for a context, and loads the source
  *    code specified by the text strings in the \p strings array into the program
@@ -1275,16 +1258,15 @@ create_program_with_il(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateProgramWithSource.html">clCreateProgramWithSource()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateProgramWithSource) cl_program CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_program_with_source) cl_program CLXX_B5D_API_CALL
 create_program_with_source(
     cl_context context,
     cl_uint count,
     const char** strings,
     const size_t* lengths
-) CLXX_B5D_API_SUFFIX(clCreateProgramWithSource);
-# define CLXX_B5D_PROVIDES_create_program_with_source 1
+) CLXX_B5D_API_SUFFIX(create_program_with_source);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateSampler)
+#if CLXX_B5D_PROVIDES(create_sampler)
 /** // doc: create_sampler() {{{
  * \brief Creates a sampler object
  *
@@ -1331,16 +1313,15 @@ create_program_with_source(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSampler.html">clCreateSampler()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateSampler) cl_sampler CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_sampler) cl_sampler CLXX_B5D_API_CALL
 create_sampler(
     cl_context context,
     cl_bool normalized_coords,
     addressing_mode_t addressing_mode,
     filter_mode_t filter_mode
-) CLXX_B5D_API_SUFFIX(clCreateSampler);
-# define CLXX_B5D_PROVIDES_create_sampler 1
+) CLXX_B5D_API_SUFFIX(create_sampler);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateSamplerWithProperties)
+#if CLXX_B5D_PROVIDES(create_sampler_with_properties)
 /** // doc: create_sampler_with_properties() {{{
  * \brief Creates a sampler object
  *
@@ -1384,14 +1365,13 @@ create_sampler(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSamplerWithProperties.html">clCreateSamplerWithProperties()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateSamplerWithProperties) cl_sampler CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_sampler_with_properties) cl_sampler CLXX_B5D_API_CALL
 create_sampler_with_properties(
     cl_context context,
     const cl_sampler_properties* sampler_properties
-) CLXX_B5D_API_SUFFIX(clCreateSamplerWithProperties);
-# define CLXX_B5D_PROVIDES_create_sampler_with_properties 1
+) CLXX_B5D_API_SUFFIX(create_sampler_with_properties);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubBuffer)
+#if CLXX_B5D_PROVIDES(create_sub_buffer)
 /** // doc: create_sub_buffer() {{{
  * \brief Creates a buffer object (referred to as a sub-buffer object) from an
  *        existing buffer object
@@ -1435,16 +1415,15 @@ create_sampler_with_properties(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSubBuffer.html">clCreateSubBuffer()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateSubBuffer) cl_mem CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_sub_buffer) cl_mem CLXX_B5D_API_CALL
 create_sub_buffer(
     cl_mem buffer,
     mem_flags_t flags,
     buffer_create_type_t buffer_create_type,
     const void* buffer_create_info
-) CLXX_B5D_API_SUFFIX(clCreateSubBuffer);
-# define CLXX_B5D_PROVIDES_create_sub_buffer 1
+) CLXX_B5D_API_SUFFIX(create_sub_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateSubDevices)
+#if CLXX_B5D_PROVIDES(create_sub_devices)
 /** // doc: create_sub_devices(...) {{{
  * \brief Creates an array of sub-devices that each reference
  *    a non-intersecting set of compute units within \p in_device.
@@ -1493,17 +1472,16 @@ create_sub_buffer(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateSubDevices.html">clCreateSubDevices()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateSubDevices) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_sub_devices) void CLXX_B5D_API_CALL
 create_sub_devices(
     cl_device_id in_device,
     const cl_device_partition_property* properties,
     cl_uint num_devices,
     cl_device_id* out_devices,
     cl_uint *num_devices_ret
-) CLXX_B5D_API_SUFFIX(clCreateSubDevices);
-# define CLXX_B5D_PROVIDES_create_sub_devices 1
+) CLXX_B5D_API_SUFFIX(create_sub_devices);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clCreateUserEvent)
+#if CLXX_B5D_PROVIDES(create_user_event)
 /** // doc: create_user_event() {{{
  * \brief Creates an OpenCL user event object
  *
@@ -1531,13 +1509,12 @@ create_sub_devices(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clCreateUserEvent.html">clCreateUserEvent()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clCreateUserEvent) cl_event CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(create_user_event) cl_event CLXX_B5D_API_CALL
 create_user_event(
     cl_context context
-) CLXX_B5D_API_SUFFIX(clCreateUserEvent);
-# define CLXX_B5D_PROVIDES_create_user_event 1
+) CLXX_B5D_API_SUFFIX(create_user_event);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrier)
+#if CLXX_B5D_PROVIDES(enqueue_barrier)
 /** // doc: enqueue_barrier() {{{
  * \brief A synchronization point that enqueues a barrier operation.
  *
@@ -1565,13 +1542,12 @@ create_user_event(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueBarrier.html">clEnqueueBarrier()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueBarrier) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_barrier) void CLXX_B5D_API_CALL
 enqueue_barrier(
     cl_command_queue command_queue
-) CLXX_B5D_API_SUFFIX(clEnqueueBarrier);
-# define CLXX_B5D_PROVIDES_enqueue_barrier 1
+) CLXX_B5D_API_SUFFIX(enqueue_barrier);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrierWithWaitList)
+#if CLXX_B5D_PROVIDES(enqueue_barrier_with_wait_list)
 /** // doc: enqueue_barrier_with_wait_list() {{{
  * \brief A synchronization point that enqueues a barrier operation.
  *
@@ -1626,16 +1602,15 @@ enqueue_barrier(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueBarrierWithWaitList.html">clEnqueueBarrierWithWaitList()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueBarrierWithWaitList) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_barrier_with_wait_list) void CLXX_B5D_API_CALL
 enqueue_barrier_with_wait_list(
     cl_command_queue command_queue,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueBarrierWithWaitList);
-# define CLXX_B5D_PROVIDES_enqueue_barrier_with_wait_list 1
+) CLXX_B5D_API_SUFFIX(enqueue_barrier_with_wait_list);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_copy_buffer)
 /** // doc: enqueue_copy_buffer() {{{
  * \brief Enqueues a command to copy from one buffer object to another
  *
@@ -1714,7 +1689,7 @@ enqueue_barrier_with_wait_list(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBuffer.html">clEnqueueCopyBuffer()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueCopyBuffer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_copy_buffer) void CLXX_B5D_API_CALL
 enqueue_copy_buffer(
     cl_command_queue command_queue,
     cl_mem src_buffer,
@@ -1725,10 +1700,9 @@ enqueue_copy_buffer(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueCopyBuffer);
-# define CLXX_B5D_PROVIDES_enqueue_copy_buffer 1
+) CLXX_B5D_API_SUFFIX(enqueue_copy_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferRect)
+#if CLXX_B5D_PROVIDES(enqueue_copy_buffer_rect)
 /** // doc: enqueue_copy_buffer_rect() {{{
  * \brief Enqueues a command to copy a 2D or 3D rectangular region from a
  *        buffer object to another buffer object.
@@ -1830,7 +1804,7 @@ enqueue_copy_buffer(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBufferRect.html">clEnqueueCopyBufferRect()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueCopyBufferRect) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_copy_buffer_rect) void CLXX_B5D_API_CALL
 enqueue_copy_buffer_rect(
     cl_command_queue command_queue,
     cl_mem src_buffer,
@@ -1845,10 +1819,9 @@ enqueue_copy_buffer_rect(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueCopyBufferRect);
-# define CLXX_B5D_PROVIDES_enqueue_copy_buffer_rect 1
+) CLXX_B5D_API_SUFFIX(enqueue_copy_buffer_rect);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferToImage)
+#if CLXX_B5D_PROVIDES(enqueue_copy_buffer_to_image)
 /** // doc: enqueue_copy_buffer_to_image() {{{
  * \brief Enqueues a command to copy an image object to a buffer object
  *
@@ -1951,7 +1924,7 @@ enqueue_copy_buffer_rect(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBufferToImage.html">clEnqueueCopyBufferToImage()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueCopyBufferToImage) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_copy_buffer_to_image) void CLXX_B5D_API_CALL
 enqueue_copy_buffer_to_image(
     cl_command_queue command_queue,
     cl_mem src_buffer,
@@ -1962,10 +1935,9 @@ enqueue_copy_buffer_to_image(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueCopyBufferToImage);
-# define CLXX_B5D_PROVIDES_enqueue_copy_buffer_to_image 1
+) CLXX_B5D_API_SUFFIX(enqueue_copy_buffer_to_image);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImage)
+#if CLXX_B5D_PROVIDES(enqueue_copy_image)
 /** // doc: enqueue_copy_image() {{{
  * \brief Enqueues a command to copy image objects
  *
@@ -2075,7 +2047,7 @@ enqueue_copy_buffer_to_image(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyImage.html">clEnqueueCopyImage()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueCopyImage) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_copy_image) void CLXX_B5D_API_CALL
 enqueue_copy_image(
     cl_command_queue command_queue,
     cl_mem src_image,
@@ -2086,10 +2058,9 @@ enqueue_copy_image(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueCopyImage);
-# define CLXX_B5D_PROVIDES_enqueue_copy_image 1
+) CLXX_B5D_API_SUFFIX(enqueue_copy_image);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImageToBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_copy_image_to_buffer)
 /** // doc: enqueue_copy_image_to_buffer() {{{
  * \brief Enqueues a command to copy an image object to a buffer object
  *
@@ -2192,7 +2163,7 @@ enqueue_copy_image(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueFillBuffer.html">clEnqueueFillBuffer()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueCopyImageToBuffer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_copy_image_to_buffer) void CLXX_B5D_API_CALL
 enqueue_copy_image_to_buffer(
     cl_command_queue command_queue,
     cl_mem src_image,
@@ -2203,10 +2174,9 @@ enqueue_copy_image_to_buffer(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueCopyImageToBuffer);
-# define CLXX_B5D_PROVIDES_enqueue_copy_image_to_buffer 1
+) CLXX_B5D_API_SUFFIX(enqueue_copy_image_to_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
 /** // doc: enqueue_fill_buffer() {{{
  * \brief Enqueues a command to fill a buffer object with a pattern of a given
  *        pattern size
@@ -2294,7 +2264,7 @@ enqueue_copy_image_to_buffer(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueFillBuffer.html">clEnqueueFillBuffer()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueFillBuffer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_fill_buffer) void CLXX_B5D_API_CALL
 enqueue_fill_buffer(
     cl_command_queue command_queue,
     cl_mem buffer,
@@ -2305,10 +2275,9 @@ enqueue_fill_buffer(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueFillBuffer);
-# define CLXX_B5D_PROVIDES_enqueue_fill_buffer 1
+) CLXX_B5D_API_SUFFIX(enqueue_fill_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillImage)
+#if CLXX_B5D_PROVIDES(enqueue_fill_image)
 /** // doc: enqueue_fill_image() {{{
  * \brief Enqueues a command to fill an image object with a specified color.
  *
@@ -2410,7 +2379,7 @@ enqueue_fill_buffer(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueFillImage.html">clEnqueueFillImage()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueFillImage) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_fill_image) void CLXX_B5D_API_CALL
 enqueue_fill_image(
     cl_command_queue command_queue,
     cl_mem image,
@@ -2420,10 +2389,9 @@ enqueue_fill_image(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueFillImage);
-# define CLXX_B5D_PROVIDES_enqueue_fill_image 1
+) CLXX_B5D_API_SUFFIX(enqueue_fill_image);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_map_buffer)
 /** // doc: enqueue_map_buffer() {{{
  * \brief Enqueues a command to map a region of the buffer object given by
  *        \p buffer into the host address space and returns a pointer to this
@@ -2520,7 +2488,7 @@ enqueue_fill_image(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueCopyBuffer.html">clEnqueueCopyBuffer()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueMapBuffer) void* CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_map_buffer) void* CLXX_B5D_API_CALL
 enqueue_map_buffer(
     cl_command_queue command_queue,
     cl_mem buffer,
@@ -2531,10 +2499,9 @@ enqueue_map_buffer(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueMapBuffer);
-# define CLXX_B5D_PROVIDES_enqueue_map_buffer 1
+) CLXX_B5D_API_SUFFIX(enqueue_map_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapImage)
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
 /** // doc: enqueue_map_image() {{{
  * \brief Enqueues a command to map a region of an image object into the host
  *        address space and returns a pointer to this mapped region
@@ -2655,7 +2622,7 @@ enqueue_map_buffer(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueMapImage.html">clEnqueueMapImage()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueMapImage) void* CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_map_image) void* CLXX_B5D_API_CALL
 enqueue_map_image(
     cl_command_queue command_queue,
     cl_mem image,
@@ -2668,10 +2635,9 @@ enqueue_map_image(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueMapImage);
-# define CLXX_B5D_PROVIDES_enqueue_map_image 1
+) CLXX_B5D_API_SUFFIX(enqueue_map_image);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarker)
+#if CLXX_B5D_PROVIDES(enqueue_marker)
 /** // doc: enqueue_marker() {{{
  * \brief Enqueues a marker command.
  *
@@ -2711,14 +2677,13 @@ enqueue_map_image(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueMarker.html">clEnqueueMarker()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueMarker) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_marker) void CLXX_B5D_API_CALL
 enqueue_marker(
     cl_command_queue command_queue,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueMarker);
-# define CLXX_B5D_PROVIDES_enqueue_marker 1
+) CLXX_B5D_API_SUFFIX(enqueue_marker);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarkerWithWaitList)
+#if CLXX_B5D_PROVIDES(enqueue_marker_with_wait_list)
 /** // doc: enqueue_marker_with_wait_list() {{{
  * \brief Enqueues a marker command which waits for either a list of events to
  *        complete, or all previously enqueued commands to complete.
@@ -2784,16 +2749,15 @@ enqueue_marker(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueMarkerWithWaitList.html">clEnqueueMarkerWithWaitList()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueMarkerWithWaitList) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_marker_with_wait_list) void CLXX_B5D_API_CALL
 enqueue_marker_with_wait_list(
     cl_command_queue command_queue,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueMarkerWithWaitList);
-# define CLXX_B5D_PROVIDES_enqueue_marker_with_wait_list 1
+) CLXX_B5D_API_SUFFIX(enqueue_marker_with_wait_list);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMigrateMemObjects)
+#if CLXX_B5D_PROVIDES(enqueue_migrate_mem_objects)
 /** // doc: enqueue_migrate_mem_objects() {{{
  * \brief Enqueues a command to indicate which device a set of memory objects
  *        should be associated with
@@ -2866,7 +2830,7 @@ enqueue_marker_with_wait_list(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueMigrateMemObjects.html">clEnqueueMigrateMemObjects()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueMigrateMemObjects) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_migrate_mem_objects) void CLXX_B5D_API_CALL
 enqueue_migrate_mem_objects(
     cl_command_queue command_queue,
     cl_uint num_mem_objects,
@@ -2875,10 +2839,9 @@ enqueue_migrate_mem_objects(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueMigrateMemObjects);
-# define CLXX_B5D_PROVIDES_enqueue_migrate_mem_objects 1
+) CLXX_B5D_API_SUFFIX(enqueue_migrate_mem_objects);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNativeKernel)
+#if CLXX_B5D_PROVIDES(enqueue_native_kernel)
 /** // doc: enqueue_native_kernel() {{{
  * \brief Enqueues a command to execute a native C/C++ function
  *
@@ -2961,7 +2924,7 @@ enqueue_migrate_mem_objects(
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNativeKernel.html">clEnqueueNativeKernel()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueNativeKernel) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_native_kernel) void CLXX_B5D_API_CALL
 enqueue_native_kernel(
     cl_command_queue command_queue,
     void (CL_CALLBACK* user_func)(void*),
@@ -2973,10 +2936,9 @@ enqueue_native_kernel(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueNativeKernel);
-# define CLXX_B5D_PROVIDES_enqueue_native_kernel 1
+) CLXX_B5D_API_SUFFIX(enqueue_native_kernel);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNDRangeKernel)
+#if CLXX_B5D_PROVIDES(enqueue_ndrange_kernel)
 /** // doc: enqueue_ndrange_kernel() {{{
  * \brief Enqueues a command to execute a kernel on a device
  *
@@ -3078,7 +3040,7 @@ enqueue_native_kernel(
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueNDRangeKernel.html">clEnqueueNDRangeKernel()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueNDRangeKernel) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_ndrange_kernel) void CLXX_B5D_API_CALL
 enqueue_ndrange_kernel(
     cl_command_queue command_queue,
     cl_kernel kernel,
@@ -3089,10 +3051,9 @@ enqueue_ndrange_kernel(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueNDRangeKernel);
-# define CLXX_B5D_PROVIDES_enqueue_ndrange_kernel 1
+) CLXX_B5D_API_SUFFIX(enqueue_ndrange_kernel);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_read_buffer)
 /** // doc: enqueue_read_buffer() {{{
  * \brief Enqueue commands to read from a buffer object to host memory
  *
@@ -3180,7 +3141,7 @@ enqueue_ndrange_kernel(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueReadBuffer.html">clEnqueueReadBuffer()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueReadBuffer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_read_buffer) void CLXX_B5D_API_CALL
 enqueue_read_buffer(
     cl_command_queue command_queue,
     cl_mem buffer,
@@ -3191,10 +3152,9 @@ enqueue_read_buffer(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueReadBuffer);
-# define CLXX_B5D_PROVIDES_enqueue_read_buffer 1
+) CLXX_B5D_API_SUFFIX(enqueue_read_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBufferRect)
+#if CLXX_B5D_PROVIDES(enqueue_read_buffer_rect)
 /** // doc: enqueue_read_buffer_rect() {{{
  * \brief Enqueue command to read from a 2D or 3D rectangular region from a
  *        buffer object to host memory.
@@ -3314,7 +3274,7 @@ enqueue_read_buffer(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueReadBufferRect.html">clEnqueueReadBufferRect()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueReadBufferRect) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_read_buffer_rect) void CLXX_B5D_API_CALL
 enqueue_read_buffer_rect(
     cl_command_queue command_queue,
     cl_mem buffer,
@@ -3330,10 +3290,9 @@ enqueue_read_buffer_rect(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueReadBufferRect);
-# define CLXX_B5D_PROVIDES_enqueue_read_buffer_rect 1
+) CLXX_B5D_API_SUFFIX(enqueue_read_buffer_rect);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadImage)
+#if CLXX_B5D_PROVIDES(enqueue_read_image)
 /** // doc: enqueue_read_image() {{{
  * \brief Enqueue commands to read from an image or image array object to host memory.
  *
@@ -3451,7 +3410,7 @@ enqueue_read_buffer_rect(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueReadImage.html">clEnqueueReadImage()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueReadImage) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_read_image) void CLXX_B5D_API_CALL
 enqueue_read_image(
     cl_command_queue command_queue,
     cl_mem image,
@@ -3464,10 +3423,9 @@ enqueue_read_image(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueReadImage);
-# define CLXX_B5D_PROVIDES_enqueue_read_image 1
+) CLXX_B5D_API_SUFFIX(enqueue_read_image);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMFree)
+#if CLXX_B5D_PROVIDES(enqueue_svm_free)
 /** // doc: enqueue_svm_free() {{{
  * \brief Enqueues a command to free the shared virtual memory allocated using
  *        #svm_alloc() or a shared system memory pointer
@@ -3544,7 +3502,7 @@ enqueue_read_image(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMFree.html">clEnqueueSVMFree()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueSVMFree) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_svm_free) void CLXX_B5D_API_CALL
 enqueue_svm_free(
     cl_command_queue command_queue,
     cl_uint num_svm_pointers,
@@ -3557,10 +3515,9 @@ enqueue_svm_free(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueSVMFree);
-# define CLXX_B5D_PROVIDES_enqueue_svm_free 1
+) CLXX_B5D_API_SUFFIX(enqueue_svm_free);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMap)
+#if CLXX_B5D_PROVIDES(enqueue_svm_map)
 /** // doc: enqueue_svm_map() {{{
  * \brief Enqueues a command that will allow the host to update a region of a
  *        SVM buffer
@@ -3642,7 +3599,7 @@ enqueue_svm_free(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMap.html">clEnqueueSVMMap()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueSVMMap) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_svm_map) void CLXX_B5D_API_CALL
 enqueue_svm_map(
     cl_command_queue command_queue,
     cl_bool blocking_map,
@@ -3652,10 +3609,9 @@ enqueue_svm_map(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueSVMMap);
-# define CLXX_B5D_PROVIDES_enqueue_svm_map 1
+) CLXX_B5D_API_SUFFIX(enqueue_svm_map);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemFill)
+#if CLXX_B5D_PROVIDES(enqueue_svm_mem_fill)
 /** // doc: enqueue_svm_mem_fill() {{{
  * \brief Enqueues a command to fill a region in memory with a pattern of a
  *        given pattern size
@@ -3735,7 +3691,7 @@ enqueue_svm_map(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemFill.html">clEnqueueSVMMemFill()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueSVMMemFill) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_svm_mem_fill) void CLXX_B5D_API_CALL
 enqueue_svm_mem_fill(
     cl_command_queue command_queue,
     void* svm_ptr,
@@ -3745,10 +3701,9 @@ enqueue_svm_mem_fill(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueSVMMemFill);
-# define CLXX_B5D_PROVIDES_enqueue_svm_mem_fill 1
+) CLXX_B5D_API_SUFFIX(enqueue_svm_mem_fill);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMemcpy)
+#if CLXX_B5D_PROVIDES(enqueue_svm_memcpy)
 /** // doc: enqueue_svm_memcpy() {{{
  * \brief Enqueues a command to do a memcpy operation
  *
@@ -3835,7 +3790,7 @@ enqueue_svm_mem_fill(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMemcpy.html">clEnqueueSVMMemcpy()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueSVMMemcpy) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_svm_memcpy) void CLXX_B5D_API_CALL
 enqueue_svm_memcpy(
     cl_command_queue command_queue,
     cl_bool blocking_copy,
@@ -3845,10 +3800,9 @@ enqueue_svm_memcpy(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueSVMMemcpy);
-# define CLXX_B5D_PROVIDES_enqueue_svm_memcpy 1
+) CLXX_B5D_API_SUFFIX(enqueue_svm_memcpy);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMMigrateMem)
+#if CLXX_B5D_PROVIDES(enqueue_svm_migrate_mem)
 /** // doc: enqueue_svm_migrate_mem() {{{
  * \brief Enqueues a command to do a migrate_mem operation
  *
@@ -3920,7 +3874,7 @@ enqueue_svm_memcpy(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMMigrateMem.html">clEnqueueSVMMigrateMem()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueSVMMigrateMem) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_svm_migrate_mem) void CLXX_B5D_API_CALL
 enqueue_svm_migrate_mem(
     cl_command_queue command_queue,
     cl_uint num_svm_pointers,
@@ -3930,10 +3884,9 @@ enqueue_svm_migrate_mem(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueSVMMigrateMem);
-# define CLXX_B5D_PROVIDES_enqueue_svm_migrate_mem 1
+) CLXX_B5D_API_SUFFIX(enqueue_svm_migrate_mem);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMUnmap)
+#if CLXX_B5D_PROVIDES(enqueue_svm_unmap)
 /** // doc: enqueue_svm_unmap() {{{
  * \brief Enqueues a command to indicate that the host has completed updating
  *        the region given by \p svm_ptr and which was specified in a previous
@@ -3996,17 +3949,16 @@ enqueue_svm_migrate_mem(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueSVMUnmap.html">clEnqueueSVMUnmap()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueSVMUnmap) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_svm_unmap) void CLXX_B5D_API_CALL
 enqueue_svm_unmap(
     cl_command_queue command_queue,
     void* svm_ptr,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueSVMUnmap);
-# define CLXX_B5D_PROVIDES_enqueue_svm_unmap 1
+) CLXX_B5D_API_SUFFIX(enqueue_svm_unmap);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueTask)
+#if CLXX_B5D_PROVIDES(enqueue_task)
 /** // doc: enqueue_task() {{{
  * \brief Enqueues a command to execute a kernel on a device.
  *
@@ -4083,17 +4035,16 @@ enqueue_svm_unmap(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.2/docs/man/xhtml/clEnqueueTask.html">clEnqueueTask()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueTask) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_task) void CLXX_B5D_API_CALL
 enqueue_task(
     cl_command_queue command_queue,
     cl_kernel kernel,
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueTask);
-# define CLXX_B5D_PROVIDES_enqueue_task 1
+) CLXX_B5D_API_SUFFIX(enqueue_task);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueUnmapMemObject)
+#if CLXX_B5D_PROVIDES(enqueue_unmap_mem_object)
 /** // doc: enqueue_unmap_mem_object() {{{
  * \brief Enqueues a command to unmap a previously mapped region of a memory object
  *
@@ -4158,7 +4109,7 @@ enqueue_task(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueUnmapMemObject.html">clEnqueueUnmapMemObject()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueUnmapMemObject) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_unmap_mem_object) void CLXX_B5D_API_CALL
 enqueue_unmap_mem_object(
     cl_command_queue command_queue,
     cl_mem memobj,
@@ -4166,10 +4117,9 @@ enqueue_unmap_mem_object(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueUnmapMemObject);
-# define CLXX_B5D_PROVIDES_enqueue_unmap_mem_object 1
+) CLXX_B5D_API_SUFFIX(enqueue_unmap_mem_object);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWaitForEvents)
+#if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
 /** // doc: enqueue_wait_for_events() {{{
  * \brief Enqueues a wait for a specific event or a list of events to complete
  *        before any future commands queued in the command-queue are executed.
@@ -4228,15 +4178,14 @@ enqueue_unmap_mem_object(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clEnqueueWaitForEvents.html">clEnqueueWaitForEvents()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueWaitForEvents) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_wait_for_events) void CLXX_B5D_API_CALL
 enqueue_wait_for_events(
     cl_command_queue command_queue,
     cl_uint num_events,
     const cl_event* event_list
-) CLXX_B5D_API_SUFFIX(clEnqueueWaitForEvents);
-# define CLXX_B5D_PROVIDES_enqueue_wait_for_events 1
+) CLXX_B5D_API_SUFFIX(enqueue_wait_for_events);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBuffer)
+#if CLXX_B5D_PROVIDES(enqueue_write_buffer)
 /** // doc: enqueue_write_buffer() {{{
  * \brief Enqueue commands to write to a buffer object from host memory
  *
@@ -4326,7 +4275,7 @@ enqueue_wait_for_events(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWriteBuffer.html">clEnqueueWriteBuffer()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueWriteBuffer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_write_buffer) void CLXX_B5D_API_CALL
 enqueue_write_buffer(
     cl_command_queue command_queue,
     cl_mem buffer,
@@ -4337,10 +4286,9 @@ enqueue_write_buffer(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueWriteBuffer);
-# define CLXX_B5D_PROVIDES_enqueue_write_buffer 1
+) CLXX_B5D_API_SUFFIX(enqueue_write_buffer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBufferRect)
+#if CLXX_B5D_PROVIDES(enqueue_write_buffer_rect)
 /** // doc: enqueue_write_buffer_rect() {{{
  * \brief Enqueue command to write a 2D or 3D rectangular region to a buffer
  *        object from host memory.
@@ -4462,7 +4410,7 @@ enqueue_write_buffer(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clEnqueueWriteBufferRect.html">clEnqueueWriteBufferRect()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueWriteBufferRect) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_write_buffer_rect) void CLXX_B5D_API_CALL
 enqueue_write_buffer_rect(
     cl_command_queue command_queue,
     cl_mem buffer,
@@ -4478,10 +4426,9 @@ enqueue_write_buffer_rect(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueWriteBufferRect);
-# define CLXX_B5D_PROVIDES_enqueue_write_buffer_rect 1
+) CLXX_B5D_API_SUFFIX(enqueue_write_buffer_rect);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteImage)
+#if CLXX_B5D_PROVIDES(enqueue_write_image)
 /** // doc: enqueue_write_image() {{{
  * \brief Enqueue commands to write to an image or image array object from host memory.
  *
@@ -4602,7 +4549,7 @@ enqueue_write_buffer_rect(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clEnqueueWriteImage.html">clEnqueueWriteImage()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clEnqueueWriteImage) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(enqueue_write_image) void CLXX_B5D_API_CALL
 enqueue_write_image(
     cl_command_queue command_queue,
     cl_mem image,
@@ -4615,10 +4562,9 @@ enqueue_write_image(
     cl_uint num_events_in_wait_list,
     const cl_event* event_wait_list,
     cl_event* event
-) CLXX_B5D_API_SUFFIX(clEnqueueWriteImage);
-# define CLXX_B5D_PROVIDES_enqueue_write_image 1
+) CLXX_B5D_API_SUFFIX(enqueue_write_image);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clFinish)
+#if CLXX_B5D_PROVIDES(finish)
 /** // doc: finish() {{{
  * \brief Blocks until all previously queued OpenCL commands in a command-queue
  *        are issued to the associated device and have completed
@@ -4644,13 +4590,12 @@ enqueue_write_image(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clFinish.html">clFinish()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clFinish) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(finish) void CLXX_B5D_API_CALL
 finish(
     cl_command_queue command_queue
-) CLXX_B5D_API_SUFFIX(clFinish);
-# define CLXX_B5D_PROVIDES_finish 1
+) CLXX_B5D_API_SUFFIX(finish);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clFlush)
+#if CLXX_B5D_PROVIDES(flush)
 /** // doc: flush() {{{
  * \brief Issues all previously queued OpenCL commands in a command-queue to
  *        the device associated with the command-queue
@@ -4676,13 +4621,12 @@ finish(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clFlush.html">clFlush()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clFlush) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(flush) void CLXX_B5D_API_CALL
 flush(
     cl_command_queue command_queue
-) CLXX_B5D_API_SUFFIX(clFlush);
-# define CLXX_B5D_PROVIDES_flush 1
+) CLXX_B5D_API_SUFFIX(flush);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetCommandQueueInfo)
+#if CLXX_B5D_PROVIDES(get_command_queue_info)
 /** // doc: get_command_queue_info(...) {{{
  * \brief Query information about a command-queue.
  *
@@ -4723,17 +4667,16 @@ flush(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetCommandQueueInfo.html">clGetCommandQueueInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetCommandQueueInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_command_queue_info) void CLXX_B5D_API_CALL
 get_command_queue_info(
     cl_command_queue command_queue,
     command_queue_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetCommandQueueInfo);
-# define CLXX_B5D_PROVIDES_get_command_queue_info 1
+) CLXX_B5D_API_SUFFIX(get_command_queue_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetContextInfo)
+#if CLXX_B5D_PROVIDES(get_context_info)
 /** // doc: get_context_info(...) {{{
  * \brief Query information about a context.
  *
@@ -4773,17 +4716,16 @@ get_command_queue_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetContextInfo.html">clGetContextInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetContextInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_context_info) void CLXX_B5D_API_CALL
 get_context_info(
     cl_context context,
     context_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetContextInfo);
-# define CLXX_B5D_PROVIDES_get_context_info 1
+) CLXX_B5D_API_SUFFIX(get_context_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceAndHostTimer)
+#if CLXX_B5D_PROVIDES(get_device_and_host_timer)
 /** // doc: get_device_and_host_timer(...) {{{
  * \brief Returns a reasonably synchronized pair of timestamps from the device
  * timer and the host timer as seen by device.
@@ -4822,15 +4764,14 @@ get_context_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetDeviceAndHostTimer.html">clGetDeviceAndHostTimer()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetDeviceAndHostTimer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_device_and_host_timer) void CLXX_B5D_API_CALL
 get_device_and_host_timer(
     cl_device_id device,
     cl_ulong* device_timestamp,
     cl_ulong* host_timestamp
-) CLXX_B5D_API_SUFFIX(clGetDeviceAndHostTimer);
-# define CLXX_B5D_PROVIDES_get_device_and_host_timer 1
+) CLXX_B5D_API_SUFFIX(get_device_and_host_timer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceIDs)
+#if CLXX_B5D_PROVIDES(get_device_ids)
 /** // doc: get_device_ids() {{{
  * \brief Retrieve device identifiers of locally available OpenCL devices.
  *
@@ -4883,17 +4824,16 @@ get_device_and_host_timer(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceIDs.html">clGetDeviceIDs()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetDeviceIDs) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_device_ids) void CLXX_B5D_API_CALL
 get_device_ids(
     cl_platform_id platform,
     device_type_t device_type,
     cl_uint num_entries,
     cl_device_id* devices,
     cl_uint* num_devices
-) CLXX_B5D_API_SUFFIX(clGetDeviceIDs);
-# define CLXX_B5D_PROVIDES_get_device_ids 1
+) CLXX_B5D_API_SUFFIX(get_device_ids);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceInfo)
+#if CLXX_B5D_PROVIDES(get_device_info)
 /** // doc: get_device_info(...) {{{
  * \brief Get certain information from device.
  *
@@ -4936,17 +4876,16 @@ get_device_ids(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetDeviceInfo.html">clGetDeviceInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetDeviceInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_device_info) void CLXX_B5D_API_CALL
 get_device_info(
     cl_device_id device,
     device_info_t name,
     size_t value_size,
     void* value,
     size_t* value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetDeviceInfo);
-# define CLXX_B5D_PROVIDES_get_device_info 1
+) CLXX_B5D_API_SUFFIX(get_device_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetEventInfo)
+#if CLXX_B5D_PROVIDES(get_event_info)
 /** // doc: get_event_info() {{{
  * \brief Returns information about the event object
  *
@@ -4985,17 +4924,16 @@ get_device_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetEventInfo.html">clGetEventInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetEventInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_event_info) void CLXX_B5D_API_CALL
 get_event_info(
     cl_event event,
     event_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetEventInfo);
-# define CLXX_B5D_PROVIDES_get_event_info 1
+) CLXX_B5D_API_SUFFIX(get_event_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetEventProfilingInfo)
+#if CLXX_B5D_PROVIDES(get_event_profiling_info)
 /** // doc: get_event_profiling_info() {{{
  * \brief Returns profiling information for the command associated with event
  *        if profiling is enabled
@@ -5037,17 +4975,16 @@ get_event_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetEventProfilingInfo.html">clGetEventProfilingInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetEventProfilingInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_event_profiling_info) void CLXX_B5D_API_CALL
 get_event_profiling_info(
     cl_event event,
     profiling_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetEventProfilingInfo);
-# define CLXX_B5D_PROVIDES_get_event_profiling_info 1
+) CLXX_B5D_API_SUFFIX(get_event_profiling_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddress)
+#if CLXX_B5D_PROVIDES(get_extension_function_address)
 /** // doc: get_extension_function_address() {{{
  * \brief Returns the address of the extension function named by \p funcname.
  *
@@ -5060,13 +4997,12 @@ get_event_profiling_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clGetExtensionFunctionAddress.html">clGetExtensionFunctionAddress()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetExtensionFunctionAddress) void* CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_extension_function_address) void* CLXX_B5D_API_CALL
 get_extension_function_address(
     const char* funcname
-) CLXX_B5D_API_SUFFIX(clGetExtensionFunctionAddress);
-# define CLXX_B5D_PROVIDES_get_extension_function_address 1
+) CLXX_B5D_API_SUFFIX(get_extension_function_address);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddressForPlatform)
+#if CLXX_B5D_PROVIDES(get_extension_function_address_for_platform)
 /** // doc: get_extension_function_address_for_platform() {{{
  * \brief Returns the address of the extension function named by \p funcname
  *        for a given \p platform
@@ -5080,14 +5016,13 @@ get_extension_function_address(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clGetExtensionFunctionAddressForPlatform.html">clGetExtensionFunctionAddressForPlatform()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetExtensionFunctionAddressForPlatform) void* CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_extension_function_address_for_platform) void* CLXX_B5D_API_CALL
 get_extension_function_address_for_platform(
     cl_platform_id platform,
     const char* funcname
-) CLXX_B5D_API_SUFFIX(clGetExtensionFunctionAddressForPlatform);
-# define CLXX_B5D_PROVIDES_get_extension_function_address_for_platform 1
+) CLXX_B5D_API_SUFFIX(get_extension_function_address_for_platform);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetHostTimer)
+#if CLXX_B5D_PROVIDES(get_host_timer)
 /** // doc: get_host_timer(...) {{{
  * \brief Return the current value of the host clock as seen by device.
  *
@@ -5119,14 +5054,13 @@ get_extension_function_address_for_platform(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetHostTimer.html">clGetHostTimer()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetHostTimer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_host_timer) void CLXX_B5D_API_CALL
 get_host_timer(
     cl_device_id device,
     cl_ulong* host_timestamp
-) CLXX_B5D_API_SUFFIX(clGetHostTimer);
-# define CLXX_B5D_PROVIDES_get_host_timer 1
+) CLXX_B5D_API_SUFFIX(get_host_timer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetImageInfo)
+#if CLXX_B5D_PROVIDES(get_image_info)
 /** // doc: get_image_info() {{{
  * \brief Get information specific to an image object created with #create_image()
  *
@@ -5165,17 +5099,16 @@ get_host_timer(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetImageInfo.html">clGetImageInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetImageInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_image_info) void CLXX_B5D_API_CALL
 get_image_info(
     cl_mem image,
     image_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetImageInfo);
-# define CLXX_B5D_PROVIDES_get_image_info 1
+) CLXX_B5D_API_SUFFIX(get_image_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
+#if CLXX_B5D_PROVIDES(get_kernel_arg_info)
 /** // doc: get_kernel_arg_info() {{{
  * \brief Returns information about the arguments of a kernel.
  *
@@ -5221,17 +5154,16 @@ get_image_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelArgInfo.html">clGetKernelArgInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetKernelArgInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_kernel_arg_info) void CLXX_B5D_API_CALL
 get_kernel_arg_info(
     cl_kernel kernel,
     cl_uint arg_index,
     kernel_arg_info_t param_name,
     size_t param_value_size, void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetKernelArgInfo);
-# define CLXX_B5D_PROVIDES_get_kernel_arg_info 1
+) CLXX_B5D_API_SUFFIX(get_kernel_arg_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelInfo)
+#if CLXX_B5D_PROVIDES(get_kernel_info)
 /** // doc: get_kernel_info() {{{
  * \brief Returns information about the kernel object
  *
@@ -5270,16 +5202,15 @@ get_kernel_arg_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelInfo.html">clGetKernelInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetKernelInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_kernel_info) void CLXX_B5D_API_CALL
 get_kernel_info(
     cl_kernel kernel,
     kernel_info_t param_name,
     size_t param_value_size, void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetKernelInfo);
-# define CLXX_B5D_PROVIDES_get_kernel_info 1
+) CLXX_B5D_API_SUFFIX(get_kernel_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelSubGroupInfo)
+#if CLXX_B5D_PROVIDES(get_kernel_sub_group_info)
 /** // doc: get_kernel_sub_group_info() {{{
  * \brief Returns information about the kernel object
  *
@@ -5336,7 +5267,7 @@ get_kernel_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetKernelSubGroupInfo.html">clGetKernelSubGroupInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetKernelSubGroupInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_kernel_sub_group_info) void CLXX_B5D_API_CALL
 get_kernel_sub_group_info(
     cl_kernel kernel,
     cl_device_id device,
@@ -5346,10 +5277,9 @@ get_kernel_sub_group_info(
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetKernelSubGroupInfo);
-# define CLXX_B5D_PROVIDES_get_kernel_sub_group_info 1
+) CLXX_B5D_API_SUFFIX(get_kernel_sub_group_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelWorkGroupInfo)
+#if CLXX_B5D_PROVIDES(get_kernel_work_group_info)
 /** // doc: get_kernel_work_group_info() {{{
  * \brief Returns information about the kernel object that may be specific to a device.
  *
@@ -5399,7 +5329,7 @@ get_kernel_sub_group_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetKernelWorkGroupInfo.html">clGetKernelWorkGroupInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetKernelWorkGroupInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_kernel_work_group_info) void CLXX_B5D_API_CALL
 get_kernel_work_group_info(
     cl_kernel kernel,
     cl_device_id device,
@@ -5407,10 +5337,9 @@ get_kernel_work_group_info(
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetKernelWorkGroupInfo);
-# define CLXX_B5D_PROVIDES_get_kernel_work_group_info 1
+) CLXX_B5D_API_SUFFIX(get_kernel_work_group_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetMemObjectInfo)
+#if CLXX_B5D_PROVIDES(get_mem_object_info)
 /** // doc: get_mem_object_info() {{{
  * \brief Get information that is common to all memory objects (buffer and
  *        image objects).
@@ -5451,17 +5380,16 @@ get_kernel_work_group_info(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetMemObjectInfo.html">clGetMemObjectInfo()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetMemObjectInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_mem_object_info) void CLXX_B5D_API_CALL
 get_mem_object_info(
     cl_mem memobj,
     mem_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetMemObjectInfo);
-# define CLXX_B5D_PROVIDES_get_mem_object_info 1
+) CLXX_B5D_API_SUFFIX(get_mem_object_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetPipeInfo)
+#if CLXX_B5D_PROVIDES(get_pipe_info)
 /** // doc: get_pipe_info() {{{
  * \brief Get information specific to a pipe object created with #create_pipe
  *
@@ -5501,17 +5429,16 @@ get_mem_object_info(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetPipeInfo.html">clGetPipeInfo()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetPipeInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_pipe_info) void CLXX_B5D_API_CALL
 get_pipe_info(
     cl_mem pipe,
     pipe_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetPipeInfo);
-# define CLXX_B5D_PROVIDES_get_pipe_info 1
+) CLXX_B5D_API_SUFFIX(get_pipe_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformIDs)
+#if CLXX_B5D_PROVIDES(get_platform_ids)
 /** // {{{ doc: get_platform_ids(...)
  * \brief Retrieve platform identifiers of locally available OpenCL platforms.
  *
@@ -5545,15 +5472,14 @@ get_pipe_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformIDs.html">clGetPlatformIDs()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetPlatformIDs) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_platform_ids) void CLXX_B5D_API_CALL
 get_platform_ids(
     cl_uint num_entries,
     cl_platform_id* platforms,
     cl_uint* num_platforms
-) CLXX_B5D_API_SUFFIX(clGetPlatformIDs);
-# define CLXX_B5D_PROVIDES_get_platform_ids 1
+) CLXX_B5D_API_SUFFIX(get_platform_ids);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformInfo)
+#if CLXX_B5D_PROVIDES(get_platform_info)
 /** // doc: get_platform_info(...) {{{
  *
  * \brief Query OpenCL platform layer for platform information.
@@ -5597,17 +5523,16 @@ get_platform_ids(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetPlatformInfo.html">clGetPlatformInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetPlatformInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_platform_info) void CLXX_B5D_API_CALL
 get_platform_info(
     cl_platform_id platform,
     platform_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetPlatformInfo);
-# define CLXX_B5D_PROVIDES_get_platform_info 1
+) CLXX_B5D_API_SUFFIX(get_platform_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramBuildInfo)
+#if CLXX_B5D_PROVIDES(get_program_build_info)
 /** // doc: get_program_build_info {{{
  * \brief Returns build information for each device in the program object.
  *
@@ -5663,17 +5588,16 @@ get_platform_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramBuildInfo.html">clGetProgramBuildInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetProgramBuildInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_program_build_info) void CLXX_B5D_API_CALL
 get_program_build_info(
     cl_program program,
     cl_device_id device,
     program_build_info_t param_name,
     size_t param_value_size, void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetProgramBuildInfo);
-# define CLXX_B5D_PROVIDES_get_program_build_info 1
+) CLXX_B5D_API_SUFFIX(get_program_build_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetProgramInfo)
+#if CLXX_B5D_PROVIDES(get_program_info)
 /** // doc: get_program_info {{{
  * \brief Returns information about the program object.
  *
@@ -5716,17 +5640,16 @@ get_program_build_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetProgramInfo.html">clGetProgramInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetProgramInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_program_info) void CLXX_B5D_API_CALL
 get_program_info(
     cl_program program,
     program_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetProgramInfo);
-# define CLXX_B5D_PROVIDES_get_program_info 1
+) CLXX_B5D_API_SUFFIX(get_program_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetSamplerInfo)
+#if CLXX_B5D_PROVIDES(get_sampler_info)
 /** // doc: get_sampler_info {{{
  * \brief Returns information about the sampler object.
  *
@@ -5767,17 +5690,16 @@ get_program_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clGetSamplerInfo.html">clGetSamplerInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetSamplerInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_sampler_info) void CLXX_B5D_API_CALL
 get_sampler_info(
     cl_sampler sampler,
     sampler_info_t param_name,
     size_t param_value_size,
     void* param_value,
     size_t* param_value_size_ret
-) CLXX_B5D_API_SUFFIX(clGetSamplerInfo);
-# define CLXX_B5D_PROVIDES_get_sampler_info 1
+) CLXX_B5D_API_SUFFIX(get_sampler_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clGetSupportedImageFormats)
+#if CLXX_B5D_PROVIDES(get_supported_image_formats)
 /** // doc: get_supported_image_formats() {{{
  * \brief Get the list of image formats supported by an OpenCL implementation
  *
@@ -5825,7 +5747,7 @@ get_sampler_info(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clGetSupportedImageFormats.html">clGetSupportedImageFormats()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clGetSupportedImageFormats) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(get_supported_image_formats) void CLXX_B5D_API_CALL
 get_supported_image_formats(
     cl_context context,
     mem_flags_t flags,
@@ -5833,10 +5755,9 @@ get_supported_image_formats(
     cl_uint num_entries,
     cl_image_format* image_formats,
     cl_uint* num_image_formats
-) CLXX_B5D_API_SUFFIX(clGetSupportedImageFormats);
-# define CLXX_B5D_PROVIDES_get_supported_image_formats 1
+) CLXX_B5D_API_SUFFIX(get_supported_image_formats);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clLinkProgram)
+#if CLXX_B5D_PROVIDES(link_program)
 /** // doc: link_program(...) {{{
  * \brief Links a set of compiled program objects and libraries for all the
  *    devices or a specific device(s) in the OpenCL context and creates an
@@ -5941,7 +5862,7 @@ get_supported_image_formats(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clLinkProgram.html">clLinkProgram()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clLinkProgram) cl_program CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(link_program) cl_program CLXX_B5D_API_CALL
 link_program(
     cl_context context,
     cl_uint num_devices,
@@ -5951,10 +5872,9 @@ link_program(
     const cl_program* input_programs,
     void (CL_CALLBACK* pfn_notify)(cl_program program, void* user_data),
     void* user_data
-) CLXX_B5D_API_SUFFIX(clLinkProgram);
-# define CLXX_B5D_PROVIDES_link_program 1
+) CLXX_B5D_API_SUFFIX(link_program);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseCommandQueue)
+#if CLXX_B5D_PROVIDES(release_command_queue)
 /** // doc: release_command_queue(...) {{{
  * \brief Decrement the \p command_queue reference count
  *
@@ -5980,13 +5900,12 @@ link_program(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseCommandQueue.html">clReleaseCommandQueue()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseCommandQueue) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_command_queue) void CLXX_B5D_API_CALL
 release_command_queue(
     cl_command_queue command_queue
-) CLXX_B5D_API_SUFFIX(clReleaseCommandQueue);
-# define CLXX_B5D_PROVIDES_release_command_queue 1
+) CLXX_B5D_API_SUFFIX(release_command_queue);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseContext)
+#if CLXX_B5D_PROVIDES(release_context)
 /** // doc: release_context(...) {{{
  * \brief Decrement the context reference count
  *
@@ -6011,13 +5930,12 @@ release_command_queue(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseContext.html">clReleaseContext()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseContext) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_context) void CLXX_B5D_API_CALL
 release_context(
     cl_context context
-) CLXX_B5D_API_SUFFIX(clReleaseContext);
-# define CLXX_B5D_PROVIDES_release_context 1
+) CLXX_B5D_API_SUFFIX(release_context);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
+#if CLXX_B5D_PROVIDES(release_device)
 /** // doc: release_device(...) {{{
  * \brief Decrements the \p devices reference count
  *
@@ -6049,13 +5967,12 @@ release_context(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseDevice.html">clReleaseDevice()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseDevice) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_device) void CLXX_B5D_API_CALL
 release_device(
     cl_device_id device
-) CLXX_B5D_API_SUFFIX(clReleaseDevice);
-# define CLXX_B5D_PROVIDES_release_device 1
+) CLXX_B5D_API_SUFFIX(release_device);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseEvent)
+#if CLXX_B5D_PROVIDES(release_event)
 /** // doc: release_event() {{{
  * \brief Decrements the \p event reference count
  *
@@ -6085,13 +6002,12 @@ release_device(
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseEvent.html">clReleaseEvent()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseEvent) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_event) void CLXX_B5D_API_CALL
 release_event(
     cl_event event
-) CLXX_B5D_API_SUFFIX(clReleaseEvent);
-# define CLXX_B5D_PROVIDES_release_event 1
+) CLXX_B5D_API_SUFFIX(release_event);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseKernel)
+#if CLXX_B5D_PROVIDES(release_kernel)
 /** // doc: release_kernel() {{{
  * \brief Decrements the \p kernel reference count
  *
@@ -6121,13 +6037,12 @@ release_event(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseKernel.html">clReleaseKernel()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseKernel) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_kernel) void CLXX_B5D_API_CALL
 release_kernel(
     cl_kernel kernel
-) CLXX_B5D_API_SUFFIX(clReleaseKernel);
-# define CLXX_B5D_PROVIDES_release_kernel 1
+) CLXX_B5D_API_SUFFIX(release_kernel);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseMemObject)
+#if CLXX_B5D_PROVIDES(release_mem_object)
 /** // doc: release_mem_object() {{{
  * \brief Decrements the memory object reference count
  *
@@ -6153,13 +6068,12 @@ release_kernel(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseMemObject.html">clReleaseMemObject()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseMemObject) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_mem_object) void CLXX_B5D_API_CALL
 release_mem_object(
     cl_mem memobj
-) CLXX_B5D_API_SUFFIX(clReleaseMemObject);
-# define CLXX_B5D_PROVIDES_release_mem_object 1
+) CLXX_B5D_API_SUFFIX(release_mem_object);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseProgram)
+#if CLXX_B5D_PROVIDES(release_program)
 /** // doc: release_program(...) {{{
  * \brief Decrements the \p program reference count
  *
@@ -6188,13 +6102,12 @@ release_mem_object(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseProgram.html">clReleaseProgram()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseProgram) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_program) void CLXX_B5D_API_CALL
 release_program(
     cl_program program
-) CLXX_B5D_API_SUFFIX(clReleaseProgram);
-# define CLXX_B5D_PROVIDES_release_program 1
+) CLXX_B5D_API_SUFFIX(release_program);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clReleaseSampler)
+#if CLXX_B5D_PROVIDES(release_sampler)
 /** // doc: release_sampler(...) {{{
  * \brief Decrements the \p sampler reference count
  *
@@ -6228,13 +6141,12 @@ release_program(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clReleaseSampler.html">clReleaseSampler()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clReleaseSampler) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(release_sampler) void CLXX_B5D_API_CALL
 release_sampler(
     cl_sampler sampler
-) CLXX_B5D_API_SUFFIX(clReleaseSampler);
-# define CLXX_B5D_PROVIDES_release_sampler 1
+) CLXX_B5D_API_SUFFIX(release_sampler);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainCommandQueue)
+#if CLXX_B5D_PROVIDES(retain_command_queue)
 /** // doc: retain_command_queue(...) {{{
  * \brief Increment the \p command_queue reference count
  *
@@ -6262,13 +6174,12 @@ release_sampler(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainCommandQueue.html">clRetainCommandQueue()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainCommandQueue) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_command_queue) void CLXX_B5D_API_CALL
 retain_command_queue(
     cl_command_queue command_queue
-) CLXX_B5D_API_SUFFIX(clRetainCommandQueue);
-# define CLXX_B5D_PROVIDES_retain_command_queue 1
+) CLXX_B5D_API_SUFFIX(retain_command_queue);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainContext)
+#if CLXX_B5D_PROVIDES(retain_context)
 /** // doc: retain_context(...) {{{
  * \brief Increment the context reference count
  *
@@ -6296,13 +6207,12 @@ retain_command_queue(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainContext.html">clRetainContext()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainContext) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_context) void CLXX_B5D_API_CALL
 retain_context(
     cl_context context
-) CLXX_B5D_API_SUFFIX(clRetainContext);
-# define CLXX_B5D_PROVIDES_retain_context 1
+) CLXX_B5D_API_SUFFIX(retain_context);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainDevice)
+#if CLXX_B5D_PROVIDES(retain_device)
 /** // doc: retain_device(...) {{{
  * \brief Increments the \p devices reference count
  *
@@ -6334,13 +6244,12 @@ retain_context(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainDevice.html">clRetainDevice()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainDevice) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_device) void CLXX_B5D_API_CALL
 retain_device(
     cl_device_id device
-) CLXX_B5D_API_SUFFIX(clRetainDevice);
-# define CLXX_B5D_PROVIDES_retain_device 1
+) CLXX_B5D_API_SUFFIX(retain_device);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainEvent)
+#if CLXX_B5D_PROVIDES(retain_event)
 /** // doc: retain_event() {{{
  * \brief Increments the event object reference count.
  *
@@ -6367,13 +6276,12 @@ retain_device(
  *
  *  \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainEvent.html">clRetainEvent()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainEvent) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_event) void CLXX_B5D_API_CALL
 retain_event(
     cl_event event
-) CLXX_B5D_API_SUFFIX(clRetainEvent);
-# define CLXX_B5D_PROVIDES_retain_event 1
+) CLXX_B5D_API_SUFFIX(retain_event);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainKernel)
+#if CLXX_B5D_PROVIDES(retain_kernel)
 /** // doc: retain_kernel() {{{
  * \brief Increments the kernel object reference count.
  *
@@ -6400,13 +6308,12 @@ retain_event(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainKernel.html">clRetainKernel()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainKernel) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_kernel) void CLXX_B5D_API_CALL
 retain_kernel(
     cl_kernel kernel
-) CLXX_B5D_API_SUFFIX(clRetainKernel);
-# define CLXX_B5D_PROVIDES_retain_kernel 1
+) CLXX_B5D_API_SUFFIX(retain_kernel);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainMemObject)
+#if CLXX_B5D_PROVIDES(retain_mem_object)
 /** // doc: retain_mem_object() {{{
  * \brief Increments the memory object reference count
  *
@@ -6432,13 +6339,12 @@ retain_kernel(
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainMemObject.html">clRetainMemObject()</a>
  *
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainMemObject) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_mem_object) void CLXX_B5D_API_CALL
 retain_mem_object(
     cl_mem memobj
-) CLXX_B5D_API_SUFFIX(clRetainMemObject);
-# define CLXX_B5D_PROVIDES_retain_mem_object 1
+) CLXX_B5D_API_SUFFIX(retain_mem_object);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainProgram)
+#if CLXX_B5D_PROVIDES(retain_program)
 /** // doc: retain_program(...) {{{
  * \brief Increments the \p program reference count
  *
@@ -6468,13 +6374,12 @@ retain_mem_object(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clRetainProgram.html">clRetainProgram()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainProgram) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_program) void CLXX_B5D_API_CALL
 retain_program(
     cl_program program
-) CLXX_B5D_API_SUFFIX(clRetainProgram);
-# define CLXX_B5D_PROVIDES_retain_program 1
+) CLXX_B5D_API_SUFFIX(retain_program);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clRetainSampler)
+#if CLXX_B5D_PROVIDES(retain_sampler)
 /** // doc: retain_sampler(...) {{{
  * \brief Increments the \p sampler reference count
  *
@@ -6504,13 +6409,12 @@ retain_program(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clRetainSampler.html">clRetainSampler()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clRetainSampler) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(retain_sampler) void CLXX_B5D_API_CALL
 retain_sampler(
     cl_sampler sampler
-) CLXX_B5D_API_SUFFIX(clRetainSampler);
-# define CLXX_B5D_PROVIDES_retain_sampler 1
+) CLXX_B5D_API_SUFFIX(retain_sampler);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetCommandQueueProperty)
+#if CLXX_B5D_PROVIDES(set_command_queue_property)
 /** // doc: set_command_queue_property() {{{
  * \brief Enable or disable the properties of a command-queue
  *
@@ -6550,16 +6454,15 @@ retain_sampler(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.0/docs/man/xhtml/clSetCommandQueueProperty.html">clSetCommandQueueProperty()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetCommandQueueProperty) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_command_queue_property) void CLXX_B5D_API_CALL
 set_command_queue_property(
     cl_command_queue command_queue,
     command_queue_properties_t properties,
     cl_bool enable,
     cl_command_queue_properties* old_properties
-) CLXX_B5D_API_SUFFIX(clSetCommandQueueProperty);
-# define CLXX_B5D_PROVIDES_set_command_queue_property 1
+) CLXX_B5D_API_SUFFIX(set_command_queue_property);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetDefaultDeviceCommandQueue)
+#if CLXX_B5D_PROVIDES(set_default_device_command_queue)
 /** // doc: set_default_device_command_queue() {{{
  * \brief Replaces the default command queue on the device.
  *
@@ -6590,15 +6493,14 @@ set_command_queue_property(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSetDefaultDeviceCommandQueue.html">clSetDefaultDeviceCommandQueue()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetDefaultDeviceCommandQueue) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_default_device_command_queue) void CLXX_B5D_API_CALL
 set_default_device_command_queue(
     cl_context context,
     cl_device_id device,
     cl_command_queue command_queue
-) CLXX_B5D_API_SUFFIX(clSetDefaultDeviceCommandQueue);
-# define CLXX_B5D_PROVIDES_set_default_device_command_queue 1
+) CLXX_B5D_API_SUFFIX(set_default_device_command_queue);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetEventCallback)
+#if CLXX_B5D_PROVIDES(set_event_callback)
 /** // doc: set_event_callback() {{{
  * \brief Registers a user callback function for a specific command execution status
  *
@@ -6638,16 +6540,15 @@ set_default_device_command_queue(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetEventCallback.html">clSetEventCallback()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetEventCallback) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_event_callback) void CLXX_B5D_API_CALL
 set_event_callback(
     cl_event event,
     cl_int command_exec_callback_type,
     void(CL_CALLBACK* pfn_event_notify)(cl_event, cl_int, void*),
     void* user_data
-) CLXX_B5D_API_SUFFIX(clSetEventCallback);
-# define CLXX_B5D_PROVIDES_set_event_callback 1
+) CLXX_B5D_API_SUFFIX(set_event_callback);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArg)
+#if CLXX_B5D_PROVIDES(set_kernel_arg)
 /** // doc: set_kernel_arg() {{{
  * \brief Used to set the argument value for a specific argument of a kernel
  *
@@ -6708,16 +6609,15 @@ set_event_callback(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArg.html">clSetKernelArg()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetKernelArg) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_kernel_arg) void CLXX_B5D_API_CALL
 set_kernel_arg(
     cl_kernel kernel,
     cl_uint arg_index,
     size_t arg_size,
     const void* arg_value
-) CLXX_B5D_API_SUFFIX(clSetKernelArg);
-# define CLXX_B5D_PROVIDES_set_kernel_arg 1
+) CLXX_B5D_API_SUFFIX(set_kernel_arg);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelArgSVMPointer)
+#if CLXX_B5D_PROVIDES(set_kernel_arg_svm_pointer)
 /** // doc: set_kernel_arg_svm_pointer() {{{
  * \brief Used to set a SVM pointer as the argument value for a specific
  *        argument of a kernel
@@ -6764,15 +6664,14 @@ set_kernel_arg(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelArgSVMPointer.html">clSetKernelArgSVMPointer()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetKernelArgSVMPointer) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_kernel_arg_svm_pointer) void CLXX_B5D_API_CALL
 set_kernel_arg_svm_pointer(
     cl_kernel kernel,
     cl_uint arg_index,
     const void* arg_value
-) CLXX_B5D_API_SUFFIX(clSetKernelArgSVMPointer);
-# define CLXX_B5D_PROVIDES_set_kernel_arg_svm_pointer 1
+) CLXX_B5D_API_SUFFIX(set_kernel_arg_svm_pointer);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetKernelExecInfo)
+#if CLXX_B5D_PROVIDES(set_kernel_exec_info)
 /** // doc: set_kernel_exec_info() {{{
  * \brief Used to pass additional information other than argument values to a kernel
  *
@@ -6812,16 +6711,15 @@ set_kernel_arg_svm_pointer(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetKernelExecInfo.html">clSetKernelExecInfo()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetKernelExecInfo) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_kernel_exec_info) void CLXX_B5D_API_CALL
 set_kernel_exec_info(
     cl_kernel kernel,
     kernel_exec_info_t param_name,
     size_t param_value_size,
     const void* param_value
-) CLXX_B5D_API_SUFFIX(clSetKernelExecInfo);
-# define CLXX_B5D_PROVIDES_set_kernel_exec_info 1
+) CLXX_B5D_API_SUFFIX(set_kernel_exec_info);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetMemObjectDestructorCallback)
+#if CLXX_B5D_PROVIDES(set_mem_object_destructor_callback)
 /** // doc: set_mem_object_destructor_callback() {{{
  * \brief Registers a user callback function with a memory object.
  *
@@ -6862,15 +6760,14 @@ set_kernel_exec_info(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetMemObjectDestructorCallback.html">clSetMemObjectDestructorCallback()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetMemObjectDestructorCallback) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_mem_object_destructor_callback) void CLXX_B5D_API_CALL
 set_mem_object_destructor_callback(
     cl_mem memobj,
     void (CL_CALLBACK* pfn_notify)(cl_mem, void*),
     void* user_data
-) CLXX_B5D_API_SUFFIX(clSetMemObjectDestructorCallback);
-# define CLXX_B5D_PROVIDES_set_mem_object_destructor_callback 1
+) CLXX_B5D_API_SUFFIX(set_mem_object_destructor_callback);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSetUserEventStatus)
+#if CLXX_B5D_PROVIDES(set_user_event_status)
 /** // doc: set_user_event_status() {{{
  * \brief Sets the execution status of a user event object
  *
@@ -6906,14 +6803,13 @@ set_mem_object_destructor_callback(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clSetUserEventStatus.html">clSetUserEventStatus()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSetUserEventStatus) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(set_user_event_status) void CLXX_B5D_API_CALL
 set_user_event_status(
     cl_event event,
     cl_int execution_status
-) CLXX_B5D_API_SUFFIX(clSetUserEventStatus);
-# define CLXX_B5D_PROVIDES_set_user_event_status 1
+) CLXX_B5D_API_SUFFIX(set_user_event_status);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSVMAlloc)
+#if CLXX_B5D_PROVIDES(svm_alloc)
 /** // doc: svm_alloc(...) {{{
  * \brief Allocates a shared virtual memory (SVM) buffer that can be shared by
  *        the host and all devices in an OpenCL context that support shared
@@ -6946,16 +6842,15 @@ set_user_event_status(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSVMAlloc.html">clSVMAlloc()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSVMAlloc) void* CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(svm_alloc) void* CLXX_B5D_API_CALL
 svm_alloc(
     cl_context context,
     svm_mem_flags_t flags,
     size_t size,
     cl_uint alignment
-) CLXX_B5D_API_SUFFIX(clSVMAlloc);
-# define CLXX_B5D_PROVIDES_svm_alloc 1
+) CLXX_B5D_API_SUFFIX(svm_alloc);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)
+#if CLXX_B5D_PROVIDES(svm_free)
 /** // doc: svm_free(...) {{{
  * \brief Frees a shared virtual memory buffer allocated using #svm_alloc
  *        (\c clSVMAlloc)
@@ -6976,14 +6871,13 @@ svm_alloc(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.1/docs/man/xhtml/clSVMFree.html">clSVMFree()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clSVMFree) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(svm_free) void CLXX_B5D_API_CALL
 svm_free(
     cl_context context,
     void* svm_pointer
-) CLXX_B5D_API_SUFFIX(clSVMFree);
-# define CLXX_B5D_PROVIDES_svm_free 1
+) CLXX_B5D_API_SUFFIX(svm_free);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clUnloadCompiler)
+#if CLXX_B5D_PROVIDES(unload_compiler)
 /** // doc: unload_compiler(...) {{{
  * \brief Allows the implementation to release the resources allocated by the
  *        OpenCL compiler
@@ -7007,12 +6901,11 @@ svm_free(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/1.1/docs/man/xhtml/clUnloadCompiler.html">clUnloadCompiler()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clUnloadCompiler) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(unload_compiler) void CLXX_B5D_API_CALL
 unload_compiler(
-) CLXX_B5D_API_SUFFIX(clUnloadCompiler);
-# define CLXX_B5D_PROVIDES_unload_compiler 1
+) CLXX_B5D_API_SUFFIX(unload_compiler);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clUnloadPlatformCompiler)
+#if CLXX_B5D_PROVIDES(unload_platform_compiler)
 /** // doc: unload_platform_compiler(...) {{{
  * \brief Allows the implementation to release the resources allocated by the
  *    OpenCL compiler for \p platform.
@@ -7041,13 +6934,12 @@ unload_compiler(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clUnloadPlatformCompiler.html">clUnloadPlatformCompiler()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clUnloadPlatformCompiler) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(unload_platform_compiler) void CLXX_B5D_API_CALL
 unload_platform_compiler(
     cl_platform_id platform
-) CLXX_B5D_API_SUFFIX(clUnloadPlatformCompiler);
-# define CLXX_B5D_PROVIDES_unload_platform_compiler 1
+) CLXX_B5D_API_SUFFIX(unload_platform_compiler);
 #endif
-#if CLXX_B5D_OPENCL_PROVIDES(clWaitForEvents)
+#if CLXX_B5D_PROVIDES(wait_for_events)
 /** // doc: wait_for_events() {{{
  * \brief Waits on the host thread for commands identified by event objects to complete
  *
@@ -7079,12 +6971,11 @@ unload_platform_compiler(
  *
  * \sa <a href="https://www.khronos.org/registry/cl/sdk/2.0/docs/man/xhtml/clWaitForEvents.html">clWaitForEvents()</a>
  */ // }}}
-extern CLXX_B5D_API_PREFIX(clWaitForEvents) void CLXX_B5D_API_CALL
+extern CLXX_B5D_API_PREFIX(wait_for_events) void CLXX_B5D_API_CALL
 wait_for_events(
     cl_uint num_events,
     const cl_event* event_list
-) CLXX_B5D_API_SUFFIX(clWaitForEvents);
-# define CLXX_B5D_PROVIDES_wait_for_events 1
+) CLXX_B5D_API_SUFFIX(wait_for_events);
 #endif
 /** @} */
 } // end namespace clxx

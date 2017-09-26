@@ -22,7 +22,7 @@
 #define CLXX_B5D_OPENCL_H_INCLUDED
 
 #include <clxx/b5d/cl_config.hpp>
-#include <clxx/common/compiler_config.hpp>
+#include <clxx/c4n/compiler_config.hpp>
 
 CLXX_DIAGNOSTIC_PUSH
 CLXX_DISABLE_COMMENT_WARNING

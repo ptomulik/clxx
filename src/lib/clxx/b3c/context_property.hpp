@@ -207,7 +207,7 @@ context_platform(const platform& x) noexcept
     return context_platform(x.get());
   }
 
-#if CLXX_B3C_H_VERSION_1_2
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
 /** // doc: context_interop_user_sync(bool) {{{
  * \brief Type-safe constructor for \ref clxx::context_property
  *

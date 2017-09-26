@@ -10,8 +10,9 @@
 #ifndef CLXX_B5D_DETAIL_CL_TO_STRING_HPP_INCLUDED
 #define CLXX_B5D_DETAIL_CL_TO_STRING_HPP_INCLUDED
 
+#include <clxx/b5d/cl_config.hpp>
 #include <clxx/b5d/detail/cl_enum2name.hpp>
-#include <clxx/common/detail/to_string_new.hpp>
+#include <clxx/c4n/detail/to_string.hpp>
 
 namespace clxx {
 /** \ingroup clxx_common_util_enum2str clxx_common_detail

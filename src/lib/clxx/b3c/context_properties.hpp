@@ -1,18 +1,18 @@
 // @COPYRIGHT@
 // Licensed under MIT license (LICENSE.txt)
 
-// clxx/cl/context_properties.hpp
+// clxx/b3c/context_properties.hpp
 
-/** // doc: clxx/cl/context_properties.hpp {{{
- * \file clxx/cl/context_properties.hpp
+/** // doc: clxx/b3c/context_properties.hpp {{{
+ * \file clxx/b3c/context_properties.hpp
  * \brief Defines \ref clxx::context_properties "context_properties" and
  *        related functions
  */ // }}}
-#ifndef CLXX_CL_CONTEXT_PROPERTIES_HPP_INCLUDED
-#define CLXX_CL_CONTEXT_PROPERTIES_HPP_INCLUDED
+#ifndef CLXX_B3C_CONTEXT_PROPERTIES_HPP_INCLUDED
+#define CLXX_B3C_CONTEXT_PROPERTIES_HPP_INCLUDED
 
-#include <clxx/cl/context_property.hpp>
-#include <clxx/common/opencl.h>
+#include <clxx/b3c/context_property.hpp>
+#include <clxx/b5d/opencl.h>
 #include <vector>
 
 namespace clxx {
@@ -153,6 +153,6 @@ make_context_properties(T1 const& x1, Tail const&... tail)
 
 } // end namespace clxx
 
-#endif /* CLXX_CL_CONTEXT_PROPERTIES_HPP_INCLUDED */
+#endif /* CLXX_B3C_CONTEXT_PROPERTIES_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:

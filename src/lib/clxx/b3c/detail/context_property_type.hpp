@@ -20,7 +20,7 @@ template <>
   struct context_property_type<context_properties_t::platform>
   { typedef cl_platform_id type; };
 
-#if CLXX_CL_H_VERSION_1_2
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
 template <>
   struct context_property_type<context_properties_t::interop_user_sync>
   { typedef bool type; };

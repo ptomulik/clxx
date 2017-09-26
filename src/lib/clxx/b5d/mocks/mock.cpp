@@ -7,7 +7,7 @@
  * \todo Write documentation for file clxx/b5d/mocks/mock.cpp
  */ // }}}
 #define CXXTEST_MOCK_TEST_SOURCE_FILE
-#include <clxx/common/compiler_config.hpp>
+#include <clxx/c4n/compiler_config.hpp>
 CLXX_DIAGNOSTIC_PUSH
 CLXX_DISABLE_DEPRECATED_DECLARATION_WARNING
 #include <clxx/b5d/mocks/cl_functions.hpp>

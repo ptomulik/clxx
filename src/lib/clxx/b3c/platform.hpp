@@ -144,8 +144,8 @@ public:
 
 } // end namespace clxx
 
-#include <clxx/info/platform_info.hpp>
-#include <clxx/info/platform_query.hpp>
+#include <clxx/i2o/platform_info.hpp>
+#include <clxx/i2o/platform_query.hpp>
 
 namespace clxx {
 /** \ingroup clxx_info

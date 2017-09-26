@@ -1,0 +1,58 @@
+
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import('env')
+
+from SCons.Util import CLVar
+
+i2o_sources = [
+##    'i2o/device_info.cpp',
+##    'i2o/device_query.cpp',
+##    'i2o/platform_info.cpp',
+##    'i2o/platform_layer_info.cpp',
+##    'i2o/platform_query.cpp',
+]
+
+i2o_headers = [
+##    'i2o/device_info.hpp',
+##    'i2o/device_info_ptr.hpp',
+##    'i2o/device_info_ptrs.hpp',
+##    'i2o/device_query.hpp',
+##    'i2o/platform_info.hpp',
+##    'i2o/platform_info_ptr.hpp',
+##    'i2o/platform_info_ptrs.hpp',
+##    'i2o/platform_layer_info.hpp',
+##    'i2o/platform_query.hpp',
+]
+
+env['CLXX_PACKAGES']['libclxx_i2o'] = {
+    'version' : env.subst('$CLXX_VERSION'),
+    'libdeps' : CLVar()
+}
+
+objects = env.SharedObject(i2o_sources)
+
+overrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_i2o']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_i2o']['libdeps']
+}
+
+lib = env.SharedLibrary('../clxx_i2o', objects, **overrides)
+
+ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
+for f in ilib: env.Ignore(f.dir, f)
+
+iheaders = env.Install("${includedir}/clxx/i2o", i2o_headers)
+for f in iheaders: env.Ignore(f.dir, f)
+
+env.Alias('install-libclxx_i2o-headers', iheaders)
+env.Alias('install-libclxx_i2o-lib', ilib)
+env.Alias('install-libclxx_i2o-dev', ['install-libclxx_i2o-headers', 'install-libclxx_i2o-lib' ])
+env.Alias('install','install-libclxx_i2o-dev')
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

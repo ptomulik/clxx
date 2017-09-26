@@ -10,8 +10,8 @@
 #ifndef CLXX_B5D_CL_EXCEPTIONS_HPP_INCLUDED
 #define CLXX_B5D_CL_EXCEPTIONS_HPP_INCLUDED
 
-#include <clxx/common/exception.hpp>
-#include <clxx/common/exception_base.hpp>
+#include <clxx/c4n/exception.hpp>
+#include <clxx/c4n/exception_base.hpp>
 #include <clxx/b5d/cl_types.hpp>
 #include <clxx/b5d/detail/clerror_stdexcept.hpp>
 #include <clxx/b5d/detail/cl_enum2cstr.hpp>

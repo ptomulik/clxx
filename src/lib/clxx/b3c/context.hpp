@@ -154,7 +154,7 @@ public:
                             size_t cb,
                             void* user_data) = nullptr,
           void* user_data = nullptr);
-#if CLXX_B3C_H_VERSION_1_1
+#if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
   /** // doc: get_reference_count() {{{
    * \brief   Get the number of devices in context.
    *

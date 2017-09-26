@@ -31,130 +31,130 @@ versions_to_check = [
 ]
 
 cl_h_functions = [
-  ('clBuildProgram', 'CL/cl.h'),
-  ('clCloneKernel', 'CL/cl.h'),
-  ('clCompileProgram', 'CL/cl.h'),
-  ('clCreateBuffer', 'CL/cl.h'),
-  ('clCreateCommandQueue', 'CL/cl.h'),
-  ('clCreateCommandQueueWithProperties', 'CL/cl.h'),
-  ('clCreateContext', 'CL/cl.h'),
-  ('clCreateContextFromType', 'CL/cl.h'),
-  ('clCreateImage', 'CL/cl.h'),
-  ('clCreateImage2D', 'CL/cl.h'),
-  ('clCreateImage3D', 'CL/cl.h'),
-  ('clCreateKernel', 'CL/cl.h'),
-  ('clCreateKernelsInProgram', 'CL/cl.h'),
-  ('clCreatePipe', 'CL/cl.h'),
-  ('clCreateProgramWithBinary', 'CL/cl.h'),
-  ('clCreateProgramWithBuiltInKernels', 'CL/cl.h'),
-  ('clCreateProgramWithIL', 'CL/cl.h'),
-  ('clCreateProgramWithSource', 'CL/cl.h'),
-  ('clCreateSampler', 'CL/cl.h'),
-  ('clCreateSamplerWithProperties', 'CL/cl.h'),
-  ('clCreateSubBuffer', 'CL/cl.h'),
-  ('clCreateSubDevices', 'CL/cl.h'),
-  ('clCreateUserEvent', 'CL/cl.h'),
-  ('clEnqueueBarrier', 'CL/cl.h'),
-  ('clEnqueueBarrierWithWaitList', 'CL/cl.h'),
-  ('clEnqueueCopyBuffer', 'CL/cl.h'),
-  ('clEnqueueCopyBufferRect', 'CL/cl.h'),
-  ('clEnqueueCopyBufferToImage', 'CL/cl.h'),
-  ('clEnqueueCopyImage', 'CL/cl.h'),
-  ('clEnqueueCopyImageToBuffer', 'CL/cl.h'),
-  ('clEnqueueFillBuffer', 'CL/cl.h'),
-  ('clEnqueueFillImage', 'CL/cl.h'),
-  ('clEnqueueMapBuffer', 'CL/cl.h'),
-  ('clEnqueueMapImage', 'CL/cl.h'),
-  ('clEnqueueMarker', 'CL/cl.h'),
-  ('clEnqueueMarkerWithWaitList', 'CL/cl.h'),
-  ('clEnqueueMigrateMemObjects', 'CL/cl.h'),
-  ('clEnqueueNativeKernel', 'CL/cl.h'),
-  ('clEnqueueNDRangeKernel', 'CL/cl.h'),
-  ('clEnqueueReadBuffer', 'CL/cl.h'),
-  ('clEnqueueReadBufferRect', 'CL/cl.h'),
-  ('clEnqueueReadImage', 'CL/cl.h'),
-  ('clEnqueueSVMFree', 'CL/cl.h'),
-  ('clEnqueueSVMMap', 'CL/cl.h'),
-  ('clEnqueueSVMMemcpy', 'CL/cl.h'),
-  ('clEnqueueSVMMemFill', 'CL/cl.h'),
-  ('clEnqueueSVMMigrateMem', 'CL/cl.h'),
-  ('clEnqueueSVMUnmap', 'CL/cl.h'),
-  ('clEnqueueTask', 'CL/cl.h'),
-  ('clEnqueueUnmapMemObject', 'CL/cl.h'),
-  ('clEnqueueWaitForEvents', 'CL/cl.h'),
-  ('clEnqueueWriteBuffer', 'CL/cl.h'),
-  ('clEnqueueWriteBufferRect', 'CL/cl.h'),
-  ('clEnqueueWriteImage', 'CL/cl.h'),
-  ('clFinish', 'CL/cl.h'),
-  ('clFlush', 'CL/cl.h'),
-  ('clGetCommandQueueInfo', 'CL/cl.h'),
-  ('clGetContextInfo', 'CL/cl.h'),
-  ('clGetDeviceAndHostTimer', 'CL/cl.h'),
-  ('clGetDeviceIDs', 'CL/cl.h'),
-  ('clGetDeviceInfo', 'CL/cl.h'),
-  ('clGetEventInfo', 'CL/cl.h'),
-  ('clGetEventProfilingInfo', 'CL/cl.h'),
-  ('clGetExtensionFunctionAddress', 'CL/cl.h'),
-  ('clGetExtensionFunctionAddressForPlatform', 'CL/cl.h'),
-  ('clGetHostTimer', 'CL/cl.h'),
-  ('clGetImageInfo', 'CL/cl.h'),
-  ('clGetKernelArgInfo', 'CL/cl.h'),
-  ('clGetKernelInfo', 'CL/cl.h'),
-  ('clGetKernelSubGroupInfo', 'CL/cl.h'),
-  ('clGetKernelWorkGroupInfo', 'CL/cl.h'),
-  ('clGetMemObjectInfo', 'CL/cl.h'),
-  ('clGetPipeInfo', 'CL/cl.h'),
-  ('clGetPlatformIDs', 'CL/cl.h'),
-  ('clGetPlatformInfo', 'CL/cl.h'),
-  ('clGetProgramBuildInfo', 'CL/cl.h'),
-  ('clGetProgramInfo', 'CL/cl.h'),
-  ('clGetSamplerInfo', 'CL/cl.h'),
-  ('clGetSupportedImageFormats', 'CL/cl.h'),
-  ('clLinkProgram', 'CL/cl.h'),
-  ('clReleaseCommandQueue', 'CL/cl.h'),
-  ('clReleaseContext', 'CL/cl.h'),
-  ('clReleaseDevice', 'CL/cl.h'),
-  ('clReleaseEvent', 'CL/cl.h'),
-  ('clReleaseKernel', 'CL/cl.h'),
-  ('clReleaseMemObject', 'CL/cl.h'),
-  ('clReleaseProgram', 'CL/cl.h'),
-  ('clReleaseSampler', 'CL/cl.h'),
-  ('clRetainCommandQueue', 'CL/cl.h'),
-  ('clRetainContext', 'CL/cl.h'),
-  ('clRetainDevice', 'CL/cl.h'),
-  ('clRetainEvent', 'CL/cl.h'),
-  ('clRetainKernel', 'CL/cl.h'),
-  ('clRetainMemObject', 'CL/cl.h'),
-  ('clRetainProgram', 'CL/cl.h'),
-  ('clRetainSampler', 'CL/cl.h'),
-  ('clSetCommandQueueProperty', 'CL/cl.h'),
-  ('clSetDefaultDeviceCommandQueue', 'CL/cl.h'),
-  ('clSetEventCallback', 'CL/cl.h'),
-  ('clSetKernelArg', 'CL/cl.h'),
-  ('clSetKernelArgSVMPointer', 'CL/cl.h'),
-  ('clSetKernelExecInfo', 'CL/cl.h'),
-  ('clSetMemObjectDestructorCallback', 'CL/cl.h'),
-  ('clSetProgramReleaseCallback', 'CL/cl.h'),
-  ('clSetProgramSpecializationConstant', 'CL/cl.h'),
-  ('clSetUserEventStatus', 'CL/cl.h'),
-  ('clSVMAlloc', 'CL/cl.h'),
-  ('clSVMFree', 'CL/cl.h'),
-  ('clUnloadCompiler', 'CL/cl.h'),
-  ('clUnloadPlatformCompiler', 'CL/cl.h'),
-  ('clWaitForEvents', 'CL/cl.h'),
+  ('clBuildProgram', 'CL/cl.h', 'build_program'),
+  ('clCloneKernel', 'CL/cl.h', 'clone_kernel'),
+  ('clCompileProgram', 'CL/cl.h', 'compile_program'),
+  ('clCreateBuffer', 'CL/cl.h', 'create_buffer'),
+  ('clCreateCommandQueue', 'CL/cl.h', 'create_command_queue'),
+  ('clCreateCommandQueueWithProperties', 'CL/cl.h', 'create_command_queue_with_properties'),
+  ('clCreateContext', 'CL/cl.h', 'create_context'),
+  ('clCreateContextFromType', 'CL/cl.h', 'create_context_from_type'),
+  ('clCreateImage', 'CL/cl.h', 'create_image'),
+  ('clCreateImage2D', 'CL/cl.h', 'create_image_2d'),
+  ('clCreateImage3D', 'CL/cl.h', 'create_image_3d'),
+  ('clCreateKernel', 'CL/cl.h', 'create_kernel'),
+  ('clCreateKernelsInProgram', 'CL/cl.h', 'create_kernels_in_program'),
+  ('clCreatePipe', 'CL/cl.h', 'create_pipe'),
+  ('clCreateProgramWithBinary', 'CL/cl.h', 'create_program_with_binary'),
+  ('clCreateProgramWithBuiltInKernels', 'CL/cl.h', 'create_program_with_built_in_kernels'),
+  ('clCreateProgramWithIL', 'CL/cl.h', 'create_program_with_il'),
+  ('clCreateProgramWithSource', 'CL/cl.h', 'create_program_with_source'),
+  ('clCreateSampler', 'CL/cl.h', 'create_sampler'),
+  ('clCreateSamplerWithProperties', 'CL/cl.h', 'create_sampler_with_properties'),
+  ('clCreateSubBuffer', 'CL/cl.h', 'create_sub_buffer'),
+  ('clCreateSubDevices', 'CL/cl.h', 'create_sub_devices'),
+  ('clCreateUserEvent', 'CL/cl.h', 'create_user_event'),
+  ('clEnqueueBarrier', 'CL/cl.h', 'enqueue_barrier'),
+  ('clEnqueueBarrierWithWaitList', 'CL/cl.h', 'enqueue_barrier_with_wait_list'),
+  ('clEnqueueCopyBuffer', 'CL/cl.h', 'enqueue_copy_buffer'),
+  ('clEnqueueCopyBufferRect', 'CL/cl.h', 'enqueue_copy_buffer_rect'),
+  ('clEnqueueCopyBufferToImage', 'CL/cl.h', 'enqueue_copy_buffer_to_image'),
+  ('clEnqueueCopyImage', 'CL/cl.h', 'enqueue_copy_image'),
+  ('clEnqueueCopyImageToBuffer', 'CL/cl.h', 'enqueue_copy_image_to_buffer'),
+  ('clEnqueueFillBuffer', 'CL/cl.h', 'enqueue_fill_buffer'),
+  ('clEnqueueFillImage', 'CL/cl.h', 'enqueue_fill_image'),
+  ('clEnqueueMapBuffer', 'CL/cl.h', 'enqueue_map_buffer'),
+  ('clEnqueueMapImage', 'CL/cl.h', 'enqueue_map_image'),
+  ('clEnqueueMarker', 'CL/cl.h', 'enqueue_marker'),
+  ('clEnqueueMarkerWithWaitList', 'CL/cl.h', 'enqueue_marker_with_wait_list'),
+  ('clEnqueueMigrateMemObjects', 'CL/cl.h', 'enqueue_migrate_mem_objects'),
+  ('clEnqueueNativeKernel', 'CL/cl.h', 'enqueue_native_kernel'),
+  ('clEnqueueNDRangeKernel', 'CL/cl.h', 'enqueue_ndrange_kernel'),
+  ('clEnqueueReadBuffer', 'CL/cl.h', 'enqueue_read_buffer'),
+  ('clEnqueueReadBufferRect', 'CL/cl.h', 'enqueue_read_buffer_rect'),
+  ('clEnqueueReadImage', 'CL/cl.h', 'enqueue_read_image'),
+  ('clEnqueueSVMFree', 'CL/cl.h', 'enqueue_svm_free'),
+  ('clEnqueueSVMMap', 'CL/cl.h', 'enqueue_svm_map'),
+  ('clEnqueueSVMMemcpy', 'CL/cl.h', 'enqueue_svm_memcpy'),
+  ('clEnqueueSVMMemFill', 'CL/cl.h', 'enqueue_svm_mem_fill'),
+  ('clEnqueueSVMMigrateMem', 'CL/cl.h', 'enqueue_svm_migrate_mem'),
+  ('clEnqueueSVMUnmap', 'CL/cl.h', 'enqueue_svm_unmap'),
+  ('clEnqueueTask', 'CL/cl.h', 'enqueue_task'),
+  ('clEnqueueUnmapMemObject', 'CL/cl.h', 'enqueue_unmap_mem_object'),
+  ('clEnqueueWaitForEvents', 'CL/cl.h', 'enqueue_wait_for_events'),
+  ('clEnqueueWriteBuffer', 'CL/cl.h', 'enqueue_write_buffer'),
+  ('clEnqueueWriteBufferRect', 'CL/cl.h', 'enqueue_write_buffer_rect'),
+  ('clEnqueueWriteImage', 'CL/cl.h', 'enqueue_write_image'),
+  ('clFinish', 'CL/cl.h', 'finish'),
+  ('clFlush', 'CL/cl.h', 'flush'),
+  ('clGetCommandQueueInfo', 'CL/cl.h', 'get_command_queue_info'),
+  ('clGetContextInfo', 'CL/cl.h', 'get_context_info'),
+  ('clGetDeviceAndHostTimer', 'CL/cl.h', 'get_device_and_host_timer'),
+  ('clGetDeviceIDs', 'CL/cl.h', 'get_device_ids'),
+  ('clGetDeviceInfo', 'CL/cl.h', 'get_device_info'),
+  ('clGetEventInfo', 'CL/cl.h', 'get_event_info'),
+  ('clGetEventProfilingInfo', 'CL/cl.h', 'get_event_profiling_info'),
+  ('clGetExtensionFunctionAddress', 'CL/cl.h', 'get_extension_function_address'),
+  ('clGetExtensionFunctionAddressForPlatform', 'CL/cl.h', 'get_extension_function_address_for_platform'),
+  ('clGetHostTimer', 'CL/cl.h', 'get_host_timer'),
+  ('clGetImageInfo', 'CL/cl.h', 'get_image_info'),
+  ('clGetKernelArgInfo', 'CL/cl.h', 'get_kernel_arg_info'),
+  ('clGetKernelInfo', 'CL/cl.h', 'get_kernel_info'),
+  ('clGetKernelSubGroupInfo', 'CL/cl.h', 'get_kernel_sub_group_info'),
+  ('clGetKernelWorkGroupInfo', 'CL/cl.h', 'get_kernel_work_group_info'),
+  ('clGetMemObjectInfo', 'CL/cl.h', 'get_mem_object_info'),
+  ('clGetPipeInfo', 'CL/cl.h', 'get_pipe_info'),
+  ('clGetPlatformIDs', 'CL/cl.h', 'get_platform_ids'),
+  ('clGetPlatformInfo', 'CL/cl.h', 'get_platform_info'),
+  ('clGetProgramBuildInfo', 'CL/cl.h', 'get_program_build_info'),
+  ('clGetProgramInfo', 'CL/cl.h', 'get_program_info'),
+  ('clGetSamplerInfo', 'CL/cl.h', 'get_sampler_info'),
+  ('clGetSupportedImageFormats', 'CL/cl.h', 'get_supported_image_formats'),
+  ('clLinkProgram', 'CL/cl.h', 'link_program'),
+  ('clReleaseCommandQueue', 'CL/cl.h', 'release_command_queue'),
+  ('clReleaseContext', 'CL/cl.h', 'release_context'),
+  ('clReleaseDevice', 'CL/cl.h', 'release_device'),
+  ('clReleaseEvent', 'CL/cl.h', 'release_event'),
+  ('clReleaseKernel', 'CL/cl.h', 'release_kernel'),
+  ('clReleaseMemObject', 'CL/cl.h', 'release_mem_object'),
+  ('clReleaseProgram', 'CL/cl.h', 'release_program'),
+  ('clReleaseSampler', 'CL/cl.h', 'release_sampler'),
+  ('clRetainCommandQueue', 'CL/cl.h', 'retain_command_queue'),
+  ('clRetainContext', 'CL/cl.h', 'retain_context'),
+  ('clRetainDevice', 'CL/cl.h', 'retain_device'),
+  ('clRetainEvent', 'CL/cl.h', 'retain_event'),
+  ('clRetainKernel', 'CL/cl.h', 'retain_kernel'),
+  ('clRetainMemObject', 'CL/cl.h', 'retain_mem_object'),
+  ('clRetainProgram', 'CL/cl.h', 'retain_program'),
+  ('clRetainSampler', 'CL/cl.h', 'retain_sampler'),
+  ('clSetCommandQueueProperty', 'CL/cl.h', 'set_command_queue_property'),
+  ('clSetDefaultDeviceCommandQueue', 'CL/cl.h', 'set_default_device_command_queue'),
+  ('clSetEventCallback', 'CL/cl.h', 'set_event_callback'),
+  ('clSetKernelArg', 'CL/cl.h', 'set_kernel_arg'),
+  ('clSetKernelArgSVMPointer', 'CL/cl.h', 'set_kernel_arg_svm_pointer'),
+  ('clSetKernelExecInfo', 'CL/cl.h', 'set_kernel_exec_info'),
+  ('clSetMemObjectDestructorCallback', 'CL/cl.h', 'set_mem_object_destructor_callback'),
+  ('clSetProgramReleaseCallback', 'CL/cl.h', 'set_program_release_callback'),
+  ('clSetProgramSpecializationConstant', 'CL/cl.h', 'set_program_specialization_constant'),
+  ('clSetUserEventStatus', 'CL/cl.h', 'set_user_event_status'),
+  ('clSVMAlloc', 'CL/cl.h', 'svm_alloc'),
+  ('clSVMFree', 'CL/cl.h', 'svm_free'),
+  ('clUnloadCompiler', 'CL/cl.h', 'unload_compiler'),
+  ('clUnloadPlatformCompiler', 'CL/cl.h', 'unload_platform_compiler'),
+  ('clWaitForEvents', 'CL/cl.h', 'wait_for_events'),
 ]
 
 cl_gl_h_functions = [
-  ('clCreateFromGLBuffer', 'CL/cl_gl.h'),
-  ('clCreateFromGLRenderbuffer', 'CL/cl_gl.h'),
-  ('clCreateFromGLTexture', 'CL/cl_gl.h'),
-  ('clCreateFromGLTexture2D', 'CL/cl_gl.h'),
-  ('clCreateFromGLTexture3D', 'CL/cl_gl.h'),
-  ('clEnqueueAcquireGLObjects', 'CL/cl_gl.h'),
-  ('clEnqueueReleaseGLObjects', 'CL/cl_gl.h'),
-  ('clGetGLContextInfoKHR', 'CL/cl_gl.h'),
-  ('clGetGLObjectInfo', 'CL/cl_gl.h'),
-  ('clGetGLTextureInfo', 'CL/cl_gl.h'),
+  ('clCreateFromGLBuffer', 'CL/cl_gl.h', 'create_from_gl_buffer'),
+  ('clCreateFromGLRenderbuffer', 'CL/cl_gl.h', 'create_from_gl_renderbuffer'),
+  ('clCreateFromGLTexture', 'CL/cl_gl.h', 'create_from_gl_texture'),
+  ('clCreateFromGLTexture2D', 'CL/cl_gl.h', 'create_from_gl_texture_2d'),
+  ('clCreateFromGLTexture3D', 'CL/cl_gl.h', 'create_from_gl_texture_3d'),
+  ('clEnqueueAcquireGLObjects', 'CL/cl_gl.h', 'enqueue_acquire_gl_objects'),
+  ('clEnqueueReleaseGLObjects', 'CL/cl_gl.h', 'enqueue_release_gl_objects'),
+  ('clGetGLContextInfoKHR', 'CL/cl_gl.h', 'get_gl_context_info_khr'),
+  ('clGetGLObjectInfo', 'CL/cl_gl.h', 'get_gl_object_info'),
+  ('clGetGLTextureInfo', 'CL/cl_gl.h', 'get_gl_texture_info'),
 ]
 
 functions_to_check = cl_h_functions + cl_gl_h_functions
@@ -469,11 +469,11 @@ def check_result(resultdict, **kw):
             warn("%s not found in any version of %s" % (entry['fcn'], entry['hdr']))
 
 def prepare_csv_output(resultdict, **kw):
-    outputlist = [ ':'.join(['Function', 'Header'] + versions_to_check) ]
+    outputlist = [ ':'.join(['Function', 'Header', 'CLXX Function'] + versions_to_check) ]
     for key in sorted(resultdict.keys(), lambda x,y : cmp(x.lower(),y.lower())):
         entry = resultdict[key]
         matrix = entry['matrix']
-        outputlist.append( ':'.join( [entry['fcn'], entry['hdr']] + [matrix[v] for v in versions_to_check] ) )
+        outputlist.append( ':'.join( [entry['fcn'], entry['hdr'], entry['clxxfcn']] + [matrix[v] for v in versions_to_check] ) )
     return '\n'.join(outputlist)
 
 def prepare_html_output(resultdict, **kw):
@@ -482,6 +482,7 @@ def prepare_html_output(resultdict, **kw):
     outputlist.append( '  <tr>')
     outputlist.append( '    <th>Function</th>')
     outputlist.append( '    <th>Header</th>')
+    outputlist.append( '    <th>CLXX Function</th>')
     outputlist.extend(['    <th>%s</th>' % v for v in versions_to_check])
     outputlist.append( '  </tr>')
     for key in sorted(resultdict.keys(), lambda x,y : cmp(x.lower(),y.lower())):
@@ -490,6 +491,7 @@ def prepare_html_output(resultdict, **kw):
         outputlist.append( '  <tr>')
         outputlist.append( '    <td class="cl-function">%s</th>' % entry['fcn'])
         outputlist.append( '    <td class="cl-header">%s</th>' % entry['hdr'])
+        outputlist.append( '    <td class="cl-function">%s</th>' % entry['clxxfcn'])
         outputlist.extend(['    <td class="cl-check">%s</td>' % matrix[v] for v in versions_to_check])
         outputlist.append( '  </tr>')
     outputlist.append('</table>')
@@ -509,7 +511,7 @@ def prepare_cpp_output(resultdict, **kw):
     outputlist.append(r'#ifndef CLXX_B5D_CL_FUNCTIONS_CONFIG_HPP_INCLUDED')
     outputlist.append(r'#define CLXX_B5D_CL_FUNCTIONS_CONFIG_HPP_INCLUDED')
     outputlist.append(r'')
-    outputlist.append(r'#include <clxx/b5d/config_params.hpp>')
+    outputlist.append(r'#include <clxx/b5d/cl_config_params.hpp>')
     outputlist.append(r'')
     outputlist.append(r'/* !!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */')
     outputlist.append(r'/*    FILE GENERATED WITH bin/cl-functions-config.py. DO NOT MODIFY    */')
@@ -538,7 +540,9 @@ def prepare_cpp_output(resultdict, **kw):
 
     for fcn in exists:
         hdr = resultdict[fcn]['hdr']
+        clxxfcn = resultdict[fcn]['clxxfcn']
         outputlist.append('#define CLXX_B5D_OPENCL_DECLARES_%s 1 /* %s */' % (fcn,hdr))
+        outputlist.append('#define CLXX_B5D_PROVIDES_%s 1' % clxxfcn)
 
     for ver in versions_to_check:
         versuffix = ver.replace('.', '_')
@@ -547,26 +551,32 @@ def prepare_cpp_output(resultdict, **kw):
             outputlist.append('#if CLXX_B5D_OPENCL_CL_H_VERSION_%s /* OpenCL >= %s */' % (versuffix, ver))
             for fcn in exists_ge[ver]:
                 hdr = resultdict[fcn]['hdr']
+                clxxfcn =  resultdict[fcn]['clxxfcn']
                 outputlist.append('# define CLXX_B5D_OPENCL_DECLARES_%s 1 /* %s */' % (fcn, hdr))
+                outputlist.append('# define CLXX_B5D_PROVIDES_%s 1' % clxxfcn)
             for fcn in deprec_ge[ver]:
                 hdr = resultdict[fcn]['hdr']
+                clxxfcn =  resultdict[fcn]['clxxfcn']
                 outputlist.append('# define CLXX_B5D_OPENCL_DEPRECATES_%s 1 /* %s */' % (fcn,hdr))
+                outputlist.append('# define CLXX_B5D_DEPRECATES_%s 1' % clxxfcn)
             outputlist.append('#else /* OpenCL < %s */' % ver)
             for fcn in exists_lt[ver]:
                 hdr = resultdict[fcn]['hdr']
+                clxxfcn =  resultdict[fcn]['clxxfcn']
                 outputlist.append('# define CLXX_B5D_OPENCL_DECLARES_%s 1 /* %s */' % (fcn,hdr))
+                outputlist.append('# define CLXX_B5D_PROVIDES_%s 1' % clxxfcn)
             outputlist.append('#endif /* CLXX_B5D_OPENCL_CL_H_VERSION_%s */' % versuffix)
     for key in sorted(resultdict.keys(), lambda x,y: cmp(x.lower(), y.lower())):
         entry = resultdict[key]
-        fcn = entry['fcn']
+        clxxfcn = entry['clxxfcn']
         outputlist.append('')
-        outputlist.append('/* Auto-deprecation for %s */' % fcn)
-        outputlist.append('#if CLXX_B5D_OPENCL_DEPRECATES_%s' % fcn)
-        outputlist.append('# define CLXX_B5D_PREFIX_DEPRECATED_%s CLXX_B5D_DEPRECATION_PREFIX' % fcn)
-        outputlist.append('# define CLXX_B5D_SUFFIX_DEPRECATED_%s CLXX_B5D_DEPRECATION_SUFFIX' %fcn)
+        outputlist.append('/* Auto-deprecation for %s */' % clxxfcn)
+        outputlist.append('#if CLXX_B5D_DEPRECATES_%s' % clxxfcn)
+        outputlist.append('# define CLXX_B5D_PREFIX_DEPRECATED_%s CLXX_B5D_DEPRECATION_PREFIX' % clxxfcn)
+        outputlist.append('# define CLXX_B5D_SUFFIX_DEPRECATED_%s CLXX_B5D_DEPRECATION_SUFFIX' % clxxfcn)
         outputlist.append('#else')
-        outputlist.append('# define CLXX_B5D_PREFIX_DEPRECATED_%s' % fcn)
-        outputlist.append('# define CLXX_B5D_SUFFIX_DEPRECATED_%s' % fcn)
+        outputlist.append('# define CLXX_B5D_PREFIX_DEPRECATED_%s' % clxxfcn)
+        outputlist.append('# define CLXX_B5D_SUFFIX_DEPRECATED_%s' % clxxfcn)
         outputlist.append('#endif')
     outputlist.append(r'')
     outputlist.append(r'#endif /* CLXX_B5D_CL_FUNCTIONS_CONFIG_HPP_INCLUDED */')
@@ -623,15 +633,15 @@ if not jsoninput:
     resultdict = dict()
 
     for fcnent in functions_to_check:
-        (fcn, hdr) = fcnent
+        (fcn, hdr, clxxfcn) = fcnent
         code = """#include <%(hdr)s>
     int main(int argc, char* argv[]) {
       (void)argc;
       (void)argv;
       (void)%(fcn)s;
       return 0;
-    }""" % {'fcn' : fcn, 'hdr' : hdr}
-        resultdict[fcn] = {'fcn' : fcn, 'hdr' : hdr, 'matrix' : dict()}
+    }""" % {'fcn' : fcn, 'hdr' : hdr, 'clxxfcn' : clxxfcn}
+        resultdict[fcn] = {'fcn' : fcn, 'hdr' : hdr, 'clxxfcn' : clxxfcn, 'matrix' : dict()}
         for ver in versions_to_check:
             incpath = os.path.join(tmpdir, 'include', 'OpenCL', ver)
             outfile = os.path.join(tmpdir, '%s_%s.o' % (fcn, ver))
