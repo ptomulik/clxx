@@ -198,6 +198,7 @@ static void _throw_clerror_no(status_t s)
     }
 }
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(build_program)
 void
 build_program(cl_program program,
               cl_uint num_devices,
@@ -221,6 +222,7 @@ build_program(cl_program program,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(clone_kernel)
 cl_kernel
@@ -267,8 +269,9 @@ compile_program(cl_program program,
       _throw_clerror_no(s);
     }
 }
-#endif // CLXX_B5D_PROVIDES(compile_program)
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_buffer)
 cl_mem
 create_buffer(cl_context context,
               mem_flags_t flags,
@@ -289,6 +292,7 @@ create_buffer(cl_context context,
     }
   return m;
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(create_command_queue)
 cl_command_queue
@@ -326,6 +330,7 @@ create_command_queue_with_properties(cl_context context,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_context)
 cl_context
 create_context(const cl_context_properties* properties,
                cl_uint num_devices,
@@ -346,7 +351,9 @@ create_context(const cl_context_properties* properties,
 
   return ctx;
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_context_from_type)
 cl_context
 create_context_from_type(const cl_context_properties* properties,
                          device_type_t device_type,
@@ -372,6 +379,7 @@ create_context_from_type(const cl_context_properties* properties,
 
   return ctx;
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(create_image)
 cl_mem
@@ -455,6 +463,7 @@ create_image_3d(cl_context context,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_kernel)
 cl_kernel
 create_kernel(cl_program program,
               const char* kernel_name)
@@ -468,7 +477,9 @@ create_kernel(cl_program program,
     }
   return kern;
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_kernels_in_program)
 void
 create_kernels_in_program(cl_program program,
                           cl_uint num_kernels,
@@ -488,6 +499,7 @@ create_kernels_in_program(cl_program program,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(create_pipe)
 cl_mem
@@ -514,6 +526,7 @@ create_pipe(cl_context context,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_program_with_binary)
 cl_program
 create_program_with_binary(cl_context context,
                            cl_uint num_devices,
@@ -538,8 +551,9 @@ create_program_with_binary(cl_context context,
     }
   return p;
 }
-#if CLXX_B5D_PROVIDES(create_program_with_built_in_kernels)
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_program_with_built_in_kernels)
 cl_program
 create_program_with_built_in_kernels(cl_context context,
                                      cl_uint num_devices,
@@ -560,7 +574,7 @@ create_program_with_built_in_kernels(cl_context context,
     }
   return p;
 }
-#endif // CLXX_B5D_PROVIDES(create_program_with_built_in_kernels)
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(create_program_with_il)
 cl_program
@@ -583,6 +597,7 @@ create_program_with_il(cl_context context,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(create_program_with_source)
 cl_program
 create_program_with_source(cl_context context,
                            cl_uint count,
@@ -598,6 +613,7 @@ create_program_with_source(cl_context context,
     }
   return p;
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(create_sampler)
 cl_sampler
@@ -685,7 +701,7 @@ create_sub_devices(cl_device_id in_device,
       _throw_clerror_no(s);
     }
 }
-#endif // CLXX_B5D_PROVIDES(create_sub_devices)
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(create_user_event)
 cl_event
@@ -733,6 +749,7 @@ enqueue_barrier_with_wait_list(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_copy_buffer)
 void
 enqueue_copy_buffer( cl_command_queue command_queue, cl_mem src_buffer,
                      cl_mem dst_buffer, size_t src_offset, size_t dst_offset,
@@ -757,6 +774,7 @@ enqueue_copy_buffer( cl_command_queue command_queue, cl_mem src_buffer,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(enqueue_copy_buffer_rect)
 void
@@ -798,6 +816,7 @@ enqueue_copy_buffer_rect(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_copy_buffer_to_image)
 void
 enqueue_copy_buffer_to_image(cl_command_queue command_queue,
                              cl_mem src_image,
@@ -827,7 +846,9 @@ enqueue_copy_buffer_to_image(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_copy_image)
 void
 enqueue_copy_image(cl_command_queue command_queue,
                    cl_mem src_image,
@@ -857,7 +878,9 @@ enqueue_copy_image(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_copy_image_to_buffer)
 void
 enqueue_copy_image_to_buffer(cl_command_queue command_queue,
                              cl_mem src_image,
@@ -887,6 +910,7 @@ enqueue_copy_image_to_buffer(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(enqueue_fill_buffer)
 void
@@ -950,6 +974,7 @@ enqueue_fill_image(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_map_buffer)
 void*
 enqueue_map_buffer( cl_command_queue command_queue, cl_mem buffer,
                     cl_bool blocking_map, map_flags_t map_flags,
@@ -975,7 +1000,9 @@ enqueue_map_buffer( cl_command_queue command_queue, cl_mem buffer,
     }
   return result;
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_map_image)
 void*
 enqueue_map_image(cl_command_queue command_queue,
                   cl_mem image,
@@ -1010,6 +1037,7 @@ enqueue_map_image(cl_command_queue command_queue,
     }
   return result;
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(enqueue_marker)
 void
@@ -1077,9 +1105,9 @@ enqueue_migrate_mem_objects(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
-/* ------------------------------------------------------------------------ */
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_native_kernel)
 void
 enqueue_native_kernel( cl_command_queue command_queue,
                        void (CL_CALLBACK* user_func)(void*),
@@ -1110,7 +1138,9 @@ enqueue_native_kernel( cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_ndrange_kernel)
 void
 enqueue_ndrange_kernel( cl_command_queue command_queue,
                          cl_kernel kernel,
@@ -1140,7 +1170,9 @@ enqueue_ndrange_kernel( cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_read_buffer)
 void
 enqueue_read_buffer( cl_command_queue command_queue, cl_mem buffer,
                      cl_bool blocking_read, size_t offset, size_t size,
@@ -1165,6 +1197,7 @@ enqueue_read_buffer( cl_command_queue command_queue, cl_mem buffer,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(enqueue_read_buffer_rect)
 void
@@ -1208,6 +1241,7 @@ enqueue_read_buffer_rect(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_read_image)
 void
 enqueue_read_image(cl_command_queue command_queue,
                    cl_mem image,
@@ -1241,6 +1275,7 @@ enqueue_read_image(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(enqueue_svm_free)
 void
@@ -1443,6 +1478,7 @@ enqueue_task(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_unmap_mem_object)
 void
 enqueue_unmap_mem_object(cl_command_queue command_queue,
                          cl_mem memobj,
@@ -1466,6 +1502,7 @@ enqueue_unmap_mem_object(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(enqueue_wait_for_events)
 void
@@ -1487,6 +1524,7 @@ enqueue_wait_for_events(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_write_buffer)
 void
 enqueue_write_buffer( cl_command_queue command_queue, cl_mem buffer,
                       cl_bool blocking_write, size_t offset, size_t size,
@@ -1511,6 +1549,7 @@ enqueue_write_buffer( cl_command_queue command_queue, cl_mem buffer,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(enqueue_write_buffer_rect)
 void
@@ -1554,6 +1593,7 @@ enqueue_write_buffer_rect(cl_command_queue command_queue,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(enqueue_write_image)
 void
 enqueue_write_image(cl_command_queue command_queue,
                     cl_mem image,
@@ -1587,7 +1627,9 @@ enqueue_write_image(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(finish)
 void
 finish(cl_command_queue command_queue)
 {
@@ -1597,7 +1639,9 @@ finish(cl_command_queue command_queue)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(flush)
 void
 flush(cl_command_queue command_queue)
 {
@@ -1607,7 +1651,9 @@ flush(cl_command_queue command_queue)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_command_queue_info)
 void
 get_command_queue_info(cl_command_queue command_queue,
                        command_queue_info_t param_name,
@@ -1629,7 +1675,9 @@ get_command_queue_info(cl_command_queue command_queue,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_context_info)
 void
 get_context_info(cl_context context,
                  context_info_t param_name,
@@ -1651,6 +1699,7 @@ get_context_info(cl_context context,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(get_device_and_host_timer)
 void
@@ -1672,6 +1721,7 @@ get_device_and_host_timer(cl_device_id device,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_device_ids)
 void
 get_device_ids(cl_platform_id platform,
                device_type_t device_type,
@@ -1693,7 +1743,9 @@ get_device_ids(cl_platform_id platform,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_device_info)
 void
 get_device_info(cl_device_id device,
                 device_info_t param_name,
@@ -1715,8 +1767,10 @@ get_device_info(cl_device_id device,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 void
+#if CLXX_B5D_PROVIDES(get_event_info)
 get_event_info(cl_event event, event_info_t param_name,
                size_t param_value_size, void* param_value,
                size_t* param_value_size_ret)
@@ -1733,7 +1787,9 @@ get_event_info(cl_event event, event_info_t param_name,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_event_profiling_info)
 void
 get_event_profiling_info(cl_event event,
                          profiling_info_t param_name,
@@ -1754,6 +1810,7 @@ get_event_profiling_info(cl_event event,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(get_extension_function_address)
 void*
@@ -1790,6 +1847,7 @@ get_host_timer(cl_device_id device,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_image_info)
 void
 get_image_info(cl_mem image,
                image_info_t param_name,
@@ -1810,6 +1868,7 @@ get_image_info(cl_mem image,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(get_kernel_arg_info)
 void
@@ -1836,6 +1895,7 @@ get_kernel_arg_info(cl_kernel kernel,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_kernel_info)
 void
 get_kernel_info(cl_kernel kernel,
                 kernel_info_t param_name,
@@ -1856,6 +1916,7 @@ get_kernel_info(cl_kernel kernel,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(get_kernel_sub_group_info)
 void
@@ -1885,6 +1946,7 @@ get_kernel_sub_group_info(cl_kernel kernel,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_kernel_work_group_info)
 void
 get_kernel_work_group_info(cl_kernel kernel,
                            cl_device_id device,
@@ -1907,7 +1969,9 @@ get_kernel_work_group_info(cl_kernel kernel,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_mem_object_info)
 void
 get_mem_object_info(cl_mem memobj,
                     mem_info_t param_name,
@@ -1928,6 +1992,7 @@ get_mem_object_info(cl_mem memobj,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(get_pipe_info)
 void
@@ -1952,6 +2017,7 @@ get_pipe_info(cl_mem pipe,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_platform_ids)
 void
 get_platform_ids(cl_uint num_entries,
                  cl_platform_id* platforms,
@@ -1965,7 +2031,9 @@ get_platform_ids(cl_uint num_entries,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_platform_info)
 void
 get_platform_info(cl_platform_id platform,
                   platform_info_t param_name,
@@ -1985,7 +2053,9 @@ get_platform_info(cl_platform_id platform,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_program_build_info)
 void
 get_program_build_info(cl_program program,
                        cl_device_id device,
@@ -2009,7 +2079,9 @@ get_program_build_info(cl_program program,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_program_info)
 void
 get_program_info(cl_program program,
                  program_info_t param_name,
@@ -2031,7 +2103,9 @@ get_program_info(cl_program program,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_sampler_info)
 void
 get_sampler_info(cl_sampler sampler,
                  sampler_info_t param_name,
@@ -2053,7 +2127,9 @@ get_sampler_info(cl_sampler sampler,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(get_supported_image_formats)
 void
 get_supported_image_formats(cl_context context,
                             mem_flags_t flags,
@@ -2077,6 +2153,7 @@ get_supported_image_formats(cl_context context,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(link_program)
 cl_program
@@ -2108,8 +2185,9 @@ link_program(cl_context context,
     }
   return p;
 }
-#endif // CLXX_B5D_PROVIDES(link_program)
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(release_command_queue)
 void
 release_command_queue(cl_command_queue command_queue)
 {
@@ -2119,7 +2197,9 @@ release_command_queue(cl_command_queue command_queue)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(release_context)
 void
 release_context(cl_context context)
 {
@@ -2129,6 +2209,7 @@ release_context(cl_context context)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(release_device)
 void
@@ -2140,8 +2221,9 @@ release_device(cl_device_id device)
       _throw_clerror_no(s);
     }
 }
-#endif // CLXX_B5D_PROVIDES(release_device)
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(release_event)
 void
 release_event(cl_event event)
 {
@@ -2151,7 +2233,9 @@ release_event(cl_event event)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(release_kernel)
 void
 release_kernel(cl_kernel kernel)
 {
@@ -2161,7 +2245,9 @@ release_kernel(cl_kernel kernel)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(release_mem_object)
 void
 release_mem_object(cl_mem memobj)
 {
@@ -2171,7 +2257,9 @@ release_mem_object(cl_mem memobj)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(release_program)
 void
 release_program(cl_program program)
 {
@@ -2181,7 +2269,9 @@ release_program(cl_program program)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(release_sampler)
 void
 release_sampler(cl_sampler sampler)
 {
@@ -2191,7 +2281,9 @@ release_sampler(cl_sampler sampler)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(retain_command_queue)
 void
 retain_command_queue(cl_command_queue command_queue)
 {
@@ -2201,7 +2293,9 @@ retain_command_queue(cl_command_queue command_queue)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(retain_context)
 void
 retain_context(cl_context context)
 {
@@ -2211,6 +2305,7 @@ retain_context(cl_context context)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(retain_device)
 void
@@ -2222,8 +2317,9 @@ retain_device(cl_device_id device)
       _throw_clerror_no(s);
     }
 }
-#endif // CLXX_B5D_PROVIDES(retain_device)
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(retain_event)
 void
 retain_event(cl_event event)
 {
@@ -2233,7 +2329,9 @@ retain_event(cl_event event)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(retain_kernel)
 void
 retain_kernel(cl_kernel kernel)
 {
@@ -2243,7 +2341,9 @@ retain_kernel(cl_kernel kernel)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(retain_mem_object)
 void
 retain_mem_object(cl_mem memobj)
 {
@@ -2253,7 +2353,9 @@ retain_mem_object(cl_mem memobj)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(retain_program)
 void
 retain_program(cl_program program)
 {
@@ -2263,7 +2365,9 @@ retain_program(cl_program program)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(retain_sampler)
 void
 retain_sampler(cl_sampler sampler)
 {
@@ -2273,6 +2377,7 @@ retain_sampler(cl_sampler sampler)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(set_command_queue_property)
 void
@@ -2329,6 +2434,7 @@ set_event_callback(cl_event event, cl_int command_exec_callback_type,
 }
 #endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(set_kernel_arg)
 void
 set_kernel_arg(cl_kernel kernel,
                cl_uint arg_index,
@@ -2348,6 +2454,7 @@ set_kernel_arg(cl_kernel kernel,
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
 #if CLXX_B5D_PROVIDES(set_kernel_arg_svm_pointer)
 void
@@ -2463,8 +2570,9 @@ unload_platform_compiler(cl_platform_id platform)
       _throw_clerror_no(s);
     }
 }
-#endif // CLXX_B5D_PROVIDES(unload_platform_compiler)
+#endif
 /* ------------------------------------------------------------------------ */
+#if CLXX_B5D_PROVIDES(wait_for_events)
 void
 wait_for_events(cl_uint num_events, const cl_event* event_list)
 {
@@ -2476,8 +2584,8 @@ wait_for_events(cl_uint num_events, const cl_event* event_list)
       _throw_clerror_no(s);
     }
 }
+#endif
 /* ------------------------------------------------------------------------ */
-// CUR
 } // end namespace clxx
 // vim: set expandtab tabstop=2 shiftwidth=2:
 // vim: set foldmethod=marker foldcolumn=4:
