@@ -176,7 +176,7 @@ cl_uint preferred_vector_width_double() const;
  * \throws uninitialized_value_error if the \c max_clock_frequency is uninitialized
  */ // }}}
 cl_uint max_clock_frequency() const;
-/** // doc: {ddress_bits() {{
+/** // doc: {ddress_bits() {{{
  * \brief Default compute device address space size of the global address space
  * \returns Default compute device address space size of the global address
  *    space expressed in bits.
@@ -1854,7 +1854,7 @@ cl_uint image_base_address_alignment() const;
    * \returns \c true if #built_in_kernels is initialized or \c false otherwise
    */ // }}}
   bool has_built_in_kernels() const noexcept;
-  /** // doc: has_image_max_buffer_size(val) { {{
+  /** // doc: has_image_max_buffer_size(val) {{{
    * \brief Check if the #image_max_buffer_size attribute is initialized
    * \returns \c true if #image_max_buffer_size is initialized or \c false otherwise
    */ // }}}
