@@ -5,7 +5,7 @@
 
 /** // doc: clxx/b5d/cl_exceptions.hpp {{{
  * \file clxx/b5d/cl_exceptions.hpp
- * \brief Defines several exceptions used across clxx project
+ * \brief Defines exceptions thrown by the b5d functions.
  */ // }}}
 #ifndef CLXX_B5D_CL_EXCEPTIONS_HPP_INCLUDED
 #define CLXX_B5D_CL_EXCEPTIONS_HPP_INCLUDED

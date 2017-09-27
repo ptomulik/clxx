@@ -14,6 +14,11 @@ tests = [
     'b5d/cl_config.t.h',
     # Exceptions
     'b5d/cl_exceptions.t.h',
+    # Utilities in detail/ subdirectory
+    'b5d/detail/clerror_stdexcept.t.h',
+    'b5d/detail/cl_enum2cstr.t.h',
+    'b5d/detail/cl_enum2name.t.h',
+    'b5d/detail/cl_to_string.t.h',
     # Functions
     'b5d/cl_functions/build_program.t.h',
     'b5d/cl_functions/clone_kernel.t.h',
