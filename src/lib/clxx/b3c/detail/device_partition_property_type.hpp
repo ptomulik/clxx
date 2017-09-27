@@ -11,7 +11,7 @@
 #define CLXX_B3C_DETAIL_DEVICE_PARTITION_PROPERTY_TYPE_HPP_INCLUDED
 
 #include <clxx/b3c/detail/device_partition_property_type_fwd.hpp>
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <vector>
 
 namespace clxx { namespace detail {

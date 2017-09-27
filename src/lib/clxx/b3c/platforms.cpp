@@ -8,7 +8,7 @@
  * \brief Implements functions for retrieval of \ref clxx::platform "platform" objects
  */ // }}}
 #include <clxx/b3c/platforms.hpp>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 
 namespace clxx {
 

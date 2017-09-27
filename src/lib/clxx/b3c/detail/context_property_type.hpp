@@ -10,7 +10,7 @@
 #ifndef CLXX_B3C_DETAIL_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED
 #define CLXX_B3C_DETAIL_CONTEXT_PROPERTY_TYPE_HPP_INCLUDED
 
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <clxx/b3c/detail/context_property_type_fwd.hpp>
 
 namespace clxx { namespace detail {

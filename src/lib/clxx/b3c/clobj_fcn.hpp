@@ -11,7 +11,7 @@
 #define CLXX_B3C_CLOBJ_FCN_HPP_INCLUDED
 
 #include <clxx/b5d/opencl.h>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 
 namespace clxx {
 /** // doc: retain_cl_object() {{{

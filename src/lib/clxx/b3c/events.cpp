@@ -6,7 +6,7 @@
  * \todo Write documentation
  */ // }}}
 #include <clxx/b3c/events.hpp>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 #include <clxx/b3c/detail/obj2cl.hpp>
 
 namespace clxx {

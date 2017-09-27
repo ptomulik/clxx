@@ -6,7 +6,7 @@
  * \brief Implements \ref clxx::enqueue_ndrange_kernel(clxx::command_queue const&, clxx::kernel const&, clxx::ndrange const&, clxx::events const&, clxx::event*) "enqueue_ndrange_kernel()" and friends.
  */ // }}}
 #include <clxx/b3c/kernel_fcn.hpp>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 #include <clxx/b3c/command_queue.hpp>
 #include <clxx/b3c/kernel.hpp>
 #include <clxx/b3c/detail/obj2cl.hpp>

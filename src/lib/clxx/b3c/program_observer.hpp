@@ -10,7 +10,7 @@
 #ifndef CLXX_B3C_PROGRAM_OBSERVER_HPP_INCLUDED
 #define CLXX_B3C_PROGRAM_OBSERVER_HPP_INCLUDED
 
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 
 namespace clxx {
 class program;

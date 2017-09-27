@@ -10,7 +10,7 @@
 #ifndef CLXX_B5D_DETAIL_CLERROR_STDEXCEPT_HPP_INCLUDED
 #define CLXX_B5D_DETAIL_CLERROR_STDEXCEPT_HPP_INCLUDED
 
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <stdexcept>
 
 namespace clxx { namespace detail {

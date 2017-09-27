@@ -14,7 +14,7 @@
 #include <clxx/b5d/opencl.h>
 #include <clxx/b3c/command_queue.hpp>
 #include <clxx/b3c/context.hpp>
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <clxx/b3c/clobj.hpp>
 
 namespace clxx {

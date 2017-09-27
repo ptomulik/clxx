@@ -8,14 +8,14 @@ from SCons.Util import CLVar, NodeList
 import os
 
 sources =  [
-    'b5d/cl_functions.cpp',
+    'b5d/functions.cpp',
 ]
 
 headers = [
     #
     # b5d/*.hpp
     #
-    'b5d/cl_functions.hpp'
+    'b5d/functions.hpp'
 ]
 
 ##headers += [

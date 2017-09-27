@@ -16,7 +16,7 @@
 
 #include <clxx/b3c/platform_fwd.hpp>
 #include <clxx/b3c/clobj.hpp>
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <string>
 
 namespace clxx {

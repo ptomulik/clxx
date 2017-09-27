@@ -9,7 +9,7 @@
 #include <clxx/b3c/program.hpp>
 #include <clxx/b3c/programs.hpp>
 #include <clxx/b3c/context.hpp>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 #include <clxx/b3c/detail/obj2cl.hpp>
 #include <clxx/c4n/exceptions.hpp>
 #include <boost/shared_array.hpp>

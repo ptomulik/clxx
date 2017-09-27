@@ -7,7 +7,7 @@
  */ // }}}
 #include <clxx/b3c/context.hpp>
 #include <clxx/b3c/clobj_impl.hpp>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 
 namespace clxx {
 /* ------------------------------------------------------------------------ */

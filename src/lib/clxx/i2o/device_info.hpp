@@ -10,7 +10,7 @@
 #ifndef CLXX_I2O_DEVICE_INFO_HPP_INCLUDED
 #define CLXX_I2O_DEVICE_INFO_HPP_INCLUDED
 
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <boost/optional.hpp>
 #include <vector>
 #include <string>

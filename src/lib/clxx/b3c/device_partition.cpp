@@ -8,7 +8,7 @@
  * \brief Implements API for \ref clxx::device "device" partitioning
  */ // }}}
 #include <clxx/b3c/device_partition.hpp>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 #include <boost/shared_array.hpp>
 
 namespace clxx {

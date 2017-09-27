@@ -12,7 +12,7 @@
 
 #include <clxx/b3c/mem_fwd.hpp>
 #include <clxx/b3c/context_fwd.hpp>
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <clxx/b5d/opencl.h>
 #include <clxx/b3c/clobj.hpp>
 

@@ -8,7 +8,7 @@
  * \brief Implements functions used to create \ref clxx::device "device" objects
  */ // }}}
 #include <clxx/b3c/devices.hpp>
-#include <clxx/b5d/cl_functions.hpp>
+#include <clxx/b5d/functions.hpp>
 
 namespace clxx {
 

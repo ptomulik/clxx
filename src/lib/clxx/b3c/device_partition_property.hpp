@@ -11,7 +11,7 @@
 #define CLXX_B3C_DEVICE_PARTITION_PROPERTY_HPP_INCLUDED
 
 #include <clxx/b3c/detail/device_partition_property_type.hpp>
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <clxx/c4n/exceptions.hpp>
 #include <vector>
 

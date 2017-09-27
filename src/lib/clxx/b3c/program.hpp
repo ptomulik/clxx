@@ -16,7 +16,7 @@
 #include <clxx/c4n/program_sources.hpp>
 #include <clxx/c4n/program_binaries.hpp>
 #include <clxx/b3c/program_observer.hpp>
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <clxx/b3c/clobj.hpp>
 #include <vector>
 #include <string>

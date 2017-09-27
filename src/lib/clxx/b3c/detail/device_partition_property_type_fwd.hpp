@@ -10,7 +10,7 @@
 #ifndef CLXX_B3C_DETAIL_DEVICE_PARTITION_PROPERTY_TYPE_FWD_HPP_INCLUDED
 #define CLXX_B3C_DETAIL_DEVICE_PARTITION_PROPERTY_TYPE_FWD_HPP_INCLUDED
 
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 
 namespace clxx { namespace detail {
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2

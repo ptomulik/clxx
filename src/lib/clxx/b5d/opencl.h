@@ -21,7 +21,7 @@
 #ifndef CLXX_B5D_OPENCL_H_INCLUDED
 #define CLXX_B5D_OPENCL_H_INCLUDED
 
-#include <clxx/b5d/cl_config.hpp>
+#include <clxx/b5d/config.hpp>
 #include <clxx/c4n/compiler_config.hpp>
 
 CLXX_DIAGNOSTIC_PUSH

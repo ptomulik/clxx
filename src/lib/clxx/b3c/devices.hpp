@@ -13,7 +13,7 @@
 
 #include <clxx/b3c/device.hpp>
 #include <clxx/b3c/platform.hpp>
-#include <clxx/b5d/cl_types.hpp>
+#include <clxx/b5d/types.hpp>
 #include <vector>
 
 namespace clxx {
