@@ -41,7 +41,7 @@ command_queue(context const& ctx, device const& dev, command_queue_properties_t 
 (void)ctx;
 (void)dev;
 (void)props;
-//# error Missing create_command_queue() and create_command_queue_with_properties(), this should never happen!
+# error Missing create_command_queue() and create_command_queue_with_properties(), this should never happen!
 #endif
 }
 /* ------------------------------------------------------------------------ */
