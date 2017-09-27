@@ -41,7 +41,7 @@ command_queue(context const& ctx, device const& dev, command_queue_properties_t 
 (void)ctx;
 (void)dev;
 (void)props;
-# error Missing clCreateCommandQueue() and clCreateCommandQueueWithProperties() do you have OpenCL library installed?
+//# error Missing create_command_queue() and create_command_queue_with_properties(), this should never happen!
 #endif
 }
 /* ------------------------------------------------------------------------ */
@@ -61,7 +61,7 @@ command_queue_properties_t command_queue::
 get_properties() const
 {
   return static_cast<command_queue_properties_t>(
-    _get_pod_info<cl_command_queue_properties>(*this,command_queue_info_t::properties)
+    _get_pod_info<cl_command_queue_properties>(*this, command_queue_info_t::properties)
   );
 }
 /* ------------------------------------------------------------------------ */
