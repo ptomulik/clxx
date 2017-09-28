@@ -83,6 +83,11 @@ env['CLXX_PACKAGES']['libclxx_b3c'] = {
     'libdeps' : CLVar('clxx_b5d clxx_info')
 }
 
+env['CLXX_PACKAGES']['libclxx_b3c_test'] = {
+    'version' : env.subst('$CLXX_VERSION'),
+    'libdeps' : CLVar('clxx_b5d_test clxx_info')
+}
+
 objects = env.SharedObject(sources)
 
 overrides = {
@@ -90,13 +95,19 @@ overrides = {
     'LIBS'          : env['CLXX_PACKAGES']['libclxx_b3c']['libdeps']
 }
 
-lib = env.SharedLibrary('../clxx_b3c', objects, **overrides)
+toverrides = {
+    'SHLIBVERSION'  : env['CLXX_PACKAGES']['libclxx_b3c_test']['version'],
+    'LIBS'          : env['CLXX_PACKAGES']['libclxx_b3c_test']['libdeps']
+}
 
-### tlib - library for testing (OpenCL functions replaced with mocks)
-##tlib = env.SharedLibrary('../clxx_b3c_test', objects + ['b3c/mock.cpp'], **overrides)
-##env.Ignore('../..', tlib)
+# rlib - real library for production
+rlib = env.SharedLibrary('../clxx_b3c', objects, **overrides)
 
-ilib = env.InstallVersionedLib('${libdir}', lib, **overrides)
+# tlib - library for testing (OpenCL functions replaced with mocks)
+tlib = env.SharedLibrary('../clxx_b3c_test', objects, **toverrides)
+env.Ignore('../..', tlib)
+
+ilib = env.InstallVersionedLib('${libdir}', rlib, **overrides)
 for f in ilib: env.Ignore(f.dir, f)
 
 iheaders = NodeList()

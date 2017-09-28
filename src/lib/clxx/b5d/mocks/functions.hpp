@@ -1058,6 +1058,7 @@ CXXTEST_MOCK_GLOBAL(cl_int,
 /** \endcond */
 
 #include <clxx/b5d/mocks/functions/dummy.hpp>
+#include <clxx/b5d/mocks/functions/pluggable.hpp>
 
 #endif /* CLXX_B5D_MOCKS_FUNCTIONS_HPP_INCLUDED */
 // vim: set expandtab tabstop=2 shiftwidth=2:

@@ -23,12 +23,7 @@ static_assert(
 command_queue::
 command_queue(context const& ctx, device const& dev, command_queue_properties_t props)
 {
-#if CLXX_B5D_PROVIDES(create_comman_queue)
-  cl_command_queue handle = create_command_queue( ctx.chk_get(),
-                                                  dev.chk_get(),
-                                                  props );
-  this->_set_handle(handle, false, false);
-#elif CLXX_B5D_PROVIDES(create_command_queue_with_properties)
+#if CLXX_B5D_PROVIDES(create_command_queue_with_properties)
   cl_queue_properties props_array[3] = {  CL_QUEUE_PROPERTIES,
                                           intval(props),
                                           static_cast<cl_queue_properties>(0) };
@@ -36,6 +31,11 @@ command_queue(context const& ctx, device const& dev, command_queue_properties_t 
                                                   ctx.chk_get(),
                                                   dev.chk_get(),
                                                   props_array );
+  this->_set_handle(handle, false, false);
+#elif CLXX_B5D_PROVIDES(create_comman_queue)
+  cl_command_queue handle = create_command_queue( ctx.chk_get(),
+                                                  dev.chk_get(),
+                                                  props );
   this->_set_handle(handle, false, false);
 #else
 (void)ctx;
