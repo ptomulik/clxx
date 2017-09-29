@@ -328,14 +328,24 @@ public:
   {
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    mem_object_type_t var = mem_object_type_t::buffer;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_TYPE) {
+          if(param_value && param_value_size >= sizeof(cl_mem_object_type))
+            *((cl_mem_object_type*)param_value) = (cl_mem_object_type)CL_MEM_OBJECT_BUFFER;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_mem_object_type);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_type(), var);
+    TS_ASSERT_EQUALS(m.get_type(), mem_object_type_t::buffer);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_TYPE);
@@ -347,14 +357,24 @@ public:
   {
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    mem_flags_t var = mem_flags_t::read_write;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_FLAGS) {
+          if(param_value && param_value_size >= sizeof(cl_mem_flags))
+            *((cl_mem_flags*)param_value) = (cl_mem_flags)CL_MEM_READ_WRITE;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_mem_flags);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_flags(), var);
+    TS_ASSERT_EQUALS(m.get_flags(), mem_flags_t::read_write);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_FLAGS);
@@ -366,14 +386,24 @@ public:
   {
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    size_t var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_SIZE) {
+          if(param_value && param_value_size >= sizeof(size_t))
+            *((size_t*)param_value) = 12ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(size_t);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_size(), var);
+    TS_ASSERT_EQUALS(m.get_size(), 12ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_SIZE);
@@ -385,14 +415,24 @@ public:
   {
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    void* var = (void*)0x1234;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_HOST_PTR) {
+          if(param_value && param_value_size >= sizeof(void*))
+            *((void**)param_value) = (void*)0x1234;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(void*);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_host_ptr(), var);
+    TS_ASSERT_EQUALS(m.get_host_ptr(), (void*)0x1234);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_HOST_PTR);
@@ -404,14 +444,24 @@ public:
   {
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    cl_uint var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_MAP_COUNT) {
+          if(param_value && param_value_size >= sizeof(cl_uint))
+            *((cl_uint*)param_value) = (cl_uint)12;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_uint);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_map_count(), var);
+    TS_ASSERT_EQUALS(m.get_map_count(), 12);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_MAP_COUNT);
@@ -423,14 +473,24 @@ public:
   {
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    cl_uint var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_REFERENCE_COUNT) {
+          if(param_value && param_value_size >= sizeof(cl_uint))
+            *((cl_uint*)param_value) = (cl_uint)12;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_uint);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_reference_count(), var);
+    TS_ASSERT_EQUALS(m.get_reference_count(), 12);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_REFERENCE_COUNT);
@@ -442,18 +502,28 @@ public:
   {
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    cl_context var = (cl_context)0x1234;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_CONTEXT) {
+          if(param_value && param_value_size >= sizeof(cl_context))
+            *((cl_context*)param_value) = (cl_context)0x1234;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_context);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
 
     T::Dummy_clRetainContext mock4(CL_SUCCESS);
     T::Dummy_clReleaseContext mock5(CL_SUCCESS);
 
-    TS_ASSERT(m.get_context() == context(var));
+    TS_ASSERT(m.get_context() == context((cl_context)0x1234));
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_CONTEXT);
@@ -466,14 +536,24 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    cl_mem var = (cl_mem)0x1234;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_ASSOCIATED_MEMOBJECT) {
+          if(param_value && param_value_size >= sizeof(cl_mem))
+            *((cl_mem*)param_value) = (cl_mem)0x1234;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_mem);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT(m.get_associated_memobject() == mem(var));
+    TS_ASSERT(m.get_associated_memobject() == mem((cl_mem)0x1234));
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_ASSOCIATED_MEMOBJECT);
@@ -487,14 +567,24 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    size_t var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_OFFSET) {
+          if(param_value && param_value_size >= sizeof(size_t))
+            *((size_t*)param_value) = (size_t)12ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(size_t);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_offset(), var);
+    TS_ASSERT_EQUALS(m.get_offset(), 12ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_OFFSET);
@@ -508,14 +598,24 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_2_0
     T::Dummy_clRetainMemObject mock1(CL_SUCCESS);
     T::Dummy_clReleaseMemObject mock2(CL_SUCCESS);
-
-    cl_bool var = 1;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetMemObjectInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetMemObjectInfo mock3([](cl_mem,
+                                             cl_mem_info param_name,
+                                             size_t param_value_size,
+                                             void* param_value,
+                                             size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_MEM_USES_SVM_POINTER) {
+          if(param_value && param_value_size >= sizeof(cl_bool))
+            *((cl_bool*)param_value) = (cl_bool)1;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_bool);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     mem m((cl_mem)0x4321);
-    TS_ASSERT_EQUALS(m.get_uses_svm_pointer(), var);
+    TS_ASSERT_EQUALS(m.get_uses_svm_pointer(), (cl_bool)1);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_mem_info)CL_MEM_USES_SVM_POINTER);

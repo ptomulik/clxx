@@ -359,14 +359,24 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_uint var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventInfo mock3([](cl_event,
+                                         cl_event_info param_name,
+                                         size_t param_value_size,
+                                         void* param_value,
+                                         size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_EVENT_REFERENCE_COUNT) {
+          if(param_value && param_value_size >= sizeof(cl_uint))
+            *((cl_uint*)param_value) = 12u;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_uint);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
-    TS_ASSERT_EQUALS(e.get_reference_count(), var);
+    TS_ASSERT_EQUALS(e.get_reference_count(), 12u);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_REFERENCE_COUNT);
@@ -379,17 +389,27 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_context var = (cl_context)12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventInfo mock3([](cl_event,
+                                         cl_event_info param_name,
+                                         size_t param_value_size,
+                                         void* param_value,
+                                         size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_EVENT_CONTEXT) {
+          if(param_value && param_value_size >= sizeof(cl_context))
+            *((cl_context*)param_value) = (cl_context)12;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_context);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
     T::Dummy_clRetainContext mock4(CL_SUCCESS);
     T::Dummy_clReleaseContext mock5(CL_SUCCESS);
-    TS_ASSERT_EQUALS(e.get_context().get(), var);
+    TS_ASSERT_EQUALS(e.get_context().get(), (cl_context)12);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_CONTEXT);
@@ -402,17 +422,27 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_command_queue var = (cl_command_queue)12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventInfo mock3([](cl_event,
+                                         cl_event_info param_name,
+                                         size_t param_value_size,
+                                         void* param_value,
+                                         size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_EVENT_COMMAND_QUEUE) {
+          if(param_value && param_value_size >= sizeof(cl_command_queue))
+            *((cl_command_queue*)param_value) = (cl_command_queue)12;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_command_queue);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
     T::Dummy_clRetainCommandQueue mock4(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue mock5(CL_SUCCESS);
-    TS_ASSERT_EQUALS(e.get_command_queue().get(), var);
+    TS_ASSERT_EQUALS(e.get_command_queue().get(), (cl_command_queue)12);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_COMMAND_QUEUE);
@@ -424,15 +454,25 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_command_type var = (cl_command_type)CL_COMMAND_READ_BUFFER;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventInfo mock3([](cl_event,
+                                         cl_event_info param_name,
+                                         size_t param_value_size,
+                                         void* param_value,
+                                         size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_EVENT_COMMAND_TYPE) {
+          if(param_value && param_value_size >= sizeof(cl_command_type))
+            *((cl_command_type*)param_value) = (cl_command_type)CL_COMMAND_READ_BUFFER;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_command_type);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
-    TS_ASSERT_EQUALS(static_cast<cl_command_type>(e.get_command_type()), var);
+    TS_ASSERT_EQUALS(e.get_command_type(), command_type_t::read_buffer);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_COMMAND_TYPE);
@@ -444,15 +484,25 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_int var = (cl_int)CL_COMMAND_READ_BUFFER;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventInfo mock3([](cl_event,
+                                         cl_event_info param_name,
+                                         size_t param_value_size,
+                                         void* param_value,
+                                         size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_EVENT_COMMAND_EXECUTION_STATUS) {
+          if(param_value && param_value_size >= sizeof(cl_int))
+            *((cl_int*)param_value) = (cl_int)CL_COMPLETE;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_int);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
-    TS_ASSERT_EQUALS(static_cast<cl_int>(e.get_command_exec_status()), var);
+    TS_ASSERT_EQUALS(e.get_command_exec_status(), command_exec_status_t::complete);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_EVENT_COMMAND_EXECUTION_STATUS);
@@ -464,15 +514,25 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_ulong var = 123ul;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventProfilingInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventProfilingInfo mock3([](cl_event,
+                                                  cl_profiling_info param_name,
+                                                  size_t param_value_size,
+                                                  void* param_value,
+                                                  size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_profiling_info)CL_PROFILING_COMMAND_QUEUED) {
+          if(param_value && param_value_size >= sizeof(cl_ulong))
+            *((cl_ulong*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_ulong);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
-    TS_ASSERT_EQUALS(e.get_profiling_command_queued(), var);
+    TS_ASSERT_EQUALS(e.get_profiling_command_queued(), 123ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_profiling_info)CL_PROFILING_COMMAND_QUEUED);
@@ -484,15 +544,25 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_ulong var = 123ul;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventProfilingInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventProfilingInfo mock3([](cl_event,
+                                                  cl_profiling_info param_name,
+                                                  size_t param_value_size,
+                                                  void* param_value,
+                                                  size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_profiling_info)CL_PROFILING_COMMAND_SUBMIT) {
+          if(param_value && param_value_size >= sizeof(cl_ulong))
+            *((cl_ulong*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_ulong);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
-    TS_ASSERT_EQUALS(e.get_profiling_command_submit(), var);
+    TS_ASSERT_EQUALS(e.get_profiling_command_submit(), 123ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_profiling_info)CL_PROFILING_COMMAND_SUBMIT);
@@ -504,15 +574,25 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_ulong var = 123ul;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventProfilingInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventProfilingInfo mock3([](cl_event,
+                                                  cl_profiling_info param_name,
+                                                  size_t param_value_size,
+                                                  void* param_value,
+                                                  size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_profiling_info)CL_PROFILING_COMMAND_START) {
+          if(param_value && param_value_size >= sizeof(cl_ulong))
+            *((cl_ulong*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_ulong);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
-    TS_ASSERT_EQUALS(e.get_profiling_command_start(), var);
+    TS_ASSERT_EQUALS(e.get_profiling_command_start(), 123ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_profiling_info)CL_PROFILING_COMMAND_START);
@@ -524,15 +604,25 @@ public:
   {
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_ulong var = 123ul;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventProfilingInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventProfilingInfo mock3([](cl_event,
+                                                  cl_profiling_info param_name,
+                                                  size_t param_value_size,
+                                                  void* param_value,
+                                                  size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_profiling_info)CL_PROFILING_COMMAND_END) {
+          if(param_value && param_value_size >= sizeof(cl_ulong))
+            *((cl_ulong*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_ulong);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
-    TS_ASSERT_EQUALS(e.get_profiling_command_end(), var);
+    TS_ASSERT_EQUALS(e.get_profiling_command_end(), 123ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_profiling_info)CL_PROFILING_COMMAND_END);
@@ -545,15 +635,25 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_2_0
     T::Dummy_clRetainEvent mock1(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock2(CL_SUCCESS);
-
-    cl_ulong var = 123ul;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetEventProfilingInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetEventProfilingInfo mock3([](cl_event,
+                                                  cl_profiling_info param_name,
+                                                  size_t param_value_size,
+                                                  void* param_value,
+                                                  size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_profiling_info)CL_PROFILING_COMMAND_COMPLETE) {
+          if(param_value && param_value_size >= sizeof(cl_ulong))
+            *((cl_ulong*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_ulong);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     event e((cl_event)0x4321);
 
-    TS_ASSERT_EQUALS(e.get_profiling_command_complete(), var);
+    TS_ASSERT_EQUALS(e.get_profiling_command_complete(), 123ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_profiling_info)CL_PROFILING_COMMAND_COMPLETE);

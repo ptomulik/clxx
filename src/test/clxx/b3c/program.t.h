@@ -452,14 +452,24 @@ public:
   {
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    cl_uint var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_REFERENCE_COUNT) {
+        if(param_value && param_value_size >= sizeof(cl_uint))
+          *((cl_uint*)param_value) = 12u;
+        if(param_value_size_ret)
+          *param_value_size_ret = sizeof(cl_uint);
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
-    TS_ASSERT_EQUALS(p.get_reference_count(), var);
+    TS_ASSERT_EQUALS(p.get_reference_count(), 12u);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_PROGRAM_REFERENCE_COUNT);
@@ -473,11 +483,21 @@ public:
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
     T::Dummy_clRetainContext mock4(CL_SUCCESS);
     T::Dummy_clReleaseContext mock5(CL_SUCCESS);
-
-    cl_context var = (cl_context)0x123;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_CONTEXT) {
+        if(param_value && param_value_size >= sizeof(cl_context))
+          *((cl_context*)param_value) = (cl_context)0x123;
+        if(param_value_size_ret)
+          *param_value_size_ret = sizeof(cl_context);
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
     TS_ASSERT_EQUALS(p.get_context(), context((cl_context)0x123));
@@ -492,14 +512,24 @@ public:
   {
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    size_t var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_NUM_DEVICES) {
+        if(param_value && param_value_size >= sizeof(cl_uint))
+          *((cl_uint*)param_value) = 12u;
+        if(param_value_size_ret)
+          *param_value_size_ret = sizeof(cl_uint);
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
-    TS_ASSERT_EQUALS(p.get_num_devices(), var);
+    TS_ASSERT_EQUALS(p.get_num_devices(), 12ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_PROGRAM_NUM_DEVICES);
@@ -517,11 +547,26 @@ public:
 #endif
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    cl_device_id array[3] = {(cl_device_id)0x123, (cl_device_id)0x456, (cl_device_id)0x789};
-    size_t n = sizeof(array);
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, array, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_DEVICES) {
+        if(param_value) {
+          if(param_value_size >= 1 * sizeof(cl_device_id)) ((cl_device_id*)param_value)[0] = (cl_device_id)0x123;
+          if(param_value_size >= 2 * sizeof(cl_device_id)) ((cl_device_id*)param_value)[1] = (cl_device_id)0x456;
+          if(param_value_size >= 3 * sizeof(cl_device_id)) ((cl_device_id*)param_value)[2] = (cl_device_id)0x789;
+          if(param_value_size_ret)
+            *param_value_size_ret = std::min(3*sizeof(cl_device_id), param_value_size);
+        } else if(param_value_size_ret) {
+          *param_value_size_ret = 3 * sizeof(cl_device_id);
+        }
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
     devices ds(p.get_devices());
@@ -540,19 +585,31 @@ public:
   {
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    char array[] = {"this is a good source"};
-    size_t n = sizeof(array);
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, array, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_SOURCE) {
+        if(param_value && param_value_size >= 4 * sizeof(char)) {
+          std::strcpy((char*)param_value, "foo");
+          ((char*)param_value)[3] = '\0';
+        }
+        if(param_value_size_ret)
+          *param_value_size_ret = 4 * sizeof(char);
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
     program_source src(p.get_source());
 
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_PROGRAM_SOURCE);
-    TS_ASSERT_EQUALS(src.size(), (n-1));
-    TS_ASSERT_EQUALS(src, array);
+    TS_ASSERT_EQUALS(src.size(), 3);
+    TS_ASSERT_EQUALS(src, "foo");
   }
   /** // doc: test_get_binary_sizes() {{{
    * \todo Write documentation
@@ -561,11 +618,26 @@ public:
   {
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    size_t array[3] = {0x123ul, 0x456ul, 0x789ul};
-    size_t n = sizeof(array);
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, array, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_BINARY_SIZES) {
+        if(param_value) {
+          if(param_value_size >= 1 * sizeof(size_t)) ((size_t*)param_value)[0] = 0x123ul;
+          if(param_value_size >= 2 * sizeof(size_t)) ((size_t*)param_value)[1] = 0x456ul;
+          if(param_value_size >= 3 * sizeof(size_t)) ((size_t*)param_value)[2] = 0x789ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = std::min(3*sizeof(size_t), param_value_size);
+        } else if(param_value_size_ret) {
+          *param_value_size_ret = 3 * sizeof(size_t);
+        }
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
     std::vector<size_t> sizes(p.get_binary_sizes());
@@ -592,14 +664,24 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    size_t var = 3;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_NUM_KERNELS) {
+        if(param_value && param_value_size >= sizeof(size_t))
+          *((size_t*)param_value) = 3ul;
+        if(param_value_size_ret)
+          *param_value_size_ret = sizeof(size_t);
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
-    TS_ASSERT_EQUALS(p.get_num_kernels(), 3);
+    TS_ASSERT_EQUALS(p.get_num_kernels(), 3ul);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_PROGRAM_NUM_KERNELS);
@@ -613,18 +695,30 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    char const* array = "kernel1 kernel2";
-    size_t n = std::strlen(array) + 1;
-
-    T::Dummy_clGetProgramInfo mock3(CL_SUCCESS, (void*)array, &n);
+    T::Pluggable_clGetProgramInfo mock3([](cl_program,
+                                           cl_program_info param_name,
+                                           size_t param_value_size,
+                                           void* param_value,
+                                           size_t* param_value_size_ret) -> cl_int {
+      if(param_name == CL_PROGRAM_KERNEL_NAMES) {
+        if(param_value && param_value_size >= 8 * sizeof(char)) {
+          std::strcpy((char*)param_value, "foo bar");
+          ((char*)param_value)[7] = '\0';
+        }
+        if(param_value_size_ret)
+          *param_value_size_ret = 8 * sizeof(char);
+        return CL_SUCCESS;
+      } else {
+        return CL_INVALID_VALUE;
+      }
+    });
 
     program p((cl_program)0x4321);
     std::string kerns(p.get_kernel_names());
 
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_PROGRAM_KERNEL_NAMES);
-    TS_ASSERT_EQUALS(kerns, array);
+    TS_ASSERT_EQUALS(kerns, "foo bar");
 #endif
   }
   /** // doc: test_get_build_status() {{{
@@ -640,11 +734,22 @@ public:
 #endif
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    cl_build_status var = (cl_build_status)CL_BUILD_IN_PROGRESS;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetProgramBuildInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetProgramBuildInfo mock3([](cl_program,
+                                                cl_device_id,
+                                                cl_program_build_info param_name,
+                                                size_t param_value_size,
+                                                void* param_value,
+                                                size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_PROGRAM_BUILD_STATUS) {
+          if(param_value && param_value_size >= sizeof(cl_build_status))
+            *((cl_build_status*)param_value) = (cl_build_status)CL_BUILD_IN_PROGRESS;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_build_status);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     program p((cl_program)0x4321);
     TS_ASSERT_EQUALS(p.get_build_status(device((cl_device_id)0x1234)), build_status_t::in_progress);
@@ -665,14 +770,27 @@ public:
 #endif
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    char const* array = "--option1 --option2";
-    size_t n = std::strlen(array) + 1;
-
-    T::Dummy_clGetProgramBuildInfo mock3(CL_SUCCESS, (void*)array, &n);
+    T::Pluggable_clGetProgramBuildInfo mock3([](cl_program,
+                                                cl_device_id,
+                                                cl_program_build_info param_name,
+                                                size_t param_value_size,
+                                                void* param_value,
+                                                size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_PROGRAM_BUILD_OPTIONS) {
+          if(param_value && param_value_size >= 20 * sizeof(char)) {
+            std::strcpy((char*)param_value, "--option1 --option2");
+            ((char*)param_value)[19] = '\0';
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 20 * sizeof(char);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     program p((cl_program)0x4321);
-    TS_ASSERT_EQUALS(p.get_build_options(device((cl_device_id)0x1234)), array);
+    TS_ASSERT_EQUALS(p.get_build_options(device((cl_device_id)0x1234)), "--option1 --option2");
 
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_uint)CL_PROGRAM_BUILD_OPTIONS);
@@ -690,14 +808,27 @@ public:
 #endif
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    char const* array = "blah blah blah";
-    size_t n = std::strlen(array) + 1;
-
-    T::Dummy_clGetProgramBuildInfo mock3(CL_SUCCESS, (void*)array, &n);
+    T::Pluggable_clGetProgramBuildInfo mock3([](cl_program,
+                                                cl_device_id,
+                                                cl_program_build_info param_name,
+                                                size_t param_value_size,
+                                                void* param_value,
+                                                size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_PROGRAM_BUILD_LOG) {
+          if(param_value && param_value_size >= 15 * sizeof(char)) {
+            std::strcpy((char*)param_value, "blah blah blah");
+            ((char*)param_value)[14] = '\0';
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 15 * sizeof(char);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     program p((cl_program)0x4321);
-    TS_ASSERT_EQUALS(p.get_build_log(device((cl_device_id)0x1234)), array);
+    TS_ASSERT_EQUALS(p.get_build_log(device((cl_device_id)0x1234)), "blah blah blah");
 
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_uint)CL_PROGRAM_BUILD_LOG);
@@ -716,11 +847,22 @@ public:
 #endif
     T::Dummy_clRetainProgram mock1(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock2(CL_SUCCESS);
-
-    cl_program_binary_type var = (cl_build_status)CL_PROGRAM_BINARY_TYPE_LIBRARY;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetProgramBuildInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetProgramBuildInfo mock3([](cl_program,
+                                                cl_device_id,
+                                                cl_program_build_info param_name,
+                                                size_t param_value_size,
+                                                void* param_value,
+                                                size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_PROGRAM_BINARY_TYPE) {
+          if(param_value && param_value_size >= sizeof(cl_program_binary_type))
+            *((cl_program_binary_type*)param_value) = (cl_program_binary_type)CL_PROGRAM_BINARY_TYPE_LIBRARY;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_program_binary_type);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     program p((cl_program)0x4321);
     TS_ASSERT_EQUALS(p.get_binary_type(device((cl_device_id)0x1234)), program_binary_type_t::library);

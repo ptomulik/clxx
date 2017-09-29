@@ -2923,7 +2923,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clSVMAlloc(function_poitner_t fptr);
+  Pluggable_clSVMAlloc(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)

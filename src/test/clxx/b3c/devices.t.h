@@ -28,9 +28,18 @@ public:
    */ // }}}
   void test__get_num_devices( )
   {
-    cl_device_id _devices[] = { (cl_device_id)0x1234, (cl_device_id)0x5678 };
-    cl_uint _num_devices = 2u;
-    T::Dummy_clGetDeviceIDs mock(CL_SUCCESS, _devices, &_num_devices);
+    T::Pluggable_clGetDeviceIDs mock([](cl_platform_id,
+                                        cl_device_type,
+                                        cl_uint,
+                                        cl_device_id* devices,
+                                        cl_uint* num_devices) -> cl_int {
+        if(devices) {
+          devices[0] = (cl_device_id)0x1234;
+          devices[1] = (cl_device_id)0x5678;
+        }
+        if(num_devices) *num_devices = 2u;
+        return CL_SUCCESS;
+    });
     TS_ASSERT_EQUALS(get_num_devices((cl_platform_id)0x4321, device_type_t::cpu), 2);
     TS_ASSERT(mock.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().back()), (cl_platform_id)0x4321);
@@ -44,9 +53,18 @@ public:
    */ // }}}
   void test__get_device_ids( )
   {
-    cl_device_id _devices[] = { (cl_device_id)0x1234, (cl_device_id)0x5678 };
-    cl_uint _num_devices = 2u;
-    T::Dummy_clGetDeviceIDs mock(CL_SUCCESS, _devices, &_num_devices);
+    T::Pluggable_clGetDeviceIDs mock([](cl_platform_id,
+                                        cl_device_type,
+                                        cl_uint,
+                                        cl_device_id* devices,
+                                        cl_uint* num_devices) -> cl_int {
+        if(devices) {
+          devices[0] = (cl_device_id)0x1234;
+          devices[1] = (cl_device_id)0x5678;
+        }
+        if(num_devices) *num_devices = 2u;
+        return CL_SUCCESS;
+    });
     std::vector<cl_device_id> devices(get_device_ids((cl_platform_id)0x4321, device_type_t::all));
     TS_ASSERT(mock.called_twice());
 
@@ -63,8 +81,8 @@ public:
     TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 
     TS_ASSERT_EQUALS(devices.size(), 2u);
-    TS_ASSERT_EQUALS(devices[0], _devices[0]);
-    TS_ASSERT_EQUALS(devices[1], _devices[1]);
+    TS_ASSERT_EQUALS(devices[0], (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(devices[1], (cl_device_id)0x5678);
   }
   /** // doc: test__get_devices() {{{
    * \brief Test get_devices()
@@ -77,9 +95,18 @@ public:
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    cl_device_id _devices[] = { (cl_device_id)0x1234, (cl_device_id)0x5678 };
-    cl_uint _num_devices = 2u;
-    T::Dummy_clGetDeviceIDs mock(CL_SUCCESS, _devices, &_num_devices);
+    T::Pluggable_clGetDeviceIDs mock([](cl_platform_id,
+                                        cl_device_type,
+                                        cl_uint,
+                                        cl_device_id* devices,
+                                        cl_uint* num_devices) -> cl_int {
+        if(devices) {
+          devices[0] = (cl_device_id)0x1234;
+          devices[1] = (cl_device_id)0x5678;
+        }
+        if(num_devices) *num_devices = 2u;
+        return CL_SUCCESS;
+    });
     devices devices(get_devices((cl_platform_id)0x4321, device_type_t::all));
 
     TS_ASSERT(mock.called_twice());
@@ -97,8 +124,8 @@ public:
     TS_ASSERT(std::get<4>(mock.calls().back()) == nullptr);
 
     TS_ASSERT_EQUALS(devices.size(), 2u);
-    TS_ASSERT_EQUALS(static_cast<device>(devices[0]).get(), _devices[0]);
-    TS_ASSERT_EQUALS(static_cast<device>(devices[1]).get(), _devices[1]);
+    TS_ASSERT_EQUALS(static_cast<device>(devices[0]).get(), (cl_device_id)0x1234);
+    TS_ASSERT_EQUALS(static_cast<device>(devices[1]).get(), (cl_device_id)0x5678);
   }
   /** // doc: test__invalid_platform() {{{
    * \brief Test get_xxx() functions in a situation when clGetDeviceIDs returns

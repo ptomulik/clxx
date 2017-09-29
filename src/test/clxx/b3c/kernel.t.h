@@ -331,14 +331,24 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_uint var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelInfo mock3([](cl_kernel,
+                                          cl_kernel_info param_name,
+                                          size_t param_value_size,
+                                          void* param_value,
+                                          size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_KERNEL_REFERENCE_COUNT) {
+          if(param_value && param_value_size >= sizeof(cl_uint))
+            *((cl_uint*)param_value) = 12u;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_uint);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
-    TS_ASSERT_EQUALS(k.get_reference_count(), var);
+    TS_ASSERT_EQUALS(k.get_reference_count(), 12u);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_KERNEL_REFERENCE_COUNT);
@@ -350,19 +360,31 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    char array[] = {"foo_function"};
-    size_t n = sizeof(array);
-
-    T::Dummy_clGetKernelInfo mock3(CL_SUCCESS, array, &n);
+    T::Pluggable_clGetKernelInfo mock3([](cl_kernel,
+                                          cl_kernel_info param_name,
+                                          size_t param_value_size,
+                                          void* param_value,
+                                          size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_KERNEL_FUNCTION_NAME) {
+          if(param_value && param_value_size >= 13 * sizeof(char)) {
+            std::strcpy((char*)param_value, "foo_function");
+            ((char*)param_value)[12] = '\0';
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 13 * sizeof(char);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
     std::string str = k.get_function_name();
 
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_KERNEL_FUNCTION_NAME);
-    TS_ASSERT_EQUALS(str.size(), (n-1));
-    TS_ASSERT_EQUALS(str, array);
+    TS_ASSERT_EQUALS(str.size(), 12ul);
+    TS_ASSERT_EQUALS(str, "foo_function");
   }
   /** // doc: test__get_num_args() {{{
    * \todo Write documentation
@@ -371,14 +393,24 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_uint var = 12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelInfo mock3([](cl_kernel,
+                                          cl_kernel_info param_name,
+                                          size_t param_value_size,
+                                          void* param_value,
+                                          size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_KERNEL_NUM_ARGS) {
+          if(param_value && param_value_size >= sizeof(cl_uint))
+            *((cl_uint*)param_value) = 12u;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_uint);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
-    TS_ASSERT_EQUALS(k.get_num_args(), var);
+    TS_ASSERT_EQUALS(k.get_num_args(), 12u);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_KERNEL_NUM_ARGS);
@@ -390,17 +422,27 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_context var = (cl_context)12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelInfo mock3([](cl_kernel,
+                                          cl_kernel_info param_name,
+                                          size_t param_value_size,
+                                          void* param_value,
+                                          size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_KERNEL_CONTEXT) {
+          if(param_value && param_value_size >= sizeof(cl_context))
+            *((cl_context*)param_value) = (cl_context)12;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_context);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 
     T::Dummy_clRetainContext mock4(CL_SUCCESS);
     T::Dummy_clReleaseContext mock5(CL_SUCCESS);
-    TS_ASSERT_EQUALS(k.get_context().get(), var);
+    TS_ASSERT_EQUALS(k.get_context().get(), (cl_context)12);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_KERNEL_CONTEXT);
@@ -412,17 +454,27 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_program var = (cl_program)12;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelInfo mock3([](cl_kernel,
+                                          cl_kernel_info param_name,
+                                          size_t param_value_size,
+                                          void* param_value,
+                                          size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_KERNEL_PROGRAM) {
+          if(param_value && param_value_size >= sizeof(cl_uint))
+            *((cl_program*)param_value) = (cl_program)12;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_program);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 
     T::Dummy_clRetainProgram mock4(CL_SUCCESS);
     T::Dummy_clReleaseProgram mock5(CL_SUCCESS);
-    TS_ASSERT_EQUALS(k.get_program().get(), var);
+    TS_ASSERT_EQUALS(k.get_program().get(), (cl_program)12);
 
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_KERNEL_PROGRAM);
@@ -435,19 +487,31 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    char array[] = {"attr1 attr2"};
-    size_t n = sizeof(array);
-
-    T::Dummy_clGetKernelInfo mock3(CL_SUCCESS, array, &n);
+    T::Pluggable_clGetKernelInfo mock3([](cl_kernel,
+                                          cl_kernel_info param_name,
+                                          size_t param_value_size,
+                                          void* param_value,
+                                          size_t* param_value_size_ret) -> cl_int {
+        if(param_name == (cl_uint)CL_KERNEL_ATTRIBUTES) {
+          if(param_value && param_value_size >= 12 * sizeof(char)) {
+            std::strcpy((char*)param_value, "attr1 attr2");
+            ((char*)param_value)[11] = '\0';
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 12 * sizeof(char);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
     std::string str = k.get_attributes();
 
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_uint)CL_KERNEL_ATTRIBUTES);
-    TS_ASSERT_EQUALS(str.size(), (n-1));
-    TS_ASSERT_EQUALS(str, array);
+    TS_ASSERT_EQUALS(str.size(), 11);
+    TS_ASSERT_EQUALS(str, "attr1 attr2");
 #endif
   }
   /** // doc: test__get_arg_info() {{{
@@ -455,7 +519,7 @@ public:
    */ // }}}
   void test__get_arg_info( )
   {
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKenelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
     T::Dummy_clGetKernelArgInfo mock3(CL_SUCCESS);
@@ -477,14 +541,29 @@ public:
    */ // }}}
   void test__get_arg_address_qualifier( )
   {
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKenelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_kernel_arg_address_qualifier var = CL_KERNEL_ARG_ADDRESS_LOCAL;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelArgInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelArgInfo mock3([](cl_kernel,
+                                            cl_uint arg_index,
+                                            cl_kernel_arg_info param_name,
+                                            size_t param_value_size,
+                                            void* param_value,
+                                            size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_ARG_ADDRESS_QUALIFIER) {
+          if(param_value && param_value_size >= sizeof(cl_kernel_arg_address_qualifier)) {
+            if(arg_index == 2)
+              *((cl_kernel_arg_address_qualifier*)param_value) = (cl_kernel_arg_address_qualifier)CL_KERNEL_ARG_ADDRESS_LOCAL;
+            else
+              *((cl_kernel_arg_address_qualifier*)param_value) = (cl_kernel_arg_address_qualifier)CL_KERNEL_ARG_ADDRESS_GLOBAL;
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_kernel_arg_address_qualifier);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
     TS_ASSERT(k.get_arg_address_qualifier(2) == kernel_arg_address_qualifier_t::local);
@@ -500,14 +579,29 @@ public:
    */ // }}}
   void test__get_arg_access_qualifier( )
   {
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKenelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_kernel_arg_access_qualifier var = CL_KERNEL_ARG_ACCESS_WRITE_ONLY;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelArgInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelArgInfo mock3([](cl_kernel,
+                                            cl_uint arg_index,
+                                            cl_kernel_arg_info param_name,
+                                            size_t param_value_size,
+                                            void* param_value,
+                                            size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_ARG_ACCESS_QUALIFIER) {
+          if(param_value && param_value_size >= sizeof(cl_kernel_arg_access_qualifier)) {
+            if(arg_index == 2)
+              *((cl_kernel_arg_access_qualifier*)param_value) = (cl_kernel_arg_access_qualifier)CL_KERNEL_ARG_ACCESS_WRITE_ONLY;
+            else
+              *((cl_kernel_arg_access_qualifier*)param_value) = (cl_kernel_arg_access_qualifier)CL_KERNEL_ARG_ACCESS_READ_WRITE;
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_kernel_arg_access_qualifier);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
     TS_ASSERT(k.get_arg_access_qualifier(2) == kernel_arg_access_qualifier_t::write_only);
@@ -523,22 +617,38 @@ public:
    */ // }}}
   void test__get_arg_type_name( )
   {
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKenelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    char var[] = { "argument1type" };
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelArgInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelArgInfo mock3([](cl_kernel,
+                                            cl_uint arg_index,
+                                            cl_kernel_arg_info param_name,
+                                            size_t param_value_size,
+                                            void* param_value,
+                                            size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_ARG_TYPE_NAME) {
+          if(param_value && param_value_size >= 9 * sizeof(char)) {
+            if(arg_index == 2)
+              std::strcpy((char*)param_value, "arg2type");
+            else
+              std::strcpy((char*)param_value, "12345678");
+            ((char*)param_value)[8] = '\0';
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 9 * sizeof(char);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
-    TS_ASSERT_EQUALS(k.get_arg_type_name(2), var);
+    TS_ASSERT_EQUALS(k.get_arg_type_name(2), "arg2type");
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), 2);
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_ARG_TYPE_NAME);
-    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(var));
+    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), 9 * sizeof(char));
 #endif
   }
   /** // doc: test__get_arg_type_qualifier() {{{
@@ -546,14 +656,29 @@ public:
    */ // }}}
   void test__get_arg_type_qualifier( )
   {
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKenelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_kernel_arg_type_qualifier var = CL_KERNEL_ARG_TYPE_CONST;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelArgInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelArgInfo mock3([](cl_kernel,
+                                            cl_uint arg_index,
+                                            cl_kernel_arg_info param_name,
+                                            size_t param_value_size,
+                                            void* param_value,
+                                            size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_ARG_TYPE_QUALIFIER) {
+          if(param_value && param_value_size >= sizeof(cl_kernel_arg_type_qualifier)) {
+            if(arg_index == 2)
+              *((cl_kernel_arg_type_qualifier*)param_value) = (cl_kernel_arg_type_qualifier)CL_KERNEL_ARG_TYPE_CONST;
+            else
+              *((cl_kernel_arg_type_qualifier*)param_value) = (cl_kernel_arg_type_qualifier)CL_KERNEL_ARG_TYPE_NONE;
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_kernel_arg_type_qualifier);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
     TS_ASSERT(k.get_arg_type_qualifier(2) == kernel_arg_type_qualifier_t::const_);
@@ -569,22 +694,38 @@ public:
    */ // }}}
   void test__get_arg_name( )
   {
-#if CLXX_B5D_OPENCL_PROVIDES(clGetKenelArgInfo)
+#if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    char var[] = { "argument1" };
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelArgInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelArgInfo mock3([](cl_kernel,
+                                            cl_uint arg_index,
+                                            cl_kernel_arg_info param_name,
+                                            size_t param_value_size,
+                                            void* param_value,
+                                            size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_ARG_NAME) {
+          if(param_value && param_value_size >= 10 * sizeof(char)) {
+            if(arg_index == 2)
+              std::strcpy((char*)param_value, "argument2");
+            else
+              std::strcpy((char*)param_value, "123456789");
+            ((char*)param_value)[9] = '\0';
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 10 * sizeof(char);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
-    TS_ASSERT_EQUALS(k.get_arg_name(2), var);
+    TS_ASSERT_EQUALS(k.get_arg_name(2), "argument2");
     TS_ASSERT(mock3.called_twice());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), 2);
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_arg_info)CL_KERNEL_ARG_NAME);
-    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(var));
+    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), 10 * sizeof(char));
 #endif
   }
   /** // doc: test__get_work_group_info() {{{
@@ -625,11 +766,22 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    size_t var = 123;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelWorkGroupInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelWorkGroupInfo mock3([](cl_kernel,
+                                                   cl_device_id,
+                                                   cl_kernel_work_group_info param_name,
+                                                  size_t param_value_size,
+                                                  void* param_value,
+                                                  size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_WORK_GROUP_SIZE) {
+          if(param_value && param_value_size >= sizeof(size_t))
+            *((size_t*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(size_t);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 
@@ -642,12 +794,12 @@ public:
 
     device d((cl_device_id)0x7654);
 
-    TS_ASSERT(k.get_work_group_size(d) == var);
+    TS_ASSERT(k.get_work_group_size(d) == 123ul);
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_WORK_GROUP_SIZE);
-    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(var));
+    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(size_t));
   }
   /** // doc: test__get_compile_work_group_size() {{{
    * \todo Write documentation
@@ -656,11 +808,25 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    size_t var[] = {123, 124, 125};
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelWorkGroupInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelWorkGroupInfo mock3([](cl_kernel,
+                                                   cl_device_id,
+                                                   cl_kernel_work_group_info param_name,
+                                                   size_t param_value_size,
+                                                   void* param_value,
+                                                   size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_COMPILE_WORK_GROUP_SIZE) {
+          if(param_value && param_value_size >= 3*sizeof(size_t)) {
+            ((size_t*)param_value)[0] = 123ul;
+            ((size_t*)param_value)[1] = 124ul;
+            ((size_t*)param_value)[2] = 125ul;
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 3*sizeof(size_t);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 
@@ -677,9 +843,9 @@ public:
 
     k.get_compile_work_group_size(array, d);
 
-    TS_ASSERT_EQUALS(array[0], 123);
-    TS_ASSERT_EQUALS(array[1], 124);
-    TS_ASSERT_EQUALS(array[2], 125);
+    TS_ASSERT_EQUALS(array[0], 123ul);
+    TS_ASSERT_EQUALS(array[1], 124ul);
+    TS_ASSERT_EQUALS(array[2], 125ul);
     TS_ASSERT_EQUALS(array[3], 0);
 
     TS_ASSERT(mock3.called_once());
@@ -697,11 +863,22 @@ public:
   {
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_ulong var = 123;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelWorkGroupInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelWorkGroupInfo mock3([](cl_kernel,
+                                                   cl_device_id,
+                                                   cl_kernel_work_group_info param_name,
+                                                   size_t param_value_size,
+                                                   void* param_value,
+                                                   size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_LOCAL_MEM_SIZE) {
+          if(param_value && param_value_size >= sizeof(cl_ulong))
+            *((cl_ulong*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_ulong);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 
@@ -714,12 +891,12 @@ public:
 
     device d((cl_device_id)0x7654);
 
-    TS_ASSERT(k.get_local_mem_size(d) == var);
+    TS_ASSERT(k.get_local_mem_size(d) == 123ul);
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_LOCAL_MEM_SIZE);
-    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(size_t));
+    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(cl_ulong));
   }
   /** // doc: test__get_preferred_work_group_size_multiple() {{{
    * \todo Write documentation
@@ -729,11 +906,22 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    size_t var = 123;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelWorkGroupInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelWorkGroupInfo mock3([](cl_kernel,
+                                                   cl_device_id,
+                                                   cl_kernel_work_group_info param_name,
+                                                   size_t param_value_size,
+                                                   void* param_value,
+                                                   size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE) {
+          if(param_value && param_value_size >= sizeof(size_t))
+            *((size_t*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(size_t);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 
@@ -746,12 +934,12 @@ public:
 
     device d((cl_device_id)0x7654);
 
-    TS_ASSERT(k.get_preferred_work_group_size_multiple(d) == var);
+    TS_ASSERT(k.get_preferred_work_group_size_multiple(d) == 123ul);
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE);
-    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(var));
+    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(size_t));
 #endif
   }
   /** // doc: test__get_private_mem_size() {{{
@@ -762,11 +950,22 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_1
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    cl_ulong var = 123;
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelWorkGroupInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelWorkGroupInfo mock3([](cl_kernel,
+                                                   cl_device_id,
+                                                   cl_kernel_work_group_info param_name,
+                                                   size_t param_value_size,
+                                                   void* param_value,
+                                                   size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_PRIVATE_MEM_SIZE) {
+          if(param_value && param_value_size >= sizeof(cl_ulong))
+            *((cl_ulong*)param_value) = 123ul;
+          if(param_value_size_ret)
+            *param_value_size_ret = sizeof(cl_ulong);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 
@@ -779,12 +978,12 @@ public:
 
     device d((cl_device_id)0x7654);
 
-    TS_ASSERT(k.get_private_mem_size(d) == var);
+    TS_ASSERT(k.get_private_mem_size(d) == 123ul);
     TS_ASSERT(mock3.called_once());
     TS_ASSERT_EQUALS(std::get<0>(mock3.calls().back()), (cl_kernel)0x4321);
     TS_ASSERT_EQUALS(std::get<1>(mock3.calls().back()), (cl_device_id)0x7654);
     TS_ASSERT_EQUALS(std::get<2>(mock3.calls().back()), (cl_kernel_work_group_info)CL_KERNEL_PRIVATE_MEM_SIZE);
-    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(size_t));
+    TS_ASSERT_EQUALS(std::get<3>(mock3.calls().back()), sizeof(cl_ulong));
 #endif
   }
   /** // doc: test__get_global_work_size() {{{
@@ -795,11 +994,25 @@ public:
 #if CLXX_B5D_OPENCL_CL_H_VERSION_1_2
     T::Dummy_clRetainKernel mock1(CL_SUCCESS);
     T::Dummy_clReleaseKernel mock2(CL_SUCCESS);
-
-    size_t var[] = {123, 124, 125};
-    size_t n = sizeof(var);
-
-    T::Dummy_clGetKernelWorkGroupInfo mock3(CL_SUCCESS, &var, &n);
+    T::Pluggable_clGetKernelWorkGroupInfo mock3([](cl_kernel,
+                                                   cl_device_id,
+                                                   cl_kernel_work_group_info param_name,
+                                                  size_t param_value_size,
+                                                  void* param_value,
+                                                  size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_KERNEL_GLOBAL_WORK_SIZE) {
+          if(param_value && param_value_size >= 3 * sizeof(size_t)) {
+            ((size_t*)param_value)[0] = 123ul;
+            ((size_t*)param_value)[1] = 124ul;
+            ((size_t*)param_value)[2] = 125ul;
+          }
+          if(param_value_size_ret)
+            *param_value_size_ret = 3 * sizeof(size_t);
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 
     kernel k((cl_kernel)0x4321);
 

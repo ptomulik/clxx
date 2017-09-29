@@ -30,9 +30,7 @@ public:
    */ // }}}
   void test__enqueue_ndrange_kernel_1( )
   {
-    cl_event var = (cl_event)0x1234;
-
-    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS, &var);
+    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS);
     T::Dummy_clRetainEvent mock2(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock3(CL_SUCCESS);
     T::Dummy_clRetainCommandQueue mock4(CL_SUCCESS);
@@ -63,9 +61,7 @@ public:
    */ // }}}
   void test__enqueue_ndrange_kernel_2( )
   {
-    cl_event var = (cl_event)0x1234;
-
-    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS, &var);
+    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS);
     T::Dummy_clRetainEvent mock2(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock3(CL_SUCCESS);
     T::Dummy_clRetainCommandQueue mock4(CL_SUCCESS);
@@ -95,9 +91,7 @@ public:
    */ // }}}
   void test__enqueue_ndrange_kernel_3( )
   {
-    cl_event var = (cl_event)0x1234;
-
-    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS, &var);
+    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS);
     T::Dummy_clRetainEvent mock2(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock3(CL_SUCCESS);
     T::Dummy_clRetainCommandQueue mock4(CL_SUCCESS);
@@ -127,9 +121,7 @@ public:
    */ // }}}
   void test__enqueue_ndrange_kernel_4( )
   {
-    cl_event var = (cl_event)0x1234;
-
-    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS, &var);
+    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS);
     T::Dummy_clRetainEvent mock2(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock3(CL_SUCCESS);
     T::Dummy_clRetainCommandQueue mock4(CL_SUCCESS);
@@ -158,9 +150,7 @@ public:
    */ // }}}
   void test__enqueue_ndrange_kernel_5( )
   {
-    cl_event var = (cl_event)0x1234;
-
-    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS, &var);
+    T::Dummy_clEnqueueNDRangeKernel mock1(CL_SUCCESS);
     T::Dummy_clRetainEvent mock2(CL_SUCCESS);
     T::Dummy_clReleaseEvent mock3(CL_SUCCESS);
     T::Dummy_clRetainCommandQueue mock4(CL_SUCCESS);

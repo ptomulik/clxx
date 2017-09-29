@@ -81,9 +81,27 @@ public:
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseDevice)
     T::Dummy_clReleaseDevice mockReleaseDevice(CL_SUCCESS);
 #endif
-    cl_device_id const out_devices[] = { (cl_device_id)0x2345, (cl_device_id)0x3456 };
-    cl_uint const num_devices_ret = 2;
-    T::Dummy_clCreateSubDevices mock(CL_SUCCESS, out_devices, &num_devices_ret);
+    T::Pluggable_clCreateSubDevices mock(
+        [] (cl_device_id,
+            const cl_device_partition_property*,
+            cl_uint num_devices,
+            cl_device_id* out_devices,
+            cl_uint* num_devices_ret) -> cl_int {
+          if(out_devices) {
+            if(num_devices > 0) out_devices[0] = (cl_device_id)0x2345;
+            if(num_devices > 1) out_devices[1] = (cl_device_id)0x3456;
+          }
+          if(num_devices_ret) {
+            if(num_devices > 0 && out_devices) {
+              *num_devices_ret = num_devices < 2u ? num_devices : 2u;
+            } else {
+              *num_devices_ret = 2u;
+            }
+          }
+          return CL_SUCCESS;
+        }
+    );
+
 
     devices devs(create_sub_devices(device((cl_device_id)0x1234), make_device_partition_properties(device_partition_equally(2))));
 

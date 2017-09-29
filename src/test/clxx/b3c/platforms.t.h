@@ -28,9 +28,20 @@ public:
    */ // }}}
   void test_get_num_platforms( )
   {
-    cl_platform_id _platforms[] = { (cl_platform_id)0x1234, (cl_platform_id)0x5678 };
-    cl_uint _num_platforms = 2;
-    T::Dummy_clGetPlatformIDs mock(CL_SUCCESS, _platforms, &_num_platforms);
+    T::Pluggable_clGetPlatformIDs mock([](cl_uint num_entries,
+                                          cl_platform_id* platforms,
+                                          cl_uint* num_platforms) -> cl_int {
+
+        if(platforms) {
+          if(num_entries >=1) platforms[0] = (cl_platform_id)0x1234;
+          if(num_entries >=2) platforms[1] = (cl_platform_id)0x5678;
+          if(num_platforms)
+            *num_platforms = std::min(num_entries, 2u);
+        } else if(num_platforms) {
+          *num_platforms = 2u;
+        }
+        return CL_SUCCESS;
+    });
 
     TS_ASSERT_EQUALS(get_num_platforms(), 2);
 
@@ -44,14 +55,25 @@ public:
    */ // }}}
   void test_get_platform_ids( )
   {
-    cl_platform_id _platforms[] = { (cl_platform_id)0x1234, (cl_platform_id)0x5678 };
-    cl_uint _num_platforms = 2;
-    T::Dummy_clGetPlatformIDs mock(CL_SUCCESS, _platforms, &_num_platforms);
+    T::Pluggable_clGetPlatformIDs mock([](cl_uint num_entries,
+                                          cl_platform_id* platforms,
+                                          cl_uint* num_platforms) -> cl_int {
+
+        if(platforms) {
+          if(num_entries >=1) platforms[0] = (cl_platform_id)0x1234;
+          if(num_entries >=2) platforms[1] = (cl_platform_id)0x5678;
+          if(num_platforms)
+            *num_platforms = std::min(num_entries, 2u);
+        } else if(num_platforms) {
+          *num_platforms = 2u;
+        }
+        return CL_SUCCESS;
+    });
 
     std::vector<cl_platform_id> ids(get_platform_ids());
     TS_ASSERT_EQUALS(ids.size(), 2);
-    TS_ASSERT_EQUALS(ids[0], _platforms[0]);
-    TS_ASSERT_EQUALS(ids[1], _platforms[1]);
+    TS_ASSERT_EQUALS(ids[0], (cl_platform_id)0x1234);
+    TS_ASSERT_EQUALS(ids[1], (cl_platform_id)0x5678);
 
     TS_ASSERT(mock.called_twice());
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), 0u);
@@ -67,14 +89,25 @@ public:
 //   */ // }}}
   void test_get_platforms( )
   {
-    cl_platform_id _platforms[] = { (cl_platform_id)0x1234, (cl_platform_id)0x5678 };
-    cl_uint _num_platforms = 2;
-    T::Dummy_clGetPlatformIDs mock(CL_SUCCESS, _platforms, &_num_platforms);
+    T::Pluggable_clGetPlatformIDs mock([](cl_uint num_entries,
+                                          cl_platform_id* platforms,
+                                          cl_uint* num_platforms) -> cl_int {
+
+        if(platforms) {
+          if(num_entries >=1) platforms[0] = (cl_platform_id)0x1234;
+          if(num_entries >=2) platforms[1] = (cl_platform_id)0x5678;
+          if(num_platforms)
+            *num_platforms = std::min(num_entries, 2u);
+        } else if(num_platforms) {
+          *num_platforms = 2u;
+        }
+        return CL_SUCCESS;
+    });
 
     platforms p(get_platforms());
     TS_ASSERT_EQUALS(p.size(), 2);
-    TS_ASSERT_EQUALS(p[0].get(), _platforms[0]);
-    TS_ASSERT_EQUALS(p[1].get(), _platforms[1]);
+    TS_ASSERT_EQUALS(p[0].get(), (cl_platform_id)0x1234);
+    TS_ASSERT_EQUALS(p[1].get(), (cl_platform_id)0x5678);
 
     TS_ASSERT(mock.called_twice());
     TS_ASSERT_EQUALS(std::get<0>(mock.calls().front()), 0u);

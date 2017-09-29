@@ -27,8 +27,18 @@ public:
    */ // }}}
   void test__enqueue_read_buffer_1( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueReadBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueReadBuffer mock1([](cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* event) ->  cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -45,7 +55,7 @@ public:
     ews.push_back(event((cl_event)0x4567));
 
     TS_ASSERT_THROWS_NOTHING(enqueue_read_buffer(q,m,true,123,456,(void*)0x7890,ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -63,8 +73,18 @@ public:
    */ // }}}
   void test__enqueue_read_buffer_2( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueReadBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueReadBuffer mock1([](cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* event) ->  cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -77,7 +97,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_read_buffer(q,m,true,123,456,(void*)0x7890,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -95,8 +115,18 @@ public:
    */ // }}}
   void test__enqueue_read_buffer_3( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueReadBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueReadBuffer mock1([](cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* event) ->  cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -129,8 +159,18 @@ public:
    */ // }}}
   void test__enqueue_read_buffer_4( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueReadBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueReadBuffer mock1([](cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* event) ->  cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -159,8 +199,18 @@ public:
    */ // }}}
   void test__enqueue_read_buffer_5( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueReadBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueReadBuffer mock1([](cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* event) ->  cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -174,7 +224,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_read_buffer(q,m,true,123,456,(void*)0x7890, 2, ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -192,8 +242,18 @@ public:
    */ // }}}
   void test__enqueue_write_buffer_1( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueWriteBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueWriteBuffer mock1([](cl_command_queue,
+                                               cl_mem,
+                                               cl_bool,
+                                               size_t,
+                                               size_t,
+                                               const void*,
+                                               cl_uint,
+                                               const cl_event*,
+                                               cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -210,7 +270,7 @@ public:
     ews.push_back(event((cl_event)0x4567));
 
     TS_ASSERT_THROWS_NOTHING(enqueue_write_buffer(q,m,true,123,456,(const void*)0x7890,ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (void*)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -228,8 +288,18 @@ public:
    */ // }}}
   void test__enqueue_write_buffer_2( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueWriteBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueWriteBuffer mock1([](cl_command_queue,
+                                               cl_mem,
+                                               cl_bool,
+                                               size_t,
+                                               size_t,
+                                               const void*,
+                                               cl_uint,
+                                               const cl_event*,
+                                               cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -242,7 +312,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_write_buffer(q,m,true,123,456,(const void*)0x7890,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (void*)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -260,8 +330,18 @@ public:
    */ // }}}
   void test__enqueue_write_buffer_3( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueWriteBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueWriteBuffer mock1([](cl_command_queue,
+                                               cl_mem,
+                                               cl_bool,
+                                               size_t,
+                                               size_t,
+                                               const void*,
+                                               cl_uint,
+                                               const cl_event*,
+                                               cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -294,8 +374,18 @@ public:
    */ // }}}
   void test__enqueue_write_buffer_4( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueWriteBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueWriteBuffer mock1([](cl_command_queue,
+                                               cl_mem,
+                                               cl_bool,
+                                               size_t,
+                                               size_t,
+                                               const void*,
+                                               cl_uint,
+                                               const cl_event*,
+                                               cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -324,8 +414,18 @@ public:
    */ // }}}
   void test__enqueue_write_buffer_5( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueWriteBuffer    mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueWriteBuffer mock1([](cl_command_queue,
+                                               cl_mem,
+                                               cl_bool,
+                                               size_t,
+                                               size_t,
+                                               const void*,
+                                               cl_uint,
+                                               const cl_event*,
+                                               cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x1234;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -339,7 +439,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_write_buffer(q,m,true,123,456,(const void*)0x7890,2,ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -357,8 +457,18 @@ public:
    */ // }}}
   void test__enqueue_copy_buffer_1( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueCopyBuffer   mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueCopyBuffer   mock1([] (cl_command_queue,
+                                                 cl_mem,
+                                                 cl_mem,
+                                                 size_t,
+                                                 size_t,
+                                                 size_t,
+                                                 cl_uint,
+                                                 const cl_event*,
+                                                 cl_event* event) -> cl_int {
+      if(event) *event = (cl_event)0x1234;
+      return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -376,7 +486,7 @@ public:
     ews.push_back(event((cl_event)0x4567));
 
     TS_ASSERT_THROWS_NOTHING(enqueue_copy_buffer(q,sm,dm,123,456,789,ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -394,8 +504,18 @@ public:
    */ // }}}
   void test__enqueue_copy_buffer_2( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueCopyBuffer   mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueCopyBuffer   mock1([] (cl_command_queue,
+                                                 cl_mem,
+                                                 cl_mem,
+                                                 size_t,
+                                                 size_t,
+                                                 size_t,
+                                                 cl_uint,
+                                                 const cl_event*,
+                                                 cl_event* event) -> cl_int {
+      if(event) *event = (cl_event)0x1234;
+      return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -409,7 +529,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_copy_buffer(q,sm,dm,123,456,789,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -427,8 +547,18 @@ public:
    */ // }}}
   void test__enqueue_copy_buffer_3( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueCopyBuffer   mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueCopyBuffer   mock1([] (cl_command_queue,
+                                                 cl_mem,
+                                                 cl_mem,
+                                                 size_t,
+                                                 size_t,
+                                                 size_t,
+                                                 cl_uint,
+                                                 const cl_event*,
+                                                 cl_event* event) -> cl_int {
+      if(event) *event = (cl_event)0x1234;
+      return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -462,8 +592,18 @@ public:
    */ // }}}
   void test__enqueue_copy_buffer_4( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueCopyBuffer   mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueCopyBuffer   mock1([] (cl_command_queue,
+                                                 cl_mem,
+                                                 cl_mem,
+                                                 size_t,
+                                                 size_t,
+                                                 size_t,
+                                                 cl_uint,
+                                                 const cl_event*,
+                                                 cl_event* event) -> cl_int {
+      if(event) *event = (cl_event)0x1234;
+      return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -493,8 +633,18 @@ public:
    */ // }}}
   void test__enqueue_copy_buffer_5( )
   {
-    cl_event res = (cl_event)0x1234;
-    T::Dummy_clEnqueueCopyBuffer   mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueCopyBuffer   mock1([] (cl_command_queue,
+                                                 cl_mem,
+                                                 cl_mem,
+                                                 size_t,
+                                                 size_t,
+                                                 size_t,
+                                                 cl_uint,
+                                                 const cl_event*,
+                                                 cl_event* event) -> cl_int {
+      if(event) *event = (cl_event)0x1234;
+      return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -509,7 +659,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_copy_buffer(q,sm,dm,123,456,789,2,ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -527,9 +677,20 @@ public:
    */ // }}}
   void test__enqueue_map_buffer_1( )
   {
-    void* res = (void*)0x1234;
-    cl_event var = (cl_event)0x4321;
-    T::Dummy_clEnqueueMapBuffer     mock1(res, CL_SUCCESS, &var);
+    T::Pluggable_clEnqueueMapBuffer mock1([](cl_command_queue,
+                                             cl_mem,
+                                             cl_bool,
+                                             cl_map_flags,
+                                             size_t,
+                                             size_t,
+                                             cl_uint,
+                                             const cl_event*,
+                                             cl_event* event,
+                                             cl_int* errcode_ret) -> void* {
+        if(errcode_ret) *errcode_ret = CL_SUCCESS;
+        if(event) *event = (cl_event)0x4321;
+        return (void*)0x1234;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -545,8 +706,8 @@ public:
     ews.push_back(event((cl_event)0x3456));
     ews.push_back(event((cl_event)0x4567));
 
-    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,ews,&e) == res);
-    TS_ASSERT(e.get() == var);
+    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,ews,&e) == (void*)0x1234);
+    TS_ASSERT(e.get() == (cl_event)0x4321);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -564,9 +725,20 @@ public:
    */ // }}}
   void test__enqueue_map_buffer_2( )
   {
-    void* res = (void*)0x1234;
-    cl_event var = (cl_event)0x4321;
-    T::Dummy_clEnqueueMapBuffer     mock1(res, CL_SUCCESS, &var);
+    T::Pluggable_clEnqueueMapBuffer mock1([](cl_command_queue,
+                                             cl_mem,
+                                             cl_bool,
+                                             cl_map_flags,
+                                             size_t,
+                                             size_t,
+                                             cl_uint,
+                                             const cl_event*,
+                                             cl_event* event,
+                                             cl_int* errcode_ret) -> void* {
+        if(errcode_ret) *errcode_ret = CL_SUCCESS;
+        if(event) *event = (cl_event)0x4321;
+        return (void*)0x1234;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -578,8 +750,8 @@ public:
     mem m((cl_mem)0x9012);
     event e;
 
-    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,&e) == res);
-    TS_ASSERT(e.get() == var);
+    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,&e) == (void*)0x1234);
+    TS_ASSERT(e.get() == (cl_event)0x4321);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -597,9 +769,20 @@ public:
    */ // }}}
   void test__enqueue_map_buffer_3( )
   {
-    void* res = (void*)0x1234;
-    cl_event var = (cl_event)0x4321;
-    T::Dummy_clEnqueueMapBuffer     mock1(res, CL_SUCCESS, &var);
+    T::Pluggable_clEnqueueMapBuffer mock1([](cl_command_queue,
+                                             cl_mem,
+                                             cl_bool,
+                                             cl_map_flags,
+                                             size_t,
+                                             size_t,
+                                             cl_uint,
+                                             const cl_event*,
+                                             cl_event* event,
+                                             cl_int* errcode_ret) -> void* {
+        if(errcode_ret) *errcode_ret = CL_SUCCESS;
+        if(event) *event = (cl_event)0x4321;
+        return (void*)0x1234;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -614,7 +797,7 @@ public:
     ews.push_back(event((cl_event)0x3456));
     ews.push_back(event((cl_event)0x4567));
 
-    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,ews) == res);
+    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,ews) == (void*)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -632,9 +815,20 @@ public:
    */ // }}}
   void test__enqueue_map_buffer_4( )
   {
-    void* res = (void*)0x1234;
-    cl_event var = (cl_event)0x4321;
-    T::Dummy_clEnqueueMapBuffer     mock1(res, CL_SUCCESS, &var);
+    T::Pluggable_clEnqueueMapBuffer mock1([](cl_command_queue,
+                                             cl_mem,
+                                             cl_bool,
+                                             cl_map_flags,
+                                             size_t,
+                                             size_t,
+                                             cl_uint,
+                                             const cl_event*,
+                                             cl_event* event,
+                                             cl_int* errcode_ret) -> void* {
+        if(errcode_ret) *errcode_ret = CL_SUCCESS;
+        if(event) *event = (cl_event)0x4321;
+        return (void*)0x1234;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -645,7 +839,7 @@ public:
     command_queue q((cl_command_queue)0x5678);
     mem m((cl_mem)0x9012);
 
-    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456) == res);
+    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456) == (void*)0x1234);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -663,9 +857,20 @@ public:
    */ // }}}
   void test__enqueue_map_buffer_5( )
   {
-    void* res = (void*)0x1234;
-    cl_event var = (cl_event)0x4321;
-    T::Dummy_clEnqueueMapBuffer     mock1(res, CL_SUCCESS, &var);
+    T::Pluggable_clEnqueueMapBuffer mock1([](cl_command_queue,
+                                             cl_mem,
+                                             cl_bool,
+                                             cl_map_flags,
+                                             size_t,
+                                             size_t,
+                                             cl_uint,
+                                             const cl_event*,
+                                             cl_event* event,
+                                             cl_int* errcode_ret) -> void* {
+        if(errcode_ret) *errcode_ret = CL_SUCCESS;
+        if(event) *event = (cl_event)0x4321;
+        return (void*)0x1234;
+    });
     T::Dummy_clRetainCommandQueue   mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue  mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject      mock4(CL_SUCCESS);
@@ -678,8 +883,8 @@ public:
     event ews[2] = { event((cl_event)0x3456), event((cl_event)0x4567) };
     event e;
 
-    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,2,ews,&e) == res);
-    TS_ASSERT(e.get() == var);
+    TS_ASSERT(enqueue_map_buffer(q,m,true,map_flags_t::read,123,456,2,ews,&e) == (void*)0x1234);
+    TS_ASSERT(e.get() == (cl_event)0x4321);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -697,8 +902,15 @@ public:
    */ // }}}
   void test__enqueue_unmap_mem_object_1( )
   {
-    cl_event res = (cl_event)0x4321;
-    T::Dummy_clEnqueueUnmapMemObject  mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueUnmapMemObject mock1([](cl_command_queue,
+                                                  cl_mem,
+                                                  void*,
+                                                  cl_uint,
+                                                  const cl_event*,
+                                                  cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x4321;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue     mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue    mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject        mock4(CL_SUCCESS);
@@ -715,7 +927,7 @@ public:
     ews.push_back(event((cl_event)0x4567));
 
     TS_ASSERT_THROWS_NOTHING(enqueue_unmap_mem_object(q,m,(void*)0x8901,ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x4321);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -730,8 +942,15 @@ public:
    */ // }}}
   void test__enqueue_unmap_mem_object_2( )
   {
-    cl_event res = (cl_event)0x4321;
-    T::Dummy_clEnqueueUnmapMemObject  mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueUnmapMemObject mock1([](cl_command_queue,
+                                                  cl_mem,
+                                                  void*,
+                                                  cl_uint,
+                                                  const cl_event*,
+                                                  cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x4321;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue     mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue    mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject        mock4(CL_SUCCESS);
@@ -744,7 +963,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_unmap_mem_object(q,m,(void*)0x8901,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x4321);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);
@@ -759,8 +978,15 @@ public:
    */ // }}}
   void test__enqueue_unmap_mem_object_3( )
   {
-    cl_event res = (cl_event)0x4321;
-    T::Dummy_clEnqueueUnmapMemObject  mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueUnmapMemObject mock1([](cl_command_queue,
+                                                  cl_mem,
+                                                  void*,
+                                                  cl_uint,
+                                                  const cl_event*,
+                                                  cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x4321;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue     mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue    mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject        mock4(CL_SUCCESS);
@@ -790,8 +1016,15 @@ public:
    */ // }}}
   void test__enqueue_unmap_mem_object_4( )
   {
-    cl_event res = (cl_event)0x4321;
-    T::Dummy_clEnqueueUnmapMemObject  mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueUnmapMemObject mock1([](cl_command_queue,
+                                                  cl_mem,
+                                                  void*,
+                                                  cl_uint,
+                                                  const cl_event*,
+                                                  cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x4321;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue     mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue    mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject        mock4(CL_SUCCESS);
@@ -817,8 +1050,15 @@ public:
    */ // }}}
   void test__enqueue_unmap_mem_object_5( )
   {
-    cl_event res = (cl_event)0x4321;
-    T::Dummy_clEnqueueUnmapMemObject  mock1(CL_SUCCESS, &res);
+    T::Pluggable_clEnqueueUnmapMemObject mock1([](cl_command_queue,
+                                                  cl_mem,
+                                                  void*,
+                                                  cl_uint,
+                                                  const cl_event*,
+                                                  cl_event* event) -> cl_int {
+        if(event) *event = (cl_event)0x4321;
+        return CL_SUCCESS;
+    });
     T::Dummy_clRetainCommandQueue     mock2(CL_SUCCESS);
     T::Dummy_clReleaseCommandQueue    mock3(CL_SUCCESS);
     T::Dummy_clRetainMemObject        mock4(CL_SUCCESS);
@@ -832,7 +1072,7 @@ public:
     event e;
 
     TS_ASSERT_THROWS_NOTHING(enqueue_unmap_mem_object(q,m,(void*)0x8901,2,ews,&e));
-    TS_ASSERT(e.get() == res);
+    TS_ASSERT(e.get() == (cl_event)0x4321);
 
     TS_ASSERT(mock1.called_once());
     TS_ASSERT(std::get<0>(mock1.calls().back()) == (cl_command_queue)0x5678);

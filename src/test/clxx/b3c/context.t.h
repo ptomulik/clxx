@@ -285,11 +285,26 @@ public:
    */ // }}}
   void test__get_devices( )
   {
-    cl_device_id array[2] = { (cl_device_id)0x1234, (cl_device_id)0x5678 };
-    size_t size = sizeof(array);
     T::Dummy_clRetainContext mock1(CL_SUCCESS);
     T::Dummy_clReleaseContext mock2(CL_SUCCESS);
-    T::Dummy_clGetContextInfo mock3(CL_SUCCESS, array, &size);
+    T::Pluggable_clGetContextInfo mock3([](cl_context,
+                                     cl_context_info param_name,
+                                     size_t,
+                                     void* param_value,
+                                     size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_CONTEXT_DEVICES) {
+          if(param_value) {
+            ((cl_device_id*)param_value)[0] = (cl_device_id)0x1234;
+            ((cl_device_id*)param_value)[1] = (cl_device_id)0x5678;
+          }
+          if (param_value_size_ret) {
+            *param_value_size_ret = 2 * sizeof(cl_device_id);
+          }
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
 #if CLXX_B5D_OPENCL_PROVIDES(clRetainDevice)
     T::Dummy_clRetainDevice mockRetainDevice(CL_SUCCESS);
 #endif
@@ -316,14 +331,27 @@ public:
    */ // }}}
   void test__get_properties( )
   {
-    cl_context_properties array[3] = {
-        (cl_context_properties)CL_CONTEXT_PLATFORM,
-        (cl_context_properties)0x4321
-    };
-    size_t size = sizeof(array);
     T::Dummy_clRetainContext mock1(CL_SUCCESS);
     T::Dummy_clReleaseContext mock2(CL_SUCCESS);
-    T::Dummy_clGetContextInfo mock3(CL_SUCCESS, array, &size);
+    T::Pluggable_clGetContextInfo mock3([](cl_context,
+                                     cl_context_info param_name,
+                                     size_t,
+                                     void* param_value,
+                                     size_t* param_value_size_ret) -> cl_int {
+        if(param_name == CL_CONTEXT_PROPERTIES) {
+          if(param_value) {
+            ((cl_context_properties*)param_value)[0] = (cl_context_properties)CL_CONTEXT_PLATFORM;
+            ((cl_context_properties*)param_value)[1] = (cl_context_properties)0x4321;
+            ((cl_context_properties*)param_value)[2] = (cl_context_properties)NULL;
+          }
+          if (param_value_size_ret) {
+            *param_value_size_ret = 3 * sizeof(cl_context_properties);
+          }
+          return CL_SUCCESS;
+        } else {
+          return CL_INVALID_VALUE;
+        }
+    });
     context c((cl_context)0x1234);
 
     // the exception here is quite normal, as we don't set
