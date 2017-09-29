@@ -207,8 +207,12 @@ public:
  */ // }}}
 class Pluggable_clBuildProgram
   : public T::Base_clBuildProgram,
-    public T::Pluggable_Function<cl_int (*) (cl_program, cl_uint, const cl_device_id*, const char*,
-                                             void (CL_CALLBACK*)(cl_program, void*), void*)>
+    public T::Pluggable_Function<cl_int (*) ( cl_program,
+                                              cl_uint,
+                                              const cl_device_id*,
+                                              const char*,
+                                              void (CL_CALLBACK*)(cl_program, void*),
+                                              void* )>
 {
   cl_int clBuildProgram(cl_program program,
                         cl_uint num_devices,
@@ -249,9 +253,15 @@ public:
  */ // }}}
 class Pluggable_clCompileProgram
   : public T::Base_clCompileProgram,
-    public T::Pluggable_Function<cl_int (*)(cl_program, cl_uint, const cl_device_id*, const char*,
-                                            cl_uint, const cl_program*, const char**,
-                                            void (CL_CALLBACK*)(cl_program, void*), void*)>
+    public T::Pluggable_Function<cl_int (*) ( cl_program,
+                                              cl_uint,
+                                              const cl_device_id*,
+                                              const char*,
+                                              cl_uint,
+                                              const cl_program*,
+                                              const char**,
+                                              void (CL_CALLBACK*)(cl_program, void*),
+                                              void* )>
 {
   cl_int clCompileProgram(cl_program program,
                         cl_uint num_devices,
@@ -277,7 +287,11 @@ public:
  */ // }}}
 class Pluggable_clCreateBuffer
   : public T::Base_clCreateBuffer,
-    public T::Pluggable_Function<cl_mem(*)(cl_context, cl_mem_flags, size_t, void*, cl_int*)>
+    public T::Pluggable_Function<cl_mem (*) ( cl_context,
+                                              cl_mem_flags,
+                                              size_t,
+                                              void*,
+                                              cl_int* )>
 {
   cl_mem clCreateBuffer( cl_context context, cl_mem_flags flags,
                          size_t size, void* host_ptr, cl_int* errcode_ret );
@@ -290,18 +304,17 @@ public:
   Pluggable_clCreateBuffer(function_pointer_t fptr);
 };
 #endif
-#if 0
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
 /** // doc: Pluggable_clCreateCommandQueue {{{
  * \brief Default mock for clCreateCommandQueue OpenCL function.
  */ // }}}
 class Pluggable_clCreateCommandQueue
   : public T::Base_clCreateCommandQueue,
-    public T::Pluggable_Function<cl_context, cl_device_id,
-                             cl_command_queue_properties, cl_int*>
+    public T::Pluggable_Function<cl_command_queue (*) ( cl_context,
+                                                        cl_device_id,
+                                                        cl_command_queue_properties,
+                                                        cl_int* )>
 {
-  cl_command_queue _queue;
-  cl_int _err;
   cl_command_queue clCreateCommandQueue(
       cl_context context,
       cl_device_id device,
@@ -314,7 +327,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateCommandQueue(cl_command_queue queue, cl_int err);
+  Pluggable_clCreateCommandQueue(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueueWithProperties)
@@ -323,11 +336,11 @@ public:
  */ // }}}
 class Pluggable_clCreateCommandQueueWithProperties
   : public T::Base_clCreateCommandQueueWithProperties,
-    public T::Pluggable_Function<cl_context, cl_device_id,
-                             const cl_queue_properties*, cl_int*>
+    public T::Pluggable_Function<cl_command_queue (*) ( cl_context,
+                                                        cl_device_id,
+                                                        const cl_queue_properties*,
+                                                        cl_int* )>
 {
-  cl_command_queue _queue;
-  cl_int _err;
   cl_command_queue clCreateCommandQueueWithProperties(
       cl_context context,
       cl_device_id device,
@@ -340,7 +353,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateCommandQueueWithProperties(cl_command_queue queue, cl_int err);
+  Pluggable_clCreateCommandQueueWithProperties(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateContext)
@@ -349,12 +362,13 @@ public:
  */ // }}}
 class Pluggable_clCreateContext
   : public T::Base_clCreateContext,
-    public T::Pluggable_Function< const cl_context_properties*, cl_uint, const cl_device_id*,
-                            void(CL_CALLBACK*)(const char*,const void*, size_t, void*),
-                            void*, cl_int*>
+    public T::Pluggable_Function<cl_context (*) ( const cl_context_properties*,
+                                                  cl_uint,
+                                                  const cl_device_id*,
+                                                  void(CL_CALLBACK*)(const char*,const void*, size_t, void*),
+                                                  void*,
+                                                  cl_int* )>
 {
-  cl_context _ctx;
-  cl_int _err;
   cl_context clCreateContext(
       const cl_context_properties* properties, cl_uint num_devices,
       const cl_device_id* devices,
@@ -368,7 +382,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateContext(cl_context ctx, cl_int err);
+  Pluggable_clCreateContext(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateContextFromType)
@@ -377,12 +391,12 @@ public:
  */ // }}}
 class Pluggable_clCreateContextFromType
   : public T::Base_clCreateContextFromType,
-    public T::Pluggable_Function< const cl_context_properties*, const cl_device_type,
-                            void(CL_CALLBACK*)(const char*,const void*, size_t, void*),
-                            void*, cl_int*>
+    public T::Pluggable_Function<cl_context (*) ( const cl_context_properties*,
+                                                  const cl_device_type,
+                                                  void(CL_CALLBACK*)(const char*,const void*, size_t, void*),
+                                                  void*,
+                                                  cl_int* )>
 {
-  cl_context _ctx;
-  cl_int _err;
   cl_context clCreateContextFromType(
       const cl_context_properties* properties,
       cl_device_type device_type,
@@ -396,7 +410,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateContextFromType(cl_context ctx, cl_int err);
+  Pluggable_clCreateContextFromType(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateImage)
@@ -405,11 +419,13 @@ public:
  */ // }}}
 class Pluggable_clCreateImage
   : public T::Base_clCreateImage,
-    public T::Pluggable_Function<cl_context, cl_mem_flags, const cl_image_format*,
-                             const cl_image_desc*, void*, cl_int*>
+    public T::Pluggable_Function<cl_mem (*) ( cl_context,
+                                              cl_mem_flags,
+                                              const cl_image_format*,
+                                              const cl_image_desc*,
+                                              void*,
+                                              cl_int* )>
 {
-  cl_mem _mem;
-  cl_int _err;
   cl_mem clCreateImage( cl_context context, cl_mem_flags flags,
                         const cl_image_format* image_format,
                         const cl_image_desc* image_desc, void* host_ptr,
@@ -420,7 +436,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateImage(cl_mem mem, cl_int err);
+  Pluggable_clCreateImage(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateImage2D)
@@ -429,11 +445,15 @@ public:
  */ // }}}
 class Pluggable_clCreateImage2D
   : public T::Base_clCreateImage2D,
-    public T::Pluggable_Function<cl_context, cl_mem_flags, const cl_image_format*,
-                             size_t, size_t, size_t, void*, cl_int*>
+    public T::Pluggable_Function<cl_mem (*) ( cl_context,
+                                              cl_mem_flags,
+                                              const cl_image_format*,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_int* )>
 {
-  cl_mem _mem;
-  cl_int _err;
   cl_mem clCreateImage2D( cl_context context, cl_mem_flags flags,
                         const cl_image_format* image_format,
                         size_t image_width, size_t image_height,
@@ -445,7 +465,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateImage2D(cl_mem mem, cl_int err);
+  Pluggable_clCreateImage2D(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateImage3D)
@@ -454,25 +474,30 @@ public:
  */ // }}}
 class Pluggable_clCreateImage3D
   : public T::Base_clCreateImage3D,
-    public T::Pluggable_Function<cl_context, cl_mem_flags, const cl_image_format*,
-                             size_t, size_t, size_t, size_t, size_t, void*,
-                             cl_int*>
+    public T::Pluggable_Function<cl_mem (*) ( cl_context,
+                                              cl_mem_flags,
+                                              const cl_image_format*,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_int* )>
 {
-  cl_mem _mem;
-  cl_int _err;
   cl_mem clCreateImage3D( cl_context context, cl_mem_flags flags,
-                        const cl_image_format* image_format,
-                        size_t image_width, size_t image_height,
-                        size_t image_depth, size_t image_row_pitch,
-                        size_t image_slice_pitch, void* host_ptr,
-                        cl_int* errcode_ret );
+                          const cl_image_format* image_format,
+                          size_t image_width, size_t image_height,
+                          size_t image_depth, size_t image_row_pitch,
+                          size_t image_slice_pitch, void* host_ptr,
+                          cl_int* errcode_ret );
 public:
   /** // doc: Pluggable_clCreateImage3D() {{{
    * \brief Constructor, initializes the mock object.
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateImage3D(cl_mem mem, cl_int err);
+  Pluggable_clCreateImage3D(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateKernel)
@@ -481,10 +506,10 @@ public:
  */ // }}}
 class Pluggable_clCreateKernel
   : public T::Base_clCreateKernel,
-    public T::Pluggable_Function< cl_program, const char*, cl_int*>
+    public T::Pluggable_Function<cl_kernel (*) ( cl_program,
+                                                 const char*,
+                                                 cl_int* )>
 {
-  cl_kernel _kern;
-  cl_int _err;
   cl_kernel clCreateKernel(
       cl_program program,
       const char* kernel_name,
@@ -496,7 +521,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateKernel(cl_kernel kern, cl_int err);
+  Pluggable_clCreateKernel(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateKernelsInProgram)
@@ -505,11 +530,11 @@ public:
  */ // }}}
 class Pluggable_clCreateKernelsInProgram
   : public T::Base_clCreateKernelsInProgram,
-    public T::Pluggable_Function< cl_program, cl_uint, cl_kernel*, cl_uint*>
+    public T::Pluggable_Function<cl_int (*) ( cl_program,
+                                              cl_uint,
+                                              cl_kernel*,
+                                              cl_uint* )>
 {
-  cl_int _err;
-  cl_kernel* _kernels;
-  cl_uint* _num_kernels_ret;
   cl_int clCreateKernelsInProgram(
       cl_program program,
       cl_uint num_kernels,
@@ -522,7 +547,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels = nullptr, cl_uint* num_kernels_ret = nullptr);
+  Pluggable_clCreateKernelsInProgram(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
@@ -531,11 +556,13 @@ public:
  */ // }}}
 class Pluggable_clCreatePipe
   : public T::Base_clCreatePipe,
-    public T::Pluggable_Function<cl_context, cl_mem_flags, cl_uint, cl_uint,
-                             const cl_pipe_properties*, cl_int*>
+    public T::Pluggable_Function<cl_mem (*) ( cl_context,
+                                              cl_mem_flags,
+                                              cl_uint,
+                                              cl_uint,
+                                              const cl_pipe_properties*,
+                                              cl_int* )>
 {
-  cl_mem _mem;
-  cl_int _err;
   cl_mem clCreatePipe( cl_context context, cl_mem_flags flags,
                        cl_uint pipe_packet_size, cl_uint pipe_max_packets,
                        const cl_pipe_properties* properties,
@@ -546,7 +573,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreatePipe(cl_mem mem, cl_int err);
+  Pluggable_clCreatePipe(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBinary)
@@ -555,12 +582,14 @@ public:
  */ // }}}
 class Pluggable_clCreateProgramWithBinary
   : public T::Base_clCreateProgramWithBinary,
-    public T::Pluggable_Function<cl_context, cl_uint, const cl_device_id*,
-                              const size_t*, const unsigned char**, cl_int*,
-                              cl_int*>
+    public T::Pluggable_Function<cl_program (*) ( cl_context,
+                                                  cl_uint,
+                                                  const cl_device_id*,
+                                                  const size_t*,
+                                                  const unsigned char**,
+                                                  cl_int*,
+                                                  cl_int* )>
 {
-  cl_program _program;
-  cl_int _err;
   cl_program clCreateProgramWithBinary(cl_context context,
                                        cl_uint num_devices,
                                        const cl_device_id* device_list,
@@ -574,7 +603,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateProgramWithBinary(cl_program program, cl_int err);
+  Pluggable_clCreateProgramWithBinary(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithBuiltInKernels)
@@ -583,11 +612,12 @@ public:
  */ // }}}
 class Pluggable_clCreateProgramWithBuiltInKernels
   : public T::Base_clCreateProgramWithBuiltInKernels,
-    public T::Pluggable_Function<cl_context, cl_uint, const cl_device_id*,
-                              const char*, cl_int*>
+    public T::Pluggable_Function<cl_program (*) ( cl_context,
+                                                  cl_uint,
+                                                  const cl_device_id*,
+                                                  const char*,
+                                                  cl_int* )>
 {
-  cl_program _program;
-  cl_int _err;
   cl_program clCreateProgramWithBuiltInKernels(cl_context context,
                                                cl_uint num_devices,
                                                const cl_device_id* device_list,
@@ -599,7 +629,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateProgramWithBuiltInKernels(cl_program program, cl_int err);
+  Pluggable_clCreateProgramWithBuiltInKernels(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithIL)
@@ -608,10 +638,11 @@ public:
  */ // }}}
 class Pluggable_clCreateProgramWithIL
   : public T::Base_clCreateProgramWithIL,
-    public T::Pluggable_Function<cl_context, const void*, size_t, cl_int*>
+    public T::Pluggable_Function<cl_program (*) ( cl_context,
+                                                  const void*,
+                                                  size_t,
+                                                  cl_int* )>
 {
-  cl_program _program;
-  cl_int _err;
   cl_program clCreateProgramWithIL(cl_context context,
                                    const void* il,
                                    size_t length,
@@ -622,7 +653,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateProgramWithIL(cl_program program, cl_int err);
+  Pluggable_clCreateProgramWithIL(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateProgramWithSource)
@@ -631,10 +662,12 @@ public:
  */ // }}}
 class Pluggable_clCreateProgramWithSource
   : public T::Base_clCreateProgramWithSource,
-    public T::Pluggable_Function<cl_context, cl_uint, const char**, const size_t*, cl_int*>
+    public T::Pluggable_Function<cl_program (*) ( cl_context,
+                                                  cl_uint,
+                                                  const char**,
+                                                  const size_t*,
+                                                  cl_int* )>
 {
-  cl_program _program;
-  cl_int _err;
   cl_program clCreateProgramWithSource(cl_context context,
                                        cl_uint count,
                                        const char** strings,
@@ -646,7 +679,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateProgramWithSource(cl_program program, cl_int err);
+  Pluggable_clCreateProgramWithSource(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSampler)
@@ -655,21 +688,22 @@ public:
  */ // }}}
 class Pluggable_clCreateSampler
   : public T::Base_clCreateSampler,
-    public T::Pluggable_Function<cl_context, cl_bool, cl_addressing_mode,
-                             cl_filter_mode, cl_int*>
+    public T::Pluggable_Function<cl_sampler (*) ( cl_context,
+                                                  cl_bool,
+                                                  cl_addressing_mode,
+                                                  cl_filter_mode,
+                                                  cl_int* )>
 {
-  cl_sampler _sampler;
-  cl_int _err;
   cl_sampler clCreateSampler( cl_context context, cl_bool normalized_coords,
                               cl_addressing_mode addressing_mode, cl_filter_mode
-                              filter_mode, cl_int* errcode_ret);
+                              filter_mode, cl_int* errcode_ret );
 public:
   /** // doc: Pluggable_clCreateSampler() {{{
    * \brief Constructor, initializes the mock object.
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateSampler(cl_sampler sampler, cl_int err);
+  Pluggable_clCreateSampler(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSamplerWithProperties)
@@ -678,10 +712,10 @@ public:
  */ // }}}
 class Pluggable_clCreateSamplerWithProperties
   : public T::Base_clCreateSamplerWithProperties,
-    public T::Pluggable_Function<cl_context, const cl_sampler_properties*, cl_int*>
+    public T::Pluggable_Function<cl_sampler (*) ( cl_context,
+                                                  const cl_sampler_properties*,
+                                                  cl_int* )>
 {
-  cl_sampler _sampler;
-  cl_int _err;
   cl_sampler clCreateSamplerWithProperties( cl_context context,
                                             const cl_sampler_properties* sampler_properties,
                                             cl_int* errcode_ret );
@@ -691,7 +725,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateSamplerWithProperties(cl_sampler sampler, cl_int err);
+  Pluggable_clCreateSamplerWithProperties(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSubBuffer)
@@ -700,10 +734,12 @@ public:
  */ // }}}
 class Pluggable_clCreateSubBuffer
   : public T::Base_clCreateSubBuffer,
-    public T::Pluggable_Function<cl_mem, cl_mem_flags, cl_buffer_create_type, const void*, cl_int*>
+    public T::Pluggable_Function<cl_mem (*) ( cl_mem,
+                                              cl_mem_flags,
+                                              cl_buffer_create_type,
+                                              const void*,
+                                              cl_int* )>
 {
-  cl_mem _mem;
-  cl_int _err;
   cl_mem clCreateSubBuffer( cl_mem buffer, cl_mem_flags flags,
                             cl_buffer_create_type buffer_create_type,
                             const void* buffer_create_info,
@@ -714,7 +750,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateSubBuffer(cl_mem mem, cl_int err);
+  Pluggable_clCreateSubBuffer(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateSubDevices)
@@ -723,11 +759,12 @@ public:
  */ // }}}
 class Pluggable_clCreateSubDevices
   : public T::Base_clCreateSubDevices,
-    public T::Pluggable_Function<cl_device_id,const cl_device_partition_property*,cl_uint,cl_device_id*,cl_uint*>
+    public T::Pluggable_Function<cl_int (*) ( cl_device_id,
+                                              const cl_device_partition_property*,
+                                              cl_uint,
+                                              cl_device_id*,
+                                              cl_uint* )>
 {
-  cl_int _err;
-  cl_device_id const* _out_devices;
-  cl_uint const* _num_devices_ret;
   cl_int clCreateSubDevices(cl_device_id in_device,
                             const cl_device_partition_property* properties,
                             cl_uint num_devices,
@@ -739,7 +776,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateSubDevices(cl_int err, cl_device_id const* out_devices = nullptr, cl_uint const* num_devices_ret = nullptr);
+  Pluggable_clCreateSubDevices(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateUserEvent)
@@ -750,10 +787,9 @@ public:
  */ // }}}
 class Pluggable_clCreateUserEvent
   : public T::Base_clCreateUserEvent,
-    public T::Pluggable_Function<cl_context, cl_int*>
+    public T::Pluggable_Function<cl_event (*) ( cl_context,
+                                                cl_int* )>
 {
-  cl_event _event;
-  cl_int _err;
   cl_event clCreateUserEvent( cl_context context, cl_int* errcode_ret );
 public:
   /** // doc: Pluggable_clCreateUserEvent() {{{
@@ -761,7 +797,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clCreateUserEvent(cl_event event, cl_int err);
+  Pluggable_clCreateUserEvent(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueBarrier)
@@ -770,9 +806,8 @@ public:
  */ // }}}
 class Pluggable_clEnqueueBarrier
   : public T::Base_clEnqueueBarrier,
-    public T::Pluggable_Function<cl_command_queue>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue )>
 {
-  cl_int _err;
   cl_int clEnqueueBarrier( cl_command_queue command_queue );
 public:
   /** // doc: Pluggable_clEnqueueBarrier() {{{
@@ -789,9 +824,11 @@ public:
  */ // }}}
 class Pluggable_clEnqueueBarrierWithWaitList
   : public T::Base_clEnqueueBarrierWithWaitList,
-    public T::Pluggable_Function<cl_command_queue, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueBarrierWithWaitList( cl_command_queue command_queue,
                                        cl_uint num_events_in_wait_list,
                                        const cl_event* event_wait_list,
@@ -811,11 +848,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueCopyBuffer
   : public T::Base_clEnqueueCopyBuffer,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_mem, size_t, size_t,
-                             size_t, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_mem,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueCopyBuffer( cl_command_queue command_queue,
                               cl_mem src_buffer, cl_mem dst_buffer,
                               size_t src_offset, size_t dst_offset,
@@ -828,7 +870,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueCopyBuffer(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueCopyBuffer(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferRect)
@@ -837,13 +879,20 @@ public:
  */ // }}}
 class Pluggable_clEnqueueCopyBufferRect
   : public T::Base_clEnqueueCopyBufferRect,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_mem, const size_t*,
-                             const size_t*, const size_t*, size_t, size_t,
-                             size_t, size_t, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_mem,
+                                              const size_t*,
+                                              const size_t*,
+                                              const size_t*,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueCopyBufferRect( cl_command_queue command_queue,
                                   cl_mem src_buffer,
                                   cl_mem dst_buffer,
@@ -863,7 +912,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueCopyBufferRect(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueCopyBufferRect(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyBufferToImage)
@@ -872,12 +921,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueCopyBufferToImage
   : public T::Base_clEnqueueCopyBufferToImage,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_mem, size_t,
-                             const size_t*, const size_t*, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_mem,
+                                              size_t,
+                                              const size_t*,
+                                              const size_t*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueCopyBufferToImage( cl_command_queue command_queue,
                                      cl_mem src_buffer,
                                      cl_mem dst_image,
@@ -893,7 +946,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueCopyBufferToImage(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueCopyBufferToImage(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImage)
@@ -902,12 +955,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueCopyImage
   : public T::Base_clEnqueueCopyImage,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_mem, const size_t*,
-                             const size_t*, const size_t*, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_mem,
+                                              const size_t*,
+                                              const size_t*,
+                                              const size_t*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueCopyImage( cl_command_queue command_queue, cl_mem src_image,
                              cl_mem dst_image, const size_t* src_origin,
                              const size_t* dst_origin, const size_t* region,
@@ -920,7 +977,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueCopyImage(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueCopyImage(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueCopyImageToBuffer)
@@ -929,12 +986,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueCopyImageToBuffer
   : public T::Base_clEnqueueCopyImageToBuffer,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_mem, const size_t*,
-                             const size_t*, size_t, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_mem,
+                                              const size_t*,
+                                              const size_t*,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueCopyImageToBuffer( cl_command_queue command_queue,
                                      cl_mem src_image,
                                      cl_mem dst_buffer,
@@ -950,7 +1011,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueCopyImageToBuffer(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueCopyImageToBuffer(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueFillBuffer)
@@ -959,11 +1020,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueFillBuffer
   : public T::Base_clEnqueueFillBuffer,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, const void *, size_t,
-                             size_t, size_t, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              const void *,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueFillBuffer( cl_command_queue command_queue, cl_mem buffer,
                               const void *pattern, size_t pattern_size,
                               size_t offset, size_t size,
@@ -985,11 +1051,15 @@ public:
  */ // }}}
 class Pluggable_clEnqueueFillImage
   : public T::Base_clEnqueueFillImage,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, const void*, const
-                             size_t*, const size_t*, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              const void*,
+                                              const size_t*,
+                                              const size_t*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueFillImage( cl_command_queue command_queue,
                              cl_mem image,
                              const void *fill_color,
@@ -1013,13 +1083,17 @@ public:
  */ // }}}
 class Pluggable_clEnqueueMapBuffer
   : public T::Base_clEnqueueMapBuffer,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, cl_map_flags,
-                             size_t, size_t, cl_uint, const cl_event*,
-                             cl_event*, cl_int*>
+    public T::Pluggable_Function<void* (*) ( cl_command_queue,
+                                             cl_mem,
+                                             cl_bool,
+                                             cl_map_flags,
+                                             size_t,
+                                             size_t,
+                                             cl_uint,
+                                             const cl_event*,
+                                             cl_event*,
+                                             cl_int* )>
 {
-  void* _result;
-  cl_int _err;
-  const cl_event* _event;
   void* clEnqueueMapBuffer( cl_command_queue command_queue, cl_mem buffer,
                             cl_bool blocking_map, cl_map_flags map_flags,
                             size_t offset, size_t size,
@@ -1032,7 +1106,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueMapBuffer(void* result, cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueMapBuffer(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMapImage)
@@ -1041,13 +1115,19 @@ public:
  */ // }}}
 class Pluggable_clEnqueueMapImage
   : public T::Base_clEnqueueMapImage,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, cl_map_flags,
-                             const size_t*, const size_t*, size_t*, size_t*,
-                             cl_uint, const cl_event*, cl_event*, cl_int*>
+    public T::Pluggable_Function<void* (*) ( cl_command_queue,
+                                             cl_mem,
+                                             cl_bool,
+                                             cl_map_flags,
+                                             const size_t*,
+                                             const size_t*,
+                                             size_t*,
+                                             size_t*,
+                                             cl_uint,
+                                             const cl_event*,
+                                             cl_event*,
+                                             cl_int* )>
 {
-  void* _result;
-  cl_int _err;
-  const cl_event* _event;
   void* clEnqueueMapImage( cl_command_queue command_queue,
                            cl_mem image,
                            cl_bool blocking_map,
@@ -1066,7 +1146,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueMapImage(void* result, cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueMapImage(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueMarker)
@@ -1075,9 +1155,9 @@ public:
  */ // }}}
 class Pluggable_clEnqueueMarker
   : public T::Base_clEnqueueMarker,
-    public T::Pluggable_Function<cl_command_queue, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueMarker( cl_command_queue command_queue,
                           cl_event* event );
 public:
@@ -1095,10 +1175,11 @@ public:
  */ // }}}
 class Pluggable_clEnqueueMarkerWithWaitList
   : public T::Base_clEnqueueMarkerWithWaitList,
-    public T::Pluggable_Function<cl_command_queue, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueMarkerWithWaitList( cl_command_queue command_queue,
                                       cl_uint num_events_in_wait_list,
                                       const cl_event* event_wait_list,
@@ -1118,12 +1199,14 @@ public:
  */ // }}}
 class Pluggable_clEnqueueMigrateMemObjects
   : public T::Base_clEnqueueMigrateMemObjects,
-    public T::Pluggable_Function<cl_command_queue, cl_uint, const cl_mem*,
-                             cl_mem_migration_flags, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_uint,
+                                              const cl_mem*,
+                                              cl_mem_migration_flags,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueMigrateMemObjects( cl_command_queue command_queue,
                                      cl_uint num_mem_objects,
                                      const cl_mem* mem_objects,
@@ -1137,7 +1220,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueMigrateMemObjects(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueMigrateMemObjects(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNativeKernel)
@@ -1148,12 +1231,17 @@ public:
  */ // }}}
 class Pluggable_clEnqueueNativeKernel
   : public T::Base_clEnqueueNativeKernel,
-    public T::Pluggable_Function<cl_command_queue, void (CL_CALLBACK*)(void*),
-                             void*, size_t, cl_uint, const cl_mem*,
-                             const void**, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              void (CL_CALLBACK*)(void*),
+                                              void*,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_mem*,
+                                              const void**,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  cl_event* _event;
   cl_int clEnqueueNativeKernel( cl_command_queue command_queue,
                                 void (CL_CALLBACK* user_func)(void*),
                                 void* args,
@@ -1170,7 +1258,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueNativeKernel(cl_int err, cl_event* event = nullptr);
+  Pluggable_clEnqueueNativeKernel(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueNDRangeKernel)
@@ -1181,12 +1269,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueNDRangeKernel
   : public T::Base_clEnqueueNDRangeKernel,
-    public T::Pluggable_Function< cl_command_queue, cl_kernel, cl_uint, const
-                              size_t*, const size_t*, const size_t*, cl_uint,
-                              const cl_event*, cl_event*>
+    public T::Pluggable_Function< cl_int (*) ( cl_command_queue,
+                                               cl_kernel,
+                                               cl_uint,
+                                               const size_t*,
+                                               const size_t*,
+                                               const size_t*,
+                                               cl_uint,
+                                               const cl_event*,
+                                               cl_event* )>
 {
-  cl_int _err;
-  cl_event* _event;
   cl_int clEnqueueNDRangeKernel( cl_command_queue command_queue,
                                  cl_kernel kernel,
                                  cl_uint work_dim,
@@ -1202,7 +1294,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueNDRangeKernel(cl_int err, cl_event* event = nullptr);
+  Pluggable_clEnqueueNDRangeKernel(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBuffer)
@@ -1211,11 +1303,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueReadBuffer
   : public T::Base_clEnqueueReadBuffer,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, size_t, size_t,
-                             void*, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueReadBuffer( cl_command_queue command_queue,
                               cl_mem buffer, cl_bool blocking_read,
                               size_t offset, size_t size, void* ptr,
@@ -1228,7 +1325,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueReadBuffer(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueReadBuffer(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueReadBufferRect)
@@ -1237,12 +1334,21 @@ public:
  */ // }}}
 class Pluggable_clEnqueueReadBufferRect
   : public T::Base_clEnqueueReadBufferRect,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, const size_t*,
-                             const size_t*, const size_t*, size_t, size_t,
-                             size_t, size_t, void*, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              const size_t*,
+                                              const size_t*,
+                                              const size_t*,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueReadBufferRect( cl_command_queue command_queue,
                                   cl_mem buffer, cl_bool blocking_read,
                                   const size_t* buffer_origin,
@@ -1271,12 +1377,18 @@ public:
  */ // }}}
 class Pluggable_clEnqueueReadImage
   : public T::Base_clEnqueueReadImage,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, const size_t*,
-                             const size_t*, size_t, size_t, void*, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              const size_t*,
+                                              const size_t*,
+                                              size_t,
+                                              size_t,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueReadImage( cl_command_queue command_queue,
                              cl_mem image,
                              cl_bool blocking_read,
@@ -1294,7 +1406,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueReadImage(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueReadImage(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueSVMFree)
@@ -1303,11 +1415,15 @@ public:
  */ // }}}
 class Pluggable_clEnqueueSVMFree
   : public T::Base_clEnqueueSVMFree,
-    public T::Pluggable_Function<cl_command_queue, cl_uint, void*,
-                             void(CL_CALLBACK*)(cl_command_queue, cl_uint, void**, void*),
-                             void*, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_uint,
+                                              void*,
+                                              void(CL_CALLBACK*)(cl_command_queue, cl_uint, void**, void*),
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueSVMFree(cl_command_queue command_queue,
                           cl_uint num_svm_pointers, void* svm_pointers[],
                           void(CL_CALLBACK* pfn_free_func)(cl_command_queue, cl_uint, void*[], void*),
@@ -1328,10 +1444,15 @@ public:
  */ // }}}
 class Pluggable_clEnqueueSVMMap
   : public T::Base_clEnqueueSVMMap,
-    public T::Pluggable_Function<cl_command_queue, cl_bool, cl_map_flags, void*,
-                             size_t, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_bool,
+                                              cl_map_flags,
+                                              void*,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueSVMMap(cl_command_queue command_queue, cl_bool blocking_map,
                          cl_map_flags map_flags, void* svm_ptr, size_t size,
                          cl_uint num_events_in_wait_list,
@@ -1351,10 +1472,15 @@ public:
  */ // }}}
 class Pluggable_clEnqueueSVMMemFill
   : public T::Base_clEnqueueSVMMemFill,
-    public T::Pluggable_Function<cl_command_queue, void*, const void*, size_t,
-                             size_t, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              void*,
+                                              const void*,
+                                              size_t,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueSVMMemFill(cl_command_queue command_queue, void* svm_ptr,
                              const void* pattern, size_t pattern_size,
                              size_t size, cl_uint num_events_in_wait_list,
@@ -1374,10 +1500,15 @@ public:
  */ // }}}
 class Pluggable_clEnqueueSVMMemcpy
   : public T::Base_clEnqueueSVMMemcpy,
-    public T::Pluggable_Function<cl_command_queue, cl_bool, void*, const void*,
-                             size_t, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_bool,
+                                              void*,
+                                              const void*,
+                                              size_t,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueSVMMemcpy(cl_command_queue command_queue,
                             cl_bool blocking_copy, void* dst_ptr,
                             const void* src_ptr, size_t size,
@@ -1398,11 +1529,15 @@ public:
  */ // }}}
 class Pluggable_clEnqueueSVMMigrateMem
   : public T::Base_clEnqueueSVMMigrateMem,
-    public T::Pluggable_Function<cl_command_queue, cl_uint, const void**,
-                             const size_t*, cl_mem_migration_flags, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_uint,
+                                              const void**,
+                                              const size_t*,
+                                              cl_mem_migration_flags,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueSVMMigrateMem(cl_command_queue command_queue,
                                 cl_uint num_svm_pointers,
                                 const void** svm_pointers, const size_t* sizes,
@@ -1425,10 +1560,12 @@ public:
  */ // }}}
 class Pluggable_clEnqueueSVMUnmap
   : public T::Base_clEnqueueSVMUnmap,
-    public T::Pluggable_Function<cl_command_queue, void*, cl_uint, const cl_event*,
-                             cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueSVMUnmap(cl_command_queue command_queue, void* svm_ptr,
                          cl_uint num_events_in_wait_list,
                          const cl_event* event_wait_list, cl_event* event );
@@ -1447,10 +1584,12 @@ public:
  */ // }}}
 class Pluggable_clEnqueueTask
   : public T::Base_clEnqueueTask,
-    public T::Pluggable_Function<cl_command_queue, cl_kernel, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_kernel,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueTask( cl_command_queue command_queue,
                         cl_kernel kernel,
                         cl_uint num_events_in_wait_list,
@@ -1471,11 +1610,13 @@ public:
  */ // }}}
 class Pluggable_clEnqueueUnmapMemObject
   : public T::Base_clEnqueueUnmapMemObject,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, void*, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueUnmapMemObject( cl_command_queue command_queue,
                                   cl_mem memobj,
                                   void* mapped_ptr,
@@ -1488,7 +1629,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueUnmapMemObject(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueUnmapMemObject(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWaitForEvents)
@@ -1497,9 +1638,10 @@ public:
  */ // }}}
 class Pluggable_clEnqueueWaitForEvents
   : public T::Base_clEnqueueWaitForEvents,
-    public T::Pluggable_Function<cl_command_queue, cl_uint, const cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_uint,
+                                              const cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueWaitForEvents( cl_command_queue command_queue,
                                  cl_uint num_events_,
                                  const cl_event* event_list );
@@ -1518,11 +1660,16 @@ public:
  */ // }}}
 class Pluggable_clEnqueueWriteBuffer
   : public T::Base_clEnqueueWriteBuffer,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, size_t, size_t,
-                             const void*, cl_uint, const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              size_t,
+                                              size_t,
+                                              const void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueWriteBuffer( cl_command_queue command_queue,
                                cl_mem buffer, cl_bool blocking_read,
                                size_t offset, size_t size, const void* ptr,
@@ -1535,7 +1682,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueWriteBuffer(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueWriteBuffer(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clEnqueueWriteBufferRect)
@@ -1544,12 +1691,21 @@ public:
  */ // }}}
 class Pluggable_clEnqueueWriteBufferRect
   : public T::Base_clEnqueueWriteBufferRect,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, const size_t*,
-                             const size_t*, const size_t*, size_t, size_t,
-                             size_t, size_t, const void*, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              const size_t*,
+                                              const size_t*,
+                                              const size_t*,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              size_t,
+                                              const void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
   cl_int clEnqueueWriteBufferRect( cl_command_queue command_queue,
                                       cl_mem buffer, cl_bool blocking_read,
                                       const size_t* buffer_origin,
@@ -1578,12 +1734,18 @@ public:
  */ // }}}
 class Pluggable_clEnqueueWriteImage
   : public T::Base_clEnqueueWriteImage,
-    public T::Pluggable_Function<cl_command_queue, cl_mem, cl_bool, const size_t*,
-                             const size_t*, size_t, size_t, const void*, cl_uint,
-                             const cl_event*, cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_mem,
+                                              cl_bool,
+                                              const size_t*,
+                                              const size_t*,
+                                              size_t,
+                                              size_t,
+                                              const void*,
+                                              cl_uint,
+                                              const cl_event*,
+                                              cl_event* )>
 {
-  cl_int _err;
-  const cl_event* _event;
   cl_int clEnqueueWriteImage( cl_command_queue command_queue,
                               cl_mem image,
                               cl_bool blocking_read,
@@ -1601,7 +1763,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clEnqueueWriteImage(cl_int err, const cl_event* event = nullptr);
+  Pluggable_clEnqueueWriteImage(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clFinish)
@@ -1610,9 +1772,8 @@ public:
  */ // }}}
 class Pluggable_clFinish
   : public T::Base_clFinish,
-    public T::Pluggable_Function<cl_command_queue>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue )>
 {
-  cl_int _err;
   cl_int clFinish(cl_command_queue);
 public:
   /** // doc: Pluggable_clFinish() {{{
@@ -1629,9 +1790,8 @@ public:
  */ // }}}
 class Pluggable_clFlush
   : public T::Base_clFlush,
-    public T::Pluggable_Function<cl_command_queue>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue )>
 {
-  cl_int _err;
   cl_int clFlush(cl_command_queue);
 public:
   /** // doc: Pluggable_clFlush() {{{
@@ -1648,11 +1808,12 @@ public:
  */ // }}}
 class Pluggable_clGetCommandQueueInfo
   : public T::Base_clGetCommandQueueInfo,
-    public T::Pluggable_Function<cl_command_queue,cl_command_queue_info,size_t,void*,size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_command_queue_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetCommandQueueInfo(cl_command_queue command_queue,
                                cl_command_queue_info param_name,
                                size_t param_value_size, void* param_value,
@@ -1663,7 +1824,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetCommandQueueInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetCommandQueueInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetContextInfo)
@@ -1672,11 +1833,12 @@ public:
  */ // }}}
 class Pluggable_clGetContextInfo
   : public T::Base_clGetContextInfo,
-    public T::Pluggable_Function<cl_context,cl_context_info,size_t,void*,size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_context,
+                                              cl_context_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetContextInfo(cl_context context, cl_context_info param_name,
                           size_t param_value_size, void* param_value,
                           size_t* param_value_size_ret);
@@ -1686,7 +1848,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetContextInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetContextInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceAndHostTimer)
@@ -1695,9 +1857,10 @@ public:
  */ // }}}
 class Pluggable_clGetDeviceAndHostTimer
   : public T::Base_clGetDeviceAndHostTimer,
-    public T::Pluggable_Function<cl_device_id,cl_ulong*,cl_ulong*>
+    public T::Pluggable_Function<cl_int (*) ( cl_device_id,
+                                              cl_ulong*,
+                                              cl_ulong* )>
 {
-  cl_int _err;
   cl_int clGetDeviceAndHostTimer(cl_device_id device, cl_ulong* device_timestamp,
                                  cl_ulong* host_timestamp);
 public:
@@ -1719,11 +1882,12 @@ public:
  */ // }}}
 class Pluggable_clGetDeviceIDs
   : public T::Base_clGetDeviceIDs,
-    public T::Pluggable_Function<cl_platform_id, cl_device_type, cl_uint, cl_device_id*, cl_uint*>
+    public T::Pluggable_Function<cl_int (*) ( cl_platform_id,
+                                              cl_device_type,
+                                              cl_uint,
+                                              cl_device_id*,
+                                              cl_uint*  )>
 {
-  cl_int _err;
-  cl_device_id const* _devices;
-  cl_uint const* _num_devices;
   cl_int clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,
                         cl_uint num_entries, cl_device_id* devices,
                         cl_uint* num_devices);
@@ -1734,7 +1898,7 @@ public:
    * \param fptr Function to be plugged-in
    *        \p devices array is stored
    */ // }}}
-  Pluggable_clGetDeviceIDs(cl_int err, cl_device_id const* devices = nullptr, cl_uint const* num_devices = nullptr);
+  Pluggable_clGetDeviceIDs(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetDeviceInfo)
@@ -1745,11 +1909,12 @@ public:
  */ // }}}
 class Pluggable_clGetDeviceInfo
   : public T::Base_clGetDeviceInfo,
-    public T::Pluggable_Function<cl_device_id, cl_device_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_device_id,
+                                              cl_device_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -1759,7 +1924,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetDeviceInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetDeviceInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetEventInfo)
@@ -1770,11 +1935,12 @@ public:
  */ // }}}
 class Pluggable_clGetEventInfo
   : public T::Base_clGetEventInfo,
-    public T::Pluggable_Function<cl_event, cl_event_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_event,
+                                              cl_event_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetEventInfo(cl_event event, cl_event_info param_name,
                          size_t param_value_size, void* param_value,
                          size_t* param_value_size_ret);
@@ -1784,7 +1950,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetEventInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetEventInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetEventProfilingInfo)
@@ -1795,11 +1961,12 @@ public:
  */ // }}}
 class Pluggable_clGetEventProfilingInfo
   : public T::Base_clGetEventProfilingInfo,
-    public T::Pluggable_Function<cl_event, cl_profiling_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_event,
+                                              cl_profiling_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetEventProfilingInfo(cl_event kernel, cl_profiling_info param_name,
                                  size_t param_value_size, void* param_value,
                                  size_t* param_value_size_ret);
@@ -1809,7 +1976,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetEventProfilingInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetEventProfilingInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddress)
@@ -1820,9 +1987,8 @@ public:
  */ // }}}
 class Pluggable_clGetExtensionFunctionAddress
   : public T::Base_clGetExtensionFunctionAddress,
-    public T::Pluggable_Function<const char*>
+    public T::Pluggable_Function<void* (*) ( const char* )>
 {
-  void* _ptr;
   void* clGetExtensionFunctionAddress(const char* funcname);
 public:
   /** // doc: Pluggable_clGetExtensionFunctionAddress() {{{
@@ -1830,7 +1996,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetExtensionFunctionAddress(void * ptr);
+  Pluggable_clGetExtensionFunctionAddress(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetExtensionFunctionAddressForPlatform)
@@ -1841,9 +2007,9 @@ public:
  */ // }}}
 class Pluggable_clGetExtensionFunctionAddressForPlatform
   : public T::Base_clGetExtensionFunctionAddressForPlatform,
-    public T::Pluggable_Function<cl_platform_id, const char*>
+    public T::Pluggable_Function<void* (*) ( cl_platform_id,
+                                             const char* )>
 {
-  void* _ptr;
   void* clGetExtensionFunctionAddressForPlatform(cl_platform_id platform,
                                                  const char* funcname);
 public:
@@ -1852,7 +2018,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetExtensionFunctionAddressForPlatform(void * ptr);
+  Pluggable_clGetExtensionFunctionAddressForPlatform(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetHostTimer)
@@ -1861,9 +2027,9 @@ public:
  */ // }}}
 class Pluggable_clGetHostTimer
   : public T::Base_clGetHostTimer,
-    public T::Pluggable_Function<cl_device_id,cl_ulong*>
+    public T::Pluggable_Function<cl_int (*) ( cl_device_id,
+                                              cl_ulong* )>
 {
-  cl_int _err;
   cl_int clGetHostTimer(cl_device_id device, cl_ulong* host_timestamp);
 public:
   /** // doc: Pluggable_clGetHostTimer() {{{
@@ -1882,11 +2048,12 @@ public:
  */ // }}}
 class Pluggable_clGetImageInfo
   : public T::Base_clGetImageInfo,
-    public T::Pluggable_Function<cl_mem, cl_image_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_mem,
+                                              cl_image_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetImageInfo(cl_mem image, cl_image_info param_name,
                         size_t param_value_size, void* param_value,
                         size_t* param_value_size_ret);
@@ -1896,7 +2063,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetImageInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetImageInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelArgInfo)
@@ -1907,11 +2074,13 @@ public:
  */ // }}}
 class Pluggable_clGetKernelArgInfo
   : public T::Base_clGetKernelArgInfo,
-    public T::Pluggable_Function<cl_kernel, cl_uint, cl_kernel_arg_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel,
+                                              cl_uint,
+                                              cl_kernel_arg_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetKernelArgInfo(cl_kernel kernel, cl_uint arg_index,
                             cl_kernel_arg_info param_name,
                             size_t param_value_size, void* param_value,
@@ -1922,7 +2091,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetKernelArgInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetKernelArgInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelInfo)
@@ -1933,11 +2102,12 @@ public:
  */ // }}}
 class Pluggable_clGetKernelInfo
   : public T::Base_clGetKernelInfo,
-    public T::Pluggable_Function<cl_kernel, cl_kernel_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel,
+                                              cl_kernel_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name,
                          size_t param_value_size, void* param_value,
                          size_t* param_value_size_ret);
@@ -1947,7 +2117,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetKernelInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetKernelInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelWorkGroupInfo)
@@ -1958,11 +2128,13 @@ public:
  */ // }}}
 class Pluggable_clGetKernelWorkGroupInfo
   : public T::Base_clGetKernelWorkGroupInfo,
-    public T::Pluggable_Function<cl_kernel, cl_device_id, cl_kernel_work_group_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel,
+                                              cl_device_id,
+                                              cl_kernel_work_group_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device,
                                   cl_kernel_work_group_info param_name,
                                   size_t param_value_size, void* param_value,
@@ -1973,7 +2145,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetKernelWorkGroupInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetKernelWorkGroupInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetKernelSubGroupInfo)
@@ -1984,9 +2156,15 @@ public:
  */ // }}}
 class Pluggable_clGetKernelSubGroupInfo
   : public T::Base_clGetKernelSubGroupInfo,
-    public T::Pluggable_Function<cl_kernel, cl_device_id, cl_kernel_sub_group_info, size_t, const void*, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel,
+                                              cl_device_id,
+                                              cl_kernel_sub_group_info,
+                                              size_t,
+                                              const void*,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
   cl_int clGetKernelSubGroupInfo(cl_kernel kernel, cl_device_id device,
                                   cl_kernel_sub_group_info param_name,
                                   size_t input_value_size, const void* input_value,
@@ -2009,11 +2187,12 @@ public:
  */ // }}}
 class Pluggable_clGetMemObjectInfo
   : public T::Base_clGetMemObjectInfo,
-    public T::Pluggable_Function<cl_mem, cl_mem_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_mem,
+                                              cl_mem_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -2023,7 +2202,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetMemObjectInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetMemObjectInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetPipeInfo)
@@ -2034,9 +2213,12 @@ public:
  */ // }}}
 class Pluggable_clGetPipeInfo
   : public T::Base_clGetPipeInfo,
-    public T::Pluggable_Function<cl_mem, cl_pipe_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_mem,
+                                              cl_pipe_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
   cl_int clGetPipeInfo(cl_mem pipe, cl_pipe_info param_name,
                        size_t param_value_size, void* param_value,
                        size_t* param_value_size_ret);
@@ -2059,11 +2241,10 @@ public:
  */ // }}}
 class Pluggable_clGetPlatformIDs
   : public T::Base_clGetPlatformIDs,
-    public T::Pluggable_Function<cl_uint, cl_platform_id*, cl_uint*>
+    public T::Pluggable_Function<cl_int (*) ( cl_uint,
+                                              cl_platform_id*,
+                                              cl_uint* )>
 {
-  cl_int _err;
-  cl_platform_id const* _platforms;
-  cl_uint const* _num_platforms;
   cl_int clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,
                           cl_uint* num_platforms);
 public:
@@ -2073,7 +2254,7 @@ public:
    * \param fptr Function to be plugged-in
    *        platforms array is stored
    */ // }}}
-  Pluggable_clGetPlatformIDs(cl_int err, cl_platform_id const* platforms = nullptr, cl_uint const* num_platforms = nullptr);
+  Pluggable_clGetPlatformIDs(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetPlatformInfo)
@@ -2084,11 +2265,12 @@ public:
  */ // }}}
 class Pluggable_clGetPlatformInfo
   : public T::Base_clGetPlatformInfo,
-    public T::Pluggable_Function<cl_platform_id, cl_platform_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_platform_id,
+                                              cl_platform_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetPlatformInfo(cl_platform_id platform, cl_platform_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -2098,7 +2280,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetPlatformInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetPlatformInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetProgramBuildInfo)
@@ -2109,12 +2291,13 @@ public:
  */ // }}}
 class Pluggable_clGetProgramBuildInfo
   : public T::Base_clGetProgramBuildInfo,
-    public T::Pluggable_Function<cl_program, cl_device_id, cl_program_build_info,
-                             size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_program,
+                                              cl_device_id,
+                                              cl_program_build_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetProgramBuildInfo(cl_program program,
                                cl_device_id device,
                                cl_program_build_info param_name,
@@ -2127,7 +2310,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetProgramBuildInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetProgramBuildInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetProgramInfo)
@@ -2138,11 +2321,12 @@ public:
  */ // }}}
 class Pluggable_clGetProgramInfo
   : public T::Base_clGetProgramInfo,
-    public T::Pluggable_Function<cl_program, cl_program_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_program,
+                                              cl_program_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
-  cl_int _err;
-  void const* _param_value;
-  size_t const* _param_value_size_ret;
   cl_int clGetProgramInfo(cl_program program, cl_program_info param_name,
                            size_t param_value_size, void* param_value,
                            size_t* param_value_size_ret);
@@ -2152,7 +2336,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetProgramInfo(cl_int err, void const* param_value = nullptr, size_t const* param_value_size_ret = nullptr);
+  Pluggable_clGetProgramInfo(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clGetSamplerInfo)
@@ -2163,7 +2347,11 @@ public:
  */ // }}}
 class Pluggable_clGetSamplerInfo
   : public T::Base_clGetSamplerInfo,
-    public T::Pluggable_Function<cl_sampler, cl_sampler_info, size_t, void*, size_t*>
+    public T::Pluggable_Function<cl_int (*) ( cl_sampler,
+                                              cl_sampler_info,
+                                              size_t,
+                                              void*,
+                                              size_t* )>
 {
   cl_int _err;
   cl_int clGetSamplerInfo(cl_sampler sampler, cl_sampler_info param_name,
@@ -2184,12 +2372,13 @@ public:
  */ // }}}
 class Pluggable_clGetSupportedImageFormats
   : public T::Base_clGetSupportedImageFormats,
-    public T::Pluggable_Function<cl_context, cl_mem_flags, cl_mem_object_type,
-                             cl_uint, cl_image_format*, cl_uint*>
+    public T::Pluggable_Function<cl_int (*) ( cl_context,
+                                              cl_mem_flags,
+                                              cl_mem_object_type,
+                                              cl_uint,
+                                              cl_image_format*,
+                                              cl_uint* )>
 {
-  cl_int _err;
-  const cl_image_format* _image_formats;
-  const cl_uint* _num_image_formats;
   cl_int clGetSupportedImageFormats( cl_context context, cl_mem_flags flags,
                                      cl_mem_object_type image_type,
                                      cl_uint num_entries,
@@ -2201,9 +2390,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clGetSupportedImageFormats(cl_int err,
-                                   const cl_image_format* image_formats = nullptr,
-                                   const cl_uint* num_image_formats = nullptr);
+  Pluggable_clGetSupportedImageFormats(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clLinkProgram)
@@ -2212,13 +2399,16 @@ public:
  */ // }}}
 class Pluggable_clLinkProgram
   : public T::Base_clLinkProgram,
-    public T::Pluggable_Function<cl_context, cl_uint, const cl_device_id*,
-                             const char*, cl_uint, const cl_program*,
-                             void (CL_CALLBACK*)(cl_program, void*), void*,
-                             cl_int*>
+    public T::Pluggable_Function<cl_program (*) ( cl_context,
+                                                  cl_uint,
+                                                  const cl_device_id*,
+                                                  const char*,
+                                                  cl_uint,
+                                                  const cl_program*,
+                                                  void (CL_CALLBACK*)(cl_program, void*),
+                                                  void*,
+                                                  cl_int* )>
 {
-  cl_program _program;
-  cl_int _err;
   cl_program clLinkProgram(cl_context context,
                            cl_uint num_devices,
                            const cl_device_id* device_list,
@@ -2234,7 +2424,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clLinkProgram(cl_program program, cl_int err);
+  Pluggable_clLinkProgram(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clReleaseCommandQueue)
@@ -2243,9 +2433,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseCommandQueue
   : public T::Base_clReleaseCommandQueue,
-    public T::Pluggable_Function<cl_command_queue>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue )>
 {
-  cl_int _err;
   cl_int clReleaseCommandQueue(cl_command_queue);
 public:
   /** // doc: Pluggable_clReleaseCommandQueue() {{{
@@ -2262,9 +2451,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseContext
   : public T::Base_clReleaseContext,
-    public T::Pluggable_Function<cl_context>
+    public T::Pluggable_Function<cl_int (*) ( cl_context )>
 {
-  cl_int _err;
   cl_int clReleaseContext(cl_context);
 public:
   /** // doc: Pluggable_clReleaseContext() {{{
@@ -2281,9 +2469,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseDevice
   : public T::Base_clReleaseDevice,
-    public T::Pluggable_Function<cl_device_id>
+    public T::Pluggable_Function<cl_int (*) ( cl_device_id )>
 {
-  cl_int _err;
   cl_int clReleaseDevice(cl_device_id device);
 public:
   /** // doc: Pluggable_clReleaseDevice() {{{
@@ -2300,9 +2487,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseEvent
   : public T::Base_clReleaseEvent,
-    public T::Pluggable_Function<cl_event>
+    public T::Pluggable_Function<cl_int (*) ( cl_event )>
 {
-  cl_int _err;
   cl_int clReleaseEvent(cl_event);
 public:
   /** // doc: Pluggable_clReleaseEvent() {{{
@@ -2319,9 +2505,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseKernel
   : public T::Base_clReleaseKernel,
-    public T::Pluggable_Function<cl_kernel>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel )>
 {
-  cl_int _err;
   cl_int clReleaseKernel(cl_kernel kernel);
 public:
   /** // doc: Pluggable_clReleaseKernel() {{{
@@ -2338,9 +2523,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseMemObject
   : public T::Base_clReleaseMemObject,
-    public T::Pluggable_Function<cl_mem>
+    public T::Pluggable_Function<cl_int (*) ( cl_mem )>
 {
-  cl_int _err;
   cl_int clReleaseMemObject(cl_mem memobj);
 public:
   /** // doc: Pluggable_clReleaseMemObject() {{{
@@ -2357,9 +2541,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseProgram
   : public T::Base_clReleaseProgram,
-    public T::Pluggable_Function<cl_program>
+    public T::Pluggable_Function<cl_int (*) ( cl_program )>
 {
-  cl_int _err;
   cl_int clReleaseProgram(cl_program program);
 public:
   /** // doc: Pluggable_clReleaseProgram() {{{
@@ -2376,9 +2559,8 @@ public:
  */ // }}}
 class Pluggable_clReleaseSampler
   : public T::Base_clReleaseSampler,
-    public T::Pluggable_Function<cl_sampler>
+    public T::Pluggable_Function<cl_int (*) ( cl_sampler )>
 {
-  cl_int _err;
   cl_int clReleaseSampler(cl_sampler sampler);
 public:
   /** // doc: Pluggable_clReleaseSampler() {{{
@@ -2395,9 +2577,8 @@ public:
  */ // }}}
 class Pluggable_clRetainCommandQueue
   : public T::Base_clRetainCommandQueue,
-    public T::Pluggable_Function<cl_command_queue>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue )>
 {
-  cl_int _err;
   cl_int clRetainCommandQueue(cl_command_queue);
 public:
   /** // doc: Pluggable_clRetainCommandQueue() {{{
@@ -2414,9 +2595,8 @@ public:
  */ // }}}
 class Pluggable_clRetainContext
   : public T::Base_clRetainContext,
-    public T::Pluggable_Function<cl_context>
+    public T::Pluggable_Function<cl_int (*) ( cl_context )>
 {
-  cl_int _err;
   cl_int clRetainContext(cl_context);
 public:
   /** // doc: Pluggable_clRetainContext() {{{
@@ -2433,9 +2613,8 @@ public:
  */ // }}}
 class Pluggable_clRetainDevice
   : public T::Base_clRetainDevice,
-    public T::Pluggable_Function<cl_device_id>
+    public T::Pluggable_Function<cl_int (*) ( cl_device_id )>
 {
-  cl_int _err;
   cl_int clRetainDevice(cl_device_id device);
 public:
   /** // doc: Pluggable_clRetainDevice() {{{
@@ -2452,9 +2631,8 @@ public:
  */ // }}}
 class Pluggable_clRetainEvent
   : public T::Base_clRetainEvent,
-    public T::Pluggable_Function<cl_event>
+    public T::Pluggable_Function<cl_int (*) ( cl_event )>
 {
-  cl_int _err;
   cl_int clRetainEvent(cl_event);
 public:
   /** // doc: Pluggable_clRetainEvent() {{{
@@ -2471,9 +2649,8 @@ public:
  */ // }}}
 class Pluggable_clRetainKernel
   : public T::Base_clRetainKernel,
-    public T::Pluggable_Function<cl_kernel>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel )>
 {
-  cl_int _err;
   cl_int clRetainKernel(cl_kernel kernel);
 public:
   /** // doc: Pluggable_clRetainKernel() {{{
@@ -2490,9 +2667,8 @@ public:
  */ // }}}
 class Pluggable_clRetainMemObject
   : public T::Base_clRetainMemObject,
-    public T::Pluggable_Function<cl_mem>
+    public T::Pluggable_Function<cl_int (*) ( cl_mem )>
 {
-  cl_int _err;
   cl_int clRetainMemObject(cl_mem memobj);
 public:
   /** // doc: Pluggable_clRetainMemObject() {{{
@@ -2509,9 +2685,8 @@ public:
  */ // }}}
 class Pluggable_clRetainProgram
   : public T::Base_clRetainProgram,
-    public T::Pluggable_Function<cl_program>
+    public T::Pluggable_Function<cl_int (*) ( cl_program )>
 {
-  cl_int _err;
   cl_int clRetainProgram(cl_program program);
 public:
   /** // doc: Pluggable_clRetainProgram() {{{
@@ -2528,9 +2703,8 @@ public:
  */ // }}}
 class Pluggable_clRetainSampler
   : public T::Base_clRetainSampler,
-    public T::Pluggable_Function<cl_sampler>
+    public T::Pluggable_Function<cl_int (*) ( cl_sampler )>
 {
-  cl_int _err;
   cl_int clRetainSampler(cl_sampler sampler);
 public:
   /** // doc: Pluggable_clRetainSampler() {{{
@@ -2549,9 +2723,11 @@ public:
  */ // }}}
 class Pluggable_clSetCommandQueueProperty
   : public T::Base_clSetCommandQueueProperty,
-    public T::Pluggable_Function<cl_command_queue, cl_command_queue_properties, cl_bool, cl_command_queue_properties*>
+    public T::Pluggable_Function<cl_int (*) ( cl_command_queue,
+                                              cl_command_queue_properties,
+                                              cl_bool,
+                                              cl_command_queue_properties* )>
 {
-  cl_int _err;
   cl_int clSetCommandQueueProperty(cl_command_queue command_queue,
                                       cl_command_queue_properties properties,
                                       cl_bool enable,
@@ -2573,9 +2749,10 @@ public:
  */ // }}}
 class Pluggable_clSetDefaultDeviceCommandQueue
   : public T::Base_clSetDefaultDeviceCommandQueue,
-    public T::Pluggable_Function<cl_context, cl_device_id, cl_command_queue>
+    public T::Pluggable_Function<cl_int (*) ( cl_context,
+                                              cl_device_id,
+                                              cl_command_queue )>
 {
-  cl_int _err;
   cl_int clSetDefaultDeviceCommandQueue(cl_context context, cl_device_id device,
                                         cl_command_queue command_queue);
 public:
@@ -2595,9 +2772,11 @@ public:
  */ // }}}
 class Pluggable_clSetEventCallback
   : public T::Base_clSetEventCallback,
-    public T::Pluggable_Function<cl_event, cl_int, void(CL_CALLBACK*)(cl_event, cl_int, void*), void*>
+    public T::Pluggable_Function<cl_int (*) ( cl_event,
+                                              cl_int,
+                                              void(CL_CALLBACK*)(cl_event, cl_int, void*),
+                                              void* )>
 {
-  cl_int _err;
   cl_int clSetEventCallback(cl_event event, cl_int command_exec_callback_type,
                             void(CL_CALLBACK *pfn_event_notify)(cl_event, cl_int, void*),
                             void* user_data);
@@ -2618,9 +2797,11 @@ public:
  */ // }}}
 class Pluggable_clSetKernelArg
   : public T::Base_clSetKernelArg,
-    public T::Pluggable_Function<cl_kernel, cl_uint, size_t, const void*>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel,
+                                              cl_uint,
+                                              size_t,
+                                              const void* )>
 {
-  cl_int _err;
   cl_int clSetKernelArg(cl_kernel kernel, cl_uint arg_index, size_t arg_size,
                         const void* arg_value);
 public:
@@ -2640,9 +2821,10 @@ public:
  */ // }}}
 class Pluggable_clSetKernelArgSVMPointer
   : public T::Base_clSetKernelArgSVMPointer,
-    public T::Pluggable_Function<cl_kernel, cl_uint, const void*>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel,
+                                              cl_uint,
+                                              const void* )>
 {
-  cl_int _err;
   cl_int clSetKernelArgSVMPointer(cl_kernel kernel, cl_uint arg_index, const void* arg_value);
 public:
   /** // doc: Pluggable_clSetKernelArgSVMPointer() {{{
@@ -2661,9 +2843,11 @@ public:
  */ // }}}
 class Pluggable_clSetKernelExecInfo
   : public T::Base_clSetKernelExecInfo,
-    public T::Pluggable_Function<cl_kernel, cl_kernel_exec_info, size_t, const void*>
+    public T::Pluggable_Function<cl_int (*) ( cl_kernel,
+                                              cl_kernel_exec_info,
+                                              size_t,
+                                              const void* )>
 {
-  cl_int _err;
   cl_int clSetKernelExecInfo(cl_kernel kernel, cl_kernel_exec_info param_name, size_t param_value_size, const void* arg_value);
 public:
   /** // doc: Pluggable_clSetKernelExecInfo() {{{
@@ -2682,9 +2866,10 @@ public:
  */ // }}}
 class Pluggable_clSetMemObjectDestructorCallback
   : public T::Base_clSetMemObjectDestructorCallback,
-    public T::Pluggable_Function<cl_mem, void(CL_CALLBACK*)(cl_mem, void*), void*>
+    public T::Pluggable_Function<cl_int (*) ( cl_mem,
+                                              void(CL_CALLBACK*)(cl_mem, void*),
+                                              void* )>
 {
-  cl_int _err;
   cl_int clSetMemObjectDestructorCallback(cl_mem memobj,
                                           void(CL_CALLBACK* pfn_notify)(cl_mem, void*),
                                           void* user_data);
@@ -2705,9 +2890,9 @@ public:
  */ // }}}
 class Pluggable_clSetUserEventStatus
   : public T::Base_clSetUserEventStatus,
-    public T::Pluggable_Function<cl_event, cl_int>
+    public T::Pluggable_Function<cl_int (*) ( cl_event,
+                                              cl_int )>
 {
-  cl_int _err;
   cl_int clSetUserEventStatus( cl_event event , cl_int execution_status );
 public:
   /** // doc: Pluggable_clSetUserEventStatus() {{{
@@ -2726,9 +2911,11 @@ public:
  */ // }}}
 class Pluggable_clSVMAlloc
   : public T::Base_clSVMAlloc,
-    public T::Pluggable_Function<cl_context, cl_svm_mem_flags, size_t, cl_uint>
+    public T::Pluggable_Function<void* (*) ( cl_context,
+                                             cl_svm_mem_flags,
+                                             size_t,
+                                             cl_uint )>
 {
-  void* _ptr;
   void* clSVMAlloc(cl_context context, cl_svm_mem_flags flags, size_t size, cl_uint alignment);
 public:
   /** // doc: Pluggable_clSVMAlloc() {{{
@@ -2736,7 +2923,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clSVMAlloc(void* ptr);
+  Pluggable_clSVMAlloc(function_poitner_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clSVMFree)
@@ -2747,7 +2934,8 @@ public:
  */ // }}}
 class Pluggable_clSVMFree
   : public T::Base_clSVMFree,
-    public T::Pluggable_Function<cl_context, void*>
+    public T::Pluggable_Function<void (*) ( cl_context,
+                                            void* )>
 {
   void clSVMFree(cl_context context, void* svm_pointer);
 public:
@@ -2756,7 +2944,7 @@ public:
    *
    * \param fptr Function to be plugged-in
    */ // }}}
-  Pluggable_clSVMFree();
+  Pluggable_clSVMFree(function_pointer_t fptr);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clUnloadCompiler)
@@ -2765,9 +2953,8 @@ public:
  */ // }}}
 class Pluggable_clUnloadCompiler
   : public T::Base_clUnloadCompiler,
-    public T::Pluggable_Function<>
+    public T::Pluggable_Function<cl_int (*)()>
 {
-  cl_int _err;
   cl_int clUnloadCompiler();
 public:
   /** // doc: Pluggable_clUnloadCompiler() {{{
@@ -2784,9 +2971,8 @@ public:
  */ // }}}
 class Pluggable_clUnloadPlatformCompiler
   : public T::Base_clUnloadPlatformCompiler,
-    public T::Pluggable_Function<cl_platform_id>
+    public T::Pluggable_Function<cl_int (*) ( cl_platform_id )>
 {
-  cl_int _err;
   cl_int clUnloadPlatformCompiler(cl_platform_id);
 public:
   /** // doc: Pluggable_clUnloadPlatformCompiler() {{{
@@ -2805,9 +2991,9 @@ public:
  */ // }}}
 class Pluggable_clWaitForEvents
   : public T::Base_clWaitForEvents,
-    public T::Pluggable_Function<cl_uint, const cl_event*>
+    public T::Pluggable_Function<cl_int (*) ( cl_uint,
+                                              const cl_event* )>
 {
-  cl_int _err;
   cl_int clWaitForEvents(cl_uint num_events, const cl_event* event_list);
 public:
   /** // doc: Pluggable_clWaitForEvents() {{{
@@ -2818,7 +3004,6 @@ public:
   Pluggable_clWaitForEvents(function_pointer_t fptr);
 };
 #endif
-#endif // #if 0
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE || ... */
 
@@ -2893,7 +3078,6 @@ Pluggable_clCreateBuffer(function_pointer_t fptr)
 {
 }
 #endif
-#if 0
 /* ------------------------------------------------------------------------- */
 #if CLXX_B5D_OPENCL_PROVIDES(clCreateCommandQueue)
 cl_command_queue Pluggable_clCreateCommandQueue::
@@ -2901,16 +3085,11 @@ clCreateCommandQueue(cl_context context, cl_device_id device,
                      cl_command_queue_properties properties,
                      cl_int* errcode_ret)
 {
-  call_with(context, device, properties, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return this->_queue;
+  return call_function(context, device, properties, errcode_ret);
 }
 Pluggable_clCreateCommandQueue::
 Pluggable_clCreateCommandQueue(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateCommandQueue(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -2921,16 +3100,11 @@ clCreateCommandQueueWithProperties(cl_context context, cl_device_id device,
                                    const cl_queue_properties* properties,
                                    cl_int* errcode_ret)
 {
-  call_with(context, device, properties, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return this->_queue;
+  return call_function(context, device, properties, errcode_ret);
 }
 Pluggable_clCreateCommandQueueWithProperties::
 Pluggable_clCreateCommandQueueWithProperties(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateCommandQueueWithProperties(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -2944,16 +3118,11 @@ clCreateContext(const cl_context_properties* properties,
                 void* user_data,
                 cl_int* errcode_ret)
 {
-  call_with(properties, num_devices, devices, pfn_notify, user_data, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return this->_ctx;
+  return call_function(properties, num_devices, devices, pfn_notify, user_data, errcode_ret);
 }
 Pluggable_clCreateContext::
 Pluggable_clCreateContext(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateContext(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -2966,16 +3135,11 @@ clCreateContextFromType(const cl_context_properties* properties,
                         void* user_data,
                         cl_int* errcode_ret)
 {
-  call_with(properties, device_type, pfn_notify, user_data, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return this->_ctx;
+  return call_function(properties, device_type, pfn_notify, user_data, errcode_ret);
 }
 Pluggable_clCreateContextFromType::
 Pluggable_clCreateContextFromType(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateContextFromType(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -2987,16 +3151,11 @@ clCreateImage( cl_context context, cl_mem_flags flags,
                const cl_image_desc* image_desc, void* host_ptr,
                cl_int* errcode_ret )
 {
-  call_with( context, flags, image_format, image_desc, host_ptr, errcode_ret );
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _mem;
+  return call_function( context, flags, image_format, image_desc, host_ptr, errcode_ret );
 }
 Pluggable_clCreateImage::
 Pluggable_clCreateImage(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateImage(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3008,17 +3167,12 @@ clCreateImage2D( cl_context context, cl_mem_flags flags,
                size_t image_width, size_t image_height, size_t image_row_pitch,
                void* host_ptr, cl_int* errcode_ret )
 {
-  call_with( context, flags, image_format, image_width, image_height,
+  return call_function( context, flags, image_format, image_width, image_height,
              image_row_pitch, host_ptr, errcode_ret );
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _mem;
 }
 Pluggable_clCreateImage2D::
 Pluggable_clCreateImage2D(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateImage2D(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3031,18 +3185,13 @@ clCreateImage3D( cl_context context, cl_mem_flags flags,
                size_t image_row_pitch, size_t image_slice_pitch,
                void* host_ptr, cl_int* errcode_ret )
 {
-  call_with( context, flags, image_format, image_width, image_height,
+  return call_function( context, flags, image_format, image_width, image_height,
              image_depth, image_row_pitch, image_slice_pitch, host_ptr,
              errcode_ret );
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _mem;
 }
 Pluggable_clCreateImage3D::
-Pluggable_clCreateImage3D(cl_mem mem, cl_int err)
-  :_mem(mem), _err(err)
+Pluggable_clCreateImage3D(function_pointer_t fptr)
+  : Base_clCreateImage3D(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3051,16 +3200,11 @@ Pluggable_clCreateImage3D(cl_mem mem, cl_int err)
 cl_kernel Pluggable_clCreateKernel::
 clCreateKernel(cl_program program, const char* kernel_name, cl_int* errcode_ret)
 {
-  call_with(program, kernel_name, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return this->_kern;
+  return call_function(program, kernel_name, errcode_ret);
 }
 Pluggable_clCreateKernel::
 Pluggable_clCreateKernel(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateKernel(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3070,20 +3214,11 @@ cl_int Pluggable_clCreateKernelsInProgram::
 clCreateKernelsInProgram(cl_program program, cl_uint num_kernels, cl_kernel* kernels,
                          cl_uint* num_kernels_ret)
 {
-  call_with(program, num_kernels, kernels, num_kernels_ret);
-  if(_kernels && kernels && _num_kernels_ret)
-    {
-      std::memcpy(kernels, _kernels, std::min(*_num_kernels_ret, num_kernels) * sizeof(cl_kernel));
-    }
-  if(_num_kernels_ret && num_kernels_ret)
-    {
-      *num_kernels_ret = *_num_kernels_ret;
-    }
-  return _err;
+  return call_function(program, num_kernels, kernels, num_kernels_ret);
 }
 Pluggable_clCreateKernelsInProgram::
 Pluggable_clCreateKernelsInProgram(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateKernelsInProgram(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3094,17 +3229,12 @@ clCreatePipe( cl_context context, cl_mem_flags flags,
               cl_uint pipe_packet_size, cl_uint pipe_max_packets,
               const cl_pipe_properties* properties, cl_int* errcode_ret )
 {
-  call_with( context, flags, pipe_packet_size, pipe_max_packets, properties,
+  return call_function( context, flags, pipe_packet_size, pipe_max_packets, properties,
              errcode_ret );
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _mem;
 }
 Pluggable_clCreatePipe::
 Pluggable_clCreatePipe(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreatePipe(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3119,14 +3249,11 @@ clCreateProgramWithBinary(cl_context context,
                           cl_int* binary_status,
                           cl_int* errcode_ret)
 {
-  call_with(context, num_devices, device_list, lengths, binaries, binary_status, errcode_ret);
-  if(errcode_ret)
-    *errcode_ret = _err;
-  return _program;
+  return call_function(context, num_devices, device_list, lengths, binaries, binary_status, errcode_ret);
 }
 Pluggable_clCreateProgramWithBinary::
 Pluggable_clCreateProgramWithBinary(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateProgramWithBinary(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3139,14 +3266,11 @@ clCreateProgramWithBuiltInKernels(cl_context context,
                                   const char* kernel_names,
                                   cl_int* errcode_ret)
 {
-  call_with(context, num_devices, device_list, kernel_names, errcode_ret);
-  if(errcode_ret)
-    *errcode_ret = _err;
-  return _program;
+  return call_function(context, num_devices, device_list, kernel_names, errcode_ret);
 }
 Pluggable_clCreateProgramWithBuiltInKernels::
 Pluggable_clCreateProgramWithBuiltInKernels(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateProgramWithBuiltInKernels(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3158,14 +3282,11 @@ clCreateProgramWithIL(cl_context context,
                       size_t length,
                       cl_int* errcode_ret)
 {
-  call_with(context, il, length, errcode_ret);
-  if(errcode_ret)
-    *errcode_ret = _err;
-  return _program;
+  return call_function(context, il, length, errcode_ret);
 }
 Pluggable_clCreateProgramWithIL::
 Pluggable_clCreateProgramWithIL(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateProgramWithIL(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3178,14 +3299,11 @@ clCreateProgramWithSource(cl_context context,
                           const size_t* lengths,
                           cl_int* errcode_ret)
 {
-  call_with(context, count, strings, lengths, errcode_ret);
-  if(errcode_ret)
-    *errcode_ret = _err;
-  return _program;
+  return call_function(context, count, strings, lengths, errcode_ret);
 }
 Pluggable_clCreateProgramWithSource::
 Pluggable_clCreateProgramWithSource(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateProgramWithSource(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3196,16 +3314,11 @@ clCreateSampler( cl_context context, cl_bool normalized_coords,
                  cl_addressing_mode addressing_mode, cl_filter_mode filter_mode,
                  cl_int* errcode_ret )
 {
-  call_with(context, normalized_coords, addressing_mode, filter_mode, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _sampler;
+  return call_function(context, normalized_coords, addressing_mode, filter_mode, errcode_ret);
 }
 Pluggable_clCreateSampler::
 Pluggable_clCreateSampler(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateSampler(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3216,16 +3329,11 @@ clCreateSamplerWithProperties( cl_context context,
                                const cl_sampler_properties* sampler_properties,
                                cl_int* errcode_ret )
 {
-  call_with(context, sampler_properties, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _sampler;
+  return call_function(context, sampler_properties, errcode_ret);
 }
 Pluggable_clCreateSamplerWithProperties::
 Pluggable_clCreateSamplerWithProperties(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateSamplerWithProperties(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3236,16 +3344,11 @@ clCreateSubBuffer( cl_mem buffer, cl_mem_flags flags,
                    cl_buffer_create_type buffer_create_type,
                    const void* buffer_create_info, cl_int* errcode_ret )
 {
-  call_with(buffer, flags, buffer_create_type, buffer_create_info, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _mem;
+  return call_function(buffer, flags, buffer_create_type, buffer_create_info, errcode_ret);
 }
 Pluggable_clCreateSubBuffer::
 Pluggable_clCreateSubBuffer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateSubBuffer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3258,20 +3361,11 @@ clCreateSubDevices(cl_device_id in_device,
                    cl_device_id* out_devices,
                    cl_uint* num_devices_ret)
 {
-  call_with(in_device, properties, num_devices, out_devices, num_devices_ret);
-  if(out_devices && _out_devices && _num_devices_ret)
-    {
-      std::memcpy(out_devices, _out_devices, std::min(num_devices, *_num_devices_ret) * sizeof(cl_device_id));
-    }
-  if(num_devices_ret && _num_devices_ret)
-    {
-      *num_devices_ret = *_num_devices_ret;
-    }
-  return _err;
+  return call_function(in_device, properties, num_devices, out_devices, num_devices_ret);
 }
 Pluggable_clCreateSubDevices::
 Pluggable_clCreateSubDevices(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateSubDevices(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3280,16 +3374,11 @@ Pluggable_clCreateSubDevices(function_pointer_t fptr)
 cl_event Pluggable_clCreateUserEvent::
 clCreateUserEvent(cl_context context, cl_int* errcode_ret )
 {
-  call_with(context, errcode_ret);
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _event;
+  return call_function(context, errcode_ret);
 }
 Pluggable_clCreateUserEvent::
 Pluggable_clCreateUserEvent(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clCreateUserEvent(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3298,12 +3387,11 @@ Pluggable_clCreateUserEvent(function_pointer_t fptr)
 cl_int Pluggable_clEnqueueBarrier::
 clEnqueueBarrier( cl_command_queue command_queue )
 {
-  call_with( command_queue );
-  return _err;
+  return call_function( command_queue );
 }
 Pluggable_clEnqueueBarrier::
 Pluggable_clEnqueueBarrier(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueBarrier(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3315,12 +3403,11 @@ clEnqueueBarrierWithWaitList( cl_command_queue command_queue,
                               const cl_event* event_wait_list,
                               cl_event* event )
 {
-  call_with( command_queue, num_events_in_wait_list, event_wait_list, event );
-  return _err;
+  return call_function( command_queue, num_events_in_wait_list, event_wait_list, event );
 }
 Pluggable_clEnqueueBarrierWithWaitList::
-Pluggable_clEnqueueBarrierWithWaitList(cl_int err )
-  : Base_Xxx(), Pluggable_Function(fptr)
+Pluggable_clEnqueueBarrierWithWaitList(function_pointer_t fptr)
+  : Base_clEnqueueBarrierWithWaitList(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3334,17 +3421,12 @@ clEnqueueCopyBuffer( cl_command_queue command_queue,
                      const cl_event* event_wait_list,
                      cl_event* event )
 {
-  call_with( command_queue, src_buffer, dst_buffer, src_offset, dst_offset,
+  return call_function( command_queue, src_buffer, dst_buffer, src_offset, dst_offset,
              size, num_events_in_wait_list, event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueCopyBuffer::
 Pluggable_clEnqueueCopyBuffer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueCopyBuffer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3365,18 +3447,13 @@ clEnqueueCopyBufferRect( cl_command_queue command_queue,
                          const cl_event* event_wait_list,
                          cl_event* event )
 {
-  call_with( command_queue, src_buffer, dst_buffer, src_origin, dst_origin,
+  return call_function( command_queue, src_buffer, dst_buffer, src_origin, dst_origin,
              region, src_row_pitch, src_slice_pitch, dst_row_pitch,
              dst_slice_pitch, num_events_in_wait_list, event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueCopyBufferRect::
 Pluggable_clEnqueueCopyBufferRect(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueCopyBufferRect(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3393,17 +3470,12 @@ clEnqueueCopyBufferToImage( cl_command_queue command_queue,
                             const cl_event* event_wait_list,
                             cl_event* event )
 {
-  call_with( command_queue, src_buffer, dst_image, src_offset, dst_origin,
+  return call_function( command_queue, src_buffer, dst_image, src_offset, dst_origin,
              region, num_events_in_wait_list, event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueCopyBufferToImage::
 Pluggable_clEnqueueCopyBufferToImage(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueCopyBufferToImage(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3417,17 +3489,12 @@ clEnqueueCopyImage( cl_command_queue command_queue, cl_mem src_image,
                     const cl_event* event_wait_list,
                     cl_event* event )
 {
-  call_with( command_queue, src_image, dst_image, src_origin, dst_origin,
+  return call_function( command_queue, src_image, dst_image, src_origin, dst_origin,
              region, num_events_in_wait_list, event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueCopyImage::
 Pluggable_clEnqueueCopyImage(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueCopyImage(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3444,17 +3511,12 @@ clEnqueueCopyImageToBuffer( cl_command_queue command_queue,
                             const cl_event* event_wait_list,
                             cl_event* event )
 {
-  call_with( command_queue, src_image, dst_buffer, src_origin, region,
+  return call_function( command_queue, src_image, dst_buffer, src_origin, region,
              dst_offset, num_events_in_wait_list, event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueCopyImageToBuffer::
 Pluggable_clEnqueueCopyImageToBuffer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueCopyImageToBuffer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3468,13 +3530,12 @@ clEnqueueFillBuffer( cl_command_queue command_queue, cl_mem buffer,
                      const cl_event* event_wait_list,
                      cl_event* event )
 {
-  call_with( command_queue, buffer, pattern, pattern_size, offset, size,
+  return call_function( command_queue, buffer, pattern, pattern_size, offset, size,
              num_events_in_wait_list, event_wait_list, event );
-  return _err;
 }
 Pluggable_clEnqueueFillBuffer::
 Pluggable_clEnqueueFillBuffer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueFillBuffer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3490,13 +3551,12 @@ clEnqueueFillImage( cl_command_queue command_queue,
                     const cl_event* event_wait_list,
                     cl_event* event)
 {
-  call_with( command_queue, image, fill_color, origin, region,
+  return call_function( command_queue, image, fill_color, origin, region,
              num_events_in_wait_list, event_wait_list, event);
-  return _err;
 }
 Pluggable_clEnqueueFillImage::
 Pluggable_clEnqueueFillImage(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueFillImage(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3510,21 +3570,12 @@ clEnqueueMapBuffer( cl_command_queue command_queue, cl_mem buffer,
                     const cl_event* event_wait_list,
                     cl_event* event, cl_int* errcode_ret )
 {
-  call_with( command_queue, buffer, blocking_map, map_flags, offset, size,
+  return call_function( command_queue, buffer, blocking_map, map_flags, offset, size,
              num_events_in_wait_list, event_wait_list, event, errcode_ret );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _result;
 }
 Pluggable_clEnqueueMapBuffer::
 Pluggable_clEnqueueMapBuffer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueMapBuffer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3544,22 +3595,13 @@ clEnqueueMapImage( cl_command_queue command_queue,
                    cl_event* event,
                    cl_int* errcode_ret )
 {
-  call_with( command_queue, image, blocking_map, map_flags, origin, region,
+  return call_function( command_queue, image, blocking_map, map_flags, origin, region,
              image_row_pitch, image_slice_pitch, num_events_in_wait_list,
              event_wait_list, event, errcode_ret );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  if(errcode_ret)
-    {
-      *errcode_ret = _err;
-    }
-  return _result;
 }
 Pluggable_clEnqueueMapImage::
 Pluggable_clEnqueueMapImage(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueMapImage(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3569,12 +3611,11 @@ cl_int Pluggable_clEnqueueMarker::
 clEnqueueMarker( cl_command_queue command_queue,
                  cl_event* event )
 {
-  call_with( command_queue, event );
-  return _err;
+  return call_function( command_queue, event );
 }
 Pluggable_clEnqueueMarker::
 Pluggable_clEnqueueMarker(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueMarker(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3586,12 +3627,11 @@ clEnqueueMarkerWithWaitList( cl_command_queue command_queue,
                              const cl_event* event_wait_list,
                              cl_event* event )
 {
-  call_with( command_queue, num_events_in_wait_list, event_wait_list, event );
-  return _err;
+  return call_function( command_queue, num_events_in_wait_list, event_wait_list, event );
 }
 Pluggable_clEnqueueMarkerWithWaitList::
 Pluggable_clEnqueueMarkerWithWaitList(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueMarkerWithWaitList(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3606,17 +3646,12 @@ clEnqueueMigrateMemObjects( cl_command_queue command_queue,
                             const cl_event* event_wait_list,
                             cl_event* event )
 {
-  call_with( command_queue, num_mem_objects, mem_objects, flags,
+  return call_function( command_queue, num_mem_objects, mem_objects, flags,
              num_events_in_wait_list, event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueMigrateMemObjects::
 Pluggable_clEnqueueMigrateMemObjects(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueMigrateMemObjects(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3634,18 +3669,13 @@ clEnqueueNativeKernel( cl_command_queue command_queue,
                        const cl_event* event_wait_list,
                        cl_event* event )
 {
-  call_with( command_queue, user_func, args, cb_args, num_mem_objects,
+  return call_function( command_queue, user_func, args, cb_args, num_mem_objects,
              mem_list, args_mem_loc, num_events_in_wait_list, event_wait_list,
              event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueNativeKernel::
 Pluggable_clEnqueueNativeKernel(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueNativeKernel(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3662,18 +3692,13 @@ clEnqueueNDRangeKernel( cl_command_queue command_queue,
                         const cl_event* event_wait_list,
                         cl_event* event)
 {
-  call_with(command_queue, kernel, work_dim, global_work_offset,
+  return call_function(command_queue, kernel, work_dim, global_work_offset,
             global_work_size, local_work_size, num_events_in_wait_list,
             event_wait_list, event);
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueNDRangeKernel::
 Pluggable_clEnqueueNDRangeKernel(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueNDRangeKernel(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3687,17 +3712,12 @@ clEnqueueReadBuffer( cl_command_queue command_queue,
                      const cl_event* event_wait_list,
                      cl_event* event)
 {
-  call_with( command_queue, buffer, blocking_read, offset, size, ptr,
+  return call_function( command_queue, buffer, blocking_read, offset, size, ptr,
              num_events_in_wait_list, event_wait_list, event );
-  if(_event && event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueReadBuffer::
 Pluggable_clEnqueueReadBuffer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueReadBuffer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3718,15 +3738,14 @@ clEnqueueReadBufferRect( cl_command_queue command_queue,
                          const cl_event* event_wait_list,
                          cl_event* event )
 {
-  call_with( command_queue, buffer, blocking_read, buffer_origin, host_origin,
+  return call_function( command_queue, buffer, blocking_read, buffer_origin, host_origin,
              region, buffer_row_pitch, buffer_splice_pitch, host_row_pitch,
              host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
              event);
-  return _err;
 }
 Pluggable_clEnqueueReadBufferRect::
 Pluggable_clEnqueueReadBufferRect(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueReadBufferRect(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3745,18 +3764,13 @@ clEnqueueReadImage( cl_command_queue command_queue,
                     const cl_event* event_wait_list,
                     cl_event* event )
 {
-  call_with( command_queue, image, blocking_read, origin, region, row_pitch,
+  return call_function( command_queue, image, blocking_read, origin, region, row_pitch,
              slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
              event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueReadImage::
 Pluggable_clEnqueueReadImage(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueReadImage(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3772,13 +3786,12 @@ clEnqueueSVMFree(cl_command_queue command_queue,
                  void* user_data, cl_uint num_events_in_wait_list,
                  const cl_event* event_wait_list, cl_event* event)
 {
-  call_with(command_queue, num_svm_pointers, svm_pointers, pfn_free_func,
+  return call_function(command_queue, num_svm_pointers, svm_pointers, pfn_free_func,
             user_data, num_events_in_wait_list, event_wait_list, event);
-  return _err;
 }
 Pluggable_clEnqueueSVMFree::
 Pluggable_clEnqueueSVMFree(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueSVMFree(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3790,13 +3803,12 @@ clEnqueueSVMMap(cl_command_queue command_queue, cl_bool blocking_map,
                 cl_uint num_events_in_wait_list,
                 const cl_event* event_wait_list, cl_event* event )
 {
-  call_with(command_queue, blocking_map, map_flags, svm_ptr, size,
+  return call_function(command_queue, blocking_map, map_flags, svm_ptr, size,
             num_events_in_wait_list, event_wait_list, event);
-  return _err;
 }
 Pluggable_clEnqueueSVMMap::
 Pluggable_clEnqueueSVMMap(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueSVMMap(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3808,13 +3820,12 @@ clEnqueueSVMMemFill(cl_command_queue command_queue, void* svm_ptr,
                     cl_uint num_events_in_wait_list, const cl_event* event_wait_list,
                     cl_event* event)
 {
-  call_with(command_queue, svm_ptr, pattern, pattern_size, size,
+  return call_function(command_queue, svm_ptr, pattern, pattern_size, size,
             num_events_in_wait_list, event_wait_list, event);
-  return _err;
 }
 Pluggable_clEnqueueSVMMemFill::
 Pluggable_clEnqueueSVMMemFill(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueSVMMemFill(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3826,13 +3837,12 @@ clEnqueueSVMMemcpy(cl_command_queue command_queue, cl_bool blocking_copy,
                     cl_uint num_events_in_wait_list, const cl_event* event_wait_list,
                     cl_event* event)
 {
-  call_with(command_queue, blocking_copy, dst_ptr, src_ptr, size,
+  return call_function(command_queue, blocking_copy, dst_ptr, src_ptr, size,
             num_events_in_wait_list, event_wait_list, event);
-  return _err;
 }
 Pluggable_clEnqueueSVMMemcpy::
 Pluggable_clEnqueueSVMMemcpy(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueSVMMemcpy(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3847,13 +3857,12 @@ clEnqueueSVMMigrateMem(cl_command_queue command_queue,
                        const cl_event* event_wait_list,
                        cl_event* event)
 {
-  call_with(command_queue, num_svm_pointers, svm_pointers, sizes, flags,
+  return call_function(command_queue, num_svm_pointers, svm_pointers, sizes, flags,
             num_events_in_wait_list, event_wait_list, event);
-  return _err;
 }
 Pluggable_clEnqueueSVMMigrateMem::
 Pluggable_clEnqueueSVMMigrateMem(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueSVMMigrateMem(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3864,13 +3873,12 @@ clEnqueueSVMUnmap(cl_command_queue command_queue, void* svm_ptr,
                   cl_uint num_events_in_wait_list,
                   const cl_event* event_wait_list, cl_event* event )
 {
-  call_with(command_queue, svm_ptr, num_events_in_wait_list, event_wait_list,
+  return call_function(command_queue, svm_ptr, num_events_in_wait_list, event_wait_list,
             event);
-  return _err;
 }
 Pluggable_clEnqueueSVMUnmap::
 Pluggable_clEnqueueSVMUnmap(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueSVMUnmap(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3883,13 +3891,12 @@ clEnqueueTask( cl_command_queue command_queue,
                const cl_event* event_wait_list,
                cl_event* event )
 {
-  call_with( command_queue, kernel, num_events_in_wait_list,
+  return call_function( command_queue, kernel, num_events_in_wait_list,
              event_wait_list, event );
-  return _err;
 }
 Pluggable_clEnqueueTask::
 Pluggable_clEnqueueTask(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueTask(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3903,17 +3910,12 @@ clEnqueueUnmapMemObject( cl_command_queue command_queue,
                          const cl_event* event_wait_list,
                          cl_event* event )
 {
-  call_with( command_queue, memobj, mapped_ptr, num_events_in_wait_list,
+  return call_function( command_queue, memobj, mapped_ptr, num_events_in_wait_list,
              event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueUnmapMemObject::
 Pluggable_clEnqueueUnmapMemObject(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueUnmapMemObject(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3924,12 +3926,11 @@ clEnqueueWaitForEvents( cl_command_queue command_queue,
                         cl_uint num_events,
                         const cl_event* event_list )
 {
-  call_with( command_queue, num_events, event_list );
-  return _err;
+  return call_function( command_queue, num_events, event_list );
 }
 Pluggable_clEnqueueWaitForEvents::
 Pluggable_clEnqueueWaitForEvents(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueWaitForEvents(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3943,17 +3944,12 @@ clEnqueueWriteBuffer( cl_command_queue command_queue,
                       const cl_event* event_wait_list,
                       cl_event* event )
 {
-  call_with( command_queue, buffer, blocking_write, offset, size, ptr,
+  return call_function( command_queue, buffer, blocking_write, offset, size, ptr,
              num_events_in_wait_list, event_wait_list, event );
-  if(_event && event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueWriteBuffer::
 Pluggable_clEnqueueWriteBuffer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueWriteBuffer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -3974,15 +3970,14 @@ clEnqueueWriteBufferRect( cl_command_queue command_queue,
                              const cl_event* event_wait_list,
                              cl_event* event )
 {
-  call_with( command_queue, buffer, blocking_read, buffer_origin, host_origin,
+  return call_function( command_queue, buffer, blocking_read, buffer_origin, host_origin,
              region, buffer_row_pitch, buffer_splice_pitch, host_row_pitch,
              host_slice_pitch, ptr, num_events_in_wait_list, event_wait_list,
              event);
-  return _err;
 }
 Pluggable_clEnqueueWriteBufferRect::
 Pluggable_clEnqueueWriteBufferRect(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueWriteBufferRect(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4001,18 +3996,13 @@ clEnqueueWriteImage( cl_command_queue command_queue,
                     const cl_event* event_wait_list,
                     cl_event* event )
 {
-  call_with( command_queue, image, blocking_read, origin, region,
+  return call_function( command_queue, image, blocking_read, origin, region,
              input_row_pitch, input_slice_pitch, ptr, num_events_in_wait_list,
              event_wait_list, event );
-  if(event && _event)
-    {
-      *event = *_event;
-    }
-  return _err;
 }
 Pluggable_clEnqueueWriteImage::
 Pluggable_clEnqueueWriteImage(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clEnqueueWriteImage(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4021,12 +4011,11 @@ Pluggable_clEnqueueWriteImage(function_pointer_t fptr)
 cl_int Pluggable_clFinish::
 clFinish(cl_command_queue command_queue)
 {
-  call_with(command_queue);
-  return _err;
+  return call_function(command_queue);
 }
 Pluggable_clFinish::
 Pluggable_clFinish(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clFinish(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4035,12 +4024,11 @@ Pluggable_clFinish(function_pointer_t fptr)
 cl_int Pluggable_clFlush::
 clFlush(cl_command_queue command_queue)
 {
-  call_with(command_queue);
-  return _err;
+  return call_function(command_queue);
 }
 Pluggable_clFlush::
 Pluggable_clFlush(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clFlush(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4051,20 +4039,11 @@ clGetCommandQueueInfo(cl_command_queue command_queue, cl_command_queue_info para
                  size_t param_value_size, void* param_value,
                  size_t* param_value_size_ret)
 {
-  call_with(command_queue, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(command_queue, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetCommandQueueInfo::
 Pluggable_clGetCommandQueueInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetCommandQueueInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4075,20 +4054,11 @@ clGetContextInfo(cl_context context, cl_context_info param_name,
                  size_t param_value_size, void* param_value,
                  size_t* param_value_size_ret)
 {
-  call_with(context, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(context, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetContextInfo::
 Pluggable_clGetContextInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetContextInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4098,12 +4068,11 @@ cl_int Pluggable_clGetDeviceAndHostTimer::
 clGetDeviceAndHostTimer(cl_device_id device, cl_ulong* device_timestamp,
                         cl_ulong* host_timestamp)
 {
-  call_with(device, device_timestamp, host_timestamp);
-  return _err;
+  return call_function(device, device_timestamp, host_timestamp);
 }
 Pluggable_clGetDeviceAndHostTimer::
 Pluggable_clGetDeviceAndHostTimer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetDeviceAndHostTimer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4114,20 +4083,11 @@ clGetDeviceIDs(cl_platform_id platform, cl_device_type device_type,
                cl_uint num_entries, cl_device_id* devices,
                cl_uint* num_devices)
 {
-  call_with(platform, device_type, num_entries, devices, num_devices);
-  if(devices && _devices && _num_devices)
-    {
-      std::memcpy(devices, _devices, std::min(num_entries, *_num_devices)*sizeof(cl_device_id));
-    }
-  if(num_devices && _num_devices)
-    {
-      *num_devices = *_num_devices;
-    }
-  return _err;
+  return call_function(platform, device_type, num_entries, devices, num_devices);
 }
 Pluggable_clGetDeviceIDs::
 Pluggable_clGetDeviceIDs(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetDeviceIDs(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4138,21 +4098,12 @@ clGetDeviceInfo(cl_device_id device, cl_device_info param_name,
                 size_t param_value_size, void* param_value,
                 size_t* param_value_size_ret)
 {
-  call_with(device, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(device, param_name, param_value_size, param_value, param_value_size_ret);
 }
 
 Pluggable_clGetDeviceInfo::
 Pluggable_clGetDeviceInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetDeviceInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4163,20 +4114,11 @@ clGetEventInfo(cl_event event, cl_event_info param_name,
                 size_t param_value_size, void* param_value,
                 size_t* param_value_size_ret)
 {
-  call_with(event, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(event, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetEventInfo::
 Pluggable_clGetEventInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetEventInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4187,20 +4129,11 @@ clGetEventProfilingInfo(cl_event event, cl_profiling_info param_name,
                 size_t param_value_size, void* param_value,
                 size_t* param_value_size_ret)
 {
-  call_with(event, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(event, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetEventProfilingInfo::
 Pluggable_clGetEventProfilingInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetEventProfilingInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4209,12 +4142,11 @@ Pluggable_clGetEventProfilingInfo(function_pointer_t fptr)
 void* Pluggable_clGetExtensionFunctionAddress::
 clGetExtensionFunctionAddress(const char* funcname)
 {
-  call_with(funcname);
-  return _ptr;
+  return call_function(funcname);
 }
 Pluggable_clGetExtensionFunctionAddress::
 Pluggable_clGetExtensionFunctionAddress(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetExtensionFunctionAddress(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4223,12 +4155,11 @@ Pluggable_clGetExtensionFunctionAddress(function_pointer_t fptr)
 void* Pluggable_clGetExtensionFunctionAddressForPlatform::
 clGetExtensionFunctionAddressForPlatform(cl_platform_id platform, const char* funcname)
 {
-  call_with(platform, funcname);
-  return _ptr;
+  return call_function(platform, funcname);
 }
 Pluggable_clGetExtensionFunctionAddressForPlatform::
 Pluggable_clGetExtensionFunctionAddressForPlatform(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetExtensionFunctionAddressForPlatform(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4237,12 +4168,11 @@ Pluggable_clGetExtensionFunctionAddressForPlatform(function_pointer_t fptr)
 cl_int Pluggable_clGetHostTimer::
 clGetHostTimer(cl_device_id device, cl_ulong* host_timestamp)
 {
-  call_with(device, host_timestamp);
-  return _err;
+  return call_function(device, host_timestamp);
 }
 Pluggable_clGetHostTimer::
 Pluggable_clGetHostTimer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetHostTimer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4253,20 +4183,11 @@ clGetImageInfo(cl_mem image, cl_image_info param_name,
                size_t param_value_size, void* param_value,
                size_t* param_value_size_ret)
 {
-  call_with(image, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(image, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetImageInfo::
 Pluggable_clGetImageInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetImageInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4277,20 +4198,11 @@ clGetKernelArgInfo(cl_kernel kernel, cl_uint arg_index, cl_kernel_arg_info param
                    size_t param_value_size, void* param_value,
                    size_t* param_value_size_ret)
 {
-  call_with(kernel, arg_index, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(kernel, arg_index, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetKernelArgInfo::
 Pluggable_clGetKernelArgInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetKernelArgInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4301,20 +4213,11 @@ clGetKernelInfo(cl_kernel kernel, cl_kernel_info param_name,
                 size_t param_value_size, void* param_value,
                 size_t* param_value_size_ret)
 {
-  call_with(kernel, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(kernel, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetKernelInfo::
 Pluggable_clGetKernelInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetKernelInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4325,20 +4228,11 @@ clGetKernelWorkGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_g
                          size_t param_value_size, void* param_value,
                          size_t* param_value_size_ret)
 {
-  call_with(kernel, device, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(kernel, device, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetKernelWorkGroupInfo::
 Pluggable_clGetKernelWorkGroupInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetKernelWorkGroupInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4350,12 +4244,11 @@ clGetKernelSubGroupInfo(cl_kernel kernel, cl_device_id device, cl_kernel_work_gr
                          size_t param_value_size, void* param_value,
                          size_t* param_value_size_ret)
 {
-  call_with(kernel, device, param_name, input_value_size, input_value, param_value_size, param_value, param_value_size_ret);
-  return _err;
+  return call_function(kernel, device, param_name, input_value_size, input_value, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetKernelSubGroupInfo::
 Pluggable_clGetKernelSubGroupInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetKernelSubGroupInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4366,20 +4259,11 @@ clGetMemObjectInfo(cl_mem memobj, cl_mem_info param_name,
                    size_t param_value_size, void* param_value,
                    size_t* param_value_size_ret)
 {
-  call_with(memobj, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(memobj, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetMemObjectInfo::
 Pluggable_clGetMemObjectInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetMemObjectInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4390,12 +4274,11 @@ clGetPipeInfo(cl_mem pipe, cl_pipe_info param_name,
               size_t param_value_size, void* param_value,
               size_t* param_value_size_ret)
 {
-  call_with(pipe, param_name, param_value_size, param_value, param_value_size_ret);
-  return _err;
+  return call_function(pipe, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetPipeInfo::
 Pluggable_clGetPipeInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetPipeInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4405,20 +4288,11 @@ cl_int Pluggable_clGetPlatformIDs::
 clGetPlatformIDs(cl_uint num_entries, cl_platform_id* platforms,
                  cl_uint* num_platforms)
 {
-  call_with(num_entries, platforms, num_platforms);
-  if(platforms && _platforms && _num_platforms)
-    {
-      std::memcpy(platforms, _platforms, std::min(num_entries, *_num_platforms)*sizeof(cl_platform_id));
-    }
-  if(num_platforms && _num_platforms)
-    {
-      *num_platforms = *_num_platforms;
-    }
-  return _err;
+  return call_function(num_entries, platforms, num_platforms);
 }
 Pluggable_clGetPlatformIDs::
 Pluggable_clGetPlatformIDs(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetPlatformIDs(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4429,20 +4303,11 @@ clGetPlatformInfo(cl_platform_id platform, cl_platform_info param_name,
                   size_t param_value_size, void* param_value,
                   size_t* param_value_size_ret)
 {
-  call_with(platform, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(platform, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetPlatformInfo::
 Pluggable_clGetPlatformInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetPlatformInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4453,20 +4318,11 @@ clGetProgramBuildInfo(cl_program program, cl_device_id device,
                       cl_program_build_info param_name, size_t param_value_size,
                       void* param_value, size_t* param_value_size_ret)
 {
-  call_with(program, device, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(program, device, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetProgramBuildInfo::
 Pluggable_clGetProgramBuildInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetProgramBuildInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4477,20 +4333,11 @@ clGetProgramInfo(cl_program program, cl_program_info param_name,
                 size_t param_value_size, void* param_value,
                 size_t* param_value_size_ret)
 {
-  call_with(program, param_name, param_value_size, param_value, param_value_size_ret);
-  if(param_value && _param_value && _param_value_size_ret)
-    {
-      std::memcpy(param_value, _param_value, std::min(*_param_value_size_ret, param_value_size));
-    }
-  if(_param_value_size_ret && param_value_size_ret)
-    {
-      *param_value_size_ret = *_param_value_size_ret;
-    }
-  return _err;
+  return call_function(program, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetProgramInfo::
 Pluggable_clGetProgramInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetProgramInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4501,12 +4348,11 @@ clGetSamplerInfo(cl_sampler sampler, cl_sampler_info param_name,
                  size_t param_value_size, void* param_value,
                  size_t* param_value_size_ret)
 {
-  call_with(sampler, param_name, param_value_size, param_value, param_value_size_ret);
-  return _err;
+  return call_function(sampler, param_name, param_value_size, param_value, param_value_size_ret);
 }
 Pluggable_clGetSamplerInfo::
 Pluggable_clGetSamplerInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetSamplerInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4519,20 +4365,11 @@ clGetSupportedImageFormats( cl_context context, cl_mem_flags flags,
                             cl_image_format* image_formats,
                             cl_uint* num_image_formats)
 {
-  call_with( context, flags, image_type, num_entries, image_formats, num_image_formats);
-  if(num_image_formats && _num_image_formats)
-    {
-      *num_image_formats = std::min(*_num_image_formats, num_entries);
-    }
-  if(image_formats && _image_formats && _num_image_formats)
-    {
-      std::memcpy(image_formats, _image_formats, std::min(num_entries, *_num_image_formats) * sizeof(cl_image_format));
-    }
-  return _err;
+  return call_function( context, flags, image_type, num_entries, image_formats, num_image_formats);
 }
 Pluggable_clGetSupportedImageFormats::
 Pluggable_clGetSupportedImageFormats(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clGetSupportedImageFormats(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4549,15 +4386,12 @@ clLinkProgram(cl_context context,
               void* user_data,
               cl_int* errcode_ret)
 {
-  call_with(context, num_devices, device_list, options, num_input_programs,
+  return call_function(context, num_devices, device_list, options, num_input_programs,
             input_programs, pfn_notify, user_data, errcode_ret);
-  if(errcode_ret)
-    *errcode_ret = _err;
-  return _program;
 }
 Pluggable_clLinkProgram::
 Pluggable_clLinkProgram(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clLinkProgram(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4566,12 +4400,11 @@ Pluggable_clLinkProgram(function_pointer_t fptr)
 cl_int Pluggable_clReleaseCommandQueue::
 clReleaseCommandQueue(cl_command_queue command_queue)
 {
-  call_with(command_queue);
-  return _err;
+  return call_function(command_queue);
 }
 Pluggable_clReleaseCommandQueue::
 Pluggable_clReleaseCommandQueue(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseCommandQueue(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4580,12 +4413,11 @@ Pluggable_clReleaseCommandQueue(function_pointer_t fptr)
 cl_int Pluggable_clReleaseContext::
 clReleaseContext(cl_context context)
 {
-  call_with(context);
-  return _err;
+  return call_function(context);
 }
 Pluggable_clReleaseContext::
 Pluggable_clReleaseContext(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseContext(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4594,12 +4426,11 @@ Pluggable_clReleaseContext(function_pointer_t fptr)
 cl_int Pluggable_clReleaseDevice::
 clReleaseDevice(cl_device_id device)
 {
-  call_with(device);
-  return _err;
+  return call_function(device);
 }
 Pluggable_clReleaseDevice::
 Pluggable_clReleaseDevice(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseDevice(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4608,12 +4439,11 @@ Pluggable_clReleaseDevice(function_pointer_t fptr)
 cl_int Pluggable_clReleaseEvent::
 clReleaseEvent(cl_event event)
 {
-  call_with(event);
-  return _err;
+  return call_function(event);
 }
 Pluggable_clReleaseEvent::
 Pluggable_clReleaseEvent(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseEvent(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4622,12 +4452,11 @@ Pluggable_clReleaseEvent(function_pointer_t fptr)
 cl_int Pluggable_clReleaseKernel::
 clReleaseKernel(cl_kernel kernel)
 {
-  call_with(kernel);
-  return _err;
+  return call_function(kernel);
 }
 Pluggable_clReleaseKernel::
 Pluggable_clReleaseKernel(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseKernel(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4636,12 +4465,11 @@ Pluggable_clReleaseKernel(function_pointer_t fptr)
 cl_int Pluggable_clReleaseMemObject::
 clReleaseMemObject(cl_mem memobj)
 {
-  call_with(memobj);
-  return _err;
+  return call_function(memobj);
 }
 Pluggable_clReleaseMemObject::
 Pluggable_clReleaseMemObject(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseMemObject(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4650,12 +4478,11 @@ Pluggable_clReleaseMemObject(function_pointer_t fptr)
 cl_int Pluggable_clReleaseProgram::
 clReleaseProgram(cl_program program)
 {
-  call_with(program);
-  return _err;
+  return call_function(program);
 }
 Pluggable_clReleaseProgram::
 Pluggable_clReleaseProgram(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseProgram(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4664,12 +4491,11 @@ Pluggable_clReleaseProgram(function_pointer_t fptr)
 cl_int Pluggable_clReleaseSampler::
 clReleaseSampler(cl_sampler sampler)
 {
-  call_with(sampler);
-  return _err;
+  return call_function(sampler);
 }
 Pluggable_clReleaseSampler::
 Pluggable_clReleaseSampler(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clReleaseSampler(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4678,12 +4504,11 @@ Pluggable_clReleaseSampler(function_pointer_t fptr)
 cl_int Pluggable_clRetainCommandQueue::
 clRetainCommandQueue(cl_command_queue command_queue)
 {
-  call_with(command_queue);
-  return _err;
+  return call_function(command_queue);
 }
 Pluggable_clRetainCommandQueue::
 Pluggable_clRetainCommandQueue(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainCommandQueue(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4692,12 +4517,11 @@ Pluggable_clRetainCommandQueue(function_pointer_t fptr)
 cl_int Pluggable_clRetainContext::
 clRetainContext(cl_context context)
 {
-  call_with(context);
-  return _err;
+  return call_function(context);
 }
 Pluggable_clRetainContext::
 Pluggable_clRetainContext(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainContext(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4706,12 +4530,11 @@ Pluggable_clRetainContext(function_pointer_t fptr)
 cl_int Pluggable_clRetainDevice::
 clRetainDevice(cl_device_id device)
 {
-  call_with(device);
-  return _err;
+  return call_function(device);
 }
 Pluggable_clRetainDevice::
 Pluggable_clRetainDevice(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainDevice(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4720,12 +4543,11 @@ Pluggable_clRetainDevice(function_pointer_t fptr)
 cl_int Pluggable_clRetainEvent::
 clRetainEvent(cl_event event)
 {
-  call_with(event);
-  return _err;
+  return call_function(event);
 }
 Pluggable_clRetainEvent::
 Pluggable_clRetainEvent(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainEvent(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4734,12 +4556,11 @@ Pluggable_clRetainEvent(function_pointer_t fptr)
 cl_int Pluggable_clRetainKernel::
 clRetainKernel(cl_kernel kernel)
 {
-  call_with(kernel);
-  return _err;
+  return call_function(kernel);
 }
 Pluggable_clRetainKernel::
 Pluggable_clRetainKernel(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainKernel(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4748,12 +4569,11 @@ Pluggable_clRetainKernel(function_pointer_t fptr)
 cl_int Pluggable_clRetainMemObject::
 clRetainMemObject(cl_mem memobj)
 {
-  call_with(memobj);
-  return _err;
+  return call_function(memobj);
 }
 Pluggable_clRetainMemObject::
 Pluggable_clRetainMemObject(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainMemObject(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4762,12 +4582,11 @@ Pluggable_clRetainMemObject(function_pointer_t fptr)
 cl_int Pluggable_clRetainProgram::
 clRetainProgram(cl_program program)
 {
-  call_with(program);
-  return _err;
+  return call_function(program);
 }
 Pluggable_clRetainProgram::
 Pluggable_clRetainProgram(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainProgram(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4776,12 +4595,11 @@ Pluggable_clRetainProgram(function_pointer_t fptr)
 cl_int Pluggable_clRetainSampler::
 clRetainSampler(cl_sampler sampler)
 {
-  call_with(sampler);
-  return _err;
+  return call_function(sampler);
 }
 Pluggable_clRetainSampler::
 Pluggable_clRetainSampler(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clRetainSampler(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4793,12 +4611,11 @@ clSetCommandQueueProperty(cl_command_queue command_queue,
                           cl_bool enable,
                           cl_command_queue_properties* old_properties)
 {
-  call_with(command_queue, properties, enable, old_properties);
-  return _err;
+  return call_function(command_queue, properties, enable, old_properties);
 }
 Pluggable_clSetCommandQueueProperty::
 Pluggable_clSetCommandQueueProperty(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetCommandQueueProperty(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4808,12 +4625,11 @@ cl_int Pluggable_clSetDefaultDeviceCommandQueue::
 clSetDefaultDeviceCommandQueue(cl_context context, cl_device_id device,
                                cl_command_queue command_queue)
 {
-  call_with(context, device, command_queue);
-  return _err;
+  return call_function(context, device, command_queue);
 }
 Pluggable_clSetDefaultDeviceCommandQueue::
 Pluggable_clSetDefaultDeviceCommandQueue(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetDefaultDeviceCommandQueue(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4824,12 +4640,11 @@ clSetEventCallback(cl_event event, cl_int command_exec_callback_type,
                    void(CL_CALLBACK *pfn_event_notify)(cl_event, cl_int, void*),
                    void* user_data)
 {
-  call_with(event, command_exec_callback_type, pfn_event_notify, user_data);
-  return _err;
+  return call_function(event, command_exec_callback_type, pfn_event_notify, user_data);
 }
 Pluggable_clSetEventCallback::
 Pluggable_clSetEventCallback(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetEventCallback(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4838,12 +4653,11 @@ Pluggable_clSetEventCallback(function_pointer_t fptr)
 cl_int Pluggable_clSetKernelArg::
 clSetKernelArg(cl_kernel kernel, cl_uint arg_index, size_t arg_size, const void* arg_value)
 {
-  call_with(kernel, arg_index, arg_size, arg_value);
-  return _err;
+  return call_function(kernel, arg_index, arg_size, arg_value);
 }
 Pluggable_clSetKernelArg::
 Pluggable_clSetKernelArg(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetKernelArg(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4852,12 +4666,11 @@ Pluggable_clSetKernelArg(function_pointer_t fptr)
 cl_int Pluggable_clSetKernelArgSVMPointer::
 clSetKernelArgSVMPointer(cl_kernel kernel, cl_uint arg_index, const void* arg_value)
 {
-  call_with(kernel, arg_index, arg_value);
-  return _err;
+  return call_function(kernel, arg_index, arg_value);
 }
 Pluggable_clSetKernelArgSVMPointer::
 Pluggable_clSetKernelArgSVMPointer(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetKernelArgSVMPointer(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4866,12 +4679,11 @@ Pluggable_clSetKernelArgSVMPointer(function_pointer_t fptr)
 cl_int Pluggable_clSetKernelExecInfo::
 clSetKernelExecInfo(cl_kernel kernel, cl_kernel_info param_name, size_t param_value_size, const void* param_value)
 {
-  call_with(kernel, param_name, param_value_size, param_value);
-  return _err;
+  return call_function(kernel, param_name, param_value_size, param_value);
 }
 Pluggable_clSetKernelExecInfo::
 Pluggable_clSetKernelExecInfo(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetKernelExecInfo(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4882,12 +4694,11 @@ clSetMemObjectDestructorCallback(cl_mem memobj,
                                  void(CL_CALLBACK* pfn_notify)(cl_mem, void*),
                                  void* user_data)
 {
-  call_with(memobj, pfn_notify, user_data);
-  return _err;
+  return call_function(memobj, pfn_notify, user_data);
 }
 Pluggable_clSetMemObjectDestructorCallback::
 Pluggable_clSetMemObjectDestructorCallback(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetMemObjectDestructorCallback(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4896,12 +4707,11 @@ Pluggable_clSetMemObjectDestructorCallback(function_pointer_t fptr)
 cl_int Pluggable_clSetUserEventStatus::
 clSetUserEventStatus( cl_event event , cl_int execution_status )
 {
-  call_with(event, execution_status);
-  return _err;
+  return call_function(event, execution_status);
 }
 Pluggable_clSetUserEventStatus::
 Pluggable_clSetUserEventStatus(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSetUserEventStatus(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4910,12 +4720,11 @@ Pluggable_clSetUserEventStatus(function_pointer_t fptr)
 void* Pluggable_clSVMAlloc::
 clSVMAlloc(cl_context context, cl_svm_mem_flags flags, size_t size, cl_uint alignment)
 {
-  call_with(context, flags, size, alignment);
-  return _ptr;
+  return call_function(context, flags, size, alignment);
 }
 Pluggable_clSVMAlloc::
 Pluggable_clSVMAlloc(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSVMAlloc(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4924,11 +4733,11 @@ Pluggable_clSVMAlloc(function_pointer_t fptr)
 void Pluggable_clSVMFree::
 clSVMFree(cl_context context, void* svm_pointer)
 {
-  call_with(context, svm_pointer);
+  return call_function(context, svm_pointer);
 }
 Pluggable_clSVMFree::
 Pluggable_clSVMFree(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clSVMFree(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4937,12 +4746,11 @@ Pluggable_clSVMFree(function_pointer_t fptr)
 cl_int Pluggable_clUnloadCompiler::
 clUnloadCompiler()
 {
-  call_with();
-  return _err;
+  return call_function();
 }
 Pluggable_clUnloadCompiler::
 Pluggable_clUnloadCompiler(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clUnloadCompiler(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4951,12 +4759,11 @@ Pluggable_clUnloadCompiler(function_pointer_t fptr)
 cl_int Pluggable_clUnloadPlatformCompiler::
 clUnloadPlatformCompiler(cl_platform_id platform)
 {
-  call_with(platform);
-  return _err;
+  return call_function(platform);
 }
 Pluggable_clUnloadPlatformCompiler::
 Pluggable_clUnloadPlatformCompiler(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clUnloadPlatformCompiler(), Pluggable_Function(fptr)
 {
 }
 #endif
@@ -4965,17 +4772,15 @@ Pluggable_clUnloadPlatformCompiler(function_pointer_t fptr)
 cl_int Pluggable_clWaitForEvents::
 clWaitForEvents(cl_uint num_events, const cl_event* event_list)
 {
-  call_with(num_events, event_list);
-  return _err;
+  return call_function(num_events, event_list);
 }
 Pluggable_clWaitForEvents::
 Pluggable_clWaitForEvents(function_pointer_t fptr)
-  : Base_Xxx(), Pluggable_Function(fptr)
+  : Base_clWaitForEvents(), Pluggable_Function(fptr)
 {
 }
 #endif
 /* ------------------------------------------------------------------------- */
-#endif // #if 0
 } // end namespace T
 #endif /* CXXTEST_MOCK_TEST_SOURCE_FILE */
 

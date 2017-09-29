@@ -10,7 +10,7 @@
 #ifndef CLXX_C4N_COMPILER_CONFIG_HPP_INCLUDED
 #define CLXX_C4N_COMPILER_CONFIG_HPP_INCLUDED
 
-#include <clxx/config.h>
+#include <clxx/c4n/config_params.hpp>
 #include <clxx/c4n/compiler_config.hpp>
 
 #if defined(_WIN32)

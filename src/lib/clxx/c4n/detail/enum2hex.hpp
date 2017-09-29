@@ -10,7 +10,7 @@
 #ifndef CLXX_C4N_DETAIL_ENUM2HEX_HPP_INCLUDED
 #define CLXX_C4N_DETAIL_ENUM2HEX_HPP_INCLUDED
 
-#include <clxx/config.h>
+#include <clxx/c4n/config.hpp>
 
 #include <string>
 #include <type_traits>
@@ -171,7 +171,7 @@ std::string enum2hex(E x)
     {
       detail::enum_hex_fmt<T>::apply(fmt);
     }
-#if CLXX_NO_STD_SNPRINTF
+#if CLXX_C4N_NO_STD_SNPRINTF
   std::sprintf(buf, fmt, t);
 #else
   std::snprintf(buf, buf_size, fmt, t);

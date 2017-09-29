@@ -10,8 +10,6 @@
 #ifndef CLXX_C4N_COMPILER_CONFIG_HPP_INCLUDED
 #define CLXX_C4N_COMPILER_CONFIG_HPP_INCLUDED
 
-#include <clxx/config.h>
-
 #if defined(__clang__)
 # define CLXX_DIAGNOSTIC_PUSH _Pragma("clang diagnostic push")
 # define CLXX_DIAGNOSTIC_POP _Pragma("clang diagnostic pop")

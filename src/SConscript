@@ -35,13 +35,22 @@ if shall_configure(env):
     SConscript('SConscript.conf_doxyfile',  exports = ['conf'])
     SConscript('SConscript.conf_install',   exports = ['conf'])
     env = conf.Finish()
-    # new approach...
+
+    # new approach: per-library config
+    conf = env.Configure(conf_dir = '.sconf_temp_clxx_c4n',
+                         log_file = 'config_clxx_c4n.log',
+                         config_h = 'lib/clxx/c4n/config_params.hpp')
+    SConscript('SConscript.conf_init',      exports = ['conf'])
+    SConscript('SConscript.conf_clxx_c4n',  exports = ['conf'])
+    env = conf.Finish()
+
     conf = env.Configure(conf_dir = '.sconf_temp_clxx_b5d',
                          log_file = 'config_clxx_b5d.log',
                          config_h = 'lib/clxx/b5d/config_params.hpp')
     SConscript('SConscript.conf_init',      exports = ['conf'])
     SConscript('SConscript.conf_clxx_b5d',  exports = ['conf'])
     env = conf.Finish()
+
 
 if shall_recurse(env):
     SConscript('lib/SConscript', exports = ['env'])

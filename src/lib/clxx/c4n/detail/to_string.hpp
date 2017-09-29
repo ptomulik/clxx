@@ -13,11 +13,11 @@
 #ifndef CLXX_C4N_DETAIL_TO_STRING_HPP_INCLUDED
 #define CLXX_C4N_DETAIL_TO_STRING_HPP_INCLUDED
 
-#include <clxx/config.h>
+#include <clxx/c4n/config.hpp>
 #include <clxx/c4n/detail/enum2hex.hpp>
 #include <string>
 #include <type_traits>
-#if CLXX_NO_STD_TO_STRING
+#if CLXX_C4N_NO_STD_TO_STRING
 # include <limits>
 #endif
 
@@ -33,7 +33,7 @@ to_string_impl(T val, const char* fmt)
 } } // end namespace clxx::detail
 
 namespace clxx {
-#if CLXX_NO_STD_TO_STRING
+#if CLXX_C4N_NO_STD_TO_STRING
 /** // doc: to_string(int) {{{
  * \todo Write documentation
  */ // }}}

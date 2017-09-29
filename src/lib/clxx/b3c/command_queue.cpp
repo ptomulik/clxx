@@ -32,7 +32,7 @@ command_queue(context const& ctx, device const& dev, command_queue_properties_t 
                                                   dev.chk_get(),
                                                   props_array );
   this->_set_handle(handle, false, false);
-#elif CLXX_B5D_PROVIDES(create_comman_queue)
+#elif CLXX_B5D_PROVIDES(create_command_queue)
   cl_command_queue handle = create_command_queue( ctx.chk_get(),
                                                   dev.chk_get(),
                                                   props );
