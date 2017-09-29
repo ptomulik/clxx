@@ -36,7 +36,7 @@ public:
   void test__create_kernels_in_program( )
   {
 #if CLXX_B5D_PROVIDES(create_kernels_in_program)
-    T::Dummy_clCreateKernelsInProgram mock(CL_SUCCESS, nullptr, nullptr);
+    T::Dummy_clCreateKernelsInProgram mock(CL_SUCCESS);
     TS_ASSERT_THROWS_NOTHING(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr));
     TS_ASSERT(mock.called_once_with((cl_program)NULL,0,nullptr,nullptr));
 #else
@@ -49,7 +49,7 @@ public:
   void test__create_kernels_in_program__invalid_program( )
   {
 #if CLXX_B5D_PROVIDES(create_kernels_in_program)
-    T::Dummy_clCreateKernelsInProgram mock(CL_INVALID_PROGRAM, nullptr, nullptr);
+    T::Dummy_clCreateKernelsInProgram mock(CL_INVALID_PROGRAM);
     TS_ASSERT_THROWS(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr), clerror_no<status_t::invalid_program>);
 #else
     TS_SKIP("create_kernels_in_program not implemented");
@@ -61,7 +61,7 @@ public:
   void test__create_kernels_in_program__invalid_program_executable( )
   {
 #if CLXX_B5D_PROVIDES(create_kernels_in_program)
-    T::Dummy_clCreateKernelsInProgram mock(CL_INVALID_PROGRAM_EXECUTABLE, nullptr, nullptr);
+    T::Dummy_clCreateKernelsInProgram mock(CL_INVALID_PROGRAM_EXECUTABLE);
     TS_ASSERT_THROWS(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr), clerror_no<status_t::invalid_program_executable>);
 #else
     TS_SKIP("create_kernels_in_program not implemented");
@@ -73,7 +73,7 @@ public:
   void test__create_kernels_in_program__invalid_value( )
   {
 #if CLXX_B5D_PROVIDES(create_kernels_in_program)
-    T::Dummy_clCreateKernelsInProgram mock(CL_INVALID_VALUE, nullptr, nullptr);
+    T::Dummy_clCreateKernelsInProgram mock(CL_INVALID_VALUE);
     TS_ASSERT_THROWS(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr), clerror_no<status_t::invalid_value>);
 #else
     TS_SKIP("create_kernels_in_program not implemented");
@@ -85,7 +85,7 @@ public:
   void test__create_kernels_in_program__out_of_resources( )
   {
 #if CLXX_B5D_PROVIDES(create_kernels_in_program)
-    T::Dummy_clCreateKernelsInProgram mock(CL_OUT_OF_RESOURCES, nullptr, nullptr);
+    T::Dummy_clCreateKernelsInProgram mock(CL_OUT_OF_RESOURCES);
     TS_ASSERT_THROWS(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr), clerror_no<status_t::out_of_resources>);
 #else
     TS_SKIP("create_kernels_in_program not implemented");
@@ -97,7 +97,7 @@ public:
   void test__create_kernels_in_program__out_of_host_memory( )
   {
 #if CLXX_B5D_PROVIDES(create_kernels_in_program)
-    T::Dummy_clCreateKernelsInProgram mock(CL_OUT_OF_HOST_MEMORY, nullptr, nullptr);
+    T::Dummy_clCreateKernelsInProgram mock(CL_OUT_OF_HOST_MEMORY);
     TS_ASSERT_THROWS(create_kernels_in_program((cl_program)NULL,0,nullptr,nullptr), clerror_no<status_t::out_of_host_memory>);
 #else
     TS_SKIP("create_kernels_in_program not implemented");

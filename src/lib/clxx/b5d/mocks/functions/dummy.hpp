@@ -478,8 +478,6 @@ class Dummy_clCreateKernelsInProgram
     public T::Dummy_CallArgs< cl_program, cl_uint, cl_kernel*, cl_uint*>
 {
   cl_int _err;
-  cl_kernel* _kernels;
-  cl_uint* _num_kernels_ret;
   cl_int clCreateKernelsInProgram(
       cl_program program,
       cl_uint num_kernels,
@@ -494,7 +492,7 @@ public:
    * \param kernels Keernels to be returned by the mock
    * \param num_kernels_ret Number of kernels to be returned by the mock
    */ // }}}
-  Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels = nullptr, cl_uint* num_kernels_ret = nullptr);
+  Dummy_clCreateKernelsInProgram(cl_int err);
 };
 #endif
 #if CLXX_B5D_OPENCL_PROVIDES(clCreatePipe)
@@ -3123,19 +3121,11 @@ clCreateKernelsInProgram(cl_program program, cl_uint num_kernels, cl_kernel* ker
                          cl_uint* num_kernels_ret)
 {
   call_with(program, num_kernels, kernels, num_kernels_ret);
-  if(_kernels && kernels && _num_kernels_ret)
-    {
-      std::memcpy(kernels, _kernels, std::min(*_num_kernels_ret, num_kernels) * sizeof(cl_kernel));
-    }
-  if(_num_kernels_ret && num_kernels_ret)
-    {
-      *num_kernels_ret = *_num_kernels_ret;
-    }
   return _err;
 }
 Dummy_clCreateKernelsInProgram::
-Dummy_clCreateKernelsInProgram(cl_int err, cl_kernel* kernels, cl_uint* num_kernels_ret)
-  : _err(err), _kernels(kernels), _num_kernels_ret(num_kernels_ret)
+Dummy_clCreateKernelsInProgram(cl_int err)
+  : _err(err)
 {
 }
 #endif
