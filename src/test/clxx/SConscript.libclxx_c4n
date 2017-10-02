@@ -1,0 +1,46 @@
+# @COPYRIGHT@
+# Licensed under MIT license (LICENSE.txt).
+
+Import(['env'])
+
+from SCons.Util import CLVar
+
+tests = [
+    'c4n/auto_bind.t.h',
+    'c4n/current_instance.t.h',
+    'c4n/exception.t.h',
+#    'c4n/exception_base.t.h',
+#    'c4n/exceptions.t.h',
+#    'c4n/shared_ptr.t.h',
+    'c4n/ndrange.t.h',
+#    'c4n/detail/clerror_stdexcept.t.h',
+    'c4n/detail/current_instance.t.h',
+#    'c4n/context_property_type_fwd.t.h',
+#    'c4n/device_partition_property_type.t.h',
+#    'c4n/device_partition_property_type_fwd.t.h',
+    'c4n/detail/enum2hex.t.h',
+    'c4n/detail/enum2name.t.h',
+    'c4n/detail/enum_range.t.h',
+    'c4n/detail/locale.t.h',
+    'c4n/detail/path.t.h',
+    'c4n/detail/search_path.t.h',
+    'c4n/detail/sha1.t.h',
+#    'c4n/detail/std_except_ctor_arg.t.h',
+#    'c4n/detail/std_except_ctor_arg_fwd.t.h',
+    'c4n/detail/to_string.t.h',
+]
+
+env.CxxTest('../check-libclxx_c4n', tests,
+           LIBS = CLVar(),
+           CXXTEST_CPPPATH = ['..'],
+           CXXTEST_LIBPATH = env.get('LIBPATH', CLVar()),
+           CXXTEST_TARGET = 'check-libclxx_c4n')
+
+env.Alias('check', [ 'check-libclxx_c4n' ])
+env.AlwaysBuild('check-libclxx_c4n')
+
+# Local Variables:
+# # tab-width:4
+# # indent-tabs-mode:nil
+# # End:
+# vim: set syntax=scons expandtab tabstop=4 shiftwidth=4:

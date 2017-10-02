@@ -15,6 +15,7 @@
 
 #include <clxx/c4n/config.hpp>
 #include <clxx/c4n/detail/enum2hex.hpp>
+#include <clxx/c4n/detail/enum2name.hpp>
 #include <string>
 #include <type_traits>
 #if CLXX_C4N_NO_STD_TO_STRING
@@ -94,7 +95,7 @@ using std::to_string;
 } // end namespace clxx
 
 namespace clxx {
-/** \ingroup clxx_common_util_enum2str clxx_common_detail
+/** \ingroup clxx_c4n_util_enum2str clxx_c4n_detail
  * @{ */
 /** // doc: enum_to_name_of_hex {{{
  * \brief Convert an enum value to its string representation

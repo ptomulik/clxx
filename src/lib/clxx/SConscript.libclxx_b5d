@@ -9,6 +9,7 @@ import os
 
 sources =  [
     'b5d/functions.cpp',
+    'b5d/detail/enum2name.cpp',
 ]
 
 headers = [

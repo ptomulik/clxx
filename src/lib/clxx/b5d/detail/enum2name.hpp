@@ -15,8 +15,11 @@
 #include <type_traits>
 
 namespace clxx { namespace detail {
+extern char const*
+enum2name(status_t x, char const* dflt = nullptr) noexcept;
 /** \ingroup clxx_common_util_enum2str clxx_common_detail
  * @{ */
+#if 0
 /** // doc: enum2name(status_t, char const*) {{{
  * \brief Convert #status_t to C string (human-readable enum name)
  * \param x The enum value to be converted
@@ -128,6 +131,7 @@ enum2name(status_t x, char const* dflt = nullptr) noexcept
 #endif
           dflt;
 }
+#endif
 /** // doc: enum2name(platform_info_t, char const*) {{{
  * \brief Convert #platform_info_t to C string (human-readable enum name)
  * \param x The enum value to be converted
