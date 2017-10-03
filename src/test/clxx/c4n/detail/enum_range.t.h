@@ -12,26 +12,19 @@
 
 #include <cxxtest/TestSuite.h>
 #include <clxx/c4n/detail/enum_range.hpp>
+#include <type_traits>
 
-enum class unumber_t : unsigned int {
+enum class number_t : unsigned {
   zero    =  0,
   one     =  1,
   two     =  2,
-  three   =  3
+  three   =  3,
+  four    =  4,
+  five    =  5,
+  six     =  6
 };
 
-enum class snumber_t : signed int {
-  minus_three   = -3,
-  minus_two     = -2,
-  minus_one     = -1,
-  zero          =  0,
-  one           =  1,
-  two           =  2,
-  three         =  3
-};
-
-typedef clxx::detail::enum_range<unumber_t> unumber_range;
-typedef clxx::detail::enum_range<snumber_t> snumber_range;
+typedef clxx::detail::enum_range<number_t> number_range;
 
 namespace clxx { namespace detail { class enum_range_test_suite; } }
 
@@ -41,140 +34,77 @@ namespace clxx { namespace detail { class enum_range_test_suite; } }
 class clxx::detail::enum_range_test_suite : public CxxTest::TestSuite
 {
 public:
-  /** // doc: test__unsigned__ctor__1() {{{
+  /** // doc: test__base_class__1() {{{
    * \todo Write documentation
    */ // }}}
-  void test__unsigned__ctor__1( )
+  void test__base_class__1( )
   {
-    unumber_range r;
-    TS_ASSERT_EQUALS(r.begin(), 0);
-    TS_ASSERT_EQUALS(r.end(), 0);
+    static_assert(::std::is_base_of<integer_range<unsigned>, enum_range<number_t> >::value, "");
   }
-  /** // doc: test__unsigned__ctor__2() {{{
+  /** // doc: test__ctor__1() {{{
    * \todo Write documentation
    */ // }}}
-  void test__unsigned__ctor__2( )
+  void test__ctor__1( )
   {
-    unumber_range r{unumber_t::zero, unumber_t::three};
-    TS_ASSERT_EQUALS(r.begin(), 0u);
-    TS_ASSERT_EQUALS(r.end(), 3u);
+    static_assert(number_range(number_t::three).start() == 0u, "");
+    static_assert(number_range(number_t::three).stop() == 3u, "");
+    static_assert(number_range(number_t::three).step() == 1, "");
+
+    TS_ASSERT_EQUALS(number_range(number_t::three).start(), 0u);
+    TS_ASSERT_EQUALS(number_range(number_t::three).stop(), 3u);
+    TS_ASSERT_EQUALS(number_range(number_t::three).step(), 1);
   }
-  /** // doc: test__unsigned__ctor__3() {{{
+  /** // doc: test__ctor__2() {{{
    * \todo Write documentation
    */ // }}}
-  void test__unsigned__ctor__3( )
+  void test__ctor__2( )
   {
-    unumber_range r(unumber_t::zero, unumber_t::three);
-    TS_ASSERT_EQUALS(r.begin(), 0u);
-    TS_ASSERT_EQUALS(r.end(), 3u);
+    static_assert(number_range(number_t::one, number_t::three).start() == 1u, "");
+    static_assert(number_range(number_t::one, number_t::three).stop() == 3u, "");
+    static_assert(number_range(number_t::one, number_t::three).step() == 1, "");
+
+    TS_ASSERT_EQUALS(number_range(number_t::one, number_t::three).start(), 1u);
+    TS_ASSERT_EQUALS(number_range(number_t::one, number_t::three).stop(), 3u);
+    TS_ASSERT_EQUALS(number_range(number_t::one, number_t::three).step(), 1);
   }
-  /** // doc: test__unsigned__ctor__4() {{{
+  /** // doc: test__ctor__3() {{{
    * \todo Write documentation
    */ // }}}
-  void test__unsigned__ctor__4( )
+  void test__ctor__3( )
   {
-    unumber_range r{0u, 3u};
-    TS_ASSERT_EQUALS(r.begin(), 0u);
-    TS_ASSERT_EQUALS(r.end(), 3u);
+    static_assert(number_range(number_t::one, number_t::three, 2).start() == 1u, "");
+    static_assert(number_range(number_t::one, number_t::three, 2).stop() == 3u, "");
+    static_assert(number_range(number_t::one, number_t::three, 2).step() == 2, "");
+
+    TS_ASSERT_EQUALS(number_range(number_t::one, number_t::three, 2).start(), 1u);
+    TS_ASSERT_EQUALS(number_range(number_t::one, number_t::three, 2).stop(), 3u);
+    TS_ASSERT_EQUALS(number_range(number_t::one, number_t::three, 2).step(), 2);
   }
-  /** // doc: test__unsigned__ctor__5() {{{
+  /** // doc: test__ctor__4() {{{
    * \todo Write documentation
    */ // }}}
-  void test__unsigned__ctor__5( )
+  void test__ctor__4( )
   {
-    unumber_range r(0u, 3u);
-    TS_ASSERT_EQUALS(r.begin(), 0u);
-    TS_ASSERT_EQUALS(r.end(), 3u);
+    static_assert(number_range(number_t::three, number_t::zero).start() == 3u, "");
+    static_assert(number_range(number_t::three, number_t::zero).stop() == 0u, "");
+    static_assert(number_range(number_t::three, number_t::zero).step() == -1, "");
+
+    TS_ASSERT_EQUALS(number_range(number_t::three, number_t::zero).start(), 3u);
+    TS_ASSERT_EQUALS(number_range(number_t::three, number_t::zero).stop(), 0u);
+    TS_ASSERT_EQUALS(number_range(number_t::three, number_t::zero).step(), -1);
   }
-  /** // doc: test__unsigned__begin__1() {{{
+  /** // doc: test__includes__1() {{{
    * \todo Write documentation
    */ // }}}
-  void test__unsigned__begin__1( )
+  void test__includes__1( )
   {
-    unumber_range r(0u, 3u);
-    TS_ASSERT_EQUALS(r.begin(), 0u);
-  }
-  /** // doc: test__unsigned__end__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__end__1( )
-  {
-    unumber_range r(0u, 3u);
-    TS_ASSERT_EQUALS(r.end(), 3u);
-  }
-  /** // doc: test__unsigned__begin__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__begin__2( )
-  {
-    unumber_range r(3u, 0u);
-    TS_ASSERT_EQUALS(r.begin(), 3u);
-  }
-  /** // doc: test__unsigned__end__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__end__2( )
-  {
-    unumber_range r(3u, 0u);
-    TS_ASSERT_EQUALS(r.end(), 0u);
-  }
-  /** // doc: test__unsigned__low__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__low__2( )
-  {
-    unumber_range r(3u, 0u);
-    TS_ASSERT_EQUALS(r.low(), 0u);
-  }
-  /** // doc: test__unsigned__high__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__high__2( )
-  {
-    unumber_range r(3u, 0u);
-    TS_ASSERT_EQUALS(r.high(), 3u);
-  }
-  /** // doc: test__unsigned__size__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__size__1( )
-  {
-    unumber_range r(1u, 4u);
-    TS_ASSERT_EQUALS(r.size(), 3u);
-  }
-  /** // doc: test__unsigned__size__2() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__size__2( )
-  {
-    unumber_range r(4u, 1u);
-    TS_ASSERT_EQUALS(r.size(), 3u);
-  }
-  /** // doc: test__unsigned__includes__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__includes__1( )
-  {
-    unumber_range r(2u, 4u);
-    TS_ASSERT_EQUALS(r.includes(0u), false);
-    TS_ASSERT_EQUALS(r.includes(1u), false);
-    TS_ASSERT_EQUALS(r.includes(2u), true);
-    TS_ASSERT_EQUALS(r.includes(3u), true);
-    TS_ASSERT_EQUALS(r.includes(4u), false);
-    TS_ASSERT_EQUALS(r.includes(5u), false);
-  }
-  /** // doc: test__unsigned__includes__1() {{{
-   * \todo Write documentation
-   */ // }}}
-  void test__unsigned__includes__2( )
-  {
-    unumber_range r(4u, 2u);
-    TS_ASSERT_EQUALS(r.includes(0u), false);
-    TS_ASSERT_EQUALS(r.includes(1u), false);
-    TS_ASSERT_EQUALS(r.includes(2u), true);
-    TS_ASSERT_EQUALS(r.includes(3u), true);
-    TS_ASSERT_EQUALS(r.includes(4u), false);
-    TS_ASSERT_EQUALS(r.includes(5u), false);
+    static_assert(!number_range(number_t::two, number_t::five, 2).includes(number_t::zero));
+    static_assert(!number_range(number_t::two, number_t::five, 2).includes(number_t::one));
+    static_assert( number_range(number_t::two, number_t::five, 2).includes(number_t::two));
+    static_assert(!number_range(number_t::two, number_t::five, 2).includes(number_t::three));
+    static_assert( number_range(number_t::two, number_t::five, 2).includes(number_t::four));
+    static_assert(!number_range(number_t::two, number_t::five, 2).includes(number_t::five));
+    static_assert(!number_range(number_t::two, number_t::five, 2).includes(number_t::six));
   }
 };
 
