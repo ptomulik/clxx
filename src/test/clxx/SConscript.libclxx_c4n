@@ -21,6 +21,7 @@ tests = [
     'c4n/detail/enum2hex.t.h',
     'c4n/detail/enum2name.t.h',
     'c4n/detail/enum_range.t.h',
+    'c4n/detail/integer_range.t.h',
     'c4n/detail/locale.t.h',
     'c4n/detail/path.t.h',
     'c4n/detail/search_path.t.h',
